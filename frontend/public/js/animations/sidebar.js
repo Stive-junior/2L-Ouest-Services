@@ -178,26 +178,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Update main content layout
-    function updateContentLayout() {
-        if (!contentMain) return;
-        const isMobile = window.innerWidth < 1024;
-        if (isMobile) {
-            contentMain.style.marginLeft = '0';
-            contentMain.style.marginRight = '0';
-            contentMain.style.width = '100%';
-            contentMain.style.display = isSidebarOpen(sidebar) || isSidebarOpen(chatSidebar) ? 'none' : 'block';
-            return;
+        function updateContentLayout() {
+    if (!contentMain) return;
+
+    const isMobile = window.innerWidth < 1024;
+    const grid = document.querySelector('.reason');
+
+    if (isMobile) {
+
+        contentMain.style.marginLeft = '0';
+        contentMain.style.marginRight = '0';
+        contentMain.style.width = '100%';
+        contentMain.style.display = (isSidebarOpen(sidebar) || isSidebarOpen(chatSidebar))
+            ? 'none'
+            : 'block';
+
+        // Forcer colonne unique
+        if (grid) {
+            grid.classList.remove('md:grid-cols-3');
+            grid.classList.add('grid-cols-1');
         }
-        const leftSidebarWidth = isSidebarOpen(sidebar) ? 320 : 0;
-        const rightSidebarWidth = isSidebarOpen(chatSidebar) ? 304 : 0;
-        const availableWidth = window.innerWidth - leftSidebarWidth - rightSidebarWidth;
-        contentMain.style.marginLeft = `${leftSidebarWidth}px`;
-        contentMain.style.marginRight = `${rightSidebarWidth}px`;
-        contentMain.style.width = `${availableWidth}px`;
-        contentMain.style.display = 'block';
-        contentMain.style.transition = 'all 0.5s ease-in-out';
+        return;
     }
+
+    const leftSidebarWidth = isSidebarOpen(sidebar) ? 320 : 0;
+    const rightSidebarWidth = isSidebarOpen(chatSidebar) ? 304 : 0;
+    const availableWidth = window.innerWidth - leftSidebarWidth - rightSidebarWidth;
+
+    contentMain.style.marginLeft = `${leftSidebarWidth}px`;
+    contentMain.style.marginRight = `${rightSidebarWidth}px`;
+    contentMain.style.width = `${availableWidth}px`;
+    contentMain.style.display = 'block';
+    contentMain.style.transition = 'all 0.5s ease-in-out';
+
+    if (availableWidth < 800) {
+        if (grid) {
+            grid.classList.remove('md:grid-cols-3');
+            grid.classList.add('grid-cols-1');
+        }
+    } else {
+        // Sinon, 3 colonnes
+        if (grid) {
+            grid.classList.remove('grid-cols-1');
+            grid.classList.add('md:grid-cols-3');
+        }
+    }
+        }
 
     // Update header visibility
     function updateHeaderVisibility() {
@@ -402,11 +428,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeSidebar(chatSidebar, chatSidebarOverlay, true);
                 }
             }
+            /*
 
             if (sidebarContainer) {
                 const history = JSON.parse(localStorage.getItem('sidebarHistory') || '["main"]');
+                alert(history[history.length - 1]);
                 showSidebarLevel(history[history.length - 1]);
             }
+                */
+
+            if (sidebarContainer) {
+    localStorage.setItem('sidebarHistory', JSON.stringify(['main']));
+    showSidebarLevel('main');
+}
+
 
             updateContentLayout();
             updateHeaderVisibility();
@@ -506,19 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
     });
 
-    // Mobile scroll handling
-    let lastScrollTop = 0;
-    window.addEventListener('scroll', () => {
-        if (window.innerWidth < 1024) {
-            const st = window.pageYOffset || document.documentElement.scrollTop;
-            if (st > lastScrollTop && st > 100) {
-                openSidebar(sidebar, sidebarOverlay, false);
-            } else if (st < lastScrollTop) {
-                closeSidebar(sidebar, sidebarOverlay, false);
-            }
-            lastScrollTop = st <= 0 ? 0 : st;
-        }
-    });
+   
 
     // Initialize
     initializeSidebars();

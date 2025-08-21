@@ -78,7 +78,7 @@ class SocketService {
         }
 
         const user = await userRepo.getById(userId);
-        const { authService } = require('./authService');
+        const  authService  = require('./authService');
         await authService.verifyToken(token);
         socket.data.user = user;
         logInfo('Middleware d\'authentification WebSocket réussi', { userId });

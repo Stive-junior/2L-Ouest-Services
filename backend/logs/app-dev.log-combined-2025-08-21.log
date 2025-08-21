@@ -1,0 +1,55 @@
+✅ [2L-Ouest-Services] 21/08/2025 14:46:13 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 21/08/2025 14:46:13 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 21/08/2025 14:46:13 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 21/08/2025 14:46:15 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 21/08/2025 14:46:17 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 21/08/2025 14:46:17 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 21/08/2025 14:46:17 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 21/08/2025 14:46:17 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 21/08/2025 14:48:30 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 21/08/2025 14:48:32 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 21/08/2025 14:48:32 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 21/08/2025 14:48:32 | INFO     | Clé API Google Maps : OK
+✅ [2L-Ouest-Services] 21/08/2025 14:48:32 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 21/08/2025 14:48:32 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 21/08/2025 14:48:32 | INFO     | Serveur démarré sur le port 35473
+{
+  "localUrl": "http://192.168.238.70:35473/api",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 21/08/2025 14:48:32 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 21/08/2025 14:48:32 | INFO     | SocketService initialisé
+⚠️ [2L-Ouest-Services] 21/08/2025 14:48:33 | WARN     | NGROK_AUTH_TOKEN non défini, utilisant l'URL locale
+✅ [2L-Ouest-Services] 21/08/2025 14:48:35 | INFO     | URL API mise à jour dans Firestore : http://192.168.238.70:35473
+{
+  "status": "local"
+}
+✅ [2L-Ouest-Services] 21/08/2025 14:48:40 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 21/08/2025 14:48:40 | INFO     | Connexion Firebase établie à la tentative 1
