@@ -1,0 +1,48 @@
+# Environnement de l'application
+NODE_ENV=production
+PORT=8080
+
+# URL du frontend pour la configuration CORS
+FRONTEND_URL=https://www.ll-ouest-services.fr
+
+# JWT (JSON Web Token)
+JWT_SECRET=prod_cle_secrete_jwt_32_caracteres_random_ici
+JWT_EXPIRES_IN=1d
+
+# Configuration Firebase
+FIREBASE_PROJECT_ID=ll-ouest-services
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@ll-ouest-services.iam.gserviceaccount.com
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDgKPM2SQHf2yqH\nvgB6zH/0NTAO1J6fOTWyxI8fRx1f1MI8hgY0wButRTSfrwTzA7c+LnV5clC5ZzjJ\nOFZW94rV2Vjz5VaaaxYcaqzaPSp5TBWzJ1tcuTWZd23aCL2MyjTJxLHbNVfK0OV9\nITRKTKqK53speBMhQ6dgIkpzpixE81jp9cYFkG/skf8i9WCWLg+nS/YHBxAGHhVu\nV+yN+mwB8wDS6Heg8Iqtnxt8a4QcqqzbAZ66Zk2D8kqEaDtt1vE4pPosokyPDjMU\nKmYA3CYbmjwUnGXPaRGuSwrxzperKCpKHZBDLQ/2PEuIYbQkqCg+bHLXz5d6uLhy\n5IkQDv5LAgMBAAECggEABE1fkaCoFmL59339kLMhF4+icFPDXEdNpl81vKzG6GJz\nJz85RO+U+Gfgy9nLl1sbEWifMj6v7vGyD3vzKEXQVoIOk4EeKZDkQpUHjploRHNh\n4pI0TjId0GgQOy7kwxwpvt+gEZbTVwitsY+ewHhP46JFZQqGxMzWxwu8GxPK5g3Z\nEefw6RSXP0wSJLEOoQoOK72fbqXjL6wClRTZFaRT12V3qxYQEk5qNd8qxP+PwiZ/\nwfDbhJNPyb/DfHzpewWawUkkZnwfzIEdnEpjWl7sKd0tGB9jUaA+7ySpQJfxSQC7\nW6wvnwENcgyMb/+LiaQ/KN16s5KjP8tVcL/7zvYxqQKBgQD8esppY9u7sy352x74\n0ZzLBSuFcnFVxkgbQZNPgQVCfBwvi2rj+FKANralFGrmESYvIvy/w4BGe+TPHpW6\ntP1cPuPBsN3ODrWqpl1tWWaUK+WGI41oV1AhaE6HMG17rXuVuFd8+EyW2gkGVXeN\nfZTbLgVeA/9Lr3Cd/++CucuDKQKBgQDjSRL56vl2aNClo3Nb+ktZOxVhXNsYZryn\njycEi4AA1xWXd6UYp5o9BBPI1X/Emor9GoBihddmxwQbHQPdK2q9iIOmh83vKPMN\nc4iXfH5Qi/GStHrNXd0OYjkVoXRD7UDGSGTmgyZk32pcQWcBigyXXJgmsWq0qDDR\n4CEtfh64UwKBgQCsq/nErCO6Mifualq7RvgZrRZ/tK4oQGxOH8H0rMOBHcpVBd97\nu/gIceLl8ZnOcMoRkLcVG0qeadspf7xdLazdKrGvZRu88jhyVkctIuhRy9e0rpnm\nU1idEG4sbQVjgVk1IxbKhDI1NTbY2xjhbpKgd8/55XfzNjAqDsCqQhEaSQKBgDk8\nlcLKIbhn/OM5njtzdLYr4t55+9LRTIEF09WZK8sKXy2du73Rt03WUQUqftqL8KR8\noAgvnGcNh0Mss2RnIqJIVp8BZCLuNQcWKTe86jJui49eU+6TzK9qnOWNmzHf9Yf5\ngy9pp6mPecFx1vbURQd5Effsheqo0GKKBtDmCeZxAoGBANQYaqLPs0n2RlETU3Hp\nIbCTVZPLJGZnSxByv9MYpOxWN0zx3vvFaJqZkbNyCltyrcf7H9tWC/aJTtvU3Ku8\nYWrIpdK/4N5eDJEKLSXQQQ8lsKh+TDvLDr6B1M0Jt4COBjo4tLNqL8OhDmddyLnI\n6DynEcJ/AtwJ8OiS7rR5dcQM\n-----END PRIVATE KEY-----\n"
+FIREBASE_DATABASE_URL=https://ll-ouest-services.firebasedatabase.app
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX=100
+
+# Service de journalisation
+LOG_LEVEL=info
+LOG_FILE_PATH=logs/app-prod.log
+
+# Service de messagerie (Nodemailer)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=prod_email@gmail.com
+SMTP_PASS=votre_prod_app_password
+
+# Google Maps
+GOOGLE_MAPS_API_KEY=votre_prod_google_maps_api_key
+
+# WebSocket (socket.io)
+SOCKET_PATH=/socket.io
+SOCKET_CONNECT_TIMEOUT=45000
+SOCKET_SERVE_CLIENT=false
+SOCKET_MAX_DISCONNECTION_DURATION=120000
+SOCKET_CLEANUP_EMPTY_NAMESPACES=true
+SOCKET_COMPRESSION=true
+SOCKET_PING_TIMEOUT=5000
+SOCKET_PING_INTERVAL=25000
+SOCKET_MAX_HTTP_BUFFER_SIZE=1000000
+
+# Firebase Cloud Messaging
+FCM_VAPID_KEY=votre_vapid_key_prod

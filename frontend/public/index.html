@@ -1,0 +1,30 @@
+<!DOCTYPE html>\n<html lang="fr">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Accueil - L&L Ouest Services</title>\n  <link rel="stylesheet" href="/css/tailwind.css">\n  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">\n  <script src="/js/main.js" defer></script>\n</head>\n<body>\n  \n</body>\n</html>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js"></script>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBqYkFbXTlCoO7N0t0eWzrzeJklA29nwRc",
+    authDomain: "ll-ouest-services.firebaseapp.com",
+    projectId: "ll-ouest-services",
+    storageBucket: "ll-ouest-services.firebasestorage.app",
+    messagingSenderId: "1075873956073",
+    appId: "1:1075873956073:web:e1d4e98a2a578d9782b078",
+    measurementId: "G-6HFZ04SGEZ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
