@@ -31,6 +31,13 @@ html.dark{
 
 }
 
+
+input:focus {
+  outline: none;   /* enlève le contour bleu */
+  border: none;    /* enlève la bordure */
+  box-shadow: none; /* enlève aussi l'effet de halo sur certains navigateurs */
+}
+
 .content-main {
   transition: margin-left 0.5s ease-in-out, margin-right 0.5s ease-in-out, width 0.5s ease-in-out;
 }
