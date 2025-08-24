@@ -9,7 +9,7 @@ import { getAuth } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth
 import { showNotification, validateInput, getStoredToken, authGuard, roleGuard, handleApiError, apiFetch } from '../modules/utils.js';
 import emailTemplates from '../templates/emailTemplates.js';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:35473/api';
 const auth = getAuth();
 
 

@@ -24,6 +24,11 @@
             "date": 1755783863028,
             "name": "logs/app-dev.log-audit-2025-08-21.log",
             "hash": "debabc072c698fff5ba2f2b3b50e14acee9f46d2d697653b144791bcc3043ac5"
+        },
+        {
+            "date": 1756011303439,
+            "name": "logs/app-dev.log-audit-2025-08-24.log",
+            "hash": "d088413424ae515ef3c5ecbee060f046483537a72a6e6654350248a2fc87cb38"
         }
     ],
     "hashType": "sha256"

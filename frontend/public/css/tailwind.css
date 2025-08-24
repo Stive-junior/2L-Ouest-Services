@@ -379,4 +379,37 @@ main img[src*="afrix-logo.png"] {
 }
 
 
+/* Animation d'entrée par le haut */
+@keyframes slideDownFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation de sortie vers le haut */
+@keyframes slideUpFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Classes personnalisées pour SweetAlert2 */
+.swal2-toast.custom-toast {
+  animation: slideDownFade 0.4s ease-out forwards;
+}
+
+.swal2-toast.custom-toast.swal2-hide {
+  animation: slideUpFade 0.4s ease-in forwards !important;
+}
+
 

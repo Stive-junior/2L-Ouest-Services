@@ -265,6 +265,9 @@
 .h-screen {
   height: 100vh;
 }
+.max-h-\[80vh\] {
+  max-height: 80vh;
+}
 .max-h-lh {
   max-height: 1lh;
 }
@@ -294,6 +297,12 @@
 }
 .min-h-screen {
   min-height: 100vh;
+}
+.w-1\/4 {
+  width: calc(1/4 * 100%);
+}
+.w-3\/4 {
+  width: calc(3/4 * 100%);
 }
 .w-\[11rem\] {
   width: 11rem;
@@ -477,6 +486,10 @@
 .rotate-none {
   rotate: none;
 }
+.-skew-y-2 {
+  --tw-skew-y: skewY(calc(2deg * -1));
+  transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+}
 .-skew-y-3 {
   --tw-skew-y: skewY(calc(3deg * -1));
   transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
@@ -626,6 +639,9 @@
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-cols-none {
   grid-template-columns: none;
@@ -985,6 +1001,10 @@
 .border-b {
   border-bottom-style: var(--tw-border-style);
   border-bottom-width: 1px;
+}
+.border-b-2 {
+  border-bottom-style: var(--tw-border-style);
+  border-bottom-width: 2px;
 }
 .border-l {
   border-left-style: var(--tw-border-style);

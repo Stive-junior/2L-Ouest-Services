@@ -1,0 +1,102 @@
+✅ [2L-Ouest-Services] 24/08/2025 05:55:06 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 24/08/2025 05:55:07 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 24/08/2025 05:55:15 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 24/08/2025 05:55:20 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 24/08/2025 05:55:21 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 24/08/2025 05:55:21 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 24/08/2025 05:55:21 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 24/08/2025 05:55:21 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 24/08/2025 05:55:28 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 24/08/2025 05:55:28 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 24/08/2025 05:55:28 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 24/08/2025 05:55:30 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 24/08/2025 05:55:30 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 24/08/2025 05:55:30 | INFO     | Clé API Google Maps : OK
+✅ [2L-Ouest-Services] 24/08/2025 05:55:30 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 24/08/2025 05:55:30 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 24/08/2025 05:55:30 | INFO     | Serveur démarré sur le port 35473
+{
+  "localUrl": "http://192.168.43.17:35473/api",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 24/08/2025 05:55:30 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 24/08/2025 05:55:30 | INFO     | SocketService initialisé
+⚠️ [2L-Ouest-Services] 24/08/2025 05:55:32 | WARN     | NGROK_AUTH_TOKEN non défini, utilisant l'URL locale
+✅ [2L-Ouest-Services] 24/08/2025 05:55:32 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:35473
+{
+  "status": "local"
+}
+✅ [2L-Ouest-Services] 24/08/2025 18:10:09 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 24/08/2025 18:10:09 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "POST"
+}
+🚨 [2L-Ouest-Services] 24/08/2025 18:10:09 | ERROR    | Erreur de validation des données
+{
+  "details": [
+    {
+      "message": "\"phone\" with value \"+33 1234567890\" fails to match the required pattern: /^\\+?[1-9]\\d{1,14}$/",
+      "path": [
+        "phone"
+      ],
+      "type": "string.pattern.base",
+      "context": {
+        "regex": {},
+        "value": "+33 1234567890",
+        "label": "phone",
+        "key": "phone"
+      }
+    }
+  ],
+  "path": "/signup",
+  "method": "POST"
+}
+🚨 [2L-Ouest-Services] 24/08/2025 18:10:09 | ERROR    | Erreur traitée par le middleware Données invalides
+{
+  "statusCode": 400,
+  "details": "\"phone\" with value \"+33 1234567890\" fails to match the required pattern: /^\\+?[1-9]\\d{1,14}$/",
+  "path": "/api/auth/signup",
+  "method": "POST"
+}
+✅ [2L-Ouest-Services] 24/08/2025 18:10:09 | INFO     | 127.0.0.1 - - [24/Aug/2025:17:10:09 +0000] "POST /api/auth/signup HTTP/1.1" 400 142 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0"
+📋 [2L-Ouest-Services] 24/08/2025 18:10:09 | AUDIT    | Requête traitée
+{
+  "method": "POST",
+  "path": "/api/auth/signup",
+  "status": 400,
+  "duration": "12ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}

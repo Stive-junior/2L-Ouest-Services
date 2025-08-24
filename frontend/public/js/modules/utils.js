@@ -23,7 +23,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:35473/api';
 
 // Chargement de SweetAlert2 via CDN
 const swalScript = document.createElement('script');
@@ -75,6 +75,128 @@ export const getAuthErrorMessage = (error) => {
 
 
 /**
+ * Displays a notification with the specified message and type.
+ * @param {string} message - The message to display.
+ * @param {'success' | 'error' | 'info'} type - The type of notification.
+ */
+export function Notify(message, type = 'info') {
+  const notification = document.createElement('div');
+  notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-transform duration-300 ${
+    type === 'error' ? 'bg-red-500 text-white' :
+    type === 'success' ? 'bg-green-500 text-white' :
+    'bg-blue-500 text-white'
+  }`;
+  notification.innerHTML = `
+    <div class="flex items-center">
+      <i class="fas ${
+        type === 'error' ? 'fa-exclamation-circle' :
+        type === 'success' ? 'fa-check-circle' :
+        'fa-info-circle'
+      } mr-2"></i>
+      <span>${message}</span>
+    </div>
+  `;
+
+  document.body.appendChild(notification);
+  setTimeout(() => notification.classList.add('translate-x-0'), 10);
+  setTimeout(() => {
+    notification.classList.remove('translate-x-0');
+    notification.classList.add('translate-x-full');
+    setTimeout(() => notification.parentNode?.removeChild(notification), 300);
+  }, 5000);
+}
+
+
+/**
+ * Validates a field based on its name and value.
+ * @param {string} field - The field name.
+ * @param {string} value - The field value.
+ * @param {boolean} [signIn=false] - Whether to apply sign-in specific validation.
+ * @returns {string|null} - Error message or null if valid.
+ */
+export function validateField(field, value, signIn = false) {
+  switch (field) {
+    case 'email':
+    case 'currentEmail':
+      if (!value) return 'L\'email est requis.';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'L\'email n\'est pas valide.';
+      return null;
+    case 'newEmail':
+      if (!value) return 'Le nouvel email est requis.';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Le nouvel email n\'est pas valide.';
+      return null;
+    case 'password':
+      if (!value) return 'Le mot de passe est requis.';
+      if (signIn) return null;
+      if (value.length < 8) return 'Le mot de passe doit contenir au moins 8 caractères.';
+      if (!/[A-Z]/.test(value)) return 'Le mot de passe doit contenir au moins une majuscule.';
+      if (!/[a-z]/.test(value)) return 'Le mot de passe doit contenir au moins une minuscule.';
+      if (!/[0-9]/.test(value)) return 'Le mot de passe doit contenir au moins un chiffre.';
+      if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) return 'Le mot de passe doit contenir au moins un caractère spécial.';
+      return null;
+    case 'name':
+      if (!value) return 'Le nom est requis.';
+      if (value.length < 2) return 'Le nom doit contenir au moins 2 caractères.';
+      return null;
+    case 'phone':
+      if (!value) return 'Le numéro de téléphone est requis.';
+      if (!/^[\d\s\-\(\)]{10,15}$/.test(value)) return 'Le numéro de téléphone n\'est pas valide.';
+      return null;
+    case 'postalCode':
+      if (!value) return 'Le code postal est requis.';
+      if (!/^\d{5}$/.test(value)) return 'Le code postal doit contenir 5 chiffres.';
+      return null;
+    case 'country':
+    case 'city':
+    case 'street':
+      if (!value) return `Le ${field === 'country' ? 'pays' : field === 'city' ? 'ville' : 'rue'} est requis.`;
+      return null;
+    default:
+      return null;
+  }
+}
+
+/**
+ * Checks the strength of a password.
+ * @param {string} password - The password to check.
+ * @returns {{ strength: number, message: string, color: string }} - Strength details.
+ */
+export function checkPasswordStrength(password) {
+  let strength = 0;
+  let message = '';
+  let color = '';
+
+  if (password.length === 0) return { strength, message, color };
+  if (password.length > 7) strength++;
+  if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength++;
+  if (password.match(/([0-9])/)) strength++;
+  if (password.match(/([!,@,#,$,%,^,&,*,?,_,~])/)) strength++;
+
+  switch (strength) {
+    case 0:
+    case 1:
+      message = 'Faible';
+      color = 'text-red-500';
+      break;
+    case 2:
+      message = 'Moyen';
+      color = 'text-yellow-500';
+      break;
+    case 3:
+      message = 'Fort';
+      color = 'text-green-500';
+      break;
+    case 4:
+      message = 'Très fort';
+      color = 'text-green-600 font-bold';
+      break;
+  }
+
+  return { strength, message, color };
+}
+
+
+/**
  * Affiche une notification avec SweetAlert2 (toast ou modal).
  * @param {string} message - Message à afficher.
  * @param {string} type - Type ('success', 'error', 'info', 'warning').
@@ -93,6 +215,9 @@ export async function showNotification(message, type, isToast = true, options = 
     confirmButtonText: 'Okay',
     position: isToast ? 'top-end' : 'center',
     toast: isToast,
+    didOpen: (popup) => {
+    popup.style.fontSize = '14px';
+  },
     ...options,
   };
   await Swal.fire(swalOptions);
@@ -299,7 +424,7 @@ function formatErrorMessage(status, serverMessage) {
 
 
 /**
- * Gère les erreurs API et affiche une notification toast.
+ * Gère les erreurs API et affiche une notification toast avec animation.
  * @param {Error} error - Erreur à gérer.
  * @param {string} defaultMessage - Message par défaut.
  * @param {boolean} [showToast=true] - Si false, ne montre pas de toast.
@@ -308,6 +433,7 @@ export async function handleApiError(error, defaultMessage, showToast = true) {
   if (showToast) {
     await swalLoaded;
     const message = error.message || defaultMessage;
+
     await Swal.fire({
       toast: true,
       position: 'top-end',
@@ -317,13 +443,16 @@ export async function handleApiError(error, defaultMessage, showToast = true) {
       timerProgressBar: true,
       showConfirmButton: false,
       showCloseButton: true,
+      customClass: {
+        popup: 'custom-toast'
+      },
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     });
   }
-  console.error('API Error:', error);
+  
   throw new Error(error.message || defaultMessage);
 }
 
@@ -365,4 +494,6 @@ export default {
   handleApiError,
   checkAndRedirect,
   getAuthErrorMessage,
+  checkPasswordStrength,
+  validateField,
 };

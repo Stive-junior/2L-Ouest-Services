@@ -19,7 +19,7 @@ import {
 import emailTemplates from '../templates/emailTemplates.js';
 import { showNotification, validateInput, getStoredToken, setStoredToken, clearStoredToken, handleApiError, apiFetch , getAuthErrorMessage } from '../modules/utils.js';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:35473/api';
 const firebaseConfig = {
   apiKey: 'AIzaSyBqYkFbXTlCoO7N0t0eWzrzeJklA29nwRc',
   authDomain: 'll-ouest-services.firebaseapp.com',
@@ -45,7 +45,7 @@ function validateSignUpData(userData) {
     email: { type: 'string', required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
     password: { type: 'string', required: true, minLength: 8, maxLength: 50 },
     name: { type: 'string', required: true, minLength: 2, maxLength: 100 },
-    phone: { type: 'string', required: true, pattern: /^\+?[1-9]\d{1,14}$/ },
+    phone: { type: 'string', required: true, pattern: /^\+\d{1,3}[\s\d\-\(\)]{4,20}$/ },
     street: { type: 'string', required: false, minLength: 3, maxLength: 255 },
     city: { type: 'string', required: false, minLength: 2, maxLength: 100 },
     postalCode: { type: 'string', required: false, pattern: /^\d{5}$/ },
@@ -55,6 +55,7 @@ function validateSignUpData(userData) {
   };
   const { error } = validateInput(userData, schema);
   if (error) {
+    console.error('Validation error:', error);
     showNotification(`Données d'inscription invalides : ${error.details}`, 'error', false);
     throw new Error('Données d’inscription invalides');
   }
@@ -166,7 +167,7 @@ const authApi = {
         showNotification('Inscription réussie !', 'success');
         return response.data;
       } catch (backendError) {
-        // En cas d'erreur backend, déconnexion immédiate de Firebase
+       
         await signOut(auth);
         clearStoredToken();
         const errorMessage = backendError.message || 'Erreur lors de l’enregistrement dans le backend';

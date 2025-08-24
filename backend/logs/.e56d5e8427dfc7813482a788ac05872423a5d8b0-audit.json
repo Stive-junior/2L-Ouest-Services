@@ -24,6 +24,11 @@
             "date": 1755783862962,
             "name": "logs/app-dev.log-error-2025-08-21.log",
             "hash": "149e67664509f9a1eae408b3081a9655b00ebf8f5bf360eaaaade5d00b6986b3"
+        },
+        {
+            "date": 1756011303427,
+            "name": "logs/app-dev.log-error-2025-08-24.log",
+            "hash": "be2de2747fc389e55fd00adf63943e23b2f1ba2f6d1b666fc8e3e42e4619c81e"
         }
     ],
     "hashType": "sha256"

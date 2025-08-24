@@ -21,7 +21,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.18/vue.global.prod.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    
+    <!-- Script de vérification auth chargé en premier (async pour rapidité) -->
+    <script async src="/js/auth-check.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
@@ -52,9 +54,45 @@
         });
     </script>
 
-    
+    <script type="module" src="/js/main.js"></script>
+    <script type="module">
+        import auth from '/js/modules/auth.js';
+        auth.init();
+    </script>
+
+    <!-- Configuration Tailwind inline pour optimisation -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'll-blue': '#2563EB',
+                        'll-dark-blue': '#1E40AF',
+                        'll-light-gray': '#EDEDEC',
+                        'll-medium-gray': '#A1A09A',
+                        'll-text-gray': '#706F6C',
+                        'll-black': '#1B1B18',
+                        'll-white': '#FDFDFC',
+                        'll-light-bg': '#FAFAFA',
+                        'sidebar-light': '#F5F5F5',
+                        'sidebar-dark': '#1A1A1A',
+                    },
+                    boxShadow: {
+                        'lg-dark-custom': '0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.1)',
+                    },
+                    scale: {
+                        '102': '1.02',
+                    },
+                },
+            },
+            plugins: [],
+        };
+    </script>
 
 </head>
+
+
 <body class="bg-ll-white dark:bg-ll-black text-ll-black dark:text-ll-light-gray flex flex-col min-h-screen transition-colors duration-300">
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
     <div id="chat-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
@@ -825,7 +863,7 @@
                 <!-- Conversation Panel -->
                 <div id="conversation-panel" class="flex flex-col h-full">
                     <div class="relative mb-4">
-                        <input id="chat-search" type="text" placeholder="Rechercher une conversation..." class="w-full pl-4 pr-12 py-3 bg-white/80 dark:bg-[#2A2A2A]/80 backdrop-blur-md rounded-xl border border-gray-200/20 dark:border-[#3E3E3A]/20 text-sm text-text-light dark:text-text-dark placeholder:text-gray-500/60 dark:placeholder:text-gray-400/60 focus:ring-ll-blue focus:border-ll-blue transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ll-blue/40 shadow-sm" aria-label="Rechercher une conversation">
+                        <input id="chat-search" type="text" placeholder="Rechercher une conversation..." class="w-full pl-4 pr-12 py-3  backdrop-blur-md rounded-xl border border-gray-200/20 dark:border-[#3E3E3A]/20 text-sm text-text-light dark:text-text-dark placeholder:text-gray-500/60 dark:placeholder:text-gray-400/60 focus:ring-ll-blue focus:border-ll-blue transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ll-blue/40 shadow-sm" aria-label="Rechercher une conversation">
                         <i class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-200"></i>
                     </div>
                     <div class="flex-1 overflow-y-auto space-y-3 custom-scrollbar">
@@ -942,17 +980,17 @@
     <!-- Main Content -->
     <div class="content-main flex-grow w-full p-6 lg:p-8 transition-all duration-500 overflow-hidden">
         <div id="blurred-header" class="fixed top-0 left-0 right-0 z-30 bg-ll-white dark:bg-ll-black lg:bg-transparent lg:dark:bg-transparent py-3 px-6 flex justify-between items-center shadow-md lg:shadow-none transition-all duration-300 mb-4 lg:mb-0 blurred-header">
-            <button id="sidebar-toggle" class="p-2 rounded-md bg-white/80 dark:bg-[#2A2A2A]/80 hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+            <button id="sidebar-toggle" class="p-2 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
                 <svg viewBox="0 0 24 24" class="w-6 h-6">
                     <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
                 </svg>
             </button>
             <div class="flex items-center space-x-1">
-                <button id="chat-sidebar-toggle" class="lg:block hidden p-3 rounded-md bg-white/80 dark:bg-[#2A2A2A]/80 hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                <button id="chat-sidebar-toggle" class="lg:block hidden p-3 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
                     <i class="fas fa-comments w-6 h-6"></i>
                 </button>
                 
-                <button id="theme-toggle-header" class="p-3 rounded-md bg-white/80 dark:bg-[#2A2A2A]/80 hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                <button id="theme-toggle-header" class="p-3 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                     </svg>
@@ -986,72 +1024,76 @@
         </div>
         
         <main class="relative z-10 max-w-7xl mx-auto w-full min-h-[calc(100vh-14rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-    <div class="w-full max-w-md bg-ll-white dark:bg-ll-black p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
-<!-- Logo and Company Name -->
-        <div class="flex items-end justify-center mb-8 gap-4">
-            <img src="/assets/images/logo.png" alt="LL-Ouest-Services Logo" class="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
-            <h1 class="text-xxl font-bold font-extrabold text-ll-black dark:text-ll-light-gray tracking-tight" style="font-family: 'Cinzel', serif;">L&L-Ouest-Services</h1>
-        </div>
-        <h2 class="text-3xl font-extrabold mb-8 mt-4 text-center  text-ll-black dark:text-ll-light-gray">Se connecter</h2>
-        <form id="signin-form" class="space-y-6">
-            <div class="space-y-6">
-                <div>
-                    <label for="email" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-2">Email <span class="text-red-500">*</span></label>
-                    <div class="relative" style="display: initial;">
-                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-ll-text-gray-500 text-lg"></i>
-                        <input type="email" id="email" name="email" class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200" required placeholder="example@domaine.com" aria-label="Adresse email">
-                        <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                    </div>
+            <div class="w-full max-w-md bg-ll-white dark:bg-ll-black p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
+                <!-- Logo and Company Name -->
+                <div class="flex items-end justify-center mb-8 gap-4">
+                    <img src="/assets/images/logo.png" alt="LL-Ouest-Services Logo" class="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
+                    <h1 class="text-xxl font-bold font-extrabold text-ll-black dark:text-ll-light-gray tracking-tight" style="font-family: 'Cinzel', serif;">L&L-Ouest-Services</h1>
                 </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-2">Mot de passe <span class="text-red-500">*</span></label>
-                    <div class="relative" style="display: initial;">
-                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-ll-light-gray-500 text-lg"></i>
-                        <input type="password" id="password" name="password" class="w-full pl-12 pr-14 py-3  dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200" required placeholder="Votre mot de passe" aria-label="Mot de passe">
-                       <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                <h2 class="text-3xl font-extrabold mb-8 mt-4 text-center  text-ll-black dark:text-ll-light-gray">Se connecter</h2>
+                <form id="signin-form" class="space-y-6">
+                    <div class="space-y-6">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-2">Email <span class="text-red-500">*</span></label>
+                            <div class="relative" style="display: initial;">
+                                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-ll-text-gray-500 text-lg"></i>
+                                <input type="email" id="email" name="email" class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200" required placeholder="example@domaine.com" aria-label="Adresse email">
+                                <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-2">Mot de passe <span class="text-red-500">*</span></label>
+                            <div class="relative" style="display: initial;">
+                                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-ll-light-gray-500 text-lg"></i>
+                                <input type="password" id="password" name="password" class="w-full pl-12 pr-14 py-3  dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200" required placeholder="Votre mot de passe" aria-label="Mot de passe">
+                                <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                            </div>
+
+                        </div>
                     </div>
+                    
+                    <button type="submit" class="w-full bg-ll-blue text-white py-3 rounded-lg hover:bg-ll-dark-blue focus:outline-none focus:ring-2 focus:ring-ll-blue/50 font-semibold tracking-wide transition-all duration-300 shadow-md hover:shadow-lg">Se connecter</button>
+                </form>
+                <div class="mt-6 text-center space-y-3">
+                    <p class="text-sm text-ll-black dark:text-ll-light-gray">
+                        Pas de compte ? <a href="/pages/auth/signup.html" class="text-ll-blue dark:text-ll-blue hover:underline font-medium transition-colors duration-200">S'inscrire</a>
+                    </p>
+                    <p class="text-sm text-ll-black dark:text-ll-light-gray">
+                        <a href="/pages/auth/password-reset.html" class="text-ll-blue dark:text-ll-blue hover:underline font-medium transition-colors duration-200">Mot de passe oublié ?</a>
+                    </p>
                 </div>
             </div>
-            <div class="flex items-center justify-end">
-                <label class="flex items-center gap-2 text-sm text-ll-black dark:text-ll-light-gray cursor-pointer">
-                    <input type="checkbox" id="show-password" class="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-blue-500 focus:ring-blue-500/50 transition-all duration-200">
-                    <span>Afficher le mot de passe</span>
-                </label>
-            </div>
-            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-semibold tracking-wide transition-all duration-300 shadow-md hover:shadow-lg">Se connecter</button>
-        </form>
-        <div class="mt-6 text-center space-y-3">
-            <p class="text-sm text-ll-black dark:text-ll-light-gray">
-                Pas de compte ? <a href="/pages/auth/signup.html" class="text-blue-600 dark:text-blue-400 hover:underline font-medium transition-colors duration-200">S'inscrire</a>
-            </p>
-            <p class="text-sm text-ll-black dark:text-ll-light-gray">
-                <a href="/pages/auth/password-reset.html" class="text-blue-600 dark:text-blue-400 hover:underline font-medium transition-colors duration-200">Mot de passe oublié ?</a>
-            </p>
-        </div>
-    </div>
-</main>
+        </main>
 
-<!-- JavaScript for Password Toggle -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const passwordInput = document.getElementById('password');
-        const showPasswordCheckbox = document.getElementById('show-password');
+        <!-- JavaScript for Password Toggle -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                      
+            document.querySelectorAll('.toggle-password').forEach(button => {
 
-        const togglePassword = () => {
-            const isChecked = showPasswordCheckbox.checked;
-            passwordInput.type = isChecked ? 'text' : 'password';
-            
-        };
-
-        showPasswordCheckbox.addEventListener('change', togglePassword);
-        showPasswordCheckbox.addEventListener('click', () => {
-            showPasswordCheckbox.checked = !showPasswordCheckbox.checked;
-            togglePassword();
+            button.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
         });
-    });
-</script>
+               
+            });
+        </script>
 
-        <section class="bg-ll-light-bg dark:bg-ll-medium-gray/10 py-12 px-6 lg:px-8">
+        <section class="bg-ll-light-bg dark:bg-ll-medium-gray/10 py-12 px-6 lg:px-8 rounded-2xl mt-16">
             <div class="max-w-7xl mx-auto">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-10 text-ll-black dark:text-ll-light-gray">Pourquoi nous choisir ? <div class="mouse">
                     <div class="wheel"></div>
@@ -1083,10 +1125,12 @@
                 </div>
             </div>
         </section>
-       <footer class="bg-ll-black dark:bg-ll-black text-ll-light-gray relative overflow-hidden">
+
+
+       <footer class=" dark:bg-ll-black bg-ll-light-bg   text-ll-light-gray relative overflow-hidden">
     <div class="absolute inset-0 bg-cover bg-center filter blur-sm opacity-30" style="background-image: url('https://via.placeholder.com/1920x400?text=Background+Footer');"></div>
     <div class="relative container mx-auto px-4 py-12">
-        <div class="relative -skew-y-3 bg-ll-blue/10 p-8 rounded-2xl shadow-xl mb-12">
+        <div class="relative -skew-y-2 bg-ll-blue/10 dark:bg-ll-medium-gray/10  p-8 py-10 rounded-2xl shadow-xl mb-12">
             <div class="skew-y-3 flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="text-center md:text-left">
                     <h3 class="text-2xl font-bold text-ll-light-gray">L&L Ouest Services</h3>
@@ -1143,10 +1187,6 @@
 
     </div>
 
-    <script type="module" src="/js/main.js"></script>
-    <script type="module">
-        import auth from '/js/modules/auth.js';
-        auth.init();
-    </script>
+   
 </body>
 </html>

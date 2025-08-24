@@ -708,3 +708,973 @@ if (typeof module !== 'undefined' && module.exports) {
     PortfolioConfig
   };
 }
+
+
+
+let formData = {
+        name: "",
+        email: "",
+        country: "FR",
+        dialCode: "+33",
+        phone: "",
+        city: "",
+        street: "",
+        postalCode: "",
+        password: "",
+        confirmPassword: ""
+    };
+
+    let countriesData = [];
+    let citiesData = {};
+    let streetsData = {};
+
+    document.addEventListener('DOMContentLoaded', function() {
+        
+
+        // Charger les pays depuis le fichier JSON
+        fetch('/assets/json/countries.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur de chargement des pays');
+                }
+                return response.json();
+            })
+            .then(data => {
+                countriesData = data;
+                populateCountryGrid(data);
+                // Définir la France par défaut
+                const france = data.find(country => country.code === 'FR');
+                if (france) {
+                    selectCountry(france.code, `${france.flag} ${france.name}`, france.dial_code);
+                    // Charger les villes pour la France par défaut et définir Angers
+                    fetch('/assets/json/fr.json')
+                        .then(resp => {
+                            if (!resp.ok) {
+                                throw new Error('Erreur de chargement des villes pour la France');
+                            }
+                            return resp.json();
+                        })
+                        .then(cities => {
+                            citiesData['fr'] = cities;
+                            const angers = cities.find(city => city.name === 'Angers');
+                            if (angers) {
+                                selectCity(angers.id, angers.name, angers.postalCode);
+                                // Charger les rues pour Angers et définir une rue par défaut (la première)
+                                fetch(`/assets/json/${angers.id}.json`)
+                                    .then(streetResp => {
+                                        if (!streetResp.ok) {
+                                            throw new Error('Erreur de chargement des rues pour Angers');
+                                        }
+                                        return streetResp.json();
+                                    })
+                                    .then(streets => {
+                                        streetsData[angers.id] = streets;
+                                        if (streets.length > 0) {
+                                            const defaultStreet = streets[0];
+                                            selectStreet(defaultStreet.id, defaultStreet.name);
+                                        }
+                                    })
+                                    .catch(() => {
+                                        loadFallbackStreets(angers.id);
+                                        const streets = streetsData[angers.id];
+                                        if (streets && streets.length > 0) {
+                                            const defaultStreet = streets[0];
+                                            selectStreet(defaultStreet.id, defaultStreet.name);
+                                        }
+                                    });
+                            }
+                        })
+                        .catch(() => {
+                            loadFallbackCities('fr');
+                            const cities = citiesData['fr'];
+                            const angers = cities.find(city => city.name === 'Angers');
+                            if (angers) {
+                                selectCity(angers.id, angers.name, angers.postalCode);
+                                loadFallbackStreets(angers.id);
+                                const streets = streetsData[angers.id];
+                                if (streets && streets.length > 0) {
+                                    const defaultStreet = streets[0];
+                                    selectStreet(defaultStreet.id, defaultStreet.name);
+                                }
+                            }
+                        });
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des pays:', error);
+                // Charger des données de secours
+                loadFallbackCountries();
+            });
+
+        // Ajouter les écouteurs pour validation en temps réel
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const postalCodeInput = document.getElementById('postalCode');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        nameInput.addEventListener('blur', () => {
+            if (!nameInput.value.trim()) {
+                showError(nameInput, 'Le nom est requis');
+            } else {
+                clearError(nameInput);
+                formData.name = nameInput.value.trim();
+            }
+        });
+
+        emailInput.addEventListener('blur', () => {
+            const value = emailInput.value.trim();
+            if (!value) {
+                showError(emailInput, 'L\'email est requis');
+            } else if (!isValidEmail(value)) {
+                showError(emailInput, 'Veuillez entrer un email valide');
+            } else {
+                clearError(emailInput);
+                formData.email = value;
+            }
+        });
+
+        phoneInput.addEventListener('blur', () => {
+            const value = phoneInput.value.trim();
+            if (!value) {
+                showError(phoneInput, 'Le numéro de téléphone est requis');
+            } else if (!isValidPhone(value)) {
+                showError(phoneInput, 'Veuillez entrer un numéro de téléphone valide');
+            } else {
+                clearError(phoneInput);
+                formData.phone = value;
+            }
+        });
+
+        postalCodeInput.addEventListener('blur', () => {
+            if (!postalCodeInput.value.trim()) {
+                showError(postalCodeInput, 'Le code postal est requis');
+            } else {
+                clearError(postalCodeInput);
+                formData.postalCode = postalCodeInput.value.trim();
+            }
+        });
+
+        passwordInput.addEventListener('blur', () => {
+            const value = passwordInput.value;
+            if (!value) {
+                showError(passwordInput, 'Le mot de passe est requis');
+            } else if (value.length < 8) {
+                showError(passwordInput, 'Le mot de passe doit contenir au moins 8 caractères');
+            } else {
+                clearError(passwordInput);
+                formData.password = value;
+            }
+            // Vérifier aussi la confirmation si déjà remplie
+            if (confirmPasswordInput.value) {
+                validateConfirmPassword();
+            }
+        });
+
+        confirmPasswordInput.addEventListener('blur', validateConfirmPassword);
+
+        // Ouvrir le modal pour sélectionner le pays
+        document.getElementById('country').addEventListener('click', function() {
+            document.getElementById('country-modal').classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        });
+
+        // Fermer le modal pays
+        document.getElementById('close-country-modal').addEventListener('click', function() {
+            document.getElementById('country-modal').classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        });
+
+        // Recherche dans le grid des pays
+        document.getElementById('country-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const filteredCountries = countriesData.filter(country => 
+                country.name.toLowerCase().includes(searchTerm) || 
+                country.code.toLowerCase().includes(searchTerm)
+            );
+            populateCountryGrid(filteredCountries);
+        });
+
+        // Ouvrir le modal pour sélectionner la ville
+        document.getElementById('city').addEventListener('click', function() {
+            if (!formData.country) {
+                showNotification('Veuillez d\'abord sélectionner un pays', 'error');
+                return;
+            }
+            loadCities(formData.country.toLowerCase());
+            document.getElementById('city-modal').classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        });
+
+        // Fermer le modal ville
+        document.getElementById('close-city-modal').addEventListener('click', function() {
+            document.getElementById('city-modal').classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        });
+
+        // Recherche dans la liste des villes
+        document.getElementById('city-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cityList = document.getElementById('city-list');
+            const cities = citiesData[formData.country.toLowerCase()] || [];
+            
+            cityList.innerHTML = '';
+            
+            const filteredCities = cities.filter(city => 
+                city.name.toLowerCase().includes(searchTerm) || 
+                city.postalCode.includes(searchTerm)
+            );
+            
+            if (filteredCities.length === 0) {
+                cityList.innerHTML = '<div class="p-4 text-center text-gray-500">Aucune ville trouvée</div>';
+                return;
+            }
+            
+            filteredCities.forEach(city => {
+                const div = document.createElement('div');
+                div.className = 'p-3 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 city-item';
+                div.dataset.id = city.id;
+                div.dataset.name = city.name;
+                div.dataset.postalCode = city.postalCode;
+                div.innerHTML = `
+                    <div class="font-medium">${city.name}</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">${city.postalCode}</div>
+                `;
+                div.addEventListener('click', () => selectCity(city.id, city.name, city.postalCode));
+                cityList.appendChild(div);
+            });
+        });
+
+        // Ouvrir le modal pour sélectionner la rue
+        document.getElementById('street').addEventListener('click', function() {
+            if (!formData.city) {
+                showNotification('Veuillez d\'abord sélectionner une ville', 'error');
+                return;
+            }
+            loadStreets(formData.city);
+            document.getElementById('street-modal').classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        });
+
+        // Fermer le modal rue
+        document.getElementById('close-street-modal').addEventListener('click', function() {
+            document.getElementById('street-modal').classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        });
+
+        // Recherche dans la liste des rues
+        document.getElementById('street-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const streetList = document.getElementById('street-list');
+            const streets = streetsData[formData.city] || [];
+            
+            streetList.innerHTML = '';
+            
+            const filteredStreets = streets.filter(street => 
+                street.name.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredStreets.length === 0) {
+                streetList.innerHTML = '<div class="p-4 text-center text-gray-500">Aucune rue trouvée</div>';
+                return;
+            }
+            
+            filteredStreets.forEach(street => {
+                const div = document.createElement('div');
+                div.className = 'p-3 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 street-item';
+                div.dataset.id = street.id;
+                div.dataset.name = street.name;
+                div.innerHTML = `
+                    <div class="font-medium">${street.name}</div>
+                `;
+                div.addEventListener('click', () => selectStreet(street.id, street.name));
+                streetList.appendChild(div);
+            });
+        });
+
+        // Navigation entre les étapes
+        document.querySelectorAll('.next-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.step');
+                const nextStepId = this.dataset.next;
+                const nextStep = document.getElementById(`step-${nextStepId}`);
+                
+                if (validateStep(currentStep.id)) {
+                    // Mettre à jour les indicateurs d'étape
+                    updateStepIndicators(parseInt(nextStepId));
+                    
+                    // Animation de transition entre les étapes
+                    currentStep.classList.add('hidden');
+                    nextStep.classList.remove('hidden');
+                    
+                    // Mettre à jour le résumé
+                    updateSummary();
+                    
+                    // Scroll to top of form
+                    nextStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        document.querySelectorAll('.prev-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.step');
+                const prevStepId = this.dataset.prev;
+                const prevStep = document.getElementById(`step-${prevStepId}`);
+                
+                // Mettre à jour les indicateurs d'étape
+                updateStepIndicators(parseInt(prevStepId));
+                
+                // Animation de transition entre les étapes
+                currentStep.classList.add('hidden');
+                prevStep.classList.remove('hidden');
+                
+                // Scroll to top of form
+                prevStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // Fonctionnalité pour afficher/masquer les mots de passe
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+        
+        // Vérification de la force du mot de passe
+        document.getElementById('password').addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+        });
+        
+        // Soumission du formulaire
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateStep('step-4')) {
+                // Afficher l'animation de chargement
+                const submitButton = document.getElementById('submit-button');
+                const originalContent = submitButton.innerHTML;
+                submitButton.innerHTML = '<span class="loading-spinner"></span> Traitement...';
+                submitButton.disabled = true;
+                
+                // Simuler l'envoi des données
+                setTimeout(() => {
+                    showNotification('Inscription réussie! Bienvenue chez L&L Ouest Services.', 'success');
+                    submitButton.innerHTML = originalContent;
+                    submitButton.disabled = false;
+                    
+                    resetForm();
+                }, 2000);
+            }
+        });
+        
+        // Écouter les changements sur les champs pour mettre à jour formData
+        document.getElementById('name').addEventListener('input', function() {
+            formData.name = this.value;
+            updateSummary();
+        });
+        
+        document.getElementById('email').addEventListener('input', function() {
+            formData.email = this.value;
+            updateSummary();
+        });
+        
+        document.getElementById('phone').addEventListener('input', function() {
+            formData.phone = this.value;
+            updateSummary();
+        });
+        
+        document.getElementById('postalCode').addEventListener('input', function() {
+            formData.postalCode = this.value;
+            updateSummary();
+        });
+    });
+    
+    // Fonction pour peupler le grid des pays
+    function populateCountryGrid(countries) {
+        const grid = document.getElementById('country-grid');
+        grid.innerHTML = '';
+        
+        if (countries.length === 0) {
+            grid.innerHTML = '<div class="col-span-full p-4 text-center text-gray-500">Aucun pays trouvé</div>';
+            return;
+        }
+        
+        countries.forEach(country => {
+            const div = document.createElement('div');
+            div.className = 'country-item';
+            if (formData.country === country.code) {
+                div.classList.add('selected');
+            }
+            div.innerHTML = `
+                <span class="text-3xl mb-2">${country.flag}</span>
+                <span class="text-sm font-medium text-center mb-1">${country.name}</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">${country.dial_code}</span>
+            `;
+            div.addEventListener('click', () => selectCountry(country.code, `${country.flag} ${country.name}`, country.dial_code));
+            grid.appendChild(div);
+        });
+    }
+    
+    // Sélectionner un pays
+    function selectCountry(code, display, dialCode) {
+        formData.country = code;
+        formData.dialCode = dialCode;
+        
+        document.getElementById('country').value = display;
+        document.getElementById('dialCode').value = dialCode;
+        document.getElementById('country-modal').classList.add('hidden');
+        document.body.classList.remove('modal-active');
+        
+        // Réinitialiser les sélecteurs de ville et rue
+        formData.city = "";
+        formData.street = "";
+        formData.postalCode = "";
+        
+        document.getElementById('city').value = "Sélectionnez une ville";
+        document.getElementById('street').value = "Sélectionnez une rue";
+        document.getElementById('postalCode').value = "";
+        
+        // Charger les villes pour le pays sélectionné
+        loadCities(code.toLowerCase());
+        
+        // Mettre à jour le résumé
+        updateSummary();
+        
+        // Repeupler la grille pour mettre en évidence le pays sélectionné
+        populateCountryGrid(countriesData);
+    }
+    
+    // Charger les villes pour un pays
+    function loadCities(countryCode) {
+        // Vérifier si les villes sont déjà en cache
+        if (citiesData[countryCode]) {
+            displayCities(citiesData[countryCode], countryCode);
+            return;
+        }
+        
+        // Charger depuis le fichier JSON
+        fetch(`/assets/json/${countryCode}.json`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur de chargement des villes');
+                }
+                return response.json();
+            })
+            .then(cities => {
+                // Mettre en cache les données
+                citiesData[countryCode] = cities;
+                displayCities(cities, countryCode);
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des villes:', error);
+                // Charger des données de secours
+                loadFallbackCities(countryCode);
+            });
+    }
+    
+    // Afficher les villes dans le modal
+    function displayCities(cities, countryCode) {
+        const cityList = document.getElementById('city-list');
+        cityList.innerHTML = '';
+        
+        if (cities.length === 0) {
+            cityList.innerHTML = '<div class="p-4 text-center text-gray-500">Aucune ville disponible pour ce pays</div>';
+            return;
+        }
+        
+        cities.forEach(city => {
+            const div = document.createElement('div');
+            div.className = 'p-3 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 city-item';
+            if (formData.city === city.id) {
+                div.classList.add('bg-blue-50', 'dark:bg-blue-900/20');
+            }
+            div.dataset.id = city.id;
+            div.dataset.name = city.name;
+            div.dataset.postalCode = city.postalCode;
+            div.innerHTML = `
+                <div class="font-medium">${city.name}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">${city.postalCode}</div>
+            `;
+            div.addEventListener('click', () => selectCity(city.id, city.name, city.postalCode));
+            cityList.appendChild(div);
+        });
+    }
+    
+    // Sélectionner une ville
+    function selectCity(id, name, postalCode) {
+        formData.city = id;
+        formData.postalCode = postalCode;
+        
+        document.getElementById('city').value = name;
+        document.getElementById('postalCode').value = postalCode;
+        document.getElementById('city-modal').classList.add('hidden');
+        document.body.classList.remove('modal-active');
+        
+        // Réinitialiser le sélecteur de rue
+        formData.street = "";
+        document.getElementById('street').value = "Sélectionnez une rue";
+        
+        // Charger les rues pour la ville sélectionnée
+        loadStreets(id);
+        
+        // Mettre à jour le résumé
+        updateSummary();
+    }
+    
+    // Charger les rues pour une ville
+    function loadStreets(cityId) {
+        // Vérifier si les rues sont déjà en cache
+        if (streetsData[cityId]) {
+            displayStreets(streetsData[cityId]);
+            return;
+        }
+        
+        // Déterminer le code pays à partir des données du formulaire
+        const countryCode = formData.country.toLowerCase();
+        
+        // Charger depuis le fichier JSON
+        fetch(`/assets/json/${cityId}.json`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur de chargement des rues');
+                }
+                return response.json();
+            })
+            .then(streets => {
+                // Mettre en cache les données
+                streetsData[cityId] = streets;
+                displayStreets(streets);
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des rues:', error);
+                // Charger des données de secours
+                loadFallbackStreets(cityId);
+            });
+    }
+    
+    // Afficher les rues dans le modal
+    function displayStreets(streets) {
+        const streetList = document.getElementById('street-list');
+        streetList.innerHTML = '';
+        
+        if (streets.length === 0) {
+            streetList.innerHTML = '<div class="p-4 text-center text-gray-500">Aucune rue disponible pour cette ville</div>';
+            return;
+        }
+        
+        streets.forEach(street => {
+            const div = document.createElement('div');
+            div.className = 'p-3 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 street-item';
+            if (formData.street === street.id) {
+                div.classList.add('bg-blue-50', 'dark:bg-blue-900/20');
+            }
+            div.dataset.id = street.id;
+            div.dataset.name = street.name;
+            div.innerHTML = `
+                <div class="font-medium">${street.name}</div>
+            `;
+            div.addEventListener('click', () => selectStreet(street.id, street.name));
+            streetList.appendChild(div);
+        });
+    }
+    
+    // Sélectionner une rue
+    function selectStreet(id, name) {
+        formData.street = id;
+        
+        document.getElementById('street').value = name;
+        document.getElementById('street-modal').classList.add('hidden');
+        document.body.classList.remove('modal-active');
+        
+        // Mettre à jour le résumé
+        updateSummary();
+    }
+    
+    // Mettre à jour les indicateurs d'étape
+    function updateStepIndicators(activeStep) {
+        document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+            if (index < activeStep - 1) {
+                indicator.classList.add('completed');
+                indicator.classList.remove('active');
+            } else if (index === activeStep - 1) {
+                indicator.classList.add('active');
+                indicator.classList.remove('completed');
+            } else {
+                indicator.classList.remove('active', 'completed');
+            }
+        });
+    }
+    
+    // Valider une étape du formulaire
+    function validateStep(stepId) {
+        let isValid = true;
+        
+        if (stepId === 'step-1') {
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            
+            if (!name.value.trim()) {
+                showError(name, 'Le nom est requis');
+                isValid = false;
+            } else {
+                clearError(name);
+                formData.name = name.value.trim();
+            }
+            
+            const emailValue = email.value.trim();
+            if (!emailValue) {
+                showError(email, 'L\'email est requis');
+                isValid = false;
+            } else if (!isValidEmail(emailValue)) {
+                showError(email, 'Veuillez entrer un email valide');
+                isValid = false;
+            } else {
+                clearError(email);
+                formData.email = emailValue;
+            }
+        } else if (stepId === 'step-2') {
+            if (!formData.country) {
+                showNotification('Veuillez sélectionner un pays', 'error');
+                isValid = false;
+            }
+            
+            const phone = document.getElementById('phone');
+            const phoneValue = phone.value.trim();
+            
+            if (!phoneValue) {
+                showError(phone, 'Le numéro de téléphone est requis');
+                isValid = false;
+            } else if (!isValidPhone(phoneValue)) {
+                showError(phone, 'Veuillez entrer un numéro de téléphone valide');
+                isValid = false;
+            } else {
+                clearError(phone);
+                formData.phone = phoneValue;
+            }
+        } else if (stepId === 'step-3') {
+            if (!formData.city) {
+                showNotification('Veuillez sélectionner une ville', 'error');
+                isValid = false;
+            }
+            if (!formData.street) {
+                showNotification('Veuillez sélectionner une rue', 'error');
+                isValid = false;
+            }
+            
+            const postalCode = document.getElementById('postalCode');
+            if (!postalCode.value.trim()) {
+                showError(postalCode, 'Le code postal est requis');
+                isValid = false;
+            } else {
+                clearError(postalCode);
+                formData.postalCode = postalCode.value.trim();
+            }
+        } else if (stepId === 'step-4') {
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            
+            if (!password.value) {
+                showError(password, 'Le mot de passe est requis');
+                isValid = false;
+            } else if (password.value.length < 8) {
+                showError(password, 'Le mot de passe doit contenir au moins 8 caractères');
+                isValid = false;
+            } else {
+                clearError(password);
+                formData.password = password.value;
+            }
+            
+            if (!confirmPassword.value) {
+                showError(confirmPassword, 'Veuillez confirmer votre mot de passe');
+                isValid = false;
+            } else if (confirmPassword.value !== password.value) {
+                showError(confirmPassword, 'Les mots de passe ne correspondent pas');
+                isValid = false;
+            } else {
+                clearError(confirmPassword);
+                formData.confirmPassword = confirmPassword.value;
+            }
+        }
+        
+        return isValid;
+    }
+    
+    // Valider la confirmation du mot de passe
+    function validateConfirmPassword() {
+        const confirmPassword = document.getElementById('confirmPassword');
+        const password = document.getElementById('password');
+        
+        if (!confirmPassword.value) {
+            showError(confirmPassword, 'Veuillez confirmer votre mot de passe');
+        } else if (confirmPassword.value !== password.value) {
+            showError(confirmPassword, 'Les mots de passe ne correspondent pas');
+        } else {
+            clearError(confirmPassword);
+        }
+    }
+    
+    // Afficher une erreur de champ
+    function showError(field, message) {
+        const errorElement = field.parentElement.nextElementSibling;
+        if (errorElement && errorElement.classList.contains('error-message')) {
+            errorElement.textContent = message;
+        }
+        field.classList.add('border-red-500');
+    }
+    
+    // Effacer l'erreur d'un champ
+    function clearError(field) {
+        const errorElement = field.parentElement.nextElementSibling;
+        if (errorElement && errorElement.classList.contains('error-message')) {
+            errorElement.textContent = '';
+        }
+        field.classList.remove('border-red-500');
+    }
+    
+    // Vérifier si l'email est valide
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    // Vérifier si le numéro de téléphone est valide
+    function isValidPhone(phone) {
+        const re = /^[0-9+\s()-]{10,}$/;
+        return re.test(phone);
+    }
+    
+    // Vérifier la force du mot de passe
+    function checkPasswordStrength(password) {
+        const strengthElement = document.getElementById('password-strength');
+        let strength = 0;
+        let message = '';
+        let color = '';
+        
+        if (password.length === 0) {
+            strengthElement.textContent = '';
+            return;
+        }
+        
+        // Vérifier la longueur
+        if (password.length > 7) strength++;
+        
+        // Vérifier la présence de minuscules et majuscules
+        if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength++;
+        
+        // Vérifier la présence de chiffres
+        if (password.match(/([0-9])/)) strength++;
+        
+        // Vérifier la présence de caractères spéciaux
+        if (password.match(/([!,@,#,$,%,^,&,*,?,_,~])/)) strength++;
+        
+        switch(strength) {
+            case 0:
+            case 1:
+                message = 'Faible';
+                color = 'text-red-500';
+                break;
+            case 2:
+                message = 'Moyen';
+                color = 'text-yellow-500';
+                break;
+            case 3:
+                message = 'Fort';
+                color = 'text-green-500';
+                break;
+            case 4:
+                message = 'Très fort';
+                color = 'text-green-600 font-bold';
+                break;
+        }
+        
+        strengthElement.innerHTML = `Force du mot de passe: <span class="${color}">${message}</span>`;
+    }
+    
+    // Mettre à jour le résumé des informations
+    function updateSummary() {
+        document.getElementById('summary-name').textContent = formData.name || 'Non renseigné';
+        document.getElementById('summary-email').textContent = formData.email || 'Non renseigné';
+        
+        const phoneText = formData.phone ? `${formData.dialCode} ${formData.phone}` : 'Non renseigné';
+        document.getElementById('summary-phone').textContent = phoneText;
+        
+        const selectedCountry = countriesData.find(country => country.code === formData.country);
+        const countryText = selectedCountry ? `${selectedCountry.flag} ${selectedCountry.name}` : 'Non renseigné';
+        document.getElementById('summary-country').textContent = countryText;
+        
+        const cityElement = document.getElementById('city');
+        const streetElement = document.getElementById('street');
+        const postalCodeElement = document.getElementById('postalCode');
+        
+        let addressText = 'Non renseigné';
+        if (formData.city && formData.street && formData.postalCode) {
+            addressText = `${streetElement.value}, ${postalCodeElement.value} ${cityElement.value}`;
+        } else if (formData.city && formData.postalCode) {
+            addressText = `${postalCodeElement.value} ${cityElement.value}`;
+        }
+        
+        document.getElementById('summary-address').textContent = addressText;
+    }
+    
+    // Afficher une notification
+    function showNotification(message, type = 'info') {
+        // Créer l'élément de notification
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-transform duration-300 ${
+            type === 'error' ? 'bg-red-500 text-white' : 
+            type === 'success' ? 'bg-green-500 text-white' : 
+            'bg-blue-500 text-white'
+        }`;
+        notification.innerHTML = `
+            <div class="flex items-center">
+                <i class="fas ${
+                    type === 'error' ? 'fa-exclamation-circle' : 
+                    type === 'success' ? 'fa-check-circle' : 
+                    'fa-info-circle'
+                } mr-2"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        // Ajouter à la page
+        document.body.appendChild(notification);
+        
+        // Animation d'entrée
+        setTimeout(() => {
+            notification.classList.add('translate-x-0');
+        }, 10);
+        
+        // Supprimer après 5 secondes
+        setTimeout(() => {
+            notification.classList.remove('translate-x-0');
+            notification.classList.add('translate-x-full');
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }, 5000);
+    }
+    
+    // Réinitialiser le formulaire
+    function resetForm() {
+        formData = {
+            name: "",
+            email: "",
+            country: "FR",
+            dialCode: "+33",
+            phone: "",
+            city: "",
+            street: "",
+            postalCode: "",
+            password: "",
+            confirmPassword: ""
+        };
+        
+        // Réinitialiser les champs
+        document.getElementById('name').value = "";
+        document.getElementById('email').value = "";
+        document.getElementById('phone').value = "";
+        document.getElementById('postalCode').value = "";
+        document.getElementById('password').value = "";
+        document.getElementById('confirmPassword').value = "";
+        
+        // Réinitialiser les sélecteurs avec valeurs par défaut
+        const france = countriesData.find(country => country.code === 'FR');
+        if (france) {
+            selectCountry(france.code, `${france.flag} ${france.name}`, france.dial_code);
+        }
+        document.getElementById('city').value = "Sélectionnez une ville";
+        document.getElementById('street').value = "Sélectionnez une rue";
+        
+        // Revenir à la première étape
+        document.querySelectorAll('.step').forEach(step => {
+            step.classList.add('hidden');
+        });
+        document.getElementById('step-1').classList.remove('hidden');
+        
+        // Réinitialiser les indicateurs d'étape
+        updateStepIndicators(1);
+        
+        // Mettre à jour le résumé
+        updateSummary();
+        
+        // Réinitialiser les erreurs
+        document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+        document.querySelectorAll('input').forEach(input => input.classList.remove('border-red-500'));
+    }
+    
+    // Données de secours pour les pays
+    function loadFallbackCountries() {
+        const fallbackCountries = [
+            { name: "France", flag: "🇫🇷", code: "FR", dial_code: "+33" },
+            { name: "Belgique", flag: "🇧🇪", code: "BE", dial_code: "+32" },
+            { name: "Suisse", flag: "🇨🇭", code: "CH", dial_code: "+41" }
+        ];
+        
+        countriesData = fallbackCountries;
+        populateCountryGrid(fallbackCountries);
+        
+        // Définir la France par défaut
+        const france = fallbackCountries.find(country => country.code === 'FR');
+        if (france) {
+            selectCountry(france.code, `${france.flag} ${france.name}`, france.dial_code);
+        }
+    }
+    
+    // Données de secours pour les villes
+    function loadFallbackCities(countryCode) {
+        const fallbackCities = {
+            fr: [
+                { id: "angers", name: "Angers", postalCode: "49000" },
+                { id: "nantes", name: "Nantes", postalCode: "44000" },
+                { id: "rennes", name: "Rennes", postalCode: "35000" }
+            ],
+            be: [
+                { id: "bruxelles", name: "Bruxelles", postalCode: "1000" },
+                { id: "liege", name: "Liège", postalCode: "4000" }
+            ],
+            ch: [
+                { id: "geneve", name: "Genève", postalCode: "1200" },
+                { id: "zurich", name: "Zurich", postalCode: "8000" }
+            ]
+        };
+        
+        const cities = fallbackCities[countryCode] || [];
+        citiesData[countryCode] = cities;
+        displayCities(cities, countryCode);
+    }
+    
+    // Données de secours pour les rues
+    function loadFallbackStreets(cityId) {
+        const fallbackStreets = {
+            angers: [
+                { id: "rue-bressigny", name: "Rue Bressigny" },
+                { id: "bd-ayrault", name: "Boulevard Ayrault" }
+            ],
+            nantes: [
+                { id: "rue-crete", name: "Rue de la Crée" },
+                { id: "bd-graslin", name: "Boulevard Graslin" }
+            ],
+            rennes: [
+                { id: "rue-de-paris", name: "Rue de Paris" },
+                { id: "rue-de-brest", name: "Rue de Brest" }
+            ]
+        };
+        
+        const streets = fallbackStreets[cityId] || [];
+        streetsData[cityId] = streets;
+        displayStreets(streets);
+    }

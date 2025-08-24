@@ -1,0 +1,858 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\tcbuselibrary{listingsutf8}
+\usepackage{noto}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{afterpage}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Colors
+\definecolor{titleblue}{RGB}{59, 130, 246}
+\definecolor{codegreen}{RGB}{0, 128, 0}
+\definecolor{warningred}{RGB}{200, 0, 0}
+\definecolor{noteblue}{RGB}{0, 102, 204}
+\definecolor{successgreen}{RGB}{46, 125, 50}
+\definecolor{infoyellow}{RGB}{255, 193, 7}
+
+% Title formatting
+\titleformat{\section}{\Large\bfseries\color{titleblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{titleblue}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{titleblue}}{\thesubsubsection}{1em}{}
+
+% Listings style for code
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codegreen},
+  commentstyle=\color{gray},
+  stringstyle=\color{blue},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!10},
+  showspaces=false,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b
+}
+
+% Custom tcolorbox for steps
+\newtcolorbox{stepbox}[1][]{
+  colback=gray!5,
+  colframe=titleblue,
+  coltitle=black,
+  title=#1,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=1pt,
+  left=5pt,
+  right=5pt,
+  top=5pt,
+  bottom=5pt
+}
+
+% Custom tcolorbox for notes
+\newtcolorbox{notebox}[1][]{
+  colback=noteblue!5,
+  colframe=noteblue,
+  coltitle=black,
+  title=#1,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=1pt,
+  left=5pt,
+  right=5pt,
+  top=5pt,
+  bottom=5pt
+}
+
+% Custom tcolorbox for warnings
+\newtcolorbox{warningbox}[1][]{
+  colback=warningred!5,
+  colframe=warningred,
+  coltitle=black,
+  title=#1,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=1pt,
+  left=5pt,
+  right=5pt,
+  top=5pt,
+  bottom=5pt
+}
+
+% Custom tcolorbox for success
+\newtcolorbox{successbox}[1][]{
+  colback=successgreen!5,
+  colframe=successgreen,
+  coltitle=black,
+  title=#1,
+  fonttitle=\bfseries,
+  sharp corners,
+  boxrule=1pt,
+  left=5pt,
+  right=5pt,
+  top=5pt,
+  bottom=5pt
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{titleblue}\textbf{L\&L Ouest Services - Guide d'Installation}}
+\fancyhead[R]{\color{titleblue}\thepage}
+\fancyfoot[C]{\color{gray}\small \copyright 2025 L\&L Ouest Services}
+
+% Hyperlink setup
+\hypersetup{
+  colorlinks=true,
+  linkcolor=titleblue,
+  urlcolor=noteblue,
+  citecolor=noteblue
+}
+
+% Table of contents depth
+\setcounter{tocdepth}{3}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge \color{titleblue} Guide d'Installation du Projet L\&L Ouest Services \par}
+  \vspace{1cm}
+  {\Large \color{black} Un guide complet pour les développeurs \par}
+  \vspace{2cm}
+  {\large \color{gray} Projet : Application web avec backend Node.js et frontend HTML/CSS/JS \par}
+  \vspace{1cm}
+  {\large \color{gray} Date : 19 août 2025 \par}
+  \vspace{2cm}
+  {\large \color{black} Logo L\&L Ouest Services \par} % Remplacement de l'image
+  \vspace{1cm}
+  {\large \color{black} Créé par : Équipe L\&L Ouest Services \par}
+\end{titlepage}
+
+% Table of contents
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Ce guide est conçu pour aider les développeurs à configurer et lancer le projet \textbf{L\&L Ouest Services}. Le projet est une application web complète composée de deux parties principales :
+\begin{itemize}
+  \item \textbf{Backend} : Un serveur Node.js robuste qui gère les données, les API, l'authentification, et les services.
+  \item \textbf{Frontend} : Une interface utilisateur moderne en HTML, CSS, et JavaScript, utilisant Tailwind CSS pour le style.
+\end{itemize}
+
+\subsection{Pré-requis}
+Avant de commencer, assurez-vous d'avoir :
+\begin{itemize}
+  \item Un ordinateur avec Windows, macOS, ou Linux.
+  \item Une connexion Internet pour télécharger les outils et dépendances.
+  \item Connaissances de base des commandes terminal.
+  \item Au moins 2 Go d'espace disque libre.
+  \item Au moins 4 Go de RAM.
+\end{itemize}
+
+\begin{warningbox}[Avertissement important]
+Ne modifiez pas les fichiers du projet sans comprendre leur rôle, car cela pourrait compromettre le fonctionnement de l'application. Suivez les instructions dans l'ordre et assurez-vous de comprendre chaque étape avant de passer à la suivante.
+\end{warningbox}
+
+\section{Préparation de l'Environnement de Développement}
+Pour lancer le projet, vous devez installer plusieurs outils essentiels. Chaque étape est expliquée en détail.
+
+\subsection{Installation de Node.js et npm}
+\begin{stepbox}[Étape 1 : Installer Node.js et npm]
+Node.js est une plateforme qui permet d'exécuter le backend JavaScript. npm (Node Package Manager) est inclus avec Node.js pour gérer les dépendances.
+
+\begin{enumerate}
+  \item Rendez-vous sur \href{https://nodejs.org/}{nodejs.org}.
+  \item Téléchargez la version \textbf{LTS} (recommandée pour la stabilité).
+  \item Suivez l'assistant d'installation (cliquez sur "Suivant" et acceptez les termes).
+  \item Une fois installé, ouvrez un terminal (sur Windows : \texttt{CMD} ou \texttt{PowerShell} ; sur macOS/Linux : \texttt{Terminal}).
+  \item Vérifiez l'installation avec les commandes suivantes :
+  \begin{lstlisting}
+node --version
+npm --version
+  \end{lstlisting}
+  Vous devriez voir des numéros de version (ex. \texttt{v20.x.x} pour Node.js et \texttt{10.x.x} pour npm).
+\end{enumerate}
+\end{stepbox}
+
+\begin{notebox}[Note importante]
+Si vous ne voyez pas de version, redémarrez votre terminal ou votre ordinateur, puis réessayez. Si le problème persiste, vérifiez que Node.js est ajouté au PATH système (voir la section \hyperref[sec:troubleshooting]{Dépannage}).
+\end{notebox}
+
+\subsection{Installation d'un éditeur de code (VS Code)}
+\begin{stepbox}[Étape 2 : Installer Visual Studio Code]
+Visual Studio Code (VS Code) est un éditeur de code convivial pour modifier les fichiers du projet.
+
+\begin{enumerate}
+  \item Téléchargez VS Code sur \href{https://code.visualstudio.com/}{code.visualstudio.com}.
+  \item Installez-le en suivant l'assistant d'installation.
+  \item Ouvrez VS Code et installez les extensions recommandées :
+  \begin{itemize}
+    \item \texttt{ESLint} : Pour vérifier le code JavaScript.
+    \item \texttt{Prettier} : Pour formater le code automatiquement.
+    \item \texttt{Live Server} : Pour tester le frontend localement.
+    \item \texttt{Thunder Client} : Pour tester les API REST.
+    \item \texttt{Auto Rename Tag} : Pour renommer automatiquement les balises HTML.
+    \item \texttt{Bracket Pair Colorizer} : Pour colorer les paires de parenthèses.
+  \end{itemize}
+  \item Pour installer une extension, ouvrez la barre latérale \texttt{Extensions} (icône de carré avec une flèche) et recherchez le nom de l'extension.
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Installation de Git}
+\begin{stepbox}[Étape 3 : Installer Git]
+Git est utilisé pour cloner le projet depuis un dépôt et gérer les versions.
+
+\begin{enumerate}
+  \item Téléchargez Git sur \href{https://git-scm.com/}{git-scm.com}.
+  \item Installez-le en suivant l'assistant (choisissez les options par défaut).
+  \item Vérifiez l'installation dans un terminal :
+  \begin{lstlisting}
+git --version
+  \end{lstlisting}
+  Vous devriez voir une version (ex. \texttt{git version 2.x.x}).
+  \item Configurez Git avec votre nom et email :
+  \begin{lstlisting}
+git config --global user.name "Votre Nom"
+git config --global user.email "votre.email@example.com"
+  \end{lstlisting}
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Cloner ou obtenir le projet}
+\begin{stepbox}[Étape 4 : Obtenir les fichiers du projet]
+Vous devez récupérer les dossiers \texttt{backend} et \texttt{frontend}.
+
+\begin{enumerate}
+  \item Si le projet est dans un dépôt Git (ex. GitHub), clonez-le :
+  \begin{lstlisting}
+git clone https://github.com/votre-compte/ll-ouest-services.git
+  \end{lstlisting}
+  Remplacez l'URL par celle du dépôt réel.
+  \item Si vous avez un dossier ZIP, décompressez-le dans un répertoire (ex. \texttt{C:\textbackslash Projets\textbackslash ll-ouest-services} ou \texttt{~/Projets/ll-ouest-services}).
+  \item Vous devriez voir deux dossiers principaux : \texttt{backend} et \texttt{frontend}.
+\end{enumerate}
+\end{stepbox}
+
+\section{Architecture du Projet}
+Cette section décrit en détail l'architecture du projet, les rôles de chaque dossier et fichier.
+
+\subsection{Structure globale du projet}
+Le projet est organisé comme suit :
+\begin{lstlisting}
+2L-Ouest-Services/
+├── backend/                 # Application backend Node.js
+├── frontend/               # Application frontend HTML/CSS/JS
+├── functions/              # Fonctions Firebase (optionnel)
+├── logs/                   # Fichiers de logs
+├── .editorconfig           # Configuration de l'éditeur
+├── .gitignore             # Fichiers à ignorer par Git
+├── .prettierrc            # Configuration Prettier
+├── deploy.sh              # Script de déploiement
+├── firestore.indexes.json # Indexes Firestore
+├── firestore.rules        # Règles de sécurité Firestore
+├── Issues.md              # Problèmes connus
+├── LICENSE                # Licence du projet
+├── project.sh             # Script de gestion du projet
+├── README.md              # Documentation du projet
+├── style.css              # Feuille de style globale
+└── tailwind.css           # Configuration Tailwind CSS
+\end{lstlisting}
+
+\subsection{Architecture détaillée du Backend}
+Le backend est une application Node.js complète avec une architecture modulaire.
+
+\subsubsection{Structure du dossier backend}
+\begin{lstlisting}
+backend/
+├── config/                 # Configuration de l'application
+│   ├── config.js          # Configuration principale
+│   ├── env.js             # Gestion des environnements
+│   └── firebase.js        # Configuration Firebase
+├── controllers/           # Contrôleurs pour les routes API
+│   ├── authController.js  # Contrôleur d'authentification
+│   ├── chatController.js  # Contrôleur de chat
+│   ├── contactController.js # Contrôleur de contact
+│   ├── documentController.js # Contrôleur de documents
+│   ├── mapController.js   # Contrôleur de cartes
+│   ├── notificationController.js # Contrôleur de notifications
+│   ├── reviewController.js # Contrôleur d'avis
+│   ├── serviceController.js # Contrôleur de services
+│   └── userController.js  # Contrôleur d'utilisateurs
+├── env/                   # Fichiers d'environnement
+│   ├── .env              # Variables d'environnement (à créer)
+│   ├── .env.dev          # Variables pour le développement
+│   └── .env.pro          # Variables pour la production
+├── logs/                  # Fichiers de logs
+├── middleware/            # Middlewares Express
+├── models/                # Modèles de données
+│   ├── chatMessageModel.js # Modèle de messages de chat
+│   ├── contactModel.js    # Modèle de contact
+│   ├── reviewModel.js     # Modèle d'avis
+│   ├── serviceModel.js    # Modèle de service
+│   └── userModel.js       # Modèle d'utilisateur
+├── node_modules/          # Dépendances Node.js (généré)
+├── public/                # Fichiers publics servis
+│   ├── img/              # Images
+│   └── uploads/           # Fichiers uploadés
+├── repositories/          # Couche d'accès aux données
+│   ├── chatRepo.js       # Repository pour le chat
+│   ├── contactRepo.js    # Repository pour les contacts
+│   ├── index.js          # Index des repositories
+│   ├── reviewRepo.js     # Repository pour les avis
+│   ├── serviceRepo.js    # Repository pour les services
+│   └── userRepo.js       # Repository pour les utilisateurs
+├── routes/                # Définition des routes API
+│   ├── authRoutes.js     # Routes d'authentification
+│   ├── chatRoutes.js     # Routes de chat
+│   ├── contactRoutes.js  # Routes de contact
+│   ├── documentRoutes.js # Routes de documents
+│   ├── index.js          # Index des routes
+│   ├── mapRoutes.js      # Routes de cartes
+│   ├── notificationRoutes.js # Routes de notifications
+│   ├── reviewRoutes.js   # Routes d'avis
+│   ├── serviceRoutes.js  # Routes de services
+│   └── userRoutes.js     # Routes d'utilisateurs
+├── services/              # Services métier
+│   ├── authService.js    # Service d'authentification
+│   ├── chatService.js    # Service de chat
+│   ├── documentService.js # Service de documents
+│   ├── emailService.js   # Service d'email
+│   ├── loggerService.js  # Service de logging
+│   ├── mapService.js     # Service de cartes
+│   ├── notificationService.js # Service de notifications
+│   ├── reviewService.js  # Service d'avis
+│   ├── serviceService.js # Service de services
+│   ├── socketService.js  # Service de sockets
+│   ├── storageService.js # Service de stockage
+│   └── userService.js    # Service d'utilisateurs
+├── storage/               # Stockage local
+├── test/                 # Tests
+├── utils/                # Utilitaires
+│   ├── validation/       # Validation des données
+│   │   ├── authValidation.js # Validation auth
+│   │   ├── chatValidation.js # Validation chat
+│   │   ├── contactValidation.js # Validation contact
+│   │   ├── documentValidation.js # Validation documents
+│   │   ├── mapValidation.js # Validation cartes
+│   │   ├── notificationValidation.js # Validation notifications
+│   │   ├── reviewValidation.js # Validation avis
+│   │   ├── serviceValidation.js # Validation services
+│   │   └── userValidation.js # Validation utilisateurs
+│   ├── errorUtils.js     # Utilitaires d'erreur
+│   ├── helperUtils.js    # Utilitaires helpers
+│   └── validationUtils.js # Utilitaires de validation
+├── app.js               # Application principale
+├── firebase-debug.log   # Logs de debug Firebase
+├── package-lock.json    # Lock des dépendances
+└── package.json         # Dépendances et scripts
+\end{lstlisting}
+
+\subsubsection{Rôle des composants backend}
+
+\begin{description}
+\item[\texttt{app.js}] Fichier principal qui initialise l'application Express, configure les middlewares, les routes, et démarre le serveur. Il inclut également la gestion des erreurs, la journalisation, et l'arrêt gracieux.
+
+\item[\texttt{config/}] Contient tous les fichiers de configuration :
+\begin{itemize}
+\item \texttt{config.js} : Configuration principale de l'application
+\item \texttt{env.js} : Gestion des différents environnements (dev, prod)
+\item \texttt{firebase.js} : Configuration et initialisation de Firebase
+\end{itemize}
+
+\item[\texttt{controllers/}] Contrôleurs qui gèrent la logique des routes API. Chaque contrôleur contient les méthodes pour traiter les requêtes HTTP.
+
+\item[\texttt{models/}] Modèles de données qui définissent la structure des données stockées dans Firebase.
+
+\item[\texttt{repositories/}] Couche d'accès aux données qui abstrait les opérations de base de données.
+
+\item[\texttt{routes/}] Définition des routes API et leur association avec les contrôleurs.
+
+\item[\texttt{services/}] Services métier qui contiennent la logique applicative complexe.
+
+\item[\texttt{utils/}] Utilitaires et helpers pour la validation, la gestion d'erreurs, etc.
+
+\item[\texttt{middleware/}] Middlewares Express personnalisés pour l'authentification, la validation, etc.
+\end{description}
+
+\subsection{Architecture détaillée du Frontend}
+Le frontend est une application web moderne avec une structure organisée.
+
+\subsubsection{Structure du dossier frontend}
+\begin{lstlisting}
+frontend/
+├── public/                # Fichiers publics servis
+│   ├── assets/           # Assets statiques
+│   ├── css/              # Feuilles de style CSS
+│   ├── js/               # Scripts JavaScript
+│   │   ├── animations/   # Animations
+│   │   ├── api/          # Clients API
+│   │   │   ├── authApi.js # API d'authentification
+│   │   │   ├── chatApi.js # API de chat
+│   │   │   ├── contactApi.js # API de contact
+│   │   │   ├── documentApi.js # API de documents
+│   │   │   ├── mapApi.js # API de cartes
+│   │   │   ├── notificationApi.js # API de notifications
+│   │   │   ├── reviewApi.js # API d'avis
+│   │   │   ├── serviceApi.js # API de services
+│   │   │   └── userApi.js # API d'utilisateurs
+│   │   ├── modules/      # Modules fonctionnels
+│   │   │   ├── auth.js   # Module d'authentification
+│   │   │   ├── chat.js   # Module de chat
+│   │   │   ├── contact.js # Module de contact
+│   │   │   ├── document.js # Module de documents
+│   │   │   ├── map.js    # Module de cartes
+│   │   │   ├── notifications.js # Module de notifications
+│   │   │   ├── review.js # Module d'avis
+│   │   │   ├── service.js # Module de services
+│   │   │   ├── user.js   # Module d'utilisateurs
+│   │   │   └── utils.js  # Utilitaires
+│   │   └── templates/    # Templates
+│   │       └── emailTemplates.js # Templates d'emails
+│   ├── pages/            # Pages HTML
+│   │   ├── auth/         # Pages d'authentification
+│   │   │   ├── change-email.html # Changement d'email
+│   │   │   ├── password-reset.html # Réinitialisation mot de passe
+│   │   │   ├── signin.html # Connexion
+│   │   │   ├── signup.html # Inscription
+│   │   │   └── verify-email.html # Vérification email
+│   │   ├── chat/         # Pages de chat
+│   │   │   └── index.html # Page principale chat
+│   │   ├── contact/      # Pages de contact
+│   │   │   └── index.html # Page contact
+│   │   ├── doc/          # Pages de documents
+│   │   │   └── index.html # Page documents
+│   │   ├── map/          # Pages de cartes
+│   │   │   └── index.html # Page carte
+│   │   ├── reviews/      # Pages d'avis
+│   │   │   ├── create.html # Création avis
+│   │   │   ├── index.html # Liste avis
+│   │   │   ├── manage.html # Gestion avis
+│   │   │   └── user.html # Avis utilisateur
+│   │   ├── services/     # Pages de services
+│   │   │   └── index.html # Page services
+│   │   └── user/         # Pages utilisateur
+│   │       └── index.html # Profil utilisateur
+│   ├── about.html        # Page À propos
+│   ├── admin.html        # Page administration
+│   ├── contact.html      # Page contact
+│   ├── dashboard.html    # Tableau de bord
+│   ├── favicon.ico       # Favicon
+│   ├── index.html        # Page d'accueil
+│   ├── mentions.html     # Mentions légales
+│   ├── realizations.html # Réalisations
+│   ├── reviews.html      # Avis
+│   └── services.html     # Services
+├── package.json          # Dépendances et scripts
+├── postcss.config.js     # Configuration PostCSS
+└── tailwind.config.js    # Configuration Tailwind CSS
+\end{lstlisting}
+
+\subsubsection{Rôle des composants frontend}
+
+\begin{description}
+\item[\texttt{public/}] Contient tous les fichiers accessibles publiquement par le navigateur.
+
+\item[\texttt{js/api/}] Clients API pour communiquer avec le backend. Chaque fichier correspond à un module backend.
+
+\item[\texttt{js/modules/}] Modules JavaScript qui implémentent la logique frontend pour chaque fonctionnalité.
+
+\item[\texttt{pages/}] Pages HTML organisées par fonctionnalité.
+
+\item[\texttt{tailwind.config.js}] Configuration de Tailwind CSS pour le style de l'application.
+\end{description}
+
+\section{Configuration du Backend}
+Le backend est une application Node.js située dans le dossier \texttt{backend}. Il fournit des API RESTful pour le frontend.
+
+\subsection{Installation des dépendances}
+\begin{stepbox}[Étape 5 : Installer les dépendances du backend]
+\begin{enumerate}
+  \item Ouvrez un terminal et naviguez vers le dossier \texttt{backend} :
+  \begin{lstlisting}
+cd chemin/vers/ll-ouest-services/backend
+  \end{lstlisting}
+  Exemple : \texttt{cd C:\textbackslash Projets\textbackslash ll-ouest-services\textbackslash backend}.
+  \item Installez les dépendances :
+  \begin{lstlisting}
+npm install
+  \end{lstlisting}
+  Cela télécharge toutes les bibliothèques nécessaires (Express, Firebase, etc.).
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Configuration de l'environnement}
+\begin{stepbox}[Étape 6 : Configurer les variables d'environnement]
+Le backend utilise des variables d'environnement pour la configuration. Vous devez créer un fichier \texttt{.env} dans le dossier \texttt{backend/env/}.
+
+\begin{enumerate}
+  \item Copiez le fichier \texttt{.env.dev} ou \texttt{.env.pro} et renommez-le en \texttt{.env} :
+  \begin{lstlisting}
+cp env/.env.dev env/.env
+  \end{lstlisting}
+  \item Modifiez le fichier \texttt{.env} avec vos configurations :
+  \begin{lstlisting}
+# Environnement
+NODE_ENV=development
+
+# Serveur
+PORT=3000
+HOST=0.0.0.0
+FRONTEND_URL=http://localhost:8080
+API_BASE_URL=http://localhost:3000/api
+
+# JWT
+JWT_SECRET=votre_clé_secrète_super_sécurisée_ici
+JWT_EXPIRES_IN=7d
+JWT_REFRESH_EXPIRES_IN=30d
+
+# Firebase
+FIREBASE_PROJECT_ID=votre-project-id
+FIREBASE_CLIENT_EMAIL=votre-service-account@votre-project.iam.gserviceaccount.com
+FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nVOTRE_CLÉ_PRIVÉE\n-----END PRIVATE KEY-----\n
+FIREBASE_DATABASE_URL=https://votre-project.firebaseio.com
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX=100
+
+# Logging
+LOG_LEVEL=info
+LOG_FILE_PATH=./logs/app.log
+
+# Email (SMTP)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=votre.email@gmail.com
+SMTP_PASS=votre_mot_de_passe_d_application
+
+# Google Maps
+GOOGLE_MAPS_API_KEY=votre_clé_api_google_maps
+
+# Socket.IO
+SOCKET_PATH=/socket.io
+SOCKET_CONNECT_TIMEOUT=45000
+SOCKET_MAX_DISCONNECTION_DURATION=30000
+SOCKET_PING_TIMEOUT=5000
+SOCKET_PING_INTERVAL=25000
+SOCKET_MAX_HTTP_BUFFER_SIZE=1e6
+
+# FCM (Firebase Cloud Messaging)
+FCM_VAPID_KEY=votre_clé_vapid
+
+# Ngrok (optionnel)
+NGROK_AUTH_TOKEN=votre_token_ngrok
+  \end{lstlisting}
+  \item Remplacez toutes les valeurs par vos propres configurations.
+\end{enumerate}
+\end{stepbox}
+
+\begin{warningbox}[Avertissement de sécurité]
+Ne partagez jamais le fichier \texttt{.env} publiquement, car il contient des informations sensibles comme des clés API et des identifiants de base de données. Assurez-vous qu'il est listé dans \texttt{.gitignore}.
+\end{warningbox}
+
+\subsection{Configuration de Firebase}
+\begin{stepbox}[Étape 7 : Configurer Firebase]
+Le projet utilise Firebase comme base de données. Vous devez configurer un projet Firebase.
+
+\begin{enumerate}
+  \item Allez sur \href{https://console.firebase.google.com/}{Firebase Console}.
+  \item Créez un nouveau projet ou sélectionnez un projet existant.
+  \item Activez les services suivants :
+  \begin{itemize}
+    \item Firestore Database
+    \item Authentication
+    \item Storage (optionnel)
+  \end{itemize}
+  \item Dans Paramètres du projet → Comptes de service, générez une nouvelle clé privée.
+  \item Téléchargez le fichier JSON et copiez son contenu dans les variables Firebase de votre fichier \texttt{.env}.
+  \item Initialisez Firestore avec les règles appropriées (voir \texttt{firestore.rules} à la racine du projet).
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Lancement du serveur backend}
+\begin{stepbox}[Étape 8 : Lancer le serveur Node.js]
+\begin{enumerate}
+  \item Dans le terminal, dans le dossier \texttt{backend}, exécutez :
+  \begin{lstlisting}
+npm start
+  \end{lstlisting}
+  Ou, pour le développement avec rechargement automatique :
+  \begin{lstlisting}
+npm run dev
+  \end{lstlisting}
+  \item Vous devriez voir des messages indiquant le démarrage du serveur :
+  \begin{lstlisting}
+Serveur démarré sur le port 3000
+Connexion Firestore : OK
+SocketService initialisé
+  \end{lstlisting}
+  \item Gardez ce terminal ouvert (le serveur doit rester en cours d'exécution).
+  \item Testez que le serveur fonctionne en ouvrant \texttt{http://localhost:3000/api/health} dans votre navigateur. Vous devriez voir une réponse JSON indiquant que le serveur est en bonne santé.
+\end{enumerate}
+\end{stepbox}
+
+\section{Configuration du Frontend}
+Le frontend est situé dans \texttt{frontend/public} et contient des fichiers HTML, CSS, et JavaScript.
+
+\subsection{Installation des dépendances}
+\begin{stepbox}[Étape 9 : Installer les dépendances du frontend}
+\begin{enumerate}
+  \item Ouvrez un nouveau terminal et naviguez vers le dossier \texttt{frontend} :
+  \begin{lstlisting}
+cd chemin/vers/ll-ouest-services/frontend
+  \end{lstlisting}
+  \item Installez les dépendances :
+  \begin{lstlisting}
+npm install
+  \end{lstlisting}
+  Cela installera Tailwind CSS et autres dépendances frontend.
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Construction des assets CSS}
+\begin{stepbox}[Étape 10 : Compiler les styles Tailwind CSS]
+\begin{enumerate}
+  \item Le projet utilise Tailwind CSS qui doit être compilé.
+  \item Dans le dossier \texttt{frontend}, exécutez :
+  \begin{lstlisting}
+npm run build:css
+  \end{lstlisting}
+  Ou, pour surveiller les changements et recompiler automatiquement :
+  \begin{lstlisting}
+npm run watch:css
+  \end{lstlisting}
+  \item Cela générera le fichier CSS final dans \texttt{frontend/public/css/}.
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Lancement du serveur frontend}
+\begin{stepbox}[Étape 11 : Servir les fichiers frontend]
+Le frontend doit être servi via un serveur web pour communiquer avec le backend et éviter les problèmes CORS.
+
+\begin{enumerate}
+  \item Option 1 : Utiliser \texttt{Live Server} dans VS Code (recommandé) :
+  \begin{itemize}
+    \item Ouvrez le dossier \texttt{frontend/public} dans VS Code.
+    \item Installez l'extension "Live Server" si ce n'est pas déjà fait.
+    \item Cliquez droit sur \texttt{index.html} et sélectionnez \texttt{Open with Live Server}.
+    \item Cela ouvrira un navigateur à \texttt{http://localhost:5500}.
+  \end{itemize}
+  \item Option 2 : Utiliser \texttt{http-server} :
+  \begin{itemize}
+    \item Installez \texttt{http-server} globalement :
+    \begin{lstlisting}
+npm install -g http-server
+    \end{lstlisting}
+    \item Naviguez vers \texttt{frontend/public} :
+    \begin{lstlisting}
+cd chemin/vers/ll-ouest-services/frontend/public
+    \end{lstlisting}
+    \item Lancez le serveur :
+    \begin{lstlisting}
+http-server -p 8080 -c-1
+    \end{lstlisting}
+    \item Ouvrez \texttt{http://localhost:8080} dans un navigateur.
+  \end{itemize}
+  \item Option 3 : Utiliser le serveur intégré de Node.js (si disponible) :
+  \begin{itemize}
+    \item Dans le dossier \texttt{frontend}, exécutez :
+    \begin{lstlisting}
+npm start
+    \end{lstlisting}
+    \item Cela lancera un serveur sur le port spécifié (généralement 8080).
+  \end{itemize}
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Configuration des URLs API}
+\begin{stepbox}[Étape 12 : Configurer l'URL de l'API backend]
+Le frontend doit connaître l'URL du backend pour envoyer des requêtes API.
+
+\begin{enumerate}
+  \item Ouvrez le fichier \texttt{frontend/public/js/api.js} (ou le fichier de configuration approprié).
+  \item Vérifiez que la variable d'URL de base pointe vers votre backend :
+  \begin{lstlisting}
+const API_BASE_URL = 'http://localhost:3000/api';
+  \end{lstlisting}
+  \item Si votre backend fonctionne sur un port différent, modifiez l'URL en conséquence.
+  \item Assurez-vous que cette URL correspond à celle configurée dans le fichier \texttt{.env} du backend pour la variable \texttt{FRONTEND_URL}.
+\end{enumerate}
+\end{stepbox}
+
+\section{Communication Frontend-Backend}
+Le frontend communique avec le backend via des requêtes API HTTP/HTTPS. Toutes les communications passent par les clients API définis dans \texttt{frontend/public/js/api/}.
+
+\subsection{Test de la communication}
+\begin{stepbox}[Étape 13 : Tester la communication entre frontend et backend]
+\begin{enumerate}
+  \item Assurez-vous que le backend est en cours d'exécution (\texttt{http://localhost:3000}).
+  \item Assurez-vous que le frontend est servi sur un serveur web (\texttt{http://localhost:8080}).
+  \item Ouvrez \texttt{http://localhost:8080} dans votre navigateur.
+  \item Ouvrez les outils de développement (F12) et allez dans l'onglet Network.
+  \item Interagissez avec l'application (ex: cliquez sur "Se connecter").
+  \item Vous devriez voir des requêtes vers \texttt{http://localhost:3000/api/...} dans l'onglet Network.
+  \item Si vous voyez des erreurs CORS, vérifiez la configuration CORS dans le backend.
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Endpoints API disponibles}
+Le backend expose les endpoints API suivants :
+
+\begin{multicols}{2}
+\begin{itemize}
+  \item \texttt{POST /api/auth/signup} - Inscription utilisateur
+  \item \texttt{POST /api/auth/signin} - Connexion utilisateur
+  \item \texttt{POST /api/auth/refresh} - Rafraîchissement du token JWT
+  \item \texttt{POST /api/auth/signout} - Déconnexion utilisateur
+  \item \texttt{GET /api/auth/verify} - Vérification de l'email
+  \item \texttt{POST /api/auth/reset-password} - Réinitialisation du mot de passe
+  \item \texttt{GET /api/users/:id} - Récupérer le profil d'un utilisateur
+  \item \texttt{PUT /api/users/:id} - Mettre à jour le profil d'un utilisateur
+  \item \texttt{DELETE /api/users/:id} - Supprimer un utilisateur
+  \item \texttt{GET /api/services} - Lister tous les services
+  \item \texttt{GET /api/services/:id} - Récupérer un service spécifique
+  \item \texttt{POST /api/services} - Créer un nouveau service
+  \item \texttt{PUT /api/services/:id} - Mettre à jour un service
+  \item \texttt{DELETE /api/services/:id} - Supprimer un service
+  \item \texttt{GET /api/reviews} - Lister tous les avis
+  \item \texttt{GET /api/reviews/:id} - Récupérer un avis spécifique
+  \item \texttt{POST /api/reviews} - Créer un nouvel avis
+  \item \texttt{PUT /api/reviews/:id} - Mettre à jour un avis
+  \item \texttt{DELETE /api/reviews/:id} - Supprimer un avis
+  \item \texttt{GET /api/chat/messages/:room} - Récupérer les messages d'une salle de chat
+  \item \texttt{POST /api/chat/messages} - Envoyer un message dans le chat
+  \item \texttt{GET /api/contacts} - Lister les contacts
+  \item \texttt{POST /api/contacts} - Créer un nouveau contact
+  \item \texttt{GET /api/documents} - Lister les documents
+  \item \texttt{POST /api/documents} - Uploader un document
+  \item \texttt{GET /api/maps/locations} - Récupérer les localisations sur la carte
+  \item \texttt{POST /api/notifications} - Envoyer une notification
+  \item \texttt{GET /api/notifications/:userId} - Récupérer les notifications d'un utilisateur
+  \item \texttt{GET /api/health} - Vérifier l'état du serveur
+\end{itemize}
+\end{multicols}
+
+\begin{notebox}[Note sur les endpoints]
+Tous les endpoints protégés nécessitent un token JWT dans l'en-tête Authorization (Bearer token). Consultez la documentation des contrôleurs pour plus de détails sur les payloads et les réponses.
+\end{notebox}
+
+\section{Déploiement du Projet}
+\label{sec:deployment}
+Une fois le projet configuré localement, vous pouvez le déployer en production. Le script \texttt{deploy.sh} à la racine du projet facilite ce processus.
+
+\subsection{Déploiement du Backend}
+\begin{stepbox}[Étape 14 : Déployer le backend]
+\begin{enumerate}
+  \item Configurez votre fichier \texttt{.env} pour l'environnement de production (\texttt{NODE_ENV=production}).
+  \item Utilisez un service comme Render, Heroku ou un VPS pour héberger le serveur Node.js.
+  \item Pour Heroku (exemple) :
+    \begin{itemize}
+      \item Créez un compte sur \href{https://heroku.com}{Heroku}.
+      \item Installez la CLI Heroku : \texttt{npm install -g heroku}.
+      \item Connectez-vous : \texttt{heroku login}.
+      \item Créez une app : \texttt{heroku create nom-de-votre-app}.
+      \item Poussez le code : \texttt{git push heroku main}.
+      \item Configurez les variables d'environnement via le dashboard Heroku.
+    \end{itemize}
+  \item Exécutez \texttt{./deploy.sh backend} pour un déploiement automatisé (adaptez le script si nécessaire).
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Déploiement du Frontend}
+\begin{stepbox}[Étape 15 : Déployer le frontend]
+\begin{enumerate}
+  \item Compilez les assets : \texttt{npm run build:css}.
+  \item Utilisez un service comme Netlify, Vercel ou Firebase Hosting.
+  \item Pour Netlify (exemple) :
+    \begin{itemize}
+      \item Créez un compte sur \href{https://netlify.com}{Netlify}.
+      \item Connectez votre dépôt GitHub.
+      \item Déployez le dossier \texttt{frontend/public} comme site statique.
+    \end{itemize}
+  \item Mettez à jour l'URL API dans les fichiers JS pour pointer vers l'URL de production du backend.
+  \item Exécutez \texttt{./deploy.sh frontend} pour un déploiement automatisé.
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Déploiement des Functions Firebase (Optionnel)}
+Si vous utilisez des Cloud Functions Firebase :
+\begin{stepbox}[Étape 16 : Déployer les functions Firebase]
+\begin{enumerate}
+  \item Installez la CLI Firebase : \texttt{npm install -g firebase-tools}.
+  \item Connectez-vous : \texttt{firebase login}.
+  \item Initialisez les functions : \texttt{firebase init functions}.
+  \item Déployez : \texttt{firebase deploy --only functions}.
+\end{enumerate}
+\end{stepbox}
+
+\begin{warningbox}[Avertissement pour le déploiement]
+Assurez-vous que toutes les clés API et secrets sont gérés via des variables d'environnement en production. Testez thoroughly avant de déployer en live.
+\end{warningbox}
+
+\section{Dépannage}
+\label{sec:troubleshooting}
+Cette section couvre les problèmes courants et leurs solutions.
+
+\subsection{Problèmes courants}
+\begin{itemize}
+  \item \textbf{Node.js non reconnu dans le terminal} : Vérifiez que Node.js est ajouté au PATH. Réinstallez Node.js et cochez l'option "Add to PATH".
+  \item \textbf{Port déjà utilisé (ex. 3000)} : Tuez le processus utilisant le port : \texttt{lsof -i :3000} (Linux/macOS) ou \texttt{netstat -ano | findstr :3000} (Windows), puis tuez avec \texttt{kill PID}.
+  \item \textbf{Erreurs Firebase} : Vérifiez les clés dans \texttt{.env}. Assurez-vous que le projet Firebase est correctement configuré et que les services sont activés.
+  \item \textbf{Erreurs CORS} : Vérifiez la configuration CORS dans \texttt{app.js} du backend. Ajoutez l'origine du frontend à la liste des origines autorisées.
+  \item \textbf{Dépendances manquantes} : Exécutez \texttt{npm install} à nouveau. Supprimez \texttt{node_modules} et \texttt{package-lock.json} si nécessaire.
+  \item \textbf{Problèmes de chat en temps réel} : Vérifiez la configuration Socket.IO et assurez-vous que le port est ouvert.
+\end{itemize}
+
+\begin{notebox}[Conseil pour le dépannage]
+Consultez les logs dans \texttt{logs/app.log} pour plus de détails sur les erreurs. Utilisez \texttt{console.log} pour debugger si nécessaire.
+\end{notebox}
+
+\section{Tests et Validation}
+Avant de passer en production, testez l'application.
+
+\subsection{Tests unitaires}
+\begin{stepbox}[Étape 17 : Exécuter les tests]
+\begin{enumerate}
+  \item Dans le dossier \texttt{backend}, exécutez :
+  \begin{lstlisting}
+npm test
+  \end{lstlisting}
+  \item Cela lancera les tests Jest configurés dans le dossier \texttt{test/}.
+\end{enumerate}
+\end{stepbox}
+
+\subsection{Tests manuels}
+\begin{itemize}
+  \item Testez l'inscription et la connexion.
+  \item Vérifiez les fonctionnalités chat, avis, services, etc.
+  \item Utilisez Thunder Client dans VS Code pour tester les endpoints API.
+\end{itemize}
+
+\section{Conclusion}
+Félicitations ! Vous avez maintenant configuré et lancé le projet L\&L Ouest Services. Ce guide couvre l'installation locale, la configuration, et le déploiement. Pour des personnalisations avancées, consultez le code source et les fichiers README. Si vous rencontrez des problèmes non couverts ici, consultez \texttt{Issues.md} ou contactez l'équipe de développement.
+
+\begin{successbox}[Succès]
+Votre application est prête à être utilisée et déployée. Bonne continuation !
+\end{successbox}
+
+\end{document}

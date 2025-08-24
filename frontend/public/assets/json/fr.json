@@ -1,0 +1,11 @@
+[
+     
+        { "id": "angers", "name": "Angers", "postalCode": "49000" },
+        { "id": "nantes", "name": "Nantes", "postalCode": "44000" },
+        { "id": "rennes", "name": "Rennes", "postalCode": "35000" },
+        { "id": "paris", "name": "Paris", "postalCode": "75000" },
+        { "id": "lyon", "name": "Lyon", "postalCode": "69000" },
+        { "id": "marseille", "name": "Marseille", "postalCode": "13000" },
+        { "id": "lille", "name": "Lille", "postalCode": "59000" },
+        { "id": "bordeaux", "name": "Bordeaux", "postalCode": "33000" }
+]

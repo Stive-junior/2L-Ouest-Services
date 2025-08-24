@@ -10,7 +10,7 @@ import { io } from "https://cdn.jsdelivr.net/npm/socket.io-client@4.7.2/dist/soc
 
 import { showNotification, validateInput, getStoredToken, authGuard, handleApiError, apiFetch } from '../modules/utils.js';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:35473/api';
 const SOCKET_URL = 'ws://localhost:3000';
 const auth = getAuth();
 let socket = null;
