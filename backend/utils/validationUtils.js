@@ -23,7 +23,7 @@ const userSchema = Joi.object({
   email: Joi.string().email().required().max(255).description('Adresse email de l\'utilisateur'),
   name: Joi.string().min(2).max(100).required().description('Nom complet ou raison sociale'),
   role: Joi.string().valid('client', 'admin').default('client').description('Rôle de l\'utilisateur'),
-  phone: Joi.string().pattern(/^\+?[1-9]\d{1,14}$/).required().description('Numéro de téléphone international'),
+  phone: Joi.string().pattern(/^\+\d{1,3}[\s\d\-\(\)]{4,20}$/).required().description('Numéro de téléphone international'),
   address: Joi.object({
     street: Joi.string().min(3).max(255).optional().description('Rue ou adresse des locaux'),
     city: Joi.string().min(2).max(100).optional().description('Ville'),

@@ -209,7 +209,6 @@ app.use(corsMiddleware);
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
-app.use(loggingMiddleware);
 app.use(rateLimitMiddleware);
 app.use('/storage', authenticate, express.static(path.join(__dirname, 'storage')));
 app.use(fileUpload());
@@ -294,6 +293,7 @@ app.use(`${apiPrefix}/document`, documentRoutes);
 app.use(`${apiPrefix}/map`, mapRoutes);
 app.use(`${apiPrefix}/notification`, notificationRoutes);
 
+app.use(loggingMiddleware);
 // --- Route de santé ---
 app.get('/api/health', async (req, res) => {
   try {
@@ -339,6 +339,7 @@ app.get('/api', (req, res) => {
 
 // --- Middleware de gestion des erreurs (doit être en dernier) ---
 app.use(errorMiddleware);
+
 
 // --- Gestion des arrêts gracieux ---
 process.on('SIGTERM', async () => {

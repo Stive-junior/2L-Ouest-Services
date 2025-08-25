@@ -6,7 +6,7 @@
  */
 
 const userService  = require('../services/userService');
-const {  logError } = require('../services/loggerService');
+const {  logError, logAudit } = require('../services/loggerService');
 
 /**
  * @class UserController
@@ -42,13 +42,15 @@ class UserController {
    * @returns {Promise<void>} - Réponse JSON avec le profil utilisateur.
    */
   async getProfile(req, res, next) {
+    
     try {
-      const user = await userService.getProfile(req.user.id);
+      const user = await userService.getProfile(req.user.userId);
       res.status(200).json({
         status: 'success',
         data: { user },
       });
     } catch (error) {
+      
       logError('Erreur lors de la récupération du profil', { error: error.message, userId: req.user.id });
       next(error);
     }

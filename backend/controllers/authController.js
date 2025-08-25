@@ -9,6 +9,7 @@
 const { logAudit, logError } = require('../services/loggerService');
 const { AppError } = require('../utils/errorUtils');
 const authService = require('../services/authService');
+const { userRepo } = require('../repositories');
 
 /**
  * @class AuthController
@@ -46,6 +47,32 @@ class AuthController {
       res.status(201).json({ status: 'success', data: { user, token } });
     } catch (error) {
       logError('Erreur lors de l\'inscription', { error: error.message, stack: error.stack });
+      next(error);
+    }
+  }
+
+  /**
+   * Récupère un utilisateur par email.
+   * @async
+   * @param {Object} req - Requête HTTP.
+   * @param {Object} req.body - Données de la requête.
+   * @param {string} req.body.email - Adresse email de l'utilisateur à rechercher.
+   * @param {Object} res - Réponse HTTP.
+   * @param {Function} next - Middleware suivant pour la gestion des erreurs.
+   * @returns {Promise<void>} Réponse JSON avec l'utilisateur trouvé ou un message si non trouvé.
+   * @throws {AppError} En cas d'erreur de validation ou d'erreur serveur.
+   */
+  async getUserByEmail(req, res, next) {
+    try {
+      const { email } = req.body;
+      const user = await userRepo.getByEmail(email);
+      if (user) {
+        res.status(200).json({ status: 'success', data: { user } });
+      } else {
+        res.status(404).json({ status: 'error', message: 'Utilisateur non trouvé' });
+      }
+    } catch (error) {
+      logError('Erreur lors de la récupération de l\'utilisateur par email', { error: error.message, stack: error.stack });
       next(error);
     }
   }
@@ -117,7 +144,8 @@ class AuthController {
     try {
       const { firebaseToken } = req.body;
       await authService.signOut(firebaseToken);
-      logAudit('Utilisateur déconnecté via contrôleur', { userId: req.user?.id || 'unknown' });
+      const { userId } = await authService.verifyToken(firebaseToken);
+      logAudit('Utilisateur déconnecté via contrôleur', { userId: userId });
       res.status(200).json({ status: 'success', message: 'Déconnexion réussie' });
     } catch (error) {
       logError('Erreur lors de la déconnexion', { error: error.message, stack: error.stack });
@@ -140,7 +168,7 @@ class AuthController {
     try {
       const { firebaseToken } = req.body;
       const { userId } = await authService.verifyToken(firebaseToken);
-      logAudit('Token vérifié via contrôleur', { userId });
+      logAudit('Token Firebase vérifié via contrôleur', { userId });
       res.status(200).json({ status: 'success', data: { userId } });
     } catch (error) {
       logError('Erreur lors de la vérification du token', { error: error.message, stack: error.stack });
@@ -254,6 +282,7 @@ const controller = new AuthController();
 module.exports = {
   signUp: controller.signUp.bind(controller),
   signIn: controller.signIn.bind(controller),
+  getUserByEmail: controller.getUserByEmail.bind(controller),
   refreshToken: controller.refreshToken.bind(controller),
   signOut: controller.signOut.bind(controller),
   verifyToken: controller.verifyToken.bind(controller),

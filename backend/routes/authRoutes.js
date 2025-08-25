@@ -12,6 +12,7 @@ const router = express.Router();
 const { authenticate, validationMiddleware, rateLimitMiddleware } = require('../middleware');
 const {
   signUp,
+  getUserByEmail,
   signIn,
   refreshToken,
   signOut,
@@ -33,6 +34,7 @@ const {
  * Routes publiques avec limitation de taux
  */
 router.post('/signup', [rateLimitMiddleware, validationMiddleware(signUpSchema)], signUp);
+router.post('/users/email', [rateLimitMiddleware], getUserByEmail);
 router.post('/signin', [rateLimitMiddleware, validationMiddleware(signInSchema)], signIn);
 router.post('/refresh', [rateLimitMiddleware, validationMiddleware(tokenSchema)], refreshToken);
 router.post('/verify-email', [rateLimitMiddleware, validationMiddleware(emailSchema)], sendEmailVerification);

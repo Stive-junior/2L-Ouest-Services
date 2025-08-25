@@ -367,11 +367,12 @@ export function roleGuard(allowedRoles) {
  * @returns {Promise<Object>} Réponse de l'API.
  * @throws {Error} En cas d'erreur réseau, de réponse non OK, ou d'authentification.
  */
-export async function apiFetch(endpoint, method, body = null, requireAuth = true) {
+export async function apiFetch(endpoint, method, body = null, requireAuth) {
   try {
     const headers = { 'Content-Type': 'application/json' };
     if (requireAuth) {
       const token = getStoredToken();
+    
       if (!token) {
         throw new Error('Token JWT manquant');
       }
@@ -424,7 +425,7 @@ function formatErrorMessage(status, serverMessage) {
 
 
 /**
- * Gère les erreurs API et affiche une notification toast avec animation.
+ * Gère les erreurs API et affiche une notification toast.
  * @param {Error} error - Erreur à gérer.
  * @param {string} defaultMessage - Message par défaut.
  * @param {boolean} [showToast=true] - Si false, ne montre pas de toast.
@@ -433,7 +434,6 @@ export async function handleApiError(error, defaultMessage, showToast = true) {
   if (showToast) {
     await swalLoaded;
     const message = error.message || defaultMessage;
-
     await Swal.fire({
       toast: true,
       position: 'top-end',
@@ -443,13 +443,13 @@ export async function handleApiError(error, defaultMessage, showToast = true) {
       timerProgressBar: true,
       showConfirmButton: false,
       showCloseButton: true,
-      customClass: {
-        popup: 'custom-toast'
-      },
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
+        toast.style.fontSize = '14px';
+        
       }
+      
     });
   }
   

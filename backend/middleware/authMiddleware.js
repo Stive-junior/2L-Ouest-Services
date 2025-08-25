@@ -9,30 +9,40 @@ const { AppError, UnauthorizedError } = require('../utils/errorUtils');
 const { logger, logError, logInfo } = require('../services/loggerService');
 const  authService  = require('../services/authService');
 
+
+
 /**
- * Middleware d'authentification pour vérifier le token JWT.
+ * Middleware permissif d'authentification.
+ * - Si le token est valide → req.user est défini
+ * - Si pas de token ou token invalide → req.user est undefined
+ * @async
  * @param {Object} req - Requête HTTP.
  * @param {Object} res - Réponse HTTP.
- * @param {Function} next - Fonction pour passer au middleware suivant.
- * @returns {Promise<void>}
+ * @param {Function} next - Middleware suivant.
  */
-const authenticate = async (req, res, next) => {
-  try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new UnauthorizedError('Token manquant ou mal formaté');
-    }
+async function authenticate(req, res, next) {
+  const authHeader = req.headers.authorization;
 
-    const token = authHeader.split(' ')[1];
-    const decoded = await authService.verifyToken(token);
-    req.user = decoded; // Attache les informations de l'utilisateur à la requête
-    logInfo('Utilisateur authentifié', { userId: decoded.id, email: decoded.email });
-    next();
-  } catch (error) {
-    logError('Erreur d\'authentification', { error: error.message, path: req.path });
-    next(error instanceof AppError ? error : new UnauthorizedError('Authentification échouée'));
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return next();
   }
-};
+
+  const token = authHeader.split('Bearer ')[1];
+
+  try {
+    logInfo('Token reçu dans middleware', { tokenSnippet: token.substring(0, 20) + '...' });
+
+    const decoded = await authService.verifyJwt(token);
+    req.user = decoded;
+    logInfo('Utilisateur authentifié', { userId: decoded.userId });
+  } catch (error) {
+    logError('Token invalide ou expiré', { error: error.message });
+    
+  }
+
+  return next();
+}
+
 
 /**
  * Middleware pour restreindre l'accès aux utilisateurs avec un rôle spécifique.

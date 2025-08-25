@@ -89,6 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMobile) {
             const hideClass = isChat ? 'translate-x-full' : '-translate-x-full';
             sidebarElement.classList.remove(hideClass);
+            sidebarElement.style.width = isChat ? '20rem' : '21rem';
+            sidebarElement.style.minWidth = isChat ? '20rem' : '21rem';
+            sidebarElement.style.opacity = '1';
+            sidebarElement.style.pointerEvents = 'auto';
             if (overlayElement) overlayElement.classList.remove('hidden');
         } else {
             sidebarElement.style.width = isChat ? '20rem' : '21rem';

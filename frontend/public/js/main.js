@@ -1,14 +1,14 @@
 /**
  * @file main.js
- * @description Initialisation globale de l’application L&L Ouest Services.
- * Configure Firebase, les APIs, les animations, et les gestionnaires d’événements pour les pages.
+ * @description Initialisation globale de l'application L&L Ouest Services.
+ * Configure Firebase, les APIs, les animations, et les gestionnaires d'événements pour les pages.
  * Optimisé pour un chargement rapide : imports dynamiques, cache des requêtes, exécution asynchrone.
  * @module main
  */
 
 import { auth, showNotification, setStoredToken, clearStoredToken, getStoredToken } from './modules/utils.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
-import api from './api.js';
+import authApi from './api.js';
 import './animations/animation.js';
 import './animations/theme.js';
 import './animations/sidebar.js';
@@ -47,8 +47,21 @@ function getCachedResponse(key) {
  */
 function getCurrentPage() {
   const path = window.location.pathname;
-  const parts = path.split('/').filter(part => part !== '');
-  return parts[parts.length - 1].replace('.html', '');
+  const parts = path.split('/').filter(Boolean); // enlève les vides
+
+  if (parts.length === 0) {
+    return 'index'; // cas de "/"
+  }
+
+  const lastPart = parts[parts.length - 1];
+
+  if (lastPart.endsWith('.html')) {
+    const pageName = lastPart.replace('.html', '');
+    return pageName === 'index' ? 'index' : pageName;
+  }
+
+  // Si l'URL se termine par un dossier (ex: /dossier/)
+  return lastPart;
 }
 
 /**
@@ -62,17 +75,19 @@ async function loadModule(modulePath) {
     return module.default;
   } catch (error) {
     console.error(`Erreur lors du chargement du module ${modulePath}:`, error);
+    showNotification('Erreur lors du chargement d\'un module.', 'error');
     return null;
   }
 }
 
 /**
- * Initialise les gestionnaires d’événements pour la page actuelle de manière asynchrone.
+ * Initialise les gestionnaires d'événements pour la page actuelle de manière asynchrone.
  * @param {string} page - Nom de la page.
  * @param {boolean} isAuthenticated - Indique si l'utilisateur est authentifié.
  */
 async function initializePage(page, isAuthenticated) {
   console.log(`Initialisation de la page : ${page}, Authentifié : ${isAuthenticated}`);
+  
   const moduleMap = {
     auth: { path: './modules/auth.js', pages: ['signin', 'signup', 'verify-email', 'password-reset', 'change-email'], authRequired: false },
     user: { path: './modules/user.js', pages: ['dashboard', 'user', 'admin'], authRequired: true },
@@ -86,6 +101,7 @@ async function initializePage(page, isAuthenticated) {
   };
 
   const initPromises = [];
+  
   Object.values(moduleMap).forEach((mod) => {
     if (mod.pages.includes(page) && (!mod.authRequired || isAuthenticated)) {
       initPromises.push(loadModule(mod.path).then((module) => {
@@ -101,7 +117,7 @@ async function initializePage(page, isAuthenticated) {
   await Promise.all(initPromises);
 }
 
-// Exécution principale asynchrone pour accélérer
+// Exécution principale asynchrone
 (async () => {
   console.log('Main script loaded');
   const page = getCurrentPage();
@@ -110,34 +126,52 @@ async function initializePage(page, isAuthenticated) {
     let isAuthenticated = !!user;
 
     if (user) {
-      const cachedToken = getCachedResponse('authToken');
+      const cachedToken = getCachedResponse('jwt');
+     
       if (cachedToken) {
         setStoredToken(cachedToken.token, cachedToken.role);
         isAuthenticated = true;
       } else {
         try {
-          const token = getStoredToken();
-          const now = Date.now();
-          let newToken = token;
+          const storedToken = getStoredToken();
+          let newToken = storedToken;
+          
 
-          if (token) {
-            const decodedToken = JSON.parse(atob(token.split('.')[1]));
-            const exp = decodedToken.exp * 1000;
-            if (exp - now < 5 * 60 * 1000) {
+          if (storedToken) {
+            try {
+              const decodedToken = JSON.parse(atob(storedToken.split('.')[1]));
+              const exp = decodedToken.exp * 1000;
+              const now = Date.now();
+              if (exp - now < 5 * 60 * 1000) { // Moins de 5 minutes avant expiration
+                const refreshData = await authApi.auth.refreshToken();
+                newToken = refreshData.token;
+                cacheResponse('jwt', { token: newToken, role: refreshData.role || 'client' });
+                setStoredToken(newToken, refreshData.role || 'client');
+              } else {
+                const verifyData = await authApi.auth.verifyToken();
+                cacheResponse('jwt', { token: storedToken, role: verifyData.role || 'client' });
+                setStoredToken(storedToken, verifyData.role || 'client');
+              }
+            } catch (decodeError) {
+              console.error('Erreur lors du décodage du token:', decodeError);
               newToken = await user.getIdToken(true);
+              const verifyData = await authApi.auth.verifyToken();
+              cacheResponse('jwt', { token: newToken, role: verifyData.role || 'client' });
+              setStoredToken(newToken, verifyData.role || 'client');
             }
           } else {
             newToken = await user.getIdToken(true);
+            const verifyData = await authApi.auth.verifyToken();
+            cacheResponse('jwt', { token: newToken, role: verifyData.role || 'client' });
+            setStoredToken(newToken, verifyData.role || 'client');
           }
 
-          const data = await api.auth.verifyToken();
-          cacheResponse('authToken', { token: data.token, role: data.role || 'client' });
-          setStoredToken(data.token, data.role || 'client');
           isAuthenticated = true;
         } catch (error) {
           console.error('Erreur de vérification du token:', error);
           clearStoredToken();
           isAuthenticated = false;
+          showNotification('Session expirée. Veuillez vous reconnecter.', 'error');
         }
       }
     } else {
@@ -145,19 +179,6 @@ async function initializePage(page, isAuthenticated) {
       isAuthenticated = false;
     }
 
-  
-
     await initializePage(page, isAuthenticated);
   });
 })();
-
-// Gestion des erreurs globales
-/*window.addEventListener('unhandledrejection', (event) => {
-  console.error('Erreur non gérée:', event.reason);
-  showNotification(
-    `Erreur inattendue : ${event.reason.message || 'Une erreur est survenue'}`,
-    'error',
-    false,
-  );
-});
-*/

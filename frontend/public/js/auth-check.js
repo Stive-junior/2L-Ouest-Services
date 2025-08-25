@@ -11,14 +11,24 @@
 
   const publicPages = [
     'signin', 'signup', 'verify-email', 'password-reset', 'change-email',
-    'about', 'contact', 'mentions', 'realizations', 'services', 'reviews', 'reviews-user'
+    'about', 'contact', 'mentions', 'realizations', 'services', 'reviews', 'reviews-user',
+    'index', '' 
   ];
-
+  
+  const protectedPages = [
+    'dashboard', 'user', 'admin', 'chat', 'doc', 'notifications'
+  ];
+  
   const isAuthenticated = !!token && !!role;
 
-  if (!publicPages.includes(page) && !isAuthenticated) {
+  // Redirection pour les pages protégées si non authentifié
+  if (protectedPages.includes(page) && !isAuthenticated) {
     window.location.replace('/pages/auth/signin.html');
-  } else if (publicPages.includes(page) && isAuthenticated) {
+    return;
+  }
+  
+  if (['signin', 'signup', 'verify-email', 'password-reset', 'change-email'].includes(page) && isAuthenticated) {
     window.location.replace('/dashboard.html');
+    return;
   }
 })();

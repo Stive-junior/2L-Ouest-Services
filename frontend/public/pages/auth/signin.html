@@ -23,6 +23,7 @@
 
     <!-- Script de vérification auth chargé en premier (async pour rapidité) -->
     <script async src="/js/auth-check.js"></script>
+    <script src="/js/loadData.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1055,7 +1056,7 @@
                         </div>
                     </div>
                     
-                    <button type="submit" class="w-full bg-ll-blue text-white py-3 rounded-lg hover:bg-ll-dark-blue focus:outline-none focus:ring-2 focus:ring-ll-blue/50 font-semibold tracking-wide transition-all duration-300 shadow-md hover:shadow-lg">Se connecter</button>
+                    <button type="submit" class="w-full bg-ll-blue text-white py-3 rounded-lg hover:bg-ll-dark-blue focus:outline-none focus:ring-2 focus:ring-ll-blue/50 font-semibold tracking-wide transition-all duration-300 shadow-md hover:shadow-lg"><span>Se connecter</span><i class="fas fa-sign-in-alt ml-2"></i></button>
                 </form>
                 <div class="mt-6 text-center space-y-3">
                     <p class="text-sm text-ll-black dark:text-ll-light-gray">

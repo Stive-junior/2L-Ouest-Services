@@ -22,7 +22,7 @@ function validateCreateUserData(userData) {
     password: { type: 'string', required: true, minLength: 8, maxLength: 50 },
     name: { type: 'string', required: true, minLength: 2, maxLength: 100 },
     role: { type: 'string', enum: ['client', 'provider', 'admin'], default: 'client' },
-    phone: { type: 'string', required: true, pattern: /^\+?[1-9]\d{1,14}$/ },
+    phone: { type: 'string', required: true, pattern: /^\+\d{1,3}[\s\d\-\(\)]{4,20}$/ },
     address: {
       type: 'object',
       required: false,
@@ -56,7 +56,7 @@ function validateUpdateUserData(userData) {
     email: { type: 'string', required: false, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
     name: { type: 'string', required: false, minLength: 2, maxLength: 100 },
     role: { type: 'string', enum: ['client', 'provider', 'admin'], required: false },
-    phone: { type: 'string', required: false, pattern: /^\+?[1-9]\d{1,14}$/ },
+    phone: { type: 'string', required: false, pattern: /^\+\d{1,3}[\s\d\-\(\)]{4,20}$/ },
     address: {
       type: 'object',
       required: false,

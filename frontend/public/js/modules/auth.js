@@ -161,7 +161,6 @@ bindSignUpForm() {
       window.location.href = '/dashboard.html';
     } catch (error) {
       Swal.close();
-      showNotification(error.message || 'Erreur lors de l\'inscription.', 'error');
     } finally {
       submitButton.disabled = false;
       submitButton.innerHTML = '<span>S\'inscrire</span><i class="fas fa-check-circle ml-2"></i>';
@@ -509,39 +508,68 @@ bindSignUpForm() {
     });
   },
 
-  /**
-   * Binds the sign-out button click event.
-   * @function bindSignOutButton
-   */
-  bindSignOutButton() {
-    const button = document.getElementById('signout-button');
-    if (!button) return;
+    /**
+     * Binds the sign-out button click event to all sign-out buttons on the page.
+     * @function bindSignOutButton
+     */
+    bindSignOutButton() {
+      const buttons = document.querySelectorAll('.signout-button');
+      if (!buttons.length) return;
 
-    button.addEventListener('click', async () => {
-      try {
-        button.disabled = true;
-        button.innerHTML = '<span class="loading-spinner"></span> Déconnexion...';
+      buttons.forEach(button => {
+        button.addEventListener('click', async () => {
+          const result = await Swal.fire({
+            title: 'Êtes-vous sûr ?',
+            text: 'Vous allez être déconnecté de votre compte.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#30d67bff',
+            cancelButtonColor: 'rgba(221, 51, 51, 1)',
+            confirmButtonText: 'Oui, se déconnecter',
+            cancelButtonText: 'Annuler'
+          });
 
-        Swal.fire({
-          title: 'Veuillez patienter...',
-          html: '<div class="flex justify-center items-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-ll-blue"></div></div>',
-          allowOutsideClick: false,
-          showConfirmButton: false
+          if (!result.isConfirmed) return;
+
+          try {
+            button.disabled = true;
+            button.innerHTML = '<span class="loading-spinner"></span> Déconnexion...';
+
+            Swal.fire({
+              title: 'Au revoir !',
+              html: `
+                <div class="flex flex-col items-center">
+                  <div class="animate-pulse rounded-full h-16 w-16 border-4 border-green-500 flex items-center justify-center mb-4">
+                    <i class="fas fa-check text-green-500 text-2xl"></i>
+                  </div>
+                  <p class="text-lg">Déconnexion en cours...</p>
+                </div>`,
+              allowOutsideClick: false,
+              showConfirmButton: false,
+              timer: 2000
+            });
+
+            await api.auth.signOut();
+
+            await Swal.fire({
+              title: 'Déconnexion réussie',
+              text: 'À bientôt !',
+              icon: 'success',
+              confirmButtonText: 'OK',
+              timer: 1500
+            });
+
+            showNotification('Déconnexion réussie.', 'success');
+            window.location.href = '/pages/auth/signin.html';
+          } catch (error) {
+            Swal.close();
+            showNotification(error.message || 'Erreur lors de la déconnexion.', 'error');
+            button.disabled = false;
+            button.innerHTML = '<span>Se déconnecter</span><i class="fas fa-sign-out-alt ml-2"></i>';
+          }
         });
-
-        await api.auth.signOut();
-        Swal.close();
-        showNotification('Déconnexion réussie.', 'success');
-        window.location.href = '/pages/auth/signin.html';
-      } catch (error) {
-        Swal.close();
-        showNotification(error.message || 'Erreur lors de la déconnexion.', 'error');
-      } finally {
-        button.disabled = false;
-        button.innerHTML = '<span>Se déconnecter</span><i class="fas fa-sign-out-alt ml-2"></i>';
-      }
-    });
-  },
+      });
+    },
 
   /**
    * Updates the submit button state based on form validity.

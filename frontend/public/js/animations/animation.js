@@ -1,6 +1,6 @@
 /**
  * @file animation.js
- * @description Gère les animations globales, les carrousels Swiper et le composant Vue.js du profil utilisateur.
+ * @description Gère les animations globales, les carrousels Swiper et la mise à jour des informations utilisateur.
  * @requires Vue, AOS, Swiper, api.js, utils.js
  */
 
@@ -10,8 +10,6 @@ import { showNotification, getStoredToken } from '../modules/utils.js';
 import api from '../api.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  
-
   /**
    * Initialise les carrousels de la page en utilisant la bibliothèque Swiper.
    */
@@ -72,101 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeInElements.forEach((el) => observer.observe(el));
   };
 
-  /**
-   * Initialise le composant Vue.js pour l'affichage du profil utilisateur dans la sidebar.
-   */
-  const initVueComponent = () => {
-    const publicPages = [
-      'signin', 'signup', 'verify-email', 'password-reset', 'change-email',
-      'about', 'contact', 'mentions', 'realizations', 'services', 'reviews', 'reviews-user',
-    ];
-    const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
-
-    // Empêche l'exécution du composant sur les pages publiques si l'utilisateur n'est pas authentifié.
-    if (publicPages.includes(currentPage) && !getStoredToken()) {
-      return;
-    }
-
-    const app = createApp({
-      setup() {
-        const user = ref(null);
-        const isAuthenticated = ref(!!getStoredToken());
-
-        const loadUser = async () => {
-          try {
-            const userData = await api.auth.getCurrentUser();
-            user.value = userData || { name: 'Utilisateur', email: '' };
-          } catch (error) {
-            user.value = { name: 'Utilisateur', email: '' };
-            console.warn('Utilisateur non authentifié ou erreur:', error.message);
-          }
-        };
-
-        const signOut = async () => {
-          try {
-            await api.auth.signOut();
-            showNotification('Déconnexion réussie.', 'success');
-            window.location.href = '/pages/auth/signin.html';
-          } catch (error) {
-            showNotification(error.message || 'Erreur lors de la déconnexion.', 'error', false, {
-              showConfirmButton: true,
-              confirmButtonText: 'Okay',
-            });
-          }
-        };
-
-        loadUser();
-
-        return { user, isAuthenticated, signOut };
-      },
-      template: `
-        <div v-if="isAuthenticated" class="mb-6 p-4 bg-gradient-to-r from-blue-600/90 to-blue-800/90 rounded-xl text-white shadow-lg transform transition-all duration-300 hover:scale-102" data-auth="authenticated">
-          <div class="flex items-center gap-4">
-            <div class="w-14 h-14 rounded-full bg-gray-900/50 flex items-center justify-center text-xl font-bold shadow-inner">
-              {{ user ? user.name.charAt(0).toUpperCase() : 'U' }}
-            </div>
-            <div>
-              <h3 class="font-bold text-white/95 text-lg">{{ user ? user.nom : 'Utilisateurs' }}</h3>
-              <p class="text-sm text-white/90">{{ user ? user.email : '' }}</p>
-            </div>
-          </div>
-          <button @click="signOut" class="mt-2 p-2 bg-red-600 rounded-lg text-white hover:bg-red-700 transition">Déconnexion</button>
-        </div>
-        <div v-else class="mb-6 p-4 bg-gradient-to-r from-gray-600/90 to-gray-800/90 rounded-xl text-white shadow-lg" data-auth="unauthenticated">
-          <div class="flex items-center gap-4">
-            <div class="w-14 h-14 rounded-full bg-gray-900/50 flex items-center justify-center text-xl font-bold shadow-inner">G</div>
-            <div>
-              <h3 class="font-bold text-white/95 text-lg">Invité</h3>
-              <p class="text-sm text-white/90">Connectez-vous pour plus de fonctionnalités</p>
-            </div>
-          </div>
-        </div>
-      `,
-    });
-
-    const sidebarContainer = document.querySelector('#sidebar-container');
-    if (sidebarContainer) {
-      app.mount('#sidebar-container');
-    } else {
-      console.warn('Conteneur #sidebar-container non trouvé. Le composant Vue.js ne peut pas être monté.');
-    }
-  };
-
-  /**
-   * Met à jour la visibilité des éléments HTML basés sur l'état d'authentification.
-   */
-  const updateAuthDependentElements = () => {
-    const isAuthenticated = !!getStoredToken();
-    document.querySelectorAll('[data-auth="authenticated"]').forEach((el) => {
-      el.style.display = isAuthenticated ? 'block' : 'none';
-    });
-    document.querySelectorAll('[data-auth="unauthenticated"]').forEach((el) => {
-      el.style.display = isAuthenticated ? 'none' : 'block';
-    });
-  };
 
   initSwiperCarousels();
   initFadeInAnimations();
-  initVueComponent();
-  updateAuthDependentElements();
+
 });

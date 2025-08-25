@@ -94,20 +94,21 @@ class UserRepository {
    * Récupère un utilisateur par son ID.
    * @async
    * @param {string} id - ID de l'utilisateur.
-   * @returns {Promise<Object>} Utilisateur trouvé.
+   * @returns {Promise<Object|null>} Utilisateur trouvé ou null si non trouvé.
    */
   async getById(id) {
+ 
     try {
       const doc = await this.collection.doc(id).get();
       if (!doc.exists) {
-        logError('Utilisateur non trouvé', { id });
-        throw new AppError(404, 'Utilisateur non trouvé');
+        logInfo('Utilisateur non trouvé', { id }); // Changed from logError to logInfo for permissive behavior
+        return null;
       }
       logInfo('Utilisateur récupéré', { id });
       return this.fromFirestore({ id: doc.id, data: () => doc.data() });
     } catch (error) {
       logError('Erreur lors de la récupération de l\'utilisateur', { error: error.message, id });
-      throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la récupération de l\'utilisateur', error.message);
+      throw new AppError(500, 'Erreur serveur lors de la récupération de l\'utilisateur', error.message);
     }
   }
 
@@ -115,22 +116,22 @@ class UserRepository {
    * Récupère un utilisateur par son email.
    * @async
    * @param {string} email - Email de l'utilisateur.
-   * @returns {Promise<Object>} Utilisateur trouvé.
+   * @returns {Promise<Object|null>} Utilisateur trouvé ou null si non trouvé.
    */
   async getByEmail(email) {
     try {
       const query = this.collection.where('email', '==', email).limit(1);
       const snapshot = await query.get();
       if (snapshot.empty) {
-        logError('Utilisateur non trouvé par email', { email });
-        throw new AppError(404, 'Utilisateur non trouvé');
+        logInfo('Utilisateur non trouvé par email', { email });
+        return null;
       }
       const doc = snapshot.docs[0];
       logInfo('Utilisateur récupéré par email', { email });
       return this.fromFirestore({ id: doc.id, data: () => doc.data() });
     } catch (error) {
       logError('Erreur lors de la récupération de l\'utilisateur par email', { error: error.message, email });
-      throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la récupération de l\'utilisateur par email', error.message);
+      throw new AppError(500, 'Erreur serveur lors de la récupération de l\'utilisateur par email', error.message);
     }
   }
 
@@ -144,6 +145,10 @@ class UserRepository {
   async update(id, userData) {
     try {
       const existingUser = await this.getById(id);
+      if (!existingUser) {
+        logError('Utilisateur non trouvé pour mise à jour', { id });
+        throw new AppError(404, 'Utilisateur non trouvé');
+      }
       const { value, error } = validate({ ...existingUser, ...userData, id }, userSchema);
       if (error) {
         logError('Erreur de validation lors de la mise à jour de l\'utilisateur', { error: error.details });
@@ -170,8 +175,8 @@ class UserRepository {
     try {
       const doc = await this.collection.doc(id).get();
       if (!doc.exists) {
-        logError('Utilisateur non trouvé pour suppression', { id });
-        throw new AppError(404, 'Utilisateur non trouvé');
+        logInfo('Utilisateur non trouvé pour suppression', { id });
+        return;
       }
       await this.collection.doc(id).delete();
       logAudit('Utilisateur supprimé', { id });
@@ -238,6 +243,10 @@ class UserRepository {
       }
 
       const existingUser = await this.getById(id);
+      if (!existingUser) {
+        logError('Utilisateur non trouvé pour ajout de facture', { id });
+        throw new AppError(404, 'Utilisateur non trouvé');
+      }
       const invoices = [...(existingUser.invoices || []), { ...value.invoice, id: value.invoice.id || generateUUID() }];
       const docRef = this.collection.doc(id);
       await docRef.update({ invoices });
@@ -259,6 +268,10 @@ class UserRepository {
   async deleteInvoice(userId, invoiceId) {
     try {
       const user = await this.getById(userId);
+      if (!user) {
+        logError('Utilisateur non trouvé pour suppression de facture', { userId });
+        throw new AppError(404, 'Utilisateur non trouvé');
+      }
       const invoices = (user.invoices || []).filter(inv => inv.id !== invoiceId);
       const docRef = this.collection.doc(userId);
       await docRef.update({ invoices });
@@ -285,6 +298,10 @@ class UserRepository {
       }
 
       const existingUser = await this.getById(id);
+      if (!existingUser) {
+        logError('Utilisateur non trouvé pour mise à jour des préférences', { id });
+        throw new AppError(404, 'Utilisateur non trouvé');
+      }
       const docRef = this.collection.doc(id);
       await docRef.update({ preferences: value.preferences });
       logAudit('Préférences utilisateur mises à jour', { userId: id });

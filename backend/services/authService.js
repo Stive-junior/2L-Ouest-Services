@@ -40,6 +40,7 @@ class AuthService {
       });
     }
     this.auth = admin.auth();
+    this.firestore = admin.firestore();
   }
 
   /**
@@ -50,7 +51,11 @@ class AuthService {
    * @private
    */
   _generateJwt(userId, role) {
-    return jwt.sign({ userId, role }, config.jwt.secret, { expiresIn: config.jwt.expiresIn });
+    // Ajout optionnel de 'kid' pour cohérence, mais non obligatoire pour jwt.verify
+    return jwt.sign({ userId, role }, config.jwt.secret, { 
+      expiresIn: config.jwt.expiresIn,
+      header: { kid: 'custom-jwt-key' }  // Optionnel: ajoute 'kid' pour éviter confusions futures
+    });
   }
 
   /**
@@ -64,6 +69,23 @@ class AuthService {
       handleCodeInApp: true,
       dynamicLinkDomain: 'll-ouest-services.firebaseapp.com',
     };
+  }
+
+  /**
+   * Vérifie un JWT généré par le backend (utilisé dans middleware pour routes protégées).
+   * @param {string} token - JWT à vérifier.
+   * @returns {Object} Payload décodé du JWT.
+   * @throws {AppError} Si le token est invalide ou expiré.
+   */
+  async verifyJwt(token) {
+    try {
+      const decoded = jwt.verify(token, config.jwt.secret);
+      logInfo('JWT personnalisé vérifié avec succès', { userId: decoded.userId });
+      return decoded;
+    } catch (error) {
+      logError('Erreur lors de la vérification du JWT personnalisé', { error: error.message });
+      throw new AppError(401, 'JWT invalide ou expiré', error.message);
+    }
   }
 
   /**
@@ -89,16 +111,15 @@ class AuthService {
       const userId = decodedToken.uid;
       logInfo('Token vérifié avec succès', { userId, email: decodedToken.email });
 
-      // Vérifier si l'utilisateur existe déjà
-      try {
-        await userRepo.getById(userId);
-        throw new AppError(409, 'Utilisateur déjà inscrit');
-      } catch (error) {
-        if (error instanceof NotFoundError) {
-          logWarn('Utilisateur non trouvé, création autorisée', { userId, email });
-        } else {
-          throw error;
-        }
+      // Vérifier si l'utilisateur existe déjà par ID ou email
+      const [existingUserById, existingUserByEmail] = await Promise.all([
+        userRepo.getById(userId),
+        userRepo.getByEmail(email),
+      ]);
+
+      if (existingUserById || existingUserByEmail) {
+        logWarn('Tentative de création d\'un utilisateur existant', { userId, email });
+        throw new AppError(409, 'Utilisateur déjà inscrit avec cet ID ou email');
       }
 
       const userProfile = {
@@ -125,7 +146,26 @@ class AuthService {
       const { error: profileError } = validate(userProfile, userSchema);
       if (profileError) throw new AppError(400, 'Profil utilisateur invalide', profileError.details);
 
-      const user = await userRepo.create(userProfile);
+      // Utiliser une transaction Firestore pour garantir l'atomicité
+      let user;
+      try {
+        await this.firestore.runTransaction(async (transaction) => {
+          const docRef = this.firestore.collection('users').doc(userId);
+          transaction.set(docRef, userRepo.toFirestore(userProfile));
+        });
+        user = await userRepo.getById(userId); // Récupérer l'utilisateur créé
+      } catch (transactionError) {
+        logError('Échec de la transaction Firestore lors de l\'inscription', { error: transactionError.message });
+        // Supprimer l'utilisateur Firebase si la transaction échoue
+        try {
+          await this.auth.deleteUser(userId);
+          logInfo('Utilisateur Firebase supprimé après échec de transaction', { userId });
+        } catch (deleteError) {
+          logError('Échec de la suppression de l\'utilisateur Firebase', { error: deleteError.message });
+        }
+        throw new AppError(500, 'Erreur serveur lors de la création de l\'utilisateur', transactionError.message);
+      }
+
       const token = this._generateJwt(userId, user.role);
 
       socketService.emitToUser(userId, 'authStatus', {
@@ -134,7 +174,13 @@ class AuthService {
         message: 'Inscription réussie',
       });
 
-      await this.sendEmailVerification(email, name);
+      // Envoyer l'email de vérification
+      try {
+        await this.sendEmailVerification(email, name);
+      } catch (emailError) {
+        logError('Échec de l\'envoi de l\'email de vérification', { error: emailError.message });
+        // Ne pas bloquer l'inscription si l'email échoue
+      }
 
       if (fcmToken) {
         try {
@@ -175,11 +221,14 @@ class AuthService {
       const decodedToken = await this.auth.verifyIdToken(firebaseToken, true);
       const userId = decodedToken.uid;
 
-      if (!decodedToken.email_verified) {
-        throw new AppError(403, 'Email non vérifié. Vérifiez votre boîte de réception.');
-      }
+     // if (!decodedToken.email_verified) {
+     //   throw new AppError(403, 'Email non vérifié. Vérifiez votre boîte de réception.');
+     // }
 
       const user = await userRepo.getById(userId);
+      if (!user) {
+        throw new AppError(404, 'Utilisateur non trouvé dans Firestore');
+      }
 
       user.lastLogin = new Date().toISOString();
       user.emailVerified = true;
@@ -197,17 +246,7 @@ class AuthService {
         message: 'Connexion réussie',
       });
 
-      if (user.preferences.fcmToken) {
-        try {
-          await notificationService.sendPushNotification(userId, {
-            title: 'Connexion réussie',
-            body: `Bienvenue de retour, ${user.name}.`,
-            data: { type: 'login', userId },
-          });
-        } catch (notificationError) {
-          logError('Échec notification connexion', { error: notificationError.message });
-        }
-      }
+     
 
       logAudit('Utilisateur connecté', { userId, email });
       return { user, token };
@@ -231,11 +270,14 @@ class AuthService {
       const decodedToken = await this.auth.verifyIdToken(value.firebaseToken, true);
       const userId = decodedToken.uid;
 
-      if (!decodedToken.email_verified) {
-        throw new AppError(403, 'Email non vérifié.');
-      }
+     //if (!decodedToken.email_verified) {
+     //   throw new AppError(403, 'Email non vérifié.');
+     // }
 
       const user = await userRepo.getById(userId);
+      if (!user) {
+        throw new AppError(404, 'Utilisateur non trouvé');
+      }
       const token = this._generateJwt(userId, user.role);
 
       socketService.emitToUser(userId, 'authStatus', {
@@ -267,6 +309,9 @@ class AuthService {
       const userId = decodedToken.uid;
 
       const user = await userRepo.getById(userId);
+      if (!user) {
+        logWarn('Utilisateur non trouvé pour déconnexion', { userId });
+      }
 
       socketService.emitToUser(userId, 'authStatus', {
         status: 'signedOut',
@@ -274,17 +319,7 @@ class AuthService {
         message: 'Déconnexion réussie',
       });
 
-      if (user.preferences.fcmToken) {
-        try {
-          await notificationService.sendPushNotification(userId, {
-            title: 'Déconnexion',
-            body: 'Vous avez été déconnecté avec succès.',
-            data: { type: 'logout', userId },
-          });
-        } catch (notificationError) {
-          logError('Échec notification déconnexion', { error: notificationError.message });
-        }
-      }
+    
 
       logAudit('Utilisateur déconnecté', { userId });
     } catch (error) {
@@ -304,16 +339,24 @@ class AuthService {
     if (error) throw new AppError(400, 'Token invalide', error.details);
 
     try {
+    
+      const decodedHeader = jwt.decode(firebaseToken, { complete: true }).header;
+      logInfo('En-tête du Firebase ID token', { header: decodedHeader });
+
       const decodedToken = await this.auth.verifyIdToken(value.firebaseToken, true);
       const userId = decodedToken.uid;
 
-      await userRepo.getById(userId);
+      const user = await userRepo.getById(userId);
+      if (!user) {
+        throw new AppError(404, 'Utilisateur non trouvé');
+      }
 
-      logInfo('Token vérifié', { userId });
+      logInfo('Firebase ID token vérifié', { userId });
       return { userId };
     } catch (error) {
-      logError('Erreur vérification token', { error: error.message, stack: error.stack });
-      throw error.code === 'auth/id-token-revoked' ? new UnauthorizedError('Token révoqué') : new AppError(401, 'Token invalide', error.message);
+      // Log supplémentaire pour l'erreur spécifique
+      logError('Erreur lors de la vérification du Firebase ID token', { error: error.message, stack: error.stack });
+      throw error.code === 'auth/id-token-revoked' ? new UnauthorizedError('Token révoqué') : new AppError(401, 'Token Firebase invalide', error.message);
     }
   }
 
@@ -321,7 +364,7 @@ class AuthService {
    * Envoie un email de vérification.
    * @param {string} email - Email à vérifier.
    * @param {string} name - Nom de l'utilisateur.
-   * @param {string} htmlTemplate - Template HTML pour l'email.
+   * @param {string} [htmlTemplate] - Template HTML pour l'email.
    * @returns {Promise<void>}
    * @throws {AppError} En cas d'erreur de validation ou d'erreur serveur.
    */
@@ -333,7 +376,7 @@ class AuthService {
       const actionCodeSettings = this._getActionCodeSettings();
       const link = await this.auth.generateEmailVerificationLink(value.email, actionCodeSettings);
 
-      const template = require('handlebars').compile(value.htmlTemplate);
+      const template = require('handlebars').compile(value.htmlTemplate || emailTemplates.verification({ name, link: '{{link}}' }));
       const html = template({ name: value.name, link, company: 'L&L Ouest Services' });
 
       await emailService.sendEmail({
@@ -353,7 +396,7 @@ class AuthService {
    * Envoie un email de réinitialisation de mot de passe.
    * @param {string} email - Email pour réinitialisation.
    * @param {string} name - Nom de l'utilisateur.
-   * @param {string} htmlTemplate - Template HTML pour l'email.
+   * @param {string} [htmlTemplate] - Template HTML pour l'email.
    * @returns {Promise<void>}
    * @throws {AppError} En cas d'erreur de validation ou d'erreur serveur.
    */
@@ -365,7 +408,7 @@ class AuthService {
       const actionCodeSettings = this._getActionCodeSettings();
       const link = await this.auth.generatePasswordResetLink(value.email, actionCodeSettings);
 
-      const template = require('handlebars').compile(value.htmlTemplate);
+      const template = require('handlebars').compile(value.htmlTemplate || emailTemplates.passwordReset({ name, link: '{{link}}' }));
       const html = template({ name: value.name, link, company: 'L&L Ouest Services' });
 
       await emailService.sendEmail({
@@ -386,7 +429,7 @@ class AuthService {
    * @param {string} currentEmail - Email actuel.
    * @param {string} newEmail - Nouvel email.
    * @param {string} name - Nom de l'utilisateur.
-   * @param {string} htmlTemplate - Template HTML pour l'email.
+   * @param {string} [htmlTemplate] - Template HTML pour l'email.
    * @returns {Promise<void>}
    * @throws {AppError} En cas d'erreur de validation ou d'erreur serveur.
    */
@@ -398,7 +441,7 @@ class AuthService {
       const actionCodeSettings = this._getActionCodeSettings();
       const link = await this.auth.generateVerifyAndChangeEmailLink(value.currentEmail, value.newEmail, actionCodeSettings);
 
-      const template = require('handlebars').compile(value.htmlTemplate);
+      const template = require('handlebars').compile(value.htmlTemplate || emailTemplates.changeEmail({ name, newEmail: value.newEmail, link: '{{link}}' }));
       const html = template({ name: value.name, newEmail: value.newEmail, link, company: 'L&L Ouest Services' });
 
       await emailService.sendEmail({
@@ -418,7 +461,7 @@ class AuthService {
    * Envoie un lien pour connexion sans mot de passe.
    * @param {string} email - Email pour connexion.
    * @param {string} name - Nom de l'utilisateur.
-   * @param {string} htmlTemplate - Template HTML pour l'email.
+   * @param {string} [htmlTemplate] - Template HTML pour l'email.
    * @returns {Promise<void>}
    * @throws {AppError} En cas d'erreur de validation ou d'erreur serveur.
    */
@@ -430,7 +473,7 @@ class AuthService {
       const actionCodeSettings = this._getActionCodeSettings();
       const link = await this.auth.generateSignInWithEmailLink(value.email, actionCodeSettings);
 
-      const template = require('handlebars').compile(value.htmlTemplate);
+      const template = require('handlebars').compile(value.htmlTemplate || emailTemplates.signIn({ name, link: '{{link}}' }));
       const html = template({ name: value.name, link, company: 'L&L Ouest Services' });
 
       await emailService.sendEmail({
