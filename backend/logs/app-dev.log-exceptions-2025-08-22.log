@@ -1,0 +1,150 @@
+[1;31m🚨 [2L-Ouest-Services] 22/08/2025 14:05:20 🚨| ⠦ ERROR    | uncaughtException: Cannot find module 'puppeteer'
+Require stack:
+- /home/stakyra/2L-Ouest-Services/backend/services/documentService.js
+- /home/stakyra/2L-Ouest-Services/backend/controllers/documentController.js
+- /home/stakyra/2L-Ouest-Services/backend/routes/documentRoutes.js
+- /home/stakyra/2L-Ouest-Services/backend/routes/index.js
+- /home/stakyra/2L-Ouest-Services/backend/app.js
+Error: Cannot find module 'puppeteer'
+Require stack:
+- /home/stakyra/2L-Ouest-Services/backend/services/documentService.js
+- /home/stakyra/2L-Ouest-Services/backend/controllers/documentController.js
+- /home/stakyra/2L-Ouest-Services/backend/routes/documentRoutes.js
+- /home/stakyra/2L-Ouest-Services/backend/routes/index.js
+- /home/stakyra/2L-Ouest-Services/backend/app.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1134:15)
+    at Module._load (node:internal/modules/cjs/loader:975:27)
+    at Module.require (node:internal/modules/cjs/loader:1225:19)
+    at require (node:internal/modules/helpers:177:18)
+    at Object.<anonymous> (/home/stakyra/2L-Ouest-Services/backend/services/documentService.js:9:19)
+    at Module._compile (node:internal/modules/cjs/loader:1356:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1414:10)
+    at Module.load (node:internal/modules/cjs/loader:1197:32)
+    at Module._load (node:internal/modules/cjs/loader:1013:12)
+    at Module.require (node:internal/modules/cjs/loader:1225:19)[0m
+[3m╭────────────────── Métadonnées ──────────────────╮[0m
+[3m│ {[0m
+[3m│ [1;34m  "error": [0m[3m{[0m
+[3m│ [1;34m    "code": [0m[3m"MODULE_NOT_FOUND",[0m
+[3m│ [1;34m    "requireStack": [0m[3m[[0m
+[3m│       "/home/stakyra/2L-Ouest-Services/backend/services/documentService.js",[0m
+[3m│       "/home/stakyra/2L-Ouest-Services/backend/controllers/documentController.js",[0m
+[3m│       "/home/stakyra/2L-Ouest-Services/backend/routes/documentRoutes.js",[0m
+[3m│       "/home/stakyra/2L-Ouest-Services/backend/routes/index.js",[0m
+[3m│       "/home/stakyra/2L-Ouest-Services/backend/app.js"[0m
+[3m│     ][0m
+[3m│   },[0m
+[3m│ [1;34m  "stack": [0m[3m"Error: Cannot find module 'puppeteer'\nRequire stack:\n- /home/stakyra/2L-Ouest-Services/backend/services/documentService.js\n- /home/stakyra/2L-Ouest-Services/backend/controllers/documentController.js\n- /home/stakyra/2L-Ouest-Services/backend/routes/documentRoutes.js\n- /home/stakyra/2L-Ouest-Services/backend/routes/index.js\n- /home/stakyra/2L-Ouest-Services/backend/app.js\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1134:15)\n    at Module._load (node:internal/modules/cjs/loader:975:27)\n    at Module.require (node:internal/modules/cjs/loader:1225:19)\n    at require (node:internal/modules/helpers:177:18)\n    at Object.<anonymous> (/home/stakyra/2L-Ouest-Services/backend/services/documentService.js:9:19)\n    at Module._compile (node:internal/modules/cjs/loader:1356:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1414:10)\n    at Module.load (node:internal/modules/cjs/loader:1197:32)\n    at Module._load (node:internal/modules/cjs/loader:1013:12)\n    at Module.require (node:internal/modules/cjs/loader:1225:19)",[0m
+[3m│ [1;34m  "exception": [0m[3mtrue,[0m
+[3m│ [1;34m  "date": [0m[3m"Fri Aug 22 2025 14:05:20 GMT+0100 (heure normale d’Afrique de l’Ouest)",[0m
+[3m│ [1;34m  "process": [0m[3m{[0m
+[3m│ [1;34m    "pid": [0m[3m27917,[0m
+[3m│ [1;34m    "uid": [0m[3m1000,[0m
+[3m│ [1;34m    "gid": [0m[3m1000,[0m
+[3m│ [1;34m    "cwd": [0m[3m"/home/stakyra/2L-Ouest-Services/backend",[0m
+[3m│ [1;34m    "execPath": [0m[3m"/usr/bin/node",[0m
+[3m│ [1;34m    "version": [0m[3m"v18.19.1",[0m
+[3m│ [1;34m    "argv": [0m[3m[[0m
+[3m│       "/usr/bin/node",[0m
+[3m│       "/home/stakyra/2L-Ouest-Services/backend/app.js"[0m
+[3m│     ],[0m
+[3m│ [1;34m    "memoryUsage": [0m[3m{[0m
+[3m│ [1;34m      "rss": [0m[3m132509696,[0m
+[3m│ [1;34m      "heapTotal": [0m[3m65949696,[0m
+[3m│ [1;34m      "heapUsed": [0m[3m38122592,[0m
+[3m│ [1;34m      "external": [0m[3m2713532,[0m
+[3m│ [1;34m      "arrayBuffers": [0m[3m367503[0m
+[3m│     }[0m
+[3m│   },[0m
+[3m│ [1;34m  "os": [0m[3m{[0m
+[3m│ [1;34m    "loadavg": [0m[3m[[0m
+[3m│       0.31,[0m
+[3m│       0.25,[0m
+[3m│       0.27[0m
+[3m│     ],[0m
+[3m│ [1;34m    "uptime": [0m[3m185519.84[0m
+[3m│   },[0m
+[3m│ [1;34m  "trace": [0m[3m[[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m15,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/cjs/loader",[0m
+[3m│ [1;34m      "function": [0m[3m"Module._resolveFilename",[0m
+[3m│ [1;34m      "line": [0m[3m1134,[0m
+[3m│ [1;34m      "method": [0m[3m"_resolveFilename",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m27,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/cjs/loader",[0m
+[3m│ [1;34m      "function": [0m[3m"Module._load",[0m
+[3m│ [1;34m      "line": [0m[3m975,[0m
+[3m│ [1;34m      "method": [0m[3m"_load",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m19,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/cjs/loader",[0m
+[3m│ [1;34m      "function": [0m[3m"Module.require",[0m
+[3m│ [1;34m      "line": [0m[3m1225,[0m
+[3m│ [1;34m      "method": [0m[3m"require",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m18,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/helpers",[0m
+[3m│ [1;34m      "function": [0m[3m"require",[0m
+[3m│ [1;34m      "line": [0m[3m177,[0m
+[3m│ [1;34m      "method": [0m[3mnull,[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m19,[0m
+[3m│ [1;34m      "file": [0m[3m"/home/stakyra/2L-Ouest-Services/backend/services/documentService.js",[0m
+[3m│ [1;34m      "function": [0m[3mnull,[0m
+[3m│ [1;34m      "line": [0m[3m9,[0m
+[3m│ [1;34m      "method": [0m[3mnull,[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m14,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/cjs/loader",[0m
+[3m│ [1;34m      "function": [0m[3m"Module._compile",[0m
+[3m│ [1;34m      "line": [0m[3m1356,[0m
+[3m│ [1;34m      "method": [0m[3m"_compile",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m10,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/cjs/loader",[0m
+[3m│ [1;34m      "function": [0m[3m"Module._extensions..js",[0m
+[3m│ [1;34m      "line": [0m[3m1414,[0m
+[3m│ [1;34m      "method": [0m[3m".js",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m32,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/cjs/loader",[0m
+[3m│ [1;34m      "function": [0m[3m"Module.load",[0m
+[3m│ [1;34m      "line": [0m[3m1197,[0m
+[3m│ [1;34m      "method": [0m[3m"load",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m12,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/cjs/loader",[0m
+[3m│ [1;34m      "function": [0m[3m"Module._load",[0m
+[3m│ [1;34m      "line": [0m[3m1013,[0m
+[3m│ [1;34m      "method": [0m[3m"_load",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m19,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/modules/cjs/loader",[0m
+[3m│ [1;34m      "function": [0m[3m"Module.require",[0m
+[3m│ [1;34m      "line": [0m[3m1225,[0m
+[3m│ [1;34m      "method": [0m[3m"require",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     }[0m
+[3m│   ][0m
+[3m│ }[0m
+[3m╰─────────────────────────────────────────────────╯[0m

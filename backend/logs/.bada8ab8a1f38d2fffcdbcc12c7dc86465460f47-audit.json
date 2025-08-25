@@ -6,9 +6,15 @@
     "auditLog": "logs/.bada8ab8a1f38d2fffcdbcc12c7dc86465460f47-audit.json",
     "files": [
         {
+<<<<<<< HEAD
             "date": 1756092245282,
             "name": "logs/app-dev.log-rejections-2025-08-25.log",
             "hash": "2ef02e8141bf312bd7cc784eba02a9ea08bec1e58bdad45eb7fad754b6fb6c2b"
+=======
+            "date": 1755867919657,
+            "name": "logs/app-dev.log-rejections-2025-08-22.log",
+            "hash": "b4d5182e3415246e38d3de4eb6321ddd20954ada2d84992ed9a5fba1440965bd"
+>>>>>>> 242a45e (sauvegarde de mes modifications locales)
         }
     ],
     "hashType": "sha256"

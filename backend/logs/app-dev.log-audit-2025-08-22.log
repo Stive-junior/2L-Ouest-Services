@@ -1,0 +1,9 @@
+📋 [2L-Ouest-Services] 22/08/2025 14:17:19 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/",
+  "status": 200,
+  "duration": "12ms",
+  "ip": "192.168.1.28",
+  "userId": "non authentifié"
+}
