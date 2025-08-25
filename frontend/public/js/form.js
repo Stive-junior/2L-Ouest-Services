@@ -24,9 +24,9 @@ let formData = {
   country: 'FR',
   dialCode: '+33',
   phone: '',
-  city: '',
-  street: '',
-  postalCode: '',
+  city: 'angers',
+  street: 'rue-bressigny',
+  postalCode: '49000',
   password: '',
   confirmPassword: ''
 };
@@ -54,24 +54,18 @@ let streetsData = {};
  * @function init
  */
 document.addEventListener('DOMContentLoaded', function() {
-  // Restaurer les données du formulaire depuis le localStorage si disponibles
   const savedFormData = localStorage.getItem('signupFormData');
   if (savedFormData) {
     try {
       const parsedData = JSON.parse(savedFormData);
       formData = { ...formData, ...parsedData };
-      
-      // Mettre à jour les champs du formulaire avec les données sauvegardées
       Object.keys(formData).forEach(key => {
         const element = document.getElementById(key);
         if (element && formData[key]) {
           element.value = formData[key];
         }
       });
-      
-      // Mettre à jour les champs spéciaux (pays, ville, rue)
       if (formData.country) {
-        // Charger les pays pour mettre à jour l'affichage
         fetch('/assets/json/countries.json')
           .then(response => response.json())
           .then(data => {
@@ -80,8 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (country) {
               document.getElementById('country').value = `${country.flag} ${country.name}`;
               document.getElementById('dialCode').value = formData.dialCode;
+              loadCities(formData.country.toLowerCase()); // Load cities for saved country
             }
-            updateSummary(); // Mettre à jour le résumé après chargement des pays
+            updateSummary();
           })
           .catch(error => {
             console.error('Erreur lors du chargement des pays:', error);
@@ -89,20 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSummary();
           });
       }
-      
-      if (formData.city && formData.country) {
-        loadCities(formData.country.toLowerCase());
-      }
-      
-      if (formData.street && formData.city) {
-        loadStreets(formData.city);
-      }
     } catch (e) {
       console.error('Erreur lors de la restauration des données:', e);
       updateSummary();
     }
   } else {
-    // Charger les pays par défaut si aucune donnée sauvegardée
     fetch('/assets/json/countries.json')
       .then(response => response.json())
       .then(data => {
@@ -110,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const france = data.find(country => country.code === 'FR');
         if (france) {
           selectCountry(france.code, `${france.flag} ${france.name}`, france.dial_code);
+          loadCities('fr'); // Load default cities for France
         }
         updateSummary();
       })
@@ -119,9 +106,9 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSummary();
       });
   }
-  
   initForm();
 });
+
 
 /**
  * Sauvegarde les données du formulaire dans le localStorage
@@ -454,20 +441,21 @@ function selectCountry(code, display, dialCode) {
   if (dialCodeInput) dialCodeInput.value = dialCode;
   document.getElementById('country-modal')?.classList.add('hidden');
   document.body.classList.remove('modal-active');
-  formData.city = '';
-  formData.street = '';
-  formData.postalCode = '';
+  // Reset city, street, and postal code
+  formData.city = code === 'FR' ? 'angers' : '';
+  formData.street = code === 'FR' ? 'rue-bressigny' : '';
+  formData.postalCode = code === 'FR' ? '49000' : '';
   const cityInput = document.getElementById('city');
   const streetInput = document.getElementById('street');
   const postalCodeInput = document.getElementById('postalCode');
-  if (cityInput) cityInput.value = 'Sélectionnez une ville';
-  if (streetInput) streetInput.value = 'Sélectionnez une rue';
-  if (postalCodeInput) postalCodeInput.value = '';
+  if (cityInput) cityInput.value = code === 'FR' ? 'Angers' : 'Sélectionnez une ville';
+  if (streetInput) streetInput.value = code === 'FR' ? 'Rue Bressigny' : 'Sélectionnez une rue';
+  if (postalCodeInput) postalCodeInput.value = code === 'FR' ? '49000' : '';
   loadCities(code.toLowerCase());
   updateSummary();
-  populateCountryGrid(countriesData);
   saveFormData();
 }
+
 
 /**
  * Loads cities for a given country.
@@ -478,12 +466,11 @@ function selectCountry(code, display, dialCode) {
 function loadCities(countryCode) {
   if (citiesData[countryCode]) {
     displayCities(citiesData[countryCode], countryCode);
-    // Restaurer la ville sélectionnée si elle existe
-    if (formData.city) {
-      const city = citiesData[countryCode].find(c => c.id === formData.city);
-      if (city) {
-        document.getElementById('city').value = city.name;
-        document.getElementById('postalCode').value = formData.postalCode;
+    // Set default city for France
+    if (countryCode === 'fr' && !formData.city) {
+      const defaultCity = citiesData[countryCode].find(c => c.id === 'angers');
+      if (defaultCity) {
+        selectCity(defaultCity.id, defaultCity.name, defaultCity.postalCode);
       }
     }
     return;
@@ -496,11 +483,11 @@ function loadCities(countryCode) {
     .then(cities => {
       citiesData[countryCode] = cities;
       displayCities(cities, countryCode);
-      if (formData.city) {
-        const city = cities.find(c => c.id === formData.city);
-        if (city) {
-          document.getElementById('city').value = city.name;
-          document.getElementById('postalCode').value = formData.postalCode;
+      // Set default city for France
+      if (countryCode === 'fr' && !formData.city) {
+        const defaultCity = cities.find(c => c.id === 'angers');
+        if (defaultCity) {
+          selectCity(defaultCity.id, defaultCity.name, defaultCity.postalCode);
         }
       }
     })
@@ -509,6 +496,7 @@ function loadCities(countryCode) {
       loadFallbackCities(countryCode);
     });
 }
+
 
 /**
  * Displays cities in the city modal.
@@ -558,9 +546,9 @@ function selectCity(id, name, postalCode) {
   if (postalCodeInput) postalCodeInput.value = postalCode;
   document.getElementById('city-modal')?.classList.add('hidden');
   document.body.classList.remove('modal-active');
-  formData.street = '';
+  formData.street = id === 'angers' ? 'rue-bressigny' : '';
   const streetInput = document.getElementById('street');
-  if (streetInput) streetInput.value = 'Sélectionnez une rue';
+  if (streetInput) streetInput.value = id === 'angers' ? 'Rue Bressigny' : 'Sélectionnez une rue';
   loadStreets(id);
   updateSummary();
   saveFormData();
@@ -713,17 +701,20 @@ function validateStep(stepId) {
       formData.phone = phoneValue;
     }
   } else if (stepId === 'step-3') {
-    if (!formData.city) {
-      showNotification('Veuillez sélectionner une ville', 'error');
+    if (!formData.city || !citiesData[formData.country.toLowerCase()]?.find(c => c.id === formData.city)) {
+      showNotification('Veuillez sélectionner une ville valide', 'error');
       isValid = false;
     }
-    if (!formData.street) {
-      showNotification('Veuillez sélectionner une rue', 'error');
+    if (!formData.street || !streetsData[formData.city]?.find(s => s.id === formData.street)) {
+      showNotification('Veuillez sélectionner une rue valide', 'error');
       isValid = false;
     }
     const postalCode = document.getElementById('postalCode');
     if (!postalCode?.value.trim()) {
       showError(postalCode, 'Le code postal est requis');
+      isValid = false;
+    } else if (!/^\d{5}$/.test(postalCode.value.trim())) {
+      showError(postalCode, 'Veuillez entrer un code postal valide (5 chiffres)');
       isValid = false;
     } else {
       clearError(postalCode);
@@ -760,6 +751,7 @@ function validateStep(stepId) {
   
   return isValid;
 }
+
 
 /**
  * Validates the confirm password field.

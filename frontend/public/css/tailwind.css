@@ -413,3 +413,47 @@ main img[src*="afrix-logo.png"] {
 }
 
 
+
+/* Animation d'apparition pour le dropdown */
+#profile-dropdown {
+    opacity: 0;
+    transform: translateY(10px);
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out, max-height 0.4s ease-out;
+}
+
+/* Pour un dropdown visible, on annule l'effet d'animation */
+#profile-dropdown.visible {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 24rem; /* max-h-96 correspond à environ 24rem (384px) */
+}
+
+/* Modal transitions */
+#edit-modal {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#edit-modal.hidden {
+    opacity: 0;
+}
+
+#edit-modal > div {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Group hover effect for edit buttons */
+.group:hover .opacity-0 {
+    opacity: 1;
+}
+
+/* Input focus styles */
+input:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Button hover effects */
+button:hover {
+    transform: translateY(-1px);
+}

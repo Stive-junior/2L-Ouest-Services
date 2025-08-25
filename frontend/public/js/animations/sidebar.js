@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // DOM elements
     const sidebar = document.getElementById('sidebar');
@@ -297,6 +298,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+   
+
+
     // Go back to previous level
     function goBack() {
         if (!sidebarContainer) return;
@@ -545,6 +549,120 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
     });
 
+
+    /**
+     * Gère l'ouverture et la fermeture du modal d'édition
+     */
+    function openEditModal(field) {
+        const modal = document.getElementById('edit-modal');
+        const input = document.getElementById('modal-input');
+        const label = document.getElementById('modal-label');
+        const profileDetails = document.querySelector('[data-level="profile-details"]');
+
+        let labelText = '';
+        let currentValue = '';
+
+        switch (field) {
+            case 'name':
+                labelText = 'Nom';
+                currentValue = profileDetails.querySelector('h3').textContent;
+                break;
+            case 'email':
+                labelText = 'Email';
+                currentValue = profileDetails.querySelector('p.text-sm.text-white\\/90').textContent;
+                break;
+            case 'address':
+                labelText = 'Adresse';
+                currentValue = profileDetails.querySelector('div:nth-child(3) p.text-sm.text-white\\/90').textContent;
+                break;
+            case 'preferences':
+                labelText = 'Notifications';
+                currentValue = profileDetails.querySelector('#notifications-status').textContent;
+                input.type = 'checkbox';
+                input.checked = currentValue === 'Activées';
+                break;
+        }
+
+        label.textContent = labelText;
+        if (field !== 'preferences') input.value = currentValue;
+
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
+        }, 10);
+    }
+
+    function closeEditModal() {
+        const modal = document.getElementById('edit-modal');
+        const input = document.getElementById('modal-input');
+        modal.querySelector('div').classList.remove('scale-100');
+        modal.querySelector('div').classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            input.type = 'text'; // Reset input type
+        }, 300);
+    }
+
+    // Ajouter des écouteurs pour les boutons d'édition
+    document.querySelectorAll('[data-edit]').forEach(button => {
+        button.addEventListener('click', () => {
+            openEditModal(button.getAttribute('data-edit'));
+        });
+    });
+
+    // Gérer l'annulation du modal
+    document.getElementById('modal-cancel').addEventListener('click', closeEditModal);
+
+    // Gérer l'enregistrement du modal
+    document.getElementById('modal-save').addEventListener('click', () => {
+        // Logique pour enregistrer les modifications (à implémenter avec l'API)
+        closeEditModal();
+    });
+
+const showNotification = async (message, type = 'info', isToast = true, options = {}) => {
+  const iconMap = {
+    success: 'success',
+    error: 'error',
+    warning: 'warning',
+    info: 'info',
+  };
+
+     const swalOptions = {
+    icon: iconMap[type] || 'info',
+    title: message,
+    timer: isToast ? 5000 : undefined,
+    timerProgressBar: isToast,
+    showConfirmButton: !isToast,
+    confirmButtonText: 'Okay',
+    position: isToast ? 'top-end' : 'center',
+    toast: isToast,
+    didOpen: (popup) => {
+    popup.style.fontSize = '14px';
+  },
+    ...options,
+  };
+  await Swal.fire(swalOptions);
+};
+
+    document.querySelectorAll('[data-action]').forEach(button => {
+        button.addEventListener('click', () => {
+            const action = button.getAttribute('data-action');
+            switch (action) {
+                case 'new-chat':
+                    showNotification('Nouvelle discussion (fonctionnalité à implémenter)', 'info');
+                    break;
+                case 'archived-chats':
+                    showNotification('Discussions archivées (fonctionnalité à implémenter)', 'info');
+                    break;
+                case 'chat-settings':
+                    showNotification('Paramètres de discussion (fonctionnalité à implémenter)', 'info');
+                    break;
+            }
+        });
+    });
+
+    
    
 
     // Initialize

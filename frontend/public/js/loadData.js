@@ -3,7 +3,7 @@
  * @description Charge les données utilisateur avant le rendu de la page
  */
 
-import { getStoredToken } from './modules/utils.js';
+import { getStoredToken, showNotification } from './modules/utils.js';
 import api from './api.js';
 
 /**
@@ -17,12 +17,19 @@ export async function loadUserData() {
         if (loadingSpinner) loadingSpinner.classList.remove('hidden');
 
         const token = getStoredToken();
-        if (!token) return null;
+        if (!token) {
+            console.log('Aucun token trouvé, utilisateur non connecté');
+            return null;
+        }
 
+        console.log('Chargement des données utilisateur...');
         const userData = await api.auth.getCurrentUser();
+        console.log('Données utilisateur chargées:', userData);
         return userData;
     } catch (error) {
         console.error('Erreur lors du chargement des données utilisateur:', error);
+        // Ne pas afficher de notification pour les erreurs de chargement de données utilisateur
+        // car cela pourrait être normal (utilisateur non connecté)
         return null;
     } finally {
         // Hide loading spinner
@@ -36,7 +43,26 @@ export async function loadUserData() {
  * @param {Object} userData - Données utilisateur
  */
 export function updateUIWithUserData(userData) {
-    if (!userData) return;
+    if (!userData) {
+        // Afficher l'état non connecté
+        const authElements = document.querySelectorAll('[data-auth]');
+        authElements.forEach(element => {
+            const shouldShow = element.getAttribute('data-auth') === 'unauthenticated';
+            element.classList.toggle('hidden', !shouldShow);
+            element.classList.toggle('block', shouldShow);
+        });
+        return;
+    }
+
+    console.log('Mise à jour de l\'interface avec les données utilisateur:', userData);
+
+    // Afficher l'état connecté
+    const authElements = document.querySelectorAll('[data-auth]');
+    authElements.forEach(element => {
+        const shouldShow = element.getAttribute('data-auth') === 'authenticated';
+        element.classList.toggle('hidden', !shouldShow);
+        element.classList.toggle('block', shouldShow);
+    });
 
     // Mise à jour du profil dans la sidebar
     const sidebarProfile = document.querySelector('#sidebar-container [data-auth="authenticated"]');
@@ -68,7 +94,6 @@ export function updateUIWithUserData(userData) {
             const firstName = (userData.name || userData.nom || 'Utilisateur').split(' ')[0];
             welcome.textContent = `Bienvenue Mr ${firstName}`;
         }
-
     }
 
     // Mise à jour du bouton de toggle d'authentification
@@ -151,16 +176,40 @@ export function updateUIWithUserData(userData) {
     // Mise à jour du dashboard avec les données utilisateur
     updateDashboardWithUserData(userData);
 
-    // Gestion du dropdown du profil
-    const dropdownToggle = document.querySelector('#profile-dropdown-toggle');
-    const dropdownMenu = document.querySelector('#profile-dropdown');
-    if (dropdownToggle && dropdownMenu) {
-        dropdownToggle.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('hidden');
-            dropdownMenu.classList.toggle('max-h-0');
-            dropdownMenu.classList.toggle('max-h-96');
-        });
-    }
+
+    // Gestion du dropdown du profil avec animation
+const dropdownToggle = document.querySelector('#profile-dropdown-toggle');
+const dropdownMenu = document.querySelector('#profile-dropdown');
+
+if (dropdownToggle && dropdownMenu) {
+    dropdownToggle.addEventListener('click', () => {
+        // Si le menu est déjà visible, on le cache avec une animation
+        if (!dropdownMenu.classList.contains('hidden')) {
+            // On prépare l'animation de disparition
+            dropdownMenu.style.opacity = 0;
+            dropdownMenu.style.transform = 'translateY(10px)';
+            dropdownMenu.style.maxHeight = '0';
+            setTimeout(() => {
+                dropdownMenu.classList.add('hidden');
+            }, 400); // Temps de l'animation
+        } else {
+            // Si le menu est caché, on le montre avec une animation
+            dropdownMenu.classList.remove('hidden');
+            setTimeout(() => {
+                dropdownMenu.style.opacity = 1;
+                dropdownMenu.style.transform = 'translateY(0)';
+                dropdownMenu.style.maxHeight = '24rem'; // max-h-96
+            }, 10); // Déclenche l'animation immédiatement après que le menu soit visible
+        }
+
+        // Mettre à jour l'état de l'icon du bouton
+        const icon = dropdownToggle.querySelector('svg');
+        if (icon) {
+            icon.classList.toggle('rotate-180');
+        }
+    });
+}
+
 }
 
 /**
@@ -169,10 +218,13 @@ export function updateUIWithUserData(userData) {
  */
 function updateDashboardWithUserData(userData) {
     console.log('Mise à jour du dashboard avec:', userData);
+    // Ici vous pouvez ajouter la logique pour mettre à jour
+    // les statistiques et autres données du dashboard
 }
 
 // Exécution au chargement
 document.addEventListener('DOMContentLoaded', async () => {
+    console.log('Chargement des données utilisateur...');
     const userData = await loadUserData();
     updateUIWithUserData(userData);
 });

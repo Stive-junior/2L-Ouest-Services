@@ -453,13 +453,23 @@ const authApi = {
    */
   async getCurrentUser() {
     try {
+       const token = getStoredToken();
+        if (!token) {
+            throw new Error('Utilisateur non authentifié');
+        }
+
       const response = await apiFetch('/user/profile', 'GET' ,null , true);
       return response.data.user;
     } catch (error) {
       const errorMessage = error.message || 'Erreur lors de la récupération des données utilisateur';
+       if (error.message.includes('401') || error.message.includes('Token')) {
+            clearStoredToken();
+            window.location.href = '/pages/auth/signin.html';
+        }
       throw await handleApiError(new Error(errorMessage), errorMessage);
     }
   },
+
 };
 
 export default authApi;

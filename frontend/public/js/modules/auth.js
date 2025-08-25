@@ -254,69 +254,76 @@ bindSignUpForm() {
   },
 
   /**
-   * Binds submission and validation to the signin form.
-   * @function bindSignInForm
-   */
-  bindSignInForm() {
-    const form = document.getElementById('signin-form');
-    if (!form) return;
+ * Binds submission and validation to the signin form.
+ * @function bindSignInForm
+ */
+bindSignInForm() {
+  const form = document.getElementById('signin-form');
+  if (!form) return;
 
-    const submitButton = form.querySelector('button[type="submit"]');
-    this.updateSubmitButtonState(form, submitButton);
+  const submitButton = form.querySelector('button[type="submit"]');
+  this.updateSubmitButtonState(form, submitButton);
 
-    form.querySelectorAll('input').forEach(input => {
-      input.addEventListener('input', () => {
-        const field = input.name;
-        const value = input.value.trim();
-        const error = validateField(field, value, true);
-        this.showFieldError(field, error);
-        this.updateSubmitButtonState(form, submitButton);
+  form.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', () => {
+      const field = input.name;
+      const value = input.value.trim();
+      const error = validateField(field, value, true);
+      this.showFieldError(field, error);
+      this.updateSubmitButtonState(form, submitButton);
+    });
+  });
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (submitButton.disabled) return;
+
+    const formData = new FormData(form);
+    const credentials = {
+      email: (formData.get('email') || '').trim(),
+      password: (formData.get('password') || '').trim(),
+      fcmToken: generateString(32)
+    };
+
+    const errors = this.validateSignInForm(credentials);
+    if (Object.keys(errors).length > 0) {
+      Object.entries(errors).forEach(([field, message]) => this.showFieldError(field, message));
+      return;
+    }
+
+    try {
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span class="loading-spinner"></span> Connexion...';
+
+      Swal.fire({
+        title: 'Veuillez patienter...',
+        html: '<div class="flex justify-center items-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-ll-blue"></div></div>',
+        allowOutsideClick: false,
+        showConfirmButton: false
       });
-    });
 
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-      if (submitButton.disabled) return;
+      await api.auth.signIn(credentials);
+      Swal.close();
 
-      const formData = new FormData(form);
-      const credentials = {
-        email: (formData.get('email') || '').trim(),
-        password: (formData.get('password') || '').trim(),
-        fcmToken: generateString(32)
-      };
+      showNotification('Connexion réussie !...patientez', 'success');
+    
+      form.querySelectorAll('input').forEach(input => input.disabled = true); 
 
-      const errors = this.validateSignInForm(credentials);
-      if (Object.keys(errors).length > 0) {
-        Object.entries(errors).forEach(([field, message]) => this.showFieldError(field, message));
-        return;
-      }
-
-      try {
-        submitButton.disabled = true;
-        submitButton.innerHTML = '<span class="loading-spinner"></span> Connexion...';
-
-        Swal.fire({
-          title: 'Veuillez patienter...',
-          html: '<div class="flex justify-center items-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-ll-blue"></div></div>',
-          allowOutsideClick: false,
-          showConfirmButton: false
-        });
-
-        await api.auth.signIn(credentials);
-        Swal.close();
-        showNotification('Connexion réussie !', 'success');
-        form.reset();
-        this.clearFieldErrors(form);
+      setTimeout(() => {
         window.location.href = '/dashboard.html';
-      } catch (error) {
-        Swal.close();
-        showNotification(error.message || 'Erreur lors de la connexion.', 'error');
-      } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = '<span>Se connecter</span><i class="fas fa-sign-in-alt ml-2"></i>';
-      }
-    });
-  },
+      }, 5000);  
+
+    } catch (error) {
+      Swal.close();
+      showNotification(error.message || 'Erreur lors de la connexion.', 'error');
+    } finally {
+      // Rétablit l'état du bouton après traitement
+      submitButton.disabled = false;
+      submitButton.innerHTML = '<span>Se connecter</span><i class="fas fa-sign-in-alt ml-2"></i>';
+    }
+  });
+}
+,
 
   /**
    * Binds submission and validation to the email verification form.

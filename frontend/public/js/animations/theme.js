@@ -12,7 +12,8 @@ class ThemeManager {
     this.html = document.documentElement;
     this.themeToggles = [
       document.getElementById('theme-toggle'),
-      document.getElementById('theme-toggle-header')
+      document.getElementById('theme-toggle-header'),
+      document.getElementById('toggle-theme')
     ].filter(Boolean);
 
     this.initTheme();

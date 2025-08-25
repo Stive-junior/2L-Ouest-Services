@@ -139,7 +139,6 @@
     <div id="chat-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
 
 
-    <!-- Sidebar -->
 
 <!-- Sidebar -->
 <aside id="sidebar" class="fixed top-0 left-0 h-full w-80 bg-sidebar-light dark:bg-sidebar-dark backdrop-blur-xl shadow-2xl z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-500 ease-in-out rounded-r-2xl overflow-hidden border-r border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0;">
@@ -210,53 +209,56 @@
                                         <span class="text-xs bg-white/20 px-2 py-1 rounded-full">Invité</span>
                                     </div>
                                 </div>
-                                <button id="profile-dropdown-toggle" class="level-dropdown-toggle p-2 rounded-xl hover:bg-ll-blue/20 dark:hover:bg-ll-blue/20 transition-colors duration-300" title="Options du profil" aria-expanded="false" aria-controls="profile-dropdown" tabindex="0">
-                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                </svg>
+                               <button id="profile-dropdown-toggle" class="level-dropdown-toggle p-2 rounded-xl hover:bg-ll-blue/20 dark:hover:bg-ll-blue/20 transition-colors duration-300" title="Options du profil" aria-expanded="false" aria-controls="profile-dropdown" tabindex="0">
+                                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
                                 </button>
                             </div>
-                            <!-- Dropdown Menu -->
-                            <div id="profile-dropdown" class="hidden mt-2 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-xl shadow-md overflow-hidden transition-all duration-300 max-h-0" style="max-height: 124px;">
-                                <div class="pl-8 pr-4 py-2 bg-white/10 dark:bg-[#1A1A1A]/50 rounded-xl shadow-md">
-                                    <a href="javascript:void(0)" data-navigate="profile-details" class="flex items-center gap-2 px-4 py-2 text-sm text-white hover:bg-ll-blue/20 transition-colors duration-300">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                        </svg>
-                                        Voir le profil complet
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white hover:bg-ll-blue/20 transition-colors duration-300">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        </svg>
-                                        Paramètres
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white hover:bg-ll-blue/20 transition-colors duration-300">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-                                        Factures
-                                    </a>
+
+                                <!-- Dropdown Menu -->
+                                <div id="profile-dropdown" class="hidden mt-2 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-xl shadow-md overflow-hidden transition-all duration-300 max-h-0" data-os="fade-up">
+                                    <div class="pl-8 pr-4 py-2 bg-white/10 dark:bg-[#1A1A1A]/50 rounded-xl shadow-md">
+                                        <!-- Menu Items -->
+                                        <a href="javascript:void(0)" data-navigate="profile-details" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                            Mon profil
+                                        </a>
+                                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            </svg>
+                                            Paramètres
+                                        </a>
+                                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            Factures
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+
                         </div>
 
                         <!-- General Menu -->
-                        <a href="javascript:void(0)" data-navigate="dashboard" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
+                        <a  href="/" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
                             <span class="inline-flex items-center justify-center w-6">
-                                <i class="fas fa-tachometer-alt sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110"></i>
+                                <i class="fas fa-home sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110"></i>
                             </span>
-                            <span class="text-black dark:text-white font-semibold tracking-wide flex-1 truncate">Tableau de bord</span>
+                            <span class="text-black dark:text-white font-semibold tracking-wide flex-1 truncate">Accueil</span>
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
                             <span class="tooltip absolute left-1/2 transform -translate-x-1/2 bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                                Tableau de bord
+                                Accueil
                             </span>
                         </a>
-                        <a href="javascript:void(0)" data-navigate="profile" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
+                        <a href="./pages/user/profile.html" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
                             <span class="inline-flex items-center justify-center w-6">
                                 <i class="fas fa-user sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110"></i>
                             </span>
@@ -490,23 +492,49 @@
                 </div>
 
                 <!-- Profile Details Level -->
-                <div data-level="profile-details" class="w-full hidden" data-parent-name="Profil Complet">
-                    <div class="flex items-center justify-between px-4 py-3">
-                        <h4 class="text-sm font-bold text-gray-500 dark:text-gray-400">Profil Complet</h4>
-                        <div class="flex items-center gap-0 overflow-hidden rounded-xl bg-gray-200/30 dark:bg-gray-700/30 shadow-md">
-                            <button data-back class="p-2 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition-colors duration-300 border-r border-white/10 dark:border-black" title="Retour au niveau précédent">
-                                <svg class="w-6 h-6 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                <div data-level="profile-details" class="w-full hidden" data-parent-name="Profil">
+                    <!-- Header with Quick Actions -->
+                    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-ll-blue to-ll-dark-blue rounded-t-xl">
+                        <h4 class="text-sm font-bold text-white/90">Profil </h4>
+                        <div class="flex items-center gap-2">
+                            <!-- Quick Action: Theme Toggle -->
+                            <button id="toggle-theme" class="p-2 rounded-full hover:bg-white/20 transition-colors duration-300" title="Changer le thème">
+                               <svg class="w-6 h-6 sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                                </svg>
+                                <span class="tooltip absolute left-1/2 transform -translate-x-1/2 bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">Thème</span>
+                            </button>
+                            
+                            <!-- Quick Action: Settings -->
+                            <button data-action="settings" class="p-2 rounded-full hover:bg-white/20 transition-colors duration-300" title="Paramètres">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 </svg>
                             </button>
-                            <button data-back-to-main class="p-2 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition-colors duration-300" title="Retour au menu principal">
-                                <svg class="w-6 h-6 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            <!-- Quick Action: Logout -->
+                            <button type="submit" class="signout-button p-2 rounded-full hover:bg-white/20 bg-red-700/50 transition-colors duration-300" title="Déconnexion">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                                 </svg>
                             </button>
+                            <!-- Navigation Buttons -->
+                            <div class="flex items-center gap-0 overflow-hidden rounded-xl bg-gray-200/30 dark:bg-gray-700/30 shadow-md">
+                                <button data-back class="p-2 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition-colors duration-300 border-r border-white/10 dark:border-black" title="Retour au niveau précédent">
+                                    <svg class="w-6 h-6 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                    </svg>
+                                </button>
+                                <button data-back-to-main class="p-2 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition-colors duration-300" title="Retour au menu principal">
+                                    <svg class="w-6 h-6 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-4 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-xl shadow-md">
+                    <!-- Profile Content -->
+                    <div class="p-4 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-b-xl shadow-md">
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center text-3xl font-bold shadow-inner overflow-hidden">
                                 <span class="user-initial">U</span>
@@ -519,32 +547,103 @@
                             </div>
                         </div>
                         <div class="space-y-3">
-                            <div>
-                                <h5 class="text-xs font-bold text-gray-400 uppercase">Adresse</h5>
-                                <p class="text-sm text-white/90"></p>
+                            <!-- Name Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Nom</h5>
+                                    <p class="text-sm text-white/90">Utilisateur</p>
+                                </div>
+                                <button data-edit="name" class="absolute right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/20 rounded-full" title="Modifier le nom">
+                                    <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
                             </div>
-                            <div>
-                                <h5 class="text-xs font-bold text-gray-400 uppercase">Rôle</h5>
-                                <p class="text-sm text-white/90">Invité</p>
+                            <!-- Email Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Email</h5>
+                                    <p class="text-sm text-white/90"></p>
+                                </div>
+                                <button data-edit="email" class="absolute right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/20 rounded-full" title="Modifier l'email">
+                                    <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
                             </div>
-                            <div>
-                                <h5 class="text-xs font-bold text-gray-400 uppercase">Préférences</h5>
-                                <div class="text-sm text-white/90">
-                                    <p>Notifications: <span id="notifications-status">Désactivées</span></p>
-                                    <p>Langue: Français</p>
+                            <!-- Address Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Adresse</h5>
+                                    <p class="text-sm text-white/90"></p>
+                                </div>
+                                <button data-edit="address" class="absolute right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/20 rounded-full" title="Modifier l'adresse">
+                                    <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Role Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A7 7 0 0112 14a7 7 0 016.879 3.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Rôle</h5>
+                                    <p class="text-sm text-white/90">Invité</p>
                                 </div>
                             </div>
-                            <div>
-                                <h5 class="text-xs font-bold text-gray-400 uppercase">Compte créé</h5>
-                                <p class="text-sm text-white/90"></p>
+                            <!-- Preferences Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Préférences</h5>
+                                    <div class="text-sm text-white/90">
+                                        <p>Notifications: <span id="notifications-status">Désactivées</span></p>
+                                        <p>Langue: Français</p>
+                                    </div>
+                                </div>
+                                <button data-edit="preferences" class="absolute right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/20 rounded-full" title="Modifier les préférences">
+                                    <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
                             </div>
-                            <div>
-                                <h5 class="text-xs font-bold text-gray-400 uppercase">Dernière connexion</h5>
-                                <p class="text-sm text-white/90"></p>
-                            </div>
+                            
+                            
                         </div>
+                        <!-- Edit Profile Button -->
                         <div class="mt-4">
                             <button class="w-full px-4 py-2 bg-ll-blue text-white rounded-lg hover:bg-ll-dark-blue transition-colors duration-300">Modifier le profil</button>
+                        </div>
+                    </div>
+                    <!-- Modal for Editing Fields -->
+                    <div id="edit-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50">
+                        <div class="bg-white dark:bg-[#1A1A1A] p-6 rounded-xl shadow-lg w-full max-w-md transform transition-all duration-300 scale-95">
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Modifier</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label id="modal-label" class="block text-sm font-medium text-gray-700 dark:text-gray-300"></label>
+                                    <input id="modal-input" type="text" class="mt-1 w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-ll-blue transition-colors duration-300" />
+                                </div>
+                                <div class="flex justify-end gap-2">
+                                    <button id="modal-cancel" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">Annuler</button>
+                                    <button id="modal-save" class="px-4 py-2 bg-ll-blue text-white rounded-lg hover:bg-ll-dark-blue transition-colors duration-300">Enregistrer</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1311,9 +1410,69 @@
             </div>
 
         </main>
+
+
+       <footer class=" dark:bg-ll-black bg-ll-light-bg   text-ll-light-gray relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center filter blur-sm opacity-30" style="background-image: url('https://via.placeholder.com/1920x400?text=Background+Footer');"></div>
+    <div class="relative container mx-auto px-4 py-12">
+        <div class="relative -skew-y-2 bg-ll-blue/10 dark:bg-ll-medium-gray/10  p-8 py-10 rounded-2xl shadow-xl mb-12">
+            <div class="skew-y-3 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-ll-light-gray">L&L Ouest Services</h3>
+                    <p class="text-sm text-ll-medium-gray mt-2">Votre partenaire de confiance pour des services de qualité dans l'Ouest de la France.</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="https://facebook.com" target="_blank" class="p-3 rounded-full bg-ll-light-gray/20 hover:bg-ll-blue transition-all duration-300 transform hover:scale-110" title="Facebook">
+                        <i class="fab fa-facebook-f text-ll-light-gray text-lg"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="p-3 rounded-full bg-ll-light-gray/20 hover:bg-ll-blue transition-all duration-300 transform hover:scale-110" title="Twitter">
+                        <i class="fab fa-twitter text-ll-light-gray text-lg"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="p-3 rounded-full bg-ll-light-gray/20 hover:bg-ll-blue transition-all duration-300 transform hover:scale-110" title="Instagram">
+                        <i class="fab fa-instagram text-ll-light-gray text-lg"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="p-3 rounded-full bg-ll-light-gray/20 hover:bg-ll-blue transition-all duration-300 transform hover:scale-110" title="LinkedIn">
+                        <i class="fab fa-linkedin-in text-ll-light-gray text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center md:text-left">
+                <h4 class="text-lg font-semibold text-ll-light-gray mb-4">Liens Utiles</h4>
+                <ul class="space-y-2">
+                    <li><a href="/pages/about.html" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300 text-sm">À propos</a></li>
+                    <li><a href="/pages/contact/index.html" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300 text-sm">Contact</a></li>
+                    <li><a href="/pages/mentions.html" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300 text-sm">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="text-center">
+                <h4 class="text-lg font-semibold text-ll-light-gray mb-4">Téléchargez notre application</h4>
+                <div class="flex justify-center gap-4">
+                    <a href="https://www.apple.com/app-store/" target="_blank" class="inline-block transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://via.placeholder.com/120x40?text=App+Store" alt="App Store" class="h-10">
+                    </a>
+                    <a href="https://play.google.com/store" target="_blank" class="inline-block transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://via.placeholder.com/120x40?text=Play+Store" alt="Play Store" class="h-10">
+                    </a>
+                </div>
+            </div>
+            <div class="text-center md:text-right">
+                <h4 class="text-lg font-semibold text-ll-light-gray mb-4">Contactez-nous</h4>
+                <p class="text-sm text-ll-medium-gray">Email: <a href="mailto:contact@llouestservice.fr" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300">contact@llouestservice.fr</a></p>
+                <p class="text-sm text-ll-medium-gray">Téléphone: <a href="tel:+330123456789" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300">+33 01 23 45 67 89</a></p>
+            </div>
+        </div>
+        <div class="mt-8 text-center border-t border-ll-medium-gray/20 pt-6">
+            <p class="text-sm text-ll-medium-gray">&copy; 2025 L&L Ouest Services. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
+
     </div>
 
-    <!-- Footer if needed -->
+   
 
     <script type="module" src="/js/main.js"></script>
     <script type="module">

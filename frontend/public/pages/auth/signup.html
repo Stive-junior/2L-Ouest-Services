@@ -1047,7 +1047,7 @@
 
       <div class="content-main flex-grow w-full p-6 lg:p-8 transition-all duration-500 overflow-hidden">
         
-        <div id="blurred-header" class="fixed top-0 left-0 right-0 z-30 bg-ll-white dark:bg-ll-black lg:bg-transparent lg:dark:bg-transparent py-3 px-6 flex justify-between items-center shadow-md lg:shadow-none transition-all duration-300 mb-4 lg:mb-0 blurred-header">
+        <header id="blurred-header" class="fixed top-0 left-0 right-0 z-30 bg-ll-white dark:bg-ll-black lg:bg-transparent lg:dark:bg-transparent py-3 px-6 flex justify-between items-center shadow-md lg:shadow-none transition-all duration-300 mb-4 lg:mb-0 ">
             <button id="sidebar-toggle" class="p-2 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
                 <svg viewBox="0 0 24 24" class="w-6 h-6">
                     <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
@@ -1089,291 +1089,274 @@
 
 
             </div>
-        </div>
+        </header>
         
-        <main class="relative z-10 max-w-6xl mx-auto w-full min-h-[calc(100vh-14rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-            <div class="w-full bg-ll-white dark:bg-ll-black p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
-                <!-- Logo and Company Name -->
-                <div class="flex items-end justify-center mb-8 gap-4">
-                    <img src="/assets/images/logo.png" alt="LL-Ouest-Services Logo" class="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
-                    <h1 class="text-xxl font-bold font-extrabold text-ll-black dark:text-ll-light-gray tracking-tight" style="font-family: 'Cinzel', serif;">L&L-Ouest-Services</h1>
+ <main class="relative z-10 max-w-7xl mx-auto w-full min-h-[calc(100vh-14rem)] flex flex-col lg:flex-row items-start justify-center px-4 sm:px-6 sm:mb-4 lg:px-8 py-14 gap-8">
+    <!-- Summary Section -->
+    <div class="w-full lg:w-3/2 bg-ll-white dark:bg-ll-black p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300 lg:sticky lg:top-6">
+        <h3 class="text-lg font-semibold mb-6 text-ll-black dark:text-ll-light-gray flex items-center">
+            <i class="fas fa-id-card mr-2 text-ll-blue"></i>
+            Vos informations
+        </h3>
+        <div class="space-y-4" id="summary-container">
+            <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                <h4 class="text-sm font-medium text-ll-blue mb-2">Informations personnelles</h4>
+                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-name">Non renseigné</p>
+                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-email">Non renseigné</p>
+            </div>
+            <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                <h4 class="text-sm font-medium text-ll-blue mb-2">Coordonnées</h4>
+                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-phone">Non renseigné</p>
+                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-country">Non renseigné</p>
+            </div>
+            <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                <h4 class="text-sm font-medium text-ll-blue mb-2">Adresse professionnelle</h4>
+                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-address">Non renseigné</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Section with Logo and Title -->
+    <div class="w-full lg:w-3/2 bg-ll-white dark:bg-ll-black p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
+        <!-- Logo and Company Name -->
+        <div class="flex items-center justify-center mb-6 gap-4">
+            <img src="/assets/images/logo.png" alt="LL-Ouest-Services Logo" class="w-12 h-12 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-ll-black dark:text-ll-light-gray tracking-tight" style="font-family: 'Cinzel', serif;">L&L-Ouest-Services</h1>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold mb-6 text-center text-ll-black dark:text-ll-light-gray">S'inscrire</h2>
+
+        <!-- Progress Bar -->
+        <div class="flex justify-center mb-6">
+            <div class="flex space-x-2">
+                <div class="w-8 h-2 bg-blue-600 rounded-full step-indicator completed" data-step="1"></div>
+                <div class="w-8 h-2 bg-blue-600 rounded-full step-indicator active" data-step="2"></div>
+                <div class="w-8 h-2 bg-gray-300 rounded-full step-indicator" data-step="3"></div>
+                <div class="w-8 h-2 bg-gray-300 rounded-full step-indicator" data-step="4"></div>
+            </div>
+        </div>
+
+        <form id="signup-form" class="space-y-6" novalidate>
+            <!-- Step 1: Personal Information -->
+            <div id="step-1" class="step" data-aos="fade-up" data-aos-duration="500">
+                <h3 class="text-lg sm:text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
+                    <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">1</span>
+                    Informations personnelles
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Nom Complet <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">Votre nom complet est nécessaire pour personnaliser votre compte.</span>
+                            </span>
+                        </label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
+                            <input type="text" id="name" name="name" class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Votre nom complet" aria-label="Nom complet">
+                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Email <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">Votre email est utilisé pour la connexion et les notifications.</span>
+                            </span>
+                        </label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
+                            <input type="email" id="email" name="email" class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="example@domaine.com" aria-label="Adresse email">
+                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                        </div>
+                    </div>
                 </div>
-                <h2 class="text-3xl font-extrabold mb-8 mt-4 text-center text-ll-black dark:text-ll-light-gray">S'inscrire</h2>
-
-                <!-- Progress Bar -->
-                <div class="flex justify-center mb-6">
-                    <div class="flex space-x-2">
-                        <div class="w-8 h-2 bg-blue-600 rounded-full step-indicator completed" data-step="1"></div>
-                        <div class="w-8 h-2 bg-blue-600 rounded-full step-indicator active" data-step="2"></div>
-                        <div class="w-8 h-2 bg-gray-300 rounded-full step-indicator" data-step="3"></div>
-                        <div class="w-8 h-2 bg-gray-300 rounded-full step-indicator" data-step="4"></div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Colonne de résumé des informations -->
-                    <div class="lg:col-span-1">
-                        <div class="bg-ll-light-bg dark:bg-gray-800 p-6 rounded-xl shadow-md sticky top-6">
-                            <h3 class="text-lg font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
-                                <i class="fas fa-id-card mr-2 text-ll-blue"></i>
-                                Vos informations
-                            </h3>
-                            
-                            <div class="space-y-4" id="summary-container">
-                                <!-- Les informations seront ajoutées dynamiquement ici -->
-                                <div class="info-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-                                    <h4 class="text-sm font-medium text-ll-blue dark:text-ll-blue mb-1">Informations personnelles</h4>
-                                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-name">Non renseigné</p>
-                                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-email">Non renseigné</p>
-                                </div>
-                                
-                                <div class="info-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-                                    <h4 class="text-sm font-medium text-ll-blue dark:text-ll-blue mb-1">Coordonnées</h4>
-                                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-phone">Non renseigné</p>
-                                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-country">Non renseigné</p>
-                                </div>
-                                
-                                <div class="info-card bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-                                    <h4 class="text-sm font-medium text-ll-blue dark:text-ll-blue mb-1">Adresse professionnelle</h4>
-                                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-address">Non renseigné</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Colonne du formulaire -->
-                    <div class="lg:col-span-2">
-                      <form id="signup-form" class="space-y-6" novalidate>
-                            <!-- Étape 1: Informations personnelles -->
-                            <div id="step-1" class="step" data-aos="fade-up" data-aos-duration="500">
-                                <h3 class="text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
-                                    <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">1</span>
-                                    Informations personnelles
-                                </h3>
-                                
-                                <div class="space-y-4">
-                                    <div>
-                                        <label for="name" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Nom Complet <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">Votre nom complet est nécessaire pour personnaliser votre compte et pour les communications officielles.</span>
-                                            </span>
-                                        </label>
-                                        <div class="relative" style="display: initial;">
-                                            <i class="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
-                                            <input type="text" id="name" name="name" class="w-full pl-10 pr-4 py-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Votre nom complet" aria-label="Nom complet">
-                                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="email" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Email <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">Votre email est utilisé pour la connexion, la récupération de mot de passe et les notifications importantes.</span>
-                                            </span>
-                                        </label>
-                                        <div class="relative" style="display: initial;">
-                                            <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
-                                            <input type="email" id="email" name="email" class="w-full pl-10 pr-4 py-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="example@domaine.com" aria-label="Adresse email">
-                                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-end mt-6">
-                                    <button type="button" class="bg-blue-600 text-white py-2.5 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg next-step" data-next="2">
-                                        Suivant <i class="fas fa-arrow-right ml-2"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Étape 2: Contact et pays -->
-                            <div id="step-2" class="step hidden" data-aos="fade-up" data-aos-duration="500">
-                                <h3 class="text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
-                                    <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">2</span>
-                                    Coordonnées
-                                </h3>
-                                
-                                <div class="space-y-4">
-                                    <div>
-                                        <label for="country" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Pays <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">Le pays est requis pour adapter les services locaux et les options disponibles.</span>
-                                            </span>
-                                        </label>
-                                        <div class="relative" style="display: initial;">
-                                            <input type="text" id="country" name="country" class="w-full p-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 cursor-pointer" readonly placeholder="Sélectionnez un pays" value="🇫🇷 France (+33)" aria-label="Sélectionnez votre pays">
-                                            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="phone" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Téléphone <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">Votre numéro de téléphone permet une communication rapide pour les mises à jour et le support.</span>
-                                            </span>
-                                        </label>
-                                        <div class="flex gap-2">
-                                            <div class="w-1/4">
-                                                <div class="relative">
-                                                    <input type="text" id="dialCode" name="dialCode" class="w-full p-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-100" readonly value="+33" aria-label="Indicatif téléphonique">
-                                                </div>
-                                            </div>
-                                            <div class="w-3/4">
-                                                <div class="relative" style="display: initial;">
-                                                    <i class="fas fa-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
-                                                    <input type="tel" id="phone" name="phone" class="w-full pl-10 pr-4 py-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="6 12 34 56 78" aria-label="Numéro de téléphone">
-                                                    <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between mt-6">
-                                    <button type="button" class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2.5 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg prev-step" data-prev="1">
-                                        <i class="fas fa-arrow-left mr-2"></i> Précédent
-                                    </button>
-                                    <button type="button" class="bg-blue-600 text-white py-2.5 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg next-step" data-next="3">
-                                        Suivant <i class="fas fa-arrow-right ml-2"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Étape 3: Adresse professionnelle -->
-                            <div id="step-3" class="step hidden" data-aos="fade-up" data-aos-duration="500">
-                                <h3 class="text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
-                                    <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">3</span>
-                                    Adresse professionnelle
-                                </h3>
-                                
-                                <div class="space-y-4">
-                                    <div>
-                                        <label for="city" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Ville (locaux professionnels) <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">La ville aide à localiser vos services et à adapter les offres régionales.</span>
-                                            </span>
-                                        </label>
-                                        <div class="relative" style="display: initial;">
-                                            <input type="text" id="city" name="city" class="w-full p-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 cursor-pointer" readonly placeholder="Sélectionnez une ville" value="Angers" aria-label="Sélectionnez votre ville">
-                                            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="street" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Rue (locaux professionnels) <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">L'adresse de rue est essentielle pour les livraisons et les visites sur site.</span>
-                                            </span>
-                                        </label>
-                                        <div class="relative">
-                                            <input type="text" id="street" name="street" class="w-full p-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 cursor-pointer" readonly placeholder="Sélectionnez une rue" aria-label="Sélectionnez votre rue">
-                                            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="postalCode" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Code Postal <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">Le code postal permet une géolocalisation précise pour les services locaux.</span>
-                                            </span>
-                                        </label>
-                                        <input type="text" id="postalCode" name="postalCode" class="w-full p-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Ex: 49000" value="49000" aria-label="Code postal">
-                                        <span class="error-message text-red-500 text-xs mt-1 block"></span>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between mt-6">
-                                    <button type="button" class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2.5 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg prev-step" data-prev="2">
-                                        <i class="fas fa-arrow-left mr-2"></i> Précédent
-                                    </button>
-                                    <button type="button" class="bg-blue-600 text-white py-2.5 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg next-step" data-next="4">
-                                        Suivant <i class="fas fa-arrow-right ml-2"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Étape 4: Mot de passe -->
-                            <div id="step-4" class="step hidden" data-aos="fade-up" data-aos-duration="500">
-                                <h3 class="text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
-                                    <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">4</span>
-                                    Sécurité du compte
-                                </h3>
-                                
-                                <div class="space-y-4">
-                                    <div>
-                                        <label for="password" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Mot de passe <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">Choisissez un mot de passe fort pour sécuriser votre compte (au moins 8 caractères, avec majuscules, minuscules, chiffres et symboles).</span>
-                                            </span>
-                                        </label>
-                                        <div class="relative" style="display: initial;">
-                                            <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
-                                            <input type="password" id="password" name="password" class="w-full pl-10 pr-12 py-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Votre mot de passe" aria-label="Mot de passe">
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <span class="error-message text-red-500 text-xs mt-1 block"></span>
-                                        </div>
-                                        <div class="mt-1 text-xs text-gray-500 dark:text-gray-400" id="password-strength"></div>
-                                    </div>
-                                    <div>
-                                        <label for="confirmPassword" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
-                                            Confirmer le mot de passe <span class="text-red-500 ml-1">*</span>
-                                            <span class="tooltip ml-2">
-                                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
-                                                <span class="tooltiptext">Répétez le mot de passe pour éviter les erreurs de saisie.</span>
-                                            </span>
-                                        </label>
-                                        <div class="relative" style="display: initial;">
-                                            <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
-                                            <input type="password" id="confirmPassword" name="confirmPassword" class="w-full pl-10 pr-12 py-2.5 form-input bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Confirmez votre mot de passe" aria-label="Confirmation du mot de passe">
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <span class="error-message text-red-500 text-xs mt-1 block"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between mt-6">
-                                    <button type="button" class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2.5 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg prev-step" data-prev="3">
-                                        <i class="fas fa-arrow-left mr-2"></i> Précédent
-                                    </button>
-                                    <button type="submit" class="bg-blue-600 text-white py-2.5 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg flex items-center" id="submit-button">
-                                        <span>S'inscrire</span>
-                                        <i class="fas fa-check-circle ml-2"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- Message pour les champs obligatoires -->
-                        <div class="mt-4 text-sm text-gray-500 dark:text-gray-400 text-center">
-                            <p class="text-red-500 inline">*</p> Champs obligatoires
-                        </div>
-
-                        <div class="mt-6 text-center space-y-3">
-                            <p class="text-sm text-ll-black dark:text-ll-light-gray">
-                                Déjà un compte ? <a href="/pages/auth/signin.html" class="text-blue-600 dark:text-blue-400 hover:underline font-medium transition-colors duration-200">Se connecter</a>
-                            </p>
-                            <p class="text-sm text-ll-black dark:text-ll-light-gray">
-                                <a href="/pages/auth/password-reset.html" class="text-blue-600 dark:text-blue-400 hover:underline font-medium transition-colors duration-200">Mot de passe oublié ?</a>
-                            </p>
-                        </div>
-                    </div>
+                <div class="flex justify-end mt-6">
+                    <button type="button" class="bg-blue-600 text-white py-2.5 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg next-step" data-next="2">
+                        Suivant <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
                 </div>
             </div>
-        </main>
+
+            <!-- Step 2: Contact and Country -->
+            <div id="step-2" class="step hidden" data-aos="fade-up" data-aos-duration="500">
+                <h3 class="text-lg sm:text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
+                    <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">2</span>
+                    Coordonnées
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="country" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Pays <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">Le pays est requis pour adapter les services locaux.</span>
+                            </span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="country" name="country" class="w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 cursor-pointer" readonly placeholder="Sélectionnez un pays" value="🇫🇷 France (+33)" aria-label="Sélectionnez votre pays">
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Téléphone <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">Votre numéro de téléphone permet une communication rapide.</span>
+                            </span>
+                        </label>
+                        <div class="flex gap-2">
+                            <div class="w-1/4">
+                                <input type="text" id="dialCode" name="dialCode" class="w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-100" readonly value="+33" aria-label="Indicatif téléphonique">
+                            </div>
+                            <div class="w-3/4">
+                                <div class="relative">
+                                    <i class="fas fa-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
+                                    <input type="tel" id="phone" name="phone" class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="6 12 34 56 78" aria-label="Numéro de téléphone">
+                                    <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between mt-6">
+                    <button type="button" class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2.5 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg prev-step" data-prev="1">
+                        <i class="fas fa-arrow-left mr-2"></i> Précédent
+                    </button>
+                    <button type="button" class="bg-blue-600 text-white py-2.5 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg next-step" data-next="3">
+                        Suivant <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Professional Address -->
+            <div id="step-3" class="step hidden" data-aos="fade-up" data-aos-duration="500">
+                <h3 class="text-lg sm:text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
+                    <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">3</span>
+                    Adresse professionnelle
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="city" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Ville (locaux professionnels) <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">La ville aide à localiser vos services.</span>
+                            </span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="city" name="city" class="w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 cursor-pointer" readonly placeholder="Sélectionnez une ville" value="Angers" aria-label="Sélectionnez votre ville">
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="street" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Rue (locaux professionnels) <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">L'adresse de rue est essentielle pour les livraisons.</span>
+                            </span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="street" name="street" class="w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 cursor-pointer" readonly placeholder="Sélectionnez une rue" value="Rue Bressigny" aria-label="Sélectionnez votre rue">
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                            <span class="error-message text-red-500 text-xs mt-2 block"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="postalCode" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Code Postal <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">Le code postal permet une géolocalisation précise.</span>
+                            </span>
+                        </label>
+                        <input type="text" id="postalCode" name="postalCode" class="w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Ex: 49000" value="49000" aria-label="Code postal">
+                        <span class="error-message text-red-500 text-xs mt-1 block"></span>
+                    </div>
+                </div>
+                <div class="flex justify-between mt-6">
+                    <button type="button" class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2.5 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg prev-step" data-prev="2">
+                        <i class="fas fa-arrow-left mr-2"></i> Précédent
+                    </button>
+                    <button type="button" class="bg-blue-600 text-white py-2.5 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg next-step" data-next="4">
+                        Suivant <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Password -->
+            <div id="step-4" class="step hidden" data-aos="fade-up" data-aos-duration="500">
+                <h3 class="text-lg sm:text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
+                    <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">4</span>
+                    Sécurité du compte
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Mot de passe <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">Choisissez un mot de passe fort (8+ caractères).</span>
+                            </span>
+                        </label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
+                            <input type="password" id="password" name="password" class="w-full pl-10 pr-12 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Votre mot de passe" aria-label="Mot de passe">
+                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <span class="error-message text-red-500 text-xs mt-1 block"></span>
+                        </div>
+                        <div class="mt-1 text-xs text-gray-500 dark:text-gray-400" id="password-strength"></div>
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-1 flex items-center">
+                            Confirmer le mot de passe <span class="text-red-500 ml-1">*</span>
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400 text-sm"></i>
+                                <span class="tooltiptext">Répétez le mot de passe pour confirmation.</span>
+                            </span>
+                        </label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg"></i>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="w-full pl-10 pr-12 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500" required placeholder="Confirmez votre mot de passe" aria-label="Confirmation du mot de passe">
+                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <span class="error-message text-red-500 text-xs mt-1 block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between mt-6">
+                    <button type="button" class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2.5 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg prev-step" data-prev="3">
+                        <i class="fas fa-arrow-left mr-2"></i> Précédent
+                    </button>
+                    <button type="submit" class="bg-blue-600 text-white py-2.5 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg flex items-center" id="submit-button">
+                        <span>S'inscrire</span>
+                        <i class="fas fa-check-circle ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="mt-4 text-sm text-gray-500 dark:text-gray-400 text-center">
+            <p class="text-red-500 inline">*</p> Champs obligatoires
+        </div>
+        <div class="mt-6 text-center space-y-3">
+            <p class="text-sm text-ll-black dark:text-ll-light-gray">
+                Déjà un compte ? <a href="/pages/auth/signin.html" class="text-blue-600 dark:text-blue-400 hover:underline font-medium transition-colors duration-200">Se connecter</a>
+            </p>
+            <p class="text-sm text-ll-black dark:text-ll-light-gray">
+                <a href="/pages/auth/password-reset.html" class="text-blue-600 dark:text-blue-400 hover:underline font-medium transition-colors duration-200">Mot de passe oublié ?</a>
+            </p>
+        </div>
+    </div>
+</main>
+
     </div>
 
     <!-- Modal for Country Selection -->
