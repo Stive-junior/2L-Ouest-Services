@@ -6,9 +6,8 @@
 import { getStoredToken, showNotification, setStoredToken, clearStoredToken } from './modules/utils.js';
 import api from './api.js';
 
-let userDataCache = null;
-let cacheTimestamp = 0;
-const CACHE_TTL = 5 * 60 * 1000;
+const USER_CACHE_KEY = 'userDataCache';
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 /**
  * Charge les données utilisateur et met à jour l'interface
@@ -16,30 +15,31 @@ const CACHE_TTL = 5 * 60 * 1000;
  */
 export async function loadUserData() {
     try {
-        
         const loadingSpinner = document.querySelector('#profile-loading');
         if (loadingSpinner) loadingSpinner.classList.remove('hidden');
 
-        const token = getStoredToken();
+        let token = getStoredToken();
         if (!token) {
             console.log('Aucun token trouvé, utilisateur non connecté');
-            userDataCache = null;
-            cacheTimestamp = 0;
+            clearUserCache();
             return null;
         }
 
-        // Vérifier si cache valide
-        if (userDataCache && Date.now() - cacheTimestamp < CACHE_TTL) {
-            console.log('Retour des données utilisateur du cache');
-            return userDataCache;
+        // Rafraîchir le token si nécessaire
+        token = await refreshTokenIfNeeded(token);
+
+        // Vérifier le cache localStorage
+        const cachedData = getCachedUserData();
+        if (cachedData) {
+            console.log('Retour des données utilisateur du cache localStorage');
+            return cachedData;
         }
 
         console.log('Chargement des données utilisateur depuis l\'API...');
         const userData = await api.auth.getCurrentUser();
 
         if (userData) {
-            userDataCache = userData;
-            cacheTimestamp = Date.now();
+            cacheUserData(userData);
             console.log('Données utilisateur chargées et mises en cache:', userData);
             return userData;
         } else {
@@ -50,11 +50,9 @@ export async function loadUserData() {
         if (error.message.includes('Token invalide') || error.message.includes('expiré')) {
             handleInvalidToken();
         }
-        userDataCache = null;
-        cacheTimestamp = 0;
+        clearUserCache();
         return null;
     } finally {
-        // Cacher le spinner de chargement
         const loadingSpinner = document.querySelector('#profile-loading');
         if (loadingSpinner) loadingSpinner.classList.add('hidden');
     }
@@ -65,10 +63,9 @@ export async function loadUserData() {
  */
 function handleInvalidToken() {
     clearStoredToken();
-    userDataCache = null;
-    cacheTimestamp = 0;
+    clearUserCache();
     showNotification('Session expirée. Veuillez vous reconnecter.', 'error');
-    window.location.href = '/signin.html'; // Redirection vers la page de connexion
+    window.location.href = '/signin.html';
 }
 
 /**
@@ -94,6 +91,51 @@ async function refreshTokenIfNeeded(currentToken) {
         console.error('Erreur lors du rafraîchissement du token:', error);
         throw new Error('Échec du rafraîchissement du token');
     }
+}
+
+/**
+ * Récupère les données utilisateur du cache localStorage
+ * @returns {Object|null} Données utilisateur cachées ou null
+ */
+function getCachedUserData() {
+    try {
+        const cached = localStorage.getItem(USER_CACHE_KEY);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_TTL) {
+            return data;
+        }
+        clearUserCache();
+        return null;
+    } catch (error) {
+        console.error('Erreur lors de la récupération du cache utilisateur:', error);
+        clearUserCache();
+        return null;
+    }
+}
+
+/**
+ * Met en cache les données utilisateur dans localStorage
+ * @param {Object} userData - Données utilisateur à cacher
+ */
+function cacheUserData(userData) {
+    try {
+        const cacheObject = {
+            data: userData,
+            timestamp: Date.now()
+        };
+        localStorage.setItem(USER_CACHE_KEY, JSON.stringify(cacheObject));
+    } catch (error) {
+        console.error('Erreur lors de la mise en cache des données utilisateur:', error);
+    }
+}
+
+/**
+ * Efface le cache des données utilisateur
+ */
+function clearUserCache() {
+    localStorage.removeItem(USER_CACHE_KEY);
 }
 
 /**
@@ -249,4 +291,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userData = await loadUserData();
     updateUIWithUserData(userData);
 });
-
