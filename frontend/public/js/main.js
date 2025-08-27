@@ -86,7 +86,7 @@ async function loadModule(modulePath) {
  * @param {boolean} isAuthenticated - Indique si l'utilisateur est authentifié.
  */
 async function initializePage(page, isAuthenticated) {
-  console.log(`Initialisation de la page : ${page}, Authentifié : ${isAuthenticated}`);
+  console.log(`Initialisation de la page : ${page}, Auth : ${isAuthenticated}`);
   
   const moduleMap = {
     auth: { path: './modules/auth.js', pages: ['signin', 'signup', 'verify-email', 'password-reset', 'change-email'], authRequired: false },
@@ -119,7 +119,7 @@ async function initializePage(page, isAuthenticated) {
 
 // Exécution principale asynchrone
 (async () => {
-  console.log('Main script loaded');
+  console.log('Script principal chargé');
   const page = getCurrentPage();
 
   onAuthStateChanged(auth, async (user) => {
@@ -127,15 +127,14 @@ async function initializePage(page, isAuthenticated) {
 
     if (user) {
       const cachedToken = getCachedResponse('jwt');
-     
+      
       if (cachedToken) {
         setStoredToken(cachedToken.token, cachedToken.role);
         isAuthenticated = true;
       } else {
         try {
-          const storedToken = getStoredToken();
+          let storedToken = getStoredToken();
           let newToken = storedToken;
-          
 
           if (storedToken) {
             try {
@@ -172,6 +171,7 @@ async function initializePage(page, isAuthenticated) {
           clearStoredToken();
           isAuthenticated = false;
           showNotification('Session expirée. Veuillez vous reconnecter.', 'error');
+          window.location.href = '/signin.html'; // Redirection vers la page de connexion
         }
       }
     } else {

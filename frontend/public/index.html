@@ -6,30 +6,29 @@
     <meta name="csrf-token" content="csrf-token-placeholder">
     <title>Accueil - L&L Ouest Services</title>
 
+
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style" onload="this.rel='stylesheet'">
     <link rel="preload" href="../../css/tailwind.css" as="style" onload="this.rel='stylesheet'">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
+    
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.18/vue.global.prod.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Script de vérification auth chargé en premier (async pour rapidité) -->
+    <!-- Script de vérification auth -->
     <script async src="/js/auth-check.js"></script>
-    <script async src="/js/form.js"></script>
-
-    <script>
+    <script type="module" src="/js/loadData.js"></script>
+<script>
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -55,24 +54,10 @@
                 document.body.classList.remove('chat-sidebar-open');
             }
 
+            
             AOS.init();
-            particlesJS.load('particles-js', '/assets/particles.json', function() {
-                console.log('Particles loaded');
-            });
-            new Swiper('.swiper-container', {
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                autoplay: {
-                    delay: 3000,
-                },
-            });
         });
+
     </script>
 
     <script type="module" src="/js/main.js"></script>
@@ -81,7 +66,7 @@
         auth.init();
     </script>
 
-    <!-- Configuration Tailwind inline pour optimisation -->
+     <!-- Configuration Tailwind inline pour optimisation -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -113,6 +98,13 @@
     </script>
 
     <style>
+        /* Styles as provided, plus dashboard specific */
+        .stat-card {
+            background: linear-gradient(135deg, #2563EB, #1E40AF);
+            color: white;
+        }
+
+
         .animate-fade-in {
             animation: fadeIn 0.5s ease-in-out;
         }
@@ -151,13 +143,69 @@
     </style>
 </head>
 
-<body class="bg-ll-white dark:bg-ll-black text-ll-black dark:text-ll-light-gray flex flex-col min-h-screen transition-colors duration-300 overflow-x-hidden">
+<body class="bg-ll-white dark:bg-ll-black text-ll-black dark:text-ll-light-gray flex flex-col min-h-screen transition-colors duration-300">
+
     <div id="particles-js" class="absolute inset-0 z-0 pointer-events-none"></div>
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
     <div id="chat-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
 
-    <div class="content-main flex-grow w-full p-6 lg:p-8 transition-all duration-500 overflow-hidden relative z-10">
+    <div class="content-main flex-grow w-full p-6 lg:p-8 transition-all duration-500 overflow-hidden">
         
+        <div id="blurred-header" class=" fixed top-0 left-0 right-0 z-30 bg-ll-white dark:bg-ll-black lg:bg-transparent lg:dark:bg-transparent py-3 px-6 flex justify-between items-center shadow-md lg:shadow-none transition-all duration-300 mb-4 lg:mb-0 ">
+            <button id="sidebar-toggle" class="p-2 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                <svg viewBox="0 0 24 24" class="w-6 h-6">
+                    <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <div class="flex items-center space-x-1">
+                <button id="chat-sidebar-toggle" class="lg:block hidden p-3 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                    <i class="fas fa-comments w-6 h-6"></i>
+                </button>
+                
+                <button id="theme-toggle-header" class="p-3 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+
+                <div id="auth" class="chat-toggle-button">
+                <div  x-data="{ open: false }" @click.away="open = false" class="relative z-40">
+                    <button type="button" id="auth" class="auth-combined-button focus:outline-none focus:ring-2 focus:ring-ll-blue/50 auth-dropdown-toggle" title="Authentification" @click="open = !open" :aria-expanded="open.toString()" aria-haspopup="true">
+                        <i class="fas fa-user text-lg"></i>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition:enter="auth-dropdown-menu transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="auth-dropdown-menu transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute right-0 mt-2 w-[11rem] rounded-lg shadow-xl p-1.5 auth-menu-backdrop" style="display: none;">
+                        <div class="flex flex-col gap-1 text-sm">
+                            <a href="/pages/user/profile.html" class="auth-menu-item">
+                            <i class="fas fa-user w-5 h-5"></i>
+                            <span>Mon Profil</span>
+                            </a>
+                            <a href="/pages/user/dashboard.html" class="auth-menu-item">
+                            <i class="fas fa-tachometer-alt w-5 h-5"></i>
+                            <span>Tableau de bord</span>
+                            </a>
+                            <a href="/pages/user/settings.html" class="auth-menu-item">
+                            <i class="fas fa-cog w-5 h-5"></i>
+                            <span>Paramètres</span>
+                            </a>
+                            <hr class="border-gray-200 dark:border-gray-700 my-1">
+                            <button type="submit"  class="signout-button auth-menu-item text-red-600 dark:text-red-400">
+                            <i class="fas fa-sign-out-alt w-5 h-5"></i>
+                            <span>Se déconnecter</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+            </div>
+        </div>
+
+       
+
         <!-- Hero Section with Video Background and Bubbles -->
         <section class="relative h-screen flex items-center justify-center overflow-hidden" data-aos="zoom-in">
             <video autoplay muted loop playsinline class="absolute w-full h-full object-cover z-0">
@@ -178,6 +226,10 @@
             <div class="bubble" style="left: 70%; animation-duration: 15s; animation-delay: 3s; width: 40px; height: 40px;"></div>
             <div class="bubble" style="left: 90%; animation-duration: 9s; animation-delay: 0.5s;"></div>
         </section>
+
+           <!-- Main Content -->
+         <main class="relative z-10 max-w-7xl mx-auto w-full min-h-[calc(100vh-14rem)] flex-1 items-center justify-center px-4 sm:px-6 lg:px-8">
+            
 
         <!-- Section 1: About Us with Lottie Animation -->
         <section class="py-20 bg-ll-light-bg dark:bg-ll-black relative" data-aos="fade-up">
@@ -341,9 +393,69 @@
             </div>
         </section>
 
-      
+      </main>
+
+
+        <footer class=" dark:bg-ll-black bg-ll-light-bg   text-ll-light-gray relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center filter blur-sm opacity-30" style="background-image: url('https://via.placeholder.com/1920x400?text=Background+Footer');"></div>
+    <div class="relative container mx-auto px-4 py-12">
+        <div class="relative -skew-y-2 bg-ll-blue/10 dark:bg-ll-medium-gray/10  p-8 py-10 rounded-2xl shadow-xl mb-12">
+            <div class="skew-y-3 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-ll-light-gray">L&L Ouest Services</h3>
+                    <p class="text-sm text-ll-medium-gray mt-2">Votre partenaire de confiance pour des services de qualité dans l’Ouest de la France.</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="https://facebook.com" target="_blank" class="p-3 rounded-full bg-ll-light-gray/20 hover:bg-ll-blue transition-all duration-300 transform hover:scale-110" title="Facebook">
+                        <i class="fab fa-facebook-f text-ll-light-gray text-lg"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="p-3 rounded-full bg-ll-light-gray/20 hover:bg-ll-blue transition-all duration-300 transform hover:scale-110" title="Twitter">
+                        <i class="fab fa-twitter text-ll-light-gray text-lg"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="p-3 rounded-full bg-ll-light-gray/20 hover:bg-ll-blue transition-all duration-300 transform hover:scale-110" title="Instagram">
+                        <i class="fab fa-instagram text-ll-light-gray text-lg"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="p-3 rounded-full bg-ll-light-gray/20 hover:bg-ll-blue transition-all duration-300 transform hover:scale-110" title="LinkedIn">
+                        <i class="fab fa-linkedin-in text-ll-light-gray text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center md:text-left">
+                <h4 class="text-lg font-semibold text-ll-light-gray mb-4">Liens Utiles</h4>
+                <ul class="space-y-2">
+                    <li><a href="/pages/about.html" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300 text-sm">À propos</a></li>
+                    <li><a href="/pages/contact/index.html" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300 text-sm">Contact</a></li>
+                    <li><a href="/pages/mentions.html" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300 text-sm">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="text-center">
+                <h4 class="text-lg font-semibold text-ll-light-gray mb-4">Téléchargez notre application</h4>
+                <div class="flex justify-center gap-4">
+                    <a href="https://www.apple.com/app-store/" target="_blank" class="inline-block transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://via.placeholder.com/120x40?text=App+Store" alt="App Store" class="h-10">
+                    </a>
+                    <a href="https://play.google.com/store" target="_blank" class="inline-block transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://via.placeholder.com/120x40?text=Play+Store" alt="Play Store" class="h-10">
+                    </a>
+                </div>
+            </div>
+            <div class="text-center md:text-right">
+                <h4 class="text-lg font-semibold text-ll-light-gray mb-4">Contactez-nous</h4>
+                <p class="text-sm text-ll-medium-gray">Email: <a href="mailto:contact@llouestservice.fr" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300">contact@llouestservice.fr</a></p>
+                <p class="text-sm text-ll-medium-gray">Téléphone: <a href="tel:+330123456789" class="text-ll-blue hover:text-ll-light-gray transition-colors duration-300">+33 01 23 45 67 89</a></p>
+            </div>
+        </div>
+        <div class="mt-8 text-center border-t border-ll-medium-gray/20 pt-6">
+            <p class="text-sm text-ll-medium-gray">&copy; 2025 L&L Ouest Services. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
 
     </div>
+    
 
     <script type="module" src="/js/main.js"></script>
     <script type="module">

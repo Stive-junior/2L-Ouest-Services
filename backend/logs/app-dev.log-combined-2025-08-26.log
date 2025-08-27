@@ -1,0 +1,142 @@
+✅ [2L-Ouest-Services] 26/08/2025 08:31:16 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:16 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:16 | INFO     | Token reçu dans middleware
+{
+  "tokenSnippet": "eyJhbGciOiJIUzI1NiIs..."
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:16 | INFO     | JWT personnalisé vérifié avec succès
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:16 | INFO     | Utilisateur authentifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:55 | INFO     | 127.0.0.1 - - [26/Aug/2025:07:31:55 +0000] "GET /api/user/profile HTTP/1.1" - - "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0"
+✅ [2L-Ouest-Services] 26/08/2025 08:31:57 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:57 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:57 | INFO     | Token reçu dans middleware
+{
+  "tokenSnippet": "eyJhbGciOiJIUzI1NiIs..."
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:57 | INFO     | JWT personnalisé vérifié avec succès
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:31:57 | INFO     | Utilisateur authentifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+🚨 [2L-Ouest-Services] 26/08/2025 08:32:00 | ERROR    | Erreur lors de la récupération de l'utilisateur
+{
+  "error": "14 UNAVAILABLE: Name resolution failed for target dns:firestore.googleapis.com:443",
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+🚨 [2L-Ouest-Services] 26/08/2025 08:32:00 | ERROR    | Erreur lors de la récupération du profil
+{
+  "error": "Erreur serveur lors de la récupération de l'utilisateur",
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+🚨 [2L-Ouest-Services] 26/08/2025 08:32:00 | ERROR    | Erreur lors de la récupération du profil
+{
+  "error": "Erreur serveur lors de la récupération de l'utilisateur"
+}
+🚨 [2L-Ouest-Services] 26/08/2025 08:32:00 | ERROR    | Erreur traitée par le middleware Erreur serveur lors de la récupération de l'utilisateur
+{
+  "statusCode": 500,
+  "details": "14 UNAVAILABLE: Name resolution failed for target dns:firestore.googleapis.com:443",
+  "path": "/api/user/profile",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:32:00 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:32:00 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "POST"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:32:00 | INFO     | En-tête du Firebase ID token
+{
+  "header": {
+    "alg": "RS256",
+    "kid": "92e883cc4663a6332ada6bc1e47f3ff5e4c8b5d7",
+    "typ": "JWT"
+  }
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:32:05 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:32:05 | INFO     | Profil utilisateur récupéré
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:32:05 | INFO     | 127.0.0.1 - - [26/Aug/2025:07:32:05 +0000] "GET /api/user/profile HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0"
+✅ [2L-Ouest-Services] 26/08/2025 08:32:05 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:32:05 | INFO     | Firebase ID token vérifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+📋 [2L-Ouest-Services] 26/08/2025 08:32:05 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:32:05 | INFO     | 127.0.0.1 - - [26/Aug/2025:07:32:05 +0000] "POST /api/auth/verify-token HTTP/1.1" 200 69 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0"
+✅ [2L-Ouest-Services] 26/08/2025 08:52:41 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:52:46 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:52:46 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "POST"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:52:46 | INFO     | En-tête du Firebase ID token
+{
+  "header": {
+    "alg": "RS256",
+    "kid": "92e883cc4663a6332ada6bc1e47f3ff5e4c8b5d7",
+    "typ": "JWT"
+  }
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:52:48 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:52:48 | INFO     | Firebase ID token vérifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+📋 [2L-Ouest-Services] 26/08/2025 08:52:48 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 26/08/2025 08:52:48 | INFO     | 127.0.0.1 - - [26/Aug/2025:07:52:48 +0000] "POST /api/auth/verify-token HTTP/1.1" 200 69 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0"

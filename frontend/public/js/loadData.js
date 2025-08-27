@@ -3,8 +3,12 @@
  * @description Charge les données utilisateur avant le rendu de la page
  */
 
-import { getStoredToken, showNotification } from './modules/utils.js';
+import { getStoredToken, showNotification, setStoredToken, clearStoredToken } from './modules/utils.js';
 import api from './api.js';
+
+let userDataCache = null;
+let cacheTimestamp = 0;
+const CACHE_TTL = 5 * 60 * 1000;
 
 /**
  * Charge les données utilisateur et met à jour l'interface
@@ -12,29 +16,83 @@ import api from './api.js';
  */
 export async function loadUserData() {
     try {
-        // Show loading spinner
+        
         const loadingSpinner = document.querySelector('#profile-loading');
         if (loadingSpinner) loadingSpinner.classList.remove('hidden');
 
         const token = getStoredToken();
         if (!token) {
             console.log('Aucun token trouvé, utilisateur non connecté');
+            userDataCache = null;
+            cacheTimestamp = 0;
             return null;
         }
 
-        console.log('Chargement des données utilisateur...');
+        // Vérifier si cache valide
+        if (userDataCache && Date.now() - cacheTimestamp < CACHE_TTL) {
+            console.log('Retour des données utilisateur du cache');
+            return userDataCache;
+        }
+
+        console.log('Chargement des données utilisateur depuis l\'API...');
         const userData = await api.auth.getCurrentUser();
-        console.log('Données utilisateur chargées:', userData);
-        return userData;
+
+        if (userData) {
+            userDataCache = userData;
+            cacheTimestamp = Date.now();
+            console.log('Données utilisateur chargées et mises en cache:', userData);
+            return userData;
+        } else {
+            throw new Error('Aucune donnée utilisateur reçue');
+        }
     } catch (error) {
         console.error('Erreur lors du chargement des données utilisateur:', error);
-        // Ne pas afficher de notification pour les erreurs de chargement de données utilisateur
-        // car cela pourrait être normal (utilisateur non connecté)
+        if (error.message.includes('Token invalide') || error.message.includes('expiré')) {
+            handleInvalidToken();
+        }
+        userDataCache = null;
+        cacheTimestamp = 0;
         return null;
     } finally {
-        // Hide loading spinner
+        // Cacher le spinner de chargement
         const loadingSpinner = document.querySelector('#profile-loading');
         if (loadingSpinner) loadingSpinner.classList.add('hidden');
+    }
+}
+
+/**
+ * Gère un token invalide : déconnexion et redirection
+ */
+function handleInvalidToken() {
+    clearStoredToken();
+    userDataCache = null;
+    cacheTimestamp = 0;
+    showNotification('Session expirée. Veuillez vous reconnecter.', 'error');
+    window.location.href = '/signin.html'; // Redirection vers la page de connexion
+}
+
+/**
+ * Rafraîchit le token si nécessaire
+ * @param {string} currentToken - Token actuel
+ * @returns {Promise<string>} Nouveau token rafraîchi
+ */
+async function refreshTokenIfNeeded(currentToken) {
+    try {
+        const decoded = JSON.parse(atob(currentToken.split('.')[1]));
+        const exp = decoded.exp * 1000;
+        const now = Date.now();
+
+        if (exp - now < CACHE_TTL) {
+            console.log('Token expire bientôt, rafraîchissement...');
+            const refreshData = await api.auth.refreshToken();
+            setStoredToken(refreshData.token, refreshData.role || 'client');
+            return refreshData.token;
+        }
+
+        return currentToken;
+    } catch (error) {
+        console.error('Erreur lors du rafraîchissement du token:', error);
+        throw new Error('Échec du rafraîchissement du token');
     }
 }
 
@@ -90,7 +148,7 @@ export function updateUIWithUserData(userData) {
         if (countryElement) countryElement.textContent = userData.address?.country || 'Pays inconnu';
         if (roleElement) roleElement.textContent = userData.role || 'Client';
 
-        if(welcome) {
+        if (welcome) {
             const firstName = (userData.name || userData.nom || 'Utilisateur').split(' ')[0];
             welcome.textContent = `Bienvenue Mr ${firstName}`;
         }
@@ -140,7 +198,7 @@ export function updateUIWithUserData(userData) {
         const userInitialElement = profileDetails.querySelector('.user-initial');
         const userPhotoElement = profileDetails.querySelector('#user-photo-detailed');
         const addressElement = profileDetails.querySelector('p.text-sm.text-white\\/90');
-        const roleElement = profileDetails.querySelector('p.text-sm.text-white\\/90');
+        const roleElement = profileDetails.querySelector('span.text-xs');
         const notificationsElement = profileDetails.querySelector('#notifications-status');
         const createdAtElement = profileDetails.querySelector('p.text-sm.text-white\\/90:nth-child(4)');
         const lastLoginElement = profileDetails.querySelector('p.text-sm.text-white\\/90:nth-child(5)');
@@ -175,41 +233,6 @@ export function updateUIWithUserData(userData) {
 
     // Mise à jour du dashboard avec les données utilisateur
     updateDashboardWithUserData(userData);
-
-
-    // Gestion du dropdown du profil avec animation
-const dropdownToggle = document.querySelector('#profile-dropdown-toggle');
-const dropdownMenu = document.querySelector('#profile-dropdown');
-
-if (dropdownToggle && dropdownMenu) {
-    dropdownToggle.addEventListener('click', () => {
-        // Si le menu est déjà visible, on le cache avec une animation
-        if (!dropdownMenu.classList.contains('hidden')) {
-            // On prépare l'animation de disparition
-            dropdownMenu.style.opacity = 0;
-            dropdownMenu.style.transform = 'translateY(10px)';
-            dropdownMenu.style.maxHeight = '0';
-            setTimeout(() => {
-                dropdownMenu.classList.add('hidden');
-            }, 400); // Temps de l'animation
-        } else {
-            // Si le menu est caché, on le montre avec une animation
-            dropdownMenu.classList.remove('hidden');
-            setTimeout(() => {
-                dropdownMenu.style.opacity = 1;
-                dropdownMenu.style.transform = 'translateY(0)';
-                dropdownMenu.style.maxHeight = '24rem'; // max-h-96
-            }, 10); // Déclenche l'animation immédiatement après que le menu soit visible
-        }
-
-        // Mettre à jour l'état de l'icon du bouton
-        const icon = dropdownToggle.querySelector('svg');
-        if (icon) {
-            icon.classList.toggle('rotate-180');
-        }
-    });
-}
-
 }
 
 /**
@@ -218,8 +241,6 @@ if (dropdownToggle && dropdownMenu) {
  */
 function updateDashboardWithUserData(userData) {
     console.log('Mise à jour du dashboard avec:', userData);
-    // Ici vous pouvez ajouter la logique pour mettre à jour
-    // les statistiques et autres données du dashboard
 }
 
 // Exécution au chargement
@@ -228,3 +249,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userData = await loadUserData();
     updateUIWithUserData(userData);
 });
+
