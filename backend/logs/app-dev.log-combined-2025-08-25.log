@@ -9691,3 +9691,251 @@
   "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
 }
 ✅ [2L-Ouest-Services] 25/08/2025 09:03:15 | INFO     | 127.0.0.1 - - [25/Aug/2025:08:03:15 +0000] "POST /api/auth/verify-token HTTP/1.1" 200 69 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0"
+✅ [2L-Ouest-Services] 25/08/2025 18:40:13 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 25/08/2025 18:40:13 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:40:14 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 25/08/2025 18:40:14 | INFO     | Démarrage du serveur...
+⚠️ [2L-Ouest-Services] 25/08/2025 18:40:14 | WARN     | Échec de la vérification réseau (tentative 1/3)
+{
+  "error": "queryA ESERVFAIL firestore.googleapis.com",
+  "stack": "Error: queryA ESERVFAIL firestore.googleapis.com\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:275:17)"
+}
+⚠️ [2L-Ouest-Services] 25/08/2025 18:40:19 | WARN     | Échec de la vérification réseau (tentative 2/3)
+{
+  "error": "queryA ESERVFAIL firestore.googleapis.com",
+  "stack": "Error: queryA ESERVFAIL firestore.googleapis.com\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:275:17)"
+}
+⚠️ [2L-Ouest-Services] 25/08/2025 18:40:24 | WARN     | Échec de la vérification réseau (tentative 3/3)
+{
+  "error": "queryA ESERVFAIL firestore.googleapis.com",
+  "stack": "Error: queryA ESERVFAIL firestore.googleapis.com\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:275:17)"
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:41:03 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 25/08/2025 18:41:03 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:41:03 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 25/08/2025 18:41:04 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 25/08/2025 18:41:04 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:41:04 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 25/08/2025 18:41:04 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:41:04 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Clé API Google Maps : OK
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Serveur démarré sur le port 3000
+{
+  "localUrl": "http://192.168.13.220:3000/api",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:41:05 | INFO     | SocketService initialisé
+⚠️ [2L-Ouest-Services] 25/08/2025 18:41:06 | WARN     | NGROK_AUTH_TOKEN non défini, utilisant l'URL locale
+✅ [2L-Ouest-Services] 25/08/2025 18:41:06 | INFO     | URL API mise à jour dans Firestore : http://192.168.13.220:3000
+{
+  "status": "local"
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:42:46 | INFO     | Requête CORS traitée
+{
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 25/08/2025 18:42:46 | INFO     | 192.168.13.220 - - [25/Aug/2025:17:42:46 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0"
+✅ [2L-Ouest-Services] 25/08/2025 19:17:23 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 25/08/2025 19:17:24 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:17:24 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 25/08/2025 19:17:24 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 25/08/2025 19:17:24 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:17:24 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 25/08/2025 19:17:24 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:17:24 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Clé API Google Maps : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Serveur démarré sur le port 3000
+{
+  "localUrl": "http://192.168.13.220:3000/api",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:17:25 | INFO     | SocketService initialisé
+⚠️ [2L-Ouest-Services] 25/08/2025 19:17:25 | WARN     | NGROK_AUTH_TOKEN non défini, utilisant l'URL locale
+✅ [2L-Ouest-Services] 25/08/2025 19:17:26 | INFO     | URL API mise à jour dans Firestore : http://192.168.13.220:3000
+{
+  "status": "local"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:20:54 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 25/08/2025 19:20:54 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:20:54 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 25/08/2025 19:20:54 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 25/08/2025 19:20:55 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:20:55 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 25/08/2025 19:20:55 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:20:55 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:20:55 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 25/08/2025 19:20:55 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | Clé API Google Maps : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | Serveur démarré sur le port 3000
+{
+  "localUrl": "http://192.168.13.220:3000/api",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:20:56 | INFO     | SocketService initialisé
+⚠️ [2L-Ouest-Services] 25/08/2025 19:20:56 | WARN     | NGROK_AUTH_TOKEN non défini, utilisant l'URL locale
+✅ [2L-Ouest-Services] 25/08/2025 19:20:57 | INFO     | URL API mise à jour dans Firestore : http://192.168.13.220:3000
+{
+  "status": "local"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:23:26 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 25/08/2025 19:23:26 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:23:27 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 25/08/2025 19:23:27 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 25/08/2025 19:23:27 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:23:27 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 25/08/2025 19:23:27 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:23:27 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Clé API Google Maps : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Serveur démarré sur le port 3000
+{
+  "localUrl": "http://192.168.13.220:3000/api",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 25/08/2025 19:23:28 | INFO     | SocketService initialisé
+⚠️ [2L-Ouest-Services] 25/08/2025 19:23:29 | WARN     | NGROK_AUTH_TOKEN non défini, utilisant l'URL locale
+✅ [2L-Ouest-Services] 25/08/2025 19:23:29 | INFO     | URL API mise à jour dans Firestore : http://192.168.13.220:3000
+{
+  "status": "local"
+}

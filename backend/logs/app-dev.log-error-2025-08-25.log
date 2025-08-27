@@ -1128,3 +1128,7 @@
 {
   "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
 }
+🚨 [2L-Ouest-Services] 25/08/2025 18:40:24 | ERROR    | Impossible de se connecter au réseau pour Firestore
+{
+  "error": "queryA ESERVFAIL firestore.googleapis.com"
+}

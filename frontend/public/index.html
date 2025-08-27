@@ -1,30 +1,136 @@
-<!DOCTYPE html>\n<html lang="fr">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Accueil - L&L Ouest Services</title>\n  <link rel="stylesheet" href="/css/tailwind.css">\n  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">\n  <script src="/js/main.js" defer></script>\n</head>\n<body>\n  \n</body>\n</html>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - L&L Ouest Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="/js/main.js" defer></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
 
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js"></script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBqYkFbXTlCoO7N0t0eWzrzeJklA29nwRc",
+        authDomain: "ll-ouest-services.firebaseapp.com",
+        projectId: "ll-ouest-services",
+        storageBucket: "ll-ouest-services.firebasestorage.app",
+        messagingSenderId: "1075873956073",
+        appId: "1:1075873956073:web:e1d4e98a2a578d9782b078",
+        measurementId: "G-6HFZ04SGEZ"
+      };
 
+      
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'],
+          },
+          colors: {
+            brand: {
+              50:  '#f0fdf4', // Vert très clair (presque blanc)
+              100: '#dcfce7', // Vert pastel
+              200: '#bbf7d0', // Vert clair
+              300: '#86efac', // Vert lumineux
+              400: '#4ade80', // Vert vif
+              500: '#22c55e', // Vert standard (couleur principale)
+              600: '#16a34a', // Vert plus foncé
+              700: '#15803d', // Vert intense
+              800: '#166534', // Vert très sombre
+              900: '#14532d'  // Vert profond
+            }
+          },
+          boxShadow: {
+            glow: '0 10px 30px -10px rgba(34,211,238,.4)'
+          }
+        }
+      }
+    }
+    </script>
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  </head>
+  <body class="bg-slate-50 text-slate-800 font-display selection:bg-brand-200 selection:text-slate-900">
+  
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/60">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-2 group" aria-label="InspireX Ana Sayfa">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-sky-500 text-white shadow-glow">L&L</span>
+          <span class="text-lg font-semibold tracking-tight group-hover:text-sky-700 transition">2L_Ouest_Services</span>
+        </a>
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBqYkFbXTlCoO7N0t0eWzrzeJklA29nwRc",
-    authDomain: "ll-ouest-services.firebaseapp.com",
-    projectId: "ll-ouest-services",
-    storageBucket: "ll-ouest-services.firebasestorage.app",
-    messagingSenderId: "1075873956073",
-    appId: "1:1075873956073:web:e1d4e98a2a578d9782b078",
-    measurementId: "G-6HFZ04SGEZ"
-  };
+        
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#about" class="hover:text-sky-700">A Propos</a>
+          <a href="#admin" class="hover:text-sky-700">Presentation</a>
+          <a href="#dashboard" class="hover:text-sky-700">Inscription</a>
+          <a href="#realization" class="hover:text-sky-700">Realisation</a>
+          <a href="#services" class="hover:text-sky-700">Services</a>
+          <a href="#contact" class="hover:text-sky-700">Contact</a>
+        </nav>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white" role="dialog" aria-label="Mobil menu">
+      <div class="max-w-6xl mx-auto px-4 py-4 grid gap-2 text-base">
+        <a class="py-2" href="#about">A Propos</a>
+        <a class="py-2" href="#admin">Presentation</a>
+        <a class="py-2" href="#dashboard">Inscription</a>
+        <a class="py-2" href="#realization">Realisation</a>
+        <a class="py-2" href="#services">Services</a>
+        <a class="py-2" href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-sky-50 via-white to-white"></div>
+    <div class="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
+      <div data-animate>
+        <h1 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+          L&L  <span class="bg-gradient-to-r from-sky-600 to-brand-600 bg-clip-text text-transparent">Ouest </span> Services
+        </h1>
+        <p class="mt-4 text-slate-600 max-w-prose">Offrez à vos collaborateurs un environnement de travail propre, sain et agréable. Nous assurons l’entretien régulier de vos bureaux et espaces professionnels 
+            avec sérieux et discrétion, pour que vous puissiez vous concentrer sur l’essentiel : votre activité.</p>
+        <div class="mt-8 grid grid-cols-3 gap-6 text-center">
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm" aria-label="Fast loading">
+            <p class="text-3xl font-bold">100%</p>
+            <p class="text-xs text-slate-500">Satisfaction du client</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm" aria-label="Responsive Design">
+            <p class="text-3xl font-bold">100%</p>
+            <p class="text-xs text-slate-500">Produit respecteux de l'environnement</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm" aria-label="Accessibility">
+            <p class="text-3xl font-bold">Proprete</p>
+            <p class="text-xs text-slate-500">Des bureaux sains et accueillants</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative" data-animate>
+        <div class="relative edge-light rounded-2xl bg-white p-3 shadow-xl">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlbF1XthKs4YUH6AQtrGlwGKA4eXUlvTte50vKDC-lFAUjiihRIcnz_AYZGIvwWo4JOhM&usqp=CAU" alt="Modern arayüz önizleme" class="rounded-xl w-full aspect-[4/3] object-cover" />
+          <div class="absolute -bottom-4 -right-4 w-28 h-28 rounded-2xl bg-gradient-to-tr from-brand-300 to-sky-400 opacity-60 blur-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
