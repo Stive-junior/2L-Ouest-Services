@@ -480,6 +480,75 @@ export async function checkAndRedirect(shouldBeAuthenticated, redirectAuthentica
   return true;
 }
 
+export function openLightbox(images, initialIndex = 0, caption = '') {
+
+    let lightbox = document.querySelector('.lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.className = 'lightbox fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-100 p-4 transition-opacity duration-300';
+        lightbox.setAttribute('aria-modal', 'true');
+        lightbox.setAttribute('role', 'dialog');
+        lightbox.setAttribute('tabindex', '-1');
+        document.body.appendChild(lightbox);
+    }
+
+    lightbox.innerHTML = `
+        <div class="lightbox-content relative max-w-90vw max-h-90vh" x-data="{
+            currentIndex: ${initialIndex},
+            images: ${JSON.stringify(images)},
+            caption: '${caption}',
+            nextImage() { this.currentIndex = (this.currentIndex + 1) % this.images.length; },
+            prevImage() { this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length; },
+            closeLightbox() { this.$el.parentElement.classList.add('opacity-0'); setTimeout(() => this.$el.parentElement.remove(), 300); }
+        }" x-on:keydown.escape.window="closeLightbox">
+            <button class="lightbox-close absolute top-[-2.5rem] right-0 text-white text-2xl cursor-pointer hover:text-ll-blue transition-colors duration-200" aria-label="Fermer la lightbox" x-on:click="closeLightbox">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="relative w-full h-full flex items-center justify-center">
+                <button class="absolute left-4 text-white text-3xl cursor-pointer hover:text-ll-blue transition-colors duration-200" aria-label="Image précédente" x-on:click="prevImage" x-show="images.length > 1">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <img :src="images[currentIndex]" alt="Image du service" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-lg transition-transform duration-300" x-bind:class="{ 'scale-100': true }" loading="lazy">
+                <button class="absolute right-4 text-white text-3xl cursor-pointer hover:text-ll-blue transition-colors duration-200" aria-label="Image suivante" x-on:click="nextImage" x-show="images.length > 1">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="lightbox-caption absolute bottom-[-2.5rem] left-0 right-0 text-center text-white text-lg font-roboto" x-text="caption"></div>
+        </div>
+    `;
+
+    lightbox.classList.remove('opacity-0');
+    lightbox.classList.add('opacity-100');
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => lightbox.remove(), 300);
+        }
+    });
+
+    lightbox.focus();
+
+    if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+    }
+
+    const imgElement = lightbox.querySelector('img');
+    imgElement.onerror = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Erreur de chargement',
+            text: 'Impossible de charger l\'image. Veuillez réessayer.',
+            confirmButtonColor: '#2563EB',
+            background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+            color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#1f2937',
+        });
+        lightbox.classList.add('opacity-0');
+        setTimeout(() => lightbox.remove(), 300);
+    };
+}
+
+
 export default {
   apiFetch,
   showNotification,
@@ -496,4 +565,5 @@ export default {
   getAuthErrorMessage,
   checkPasswordStrength,
   validateField,
+  openLightbox,
 };

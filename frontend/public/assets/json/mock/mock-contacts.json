@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Service Client",
+    "email": "contact@llouests.com",
+    "phone": "+33 1 23 45 67 89"
+  },
+  {
+    "name": "Support Technique",
+    "email": "support@llouests.com",
+    "phone": "+33 1 98 76 54 32"
+  },
+  {
+    "name": "Département Commercial",
+    "email": "sales@llouests.com",
+    "phone": "+33 1 56 78 90 12"
+  },
+  {
+    "name": "Ressources Humaines",
+    "email": "hr@llouests.com",
+    "phone": "+33 1 34 56 78 90"
+  }
+]

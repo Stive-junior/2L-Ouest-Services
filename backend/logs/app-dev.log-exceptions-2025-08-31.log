@@ -1,9 +1,9 @@
-[1;31m🚨 [2L-Ouest-Services] 25/08/2025 04:24:05 🚨| ⠼ ERROR    | uncaughtException: Identifier 'logger' has already been declared
-/home/stive-junior/2L-Ouest-Services/backend/middleware/authMiddleware.js:18
-const { logger, logError, logInfo } = require('../services/loggerService');
-        ^
+[1;31m🚨 [2L-Ouest-Services] 31/08/2025 18:49:31 🚨| ⠦ ERROR    | uncaughtException: Unexpected end of input
+/home/stive-junior/2L-Ouest-Services/backend/routes/userRoutes.js:35
+https://assets10.lottiefiles.com/packages/lf20_v33gmcrb.json
+                                                            
 
-SyntaxError: Identifier 'logger' has already been declared
+SyntaxError: Unexpected end of input
     at wrapSafe (node:internal/modules/cjs/loader:1669:18)
     at Module._compile (node:internal/modules/cjs/loader:1712:20)
     at Object..js (node:internal/modules/cjs/loader:1871:10)
@@ -13,15 +13,15 @@ SyntaxError: Identifier 'logger' has already been declared
     at wrapModuleLoad (node:internal/modules/cjs/loader:238:24)
     at Module.require (node:internal/modules/cjs/loader:1493:12)
     at require (node:internal/modules/helpers:152:16)
-    at Object.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/middleware/index.js:7:24)[0m
+    at Object.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/routes/index.js:15:20)[0m
 [3m╭────────────────── Métadonnées ──────────────────╮[0m
 [3m│ {[0m
 [3m│ [1;34m  "error": [0m[3m{},[0m
-[3m│ [1;34m  "stack": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend/middleware/authMiddleware.js:18\nconst { logger, logError, logInfo } = require('../services/loggerService');\n        ^\n\nSyntaxError: Identifier 'logger' has already been declared\n    at wrapSafe (node:internal/modules/cjs/loader:1669:18)\n    at Module._compile (node:internal/modules/cjs/loader:1712:20)\n    at Object..js (node:internal/modules/cjs/loader:1871:10)\n    at Module.load (node:internal/modules/cjs/loader:1470:32)\n    at Module._load (node:internal/modules/cjs/loader:1290:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:238:24)\n    at Module.require (node:internal/modules/cjs/loader:1493:12)\n    at require (node:internal/modules/helpers:152:16)\n    at Object.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/middleware/index.js:7:24)",[0m
+[3m│ [1;34m  "stack": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend/routes/userRoutes.js:35\nhttps://assets10.lottiefiles.com/packages/lf20_v33gmcrb.json\n                                                            \n\nSyntaxError: Unexpected end of input\n    at wrapSafe (node:internal/modules/cjs/loader:1669:18)\n    at Module._compile (node:internal/modules/cjs/loader:1712:20)\n    at Object..js (node:internal/modules/cjs/loader:1871:10)\n    at Module.load (node:internal/modules/cjs/loader:1470:32)\n    at Module._load (node:internal/modules/cjs/loader:1290:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:238:24)\n    at Module.require (node:internal/modules/cjs/loader:1493:12)\n    at require (node:internal/modules/helpers:152:16)\n    at Object.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/routes/index.js:15:20)",[0m
 [3m│ [1;34m  "exception": [0m[3mtrue,[0m
-[3m│ [1;34m  "date": [0m[3m"Mon Aug 25 2025 04:24:05 GMT+0100 (heure normale d’Afrique de l’Ouest)",[0m
+[3m│ [1;34m  "date": [0m[3m"Sun Aug 31 2025 18:49:31 GMT+0100 (heure normale d’Afrique de l’Ouest)",[0m
 [3m│ [1;34m  "process": [0m[3m{[0m
-[3m│ [1;34m    "pid": [0m[3m69705,[0m
+[3m│ [1;34m    "pid": [0m[3m12912,[0m
 [3m│ [1;34m    "uid": [0m[3m1000,[0m
 [3m│ [1;34m    "gid": [0m[3m1000,[0m
 [3m│ [1;34m    "cwd": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend",[0m
@@ -32,20 +32,20 @@ SyntaxError: Identifier 'logger' has already been declared
 [3m│       "/home/stive-junior/2L-Ouest-Services/backend/app.js"[0m
 [3m│     ],[0m
 [3m│ [1;34m    "memoryUsage": [0m[3m{[0m
-[3m│ [1;34m      "rss": [0m[3m114466816,[0m
-[3m│ [1;34m      "heapTotal": [0m[3m56913920,[0m
-[3m│ [1;34m      "heapUsed": [0m[3m34769048,[0m
-[3m│ [1;34m      "external": [0m[3m2570995,[0m
-[3m│ [1;34m      "arrayBuffers": [0m[3m21573[0m
+[3m│ [1;34m      "rss": [0m[3m145620992,[0m
+[3m│ [1;34m      "heapTotal": [0m[3m105562112,[0m
+[3m│ [1;34m      "heapUsed": [0m[3m52707136,[0m
+[3m│ [1;34m      "external": [0m[3m3497169,[0m
+[3m│ [1;34m      "arrayBuffers": [0m[3m21253[0m
 [3m│     }[0m
 [3m│   },[0m
 [3m│ [1;34m  "os": [0m[3m{[0m
 [3m│ [1;34m    "loadavg": [0m[3m[[0m
-[3m│       3.28,[0m
-[3m│       2.73,[0m
-[3m│       2.22[0m
+[3m│       4.66,[0m
+[3m│       5.43,[0m
+[3m│       6.29[0m
 [3m│     ],[0m
-[3m│ [1;34m    "uptime": [0m[3m81918.67[0m
+[3m│ [1;34m    "uptime": [0m[3m4193.41[0m
 [3m│   },[0m
 [3m│ [1;34m  "trace": [0m[3m[[0m
 [3m│     {[0m
@@ -121,10 +121,10 @@ SyntaxError: Identifier 'logger' has already been declared
 [3m│ [1;34m      "native": [0m[3mfalse[0m
 [3m│     },[0m
 [3m│     {[0m
-[3m│ [1;34m      "column": [0m[3m24,[0m
-[3m│ [1;34m      "file": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend/middleware/index.js",[0m
+[3m│ [1;34m      "column": [0m[3m20,[0m
+[3m│ [1;34m      "file": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend/routes/index.js",[0m
 [3m│ [1;34m      "function": [0m[3mnull,[0m
-[3m│ [1;34m      "line": [0m[3m7,[0m
+[3m│ [1;34m      "line": [0m[3m15,[0m
 [3m│ [1;34m      "method": [0m[3mnull,[0m
 [3m│ [1;34m      "native": [0m[3mfalse[0m
 [3m│     }[0m

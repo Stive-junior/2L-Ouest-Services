@@ -1,0 +1,9 @@
+📋 [2L-Ouest-Services] 29/08/2025 13:16:02 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "3ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}

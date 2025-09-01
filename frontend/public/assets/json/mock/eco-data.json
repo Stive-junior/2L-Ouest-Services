@@ -1,0 +1,22 @@
+{
+  "ecoCommitments": [
+    {
+      "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-16 h-16 text-green-600 dark:text-green-500 mb-4 block mx-auto' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4a1 1 0 011 1v1H9V4a1 1 0 011-1zm-5 4h14'></path></svg>",
+      "title": "Produits Biodégradables",
+      "description": "Utilisation de solutions de nettoyage écologiques sans produits chimiques agressifs.",
+      "lottieUrl": "/assets/json/animation.json"
+    },
+    {
+      "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-16 h-16 text-blue-500 dark:text-blue-400 mb-4 block mx-auto' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 16a4 4 0 01-.88-7.903A5 5 0 0115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'></path></svg>",
+      "title": "Gestion de l'Eau",
+      "description": "Techniques optimisées pour réduire la consommation d'eau lors des interventions.",
+      "lottieUrl": "/assets/json/animation.json"
+    },
+    {
+      "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-16 h-16 text-emerald-500 dark:text-emerald-400 mb-4 block mx-auto' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'></path></svg>",
+      "title": "Formation Écologique",
+      "description": "Équipe formée aux pratiques durables pour un impact environnemental minimal.",
+      "lottieUrl": "/assets/json/animation.json"
+    }
+  ]
+}

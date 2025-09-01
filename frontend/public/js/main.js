@@ -119,6 +119,7 @@ async function initializePage(page, isAuthenticated) {
 
 // Exécution principale asynchrone
 (async () => {
+  AOS.init();
   console.log('Script principal chargé');
   const page = getCurrentPage();
 
@@ -171,7 +172,7 @@ async function initializePage(page, isAuthenticated) {
           clearStoredToken();
           isAuthenticated = false;
           showNotification('Session expirée. Veuillez vous reconnecter.', 'error');
-          window.location.href = '/signin.html'; // Redirection vers la page de connexion
+          window.location.href = '/pages/auth/signin.html';
         }
       }
     } else {

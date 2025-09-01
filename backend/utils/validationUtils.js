@@ -15,6 +15,17 @@ const { AppError } = require('./errorUtils');
  */
 
 /**
+ * Schéma de validation pour les images d'un service.
+ * @type {Joi.ObjectSchema}
+ */
+const imageSchema = Joi.object({
+  url: Joi.string().uri().required().description('URL de l\'image'),
+  type: Joi.string().valid('before', 'after', 'showcase', 'equipment').required().description('Type d\'image (avant, après, vitrine, équipement)'),
+  description: Joi.string().max(255).optional().description('Description de l\'image'),
+  createdAt: Joi.string().isoDate().default(() => new Date().toISOString()).description('Date de création de l\'image'),
+}).label('ImageSchema');
+
+/**
  * Schéma de validation pour les utilisateurs dans Firestore.
  * @type {Joi.ObjectSchema}
  */
@@ -56,15 +67,18 @@ const userSchema = Joi.object({
   emailVerified: Joi.boolean().default(false).description('Statut de vérification de l\'email'),
 }).label('UserSchema');
 
+
 /**
  * Schéma de validation pour les services.
  * @type {Joi.ObjectSchema}
  */
 const serviceSchema = Joi.object({
-  id: Joi.string().required().description('Identifiant unique du service'),
-  name: Joi.string().min(3).max(100).required().description('Nom du service'),
-  description: Joi.string().min(10).max(1000).required().description('Description du service'),
-  price: Joi.number().positive().required().description('Prix du service'),
+  id: Joi.string().uuid().required().description('Identifiant unique du service'),
+  name: Joi.string().min(3).max(100).required().description('Nom du service (ex: Nettoyage de bureaux)'),
+  description: Joi.string().min(10).max(1000).required().description('Description détaillée du service'),
+  price: Joi.number().positive().required().description('Prix de base du service (€)'),
+  area: Joi.number().positive().optional().description('Superficie en m² pour le service'),
+  duration: Joi.number().positive().optional().description('Durée estimée en heures'),
   category: Joi.string().valid(
     'bureaux',
     'piscine',
@@ -74,20 +88,30 @@ const serviceSchema = Joi.object({
     'sas d\'entrée',
     'réfectoire',
     'sanitaires',
-    'escaliers'
+    'escaliers',
+    'vitrines'
   ).required().description('Catégorie du service'),
-  images: Joi.array().items(Joi.string().uri()).max(10).optional().description('URLs des images associées'),
+  images: Joi.array().items(imageSchema).max(20).optional().description('Images associées au service'),
   availability: Joi.object({
     isAvailable: Joi.boolean().default(true).description('Disponibilité du service'),
     schedule: Joi.array().items(
       Joi.object({
-        day: Joi.string().valid('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday').required(),
+        day: Joi.string().valid('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche').required(),
         hours: Joi.array().items(Joi.string().pattern(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)).required(),
       })
     ).optional().description('Horaires de disponibilité'),
   }).optional().description('Informations de disponibilité'),
+  location: Joi.object({
+    address: Joi.string().max(255).optional().description('Adresse du service'),
+    coordinates: Joi.object({
+      lat: Joi.number().min(-90).max(90).optional().description('Latitude'),
+      lng: Joi.number().min(-180).max(180).optional().description('Longitude'),
+    }).optional().description('Coordonnées géographiques'),
+  }).optional().description('Localisation du service'),
   createdAt: Joi.string().isoDate().default(() => new Date().toISOString()).description('Date de création'),
+  updatedAt: Joi.string().isoDate().optional().description('Date de dernière mise à jour'),
 }).label('ServiceSchema');
+
 
 /**
  * Schéma de validation pour les avis.

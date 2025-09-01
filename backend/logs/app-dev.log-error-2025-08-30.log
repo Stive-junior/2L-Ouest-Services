@@ -1,0 +1,4 @@
+🚨 [2L-Ouest-Services] 30/08/2025 09:14:33 | ERROR    | Impossible de se connecter au réseau pour Firestore
+{
+  "error": "queryA EREFUSED firestore.googleapis.com"
+}

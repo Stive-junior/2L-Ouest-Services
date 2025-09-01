@@ -1,0 +1,85 @@
+✅ [2L-Ouest-Services] 30/08/2025 01:52:21 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 30/08/2025 01:52:21 | INFO     | Serveur WebSocket fermé
+✅ [2L-Ouest-Services] 30/08/2025 01:52:21 | INFO     | Application Firebase arrêtée proprement
+✅ [2L-Ouest-Services] 30/08/2025 01:52:23 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:35473
+{
+  "status": "stopped"
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:14:22 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 30/08/2025 09:14:22 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:14:22 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 30/08/2025 09:14:23 | INFO     | Démarrage du serveur...
+⚠️ [2L-Ouest-Services] 30/08/2025 09:14:23 | WARN     | Échec de la vérification réseau (tentative 1/3)
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "stack": "Error: queryA EREFUSED firestore.googleapis.com\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)"
+}
+⚠️ [2L-Ouest-Services] 30/08/2025 09:14:28 | WARN     | Échec de la vérification réseau (tentative 2/3)
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "stack": "Error: queryA EREFUSED firestore.googleapis.com\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)"
+}
+⚠️ [2L-Ouest-Services] 30/08/2025 09:14:33 | WARN     | Échec de la vérification réseau (tentative 3/3)
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "stack": "Error: queryA EREFUSED firestore.googleapis.com\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)"
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:22:56 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 30/08/2025 09:22:56 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:22:56 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 30/08/2025 09:22:57 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 30/08/2025 09:22:57 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:22:57 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 30/08/2025 09:22:57 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:22:57 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 30/08/2025 09:23:11 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 30/08/2025 09:23:11 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 30/08/2025 09:23:11 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 30/08/2025 09:23:12 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:23:13 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:23:13 | INFO     | Clé API Google Maps : OK
+✅ [2L-Ouest-Services] 30/08/2025 09:23:13 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 30/08/2025 09:23:13 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 30/08/2025 09:23:13 | INFO     | Serveur démarré sur le port 35473
+{
+  "localUrl": "http://192.168.103.70:35473/api",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:23:13 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 30/08/2025 09:23:13 | INFO     | SocketService initialisé
+⚠️ [2L-Ouest-Services] 30/08/2025 09:23:14 | WARN     | NGROK_AUTH_TOKEN non défini, utilisant l'URL locale
+✅ [2L-Ouest-Services] 30/08/2025 09:23:14 | INFO     | URL API mise à jour dans Firestore : http://192.168.103.70:35473
+{
+  "status": "local"
+}

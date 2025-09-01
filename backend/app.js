@@ -285,7 +285,7 @@ app.get('/api/ngrok-url', (req, res) => {
 const apiPrefix = '/api';
 app.use(`${apiPrefix}/auth`, authRoutes);
 app.use(`${apiPrefix}/user`, userRoutes);
-app.use(`${apiPrefix}/service`, serviceRoutes);
+app.use(`${apiPrefix}/services`, serviceRoutes);
 app.use(`${apiPrefix}/review`, reviewRoutes);
 app.use(`${apiPrefix}/chat`, chatRoutes);
 app.use(`${apiPrefix}/contact`, contactRoutes);

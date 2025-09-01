@@ -1,0 +1,23 @@
+[
+  {
+    "id": "e1",
+    "title": "Salon du Nettoyage Écologique",
+    "date": "2025-09-10",
+    "location": "Nantes",
+    "description": "Découvrez nos innovations."
+  },
+  {
+    "id": "e2",
+    "title": "Atelier Propreté",
+    "date": "2025-10-05",
+    "location": "Rennes",
+    "description": "Formation sur les techniques modernes."
+  },
+  {
+    "id": "e3",
+    "title": "Conférence Durabilité",
+    "date": "2025-11-20",
+    "location": "Brest",
+    "description": "Engagement pour un avenir vert."
+  }
+]

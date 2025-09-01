@@ -1,0 +1,378 @@
+[
+  
+    {
+      "name": "John Doe",
+      "role": "Directeur Général",
+      "roleCategory": "management",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "bio": "Fondateur de L&L Ouest Services, John dirige l’entreprise avec une vision axée sur l’écologie et l’excellence. Avec plus de 15 ans d’expérience, il a transformé le secteur du nettoyage en intégrant des pratiques durables.",
+      "skills": [
+        { "name": "Leadership", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 7h-10'></path><path d='M14 17H4'></path><circle cx='17' cy='17' r='3'></circle><circle cx='7' cy='7' r='3'></circle></svg>", "level": 95 },
+        { "name": "Stratégie", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 8V4'></path><path d='M10 12h4'></path></svg>", "level": 90 },
+        { "name": "Écologie", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", "level": 92 }
+      ],
+      "certifications": ["MBA en Gestion d’Entreprise", "Certification Éco-Entrepreneur", "Leadership Durable"],
+      "performance": {
+        "Leadership": 95,
+        "Satisfaction Client": 90,
+        "Innovation": 85,
+        "Gestion Budgétaire": 88
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "email": "john.doe@llouestservices.fr",
+        "phone": "+33 6 12 34 56 78"
+      },
+      "yearsExperience": 15,
+      "availability": "Sur rendez-vous",
+      "education": ["Master en Administration des Affaires, HEC Paris"],
+      "languages": ["Français", "Anglais", "Espagnol"],
+      "projectsCompleted": 120
+    },
+    {
+      "name": "Jane Smith",
+      "role": "Directrice des Opérations",
+      "roleCategory": "management",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "bio": "Jane excelle dans la coordination des équipes pour garantir des opérations fluides et efficaces. Diplômée en management opérationnel, elle optimise nos processus pour une qualité de service exceptionnelle.",
+      "skills": [
+        { "name": "Gestion de Projet", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line><line x1='3' y1='10' x2='21' y2='10'></line></svg>", "level": 92 },
+        { "name": "Planification", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'></path><polyline points='14 2 14 8 20 8'></polyline></svg>", "level": 94 },
+        { "name": "Communication", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>", "level": 90 }
+      ],
+      "certifications": ["PMP Certification", "Lean Six Sigma Green Belt", "Management Agile"],
+      "performance": {
+        "Efficacité Opérationnelle": 92,
+        "Satisfaction Équipe": 88,
+        "Respect des Délais": 90,
+        "Optimisation Processus": 91
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/janesmith",
+        "email": "jane.smith@llouestservices.fr",
+        "phone": "+33 6 23 45 67 89"
+      },
+      "yearsExperience": 12,
+      "availability": "Disponible en semaine",
+      "education": ["Licence en Management Opérationnel, ESSEC"],
+      "languages": ["Français", "Anglais"],
+      "projectsCompleted": 85
+    },
+    {
+      "name": "Luc Martin",
+      "role": "Responsable Technique",
+      "roleCategory": "technical",
+      "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      "bio": "Luc est un expert des équipements de nettoyage de pointe, garantissant des résultats impeccables. Ingénieur de formation, il supervise l’ensemble de nos équipements et processus techniques.",
+      "skills": [
+        { "name": "Maintenance Équipements", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'></path></svg>", "level": 96 },
+        { "name": "Technologie Verte", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", "level": 93 },
+        { "name": "Formation Technique", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20h9'></path><path d='M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z'></path></svg>", "level": 89 }
+      ],
+      "certifications": ["Ingénieur en Génie Chimique", "Certification Hygiène et Sécurité", "Expert en Nettoyage Industriel"],
+      "performance": {
+        "Maintenance": 90,
+        "Innovation Technique": 85,
+        "Fiabilité": 88,
+        "Sécurité Équipements": 92
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/lucmartin",
+        "email": "luc.martin@llouestservices.fr",
+        "phone": "+33 6 34 56 78 90"
+      },
+      "yearsExperience": 10,
+      "availability": "Disponible sur site",
+      "education": ["Diplôme d’Ingénieur, École Centrale Paris"],
+      "languages": ["Français", "Anglais", "Allemand"],
+      "projectsCompleted": 65
+    },
+    {
+      "name": "Clara Dubois",
+      "role": "Responsable Marketing",
+      "roleCategory": "management",
+      "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      "bio": "Clara conçoit des campagnes innovantes pour promouvoir nos services écologiques, renforçant la visibilité de L&L Ouest Services auprès des clients.",
+      "skills": [
+        { "name": "Marketing Digital", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='4' width='20' height='16' rx='2'></rect><path d='M10 10h4'></path><path d='M12 12v6'></path><path d='M10 18h4'></path></svg>", "level": 88 },
+        { "name": "Communication", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>", "level": 90 },
+        { "name": "Stratégie de Marque", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 8V4'></path><path d='M10 12h4'></path></svg>", "level": 87 }
+      ],
+      "certifications": ["Google Ads Certification", "Marketing Stratégique", "SEO Avancé"],
+      "performance": {
+        "Engagement Client": 88,
+        "Campagnes Réussies": 90,
+        "Créativité": 85,
+        "Visibilité Marque": 89
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/claradubois",
+        "email": "clara.dubois@llouestservices.fr",
+        "phone": "+33 6 45 67 89 01"
+      },
+      "yearsExperience": 8,
+      "availability": "Disponible en semaine",
+      "education": ["Master en Marketing, Sorbonne Université"],
+      "languages": ["Français", "Anglais", "Italien"],
+      "projectsCompleted": 50
+    },
+    {
+      "name": "Antoine Lefèvre",
+      "role": "Agent de Nettoyage",
+      "roleCategory": "cleaning",
+      "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      "bio": "Antoine excelle dans le nettoyage des espaces professionnels avec une attention méticuleuse aux détails, garantissant des environnements impeccables.",
+      "skills": [
+        { "name": "Nettoyage Général", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 5v3'></path><path d='M14 5v3'></path><path d='M10 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4'></path><path d='M8 17l2-2 2 2'></path></svg>", "level": 85 },
+        { "name": "Dépoussiérage", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6H4'></path><path d='M14 12H4'></path><path d='M16 18H4'></path></svg>", "level": 88 },
+        { "name": "Produits Écologiques", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", "level": 90 }
+      ],
+      "certifications": ["Formation Nettoyage Professionnel", "Certificat Produits Écologiques", "Hygiène et Sécurité"],
+      "performance": {
+        "Efficacité": 85,
+        "Satisfaction Client": 90,
+        "Précision": 88,
+        "Ponctualité": 87
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/antoinelefevre",
+        "email": "antoine.lefevre@llouestservices.fr",
+        "phone": "+33 6 56 78 90 12"
+      },
+      "yearsExperience": 5,
+      "availability": "Disponible tous les jours",
+      "education": ["CAP Propreté"],
+      "languages": ["Français"],
+      "projectsCompleted": 200
+    },
+    {
+      "name": "Émilie Bernard",
+      "role": "Spécialiste Nettoyage de Vitres",
+      "roleCategory": "cleaning",
+      "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      "bio": "Émilie est experte dans le nettoyage des vitres, assurant une clarté impeccable, même en hauteur, avec un focus sur la sécurité.",
+      "skills": [
+        { "name": "Nettoyage de Vitres", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='2' ry='2'></rect><line x1='3' y1='9' x2='21' y2='9'></line><line x1='3' y1='15' x2='21' y2='15'></line></svg>", "level": 92 },
+        { "name": "Travail en Hauteur", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8 3L12 7L16 3'></path><path d='M12 22V7'></path></svg>", "level": 90 },
+        { "name": "Sécurité", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'></path></svg>", "level": 95 }
+      ],
+      "certifications": ["CACES Nacelle", "Formation Sécurité Vitres", "Certificat Travail en Hauteur"],
+      "performance": {
+        "Précision": 92,
+        "Rapidité": 85,
+        "Satisfaction Client": 90,
+        "Sécurité": 95
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/emiliebernard",
+        "email": "emilie.bernard@llouestservices.fr",
+        "phone": "+33 6 67 89 01 23"
+      },
+      "yearsExperience": 7,
+      "availability": "Disponible sur rendez-vous",
+      "education": ["BEP Métiers de l’Hygiène"],
+      "languages": ["Français", "Anglais"],
+      "projectsCompleted": 150
+    },
+    {
+      "name": "Marc Dubois",
+      "role": "Spécialiste Dépoussiérage",
+      "roleCategory": "cleaning",
+      "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "bio": "Marc maîtrise l’art du dépoussiérage pour des environnements sains et propres, utilisant des techniques écologiques avancées.",
+      "skills": [
+        { "name": "Dépoussiérage", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6H4'></path><path d='M14 12H4'></path><path d='M16 18H4'></path></svg>", "level": 90 },
+        { "name": "Produits Écologiques", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", "level": 88 },
+        { "name": "Précision", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'></circle><polyline points='12 6 12 12 16.5 12'></polyline></svg>", "level": 85 }
+      ],
+      "certifications": ["Formation Nettoyage Écologique", "Certificat Hygiène", "Techniques de Dépoussiérage Avancées"],
+      "performance": {
+        "Efficacité": 88,
+        "Satisfaction Client": 85,
+        "Précision": 90,
+        "Utilisation Éco-Produits": 87
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/marcDubois",
+        "email": "marc.dubois@llouestservices.fr",
+        "phone": "+33 6 78 90 12 34"
+      },
+      "yearsExperience": 6,
+      "availability": "Disponible tous les jours",
+      "education": ["CAP Propreté"],
+      "languages": ["Français"],
+      "projectsCompleted": 180
+    },
+    {
+      "name": "Julie Renaud",
+      "role": "Coordinatrice Événements",
+      "roleCategory": "management",
+      "image": "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "bio": "Julie organise des services de nettoyage pour des événements avec une précision remarquable, assurant des espaces parfaits pour chaque occasion.",
+      "skills": [
+        { "name": "Organisation d’Événements", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line><line x1='3' y1='10' x2='21' y2='10'></line></svg>", "level": 90 },
+        { "name": "Coordination", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'></path><circle cx='8.5' cy='7' r='4'></circle><polyline points='17 11 19 13 23 9'></polyline></svg>", "level": 88 },
+        { "name": "Logistique", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'></path><circle cx='12' cy='10' r='3'></circle></svg>", "level": 85 }
+      ],
+      "certifications": ["Événementiel Professionnel", "Gestion de Projet Événementiel", "Logistique Avancée"],
+      "performance": {
+        "Organisation": 90,
+        "Satisfaction Client": 85,
+        "Flexibilité": 88,
+        "Coordination Équipe": 87
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/julierenaud",
+        "email": "julie.renaud@llouestservices.fr",
+        "phone": "+33 6 89 01 23 45"
+      },
+      "yearsExperience": 9,
+      "availability": "Disponible sur rendez-vous",
+      "education": ["Licence en Gestion Événementielle, IUT Paris"],
+      "languages": ["Français", "Anglais"],
+      "projectsCompleted": 70
+    },
+    {
+      "name": "Thomas Leroy",
+      "role": "Formateur Nettoyage",
+      "roleCategory": "technical",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "bio": "Thomas forme les équipes aux techniques de nettoyage modernes et écologiques, renforçant leurs compétences pour des résultats optimaux.",
+      "skills": [
+        { "name": "Formation", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20h9'></path><path d='M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z'></path></svg>", "level": 90 },
+        { "name": "Techniques de Nettoyage", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 5v3'></path><path d='M14 5v3'></path><path d='M10 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4'></path><path d='M8 17l2-2 2 2'></path></svg>", "level": 88 },
+        { "name": "Écologie", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", "level": 85 }
+      ],
+      "certifications": ["Formateur Agréé", "Certificat Nettoyage Écologique", "Pédagogie Active"],
+      "performance": {
+        "Formation": 90,
+        "Engagement Équipe": 88,
+        "Innovation": 85,
+        "Pédagogie": 87
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/thomasleroy",
+        "email": "thomas.leroy@llouestservices.fr",
+        "phone": "+33 6 90 12 34 56"
+      },
+      "yearsExperience": 8,
+      "availability": "Disponible en semaine",
+      "education": ["Licence en Formation Professionnelle, CNAM"],
+      "languages": ["Français", "Anglais"],
+      "projectsCompleted": 60
+    },
+    {
+      "name": "Laura Petit",
+      "role": "Assistante Administrative",
+      "roleCategory": "management",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "bio": "Laura gère les plannings et réservations avec une organisation irréprochable, assurant une coordination fluide pour nos clients.",
+      "skills": [
+        { "name": "Organisation", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line><line x1='3' y1='10' x2='21' y2='10'></line></svg>", "level": 90 },
+        { "name": "Gestion Administrative", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'></path><polyline points='14 2 14 8 20 8'></polyline></svg>", "level": 88 },
+        { "name": "Service Client", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>", "level": 92 }
+      ],
+      "certifications": ["Formation Gestion Administrative", "Certificat Service Client", "Bureautique Avancée"],
+      "performance": {
+        "Organisation": 90,
+        "Satisfaction Client": 92,
+        "Efficacité": 88,
+        "Gestion des Plannings": 89
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/laurapetit",
+        "email": "laura.petit@llouestservices.fr",
+        "phone": "+33 6 01 23 45 67"
+      },
+      "yearsExperience": 6,
+      "availability": "Disponible en semaine",
+      "education": ["BTS Assistant de Gestion, Lycée Saint-Louis"],
+      "languages": ["Français", "Anglais"],
+      "projectsCompleted": 100
+    },
+    {
+      "name": "Sophie Lambert",
+      "role": "Superviseuse Nettoyage Écologique",
+      "roleCategory": "cleaning",
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "bio": "Sophie supervise les équipes de nettoyage écologique, assurant l’utilisation de produits respectueux de l’environnement pour des résultats durables.",
+      "skills": [
+        { "name": "Nettoyage Écologique", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", "level": 90 },
+        { "name": "Supervision", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'></path><circle cx='8.5' cy='7' r='4'></circle><polyline points='17 11 19 13 23 9'></polyline></svg>", "level": 88 },
+        { "name": "Contrôle Qualité", "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'></polyline></svg>", "level": 85 }
+      ],
+      "certifications": ["Certificat Nettoyage Écologique", "Formation Supervision", "Contrôle Qualité ISO"],
+      "performance": {
+        "Qualité du Travail": 90,
+        "Satisfaction Client": 88,
+        "Leadership": 85,
+        "Utilisation Éco-Produits": 87
+      },
+      "actionImages": [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      ],
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/sophielambert",
+        "email": "sophie.lambert@llouestservices.fr",
+        "phone": "+33 6 12 34 56 78"
+      },
+      "yearsExperience": 7,
+      "availability": "Disponible tous les jours",
+      "education": ["BEP Métiers de l’Hygiène"],
+      "languages": ["Français"],
+      "projectsCompleted": 140
+    }
+  
+]

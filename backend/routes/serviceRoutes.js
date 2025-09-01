@@ -1,6 +1,6 @@
 /**
  * @file serviceRoutes.js
- * @description Routes pour gérer les services dans L&L Ouest Services.
+ * @description Routes pour gérer les services de nettoyage dans L&L Ouest Services.
  * Applique les middlewares pour l’authentification, la validation et la limitation de taux.
  * Utilise les schémas Joi centralisés dans serviceValidation.js pour valider les requêtes.
  * @module routes/serviceRoutes
@@ -29,7 +29,7 @@ const {
   categorySchema,
   nearbySchema,
   locationSchema,
-  imageSchema,
+  addImageSchema,
   deleteImageSchema,
 } = require('../utils/validation/serviceValidation');
 
@@ -38,15 +38,15 @@ const {
  */
 router.use(authenticate);
 
-router.post('/', [restrictTo(['provider', 'admin']), validationMiddleware(createServiceSchema)], createService);
+router.post('/', [restrictTo(['admin']), validationMiddleware(createServiceSchema)], createService);
 router.get('/:id', [validationMiddleware(idSchema)], getServiceById);
-router.put('/:id', [restrictTo(['provider', 'admin']), validationMiddleware(updateServiceSchema)], updateService);
-router.delete('/:id', [restrictTo(['provider', 'admin']), validationMiddleware(idSchema)], deleteService);
+router.put('/:id', [restrictTo(['admin']), validationMiddleware(updateServiceSchema)], updateService);
+router.delete('/:id', [restrictTo(['admin']), validationMiddleware(idSchema)], deleteService);
 router.get('/', [validationMiddleware(paginationSchema)], getAllServices);
 router.get('/category/:category', [validationMiddleware(categorySchema)], getServicesByCategory);
 router.get('/nearby', [validationMiddleware(nearbySchema)], getNearbyServices);
-router.patch('/:id/location', [restrictTo(['provider', 'admin']), validationMiddleware(locationSchema)], updateServiceLocation);
-router.post('/:id/image', [restrictTo(['provider', 'admin']), validationMiddleware(imageSchema)], uploadServiceImage);
-router.delete('/:id/image', [restrictTo(['provider', 'admin']), validationMiddleware(deleteImageSchema)], deleteServiceImage);
+router.patch('/:id/location', [restrictTo(['admin']), validationMiddleware(locationSchema)], updateServiceLocation);
+router.post('/:id/image', [restrictTo(['admin']), validationMiddleware(addImageSchema)], uploadServiceImage);
+router.delete('/:id/image', [restrictTo(['admin']), validationMiddleware(deleteImageSchema)], deleteServiceImage);
 
 module.exports = router;

@@ -550,75 +550,129 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    /**
-     * Gère l'ouverture et la fermeture du modal d'édition
-     */
-    function openEditModal(field) {
-        const modal = document.getElementById('edit-modal');
-        const input = document.getElementById('modal-input');
-        const label = document.getElementById('modal-label');
-        const profileDetails = document.querySelector('[data-level="profile-details"]');
+        /**
+         * Ouvre le modal d'édition avec les valeurs appropriées selon le champ à modifier.
+         * @param {string} field - Le champ à éditer (name, email, address, preferences)
+         */
+        function openEditModal(field) {
+            const modal = document.getElementById('edit-modal');
+            const input = document.getElementById('modal-input');
+            const label = document.getElementById('modal-label');
+            const profileDetails = document.querySelector('[data-level="profile-details"]');
 
-        let labelText = '';
-        let currentValue = '';
+            if (!modal || !input || !label || !profileDetails) {
+                console.error("Certains éléments requis pour le modal sont introuvables.");
+                return;
+            }
 
-        switch (field) {
-            case 'name':
-                labelText = 'Nom';
-                currentValue = profileDetails.querySelector('h3').textContent;
-                break;
-            case 'email':
-                labelText = 'Email';
-                currentValue = profileDetails.querySelector('p.text-sm.text-white\\/90').textContent;
-                break;
-            case 'address':
-                labelText = 'Adresse';
-                currentValue = profileDetails.querySelector('div:nth-child(3) p.text-sm.text-white\\/90').textContent;
-                break;
-            case 'preferences':
-                labelText = 'Notifications';
-                currentValue = profileDetails.querySelector('#notifications-status').textContent;
-                input.type = 'checkbox';
-                input.checked = currentValue === 'Activées';
-                break;
+            // Réinitialiser l'input
+            input.type = 'text';
+            input.checked = false;
+            input.value = '';
+
+            let labelText = '';
+            let currentValue = '';
+
+            try {
+                switch (field) {
+                    case 'name':
+                        labelText = 'Nom';
+                        currentValue = profileDetails.querySelector('h3')?.textContent || '';
+                        break;
+                    case 'email':
+                        labelText = 'Email';
+                        currentValue = profileDetails.querySelector('p.text-sm.text-white\\/90')?.textContent || '';
+                        break;
+                    case 'address':
+                        labelText = 'Adresse';
+                        currentValue = profileDetails.querySelector('div:nth-child(3) p.text-sm.text-white\\/90')?.textContent || '';
+                        break;
+                    case 'preferences':
+                        labelText = 'Notifications';
+                        currentValue = profileDetails.querySelector('#notifications-status')?.textContent || '';
+                        input.type = 'checkbox';
+                        input.checked = currentValue.trim().toLowerCase() === 'activées';
+                        break;
+                    default:
+                        console.warn(`Champ inconnu : ${field}`);
+                        return;
+                }
+
+                label.textContent = labelText;
+
+                if (field !== 'preferences') {
+                    input.value = currentValue.trim();
+                }
+
+                // Ouvrir le modal
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.querySelector('div')?.classList.replace('scale-95', 'scale-100');
+                }, 10);
+            } catch (error) {
+                console.error("Erreur lors de l'ouverture du modal :", error);
+            }
         }
 
-        label.textContent = labelText;
-        if (field !== 'preferences') input.value = currentValue;
+        /**
+         * Ferme le modal d'édition proprement
+         */
+        function closeEditModal() {
+            const modal = document.getElementById('edit-modal');
+            const input = document.getElementById('modal-input');
 
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.querySelector('div').classList.remove('scale-95');
-            modal.querySelector('div').classList.add('scale-100');
-        }, 10);
-    }
+            if (!modal || !input) {
+                console.error("Impossible de fermer le modal, éléments manquants.");
+                return;
+            }
 
-    function closeEditModal() {
-        const modal = document.getElementById('edit-modal');
-        const input = document.getElementById('modal-input');
-        modal.querySelector('div').classList.remove('scale-100');
-        modal.querySelector('div').classList.add('scale-95');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            input.type = 'text'; // Reset input type
-        }, 300);
-    }
+            const modalContent = modal.querySelector('div');
+            if (modalContent) {
+                modalContent.classList.replace('scale-100', 'scale-95');
+            }
 
-    // Ajouter des écouteurs pour les boutons d'édition
-    document.querySelectorAll('[data-edit]').forEach(button => {
-        button.addEventListener('click', () => {
-            openEditModal(button.getAttribute('data-edit'));
-        });
-    });
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                input.type = 'text'; // Réinitialiser pour éviter des conflits futurs
+                input.checked = false;
+                input.value = '';
+            }, 300);
+        }
 
-    // Gérer l'annulation du modal
-    document.getElementById('modal-cancel').addEventListener('click', closeEditModal);
+        /**
+         * Initialise les événements sur les boutons d'édition et modal
+         */
+        function initEditModalHandlers() {
+            // Boutons pour ouvrir le modal
+            document.querySelectorAll('[data-edit]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const field = button.getAttribute('data-edit');
+                    if (field) {
+                        openEditModal(field);
+                    }
+                });
+            });
 
-    // Gérer l'enregistrement du modal
-    document.getElementById('modal-save').addEventListener('click', () => {
-        // Logique pour enregistrer les modifications (à implémenter avec l'API)
-        closeEditModal();
-    });
+            // Bouton pour annuler (fermer)
+            document.getElementById('modal-cancel')?.addEventListener('click', closeEditModal);
+
+            // Bouton pour enregistrer (tu peux ajouter ici la logique de sauvegarde)
+            document.getElementById('modal-save')?.addEventListener('click', () => {
+                // Exemple : tu peux récupérer la valeur ici pour l’envoyer à un serveur
+                const input = document.getElementById('modal-input');
+                const value = input.type === 'checkbox' ? input.checked : input.value.trim();
+                console.log("Valeur à sauvegarder :", value);
+
+                // TODO : ajouter logique de sauvegarde ici (ex. API, mise à jour DOM, etc.)
+
+                closeEditModal();
+            });
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', initEditModalHandlers);
+
+
 
 const showNotification = async (message, type = 'info', isToast = true, options = {}) => {
   const iconMap = {

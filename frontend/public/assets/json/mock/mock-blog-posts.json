@@ -1,0 +1,37 @@
+[
+  {
+    "id": "b1",
+    "title": "Comment choisir un service de nettoyage ?",
+    "content": "Conseils pour sélectionner le bon service.",
+    "date": "2025-08-01",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "b2",
+    "title": "Les avantages du nettoyage écologique",
+    "content": "Pourquoi opter pour des produits verts.",
+    "date": "2025-07-15",
+    "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "b3",
+    "title": "Entretien des bureaux : nos astuces",
+    "content": "Maintenir un espace de travail propre.",
+    "date": "2025-06-30",
+    "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "b4",
+    "title": "Nettoyage événementiel : ce qu’il faut savoir",
+    "content": "Préparer vos événements avec soin.",
+    "date": "2025-06-15",
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "b5",
+    "title": "L’importance de la propreté en milieu médical",
+    "content": "Normes strictes pour la santé.",
+    "date": "2025-05-20",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  }
+]

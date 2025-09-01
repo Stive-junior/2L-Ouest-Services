@@ -1,0 +1,102 @@
+[
+    {
+        "id": "service-1",
+        "name": "Nettoyage de Bureaux",
+        "description": "Nettoyage complet des bureaux, incluant les surfaces, sols, et mobiliers pour un environnement de travail sain.",
+        "price": 150,
+        "area": 100,
+        "duration": 2,
+        "category": "bureaux",
+        "ecoFriendly": true,
+        "images": [
+            { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "before", "description": "Bureau avant nettoyage" },
+            { "url": "https://images.unsplash.com/photo-1600585152915-d208bec867a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "after", "description": "Bureau après nettoyage" }
+        ],
+        "availability": { "isAvailable": true, "schedule": [{ "day": "lundi", "hours": ["09:00", "17:00"] }, { "day": "mercredi", "hours": ["09:00", "17:00"] }] },
+        "location": { "address": "123 Rue Exemple, Nantes", "coordinates": { "lat": 47.2184, "lng": -1.5536 } },
+        "createdAt": "2025-08-29T17:10:00Z",
+        "features": ["Produits écologiques", "Nettoyage en profondeur", "Service personnalisé"],
+        "rating": 4,
+        "reviews": 120
+    },
+    {
+        "id": "service-2",
+        "name": "Nettoyage de Vitrines",
+        "description": "Nettoyage des vitrines commerciales pour une présentation impeccable et attrayante.",
+        "price": 80,
+        "area": 50,
+        "duration": 1,
+        "category": "vitrines",
+        "ecoFriendly": true,
+        "images": [
+            { "url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "before", "description": "Vitrine avant nettoyage" },
+            { "url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "after", "description": "Vitrine après nettoyage" }
+        ],
+        "availability": { "isAvailable": true, "schedule": [{ "day": "mardi", "hours": ["10:00", "16:00"] }, { "day": "jeudi", "hours": ["10:00", "16:00"] }] },
+        "location": { "address": "456 Avenue Test, Rennes", "coordinates": { "lat": 48.1147, "lng": -1.6794 } },
+        "createdAt": "2025-08-29T17:10:00Z",
+        "features": ["Produits sans traces", "Service rapide", "Horaires flexibles"],
+        "rating": 4.5,
+        "reviews": 85
+    },
+    {
+        "id": "service-3",
+        "name": "Nettoyage de Piscine",
+        "description": "Entretien complet des piscines, incluant le nettoyage des parois, du fond et le traitement de l'eau.",
+        "price": 200,
+        "area": 150,
+        "duration": 3,
+        "category": "piscine",
+        "ecoFriendly": true,
+        "images": [
+            { "url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", "type": "before", "description": "Piscine avant nettoyage" },
+            { "url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", "type": "after", "description": "Piscine après nettoyage" }
+        ],
+        "availability": { "isAvailable": true, "schedule": [{ "day": "vendredi", "hours": ["08:00", "14:00"] }] },
+        "location": { "address": "789 Boulevard Plage, La Baule", "coordinates": { "lat": 47.2805, "lng": -2.3938 } },
+        "createdAt": "2025-08-29T17:10:00Z",
+        "features": ["Traitement écologique", "Nettoyage complet", "Maintenance régulière"],
+        "rating": 4.7,
+        "reviews": 95
+    },
+    {
+        "id": "service-4",
+        "name": "Nettoyage Régulier",
+        "description": "Service de nettoyage régulier pour maintenir vos espaces propres en continu.",
+        "price": 120,
+        "area": 80,
+        "duration": 1.5,
+        "category": "régulier",
+        "ecoFriendly": false,
+        "images": [
+            { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "before", "description": "Espace avant nettoyage régulier" },
+            { "url": "https://images.unsplash.com/photo-1600585152915-d208bec867a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "after", "description": "Espace après nettoyage régulier" }
+        ],
+        "availability": { "isAvailable": true, "schedule": [{ "day": "lundi", "hours": ["08:00", "16:00"] }, { "day": "jeudi", "hours": ["08:00", "16:00"] }] },
+        "location": { "address": "101 Rue Centrale, Angers", "coordinates": { "lat": 47.4738, "lng": -0.5516 } },
+        "createdAt": "2025-08-29T17:10:00Z",
+        "features": ["Service hebdomadaire", "Flexibilité horaire", "Personnel qualifié"],
+        "rating": 4.6,
+        "reviews": 110
+    },
+    {
+        "id": "service-5",
+        "name": "Nettoyage Ponctuel",
+        "description": "Nettoyage ponctuel pour des besoins spécifiques ou des événements spéciaux.",
+        "price": 100,
+        "area": 60,
+        "duration": 1,
+        "category": "ponctuel",
+        "ecoFriendly": true,
+        "images": [
+            { "url": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "before", "description": "Espace avant nettoyage ponctuel" },
+            { "url": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "after", "description": "Espace après nettoyage ponctuel" }
+        ],
+        "availability": { "isAvailable": true, "schedule": [{ "day": "samedi", "hours": ["09:00", "15:00"] }] },
+        "location": { "address": "202 Avenue Événement, Nantes", "coordinates": { "lat": 47.2184, "lng": -1.5536 } },
+        "createdAt": "2025-08-29T17:10:00Z",
+        "features": ["Intervention rapide", "Service sur mesure", "Produits écologiques"],
+        "rating": 4.4,
+        "reviews": 70
+    }
+]

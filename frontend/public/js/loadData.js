@@ -1,6 +1,6 @@
 /**
  * @file loadData.js
- * @description Charge les données utilisateur avant le rendu de la page
+ * @description Charge les données utilisateur avant le rendu de la page et met à jour le menu d'authentification selon l'état de connexion.
  */
 
 import { getStoredToken, showNotification, setStoredToken, clearStoredToken } from './modules/utils.js';
@@ -40,7 +40,6 @@ export async function loadUserData() {
 
         if (userData) {
             cacheUserData(userData);
-            console.log('Données utilisateur chargées et mises en cache:', userData);
             return userData;
         } else {
             throw new Error('Aucune donnée utilisateur reçue');
@@ -65,7 +64,7 @@ function handleInvalidToken() {
     clearStoredToken();
     clearUserCache();
     showNotification('Session expirée. Veuillez vous reconnecter.', 'error');
-    window.location.href = '/signin.html';
+    window.location.href = '/pages/auth/signin.html';
 }
 
 /**
@@ -139,10 +138,154 @@ function clearUserCache() {
 }
 
 /**
+ * Met à jour le menu d'authentification selon l'état de connexion
+ * @param {Object|null} userData - Données utilisateur ou null si non connecté
+ */
+
+  
+
+
+function updateAuthMenu(userData) {
+    const authContainer = document.querySelector('#auth.chat-toggle-button');
+    if (!authContainer) {
+        console.error('Authentication container not found');
+        return;
+    }
+
+    const isAuthenticated = !!userData;
+    let initials = '';
+    let displayName = '';
+
+    if (isAuthenticated) {
+        displayName = userData.name || userData.nom || 'Utilisateur';
+        const nameParts = displayName.trim().split(' ');
+        
+        if (nameParts.length >= 2) {
+            initials = nameParts[0][0] + nameParts[1][0];
+            initials = initials.toUpperCase();
+        } else {
+            initials = nameParts[0].slice(0, 2);
+            initials = initials.charAt(0).toUpperCase() + initials.slice(1).toLowerCase();
+        }
+    }
+
+    authContainer.innerHTML = `
+        <div x-data="{ open: false }" @click.away="open = false" class="relative z-50">
+            <div x-data="{ open: false }" @click.away="open = false" class="relative z-40">
+            <button type="button" id="auth" class="auth-combined-button bg-dark focus:outline-none focus:ring-2 focus:ring-ll-blue/50 auth-dropdown-toggle" title="Authentification" @click="open = !open" :aria-expanded="open.toString()" aria-haspopup="true">
+                ${
+                    isAuthenticated ?
+                     (userData.photoURL
+                        ? `<img src="${userData.photoURL}" alt="Photo de profil" class="w-8 h-8 rounded-full mr-2  object-cover">`
+                        : `<div class="w-8 h-8 rounded-full overflow-hidden bg-ll-blue text-white flex items-center justify-center text-sm font-semibold mr-2">
+                            ${initials}
+                        </div>`):
+                        `<div class="w-8 h-8 rounded-full bg-ll-blue text-white flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        </div>`
+                }
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+
+            <div 
+                x-show="open" 
+                x-transition:enter="transition ease-out duration-300 transform" 
+                x-transition:enter-start="opacity-0 scale-95 translate-y-2" 
+                x-transition:enter-end="opacity-100 scale-100 translate-y-0" 
+                x-transition:leave="transition ease-in duration-200 transform" 
+                x-transition:leave-start="opacity-100 scale-100 translate-y-0" 
+                x-transition:leave-end="opacity-0 scale-95 translate-y-2" 
+                class="absolute right-0 mt-3 w-72 bg-ll-white dark:bg-ll-black rounded-xl shadow-lg-dark-custom p-4 border border-ll-light-gray/20 dark:border-ll-dark-blue/30 auth-menu-backdrop"
+            >
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center gap-3 pb-3 border-b border-ll-light-gray/30 dark:border-ll-dark-blue/50">
+                        <img src="/assets/images/logo.png" alt="Company Logo" class="w-12 h-12 rounded-md">
+                        <div>
+                            <span class="text-lg font-cinzel font-semibold text-ll-black dark:text-ll-white">Entreprise</span>
+                            <p class="text-xs text-ll-text-gray font-roboto">${isAuthenticated ? displayName : 'Bienvenue, Invité'}</p>
+                        </div>
+                    </div>
+                    ${
+                        isAuthenticated
+                            ? `
+                            <a href="/pages/user/profile.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-ll-blue/10 dark:hover:bg-ll-dark-blue/20 transition-all duration-150 auth-menu-item">
+                                <i class="fas fa-user w-5 h-5 text-ll-blue"></i>
+                                <span class="text-sm font-roboto text-ll-black dark:text-ll-white">Mon Profil</span>
+                            </a>
+                            <a href="/pages/user/dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-ll-blue/10 dark:hover:bg-ll-dark-blue/20 transition-all duration-150 auth-menu-item">
+                                <i class="fas fa-tachometer-alt w-5 h-5 text-ll-blue"></i>
+                                <span class="text-sm font-roboto text-ll-black dark:text-ll-white">Tableau de bord</span>
+                            </a>
+                            <a href="/pages/user/settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-ll-blue/10 dark:hover:bg-ll-dark-blue/20 transition-all duration-150 auth-menu-item">
+                                <i class="fas fa-cog w-5 h-5 text-ll-blue"></i>
+                                <span class="text-sm font-roboto text-ll-black dark:text-ll-white">Paramètres</span>
+                            </a>
+                            <a href="/pages/user/notifications.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-ll-blue/10 dark:hover:bg-ll-dark-blue/20 transition-all duration-150 auth-menu-item">
+                                <i class="fas fa-bell w-5 h-5 text-ll-blue"></i>
+                                <span class="text-sm font-roboto text-ll-black dark:text-ll-white">Notifications</span>
+                            </a>
+                            <hr class="border-ll-light-gray/30 dark:border-ll-dark-blue/50 my-2">
+                            <button 
+                                type="button" 
+                                class="signout-button flex items-center gap-3 px-3 py-2 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-100/50 dark:hover:bg-red-900/20 transition-all duration-150 auth-menu-item"
+                            >
+                                <i class="fas fa-sign-out-alt w-5 h-5"></i>
+                                <span class="text-sm font-roboto">Se déconnecter</span>
+                            </button>
+                            `
+                            : `
+                            <a href="/pages/auth/signin.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-ll-blue/10 dark:hover:bg-ll-dark-blue/20 transition-all duration-150 auth-menu-item">
+                                <i class="fas fa-sign-in-alt w-5 h-5 text-ll-blue"></i>
+                                <span class="text-sm font-roboto text-ll-black dark:text-ll-white">Se connecter</span>
+                            </a>
+                            <a href="/pages/auth/signup.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-ll-blue/10 dark:hover:bg-ll-dark-blue/20 transition-all duration-150 auth-menu-item">
+                                <i class="fas fa-user-plus w-5 h-5 text-ll-blue"></i>
+                                <span class="text-sm font-roboto text-ll-black dark:text-ll-white">S'inscrire</span>
+                            </a>
+                            <a href="/pages/auth/reset-password.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-ll-blue/10 dark:hover:bg-ll-dark-blue/20 transition-all duration-150 auth-menu-item">
+                                <i class="fas fa-key w-5 h-5 text-ll-blue"></i>
+                                <span class="text-sm font-roboto text-ll-black dark:text-ll-white">Réinitialiser le mot de passe</span>
+                            </a>
+                            `
+                    }
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Attach sign-out event listener if authenticated
+    if (isAuthenticated) {
+        const signOutButton = authContainer.querySelector('.signout-button');
+        if (signOutButton) {
+            signOutButton.addEventListener('click', async () => {
+                try {
+                    await api.auth.signOut();
+                    clearStoredToken();
+                    clearUserCache();
+                    showNotification('Déconnexion réussie.', 'success');
+                    window.location.href = '/pages/auth/signin.html';
+                } catch (error) {
+                    console.error('Erreur lors de la déconnexion:', error);
+                    showNotification('Erreur lors de la déconnexion.', 'error');
+                }
+            });
+        }
+    }
+}
+
+
+/**
  * Met à jour l'interface avec les données utilisateur
  * @param {Object} userData - Données utilisateur
  */
 export function updateUIWithUserData(userData) {
+    // Mettre à jour le menu d'authentification
+    updateAuthMenu(userData);
+
     if (!userData) {
         // Afficher l'état non connecté
         const authElements = document.querySelectorAll('[data-auth]');
@@ -196,41 +339,6 @@ export function updateUIWithUserData(userData) {
         }
     }
 
-    // Mise à jour du bouton de toggle d'authentification
-    const authToggleButton = document.querySelector('#auth.auth-combined-button');
-    if (authToggleButton) {
-        authToggleButton.innerHTML = '';
-
-        const avatarWrapper = document.createElement('div');
-        avatarWrapper.classList.add('w-8', 'h-8', 'rounded-full', 'overflow-hidden', 'bg-ll-blue', 'text-white', 'flex', 'items-center', 'justify-center', 'text-sm', 'font-semibold', 'mr-2');
-
-        if (userData.photoURL) {
-            const img = document.createElement('img');
-            img.src = userData.photoURL;
-            img.alt = 'Photo de profil';
-            img.classList.add('w-full', 'h-full', 'object-cover');
-            avatarWrapper.appendChild(img);
-        } else {
-            const name = userData.name || userData.nom || 'Utilisateur';
-            const nameParts = name.trim().split(' ');
-            let initials = '';
-            if (nameParts.length >= 2) {
-                initials = nameParts[0][0] + nameParts[1][0];
-                initials = initials.toUpperCase();
-            } else {
-                initials = nameParts[0].slice(0, 2);
-                initials = initials.charAt(0).toUpperCase() + initials.slice(1).toLowerCase();
-            }
-            avatarWrapper.textContent = initials;
-        }
-
-        authToggleButton.appendChild(avatarWrapper);
-
-        const arrow = document.createElement('i');
-        arrow.className = 'fas fa-chevron-down text-xs ml-1';
-        authToggleButton.appendChild(arrow);
-    }
-
     // Mise à jour du profil détaillé
     const profileDetails = document.querySelector('[data-level="profile-details"]');
     if (profileDetails) {
@@ -273,7 +381,6 @@ export function updateUIWithUserData(userData) {
         }
     }
 
-    // Mise à jour du dashboard avec les données utilisateur
     updateDashboardWithUserData(userData);
 }
 
@@ -291,3 +398,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userData = await loadUserData();
     updateUIWithUserData(userData);
 });
+
+

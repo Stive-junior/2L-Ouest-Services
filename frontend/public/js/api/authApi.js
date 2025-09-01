@@ -15,6 +15,7 @@ import {
   sendPasswordResetEmail,
   signOut,
   updateEmail,
+  onAuthStateChanged,
 } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
 import emailTemplates from '../templates/emailTemplates.js';
 import { showNotification, validateInput, getStoredToken, setStoredToken, clearStoredToken, handleApiError, apiFetch, getAuthErrorMessage } from '../modules/utils.js';
@@ -31,8 +32,25 @@ const firebaseConfig = {
   measurementId: 'G-6HFZ04SGEZ',
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+/**
+ * Waits for Firebase auth state to be resolved.
+ * @returns {Promise<Object|null>} Current user or null if not authenticated.
+ */
+function waitForAuthState() {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      unsubscribe(); // Unsubscribe after first call
+      resolve(user);
+    }, (error) => {
+      unsubscribe();
+      reject(new Error(getAuthErrorMessage(error) || 'Erreur lors de la vérification de l\'état d\'authentification'));
+    });
+  });
+}
 
 /**
  * Valide les données pour l'inscription.
@@ -45,7 +63,7 @@ function validateSignUpData(userData) {
     email: { type: 'string', required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
     password: { type: 'string', required: true, minLength: 8, maxLength: 50 },
     name: { type: 'string', required: true, minLength: 2, maxLength: 100 },
-    phone: { type: 'string', required: true, pattern: /^\+\d{1,3}[\s\d\-$$  $$]{4,20}$/ },
+    phone: { type: 'string', required: true, pattern: /^\+\d{1,3}[\s\d\-]{4,20}$/ },
     street: { type: 'string', required: false, minLength: 3, maxLength: 255 },
     city: { type: 'string', required: false, minLength: 2, maxLength: 100 },
     postalCode: { type: 'string', required: false, pattern: /^\d{5}$/ },
@@ -55,7 +73,6 @@ function validateSignUpData(userData) {
   };
   const { error } = validateInput(userData, schema);
   if (error) {
-    console.error('Validation error:', error);
     showNotification(`Données d'inscription invalides : ${error.details}`, 'error', false);
     throw new Error('Données d’inscription invalides');
   }
@@ -153,7 +170,7 @@ const authApi = {
       validateSignUpData(userData);
       const { email, password, name, phone, street, city, postalCode, country, fcmToken, role } = userData;
 
-      // Étape 1 : Vérifier si l'email existe déjà dans le backend
+      // Vérifier si l'email existe déjà dans le backend
       try {
         const response = await apiFetch('/auth/users/email', 'POST', { email }, false);
         if (response.data.exists) {
@@ -161,24 +178,26 @@ const authApi = {
           throw new Error('Cet email est déjà utilisé');
         }
       } catch (error) {
-        if (error.message !== 'Utilisateur non trouvé') {
+        if (!error.message.includes('Utilisateur non trouvé')) {
           throw await handleApiError(error, 'Erreur lors de la vérification de l\'email');
         }
       }
 
-      // Étape 2 : Création de l'utilisateur dans Firebase
-      let userCredential;
+      // Création de l'utilisateur dans Firebase
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      let firebaseToken;
+
       try {
-        userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      } catch (firebaseError) {
-        const errorMessage = getAuthErrorMessage(firebaseError);
-        throw await handleApiError(new Error(errorMessage), errorMessage);
+        firebaseToken = await user.getIdToken();
+      } catch (error) {
+        // Supprimer l'utilisateur Firebase en cas d'échec
+        await user.delete();
+        throw await handleApiError(error, 'Erreur lors de la récupération du token Firebase');
       }
 
-      const firebaseToken = await userCredential.user.getIdToken();
-
       try {
-        // Étape 3 : Enregistrement dans le backend
+        // Enregistrement dans le backend
         const address = { street, city, postalCode, country: country || 'France' };
         const response = await apiFetch('/auth/signup', 'POST', {
           email,
@@ -190,25 +209,23 @@ const authApi = {
           role: role || 'client',
         }, false);
 
-        // Étape 4 : Stockage du token si tout réussit
+        // Stockage du token
         setStoredToken(response.data.token, response.data.user.role || 'client');
         showNotification('Inscription réussie ! Vérifiez votre email pour confirmer.', 'success');
         return response.data;
       } catch (backendError) {
-        // Étape 5 : Nettoyage si le backend échoue
+        // Nettoyage si le backend échoue
         try {
-          await userCredential.user.delete();
+          await user.delete();
           console.log('Utilisateur Firebase supprimé après échec backend');
         } catch (deleteError) {
           console.error('Échec de la suppression de l\'utilisateur Firebase:', deleteError);
         }
         clearStoredToken();
-        const errorMessage = backendError.message || 'Erreur lors de l’enregistrement dans le backend';
-        throw await handleApiError(new Error(errorMessage), errorMessage);
+        throw await handleApiError(backendError, 'Erreur lors de l’enregistrement dans le backend');
       }
     } catch (error) {
-      const errorMessage = getAuthErrorMessage(error) || 'Erreur lors de l’inscription';
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+      throw await handleApiError(error, getAuthErrorMessage(error) || 'Erreur lors de l’inscription');
     }
   },
 
@@ -220,35 +237,35 @@ const authApi = {
    * @throws {Error} En cas d'erreur de connexion.
    */
   async signIn(credentials) {
- 
     try {
       validateSignInData(credentials);
       const { email, password, fcmToken = '' } = credentials;
 
-      // Étape 1 : Connexion à Firebase
+      // Connexion à Firebase
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const firebaseToken = await userCredential.user.getIdToken();
+      const user = userCredential.user;
+      let firebaseToken;
 
- 
       try {
-        // Étape 2 : Connexion au backend
-        const response = await apiFetch('/auth/signin', 'POST', { email, firebaseToken, fcmToken }, false);
+        firebaseToken = await user.getIdToken();
+      } catch (error) {
+        await signOut(auth);
+        throw await handleApiError(error, 'Erreur lors de la récupération du token Firebase');
+      }
 
-        console.log('Response from backend:', response);
-        // Étape 3 : Stockage du token si tout réussit
+      try {
+        // Connexion au backend
+        const response = await apiFetch('/auth/signin', 'POST', { email, firebaseToken, fcmToken }, false);
         setStoredToken(response.data.token, response.data.user.role || 'client');
         showNotification('Connexion réussie !', 'success');
         return response.data;
       } catch (backendError) {
-        // En cas d'erreur backend, déconnexion immédiate de Firebase
         await signOut(auth);
         clearStoredToken();
-        const errorMessage = backendError.message || 'Erreur lors de la connexion au backend';
-        throw await handleApiError(new Error(errorMessage), errorMessage);
+        throw await handleApiError(backendError, 'Erreur lors de la connexion au backend');
       }
     } catch (error) {
-      const errorMessage = getAuthErrorMessage(error);
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+      throw await handleApiError(error, getAuthErrorMessage(error) || 'Erreur lors de la connexion');
     }
   },
 
@@ -260,19 +277,20 @@ const authApi = {
    */
   async refreshToken() {
     try {
-      if (!auth.currentUser) {
+      const user = await waitForAuthState();
+      if (!user) {
+        clearStoredToken();
         throw new Error('Aucun utilisateur connecté');
       }
-      const firebaseToken = await auth.currentUser.getIdToken(true);
-      const response = await apiFetch('/auth/refresh', 'POST', { firebaseToken });
+      const firebaseToken = await user.getIdToken(true);
+      const response = await apiFetch('/auth/refresh', 'POST', { firebaseToken }, false);
       setStoredToken(response.data.token, response.data.role || 'client');
       showNotification('Token rafraîchi avec succès.', 'success');
       return response.data;
     } catch (error) {
       clearStoredToken();
       await signOut(auth);
-      const errorMessage = error.message || 'Erreur lors du rafraîchissement du token';
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+      throw await handleApiError(error, 'Erreur lors du rafraîchissement du token');
     }
   },
 
@@ -284,15 +302,17 @@ const authApi = {
    */
   async signOut() {
     try {
-      const firebaseToken = await auth.currentUser.getIdToken(true);
-      await apiFetch('/auth/signout', 'POST', {firebaseToken});
+      const user = await waitForAuthState();
+      if (user) {
+        const firebaseToken = await user.getIdToken();
+        await apiFetch('/auth/signout', 'POST', { firebaseToken }, true);
+      }
       await signOut(auth);
       clearStoredToken();
       showNotification('Déconnexion réussie.', 'success');
       window.location.href = '/pages/auth/signin.html';
     } catch (error) {
-      const errorMessage = error.message || 'Erreur lors de la déconnexion';
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+      throw await handleApiError(error, 'Erreur lors de la déconnexion');
     }
   },
 
@@ -304,15 +324,15 @@ const authApi = {
    */
   async verifyToken() {
     try {
-      if (!auth.currentUser) {
+      const user = await waitForAuthState();
+      if (!user) {
         throw new Error('Aucun utilisateur connecté');
       }
-      const firebaseToken = await auth.currentUser.getIdToken();
+      const firebaseToken = await user.getIdToken();
       const response = await apiFetch('/auth/verify-token', 'POST', { firebaseToken }, false);
       return response.data;
     } catch (error) {
-      const errorMessage = error.message || 'Erreur lors de la vérification du token';
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+      throw await handleApiError(error, 'Erreur lors de la vérification du token');
     }
   },
 
@@ -327,10 +347,11 @@ const authApi = {
   async sendEmailVerification(email, name) {
     try {
       validateEmailData({ email, name });
-      if (!auth.currentUser) {
+      const user = await waitForAuthState();
+      if (!user) {
         throw new Error('Aucun utilisateur connecté');
       }
-      await sendEmailVerification(auth.currentUser, {
+      await sendEmailVerification(user, {
         url: `${window.location.origin}/pages/auth/verify-email.html`,
         handleCodeInApp: true,
       });
@@ -341,8 +362,7 @@ const authApi = {
       }, false);
       showNotification('Email de vérification envoyé.', 'success');
     } catch (error) {
-      const errorMessage = error.message || 'Erreur lors de l’envoi de l’email de vérification';
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+      throw await handleApiError(error, 'Erreur lors de l’envoi de l’email de vérification');
     }
   },
 
@@ -370,8 +390,8 @@ const authApi = {
     } catch (error) {
       const errorMessage = error.code === 'auth/user-not-found'
         ? 'Aucun utilisateur trouvé avec cet email.'
-        : error.message || 'Erreur lors de l’envoi de l’email de réinitialisation';
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+        : 'Erreur lors de l’envoi de l’email de réinitialisation';
+      throw await handleApiError(error, errorMessage);
     }
   },
 
@@ -387,11 +407,12 @@ const authApi = {
   async sendVerifyAndChangeEmail(currentEmail, newEmail, name) {
     try {
       validateChangeEmailData({ currentEmail, newEmail, name });
-      if (!auth.currentUser) {
+      const user = await waitForAuthState();
+      if (!user) {
         throw new Error('Aucun utilisateur connecté');
       }
-      await updateEmail(auth.currentUser, newEmail);
-      await sendEmailVerification(auth.currentUser, {
+      await updateEmail(user, newEmail);
+      await sendEmailVerification(user, {
         url: `${window.location.origin}/pages/auth/verify-email.html`,
         handleCodeInApp: true,
       });
@@ -400,13 +421,13 @@ const authApi = {
         newEmail,
         name,
         htmlTemplate: emailTemplates.changeEmail({ name, newEmail, link: '{{link}}' }),
-      });
+      }, true);
       showNotification('Email de changement envoyé.', 'success');
     } catch (error) {
       const errorMessage = error.code === 'auth/email-already-in-use'
         ? 'Le nouvel email est déjà utilisé.'
-        : error.message || 'Erreur lors de l’envoi de l’email de changement';
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+        : 'Erreur lors de l’envoi de l’email de changement';
+      throw await handleApiError(error, errorMessage);
     }
   },
 
@@ -426,7 +447,8 @@ const authApi = {
         throw new Error('Lien de connexion invalide');
       }
       const userCredential = await signInWithEmailLink(auth, email, link);
-      const firebaseToken = await userCredential.user.getIdToken();
+      const user = userCredential.user;
+      const firebaseToken = await user.getIdToken();
 
       try {
         const response = await apiFetch('/auth/signin', 'POST', { email, firebaseToken }, false);
@@ -436,12 +458,10 @@ const authApi = {
       } catch (backendError) {
         await signOut(auth);
         clearStoredToken();
-        const errorMessage = backendError.message || 'Erreur lors de la connexion au backend';
-        throw await handleApiError(new Error(errorMessage), errorMessage);
+        throw await handleApiError(backendError, 'Erreur lors de la connexion au backend');
       }
     } catch (error) {
-      const errorMessage = error.message || 'Erreur lors de la connexion avec lien';
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+      throw await handleApiError(error, 'Erreur lors de la connexion avec lien');
     }
   },
 
@@ -453,23 +473,27 @@ const authApi = {
    */
   async getCurrentUser() {
     try {
-       const token = getStoredToken();
-        if (!token) {
-            throw new Error('Utilisateur non authentifié');
-        }
-
-      const response = await apiFetch('/user/profile', 'GET' ,null , true);
+      const token = getStoredToken();
+      if (!token) {
+        throw new Error('Utilisateur non authentifié');
+      }
+      const user = await waitForAuthState();
+      if (!user) {
+        clearStoredToken();
+        throw new Error('Aucun utilisateur connecté');
+      }
+      const response = await apiFetch('/user/profile', 'GET', null, true);
       return response.data.user;
     } catch (error) {
-      const errorMessage = error.message || 'Erreur lors de la récupération des données utilisateur';
-       if (error.message.includes('401') || error.message.includes('Token')) {
-            clearStoredToken();
-            window.location.href = '/pages/auth/signin.html';
-        }
-      throw await handleApiError(new Error(errorMessage), errorMessage);
+      if (error.message.includes('401') || error.message.includes('Token')) {
+        clearStoredToken();
+        await signOut(auth);
+        window.location.href = '/pages/auth/signin.html';
+      }
+      throw await handleApiError(error, 'Erreur lors de la récupération des données utilisateur');
     }
   },
-
 };
 
 export default authApi;
+

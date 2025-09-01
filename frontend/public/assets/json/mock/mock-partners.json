@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Hilton Hotels & Resorts",
+        "logo": "/assets/images/logo.png",
+        "description": "Une collaboration pour garantir une expérience client irréprochable. Notre engagement commun pour l'hygiène et le confort soutient leur réputation mondiale d'excellence.",
+        "website": "https://www.hilton.com"
+    },
+    {
+        "name": "JLL",
+        "logo": "/assets/images/logo.png",
+        "description": "Recommandé pour la valorisation et l'entretien d'actifs immobiliers prestigieux. JLL nous choisit pour notre fiabilité et notre capacité à maintenir des standards élevés.",
+        "website": "https://www.jll.com"
+    },
+    {
+        "name": "WeWork",
+        "logo": "/assets/images/logo.png",
+        "description": "Partenaire de confiance pour des espaces de travail sains et créatifs. Nous assurons un environnement impeccable pour stimuler le bien-être et la productivité.",
+        "website": "https://www.wework.com"
+    },
+    {
+        "name": "Westfield",
+        "logo": "/assets/images/logo.png",
+        "description": "Assurer une expérience premium dans des zones à très fort trafic. Nos équipes relèvent le défi quotidien de la propreté avec efficacité et discrétion.",
+        "website": "https://www.westfield.com"
+    },
+    {
+        "name": "Equinox",
+        "logo": "/assets/images/logo.png",
+        "description": "Maintenir des standards d'hygiène stricts pour une clientèle exigeante. Equinox valorise notre engagement envers la sécurité et la satisfaction de leurs membres.",
+        "website": "https://www.equinox.com"
+    }
+]

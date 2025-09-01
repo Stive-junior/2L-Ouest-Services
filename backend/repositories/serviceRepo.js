@@ -1,7 +1,7 @@
 /**
  * @file serviceRepo.js
- * @description Repository pour gérer les services dans Firestore pour L&L Ouest Services.
- * Fournit des opérations CRUD et gestion des images.
+ * @description Repository pour gérer les services de nettoyage dans Firestore pour L&L Ouest Services.
+ * Fournit des opérations CRUD et gestion des images avec une structure enrichie.
  * @module repositories/serviceRepo
  */
 
@@ -35,11 +35,14 @@ class ServiceRepository {
       name: doc.name,
       description: doc.description,
       price: doc.price,
+      area: doc.area,
+      duration: doc.duration,
       category: doc.category,
-      providerId: doc.providerId,
       images: doc.images || [],
       availability: doc.availability || { isAvailable: true, schedule: [] },
+      location: doc.location || {},
       createdAt: doc.createdAt || null,
+      updatedAt: doc.updatedAt || null,
     };
   }
 
@@ -53,11 +56,14 @@ class ServiceRepository {
       name: service.name,
       description: service.description,
       price: service.price,
+      area: service.area || null,
+      duration: service.duration || null,
       category: service.category,
-      providerId: service.providerId,
       images: service.images || [],
       availability: service.availability || { isAvailable: true, schedule: [] },
+      location: service.location || {},
       createdAt: service.createdAt || new Date().toISOString(),
+      updatedAt: service.updatedAt || new Date().toISOString(),
     };
   }
 
@@ -158,16 +164,23 @@ class ServiceRepository {
   }
 
   /**
-   * Récupère tous les services avec pagination.
+   * Récupère tous les services avec pagination et filtres optionnels.
    * @async
    * @param {number} page - Numéro de page.
    * @param {number} limit - Limite par page.
+   * @param {Object} [filters] - Filtres optionnels (ex: { area, duration }).
    * @returns {Promise<{ services: Object[], total: number, page: number, totalPages: number }>} Liste des services paginée.
    * @throws {AppError} Si la récupération échoue.
    */
-  async getAll(page = 1, limit = 10) {
+  async getAll(page = 1, limit = 10, filters = {}) {
     try {
-      const query = this.collection.orderBy('createdAt', 'desc');
+      let query = this.collection.orderBy('createdAt', 'desc');
+      if (filters.area) {
+        query = query.where('area', '>=', filters.area.min).where('area', '<=', filters.area.max);
+      }
+      if (filters.duration) {
+        query = query.where('duration', '>=', filters.duration.min).where('duration', '<=', filters.duration.max);
+      }
       const { results, total, totalPages } = await paginateResults(query, page, limit);
       const services = results.map(doc => this.fromFirestore(doc));
       logInfo('Liste des services récupérée', { page, limit, total });
@@ -179,17 +192,24 @@ class ServiceRepository {
   }
 
   /**
-   * Récupère les services par catégorie avec pagination.
+   * Récupère les services par catégorie avec pagination et filtres optionnels.
    * @async
    * @param {string} category - Catégorie du service.
    * @param {number} page - Numéro de page.
    * @param {number} limit - Limite par page.
+   * @param {Object} [filters] - Filtres optionnels (ex: { area, duration }).
    * @returns {Promise<{ services: Object[], total: number, page: number, totalPages: number }>} Liste des services paginée.
    * @throws {AppError} Si la récupération échoue.
    */
-  async getByCategory(category, page = 1, limit = 10) {
+  async getByCategory(category, page = 1, limit = 10, filters = {}) {
     try {
-      const query = this.collection.where('category', '==', category).orderBy('createdAt', 'desc');
+      let query = this.collection.where('category', '==', category).orderBy('createdAt', 'desc');
+      if (filters.area) {
+        query = query.where('area', '>=', filters.area.min).where('area', '<=', filters.area.max);
+      }
+      if (filters.duration) {
+        query = query.where('duration', '>=', filters.duration.min).where('duration', '<=', filters.duration.max);
+      }
       const { results, total, totalPages } = await paginateResults(query, page, limit);
       const services = results.map(doc => this.fromFirestore(doc));
       logInfo('Services récupérés par catégorie', { category, page, limit, total });
@@ -198,6 +218,62 @@ class ServiceRepository {
       logError('Erreur lors de la récupération des services par catégorie', { error: error.message, category });
       throw new AppError(500, 'Erreur serveur lors de la récupération des services par catégorie', error.message);
     }
+  }
+
+  /**
+   * Récupère les services à proximité avec pagination et filtres.
+   * @async
+   * @param {number} lat - Latitude.
+   * @param {number} lng - Longitude.
+   * @param {number} radius - Rayon en mètres.
+   * @param {number} page - Numéro de page.
+   * @param {number} limit - Limite par page.
+   * @param {Object} [filters] - Filtres optionnels (ex: { area, duration }).
+   * @returns {Promise<{ services: Object[], total: number, page: number, totalPages: number }>} Liste des services paginée.
+   * @throws {AppError} Si la récupération échoue.
+   */
+  async getNearby(lat, lng, radius, page = 1, limit = 10, filters = {}) {
+    try {
+      const querySnapshot = await this.collection.get();
+      const services = [];
+      querySnapshot.forEach(doc => {
+        const service = this.fromFirestore(doc);
+        if (service.location.coordinates) {
+          const distance = this.calculateDistance(lat, lng, service.location.coordinates.lat, service.location.coordinates.lng);
+          if (distance <= radius / 1000) { // Convertir mètres en km
+            if (filters.area && (service.area < filters.area.min || service.area > filters.area.max)) return;
+            if (filters.duration && (service.duration < filters.duration.min || service.duration > filters.duration.max)) return;
+            services.push(service);
+          }
+        }
+      });
+      const { results, total, totalPages } = paginateResults(services, page, limit);
+      logInfo('Services à proximité récupérés', { lat, lng, radius, page, limit, total });
+      return { services: results, total, page, totalPages };
+    } catch (error) {
+      logError('Erreur lors de la récupération des services à proximité', { error: error.message });
+      throw new AppError(500, 'Erreur serveur lors de la récupération des services à proximité', error.message);
+    }
+  }
+
+  /**
+   * Calcule la distance entre deux points géographiques (en km).
+   * @param {number} lat1 - Latitude du point 1.
+   * @param {number} lng1 - Longitude du point 1.
+   * @param {number} lat2 - Latitude du point 2.
+   * @param {number} lng2 - Longitude du point 2.
+   * @returns {number} Distance en kilomètres.
+   */
+  calculateDistance(lat1, lng1, lat2, lng2) {
+    const toRad = (value) => (value * Math.PI) / 180;
+    const R = 6371; // Rayon de la Terre en km
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
   }
 }
 

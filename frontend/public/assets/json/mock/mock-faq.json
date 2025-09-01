@@ -1,0 +1,44 @@
+[
+  {
+    "question": "Quels sont vos tarifs ?",
+    "answer": "Nos <span class='highlight text-blue-600 font-semibold'>tarifs</span> sont établis sur mesure, en fonction de la <span class='highlight text-blue-600 font-semibold'>surface à nettoyer</span>, de la fréquence des interventions et des services spécifiques souhaités. Contactez-nous pour un <span class='highlight text-blue-600 font-semibold'>devis gratuit</span> à Angers ou dans l’Ouest de la France !",
+    "category": "tarifs",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='text-blue-600'><line x1='12' y1='1' x2='12' y2='23'></line><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'></path></svg>"
+  },
+  {
+    "question": "Utilisez-vous des produits écologiques ?",
+    "answer": "Oui, nous utilisons des <span class='highlight text-green-600 font-semibold'>produits écologiques</span> certifiés biodégradables et hypoallergéniques, parfaits pour les foyers à Angers et respectueux de l’environnement.",
+    "category": "ecologie",
+    "icon": "<i class=\"fas fa-leaf text-green-600\"></i>"
+  },
+  {
+    "question": "Dans quelles régions intervenez-vous ?",
+    "answer": "Nous opérons à <span class='highlight text-purple-600 font-semibold'>Angers</span>, dans l’ensemble de l’<span class='highlight text-purple-600 font-semibold'>Ouest de la France</span>, incluant la Bretagne, les Pays de la Loire, et certaines parties de la Normandie et Nouvelle-Aquitaine. Contactez-nous pour vérifier la disponibilité.",
+    "category": "regions",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='text-purple-600'><circle cx='12' cy='10' r='3'></circle><path d='M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z'></path></svg>"
+  },
+  {
+    "question": "Comment réserver un service ?",
+    "answer": "Réservez facilement via notre <span class='highlight text-blue-600 font-semibold'>formulaire en ligne</span> sur notre site ou appelez-nous au <span class='highlight text-blue-600 font-semibold'>+33 2 41 23 45 67</span> pour un service à Angers ou ailleurs.",
+    "category": "tarifs",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='text-blue-600'><path d='M20 6 9 17l-5-5'></path></svg>"
+  },
+  {
+    "question": "Vos produits sont-ils sans danger pour les animaux ?",
+    "answer": "Oui, nos <span class='highlight text-green-600 font-semibold'>produits</span> sont hypoallergéniques et sans danger pour les <span class='highlight text-green-600 font-semibold'>animaux domestiques</span> et les enfants, idéaux pour les foyers à Angers.",
+    "category": "ecologie",
+    "icon": "<i class=\"fas fa-leaf text-green-600 \"></i>"
+  },
+  {
+    "question": "Quelle est la politique de remboursement ?",
+    "answer": "Nous offrons un <span class='highlight text-blue-600 font-semibold'>remboursement complet</span> sous 30 jours si vous n’êtes pas satisfait de nos services de nettoyage à Angers ou ailleurs.",
+    "category": "tarifs",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='text-blue-600'><path d='M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z'></path><line x1='4' y1='22' x2='4' y2='15'></line></svg>"
+  },
+  {
+    "question": "Comment contacter le support ?",
+    "answer": "Contactez notre équipe à Angers par <span class='highlight text-purple-600 font-semibold'>email</span> (support@llouests.com) ou par <span class='highlight text-purple-600 font-semibold'>téléphone</span> (+33 2 41 23 45 67).",
+    "category": "regions",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='text-purple-600'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>"
+  }
+]

@@ -1,6 +1,6 @@
 /**
  * @file storageService.js
- * @description Service pour gérer les fichiers localement (images, PDFs, fichiers de chat) pour L&L Ouest Services.
+ * @description Service pour gérer les fichiers localement (images, PDFs) pour L&L Ouest Services.
  * Intègre avec serviceRepo, reviewRepo, et chatRepo pour la gestion des fichiers.
  * @module services/storageService
  */
@@ -10,7 +10,7 @@ const path = require('path');
 const { serviceRepo, reviewRepo, chatRepo } = require('../repositories/index');
 const socketService = require('./socketService');
 const { generateUUID } = require('../utils/helperUtils');
-const { logger, logInfo, logError, logAudit } = require('./loggerService');
+const { logInfo, logError, logAudit } = require('./loggerService');
 const { AppError, NotFoundError } = require('../utils/errorUtils');
 
 /**
@@ -20,7 +20,7 @@ const { AppError, NotFoundError } = require('../utils/errorUtils');
 class StorageService {
   constructor() {
     this.storagePath = path.join(__dirname, '..', 'storage');
-    this.baseUrl = process.env.NODE_ENV === 'production' 
+    this.baseUrl = process.env.NODE_ENV === 'production'
       ? 'https://ll-ouest-services-backend.herokuapp.com/storage'
       : 'http://localhost:3000/storage';
   }
@@ -33,7 +33,7 @@ class StorageService {
    * @private
    */
   validateFileType(filePath) {
-    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.pdf'];
+    const allowedExtensions = ['.jpg', '.jpeg', '.png'];
     const ext = path.extname(filePath).toLowerCase();
     if (!allowedExtensions.includes(ext)) {
       throw new AppError(400, `Type de fichier non supporté : ${ext}`, 'Unsupported file type');
@@ -70,15 +70,11 @@ class StorageService {
       const uniqueFileName = `${generateUUID()}_${path.basename(fileName)}`;
       const filePath = path.join(destination, uniqueFileName);
       const fullPath = path.join(this.storagePath, filePath);
-      const relativeUrl = `/storage/${filePath.replace(/\\/g, '/')}`; // Normaliser les séparateurs pour les URLs
+      const relativeUrl = `/storage/${filePath.replace(/\\/g, '/')}`;
 
-      // Créer les dossiers si nécessaire
       await this.ensureDirectory(destination);
-
-      // Écrire le fichier
       await fs.writeFile(fullPath, fileBuffer);
 
-      // Générer l'URL publique
       const fileUrl = `${this.baseUrl}/${filePath.replace(/\\/g, '/')}`;
       logInfo('Fichier téléchargé localement', { fileName: uniqueFileName, destination });
       return fileUrl;
@@ -96,18 +92,15 @@ class StorageService {
    */
   async deleteFile(fileUrl) {
     try {
-      // Extraire le chemin relatif depuis l'URL
       const relativePath = fileUrl.replace(this.baseUrl, '').replace(/^\/storage\//, '');
       const filePath = path.join(this.storagePath, relativePath);
 
-      // Vérifier si le fichier existe
       try {
         await fs.access(filePath);
       } catch {
         throw new NotFoundError('Fichier non trouvé', 'File not found');
       }
 
-      // Supprimer le fichier
       await fs.unlink(filePath);
       logAudit('Fichier supprimé localement', { fileUrl });
     } catch (error) {
@@ -121,18 +114,16 @@ class StorageService {
    * @param {string} serviceId - ID du service.
    * @param {Buffer} fileBuffer - Buffer de l'image.
    * @param {string} fileName - Nom original du fichier.
-   * @returns {Promise<Object>} Service mis à jour avec la nouvelle image.
+   * @returns {Promise<string>} URL de l'image téléchargée.
    * @throws {AppError} Si l'ajout de l'image échoue.
    */
   async uploadServiceImage(serviceId, fileBuffer, fileName) {
     try {
-      const service = await serviceRepo.getById(serviceId);
+      await serviceRepo.getById(serviceId);
       const fileUrl = await this.uploadFile(fileBuffer, `services/${serviceId}/images`, fileName);
-      const updatedImages = [...(service.images || []), fileUrl];
-      const updatedService = await serviceRepo.update(serviceId, { ...service, images: updatedImages });
-      socketService.emitToRoom(`service:${serviceId}`, 'serviceUpdated', { serviceId, images: updatedImages });
+      socketService.emitToRoom(`service:${serviceId}`, 'serviceImageAdded', { serviceId, fileUrl });
       logAudit('Image ajoutée au service', { serviceId, fileUrl });
-      return updatedService;
+      return fileUrl;
     } catch (error) {
       logError('Erreur lors de l\'ajout de l\'image au service', { error: error.message, serviceId });
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de l\'ajout de l\'image au service', error.message);
@@ -148,14 +139,9 @@ class StorageService {
    */
   async deleteServiceImage(serviceId, fileUrl) {
     try {
-      const service = await serviceRepo.getById(serviceId);
-      if (!service.images || !service.images.includes(fileUrl)) {
-        throw new NotFoundError('Image non trouvée dans le service', 'Image not found in service');
-      }
+      await serviceRepo.getById(serviceId);
       await this.deleteFile(fileUrl);
-      const updatedImages = service.images.filter(url => url !== fileUrl);
-      await serviceRepo.update(serviceId, { ...service, images: updatedImages });
-      socketService.emitToRoom(`service:${serviceId}`, 'serviceUpdated', { serviceId, images: updatedImages });
+      socketService.emitToRoom(`service:${serviceId}`, 'serviceImageDeleted', { serviceId, fileUrl });
       logAudit('Image supprimée du service', { serviceId, fileUrl });
     } catch (error) {
       logError('Erreur lors de la suppression de l\'image du service', { error: error.message, serviceId });

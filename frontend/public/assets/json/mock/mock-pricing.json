@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Basique",
+    "price": 99,
+    "features": [
+      "Nettoyage standard",
+      "1 intervention par mois",
+      "Produits écologiques",
+      "Support par email"
+    ]
+  },
+  {
+    "name": "Pro",
+    "price": 199,
+    "features": [
+      "Nettoyage approfondi",
+      "2 interventions par mois",
+      "Produits écologiques",
+      "Support par email et téléphone",
+      "Planification flexible"
+    ]
+  },
+  {
+    "name": "Entreprise",
+    "price": 499,
+    "features": [
+      "Nettoyage industriel",
+      "Interventions hebdomadaires",
+      "Produits écologiques",
+      "Support prioritaire 24/7",
+      "Gestion de projet dédiée",
+      "Rapports personnalisés"
+    ]
+  },
+  {
+    "name": "Événementiel",
+    "price": 299,
+    "features": [
+      "Nettoyage avant/après événement",
+      "1 intervention unique",
+      "Produits écologiques",
+      "Support par email et téléphone",
+      "Équipe dédiée"
+    ]
+  }
+]
