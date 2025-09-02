@@ -1072,8 +1072,8 @@ let swiperInstance = null;
                 <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
             `}
             <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-6 carousel-caption">
-                <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_v33gmcrb.json" background="transparent" speed="1" style="width: 180px; height: 180px;" loop autoplay></lottie-player>
-                <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight text-fade-in">${slide.title}</h1>
+            <lottie-player src="https://assets.lottiefiles.com/packages/lf20_kq0c0swq.json" background="transparent" speed="1" style="width: 180px; height: 180px;" loop autoplay></lottie-player>    
+            <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight text-fade-in">${slide.title}</h1>
                 <p class="text-lg md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light text-fade-in">${slide.subtitle}</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center text-fade-in">
                     ${slide.buttons.map(btn => `
@@ -2393,7 +2393,7 @@ function initStatsSection() {
         <p class="text-lg font-semibold text-ll-black dark:text-ll-white">${stat.label}</p>
         <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">${stat.description}</p>
         <div class="flex items-baseline mt-2">
-          <span id="stat-value-${index}" class="text-4xl font-cinzel font-bold text-ll-black dark:text-ll-white mr-2">0</span>
+          <span id="stats-value-${index}" class="text-4xl font-cinzel font-bold text-ll-black dark:text-ll-white mr-2">0</span>
         </div>
       </div>
     </div>
@@ -2539,7 +2539,7 @@ function initStatsSection() {
    * Animation du texte de la statistique (compteur)
    */
   function animateStatValue(index, target, unit) {
-    const valueElement = document.getElementById(`stat-value-${index}`);
+    const valueElement = document.getElementById(`stats-value-${index}`);
     if (!valueElement) return;
 
     let current = 0;
@@ -3311,7 +3311,38 @@ function initEco(){
 
 }
 
-function initAbout(){
+function initAbout() {
+  // Populate stats dynamically
+  const statsContainer = document.getElementById('company-stats');
+  if (!statsContainer) {
+    console.warn('Conteneur des statistiques non trouvé');
+    return;
+  }
+
+  const uniqueStats = [];
+  const seenLabels = new Set();
+  MOCK_STATS.slice(0,4).forEach(stat => {
+    if (!seenLabels.has(stat.label)) {
+      uniqueStats.push(stat);
+      seenLabels.add(stat.label);
+    }
+  });
+
+  statsContainer.innerHTML = uniqueStats.map((stat, index) => `
+    <div class="stat-item flex flex-col items-center" data-aos="fade-up" data-aos-delay="${500 + index * 100}">
+      <div class="relative w-[120px] h-[120px] mb-2">
+        <canvas id="stat-canvas-${index}" width="120" height="120" class="absolute inset-0 rounded-full"></canvas>
+        <div class="absolute inset-0 flex items-center justify-center z-10">
+          <div class="bg-indigo-100 dark:bg-indigo-900/30 rounded-full p-4 shadow-md">
+            ${stat.svg}
+          </div>
+        </div>
+      </div>
+      <div class="stat-number text-2xl font-cinzel font-bold text-ll-black dark:text-ll-white" id="stat-value-${index}">0</div>
+      <div class="stat-label text-sm text-ll-text-gray dark:text-ll-medium-gray">${stat.label}</div>
+    </div>
+  `).join('');
+  
 
   const typingContainer = document.getElementById('typing-text');
   if (typingContainer) {
@@ -3350,7 +3381,7 @@ function initAbout(){
         container: slide,
         renderer: 'svg',
         loop: true,
-        autoplay: index === 0,
+        autoplay: true,
         path: lottieUrl
       });
     }
@@ -3375,19 +3406,13 @@ function initAbout(){
   }
 
   // Canvas Stats Animation
-  const stats = [
-    { value: 500, unit: '+', label: 'Clients satisfaits' },
-    { value: 13, unit: '', label: "Ans d'expérience" },
-    { value: 24, unit: '/7', label: 'Service disponible' },
-    { value: 100, unit: '%', label: 'Éco-responsable' }
-  ];
-
-  stats.forEach((stat, index) => {
-    const statItem = document.querySelector(`.stat-item:nth-child(${index + 1})`);
+  uniqueStats.forEach((stat, index) => {
+    const statItem = statsContainer.children[index];
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           animateCanvasCounter(index, stat.value, stat.unit);
+          animateStatValue(index, stat.value, stat.unit);
           observer.unobserve(statItem);
         }
       });
@@ -3395,123 +3420,139 @@ function initAbout(){
     observer.observe(statItem);
   });
 
- 
   function animateCanvasCounter(index, target, unit) {
-  const canvas = document.getElementById(`stat-canvas-${index}`);
-  if (!canvas) return;
+    const canvas = document.getElementById(`stat-canvas-${index}`);
+    if (!canvas) return;
 
-  const ctx = canvas.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = 120 * dpr;
-  canvas.height = 120 * dpr;
-  ctx.scale(dpr, dpr);
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = 120 * dpr;
+    canvas.height = 120 * dpr;
+    ctx.scale(dpr, dpr);
 
-  const radius = 50;
-  const centerX = canvas.width / (2 * dpr);
-  const centerY = canvas.height / (2 * dpr);
+    const radius = 50;
+    const centerX = canvas.width / (2 * dpr);
+    const centerY = canvas.height / (2 * dpr);
 
-  let current = 0;
-  const increment = target / 100;
-  let animationFrameId;
-  let pulsePhase = 0;
-  let isCountingComplete = false;
+    let current = 0;
+    const increment = target / 100;
+    let animationFrameId;
+    let pulsePhase = 0;
+    let isCountingComplete = false;
 
-  // Store theme info
-  let themeToApply = detectTheme();
-  let fontColor = getFontColor(themeToApply);
+    let themeToApply = detectTheme();
+    let fontColor = getFontColor(themeToApply);
+    let glowColor = themeToApply === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(37, 99, 235, 0.3)';
 
-  // Gradient (can stay the same)
-  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  gradient.addColorStop(0, '#2563EB');
-  gradient.addColorStop(1, '#90EE90');
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, '#2563EB');
+    gradient.addColorStop(1, '#90EE90');
 
-  // --- Theme detection helpers ---
-  function detectTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return savedTheme !== null ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
-  }
-
-  function getFontColor(theme) {
-    return theme === 'dark' ? '#FDFDFC' : '#1B1B18';
-  }
-
-  function handleThemeChange() {
-    const newTheme = detectTheme();
-    if (newTheme !== themeToApply) {
-      themeToApply = newTheme;
-      fontColor = getFontColor(themeToApply);
+    function detectTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return savedTheme !== null ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
     }
-  }
 
-  // Listen to system-level theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
+    function getFontColor(theme) {
+      return theme === 'dark' ? '#FDFDFC' : '#1B1B18';
+    }
 
-  // Listen to localStorage changes (e.g., user toggles dark/light)
-  window.addEventListener('storage', handleThemeChange);
-
-  // --- Main draw loop ---
-  function draw() {
-    handleThemeChange(); // Ensure theme is up-to-date on each frame
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Background circle
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-    ctx.strokeStyle = '#EDEDEC';
-    ctx.lineWidth = 8;
-    ctx.stroke();
-
-    // Progress arc
-    const progress = isCountingComplete ? 1 : current / target;
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, -Math.PI / 2, (2 * Math.PI * progress) - Math.PI / 2);
-    ctx.strokeStyle = gradient;
-    ctx.lineWidth = 8;
-    ctx.stroke();
-
-    // Number text
-    ctx.font = 'bold 28px Cinzel';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = fontColor;
-    const display = Math.floor(current) + (unit || '');
-    ctx.fillText(display, centerX, centerY);
-
-    // Pulse effect
-    const pulseScale = 1 + 0.05 * Math.sin(pulsePhase);
-    ctx.save();
-    ctx.translate(centerX, centerY);
-    ctx.scale(pulseScale, pulseScale);
-    ctx.translate(-centerX, -centerY);
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius - 4, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'rgba(37, 99, 235, 0.3)';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.restore();
-
-    pulsePhase += 0.05;
-
-    if (!isCountingComplete && current < target) {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        isCountingComplete = true;
+    function handleThemeChange() {
+      const newTheme = detectTheme();
+      if (newTheme !== themeToApply) {
+        themeToApply = newTheme;
+        fontColor = getFontColor(themeToApply);
+        glowColor = themeToApply === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(37, 99, 235, 0.3)';
       }
     }
 
-    animationFrameId = requestAnimationFrame(draw);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
+    window.addEventListener('storage', handleThemeChange);
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Background circle
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+      ctx.strokeStyle = themeToApply === 'dark' ? '#374151' : '#EDEDEC';
+      ctx.lineWidth = 8;
+      ctx.stroke();
+
+      // Progress arc
+      const progress = isCountingComplete ? 1 : current / target;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, -Math.PI / 2, (2 * Math.PI * progress) - Math.PI / 2);
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 8;
+      ctx.stroke();
+
+      // Pulse effect
+      const pulseScale = 1 + 0.05 * Math.sin(pulsePhase);
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.scale(pulseScale, pulseScale);
+      ctx.translate(-centerX, -centerY);
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius - 4, 0, 2 * Math.PI);
+      ctx.strokeStyle = glowColor;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.restore();
+
+      pulsePhase += 0.05;
+
+      if (!isCountingComplete && current < target) {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          isCountingComplete = true;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    // Cleanup
+    const statItem = statsContainer.children[index];
+    const observerCleanup = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          cancelAnimationFrame(animationFrameId);
+        }
+      });
+    }, { threshold: 0 });
+    observerCleanup.observe(statItem);
   }
 
-  draw();
+  function animateStatValue(index, target, unit) {
+    const valueElement = document.getElementById(`stat-value-${index}`);
+    if (!valueElement) return;
+
+    let current = 0;
+    const increment = target / 100;
+    let animationFrameId;
+
+    function updateValue() {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        valueElement.textContent = Math.floor(current) + (unit || '');
+        cancelAnimationFrame(animationFrameId);
+        return;
+      }
+      valueElement.textContent = Math.floor(current) + (unit || '');
+      animationFrameId = requestAnimationFrame(updateValue);
+    }
+
+    updateValue();
+  }
+
+ 
 }
-
-
-
-}
-
 
 /**
  * Initialisation globale

@@ -1,0 +1,317 @@
+✅ [2L-Ouest-Services] 02/09/2025 05:25:19 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:19 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:22 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:22 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:22 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "POST"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:22 | INFO     | En-tête du Firebase ID token
+{
+  "header": {
+    "alg": "RS256",
+    "kid": "ef248f42f74ae0f94920af9a9a01317ef2d35fe1",
+    "typ": "JWT"
+  }
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:22 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:22 | INFO     | Token reçu dans middleware
+{
+  "tokenSnippet": "eyJhbGciOiJIUzI1NiIs..."
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:22 | INFO     | JWT personnalisé vérifié avec succès
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:22 | INFO     | Utilisateur authentifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:23 | INFO     | Liste des services récupérée
+{
+  "page": 1,
+  "limit": 50,
+  "total": 0
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:23 | INFO     | Liste des services récupérée
+{
+  "page": 1,
+  "limit": 50,
+  "total": 0
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:23 | INFO     | 127.0.0.1 - - [02/Sep/2025:04:25:23 +0000] "GET /api/services?page=1&limit=50 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 05:25:23 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:23 | INFO     | Profil utilisateur récupéré
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:23 | INFO     | 127.0.0.1 - - [02/Sep/2025:04:25:23 +0000] "GET /api/user/profile HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 05:25:27 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:27 | INFO     | Firebase ID token vérifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+📋 [2L-Ouest-Services] 02/09/2025 05:25:27 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:27 | INFO     | 127.0.0.1 - - [02/Sep/2025:04:25:27 +0000] "POST /api/auth/verify-token HTTP/1.1" 200 69 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 05:25:45 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:45 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "POST"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:45 | INFO     | En-tête du Firebase ID token
+{
+  "header": {
+    "alg": "RS256",
+    "kid": "ef248f42f74ae0f94920af9a9a01317ef2d35fe1",
+    "typ": "JWT"
+  }
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:47 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:47 | INFO     | Firebase ID token vérifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+📋 [2L-Ouest-Services] 02/09/2025 05:25:47 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:25:47 | INFO     | 127.0.0.1 - - [02/Sep/2025:04:25:47 +0000] "POST /api/auth/verify-token HTTP/1.1" 200 69 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 05:43:13 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:13 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "POST"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | En-tête du Firebase ID token
+{
+  "header": {
+    "alg": "RS256",
+    "kid": "ef248f42f74ae0f94920af9a9a01317ef2d35fe1",
+    "typ": "JWT"
+  }
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | Token reçu dans middleware
+{
+  "tokenSnippet": "eyJhbGciOiJIUzI1NiIs..."
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | JWT personnalisé vérifié avec succès
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | Utilisateur authentifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | Profil utilisateur récupéré
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:15 | INFO     | 127.0.0.1 - - [02/Sep/2025:04:43:15 +0000] "GET /api/user/profile HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 05:43:16 | INFO     | Liste des services récupérée
+{
+  "page": 1,
+  "limit": 50,
+  "total": 0
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:16 | INFO     | Liste des services récupérée
+{
+  "page": 1,
+  "limit": 50,
+  "total": 0
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:16 | INFO     | 127.0.0.1 - - [02/Sep/2025:04:43:16 +0000] "GET /api/services?page=1&limit=50 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 05:43:17 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:17 | INFO     | Firebase ID token vérifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+📋 [2L-Ouest-Services] 02/09/2025 05:43:17 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:17 | INFO     | 127.0.0.1 - - [02/Sep/2025:04:43:17 +0000] "POST /api/auth/verify-token HTTP/1.1" 200 69 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 05:43:54 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:54 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "POST"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:54 | INFO     | En-tête du Firebase ID token
+{
+  "header": {
+    "alg": "RS256",
+    "kid": "ef248f42f74ae0f94920af9a9a01317ef2d35fe1",
+    "typ": "JWT"
+  }
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:59 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:59 | INFO     | Firebase ID token vérifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+📋 [2L-Ouest-Services] 02/09/2025 05:43:59 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 05:43:59 | INFO     | 127.0.0.1 - - [02/Sep/2025:04:43:59 +0000] "POST /api/auth/verify-token HTTP/1.1" 200 69 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 06:41:07 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:07 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:10 | INFO     | Liste des services récupérée
+{
+  "page": 1,
+  "limit": 50,
+  "total": 0
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:10 | INFO     | Liste des services récupérée
+{
+  "page": 1,
+  "limit": 50,
+  "total": 0
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:10 | INFO     | 127.0.0.1 - - [02/Sep/2025:05:41:10 +0000] "GET /api/services?page=1&limit=50 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "POST"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | En-tête du Firebase ID token
+{
+  "header": {
+    "alg": "RS256",
+    "kid": "ef248f42f74ae0f94920af9a9a01317ef2d35fe1",
+    "typ": "JWT"
+  }
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "OPTIONS"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | Token reçu dans middleware
+{
+  "tokenSnippet": "eyJhbGciOiJIUzI1NiIs..."
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | JWT personnalisé vérifié avec succès
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | Utilisateur authentifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | Profil utilisateur récupéré
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:13 | INFO     | 127.0.0.1 - - [02/Sep/2025:05:41:13 +0000] "GET /api/user/profile HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
+✅ [2L-Ouest-Services] 02/09/2025 06:41:16 | INFO     | Utilisateur récupéré
+{
+  "id": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:16 | INFO     | Firebase ID token vérifié
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+📋 [2L-Ouest-Services] 02/09/2025 06:41:16 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "gphPyfwDYhdEte6uskvuOu9WYTP2"
+}
+✅ [2L-Ouest-Services] 02/09/2025 06:41:16 | INFO     | 127.0.0.1 - - [02/Sep/2025:05:41:16 +0000] "POST /api/auth/verify-token HTTP/1.1" 200 69 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0"
