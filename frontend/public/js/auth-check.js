@@ -11,6 +11,7 @@
   const codeCheckEmail = localStorage.getItem('codeCheckEmail');
   const page = window.location.pathname.split('/').pop().replace('.html', '');
 
+  //alert(localStorage.getItem('jwt'));
   const publicPages = [
     'signin',
     'signup',

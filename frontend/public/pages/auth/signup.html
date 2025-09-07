@@ -120,17 +120,15 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Tooltip style */
-        .tooltip {
+        /* Styles pour les tooltips */
+        .tooltip-info {
             position: relative;
             display: inline-block;
-            cursor: help;
         }
-        
-        .tooltip .tooltiptext {
+        .tooltip-info .tooltiptext {
             visibility: hidden;
             width: 200px;
-            background-color: #555;
+            background-color: #333;
             color: #fff;
             text-align: center;
             border-radius: 6px;
@@ -142,12 +140,15 @@
             margin-left: -100px;
             opacity: 0;
             transition: opacity 0.3s;
+            font-size: 12px;
         }
-        
-        .tooltip:hover .tooltiptext {
+        .tooltip-info:hover .tooltiptext {
             visibility: visible;
             opacity: 1;
         }
+
+
+
         
         /* Modal style */
         .modal {
@@ -157,10 +158,115 @@
         body.modal-active {
             overflow: hidden;
         }
+
+
+
+        .dropdown-content-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .dropdown-content-info.open {
+            max-height: 500px; /* A large value to ensure it can contain the content */
+            opacity: 1;
+            margin-top: 1.5rem;
+        }
+
+        .info-toggle svg {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .info-toggle[aria-expanded="false"] svg {
+            transform: rotate(-90deg);
+        }
+
+        .summary-toggle-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .summary-toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        /* Animation classes for form steps */
+        .step {
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .step.hidden {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        #form-panel .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        #form-panel .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+        #form-panel .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+       
+        #summary-toggle-btn {
+            position: absolute;
+            top: 4rem;
+            left: -1.5rem;
+            z-index: 20;
+            transition: left 0.3s ease-in-out , right 0,3s ease-in;
+            align-items: center;
+            justify-content: center;
+            width: 3rem; 
+            overflow: hidden;
+        }
+
+        #summary-toggle-btn[aria-expanded="false"]:hover {
+            width: 8rem;
+            left: -6rem;
+        }
+        
+        /* Masque le texte par défaut */
+        #hover-message {
+            opacity: 0;
+            white-space: nowrap; /* empêche le texte de se briser sur plusieurs lignes */
+            margin-left: 0.5rem; /* ou ml-2 */
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        /* Affiche le texte au survol du bouton fermé */
+        #summary-toggle-btn[aria-expanded="false"]:hover #hover-message {
+            opacity: 1;
+            display: block;
+        }
+
+
     </style>
 </head>
 
-<body class="bg-ll-white dark:bg-ll-black text-ll-black dark:text-ll-light-gray flex flex-col min-h-screen transition-colors duration-300">
+<body  class="bg-ll-white dark:bg-ll-black text-ll-black dark:text-ll-light-gray flex flex-col min-h-screen transition-colors duration-300">
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
     <div id="chat-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
 
@@ -1091,41 +1197,70 @@
             </div>
         </header>
         
- <main class="relative z-10 max-w-7xl mx-auto w-full min-h-[calc(100vh-14rem)] flex flex-col lg:flex-row items-start justify-center px-4 sm:px-6 sm:mb-4 lg:px-8 py-14 gap-8">
-    <!-- Summary Section -->
-    <div class="w-full lg:w-3/2 bg-ll-white dark:bg-ll-black p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300 lg:sticky lg:top-6">
-        <h3 class="text-lg font-semibold mb-6 text-ll-black dark:text-ll-light-gray flex items-center">
-            <i class="fas fa-id-card mr-2 text-ll-blue"></i>
-            Vos informations
-        </h3>
-        <div class="space-y-4" id="summary-container">
-            <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-                <h4 class="text-sm font-medium text-ll-blue mb-2">Informations personnelles</h4>
-                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-name">Non renseigné</p>
-                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-email">Non renseigné</p>
-            </div>
-            <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-                <h4 class="text-sm font-medium text-ll-blue mb-2">Coordonnées</h4>
-                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-phone">Non renseigné</p>
-                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-country">Non renseigné</p>
-            </div>
-            <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-                <h4 class="text-sm font-medium text-ll-blue mb-2">Adresse professionnelle</h4>
-                <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-address">Non renseigné</p>
+
+        <main class="relative z-10 max-w-7xl mx-auto w-full min-h-[calc(100vh-14rem)] flex flex-col-reverse lg:flex-row items-start justify-center px-4 sm:px-6 sm:mb-4 lg:px-8 py-14 gap-8">
+   
+            <div id="summary-panel" class="w-full lg:w-1/3 bg-ll-white dark:bg-ll-black p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300 lg:sticky lg:top-6">
+        
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-ll-black dark:text-ll-light-gray flex items-center">
+                <i class="fas fa-id-card mr-2 text-ll-blue"></i>
+                Vos informations
+            </h3>
+
+            <button class="info-toggle p-2 rounded-xl hover:bg-ll-blue/20 dark:hover:bg-ll-blue/20 transition-colors duration-300" data-level-id="info" aria-expanded="true" aria-controls="level-dropdown-info" title="Afficher/Masquer les détails">
+                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 15L6 9H18L12 15Z" />
+                </svg>
+            </button>
+        </div>
+        
+
+        <div id="level-dropdown-info" class="dropdown-content-info mt-6">
+            <div class="space-y-4" id="summary-container">
+                <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                    <h4 class="text-sm font-medium text-ll-blue mb-2">Informations personnelles</h4>
+                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-name">Non renseigné</p>
+                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-email">Non renseigné</p>
+                </div>
+                <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                    <h4 class="text-sm font-medium text-ll-blue mb-2">Coordonnées</h4>
+                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-phone">Non renseigné</p>
+                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-country">Non renseigné</p>
+                </div>
+                <div class="info-card bg-ll-light-bg dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                    <h4 class="text-sm font-medium text-ll-blue mb-2">Adresse professionnelle</h4>
+                    <p class="text-xs text-ll-text-gray dark:text-ll-medium-gray" id="summary-address">Non renseigné</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Form Section with Logo and Title -->
-    <div class="w-full lg:w-3/2 bg-ll-white dark:bg-ll-black p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
-        <!-- Logo and Company Name -->
-        <div class="flex items-center justify-center mb-6 gap-4">
-            <img src="/assets/images/logo.png" alt="LL-Ouest-Services Logo" class="w-12 h-12 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-ll-black dark:text-ll-light-gray tracking-tight" style="font-family: 'Cinzel', serif;">L&L-Ouest-Services</h1>
-        </div>
+    <div id="form-panel" class="relative w-full lg:w-[30rem] bg-ll-white dark:bg-ll-black p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
+        
+        <button id="summary-toggle-btn" class="tooltip-info hidden lg:flex items-center justify-center w-12 h-12 bg-ll-white dark:bg-ll-black border border-gray-200 dark:border-gray-700 text-white rounded-xl shadow-lg absolute top-16 -left-6 z-20  transition-all duration-300  " aria-expanded="true" aria-controls="summary-panel">
+            
+             <svg id="summary-toggle-icon" class="w-5 h-5 text-gray-500 dark:text-gray-400  transition-transform duration-300" fill="currentColor" viewBox="0 0 297 297" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M279.368,24.726H102.992c-9.722,0-17.632,7.91-17.632,17.632V67.92c0,9.722,7.91,17.632,17.632,17.632h176.376 c9.722,0,17.632-7.91,17.632-17.632V42.358C297,32.636,289.09,24.726,279.368,24.726z"/>
+                    <path d="M279.368,118.087H102.992c-9.722,0-17.632,7.91-17.632,17.632v25.562c0,9.722,7.91,17.632,17.632,17.632h176.376 c9.722,0,17.632-7.91,17.632-17.632v-25.562C297,125.997,289.09,118.087,279.368,118.087z"/>
+                    <path d="M279.368,211.448H102.992c-9.722,0-17.632,7.91-17.632,17.633v25.561c0,9.722,7.91,17.632,17.632,17.632h176.376 c9.722,0,17.632-7.91,17.632-17.632v-25.561C297,219.358,289.09,211.448,279.368,211.448z"/>
+                    <path d="M45.965,24.726H17.632C7.91,24.726,0,32.636,0,42.358V67.92c0,9.722,7.91,17.632,17.632,17.632h28.333 c9.722,0,17.632-7.91,17.632-17.632V42.358C63.597,32.636,55.687,24.726,45.965,24.726z"/>
+                    <path d="M45.965,118.087H17.632C7.91,118.087,0,125.997,0,135.719v25.562c0,9.722,7.91,17.632,17.632,17.632h28.333 c9.722,0,17.632-7.91,17.632-17.632v-25.562C63.597,125.997,55.687,118.087,45.965,118.087z"/>
+                    <path d="M45.965,211.448H17.632C7.91,211.448,0,219.358,0,229.081v25.561c0,9.722,7.91,17.632,17.632,17.632h28.333 c9.722,0,17.632-7.91,17.632-17.632v-25.561C63.597,219.358,55.687,211.448,45.965,211.448z"/>
+                </svg>
+            <span id="summary-toggle-tooltip" class="tooltiptext !w-36 !-ml-16">Masquer le résumé</span>
+            <span id="hover-message" class="ml-2 text-sm text-gray-700 dark:text-gray-300 hidden">Résumé</span>
+        </button>
+
+        
+
+                <div class="flex items-end justify-center mb-8 gap-4">
+                    <img src="/assets/images/logo.png" alt="LL-Ouest-Services Logo" class="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
+                    <h1 class="text-xxl font-bold font-extrabold text-ll-black dark:text-ll-light-gray tracking-tight" style="font-family: 'Cinzel', serif;">L&L-Ouest-Services</h1>
+                </div>
+
         <h2 class="text-xl sm:text-2xl font-extrabold mb-6 text-center text-ll-black dark:text-ll-light-gray">S'inscrire</h2>
 
-        <!-- Progress Bar -->
         <div class="flex justify-center mb-6">
             <div class="flex space-x-2">
                 <div class="w-8 h-2 bg-blue-600 rounded-full step-indicator completed" data-step="1"></div>
@@ -1136,7 +1271,6 @@
         </div>
 
         <form id="signup-form" class="space-y-6" novalidate>
-            <!-- Step 1: Personal Information -->
             <div id="step-1" class="step" data-aos="fade-up" data-aos-duration="500">
                 <h3 class="text-lg sm:text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
                     <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">1</span>
@@ -1179,7 +1313,6 @@
                 </div>
             </div>
 
-            <!-- Step 2: Contact and Country -->
             <div id="step-2" class="step hidden" data-aos="fade-up" data-aos-duration="500">
                 <h3 class="text-lg sm:text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
                     <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">2</span>
@@ -1232,7 +1365,6 @@
                 </div>
             </div>
 
-            <!-- Step 3: Professional Address -->
             <div id="step-3" class="step hidden" data-aos="fade-up" data-aos-duration="500">
                 <h3 class="text-lg sm:text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
                     <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">3</span>
@@ -1289,7 +1421,6 @@
                 </div>
             </div>
 
-            <!-- Step 4: Password -->
             <div id="step-4" class="step hidden" data-aos="fade-up" data-aos-duration="500">
                 <h3 class="text-lg sm:text-xl font-semibold mb-4 text-ll-black dark:text-ll-light-gray flex items-center">
                     <span class="flex items-center justify-center w-8 h-8 bg-ll-blue text-white rounded-full mr-2">4</span>
@@ -1356,6 +1487,8 @@
         </div>
     </div>
 </main>
+
+
 
     </div>
 
@@ -1509,6 +1642,103 @@
         auth.init();
     </script>
   
+
+ <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                    const summaryToggleBtn = document.getElementById('summary-toggle-btn');
+                    const summaryPanel = document.getElementById('summary-panel');
+                    const toggleIcon = document.getElementById('summary-toggle-icon');
+                    const toggleTooltip = document.getElementById('summary-toggle-tooltip');
+                    const hoverMessage = document.getElementById('hover-message');
+
+                    summaryToggleBtn.addEventListener('click', () => {
+                        const isExpanded = summaryToggleBtn.getAttribute('aria-expanded') === 'true';
+
+                        if (isExpanded) {
+                            summaryToggleBtn.setAttribute('aria-expanded', 'false');
+                            summaryPanel.classList.remove('lg:w-1/3');
+                            summaryPanel.classList.add('lg:w-0', 'lg:opacity-0', 'lg:p-0', 'lg:invisible');
+                            toggleIcon.classList.add('rotated');
+                            toggleTooltip.textContent = 'Afficher le résumé';
+                        } else {
+                            summaryToggleBtn.setAttribute('aria-expanded', 'true');
+                            summaryPanel.classList.remove('lg:w-0', 'lg:opacity-0', 'lg:p-0', 'lg:invisible');
+                            summaryPanel.classList.add('lg:w-1/3');
+                            toggleIcon.classList.remove('rotated');
+                            toggleTooltip.textContent = 'Masquer le résumé';
+                        }
+                    });
+
+                 
+            // Gérer le survol du bouton
+            summaryToggleBtn.addEventListener('mouseenter', () => {
+                const isExpanded = summaryToggleBtn.getAttribute('aria-expanded') === 'true';
+                if (!isExpanded) {
+                    summaryToggleBtn.classList.add('hover-expand');
+                }
+            });
+
+            summaryToggleBtn.addEventListener('mouseleave', () => {
+                summaryToggleBtn.classList.remove('hover-expand');
+            });
+        
+
+
+            document.querySelectorAll('.info-toggle').forEach(button => {
+                const contentId = button.getAttribute('aria-controls');
+                const content = document.getElementById(contentId);
+                const icon = button.querySelector('svg');
+
+                // Function to toggle the content
+                const toggleContent = () => {
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    if (isExpanded) {
+                        // Close the content
+                        content.style.maxHeight = '0px';
+                        content.style.opacity = '0';
+                        content.style.marginTop = '0';
+                        button.setAttribute('aria-expanded', 'false');
+                        icon.style.transform = 'rotate(-90deg)';
+                        setTimeout(() => {
+                            content.classList.add('hidden');
+                        }, 500); 
+                    } else {
+                        // Open the content
+                        content.classList.remove('hidden');
+                        // Set the maxHeight to the scrollHeight to trigger the transition
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.style.opacity = '1';
+                        content.style.marginTop = '1.5rem';
+                        button.setAttribute('aria-expanded', 'true');
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                };
+
+                // Add a click event listener to the button
+                button.addEventListener('click', toggleContent);
+
+                // Ensure initial state matches the `aria-expanded` attribute
+                // This makes sure the element has the correct height on page load
+                if (button.getAttribute('aria-expanded') === 'true') {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.opacity = '1';
+                    content.style.marginTop = '1.5rem';
+                } else {
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                    content.style.marginTop = '0';
+                    content.classList.add('hidden');
+                }
+
+                // Add a transition listener to handle post-transition cleanup
+                content.style.transition = 'max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin-top 0.5s ease-in-out';
+            });
+    
+        
+        });
+    </script>
+    
 
 
 

@@ -6,17 +6,26 @@
  * @module main
  */
 
-import { auth, showNotification, setStoredToken, clearStoredToken, getStoredToken } from './modules/utils.js';
+
+import { auth, showNotification, setStoredToken, clearStoredToken, getStoredToken, getCachedUserData } from './modules/utils.js';
+
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
-import authApi from './api.js';
+
+import Api from './api.js';
+
 import './animations/animation.js';
+
 import './animations/theme.js';
+
 import './animations/sidebar.js';
+
 import './animations/chat.js';
+
 
 // Cache des requêtes API (objet global avec TTL de 5 minutes)
 const apiCache = {};
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
 
 /**
  * Cache une réponse API.
@@ -125,15 +134,16 @@ async function initializePage(page, isAuthenticated) {
 
   onAuthStateChanged(auth, async (user) => {
     let isAuthenticated = !!user;
+    let tokenRefreshed = false;
 
     if (user) {
-      const cachedToken = getCachedResponse('jwt');
-      
-      if (cachedToken) {
-        setStoredToken(cachedToken.token, cachedToken.role);
-        isAuthenticated = true;
-      } else {
-        try {
+      try {
+        const cachedToken = getCachedResponse('jwt');
+        
+        if (cachedToken) {
+          setStoredToken(cachedToken.token, cachedToken.role);
+          isAuthenticated = true;
+        } else {
           let storedToken = getStoredToken();
           let newToken = storedToken;
 
@@ -142,42 +152,62 @@ async function initializePage(page, isAuthenticated) {
               const decodedToken = JSON.parse(atob(storedToken.split('.')[1]));
               const exp = decodedToken.exp * 1000;
               const now = Date.now();
+              if (exp <= now) {
+                throw new Error('Token expired');
+              }
               if (exp - now < 5 * 60 * 1000) { // Moins de 5 minutes avant expiration
-                const refreshData = await authApi.auth.refreshToken();
+                const refreshData = await Api.auth.refreshToken();
                 newToken = refreshData.token;
                 cacheResponse('jwt', { token: newToken, role: refreshData.role || 'client' });
                 setStoredToken(newToken, refreshData.role || 'client');
+                tokenRefreshed = true;
               } else {
-                const verifyData = await authApi.auth.verifyToken();
+                const verifyData = await Api.auth.verifyToken();
                 cacheResponse('jwt', { token: storedToken, role: verifyData.role || 'client' });
                 setStoredToken(storedToken, verifyData.role || 'client');
               }
             } catch (decodeError) {
               console.error('Erreur lors du décodage du token:', decodeError);
-              newToken = await user.getIdToken(true);
-              const verifyData = await authApi.auth.verifyToken();
-              cacheResponse('jwt', { token: newToken, role: verifyData.role || 'client' });
-              setStoredToken(newToken, verifyData.role || 'client');
+              newToken = await Api.auth.refreshToken(); // Attempt refresh
+              const verifyData = await Api.auth.verifyToken();
+              cacheResponse('jwt', { token: newToken.token, role: verifyData.role || 'client' });
+              setStoredToken(newToken.token, verifyData.role || 'client');
+              tokenRefreshed = true;
             }
           } else {
             newToken = await user.getIdToken(true);
-            const verifyData = await authApi.auth.verifyToken();
+            const verifyData = await Api.auth.verifyToken();
             cacheResponse('jwt', { token: newToken, role: verifyData.role || 'client' });
             setStoredToken(newToken, verifyData.role || 'client');
           }
-
           isAuthenticated = true;
-        } catch (error) {
-          console.error('Erreur de vérification du token:', error);
-          clearStoredToken();
-          isAuthenticated = false;
-          showNotification('Session expirée. Veuillez vous reconnecter.', 'error');
-          window.location.href = '/pages/auth/signin.html';
         }
+      } catch (error) {
+        console.error('Erreur de vérification du token:', error);
+        if (error.message.includes('invalid algorithm') || error.message.includes('Token invalide') || error.message.includes('expiré')) {
+          clearStoredToken();
+          await Api.auth.signOut();
+          showNotification('Session expirée ou token invalide. Veuillez vous reconnecter.', 'error');
+          window.location.href = '/pages/auth/signin.html';
+        } else if (error.message.includes('network')) {
+          showNotification('Erreur réseau lors de la vérification de la session. Utilisation du mode hors ligne.', 'warning');
+          // Fall back to cached data if available
+          const cachedUser = getCachedUserData();
+          if (cachedUser) {
+            isAuthenticated = true;
+          }
+        } else {
+          showNotification('Erreur inattendue lors de la vérification de la session. Veuillez réessayer.', 'error');
+        }
+        isAuthenticated = false;
       }
     } else {
       clearStoredToken();
       isAuthenticated = false;
+    }
+
+    if (tokenRefreshed) {
+      showNotification('Session rafraîchie avec succès.', 'info');
     }
 
     await initializePage(page, isAuthenticated);

@@ -23,9 +23,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-const API_BASE_URL = 'http://localhost:35473/api';
+export const API_BASE_URL = 'http://localhost:35473/api';
+export const CACHE_TTL = 5 * 60 * 1000; 
+export const USER_CACHE_KEY = 'userDataCache';
 
-// Chargement de SweetAlert2 via CDN
+
 const swalScript = document.createElement('script');
 swalScript.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js';
 swalScript.async = true;
@@ -34,6 +36,103 @@ document.head.appendChild(swalScript);
 let swalLoadedResolve;
 const swalLoaded = new Promise((resolve) => (swalLoadedResolve = resolve));
 swalScript.onload = () => swalLoadedResolve();
+
+
+/**
+   * Détermine si le thème est sombre.
+   * @returns {boolean} True si mode sombre actif.
+   */
+  export function isDarkMode() {
+    return document.documentElement.classList.contains('dark');
+  };
+
+
+/**
+ * Efface le cache des données utilisateur
+ */
+export function clearUserCache() {
+  localStorage.removeItem(USER_CACHE_KEY);
+}
+
+
+/**
+ * Récupère les données utilisateur du cache localStorage
+ * @returns {Object|null} Données utilisateur cachées ou null
+ */
+export function getCachedUserData() {
+  try {
+    const cached = localStorage.getItem(USER_CACHE_KEY);
+    if (!cached) return null;
+
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < CACHE_TTL) {
+      return data;
+    }
+    clearUserCache();
+    return null;
+  } catch (error) {
+    console.error('Erreur lors de la récupération du cache utilisateur:', error);
+    clearUserCache();
+    return null;
+  }
+}
+
+
+/**
+ * Met en cache les données utilisateur dans localStorage
+ * @param {Object} userData - Données utilisateur à cacher
+ */
+export function cacheUserData(userData) {
+  try {
+    const cacheObject = {
+      data: userData,
+      timestamp: Date.now()
+    };
+    localStorage.setItem(USER_CACHE_KEY, JSON.stringify(cacheObject));
+  } catch (error) {
+    console.error('Erreur lors de la mise en cache des données utilisateur:', error);
+  }
+}
+
+
+/**
+ * Vérifie la connectivité réseau.
+ * @returns {Promise<boolean>} True si connecté, false sinon.
+ */
+export async function checkNetwork() {
+  if (!navigator.onLine) {
+    return false;
+  }
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const response = await fetch(`${API_BASE_URL}/health`, { method: 'HEAD', signal: controller.signal });
+    clearTimeout(timeoutId);
+    return response.ok;
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      console.error('Network check timed out');
+    }
+    return false;
+  }
+}
+
+export /**
+ * Gère les erreurs de réseau ou d'API de manière robuste.
+ * @param {Error} error - L'erreur à gérer.
+ * @param {string} context - Contexte de l'erreur.
+ */
+function handleNetworkError(error, context) {
+  console.error(`${context}:`, error);
+  showNotification('Problème de réseau ou serveur indisponible. Vérifiez votre connexion.', 'error');
+  // Tentative de reconnexion automatique après 5s
+  setTimeout(async () => {
+    if (await checkNetwork()) {
+      showNotification('Connexion rétablie.', 'success');
+      window.location.reload();
+    }
+  }, 5000);
+}
 
 
 export const getAuthErrorMessage = (error) => {
@@ -74,37 +173,96 @@ export const getAuthErrorMessage = (error) => {
 };
 
 
-/**
- * Displays a notification with the specified message and type.
- * @param {string} message - The message to display.
- * @param {'success' | 'error' | 'info'} type - The type of notification.
- */
-export function Notify(message, type = 'info') {
-  const notification = document.createElement('div');
-  notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-transform duration-300 ${
-    type === 'error' ? 'bg-red-500 text-white' :
-    type === 'success' ? 'bg-green-500 text-white' :
-    'bg-blue-500 text-white'
-  }`;
-  notification.innerHTML = `
-    <div class="flex items-center">
-      <i class="fas ${
-        type === 'error' ? 'fa-exclamation-circle' :
-        type === 'success' ? 'fa-check-circle' :
-        'fa-info-circle'
-      } mr-2"></i>
-      <span>${message}</span>
-    </div>
-  `;
+    /**
+     * Affiche un dialogue de chargement avec animation.
+     * Le dialogue reste ouvert jusqu'à ce qu'il soit fermé manuellement.
+     * @param {string} title - Le titre du dialogue de chargement.
+     * @returns {void}
+     */
+    export async function showLoadingDialog(title,icon) {
+      const isDark = isDarkMode();
+      const bgClass = isDark ? 'bg-ll-black text-ll-white' : 'bg-ll-white text-ll-black';
+      const borderClass = isDark ? 'border-ll-dark-blue/50' : 'border-ll-light-gray/20';
+      
+      Swal.fire({
+        title,
+        html: `
+          <div class="${bgClass} p-4 rounded-xl ${borderClass}">
+            <lottie-player src="/assets/json/icons/${icon}.json" background="transparent" speed="1" style="width: 150px; height: 150px; margin: 0 auto;" loop autoplay></lottie-player>
+            <p class="text-center mt-2 text-sm">Veuillez patienter pendant l'opération.</p>
+          </div>
+        `,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        background: isDark ? '#1B1B18' : '#FDFDFC',
+        color: isDark ? '#FDFDFC' : '#1B1B18',
+        customClass: {
+          popup: 'swal-wide',
+        },
+        // On peut utiliser didOpen si on a besoin de faire des actions après l'affichage du modal
+      });
+    }
 
-  document.body.appendChild(notification);
-  setTimeout(() => notification.classList.add('translate-x-0'), 10);
-  setTimeout(() => {
-    notification.classList.remove('translate-x-0');
-    notification.classList.add('translate-x-full');
-    setTimeout(() => notification.parentNode?.removeChild(notification), 300);
-  }, 5000);
-}
+    /**
+   * Affiche un dialogue SWAL de succès personnalisé pour l'inscription.
+   * @param {Object} userData - Données de l'utilisateur.
+   * @returns {Promise<void>}
+   */
+  export async function showSuccessSignUp(Username) {
+    const isDark = isDarkMode();
+    const bgClass = isDark ? 'bg-ll-black text-ll-white' : 'bg-ll-white text-ll-black';
+    const message = `Bienvenue, <span class="text-blue dark:text-ll-white"${Username}</span> ! Nous sommes ravis de vous accueillir.`;
+
+    await Swal.fire({
+      title: 'Inscription réussie',
+      html: `
+        <div class="${bgClass} p-4 rounded-xl">
+          <lottie-player src="/assets/json/success-animation.json" background="transparent" speed="1" style="width: 150px; height: 150px; margin: 0 auto;" autoplay></lottie-player>
+          <p class="text-center mt-4 text-lg font-cinzel">${message}</p>
+        </div>
+      `,
+      icon: 'success',
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      timer: 3000,
+      background: isDark ? '#1B1B18' : '#FDFDFC',
+      didOpen: () => {
+        
+      },
+    });
+  };
+
+
+  /**
+   * Affiche un dialogue SWAL de succès personnalisé pour la connexion.
+   * @param {Object} userData - Données de l'utilisateur.
+   * @returns {Promise<void>}
+   */
+  export async function showSuccessDialog(userData) {
+    const isDark = isDarkMode();
+    const bgClass = isDark ? 'bg-ll-black text-ll-white' : 'bg-ll-white text-ll-black';
+    const firstName = (userData.name || userData.nom || 'Utilisateur').split(' ')[0];
+    const isFirstLogin = !userData.lastLogin || new Date(userData.createdAt).getTime() === new Date(userData.lastLogin).getTime();
+    const message = isFirstLogin ? `Bienvenue, ${firstName} ! Nous sommes ravis de vous accueillir.` : `Ravi de vous revoir, ${firstName} !`;
+
+    await Swal.fire({
+      title: 'Connexion réussie',
+      html: `
+        <div class="${bgClass} p-4 rounded-xl">
+          <lottie-player src="/assets/json/icons/spray.json" background="transparent" speed="1" style="width: 150px; height: 150px; margin: 0 auto;" autoplay></lottie-player>
+          <p class="text-center mt-4 text-lg font-cinzel">${message}</p>
+        </div>
+      `,
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 3000,
+      background: isDark ? '#1B1B18' : '#FDFDFC',
+      color: isDark ? '#FDFDFC' : '#1B1B18',
+      didOpen: () => {
+        
+      },
+    });
+  };
 
 
 /**
@@ -215,6 +373,8 @@ export async function showNotification(message, type, isToast = true, options = 
     confirmButtonText: 'Okay',
     position: isToast ? 'top-end' : 'center',
     toast: isToast,
+    background: isDarkMode() ? '#1B1B18' : '#FDFDFC',
+    color: isDarkMode() ? '#FDFDFC' : '#1B1B18',
     didOpen: (popup) => {
     popup.style.fontSize = '14px';
   },
@@ -566,4 +726,8 @@ export default {
   checkPasswordStrength,
   validateField,
   openLightbox,
+  showLoadingDialog,
+  showSuccessDialog,
+  isDarkMode,
+  getCachedUserData
 };

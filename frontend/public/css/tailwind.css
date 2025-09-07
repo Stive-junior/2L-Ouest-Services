@@ -73,7 +73,8 @@ input:focus {
   background: rgba(59, 130, 246, 0.8);
 }
 
-.tooltip {
+
+.sidebar-item .tooltip {
   visibility: hidden;
   background-color: #333;
   color: #fff;
@@ -89,10 +90,43 @@ input:focus {
   transition: opacity 0.3s ease;
 }
 
+
 .sidebar-item:hover .tooltip {
   visibility: visible;
   opacity: 1;
 }
+
+.border-effect {
+  position: relative; /* Indispensable pour que le pseudo-élément soit positionné par rapport au conteneur */
+}
+
+.border-effect::after {
+  content: '';
+  pointer-events: none;
+  position: fixed; 
+  inset: 0;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.dark .border-effect::after {
+  border-color: rgba(255, 255, 255, 0.12); /* ou la classe Tailwind correspondante */
+}
+
+/* Active l'effet et l'anime */
+.border-effect.active::after {
+  opacity: 1;
+}
+
+/* La transition se fait sur ces propriétés */
+.border-effect::after {
+  transition: all 0.5s ease;
+  inset: 0;
+}
+
+
 
 .nav-logo {
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -278,45 +312,76 @@ input:focus {
             scrollbar-color: var(--ll-blue) transparent;
         }
 
-        #chat-sidebar.collapsed {
-            width: 0 !important;
-            min-width: 0 !important;
-            opacity: 0;
-            pointer-events: none;
-        }
 
-        #chat-sidebar.collapsed .custom-scrollbar,
-        #chat-sidebar.collapsed #chat-sidebar-container,
-        #chat-sidebar.collapsed .flex {
-            opacity: 0;
-            width: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
+      #sidebar {
+          transform: translateX(-100%);
+          transition: transform 0.5s ease-in-out, width 0.5s ease-in-out;
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 1000;
+          overflow-y: auto;
+      }
 
-       
-
-        #chat-sidebar.collapsed .collapsed-hidden {
-            display: none !important;
-        }
-
-        @media (min-width: 1024px) {
-            #chat-sidebar.collapsed .collapsed-hidden {
-                display: block;
-            }
-        }
-
-        @keyframes fadeSlideIn {
-            0% { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+      .sidebar-open #sidebar {
+          transform: translateX(0);
+      }
 
 
+      #chat-sidebar {
+          transform: translateX(100%);
+          transition: transform 0.5s ease-in-out, width 0.5s ease-in-out;
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          z-index: 1000;
+          overflow-y: auto;
+      }
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-}
+      .chat-sidebar-open #chat-sidebar {
+          transform: translateX(0);
+      }
+
+      .content-main {
+          transition: margin-left 0.5s ease-in-out, margin-right 0.5s ease-in-out, width 0.5s ease-in-out, padding 0.5s ease-in-out, border-radius 0.5s ease-in-out;
+      }
+
+      /* Additional styles for smooth collapsing */
+      #chat-sidebar.collapsed {
+          width: 0 !important;
+          min-width: 0 !important;
+          opacity: 0;
+          pointer-events: none;
+          transition: width 0.5s ease-in-out, min-width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      }
+
+      #chat-sidebar.collapsed .custom-scrollbar,
+      #chat-sidebar.collapsed #chat-sidebar-container,
+      #chat-sidebar.collapsed .flex {
+          opacity: 0;
+          width: 0;
+          pointer-events: none;
+          transition: opacity 0.5s ease-in-out, width 0.5s ease-in-out;
+      }
+
+      #chat-sidebar.collapsed .collapsed-hidden {
+          display: none !important;
+      }
+
+      @media (min-width: 1024px) {
+          #chat-sidebar.collapsed .collapsed-hidden {
+              display: block;
+          }
+      }
+
+      @keyframes fadeSlideIn {
+          0% { opacity: 0; transform: translateY(15px); }
+          100% { opacity: 1; transform: translateY(0); }
+      }
+
+
 
 button, a {
     transition: color 200ms ease, background-color 200ms ease, transform 200ms ease;

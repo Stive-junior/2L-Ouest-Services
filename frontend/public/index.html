@@ -63,6 +63,8 @@
                 extend: {
                     colors: {
                         'll-blue': '#2563EB',
+                        'll-green' : '#90EE90',
+                        'll-dark-green': '#10b981',
                         'll-dark-blue': '#1E40AF',
                         'll-light-gray': '#EDEDEC',
                         'll-medium-gray': '#A1A09A',
@@ -99,22 +101,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .bubble {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle, rgba(0,191,255,0.7), rgba(0,191,255,0.2));
-            border-radius: 50%;
-            animation: bubbleRise 15s infinite ease-in;
-            opacity: 0.7;
-            z-index: 5;
-        }
-
-        @keyframes bubbleRise {
-            0% { transform: translateY(0) scale(0.8); opacity: 0.7; }
-            50% { transform: translateY(-50vh) scale(1.2); opacity: 0.4; }
-            100% { transform: translateY(-100vh) scale(0.8); opacity: 0; }
-        }
+        
 
         .video-overlay {
             position: absolute;
@@ -1237,13 +1224,138 @@
 
         blockquote {
         position: relative;
-        padding: 1rem;
-        border-left: 4px solid #2563EB;
+        padding: 1rem 1rem 1rem 1.5rem;
         }
+
+        blockquote::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, #2563EB, #90EE90);
+        }
+
 
         blockquote footer {
         font-style: normal;
         }
+
+
+        section:not(#faq) button,.content-main a.inline-flex , #hero-slides a {
+       
+        font-weight: 600;
+        border: 0.5px solid #e2e8f0;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        }
+
+        html:not(.dark){
+            color: white;
+        }
+
+        /* Le pseudo-élément pour la bordure en dégradé */
+        section button::before {
+        content: '';
+        position: absolute;
+        inset: -2px; /* Agrandit l'inset pour créer un effet de lueur */
+        border-radius: 0.5rem;
+        background: linear-gradient(90deg, #2563EB, #90EE90);
+        z-index: -1;
+        filter: blur(8px); /* Applique un flou pour l'effet de lueur */
+        opacity: 0;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        transform: scale(0.95);
+        }
+
+ 
+
+
+html:not(.dark) #blurred-header.header-light-style button { 
+    background-color: rgba(255, 255, 255, 0.5); 
+    color: #a0a0a0; 
+} 
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.service-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.service-card:hover .hover-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-overlay {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .service-card {
+    height: 72rem;
+  }
+
+  .hover-overlay {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .hover-overlay h4 {
+    font-size: 1rem;
+  }
+
+  .hover-overlay p {
+    font-size: 0.75rem;
+  }
+}
+
+
+
+
+.modal-content {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.modal-content img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .modal-content {
+    max-width: 95%;
+    padding: 1rem;
+  }
+
+  .modal-content img {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .modal-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .modal-content p {
+    font-size: 0.875rem;
+  }
+}
 
     </style>
 </head>
@@ -1263,23 +1375,23 @@
         <div id="chat-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden lg:hidden"></div>
 
         <!-- Sidebar -->
-<aside id="sidebar" class="fixed top-0 left-0 h-full w-80 bg-sidebar-light dark:bg-sidebar-dark backdrop-blur-xl shadow-2xl z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-500 ease-in-out rounded-r-2xl overflow-hidden border-r border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0;">
+<aside id="sidebar" class="fixed top-0 left-0 h-full w-80 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-500 ease-in-out rounded-none overflow-hidden border-r border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0;">
     <div class="relative w-full h-full">
         <!-- Sidebar Header -->
         <div class="absolute top-0 w-full p-4 z-40 bg-gradient-to-b from-sidebar-light/90 to-transparent dark:from-sidebar-dark/90 dark:to-transparent shadow-md">
             <div class="flex items-center justify-between">
-                <a href="/" class="flex items-center text-2xl font-extrabold text-ll-blue dark:text-ll-blue hover:text-ll-dark-blue dark:hover:text-ll-dark-blue transition-all duration-300">
+                <a href="/" class="flex items-center text-xl font-extrabold text-ll-dark-green dark:text-ll-blue hover:text-ll-dark-blue dark:hover:text-ll-dark-blue transition-all duration-300">
                     <img src="../../assets/images/logo.png" alt="L&L Ouest Services Logo" class="h-12 w-12 mr-3 transform transition-transform duration-300 hover:scale-110 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
                     <span class="text-xl tracking-tight">L&L Ouest Services</span>
                 </a>
                 <div class="flex items-center gap-2">
                     <button id="sidebar-collapse-toggle" class="p-2 rounded-lg hover:bg-white/20 dark:hover:bg-[#2A2A2A] transition-colors focus:outline-none focus:ring-2 focus:ring-ll-blue/30 hidden lg:block" title="Réduire/Étendre le sidebar">
-                        <svg viewBox="0 0 24 24" class="w-7 h-7 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
+                        <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
                             <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
                         </svg>
                     </button>
-                    <button id="main-sidebar-close" class="lg:hidden p-2 rounded-lg hover:bg-[#f53003]/10 dark:hover:bg-afrixBrown transition focus:outline-none focus:ring-2 focus:ring-ll-blue/30" title="Fermer le sidebar">
-                        <svg viewBox="0 0 24 24" class="w-7 h-7 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
+                    <button id="main-sidebar-close" class="lg:hidden p-2 rounded-lg hover:bg-[#f53003]/10 dark:hover:bg-gray-200 transition focus:outline-none focus:ring-2 focus:ring-ll-blue/30" title="Fermer le sidebar">
+                        <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
                             <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
                         </svg>
                     </button>
@@ -1313,57 +1425,57 @@
                 <div data-level="main" class="w-full float-left">
                     <div class="flex min-h-full w-full flex-col px-3 space-y-2">
                         <!-- User Profile -->
-                        <div id="user-profile-container" class="mb-6 p-4 bg-gradient-to-r from-ll-blue to-ll-dark-blue backdrop-blur-md rounded-xl text-white shadow-lg transform transition-all duration-300 hover:scale-102 relative">
-                            <!-- Loading Spinner -->
-                            <div id="profile-loading" class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl hidden">
-                                <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+                        <div id="user-profile-container" class="mb-6 p-4 bg-gradient-to-r from-ll-dark-green to-ll-dark-blue backdrop-blur-md rounded-xl text-white shadow-lg transform transition-all duration-300 hover:scale-102 relative">
+                                                    <!-- Loading Spinner -->
+                        <div id="profile-loading" class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl hidden">
+                        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold shadow-inner overflow-hidden">
+                            <span id="user-initial" class="user-initial">U</span>
+                            <img id="user-photo" src="" alt="Photo de profil" class="hidden w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 id="user-name" class="font-bold text-white/95 text-lg truncate">Utilisateur</h3>
+                            <p id="user-email" class="text-sm text-white/90 truncate"></p>
+                            <div class="flex items-center gap-2 mt-1">
+                            <span id="user-country" class="text-sm text-white/80"></span>
+                            <span id="user-role" class="text-xs bg-white/20 px-2 py-1 rounded-full">Invité</span>
                             </div>
-                            <div data-auth="authenticated" class="flex items-center gap-4">
-                                <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold shadow-inner overflow-hidden">
-                                    <span class="user-initial">U</span>
-                                    <img id="user-photo" src="" alt="Photo de profil" class="hidden w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="font-bold text-white/95 text-lg truncate">Utilisateur</h3>
-                                    <p class="text-sm text-white/90 truncate"></p>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-sm text-white/80"></span>
-                                        <span class="text-xs bg-white/20 px-2 py-1 rounded-full">Invité</span>
-                                    </div>
-                                </div>
-                               <button id="profile-dropdown-toggle" class="level-dropdown-toggle p-2 rounded-xl hover:bg-ll-blue/20 dark:hover:bg-ll-blue/20 transition-colors duration-300" title="Options du profil" aria-expanded="false" aria-controls="profile-dropdown" tabindex="0">
-                                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        </div>
+                        <button data-level-id="profile" class="level-dropdown-toggle p-2 rounded-xl hover:bg-ll-blue/20 dark:hover:bg-ll-blue/20 transition-colors duration-300" title="Options du profil" aria-expanded="false" aria-controls="profile" tabindex="0">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        </div>
 
-                                <!-- Dropdown Menu -->
-                                <div id="profile-dropdown" class="hidden mt-2 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-xl shadow-md overflow-hidden transition-all duration-300 max-h-0" data-os="fade-up">
-                                    <div class="pl-8 pr-4 py-2 bg-white/10 dark:bg-[#1A1A1A]/50 rounded-xl shadow-md">
-                                        <!-- Menu Items -->
-                                        <a href="javascript:void(0)" data-navigate="profile-details" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                            </svg>
-                                            Mon profil
-                                        </a>
-                                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            </svg>
-                                            Paramètres
-                                        </a>
-                                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                            </svg>
-                                            Factures
-                                        </a>
-                                    </div>
-                                </div>
+                        <!-- Dropdown Menu -->
+                        <div id="level-dropdown-profile" class="hidden mt-2 bg-radial-gradient dark:bg-radial-gradient-dark rounded-xl shadow-md overflow-hidden transition-all duration-300 max-h-0" data-os="fade-up">
+                        <div class="pl-8 pr-4 py-2 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-xl shadow-md">
+                            <!-- Menu Items -->
+                            <a href="javascript:void(0)" data-navigate="profile-details" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            Mon profil
+                            </a>
+                            <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Paramètres
+                            </a>
+                            <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Factures
+                            </a>
+                        </div>
+                        </div>
 
                         </div>
 
@@ -2197,8 +2309,8 @@
 </aside>
 
 
-<aside id="chat-sidebar" class="fixed top-0 right-0 h-full w-80 bg-sidebar-light dark:bg-sidebar-dark backdrop-blur-xl shadow-2xl transform translate-x-full z-50 lg:translate-x-0 transition-all duration-500 ease-in-out rounded-l-2xl overflow-hidden border-l border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0; pointer-events: none;">
-    <div class="relative w-full h-full flex flex-col">
+<aside id="chat-sidebar" class="fixed top-0 right-0 h-full w-80 bg-sidebar-light dark:bg-sidebar-dark backdrop-blur-xl shadow-2xl transform translate-x-full z-50 lg:translate-x-0 transition-all duration-500 ease-in-out rounded-none overflow-hidden border-l border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0; pointer-events: none;">
+<div class="relative w-full h-full flex flex-col">
         <!-- Chat Header -->
         <div class="absolute top-0 w-full p-4 z-40 bg-gradient-to-b from-sidebar-light/95 to-transparent dark:from-sidebar-dark/95 dark:to-transparent shadow-md">
             <div class="flex items-center justify-between">
@@ -2344,52 +2456,22 @@
 
         <div class="content-main flex-grow w-full transition-all duration-500 overflow-hidden relative z-10">
             <!-- Header -->
-            <div id="blurred-header" class="fixed top-0 left-0 right-0 z-30 bg-ll-white dark:bg-ll-black lg:bg-transparent lg:dark:bg-transparent py-3 px-6 flex justify-between items-center shadow-md lg:shadow-none transition-all duration-300 mb-4 lg:mb-0">
-                <button id="sidebar-toggle" class="p-2 rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
-                    <svg viewBox="0 0 24 24" class="w-6 h-6">
+            <div id="blurred-header" class="fixed top-0 left-0 right-0 z-30 bg-ll-white xl:backrop-blur-xl  lg:bg-transparent lg:dark:bg-transparent py-3 px-6 flex justify-between items-center shadow-md lg:shadow-none transition-all duration-300 mb-4 lg:mb-0">
+                <button id="sidebar-toggle" class="p-2 rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30  text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5">
                         <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
                     </svg>
                 </button>
                 <div class="flex items-center space-x-1">
-                    <button id="chat-sidebar-toggle" class="lg:block hidden p-3 rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
-                        <i class="fas fa-comments w-6 h-6"></i>
+                    <button id="chat-sidebar-toggle" class="lg:block hidden p-3 rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                        <i class="fas fa-comments w-5 h-5"></i>
                     </button>
-                    <button id="theme-toggle-header" class="p-3 rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button id="theme-toggle-header" class="p-3 rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30  text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                         </svg>
                     </button>
                     <div id="auth" class="chat-toggle-button">
-                        <div x-data="{ open: false }" @click.away="open = false" class="relative z-40">
-                            <button type="button" id="auth" class="auth-combined-button focus:outline-none focus:ring-2 focus:ring-ll-blue/50 auth-dropdown-toggle" title="Authentification" @click="open = !open" :aria-expanded="open.toString()" aria-haspopup="true">
-                                <i class="fas fa-user text-lg"></i>
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                            <div x-show="open" x-transition:enter="auth-dropdown-menu transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="auth-dropdown-menu transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute right-0 mt-2 w-[11rem] rounded-lg shadow-xl p-1.5 auth-menu-backdrop" style="display: none;">
-                                <div class="flex flex-col gap-1 text-sm">
-                                    <a href="/pages/user/profile.html" class="auth-menu-item">
-                                        <i class="fas fa-user w-5 h-5"></i>
-                                        <span>Mon Profil</span>
-                                    </a>
-                                    <a href="/pages/user/dashboard.html" class="auth-menu-item">
-                                        <i class="fas fa-tachometer-alt w-5 h-5"></i>
-                                        <span>Tableau de bord</span>
-                                    </a>
-                                    <a href="/pages/user/settings.html" class="auth-menu-item">
-                                        <i class="fas fa-cog w-5 h-5"></i>
-                                        <span>Paramètres</span>
-                                    </a>
-                                    <hr class="border-gray-200 dark:border-gray-700 my-1">
-                                    <button type="submit" class="signout-button auth-menu-item text-red-600 dark:text-red-400">
-                                        <i class="fas fa-sign-out-alt w-5 h-5"></i>
-                                        <span>Se déconnecter</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div x-show="open" class="fixed inset-0 z-30" style="display: none;"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2397,10 +2479,16 @@
             
 
          
-            <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-800" data-carousel>
+            
+
+
+            <!-- Main Content -->
+            <main class="relative z-10">
+
+            <section id="hero" class=" h-screen  items-center justify-center bg-gradient-to-br from-ll-light-bg to-ll-white dark:from-sidebar-dark dark:to-ll-black transition-colors duration-500 relative overflow-hidden" data-carousel>
                 
                 <!-- Navigation des thumbnails améliorée -->
-                <div class="absolute left-4 bottom-4 z-30 flex items-end gap-4">
+                <div class="absolute left-4 bottom-4 z-20 flex items-end gap-4">
                     <div id="thumbnail-container" class="relative flex flex-col items-center">
                         <button id="thumb-nav-up" class="thumb-nav-btn mb-2 p-2 rounded-full bg-black/30 text-white hover:bg-black/60 transition-colors duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
@@ -2428,14 +2516,6 @@
                     <!-- Slides générés dynamiquement -->
                 </div>
 
-                <!-- Bulles d'animation -->
-                <div class="absolute inset-0 z-0 overflow-hidden">
-                    <div class="bubble absolute rounded-full bg-blue-300/20 dark:bg-blue-600/20 animate-float" style="left: 5%; width: 20px; height: 20px; animation-duration: 18s; animation-delay: 0s;"></div>
-                    <div class="bubble absolute rounded-full bg-green-300/20 dark:bg-green-600/20 animate-float" style="left: 15%; width: 25px; height: 25px; animation-duration: 14s; animation-delay: 2s;"></div>
-                    <div class="bubble absolute rounded-full bg-purple-300/20 dark:bg-purple-600/20 animate-float" style="left: 25%; width: 15px; height: 15px; animation-duration: 16s; animation-delay: 1s;"></div>
-                    <div class="bubble absolute rounded-full bg-blue-300/20 dark:bg-blue-600/20 animate-float" style="left: 75%; width: 35px; height: 35px; animation-duration: 13s; animation-delay: 3.5s;"></div>
-                    <div class="bubble absolute rounded-full bg-purple-300/20 dark:bg-purple-600/20 animate-float" style="left: 85%; width: 28px; height: 28px; animation-duration: 19s; animation-delay: 0.8s;"></div>
-                </div>
 
                 <!-- Indicateur de défilement -->
                 <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 animate-bounce hidden md:block">
@@ -2446,53 +2526,50 @@
             </section>
 
 
-            <!-- Main Content -->
-            <main class="relative z-10">
-                <!-- About Us Section -->
-                <section id="about" class="py-24 bg-gradient-to-br from-ll-light-bg to-ll-white dark:from-sidebar-dark dark:to-ll-black transition-colors duration-500 relative overflow-hidden">
-                    <div class="container mx-auto px-4 max-w-7xl">
-                        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-                        <!-- Lottie Carousel -->
-                        <div class="lg:w-1/2 relative" data-aos="fade-right" data-aos-delay="200">
-                            <div id="lottie-carousel" class="relative w-full h-[400px] md:h-[500px]">
-                            <div class="lottie-slide absolute inset-0 opacity-0 transition-opacity duration-1000" data-lottie-url="/assets/json/icons/team.json"></div>
-                            <div class="lottie-slide absolute inset-0 opacity-0 transition-opacity duration-1000" data-lottie-url="/assets/json/icons/spray.json"></div>
-                            <div class="lottie-slide absolute inset-0 opacity-0 transition-opacity duration-1000" data-lottie-url="/assets/json/icons/Cleaning.json"></div>
+            <div class="section-divider"></div>
+
+            <section id="about" class="py-24 bg-gradient-to-br from-ll-light-bg to-ll-white dark:from-sidebar-dark dark:to-ll-black transition-colors duration-500 relative overflow-hidden">
+                <div class="container mx-auto px-4 max-w-7xl">
+                    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                        <div class="w-full relative lg:w-1/2" data-aos="fade-right" data-aos-delay="200">
+                            <div class="text-center" data-aos="fade-up" data-aos-delay="900">
+                                <blockquote class="max-w-2xl mx-auto p-5 lg:p-[2rem] text-lg italic text-ll-text-gray dark:text-ll-medium-gray">
+                                    "Notre mission est de transformer chaque espace en un environnement propre, sain et durable."
+                                    <footer class="mt-2 text-sm font-bold text-ll-black italic dark:text-ll-white"> L&L Ouest Services</footer>
+                                </blockquote>
+                            </div>
+
+                            <div id="lottie-carousel" class="relative w-full h-[300px] md:h-[500px]">
+                                <div class="lottie-slide absolute inset-0 opacity-0 transition-opacity duration-1000" data-lottie-url="/assets/json/icons/team.json"></div>
+                                <div class="lottie-slide absolute inset-0 opacity-0 transition-opacity duration-1000" data-lottie-url="/assets/json/icons/spray.json"></div>
+                                <div class="lottie-slide absolute inset-0 opacity-0 transition-opacity duration-1000" data-lottie-url="/assets/json/icons/Cleaning.json"></div>
                             </div>
                         </div>
-                        <!-- Content -->
+
                         <div class="lg:w-1/2" data-aos="fade-left" data-aos-delay="400">
-                            <h2 class="text-4xl md:text-5xl font-cinzel font-bold mb-8 text-ll-black dark:text-ll-white">L'Excellence du Nettoyage Depuis 2010</h2>
+                            <h2 class="text-3xl md:text-4xl font-cinzel font-bold mb-8 text-ll-black dark:text-ll-white">L'Excellence du Nettoyage Depuis 2010</h2>
+                            
                             <div id="typing-text" class="text-lg md:text-xl mb-8 text-ll-text-gray dark:text-ll-medium-gray leading-relaxed">
-                            <p>Fondée en 2010, L&L Ouest Services s'est imposée comme une référence dans le domaine du nettoyage professionnel dans l'Ouest de la France. Notre expertise s'étend du nettoyage de bureaux à l'entretien industriel, en passant par les espaces commerciaux et résidentiels.</p>
-                            <p class="mt-4">Nous combinons savoir-faire traditionnel et innovations technologiques pour offrir à nos clients des services de qualité exceptionnelle, respectueux de l'environnement et adaptés à leurs besoins spécifiques.</p>
+                                <p>Fondée en 2010, L&L Ouest Services s'est imposée comme une référence dans le domaine du nettoyage professionnel dans l'Ouest de la France. Notre expertise s'étend du nettoyage de bureaux à l'entretien industriel, en passant par les espaces commerciaux et résidentiels.</p>
+                                <p class="mt-4">Nous combinons savoir-faire traditionnel et innovations technologiques pour offrir à nos clients des services de qualité exceptionnelle, respectueux de l'environnement et adaptés à leurs besoins spécifiques.</p>
                             </div>
-                            
-                           <div id="company-stats" class="company-stats grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        </div>
-                            
-                            
-
-
+                                        
+                            <div id="company-stats" class="company-stats grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 lg:gap-12 mb-8">
+                                </div>
+                                        
                             <div class="text-center mt-12 aos-init aos-animate border-xl border-blue-200" data-aos="fade-up" data-aos-delay="500">
-                            <a href="/pages/about.html" class="inline-flex items-center text-ll-blue hover:text-ll-white font-semibold transition-all duration-300 flex-1 py-2 px-4 bg-ll-blue text-white rounded-full hover:bg-ll-dark-blue">
-                               <span> Voir tous nos services </span>
-                            <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                            </a>
-                        </div>
-                        </div>
-                        </div>
-                        <!-- Quote Block -->
-                        <div class="mt-12 text-center" data-aos="fade-up" data-aos-delay="900">
-                        <blockquote class="max-w-2xl mx-auto text-lg italic text-ll-text-gray dark:text-ll-medium-gray">
-                            "Notre mission est de transformer chaque espace en un environnement propre, sain et durable."
-                            <footer class="mt-2 text-sm font-bold text-ll-black dark:text-ll-white">— L&L Ouest Services</footer>
-                        </blockquote>
+                                <a href="/pages/about.html" class="inline-flex items-center text-ll-blue hover:text-ll-white font-semibold transition-all duration-300 py-2 px-4 action text-white rounded-full hover:bg-ll-dark-blue">
+                                    <span> Voir tous nos services </span>
+                                    <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    </section>
+                </div>
+            </section>
+
 
                 <div class="section-divider"></div>
 
@@ -2668,11 +2745,11 @@
 
                 <div class="section-divider"></div>
 
-                <!-- Section Équipe -->
+                
                 <!-- Section Équipe -->
 
   
-                <section id="team" class="py-24 lg:py-32 relative overflow-hidden">
+    <section id="team" class="py-24 lg:py-32 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 dark:from-blue-900/10 dark:to-indigo-900/10"></div>
         <div class="container mx-auto px-4 lg:px-12 relative z-10">
             <div class="text-center mb-16">
@@ -2736,7 +2813,7 @@
         </div>
 
         <!-- Modal -->
-        <div id="team-modal" class="modal fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 md:p-6 transition-opacity duration-500">
+        <div id="team-modal" class="modal  fixed inset-0 bg-black/70 flex items-center justify-center z-40 p-4 md:p-6 transition-opacity duration-500">
             <div class="modal-content bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden max-h-[90vh] overflow-y-auto transform transition-transform duration-500">
                 <button id="modal-close" class="absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-full p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -2751,18 +2828,41 @@
 
   <div class="section-divider"></div>
 
-                <section id="why-us" class="py-24 inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 dark:from-blue-900/10 dark:to-indigo-900/10 transition-colors duration-300">
-                    <div class="container mx-auto px-4 max-w-7xl">
-                        <div class="text-center mb-16" data-aos="fade-up">
-                            <h2 class="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-ll-black dark:text-ll-white">Pourquoi Nous Choisir ?</h2>
-                            <p class="text-lg md:text-xl text-ll-text-gray dark:text-ll-medium-gray max-w-3xl mx-auto">
-                                Nous combinons expertise, innovation et engagement écologique pour offrir un service de nettoyage inégalé.
-                            </p>
-                        </div>
-                        <div id="why-us-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                        </div>
-                    </div>
-                </section>
+
+<section id="why-us" class="py-16 bg-gradient-to-br from-gray-50 to-blue-100 dark:from-gray-900 dark:to-blue-900/20 transition-colors duration-500 relative overflow-hidden">
+  <!-- Decorative Background -->
+  <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10 dark:opacity-20"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/30 dark:to-gray-900/30"></div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+    <!-- Header Section -->
+    <div class="text-center mb-12 sm:mb-16" data-aos="fade-down">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white font-sans tracking-tight">
+        Pourquoi Nous Choisir ?
+      </h2>
+      <p class="mt-4 text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        Nous transformons vos espaces avec des solutions de nettoyage innovantes, durables et sur mesure.
+      </p>
+    </div>
+
+    <!-- Dynamic Grid for Cards -->
+    <div id="why-us-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="300">
+      <a href="#contact" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-full shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-300 group">
+        Demandez votre devis personnalisé
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
 
                 <div class="section-divider"></div>
 
@@ -2802,10 +2902,15 @@
                         <div id="eco-list" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         </div>
 
-                        <div class="text-center mt-12">
-                        <a href="#contact" class="inline-block px-8 py-4 text-lg font-bold text-white bg-green-600 rounded-full hover:bg-green-700 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
-                            Faites-nous Confiance
-                        </a>
+                       
+
+                         <div class="mt-14 text-center" data-aos="fade-up" data-aos-delay="300">
+                             <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-full text-white bg-green-600 rounded-full hover:bg-green-700  transition-colors duration-300 shadow-md dark:shadow-lg-dark-custom">
+                                 <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-ll-white" fill="currentColor">
+                                    <path d="M49.725 16.293c-.027.27-.043.578-.05.912l-3.834 1.831c-.537-.088-3.2.067-7.172-1.893c-1.007-.497-1.991-.761-2.936-.761a5.41 5.41 0 0 0-2.459.595c-1.003-.217-2.448-.773-3.293-.771c-1.912.01-6.259 1.567-7.463 1.7c-1.178.129-2.391.453-3.612.969c-2.219-.646-5.001-1.701-6.491-2.284L2 9v24.41l7.654 3.642c.111-.13.238-.33.376-.578l.237.11c.116.3.244.599.384.896c-.84 1.414-.94 3.007-.269 4.392c.575 1.185 1.646 2.017 2.839 2.25c.065.738.313 1.452.731 2.071c.75 1.107 1.942 1.768 3.191 1.768c.113 0 .226-.005.338-.018c.178.481.439.929.778 1.317c.754.867 1.81 1.364 2.896 1.364c.08 0 .158-.002.237-.008c.138.524.373 1.02.701 1.462c.755 1.02 1.92 1.627 3.118 1.627c.744 0 1.455-.228 2.082-.655c1.212.778 2.266 1.325 3.201 1.661c.469.191.957.289 1.455.289c1.178 0 2.321-.55 3.137-1.512c.303-.358.549-.758.729-1.186a3.78 3.78 0 0 0 1.087.162c1.252 0 2.439-.613 3.26-1.685a4.715 4.715 0 0 0 .83-1.711c.086.006.171.009.256.009c1.447 0 2.832-.849 3.611-2.216a4.735 4.735 0 0 0 .629-2.336c1.43-.213 2.689-1.23 3.302-2.713c.604-1.461.44-3.073-.403-4.417l3.895-2.195c.1.342.198.657.293.913L62 31.098V10.642l-12.275 5.651m-.001 3.037c.062 1.082.175 2.305.321 3.582c-.8-1.344-1.81-1.957-3.064-2.262l2.743-1.32m-5.228 23.756c-2.148-.739-6.619-5.995-6.619-5.995h.088c.455-.032 1.438-.511 2.541-.282c-1.732-1.488-3.637-.229-4.934-1c.301.965 1.748 1.269 2.119 1.281l4.284 4.982c1.94 2.255.589 5.045-1.356 5.489c-1.305-.635-4.99-5.018-4.99-5.018c.126-.023.873-.257 1.634-.157c-1.757-1.314-3.749-.174-4.931-.999c.67 1.655 2.877 1.231 3.108 1.191l2.292 2.926c1.834 2.34.393 5.043-1.555 5.409c-1.727-.607-2.848-2.767-2.848-2.767c.174-.028.756-.287 1.584-.167c-1.473-1.291-3.188-.12-4.219-.855c.637 1.388 2.225 1.072 2.314 1.062c1.588 2.501-.059 5.109-2.027 5.187h-.002l-.002.001c-1.182-.205-2.42-1.15-3.818-2.12c.48-.532.904-1.467.904-1.467c1.404-2.542-.418-4.79-2.299-4.597c1.526.417 2.67 2.365 1.479 4.528l-.523.88c-.568 1.035-1.455 1.66-2.107 1.583c-1.004-.122-2.419-1.588-1.824-3.656c.23-.21 2.448-3.603 2.448-3.603c1.525-2.456-.187-4.807-2.073-4.727c1.502.507 2.555 2.521 1.26 4.611l-1.803 2.811c-.615.994-1.411 1.557-2.17 1.453c-1.178-.16-2.004-1.597-1.815-3.08c-.01.009 1.298-1.454 1.298-1.454c1.738-2.271.25-4.807-1.633-4.94c1.447.674 2.309 2.798.832 4.731l-.638.782c-.7.918-1.543 1.385-2.281 1.201c-1.288-.323-1.958-2.733-1.349-3.39c.479-.517 1.824-2.154 1.824-2.154c1.737-2.272.251-4.807-1.634-4.942c1.448.676 2.31 2.8.833 4.734l-.638.78c-.704.926-1.55 1.391-2.293 1.202c-1.548-.392-2.321-2.782-.84-4.722c0 0-.503-1.598-.73-2.281l-.746-.346c1.749-4.075 4.391-13.069 4.513-16.057c1.288.459 4.688 1.437 5.049 1.439l-.002.002c3.66-1.15 7.496-1.023 9.246-1.699c.567-.216 1.695-.23 2.891.454c-.747.655-1.453 1.435-2.186 2.162c-1.752 1.739-8.266 4.451-7.01 7.303c1.084 2.461 4.137 4.979 9.258 1.026l2.88-.396l4.479 2.21l5.74 5.895c2.047 2.098.888 4.946-1.003 5.556m1.44-6.495c-.658-1.23-2.709-3.247-4.645-4.896l-.012-.012c.893.036 1.83-1.402 3.041-1.513c-.846-.646-2.248.1-2.685.218c-2.409.648-6.153-2.383-6.153-2.383l-3.582.516s-4.26 5.199-7.849.916c-1.949-2.326 5.114-5.364 6.854-7.093c2.229-2.215 4.215-4.925 7.882-3.079c3.046 1.536 4.246 1.441 8.332 2.152c1.218.213 2.062.771 2.967 1.86c.426 3.584 1.115 7.559 1.776 10.325c-.341.287-3.264 2.253-5.926 2.989" />
+                                 </svg>
+                           Faites-nous Confiance
+                            </a>
                         </div>
                     </div>
                     </section>

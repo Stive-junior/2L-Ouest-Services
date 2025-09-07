@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!chatSidebar) return false;
         return window.innerWidth < 1024 
             ? !chatSidebar.classList.contains('translate-x-full')
-            : chatSidebar.style.width === '20rem';
+            : chatSidebar.style.width === '19rem';
     }
 
     // Affiche le panneau des messages avec transition

@@ -2,6 +2,7 @@
  * @file theme.js
  * @description Gère le basculement entre les thèmes clair et sombre,
  * et sauvegarde la préférence de l'utilisateur dans le localStorage.
+ * @module theme
  */
 
 class ThemeManager {

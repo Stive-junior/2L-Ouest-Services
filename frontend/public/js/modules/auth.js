@@ -7,7 +7,7 @@
  */
 
 import api from '../api.js';
-import { showNotification, validateField, generateString } from './utils.js';
+import { showNotification, validateField, generateString, showLoadingDialog, cacheUserData, showSuccessDialog, showSuccessSignUp } from './utils.js';
 
 /**
  * Module d'authentification pour gérer les opérations liées aux utilisateurs.
@@ -27,6 +27,15 @@ const auth = {
     this.bindSignOutButton();
     this.bindCodeCheckForm();
   },
+
+  /**
+   * Détermine si le thème est sombre.
+   * @returns {boolean} True si mode sombre actif.
+   */
+  isDarkMode() {
+    return document.documentElement.classList.contains('dark');
+  },
+
 
   /**
    * Lie la soumission et la validation en temps réel au formulaire d'inscription.
@@ -141,20 +150,19 @@ const auth = {
         submitButton.disabled = true;
         submitButton.innerHTML = '<span class="loading-spinner"></span> Traitement...';
 
-        Swal.fire({
-          title: 'Veuillez patienter...',
-          html: '<div class="flex justify-center items-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-ll-blue"></div></div>',
-          allowOutsideClick: false,
-          showConfirmButton: false,
-        });
+       
+        await showLoadingDialog('Inscription en cours...','Cleaning');
 
-        await api.auth.signUp(userData);
-        Swal.close();
-        showNotification('Inscription réussie !', 'success');
+        const response = await api.auth.signUp(userData);
+        await showSuccessSignUp(userData.name);
+
         form.reset();
         this.clearFieldErrors(form);
         localStorage.removeItem('signupFormData');
         window.location.href = '/dashboard.html';
+
+
+        
       } catch (error) {
         Swal.close();
         showNotification(error.message || 'Erreur lors de l\'inscription.', 'error');
@@ -207,21 +215,24 @@ const auth = {
         submitButton.disabled = true;
         submitButton.innerHTML = '<span class="loading-spinner"></span> Connexion...';
 
-        Swal.fire({
-          title: 'Veuillez patienter...',
-          html: '<div class="flex justify-center items-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-ll-blue"></div></div>',
-          allowOutsideClick: false,
-          showConfirmButton: false,
-        });
+        await showLoadingDialog('Connexion en cours...','Cleaning');
 
-        await api.auth.signIn(credentials);
-        Swal.close();
-        showNotification('Connexion réussie ! Veuillez patienter...', 'success');
+        const response = await api.auth.signIn(credentials);
+
+        if(response.token){
+
+        const loadedUserData = await api.auth.getCurrentUser();
+        cacheUserData(loadedUserData);
+
+        await showSuccessDialog(loadedUserData);
+      
+     
         form.querySelectorAll('input').forEach(input => (input.disabled = true));
 
         setTimeout(() => {
           window.location.href = '/dashboard.html';
-        }, 5000);
+        }, 1000);
+      }
       } catch (error) {
         Swal.close();
         showNotification(error.message || 'Erreur lors de la connexion.', 'error');
@@ -633,67 +644,66 @@ const auth = {
     return valid;
   },
 
-  /**
-   * Lie l'événement de clic aux boutons de déconnexion sur la page.
-   * @function bindSignOutButton
-   */
-  bindSignOutButton() {
-    const buttons = document.querySelectorAll('.signout-button');
-    if (!buttons.length) return;
+/**
+ * Lie l'événement de clic aux boutons de déconnexion sur la page.
+ * @function bindSignOutButton
+ */
+bindSignOutButton() {
+  const buttons = document.querySelectorAll('.signout-button');
+  if (!buttons.length) return;
 
-    buttons.forEach(button => {
-      button.addEventListener('click', async () => {
-        const result = await Swal.fire({
-          title: 'Êtes-vous sûr ?',
-          text: 'Vous allez être déconnecté de votre compte.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#30d67bff',
-          cancelButtonColor: 'rgba(221, 51, 51, 1)',
-          confirmButtonText: 'Oui, se déconnecter',
-          cancelButtonText: 'Annuler',
+  buttons.forEach(button => {
+    button.addEventListener('click', async () => {
+      const result = await Swal.fire({
+        title: 'Êtes-vous sûr ?',
+        text: 'Vous allez être déconnecté de votre compte.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#30d67bff',
+        cancelButtonColor: 'rgba(221, 51, 51, 1)',
+        confirmButtonText: 'Oui, se déconnecter',
+        cancelButtonText: 'Annuler',
+        background: this.isDarkMode() ? '#1B1B18' : '#FDFDFC',
+        color: this.isDarkMode() ? '#FDFDFC' : '#1B1B18',
+      });
+
+      if (!result.isConfirmed) return;
+
+      try {
+        button.disabled = true;
+        button.innerHTML = '<span class="loading-spinner"></span> Déconnexion...';
+
+        showLoadingDialog('Déconnexion en cours...','Cleaning');
+
+        await api.auth.signOut();
+
+        Swal.close();
+
+        await Swal.fire({
+          title: 'Déconnexion réussie',
+          text: 'À bientôt !',
+          icon: 'success',
+          timer: 2000,
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          background: this.isDarkMode() ? '#1B1B18' : '#FDFDFC',
+          color: this.isDarkMode() ? '#FDFDFC' : '#1B1B18',
         });
 
-        if (!result.isConfirmed) return;
+        window.location.replace('/pages/auth/signin.html');
 
-        try {
-          button.disabled = true;
-          button.innerHTML = '<span class="loading-spinner"></span> Déconnexion...';
+      } catch (error) {
 
-          Swal.fire({
-            title: 'Au revoir !',
-            html: `
-              <div class="flex flex-col items-center">
-                <div class="animate-pulse rounded-full h-16 w-16 border-4 border-green-500 flex items-center justify-center mb-4">
-                  <i class="fas fa-check text-green-500 text-2xl"></i>
-                </div>
-                <p class="text-lg">Déconnexion en cours...</p>
-              </div>`,
-            allowOutsideClick: false,
-            showConfirmButton: false,
-            timer: 1000,
-          });
-
-          await api.auth.signOut();
-          await Swal.fire({
-            title: 'Déconnexion réussie',
-            text: 'À bientôt !',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            timer: 1000,
-          });
-
-          showNotification('Déconnexion réussie.', 'success');
-          window.location.href = '/pages/auth/signin.html';
-        } catch (error) {
-          Swal.close();
-          showNotification(error.message || 'Erreur lors de la déconnexion.', 'error');
-          button.disabled = false;
-          button.innerHTML = '<span>Se déconnecter</span><i class="fas fa-sign-out-alt ml-2"></i>';
-        }
-      });
+        Swal.close();
+        showNotification(error.message || 'Erreur lors de la déconnexion.', 'error');
+      } finally {
+        // Rétablir l'état initial du bouton dans tous les cas
+        button.disabled = false;
+        button.innerHTML = '<span>Se déconnecter</span><i class="fas fa-sign-out-alt ml-2"></i>';
+      }
     });
-  },
+  });
+},
 
   /**
    * Met à jour l'état du bouton de soumission en fonction de la validité du formulaire.

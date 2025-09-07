@@ -24,6 +24,26 @@
             "date": 1756753529394,
             "name": "logs/app-dev.log-rejections-2025-09-01.log",
             "hash": "fce91b7a1f9017fd3c92b7aebac415cc55a44d68da65adb0157ee6a6f014fb23"
+        },
+        {
+            "date": 1756813276383,
+            "name": "logs/app-dev.log-rejections-2025-09-02.log",
+            "hash": "12f3ccc121a0ac410e6e9e92b069509c039886ad14f46b3429d2b7e40c8a9bc3"
+        },
+        {
+            "date": 1757022493597,
+            "name": "logs/app-dev.log-rejections-2025-09-04.log",
+            "hash": "6bb568d9652a8717f85bcbd4fb8a401ebae2ee2abdec930b922f57b6290ddabd"
+        },
+        {
+            "date": 1757083272374,
+            "name": "logs/app-dev.log-rejections-2025-09-05.log",
+            "hash": "98e7b466473cefea427b9081854509c393877609083fbaa82d96fcd38031b610"
+        },
+        {
+            "date": 1757213671071,
+            "name": "logs/app-dev.log-rejections-2025-09-07.log",
+            "hash": "a8e2da0e30b0d4471f5f676108589f6b092498f681e8b38552400b86b5ecf787"
         }
     ],
     "hashType": "sha256"

@@ -44,96 +44,234 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Close a sidebar
-    function closeSidebar(sidebarElement, overlayElement, isChat = false) {
-        if (!sidebarElement) return;
-        const isMobile = window.innerWidth < 1024;
-        if (isMobile) {
-            const hideClass = isChat ? 'translate-x-full' : '-translate-x-full';
-            sidebarElement.classList.add(hideClass);
-            if (overlayElement) overlayElement.classList.add('hidden');
+
+function openSidebar(sidebarElement, overlayElement, isChat = false) {
+    if (!sidebarElement) return;
+    const isMobile = window.innerWidth < 1024;
+
+    if (isMobile) {
+        const hideClass = isChat ? 'translate-x-full' : '-translate-x-full';
+        sidebarElement.classList.remove(hideClass);
+        sidebarElement.classList.add('transition-all', 'duration-500', 'ease-in-out');
+
+        sidebarElement.style.width = isChat ? '19rem' : '19rem';
+        sidebarElement.style.minWidth = isChat ? '19rem' : '19rem';
+        sidebarElement.style.opacity = '1';
+        sidebarElement.style.pointerEvents = 'auto';
+
+        // Add style classes and handle dark/light mode
+        sidebarElement.classList.add('bg-sidebar-light', 'backdrop-blur-xl', 'shadow-2xl');
+        
+        // Check if dark mode is active
+        const isDarkMode = document.documentElement.classList.contains('dark') || 
+                           document.body.classList.contains('dark');
+        
+        if (isDarkMode) {
+            sidebarElement.classList.add('dark:bg-sidebar-dark');
         } else {
-            sidebarElement.style.width = '0';
-            sidebarElement.style.minWidth = '0';
-            sidebarElement.style.opacity = '0';
-            sidebarElement.style.pointerEvents = 'none';
+            sidebarElement.classList.remove('dark:bg-sidebar-dark');
         }
-        sidebarElement.classList.add('closed');
-        setSidebarButtonsState(sidebarElement, false);
-        if (isChat) {
-            document.body.classList.remove('chat-sidebar-open');
-            if (chatSidebarToggle) {
-                chatSidebarToggle.classList.remove('chat-closed');
-                chatSidebarToggle.classList.add('chat-open');
-                themeButton.classList.remove('chat-closed');
-                themeButton.classList.add('chat-open');
-                authButton.classList.remove('chat-closed');
-                authButton.classList.add('chat-open');
-            }
-        } else {
-            document.body.classList.remove('sidebar-open');
-            if (sidebarToggle){
-                sidebarToggle.classList.remove('hidden');
-                sidebarToggle.classList.remove('chat-closed');
-                sidebarToggle.classList.add('chat-open');
-            }
+
+        // Ensure opacity and pointer events for smooth appearance
+        sidebarElement.style.opacity = '1';
+        sidebarElement.style.pointerEvents = 'auto';
+
+        if (overlayElement) {
+            overlayElement.classList.remove('hidden');
+            overlayElement.classList.add('transition-opacity', 'duration-500', 'ease-in-out');
+            overlayElement.style.opacity = '1';
         }
-        updateContentLayout();
-        updateHeaderVisibility();
-        saveSidebarState();
+    } else {
+        sidebarElement.classList.remove('collapsed', 'closed');
+        sidebarElement.style.width = isChat ? '19rem' : '19rem';
+        sidebarElement.style.minWidth = isChat ? '19rem' : '19rem';
+        sidebarElement.style.opacity = '1';
+        sidebarElement.style.pointerEvents = 'auto';
+        sidebarElement.classList.add('transition-all', 'duration-500', 'ease-in-out');
     }
 
-    // Open a sidebar
-    function openSidebar(sidebarElement, overlayElement, isChat = false) {
-        if (!sidebarElement) return;
-        const isMobile = window.innerWidth < 1024;
-        if (isMobile) {
-            const hideClass = isChat ? 'translate-x-full' : '-translate-x-full';
-            sidebarElement.classList.remove(hideClass);
-            sidebarElement.style.width = isChat ? '20rem' : '21rem';
-            sidebarElement.style.minWidth = isChat ? '20rem' : '21rem';
-            sidebarElement.style.opacity = '1';
-            sidebarElement.style.pointerEvents = 'auto';
-            if (overlayElement) overlayElement.classList.remove('hidden');
-        } else {
-            sidebarElement.style.width = isChat ? '20rem' : '21rem';
-            sidebarElement.style.minWidth = isChat ? '20rem' : '21rem';
-            sidebarElement.style.opacity = '1';
-            sidebarElement.style.pointerEvents = 'auto';
+    setSidebarButtonsState(sidebarElement, true);
+
+    if (isChat) {
+        document.body.classList.add('chat-sidebar-open');
+        if (chatSidebarToggle) {
+            // Animate button transitions
+            chatSidebarToggle.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            chatSidebarToggle.classList.add('chat-closed');
+            chatSidebarToggle.classList.remove('chat-open');
+
+            themeButton.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            themeButton.classList.add('chat-closed');
+            themeButton.classList.remove('chat-open');
+
+            authButton.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            authButton.classList.add('chat-closed');
+            authButton.classList.remove('chat-open');
         }
-        sidebarElement.classList.remove('closed', 'collapsed');
-        setSidebarButtonsState(sidebarElement, true);
-        if (isChat) {
-            document.body.classList.add('chat-sidebar-open');
-            if (chatSidebarToggle) {
-                chatSidebarToggle.classList.add('chat-closed');
-                chatSidebarToggle.classList.remove('chat-open');
-                themeButton.classList.add('chat-closed');
-                themeButton.classList.remove('chat-open');
-                authButton.classList.add('chat-closed');
-                authButton.classList.remove('chat-open');
-            }
-        } else {
-            document.body.classList.add('sidebar-open');
+    } else {
+        document.body.classList.add('sidebar-open');
+        if (sidebarToggle) {
+            sidebarToggle.classList.add('transition-all', 'duration-300', 'ease-in-out');
             sidebarToggle.classList.add('chat-closed');
             sidebarToggle.classList.remove('chat-open');
 
-            if (sidebarToggle && isMobile){
+            if (isMobile) {
                 sidebarToggle.classList.add('hidden');
             }
         }
-        updateContentLayout();
-        updateHeaderVisibility();
-        saveSidebarState();
     }
 
-    // Check if a sidebar is open
-    function isSidebarOpen(sidebarElement) {
-        if (!sidebarElement) return false;
-        return window.innerWidth < 1024
-            ? !sidebarElement.classList.contains(sidebarElement === sidebar ? '-translate-x-full' : 'translate-x-full')
-            : sidebarElement.style.width === (sidebarElement === sidebar ? '21rem' : '20rem');
+    updateContentLayout();
+    updateHeaderVisibility();
+    saveSidebarState();
+}
+
+function closeSidebar(sidebarElement, overlayElement, isChat = false) {
+    if (!sidebarElement) return;
+    const isMobile = window.innerWidth < 1024;
+
+    if (isMobile) {
+        const hideClass = isChat ? 'translate-x-full' : '-translate-x-full';
+        sidebarElement.classList.add(hideClass);
+        sidebarElement.classList.add('transition-all', 'duration-500', 'ease-in-out');
+
+        // Remove style classes, including dark mode
+        sidebarElement.classList.remove('bg-sidebar-light', 'backdrop-blur-xl', 'shadow-2xl', 'dark:bg-sidebar-dark');
+
+        // Fade out
+        sidebarElement.style.opacity = '0';
+        sidebarElement.style.pointerEvents = 'none';
+
+        if (overlayElement) {
+            overlayElement.classList.add('transition-opacity', 'duration-500', 'ease-in-out');
+            overlayElement.style.opacity = '0';
+            setTimeout(() => {
+                overlayElement.classList.add('hidden');
+            }, 500);
+        }
+    } else {
+        sidebarElement.style.width = '0';
+        sidebarElement.style.minWidth = '0';
+        sidebarElement.style.opacity = '0';
+        sidebarElement.style.pointerEvents = 'none';
+        sidebarElement.classList.add('transition-all', 'duration-500', 'ease-in-out');
+
+        setTimeout(() => {
+            sidebarElement.classList.add('collapsed');
+        }, 500);
     }
+
+    sidebarElement.classList.add('closed');
+    setSidebarButtonsState(sidebarElement, false);
+
+    if (isChat) {
+        document.body.classList.remove('chat-sidebar-open');
+        if (chatSidebarToggle) {
+            // Animate button transitions
+            chatSidebarToggle.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            chatSidebarToggle.classList.remove('chat-closed');
+            chatSidebarToggle.classList.add('chat-open');
+
+            themeButton.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            themeButton.classList.remove('chat-closed');
+            themeButton.classList.add('chat-open');
+
+            authButton.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            authButton.classList.remove('chat-closed');
+            authButton.classList.add('chat-open');
+        }
+    } else {
+        document.body.classList.remove('sidebar-open');
+        if (sidebarToggle) {
+            sidebarToggle.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            sidebarToggle.classList.remove('chat-closed');
+            sidebarToggle.classList.add('chat-open');
+
+            sidebarToggle.classList.remove('hidden');
+        }
+    }
+
+    updateContentLayout();
+    updateHeaderVisibility();
+    saveSidebarState();
+}
+
+function updateContentLayout() {
+    if (!contentMain) return;
+
+    const isMobile = window.innerWidth < 1024;
+    const grid = document.querySelector('.reason');
+
+    contentMain.style.transition = 'margin-left 0.5s ease-in-out, margin-right 0.5s ease-in-out, width 0.5s ease-in-out, padding 0.5s ease-in-out, border-radius 0.5s ease-in-out';
+    
+    contentMain.classList.remove('rounded-l-2xl', 'rounded-r-2xl', 'rounded-l-[28px]', 'rounded-r-[28px]', 'border-r', 'border-white/20', 'dark:border-[#3E3E3A]/50', 'rounded-[28px]');
+    contentMain.style.padding = '0';
+
+    if (isMobile) {
+        contentMain.style.marginLeft = '0';
+        contentMain.style.marginRight = '0';
+        contentMain.style.width = '100%';
+
+        if (grid) {
+            grid.classList.remove('md:grid-cols-3');
+            grid.classList.add('grid-cols-1');
+        }
+        return;
+    }
+
+    const leftSidebarOpen = isSidebarOpen(sidebar);
+    const rightSidebarOpen = isSidebarOpen(chatSidebar);
+
+    const leftSidebarWidth = leftSidebarOpen ? (sidebar?.offsetWidth || 304) : 0;
+    const rightSidebarWidth = rightSidebarOpen ? (chatSidebar?.offsetWidth || 304) : 0;
+    const availableWidth = window.innerWidth - leftSidebarWidth - rightSidebarWidth;
+
+    contentMain.style.marginLeft = `${leftSidebarWidth}px`;
+    contentMain.style.marginRight = `${rightSidebarWidth}px`;
+    contentMain.style.width = `${availableWidth}px`;
+
+    if (leftSidebarOpen || rightSidebarOpen) {
+        // Dynamically set padding based on open sidebars
+        let paddingLeft = leftSidebarOpen ? '0px' : '6px';
+        let paddingRight = rightSidebarOpen ? '0px' : '6px';
+        contentMain.style.padding = `6px ${paddingRight} 6px ${paddingLeft}`;
+        contentMain.classList.add('rounded-[28px]', 'border-r', 'border-white/20', 'dark:border-[#3E3E3A]/50');
+
+        if (leftSidebarOpen && !rightSidebarOpen) {
+            contentMain.classList.add('rounded-l-[28px]');
+            contentMain.classList.remove('rounded-r-[28px]');
+        } else if (rightSidebarOpen && !leftSidebarOpen) {
+            contentMain.classList.add('rounded-r-[28px]');
+            contentMain.classList.remove('rounded-l-[28px]');
+        } else if (leftSidebarOpen && rightSidebarOpen) {
+            contentMain.classList.add('rounded-l-[28px]', 'rounded-r-[28px]');
+        }
+    }
+
+    if (availableWidth < 800) {
+        if (grid) {
+            grid.classList.remove('md:grid-cols-3');
+            grid.classList.add('grid-cols-1');
+        }
+    } else {
+        if (grid) {
+            grid.classList.remove('grid-cols-1');
+            grid.classList.add('md:grid-cols-3');
+        }
+    }
+}
+
+function isSidebarOpen(sidebarElement) {
+    if (!sidebarElement) return false;
+    if (window.innerWidth < 1024) {
+        return !sidebarElement.classList.contains(sidebarElement === sidebar ? '-translate-x-full' : 'translate-x-full');
+    } else {
+        return sidebarElement.style.width === '19rem';
+    }
+}
+
+// Ensure layout updates on resize for smooth transitions
+window.addEventListener('resize', updateContentLayout);
 
     // Toggle main sidebar
     function toggleSidebar() {
@@ -183,52 +321,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-        function updateContentLayout() {
-    if (!contentMain) return;
 
-    const isMobile = window.innerWidth < 1024;
-    const grid = document.querySelector('.reason');
 
-    if (isMobile) {
 
-        contentMain.style.marginLeft = '0';
-        contentMain.style.marginRight = '0';
-        contentMain.style.width = '100%';
-        contentMain.style.display = (isSidebarOpen(sidebar) || isSidebarOpen(chatSidebar))
-            ? 'none'
-            : 'block';
 
-        // Forcer colonne unique
-        if (grid) {
-            grid.classList.remove('md:grid-cols-3');
-            grid.classList.add('grid-cols-1');
-        }
-        return;
-    }
 
-    const leftSidebarWidth = isSidebarOpen(sidebar) ? 320 : 0;
-    const rightSidebarWidth = isSidebarOpen(chatSidebar) ? 304 : 0;
-    const availableWidth = window.innerWidth - leftSidebarWidth - rightSidebarWidth;
-
-    contentMain.style.marginLeft = `${leftSidebarWidth}px`;
-    contentMain.style.marginRight = `${rightSidebarWidth}px`;
-    contentMain.style.width = `${availableWidth}px`;
-    contentMain.style.display = 'block';
-    contentMain.style.transition = 'all 0.5s ease-in-out';
-
-    if (availableWidth < 800) {
-        if (grid) {
-            grid.classList.remove('md:grid-cols-3');
-            grid.classList.add('grid-cols-1');
-        }
-    } else {
-        // Sinon, 3 colonnes
-        if (grid) {
-            grid.classList.remove('grid-cols-1');
-            grid.classList.add('md:grid-cols-3');
-        }
-    }
-        }
 
     // Update header visibility
     function updateHeaderVisibility() {
@@ -253,6 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Affiche un niveau spécifique dans le sidebar avec une transition fluide.
      */
     function showSidebarLevel(level) {
+
         if (!sidebarContainer) return;
 
         const levels = sidebarContainer.querySelectorAll('[data-level]');

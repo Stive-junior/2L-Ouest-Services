@@ -192,56 +192,56 @@
                     <div class="flex min-h-full w-full flex-col px-3 space-y-2">
                         <!-- User Profile -->
                         <div id="user-profile-container" class="mb-6 p-4 bg-gradient-to-r from-ll-blue to-ll-dark-blue backdrop-blur-md rounded-xl text-white shadow-lg transform transition-all duration-300 hover:scale-102 relative">
-                            <!-- Loading Spinner -->
-                            <div id="profile-loading" class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl hidden">
-                                <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+                                                    <!-- Loading Spinner -->
+                        <div id="profile-loading" class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl hidden">
+                        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+                        </div>
+                        <div data-auth="authenticated" class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold shadow-inner overflow-hidden">
+                            <span id="user-initial" class="user-initial">U</span>
+                            <img id="user-photo" src="" alt="Photo de profil" class="hidden w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 id="user-name" class="font-bold text-white/95 text-lg truncate">Utilisateur</h3>
+                            <p id="user-email" class="text-sm text-white/90 truncate"></p>
+                            <div class="flex items-center gap-2 mt-1">
+                            <span id="user-country" class="text-sm text-white/80"></span>
+                            <span id="user-role" class="text-xs bg-white/20 px-2 py-1 rounded-full">Invité</span>
                             </div>
-                            <div data-auth="authenticated" class="flex items-center gap-4">
-                                <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold shadow-inner overflow-hidden">
-                                    <span class="user-initial">U</span>
-                                    <img id="user-photo" src="" alt="Photo de profil" class="hidden w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="font-bold text-white/95 text-lg truncate">Utilisateur</h3>
-                                    <p class="text-sm text-white/90 truncate"></p>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-sm text-white/80"></span>
-                                        <span class="text-xs bg-white/20 px-2 py-1 rounded-full">Invité</span>
-                                    </div>
-                                </div>
-                               <button id="profile-dropdown-toggle" class="level-dropdown-toggle p-2 rounded-xl hover:bg-ll-blue/20 dark:hover:bg-ll-blue/20 transition-colors duration-300" title="Options du profil" aria-expanded="false" aria-controls="profile-dropdown" tabindex="0">
-                                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        </div>
+                        <button data-level-id="profile" class="level-dropdown-toggle p-2 rounded-xl hover:bg-ll-blue/20 dark:hover:bg-ll-blue/20 transition-colors duration-300" title="Options du profil" aria-expanded="false" aria-controls="profile" tabindex="0">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        </div>
 
-                                <!-- Dropdown Menu -->
-                                <div id="profile-dropdown" class="hidden mt-2 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-xl shadow-md overflow-hidden transition-all duration-300 max-h-0" data-os="fade-up">
-                                    <div class="pl-8 pr-4 py-2 bg-white/10 dark:bg-[#1A1A1A]/50 rounded-xl shadow-md">
-                                        <!-- Menu Items -->
-                                        <a href="javascript:void(0)" data-navigate="profile-details" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                            </svg>
-                                            Mon profil
-                                        </a>
-                                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            </svg>
-                                            Paramètres
-                                        </a>
-                                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                            </svg>
-                                            Factures
-                                        </a>
-                                    </div>
-                                </div>
+                        <!-- Dropdown Menu -->
+                        <div id="level-dropdown-profile" class="hidden mt-2 bg-radial-gradient dark:bg-radial-gradient-dark rounded-xl shadow-md overflow-hidden transition-all duration-300 max-h-0" data-os="fade-up">
+                        <div class="pl-8 pr-4 py-2 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-xl shadow-md">
+                            <!-- Menu Items -->
+                            <a href="javascript:void(0)" data-navigate="profile-details" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            Mon profil
+                            </a>
+                            <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Paramètres
+                            </a>
+                            <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Factures
+                            </a>
+                        </div>
+                        </div>
 
                         </div>
 

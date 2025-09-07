@@ -52,15 +52,6 @@ function toggleServicesLoading(show) {
     }
 }
 
-// Toggle loading state for before/after showcase
-function toggleBeforeAfterLoading(show) {
-    const loadingEl = document.getElementById('before-after-loading');
-    const beforeAfterList = document.getElementById('before-after-list');
-    if (loadingEl && beforeAfterList) {
-        loadingEl.classList.toggle('hidden', !show);
-        beforeAfterList.classList.toggle('hidden', show);
-    }
-}
 
 // Load mock services from JSON
 async function loadMockServices() {
@@ -310,88 +301,6 @@ export function renderServices(services) {
     });
 }
 
-/**
- * Renders before/after showcase.
- * @param {Array<Object>} services - Services with before/after images.
- */
-export function renderBeforeAfter(services) {
-    const beforeAfterList = document.getElementById('before-after-list');
-    const loadingEl = document.getElementById('before-after-loading');
-    if (!beforeAfterList || !loadingEl) return;
-
-    toggleBeforeAfterLoading(true);
-
-    const beforeAfterItems = services
-        .filter(service => service.images.some(img => img.type === 'before') && service.images.some(img => img.type === 'after'))
-        .map(service => {
-            const beforeImage = service.images.find(img => img.type === 'before');
-            const afterImage = service.images.find(img => img.type === 'after');
-            return `
-                <div class="before-after-container relative overflow-hidden rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                    <img src="${beforeImage.url}" alt="${beforeImage.description}" class="before w-full h-64 object-cover">
-                    <img src="${afterImage.url}" alt="${afterImage.description}" class="after w-full h-64 object-cover absolute top-0 left-0">
-                    <div class="comparison-slider absolute top-0 h-full w-1 bg-blue-600 cursor-ew-resize"></div>
-                </div>
-            `;
-        });
-
-    beforeAfterList.innerHTML = beforeAfterItems.join('');
-
-    toggleBeforeAfterLoading(false);
-
-    // Initialize before/after sliders
-    document.querySelectorAll('.before-after-container').forEach(container => {
-        const beforeImg = container.querySelector('.before');
-        const afterImg = container.querySelector('.after');
-        const slider = container.querySelector('.comparison-slider');
-
-        let isDragging = false;
-
-        const updateSlider = (x) => {
-            const rect = container.getBoundingClientRect();
-            const percentage = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
-            afterImg.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
-            slider.style.left = `${percentage}%`;
-        };
-
-        slider.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            updateSlider(e.clientX);
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                updateSlider(e.clientX);
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        container.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            updateSlider(e.touches[0].clientX);
-        });
-
-        container.addEventListener('touchmove', (e) => {
-            if (isDragging) {
-                updateSlider(e.touches[0].clientX);
-            }
-        });
-
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-        });
-
-        container.addEventListener('click', () => {
-            openLightbox(beforeImage.url, beforeImage.description);
-        });
-
-        // Initialize slider position
-        updateSlider(container.getBoundingClientRect().left + container.getBoundingClientRect().width / 2);
-    });
-}
 
 /**
  * Displays service details in a modal.

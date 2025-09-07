@@ -18,7 +18,7 @@ import {
   onAuthStateChanged,
 } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
 import emailTemplates from '../templates/emailTemplates.js';
-import { showNotification, validateInput, getStoredToken, setStoredToken, clearStoredToken, handleApiError, apiFetch, getAuthErrorMessage } from '../modules/utils.js';
+import { showNotification, validateInput, getStoredToken, setStoredToken, clearStoredToken, handleApiError, apiFetch, getAuthErrorMessage, clearUserCache } from '../modules/utils.js';
 
 const API_BASE_URL = 'http://localhost:35473/api';
 const firebaseConfig = {
@@ -257,7 +257,6 @@ const authApi = {
         // Connexion au backend
         const response = await apiFetch('/auth/signin', 'POST', { email, firebaseToken, fcmToken }, false);
         setStoredToken(response.data.token, response.data.user.role || 'client');
-        showNotification('Connexion réussie !', 'success');
         return response.data;
       } catch (backendError) {
         await signOut(auth);
@@ -308,9 +307,10 @@ const authApi = {
         await apiFetch('/auth/signout', 'POST', { firebaseToken }, true);
       }
       await signOut(auth);
+      clearUserCache();
       clearStoredToken();
       showNotification('Déconnexion réussie.', 'success');
-      window.location.href = '/pages/auth/signin.html';
+      
     } catch (error) {
       throw await handleApiError(error, 'Erreur lors de la déconnexion');
     }

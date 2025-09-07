@@ -1,0 +1,59 @@
+{
+  "showcases": [
+    {
+      "title": "Nettoyage de Bureau",
+      "before": {
+        "url": "/assets/images/before-garden.png",
+        "description": "Bureau encombré et poussiéreux avant notre intervention."
+      },
+      "after": {
+        "url": "/assets/images/after-garden.png",
+        "description": "Bureau propre, organisé et prêt à l'emploi après nettoyage."
+      }
+    },
+    {
+      "title": "Entretien Industriel",
+      "before": {
+        "url": "/assets/images/before-garden.png",
+        "description": "Site industriel sale avec résidus avant nettoyage."
+      },
+      "after": {
+        "url": "/assets/images/after-garden.png",
+        "description": "Site industriel impeccable et sécurisé après notre service."
+      }
+    },
+    {
+      "title": "Espaces Commerciaux",
+      "before": {
+        "url": "/assets/images/before-garden.png",
+        "description": "Magasin désordonné avec sols sales avant intervention."
+      },
+      "after": {
+        "url": "/assets/images/after-garden.png",
+        "description": "Magasin éclatant de propreté, attractif pour les clients."
+      }
+    },
+    {
+      "title": "Nettoyage Résidentiel",
+      "before": {
+        "url": "/assets/images/before-veranda.png",
+        "description": "Maison en désordre avec poussière accumulée."
+      },
+      "after": {
+        "url": "/assets/images/after-veranda.png",
+        "description": "Maison fraîche et immaculée après nettoyage approfondi."
+      }
+    },
+    {
+      "title": "Nettoyage Éco-Responsable",
+      "before": {
+        "url": "/assets/images/before-garden.png",
+        "description": "Espace pollué avant utilisation de produits biodégradables."
+      },
+      "after": {
+        "url": "/assets/images/after-garden.png",
+        "description": "Espace propre et respectueux de l'environnement après service."
+      }
+    }
+  ]
+}

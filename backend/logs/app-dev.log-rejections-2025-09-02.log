@@ -1,0 +1,52 @@
+[1;31m🚨 [2L-Ouest-Services] 02/09/2025 12:45:01 🚨| ⠹ ERROR    | unhandledRejection: Échec de connexion à Firestore après retries
+Error: Échec de connexion à Firestore après retries
+    at Firebase.retryConnect (/home/stive-junior/2L-Ouest-Services/backend/config/firebase.js:114:11)[0m
+[3m╭────────────────── Métadonnées ──────────────────╮[0m
+[3m│ {[0m
+[3m│ [1;34m  "error": [0m[3m{[0m
+[3m│ [1;34m    "statusCode": [0m[3m500,[0m
+[3m│ [1;34m    "details": [0m[3m"Impossible de vérifier la connexion à Firestore",[0m
+[3m│ [1;34m    "isOperational": [0m[3mtrue[0m
+[3m│   },[0m
+[3m│ [1;34m  "stack": [0m[3m"Error: Échec de connexion à Firestore après retries\n    at Firebase.retryConnect (/home/stive-junior/2L-Ouest-Services/backend/config/firebase.js:114:11)",[0m
+[3m│ [1;34m  "rejection": [0m[3mtrue,[0m
+[3m│ [1;34m  "date": [0m[3m"Tue Sep 02 2025 12:45:01 GMT+0100 (heure normale d’Afrique de l’Ouest)",[0m
+[3m│ [1;34m  "process": [0m[3m{[0m
+[3m│ [1;34m    "pid": [0m[3m10941,[0m
+[3m│ [1;34m    "uid": [0m[3m1000,[0m
+[3m│ [1;34m    "gid": [0m[3m1000,[0m
+[3m│ [1;34m    "cwd": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend",[0m
+[3m│ [1;34m    "execPath": [0m[3m"/home/stive-junior/.nvm/versions/node/v24.5.0/bin/node",[0m
+[3m│ [1;34m    "version": [0m[3m"v24.5.0",[0m
+[3m│ [1;34m    "argv": [0m[3m[[0m
+[3m│       "/home/stive-junior/.nvm/versions/node/v24.5.0/bin/node",[0m
+[3m│       "/home/stive-junior/2L-Ouest-Services/backend/app.js"[0m
+[3m│     ],[0m
+[3m│ [1;34m    "memoryUsage": [0m[3m{[0m
+[3m│ [1;34m      "rss": [0m[3m127635456,[0m
+[3m│ [1;34m      "heapTotal": [0m[3m51273728,[0m
+[3m│ [1;34m      "heapUsed": [0m[3m47333264,[0m
+[3m│ [1;34m      "external": [0m[3m3576153,[0m
+[3m│ [1;34m      "arrayBuffers": [0m[3m100237[0m
+[3m│     }[0m
+[3m│   },[0m
+[3m│ [1;34m  "os": [0m[3m{[0m
+[3m│ [1;34m    "loadavg": [0m[3m[[0m
+[3m│       1.81,[0m
+[3m│       7.59,[0m
+[3m│       6.37[0m
+[3m│     ],[0m
+[3m│ [1;34m    "uptime": [0m[3m875.84[0m
+[3m│   },[0m
+[3m│ [1;34m  "trace": [0m[3m[[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m11,[0m
+[3m│ [1;34m      "file": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend/config/firebase.js",[0m
+[3m│ [1;34m      "function": [0m[3m"Firebase.retryConnect",[0m
+[3m│ [1;34m      "line": [0m[3m114,[0m
+[3m│ [1;34m      "method": [0m[3m"retryConnect",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     }[0m
+[3m│   ][0m
+[3m│ }[0m
+[3m╰─────────────────────────────────────────────────╯[0m

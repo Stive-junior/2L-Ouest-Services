@@ -1,24 +1,67 @@
 {
-  "reasons": [
-    {
-      "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-16 h-16 text-ll-blue mb-4 block mx-auto' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 3v1m0 16v1m8.66-12.34l-.7.7M4.05 19.95l-.7.7M21 12h-1M4 12H3m16.95 7.05l-.7-.7M4.34 4.34l-.7-.7M12 5a7 7 0 017 7h-4a3 3 0 00-3-3V5z'/></svg>",
-      "title": "Éco-Responsable",
-      "description": "Utilisation exclusive de produits biodégradables et de méthodes durables."
+  "reason1": {
+    "title": "Qualité Supérieure",
+    "description": "Techniques avancées pour un nettoyage impeccable et durable.",
+    "hoverDescription": "Nos équipements de pointe et produits certifiés garantissent une propreté exceptionnelle tout en respectant l'environnement.",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-10 h-10 text-blue-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 13l4 4L19 7' /></svg>",
+    "color": "blue-500",
+    "stats": {
+      "label": "Satisfaction Client",
+      "value": "98%",
+      "percentage": 98
     },
-    {
-      "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-16 h-16 text-ll-blue mb-4 block mx-auto' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'/></svg>",
-      "title": "Rapidité",
-      "description": "Interventions rapides et efficaces, adaptées à vos contraintes horaires."
+    "image": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80"
+  },
+  "reason2": {
+    "title": "Écoresponsabilité",
+    "description": "Produits biodégradables pour un avenir plus vert.",
+    "hoverDescription": "Nous utilisons des produits éco-certifiés et optimisons notre logistique pour réduire notre empreinte carbone.",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-10 h-10 text-green-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' /></svg>",
+    "color": "green-600",
+    "stats": {
+      "label": "Réduction CO2",
+      "value": "65%",
+      "percentage": 65
     },
-    {
-      "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-16 h-16 text-ll-blue mb-4 block mx-auto' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m3-4a4 4 0 100-8 4 4 0 000 8zm6 0a4 4 0 100-8 4 4 0 000 8z'/></svg>",
-      "title": "Équipe Qualifiée",
-      "description": "Professionnels formés pour un service irréprochable."
+    "image": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80"
+  },
+  "reason3": {
+    "title": "Service Sur-Mesure",
+    "description": "Solutions de nettoyage adaptées à vos besoins uniques.",
+    "hoverDescription": "Plans personnalisés pour bureaux, usines ou espaces commerciaux, conçus pour répondre à vos exigences spécifiques.",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-10 h-10 text-purple-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c2.21 0 4-1.79 4-4S14.21 0 12 0 8 1.79 8 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z' /></svg>",
+    "color": "purple-600",
+    "stats": {
+      "label": "Personnalisation",
+      "value": "100%",
+      "percentage": 100
     },
-    {
-      "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-16 h-16 text-ll-blue mb-4 block mx-auto' fill='currentColor' viewBox='0 0 24 24'><path d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/></svg>",
-      "title": "Satisfaction Garantie",
-      "description": "Votre satisfaction est notre priorité absolue."
-    }
-  ]
+    "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
+  },
+  "reason4": {
+    "title": "Équipe Qualifiée",
+    "description": "Professionnels formés pour un service d'excellence.",
+    "hoverDescription": "Notre équipe suit des formations continues pour maîtriser les techniques de nettoyage les plus récentes.",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-10 h-10 text-yellow-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m3-4a4 4 0 100-8 4 4 0 000 8z' /></svg>",
+    "color": "yellow-500",
+    "stats": {
+      "label": "Formations",
+      "value": "25+",
+      "percentage": 85
+    },
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
+  },
+  "reason5": {
+    "title": "Sécurité Assurée",
+    "description": "Protocoles rigoureux pour protéger vos espaces.",
+    "hoverDescription": "Nos employés sont vérifiés et nos services sont couverts par une assurance responsabilité civile complète.",
+    "icon": "<svg xmlns='http://www.w3.org/2000/svg' class='w-10 h-10 text-red-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' /></svg>",
+    "color": "red-600",
+    "stats": {
+      "label": "Assurance",
+      "value": "5M€",
+      "percentage": 100
+    },
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+  }
 }

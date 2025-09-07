@@ -19,7 +19,7 @@
 // Imports essentiels
 import { showNotification, openLightbox } from '../modules/utils.js';
 import api from '../api.js';
-import { renderServices, renderBeforeAfter, loadServices } from '../injection/loadService.js';
+import { renderServices, loadServices } from '../injection/loadService.js';
 
 // Icônes SVG pour catégories avec effets néon
 const categoryIcons = {
@@ -1052,7 +1052,7 @@ let swiperInstance = null;
     /**
      * Initialize hero carousel
      */
-    async function initHeroCarousel() {
+async function initHeroCarousel() {
     const slidesContainer = document.getElementById('hero-slides');
     const thumbnailList = document.getElementById('thumbnail-list');
     if (!slidesContainer || !thumbnailList) return;
@@ -1072,12 +1072,11 @@ let swiperInstance = null;
                 <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
             `}
             <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-6 carousel-caption">
-            <lottie-player src="https://assets.lottiefiles.com/packages/lf20_kq0c0swq.json" background="transparent" speed="1" style="width: 180px; height: 180px;" loop autoplay></lottie-player>    
-            <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight text-fade-in">${slide.title}</h1>
+           <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight text-fade-in">${slide.title}</h1>
                 <p class="text-lg md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light text-fade-in">${slide.subtitle}</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center text-fade-in">
                     ${slide.buttons.map(btn => `
-                        <a href="${btn.href}" class="${btn.class} py-3 px-8 rounded-full font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500 flex items-center gap-2" aria-label="${btn.ariaLabel}">
+                        <a href="${btn.href}" class="${btn.class} action py-3 px-8 rounded-full font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500 flex items-center gap-2" aria-label="${btn.ariaLabel}">
                             <span>${btn.icon}</span> ${btn.text}
                         </a>
                     `).join('')}
@@ -1185,6 +1184,7 @@ let swiperInstance = null;
         fadeEffect: { crossFade: true },
         loop: true,
         autoplay: { delay: 7000, disableOnInteraction: false },
+        resizeObserver: true,
         on: {
             slideChange: (swiper) => {
                 const activeIndex = swiper.realIndex;
@@ -1260,7 +1260,8 @@ let swiperInstance = null;
     // Initialisation des boutons de navigation
     checkScrollButtons();
 }
-    
+
+
    
 
 
@@ -1271,9 +1272,11 @@ function initTestimonialsCarousel() {
   const testimonialsContainer = document.getElementById('testimonials-list');
   const loadingIndicator = document.getElementById('testimonials-loading');
   if (!testimonialsContainer) {
-    console.error('Conteneur des témoignages non trouvé');
+    console.log('Conteneur des témoignages non trouvé');
     return;
   }
+
+  
 
   // Fetch testimonials data (replace with your actual data source)
   const testimonials = MOCK_TESTIMONIALS;
@@ -1378,59 +1381,72 @@ function initTestimonialsCarousel() {
 function openTestimonialModal(testimonial) {
   const modal = document.createElement('div');
   modal.id = 'testimonial-modal';
-  modal.className =
-    'fixed inset-0 bg-black/85 flex items-center justify-center z-50 p-4 transition-opacity duration-300 opacity-0 backdrop-blur-md';
+  modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 md:p-6 transition-opacity duration-500 opacity-0';
+
   modal.innerHTML = `
-    <div class="bg-gray-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-500 relative border border-blue-500/30">
-      <div class="sticky top-0 bg-gray-900 p-6 border-b border-blue-500/30 flex justify-between items-center rounded-t-3xl">
-        <h3 class="text-xl font-cinzel font-bold text-blue-400">Témoignage Complet</h3>
-        <button class="close-testimonial-modal text-gray-400 hover:text-blue-400 text-xl focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Fermer la modale">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="p-6">
-        <div class="flex items-center mb-6">
-          <img src="${testimonial.image}" alt="Photo de ${testimonial.author}" class="w-20 h-20 rounded-full object-cover mr-4 border-2 border-blue-500">
-          <div>
-            <p class="font-bold text-xl text-blue-400">${testimonial.author}</p>
-            <p class="text-gray-400">${testimonial.title}</p>
-            <div class="flex mt-2">
-              ${Array(testimonial.rating).fill('<i class="fas fa-star text-yellow-400" aria-hidden="true"></i>').join('')}
-              ${Array(5 - testimonial.rating).fill('<i class="fas fa-star text-gray-600" aria-hidden="true"></i>').join('')}
+    <div class="modal-content bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-500">
+      <button class="modal-close absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-full p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 md:p-8">
+        <!-- Left Column: Image, Rating, Details -->
+        <div class="space-y-6">
+          <div class="text-center">
+            <img src="${testimonial.image || 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80'}" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-blue-200 dark:border-gray-600 shadow-md" alt="Photo de ${testimonial.author}">
+            <h3 class="text-2xl font-sans font-bold text-gray-900 dark:text-white">${testimonial.author}</h3>
+            <p class="text-blue-600 dark:text-blue-400 font-medium">${testimonial.title}</p>
+            <div class="mt-2 flex justify-center">
+              ${Array(testimonial.rating || 5).fill('<svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.97a1 1 0 00-.364-1.118L2.098 9.397c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.97z"/></svg>').join('')}
+              ${Array(5 - (testimonial.rating || 5)).fill('<svg class="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.97a1 1 0 00-.364-1.118L2.098 9.397c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.97z"/></svg>').join('')}
             </div>
           </div>
+          <div class="bg-blue-50 dark:bg-gray-700 p-4 rounded-xl shadow-sm">
+            <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+              </svg>
+              Détails du Témoignage
+            </h4>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">${testimonial.details || 'Aucun détail supplémentaire fourni.'}</p>
+          </div>
         </div>
-        <p class="text-base text-gray-300 italic leading-relaxed">${testimonial.text}</p>
-        <p class="text-base text-gray-300 mt-4">${testimonial.details}</p>
-        <div class="mt-6 flex justify-end">
-          <button class="close-testimonial-modal px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold">
-            Fermer
-          </button>
+        <!-- Right Column: Testimonial Text -->
+        <div class="space-y-6">
+          <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
+            <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              Témoignage
+            </h4>
+            <p class="text-gray-700 dark:text-gray-300 italic leading-relaxed">${testimonial.text}</p>
+          </div>
         </div>
       </div>
     </div>
   `;
+
   document.body.appendChild(modal);
 
   setTimeout(() => {
     modal.classList.remove('opacity-0');
     modal.classList.add('opacity-100');
-    modal.querySelector('.bg-gray-900').classList.remove('scale-95');
-    modal.querySelector('.bg-gray-900').classList.add('scale-100');
+    modal.querySelector('.modal-content').classList.remove('scale-95');
+    modal.querySelector('.modal-content').classList.add('scale-100');
   }, 10);
 
   const closeModal = () => {
     modal.classList.remove('opacity-100');
     modal.classList.add('opacity-0');
-    modal.querySelector('.bg-gray-900').classList.remove('scale-100');
-    modal.querySelector('.bg-gray-900').classList.add('scale-95');
+    modal.querySelector('.modal-content').classList.remove('scale-100');
+    modal.querySelector('.modal-content').classList.add('scale-95');
     setTimeout(() => modal.remove(), 500);
     document.body.style.overflow = 'auto';
   };
 
-  modal.querySelectorAll('.close-testimonial-modal').forEach(btn => {
+  modal.querySelectorAll('.modal-close').forEach(btn => {
     btn.addEventListener('click', closeModal);
   });
 
@@ -1440,9 +1456,10 @@ function openTestimonialModal(testimonial) {
     }
   });
 
-  modal.querySelector('.close-testimonial-modal').focus();
+  modal.querySelector('.modal-close').focus();
   document.body.style.overflow = 'hidden';
 }
+
 
 
 
@@ -1516,7 +1533,7 @@ let typingInterval = null;
             <div id="faq-content-${startIndex + index}" class="faq-content hidden p-6 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-gray-200 dark:border-gray-600 transition-all duration-300">
               <p class="mb-6"></p>
               <div class="flex justify-between gap-6">
-                <a href="#contact" class="text-white bg-green-500 dark:bg-transparent border-xl border p-2 rounded-xl border-green-500 hover:text-green-700 font-medium text-sm flex items-center gap-2 transition-all duration-300">
+                <a href="#contact" class="text-white bg-green-500 dark:bg-transparent border-xl border p-2 rounded-xl border-green-500  font-medium text-sm flex items-center gap-2 transition-all duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -1524,7 +1541,7 @@ let typingInterval = null;
                   </svg>
                   En savoir plus
                 </a>
-                <a href="#related" class="text-white bg-blue-500 dark:bg-transparent border-xl border p-2 rounded-xl border-blue-500 hover:text-blue-700 font-medium text-sm flex items-center gap-2 transition-all duration-300">
+                <a href="#related" class="text-white bg-blue-500 dark:bg-transparent border-xl border p-2 rounded-xl border-blue-500  font-medium text-sm flex items-center gap-2 transition-all duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M13 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V9l-7-7z"></path>
                     <path d="M13 3v6h6"></path>
@@ -1644,13 +1661,14 @@ let typingInterval = null;
 
   
 
-     /**
+        /**
          * Initializes the team section with a carousel, filters, and modal functionality.
          * Ensures accessibility, lazy loading, and smooth animations for a professional experience.
          */
         function initTeamSection() {
             const teamContainer = document.getElementById('team-list');
             const modal = document.getElementById('team-modal');
+            const header = document.getElementById('blurred-header');
             const modalContent = document.getElementById('modal-content');
             const modalClose = document.getElementById('modal-close');
 
@@ -1924,6 +1942,8 @@ let typingInterval = null;
                             `;
 
                             modal.classList.add('active');
+                            header.classList.toggle('z-30','');
+
                             document.body.style.overflow = 'hidden';
 
                             if (swiperInstance.autoplay.running) {
@@ -1989,6 +2009,7 @@ let typingInterval = null;
             // Gestion de la fermeture de la modale
             function closeModal() {
                 modal.classList.remove('active');
+                header.classList.add('z-30');
                 document.body.style.overflow = 'auto';
 
                 setTimeout(() => {
@@ -2380,15 +2401,18 @@ function initStatsSection() {
 
   // Génère les cartes à partir des données
   statsContainer.innerHTML = MOCK_STATS.map((stat, index) => `
-    <div class="stat-card bg-white dark:bg-ll-black rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/20" data-aos="fade-up" data-aos-delay="${index * 100}">
-      <div class="flex-shrink-0 relative w-[120px] h-[120px] mb-4 sm:mb-0 sm:mr-6">
-        <canvas id="stats-canvas-${index}" width="120" height="120" class="absolute inset-0 rounded-full"></canvas>
-        <div class="absolute inset-0 flex items-center justify-center z-10">
-          <div class="bg-indigo-100 dark:bg-indigo-900/30 rounded-full p-4 shadow-md">
-            ${stat.svg}
-          </div>
-        </div>
-      </div>
+    <div class="stat-card bg-white gap-4 dark:bg-ll-black rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/20" data-aos="fade-up" data-aos-delay="${index * 100}">
+      
+
+      <div class="relative w-[140px] h-[140px] md:w-[120px] md:h-[120px] mb-2">
+                <canvas id="stats-canvas-${index}" width="140" height="140" class="absolute inset-0"></canvas>
+                <div class="absolute inset-[-3px] flex items-center justify-center z-10">
+                    <div class="rounded-full p-4 ">
+                      ${stat.svg}
+                    </div>
+                </div>
+            </div>
+
       <div class="flex-1 mt-4 sm:mt-0">
         <p class="text-lg font-semibold text-ll-black dark:text-ll-white">${stat.label}</p>
         <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">${stat.description}</p>
@@ -2441,13 +2465,14 @@ function initStatsSection() {
 
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = 120 * dpr;
-    canvas.height = 120 * dpr;
+    const size = canvas.clientWidth;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
     ctx.scale(dpr, dpr);
 
-    const radius = 50;
-    const centerX = canvas.width / (2 * dpr);
-    const centerY = canvas.height / (2 * dpr);
+    const radius = (size / 2) - 10;
+    const centerX = size / 2;
+    const centerY = size / 2;
 
     let current = 0;
     const increment = target / 100;
@@ -2460,7 +2485,7 @@ function initStatsSection() {
     let fontColor = getFontColor(themeToApply);
     let glowColor = themeToApply === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(37, 99, 235, 0.3)';
 
-    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    const gradient = ctx.createLinearGradient(0, 0, size, size);
     gradient.addColorStop(0, '#2563EB');
     gradient.addColorStop(1, '#90EE90');
 
@@ -2488,7 +2513,7 @@ function initStatsSection() {
     window.addEventListener('storage', handleThemeChange);
 
     function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, size, size);
 
       // Cercle de fond
       ctx.beginPath();
@@ -2564,6 +2589,7 @@ function initStatsSection() {
 
 
 
+
 /**
  * Initialise la section Tarification avec grille
  */
@@ -2612,63 +2638,74 @@ function initContactsSection() {
 }
 
 
+
+
+
+
 function initWhyUsSection() {
-    const whyUsContainer = document.getElementById('why-us-list');
-    if (!whyUsContainer) {
-        console.warn('Conteneur "Pourquoi Nous Choisir" non trouvé');
-        return;
-    }
+  const whyUsContainer = document.getElementById('why-us-list');
+  if (!whyUsContainer) {
+    console.warn('Conteneur "Pourquoi Nous Choisir" non trouvé');
+    return;
+  }
 
-    const reasons = WHY_US_DATA.reasons;
+  // Assurez-vous que WHY_US_DATA.reasons existe et est un tableau
+  const reasons = Object.values(WHY_US_DATA);
 
-    console.log(WHY_US_DATA);
+  whyUsContainer.innerHTML = reasons.map((reason, index) => `
+   <div class="service-card group relative rounded-xl overflow-hidden h-80 bg-white dark:bg-gray-800 shadow-md hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="${index * 150}"> 
+      <div 
+        class="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-in-out group-hover:scale-110" 
+        style="background-image: url('${reason.image}');"
+      ></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
-    whyUsContainer.innerHTML = reasons.map((reason, index) => `
-        <div class="service-card bg-white relative overflow-hidden dark:bg-ll-black rounded-2xl shadow-xl p-8 text-center transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/20" data-aos="fade-up" data-aos-delay="${index * 100}">
-            <div class="relative">
-                <div class="icon-container mb-4">${reason.icon}</div>
-                <h3 class="text-xl font-bold mb-2 text-ll-black dark:text-ll-white">${reason.title}</h3>
-                <p class="text-ll-text-gray dark:text-ll-medium-gray">${reason.description}</p>
+      <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+        <div class="relative h-48">
+        
+          <div class="initial-content absolute bottom-0 left-0 w-full transition-all duration-500 ease-out group-hover:-translate-y-full group-hover:opacity-0">
+            <div class="icon-container w-14 h-14 rounded-full flex items-center justify-center mb-4 bg-white/10 ${reason.color || 'text-white'}">
+              ${reason.icon}
             </div>
+            <h3 class="text-2xl font-bold font-sans tracking-tight">${reason.title}</h3>
+          </div>
+
+          <div class="hover-content absolute bottom-0 left-0 w-full opacity-0 translate-y-8 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+            <h4 class="text-xl font-bold font-sans tracking-tight mb-2">${reason.title}</h4>
+            <p class="text-gray-200 text-sm mb-4">${reason.description || reason.hoverDescription}</p>
+            ${reason.stats ? `
+              <div class="border-t border-white/20 pt-3">
+                <span class="text-xs font-semibold text-gray-300 uppercase tracking-wider">${reason.stats.label}</span>
+                <p class="text-2xl font-bold">${reason.stats.value}</p>
+              </div>
+            ` : ''}
+          </div>
+          
         </div>
-    `).join('');
+      </div>
+    </div>
+  `).join('');
 
-    // Initialize Intersection Observer for infinite pulse animation
-    const observers = [];
-    reasons.forEach((_, index) => {
-        const serviceCard = whyUsContainer.children[index];
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCardPulse(index);
-                } else {
-                    // Stop animation when out of view
-                    const iconContainer = serviceCard.querySelector('.icon-container');
-                    if (iconContainer) {
-                        iconContainer.style.animation = 'none';
-                    }
-                }
-            });
-        }, { threshold: 0.5 });
-        observer.observe(serviceCard);
-        observers.push(observer);
-    });
-
-    /**
-     * Animates the card icon with a subtle infinite pulse effect
-     */
-    function animateCardPulse(index) {
-        const serviceCard = whyUsContainer.children[index];
-        const iconContainer = serviceCard.querySelector('.icon-container');
-        if (!iconContainer) return;
-
-        // Apply CSS-based pulse animation
-        iconContainer.style.animation = 'pulse 2s infinite ease-in-out';
-    }
+  // L'observateur pour l'animation de flottement reste utile
+  const observers = [];
+  document.querySelectorAll('.reason-card').forEach(card => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const iconContainer = card.querySelector('.icon-container');
+        if (iconContainer) {
+          iconContainer.style.animation = entry.isIntersecting 
+            ? 'float 3s ease-in-out infinite' 
+            : 'none';
+        }
+      });
+    }, { threshold: 0.3 }); // Déclenche quand 30% de la carte est visible
+    observer.observe(card);
+    observers.push(observer);
+  });
 }
 
-
-
+// N'oubliez pas d'appeler la fonction
+// document.addEventListener('DOMContentLoaded', initWhyUsSection);
 
 /**
  * Initialise les modales vidéo avec gestion plein écran
@@ -2882,8 +2919,75 @@ function initNumberPicker() {
   });
 }
 
+// Toggle loading state for before/after showcase
+function toggleBeforeAfterLoading(show) {
+  const loadingEl = document.getElementById('before-after-loading');
+  const beforeAfterList = document.getElementById('before-after-list');
+  if (loadingEl && beforeAfterList) {
+    loadingEl.classList.toggle('hidden', !show);
+    beforeAfterList.classList.toggle('hidden', show);
+  }
+}
+
 /**
- * Initialise les sliders avant/après
+ * Renders before/after showcase from JSON data.
+ */
+async function renderBeforeAfter() {
+  const beforeAfterList = document.getElementById('before-after-list');
+  const loadingEl = document.getElementById('before-after-loading');
+  if (!beforeAfterList || !loadingEl) return;
+
+  toggleBeforeAfterLoading(true);
+
+  try {
+    // Fetch JSON data securely
+    const response = await fetch('/assets/json/mock/before-after.json', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const showcases = data.showcases || [];
+
+    if (showcases.length === 0) {
+      beforeAfterList.innerHTML = '<p class="text-center text-gray-500">Aucune transformation disponible pour le moment.</p>';
+      toggleBeforeAfterLoading(false);
+      return;
+    }
+
+    const beforeAfterItems = showcases.map((showcase, index) => {
+      const before = showcase.before || { url: '', description: '' };
+      const after = showcase.after || { url: '', description: '' };
+      const title = showcase.title || 'Transformation';
+
+      return `
+        <div class="before-after-container relative overflow-hidden rounded-xl shadow-lg border border-black-500" data-aos="fade-up" data-aos-delay="100">
+                    <img src="${before.url}" alt="${before.description}" class="before w-full h-64 object-cover">
+                    <img src="${after.url}" alt="${after.description}" class="after w-full h-64 object-cover absolute top-0 left-0">
+                    <div class="comparison-slider absolute top-0 h-full w-1 bg-blue-600 cursor-ew-resize"></div>
+                </div>  
+      `;
+    });
+
+    beforeAfterList.innerHTML = beforeAfterItems.join('');
+    initBeforeAfterSliders();
+  } catch (error) {
+    console.error('Erreur lors du chargement des données before/after:', error);
+    beforeAfterList.innerHTML = '<p class="text-center text-red-500">Erreur lors du chargement des transformations. Veuillez réessayer plus tard.</p>';
+  } finally {
+    toggleBeforeAfterLoading(false);
+  }
+}
+
+/**
+ * Initialise les sliders avant/après avec accessibilité et sécurité améliorées
  */
 function initBeforeAfterSliders() {
   document.querySelectorAll('.before-after-container').forEach(container => {
@@ -2896,6 +3000,8 @@ function initBeforeAfterSliders() {
       return;
     }
 
+    let isDragging = false;
+
     const updateSlider = x => {
       const rect = container.getBoundingClientRect();
       const percentage = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
@@ -2903,8 +3009,6 @@ function initBeforeAfterSliders() {
       slider.style.left = `${percentage}%`;
       slider.setAttribute('aria-valuenow', percentage.toFixed(0));
     };
-
-    let isDragging = false;
 
     const startDragging = x => {
       isDragging = true;
@@ -2915,7 +3019,9 @@ function initBeforeAfterSliders() {
       isDragging = false;
     };
 
+    // Mouse events
     slider.addEventListener('mousedown', e => {
+      e.preventDefault(); // Prevent text selection
       startDragging(e.clientX);
     });
 
@@ -2927,18 +3033,23 @@ function initBeforeAfterSliders() {
 
     document.addEventListener('mouseup', stopDragging);
 
+    // Touch events
     container.addEventListener('touchstart', e => {
+      e.preventDefault(); // Prevent scrolling
       startDragging(e.touches[0].clientX);
-    });
+    }, { passive: false });
 
     container.addEventListener('touchmove', e => {
       if (isDragging) {
+        e.preventDefault(); // Prevent scrolling
         updateSlider(e.touches[0].clientX);
       }
-    });
+    }, { passive: false });
 
     document.addEventListener('touchend', stopDragging);
 
+    // Keyboard accessibility
+    slider.setAttribute('tabindex', '0');
     slider.setAttribute('role', 'slider');
     slider.setAttribute('aria-valuemin', '0');
     slider.setAttribute('aria-valuemax', '100');
@@ -2952,13 +3063,32 @@ function initBeforeAfterSliders() {
         percentage = Math.max(0, percentage - 5);
       } else if (e.key === 'ArrowRight') {
         percentage = Math.min(100, percentage + 5);
+      } else {
+        return;
       }
       updateSlider(rect.left + (rect.width * percentage) / 100);
     });
 
+    // Initialize slider position
     updateSlider(container.getBoundingClientRect().left + container.getBoundingClientRect().width / 2);
+
+    // Error handling for images
+    beforeImg.addEventListener('error', () => {
+      beforeImg.src = '/assets/images/image.png';
+      beforeImg.alt = 'Image avant indisponible';
+    });
+
+    afterImg.addEventListener('error', () => {
+      afterImg.src = '/assets/images/logo.png';
+      afterImg.alt = 'Image après indisponible';
+    });
   });
 }
+
+
+
+
+
 
 /**
  * Affiche l'animation de chargement
@@ -3104,7 +3234,7 @@ function initServiceFilters() {
  * Initialise les particules interactives
  */
 function initParticles() {
-  if (typeof particlesJS === 'undefined') {
+  if (typeof particlesJS === 'undefined' || !document.getElementById('particles-js')) {
     console.warn('particlesJS non chargé');
     return;
   }
@@ -3225,7 +3355,7 @@ function initEco(){
     <div class="eco-card relative group p-6 rounded-2xl border-2 border-green-500/20 bg-white dark:bg-ll-black shadow-lg hover:shadow-green-500/30 transform hover:scale-[1.03] transition-all duration-500 cursor-pointer overflow-hidden" data-aos="fade-up" data-aos-delay="${index * 100}" data-lottie-url="${commitment.lottieUrl}">
       <div class="relative w-40 h-20 mx-auto mb-4 flex items-center justify-center">
         <div class="icon-container absolute transition-opacity duration-500 group-hover:opacity-0">${commitment.icon}</div>
-        <div class="lottie-container absolute opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+        <div class="lottie-container w-[100px] absolute opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
       </div>
       <h3 class="text-xl font-bold mb-2 text-center text-ll-black dark:text-ll-white group-hover:text-green-700 dark:group-hover:text-green-500 transition-colors duration-300">${commitment.title}</h3>
       <div class="content-container mt-4 overflow-hidden h-auto group-hover:h-auto transition-all duration-500 ease-in-out">
@@ -3312,122 +3442,164 @@ function initEco(){
 }
 
 function initAbout() {
-  // Populate stats dynamically
-  const statsContainer = document.getElementById('company-stats');
-  if (!statsContainer) {
-    console.warn('Conteneur des statistiques non trouvé');
-    return;
-  }
-
-  const uniqueStats = [];
-  const seenLabels = new Set();
-  MOCK_STATS.slice(0,4).forEach(stat => {
-    if (!seenLabels.has(stat.label)) {
-      uniqueStats.push(stat);
-      seenLabels.add(stat.label);
-    }
-  });
-
-  statsContainer.innerHTML = uniqueStats.map((stat, index) => `
-    <div class="stat-item flex flex-col items-center" data-aos="fade-up" data-aos-delay="${500 + index * 100}">
-      <div class="relative w-[120px] h-[120px] mb-2">
-        <canvas id="stat-canvas-${index}" width="120" height="120" class="absolute inset-0 rounded-full"></canvas>
-        <div class="absolute inset-0 flex items-center justify-center z-10">
-          <div class="bg-indigo-100 dark:bg-indigo-900/30 rounded-full p-4 shadow-md">
-            ${stat.svg}
-          </div>
-        </div>
-      </div>
-      <div class="stat-number text-2xl font-cinzel font-bold text-ll-black dark:text-ll-white" id="stat-value-${index}">0</div>
-      <div class="stat-label text-sm text-ll-text-gray dark:text-ll-medium-gray">${stat.label}</div>
-    </div>
-  `).join('');
+    
   
 
-  const typingContainer = document.getElementById('typing-text');
-  if (typingContainer) {
-    const paragraphs = typingContainer.querySelectorAll('p');
-    let currentPara = 0;
-    let currentChar = 0;
-    const textArray = Array.from(paragraphs).map(p => p.textContent);
-    
-    paragraphs.forEach(p => p.textContent = '');
 
-    function type() {
-      if (currentPara < textArray.length) {
-        const currentText = textArray[currentPara];
-        if (currentChar < currentText.length) {
-          paragraphs[currentPara].textContent += currentText[currentChar];
-          currentChar++;
-          setTimeout(type, 30);
-        } else {
-          currentChar = 0;
-          currentPara++;
-          setTimeout(type, 500);
+    // Gérer l'état du thème
+    let themeState = {
+        themeToApply: detectTheme(),
+        fontColor: getFontColor(detectTheme()),
+        glowColor: getGlowColor(detectTheme())
+    };
+
+    function detectTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return savedTheme !== null ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
+    }
+
+    function getFontColor(theme) {
+        return theme === 'dark' ? '#FDFDFC' : '#1B1B18';
+    }
+
+    function getGlowColor(theme) {
+        return theme === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(37, 99, 235, 0.3)';
+    }
+
+    function handleThemeChange() {
+        const newTheme = detectTheme();
+        if (newTheme !== themeState.themeToApply) {
+            themeState.themeToApply = newTheme;
+            themeState.fontColor = getFontColor(newTheme);
+            themeState.glowColor = getGlowColor(newTheme);
         }
-      }
     }
-    setTimeout(type, 1000);
-  }
 
-  // Lottie Carousel
-  const lottieSlides = document.querySelectorAll('.lottie-slide');
-  let currentSlide = 0;
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
+    window.addEventListener('storage', handleThemeChange);
 
-  lottieSlides.forEach((slide, index) => {
-    const lottieUrl = slide.dataset.lottieUrl;
-    if (lottieUrl) {
-      lottie.loadAnimation({
-        container: slide,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: lottieUrl
-      });
+    // Initialisation du DOM
+    const statsContainer = document.getElementById('company-stats');
+    if (!statsContainer) {
+        console.warn('Conteneur des statistiques non trouvé');
+        return;
     }
-  });
 
-  function showNextSlide() {
-    lottieSlides.forEach((slide, index) => {
-      const anim = slide.querySelector('svg')?.parentNode?.__animation;
-      if (index === currentSlide) {
-        slide.style.opacity = '1';
-        if (anim) anim.play();
-      } else {
-        slide.style.opacity = '0';
-        if (anim) anim.stop();
-      }
+    const uniqueStats = [];
+    const seenLabels = new Set();
+    MOCK_STATS.slice(0,4).forEach(stat => {
+        if (!seenLabels.has(stat.label)) {
+            uniqueStats.push(stat);
+            seenLabels.add(stat.label);
+        }
     });
-    currentSlide = (currentSlide + 1) % lottieSlides.length;
-    setTimeout(showNextSlide, 5000);
-  }
-  if (lottieSlides.length > 0) {
-    showNextSlide();
-  }
 
-  // Canvas Stats Animation
-  uniqueStats.forEach((stat, index) => {
-    const statItem = statsContainer.children[index];
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCanvasCounter(index, stat.value, stat.unit);
-          animateStatValue(index, stat.value, stat.unit);
-          observer.unobserve(statItem);
+    statsContainer.innerHTML = uniqueStats.map((stat, index) => `
+        <div class="stat-item flex flex-col items-center" data-aos="fade-up" data-aos-delay="${500 + index * 100}">
+            <div class="relative w-[140px] h-[140px] md:w-[120px] md:h-[120px] mb-2">
+                <canvas id="stat-canvas-${index}" width="140" height="140" class="absolute inset-0"></canvas>
+                <div class="absolute inset-[-3px] flex items-center justify-center z-10">
+                    <div class="rounded-full p-4 shadow-md">
+                      ${stat.svg}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="stat-number text-2xl font-cinzel font-bold text-ll-black dark:text-ll-white" id="stat-value-${index}">0</div>
+            <div class="stat-label text-sm text-center text-ll-text-gray dark:text-ll-medium-gray">${stat.label}</div>
+        </div>
+    `).join('');
+
+    // Reste de l'initialisation (Typing Text, Lottie Carousel)
+    const typingContainer = document.getElementById('typing-text');
+    if (typingContainer) {
+        const paragraphs = typingContainer.querySelectorAll('p');
+        let currentPara = 0;
+        let currentChar = 0;
+        const textArray = Array.from(paragraphs).map(p => p.textContent);
+        
+        paragraphs.forEach(p => p.textContent = '');
+
+        function type() {
+            if (currentPara < textArray.length) {
+                const currentText = textArray[currentPara];
+                if (currentChar < currentText.length) {
+                    paragraphs[currentPara].textContent += currentText[currentChar];
+                    currentChar++;
+                    setTimeout(type, 30);
+                } else {
+                    currentChar = 0;
+                    currentPara++;
+                    setTimeout(type, 500);
+                }
+            }
         }
-      });
-    }, { threshold: 0.5 });
-    observer.observe(statItem);
-  });
+        setTimeout(type, 1000);
+    }
 
-  function animateCanvasCounter(index, target, unit) {
+    const lottieSlides = document.querySelectorAll('.lottie-slide');
+    let currentSlide = 0;
+
+    lottieSlides.forEach((slide, index) => {
+        const lottieUrl = slide.dataset.lottieUrl;
+        if (lottieUrl) {
+            lottie.loadAnimation({
+                container: slide,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: lottieUrl
+            });
+        }
+    });
+
+    function showNextSlide() {
+        lottieSlides.forEach((slide, index) => {
+            const anim = slide.querySelector('svg')?.parentNode?.__animation;
+            if (index === currentSlide) {
+                slide.style.opacity = '1';
+                if (anim) anim.play();
+            } else {
+                slide.style.opacity = '0';
+                if (anim) anim.stop();
+            }
+        });
+        currentSlide = (currentSlide + 1) % lottieSlides.length;
+        setTimeout(showNextSlide, 5000);
+    }
+    if (lottieSlides.length > 0) {
+        showNextSlide();
+    }
+
+    // Canvas Stats Animation
+    uniqueStats.forEach((stat, index) => {
+        const statItem = statsContainer.children[index];
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCanvasCounter(index, stat.value, stat.unit);
+                    animateStatValue(index, stat.value, stat.unit);
+                    observer.unobserve(statItem);
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(statItem);
+    });
+
+
+
+    function animateCanvasCounter(index, target, unit) {
     const canvas = document.getElementById(`stat-canvas-${index}`);
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = 120 * dpr;
-    canvas.height = 120 * dpr;
+    // The sizes here must match the CSS classes w-[140px] h-[140px]
+    const canvasSize = 140; 
+    canvas.width = canvasSize * dpr;
+    canvas.height = canvasSize * dpr;
     ctx.scale(dpr, dpr);
 
     const radius = 50;
@@ -3440,6 +3612,7 @@ function initAbout() {
     let pulsePhase = 0;
     let isCountingComplete = false;
 
+    // Détection et suivi du thème
     let themeToApply = detectTheme();
     let fontColor = getFontColor(themeToApply);
     let glowColor = themeToApply === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(37, 99, 235, 0.3)';
@@ -3467,20 +3640,21 @@ function initAbout() {
       }
     }
 
+    // Réagir aux changements de thème
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
     window.addEventListener('storage', handleThemeChange);
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Background circle
+      // Cercle de fond
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
       ctx.strokeStyle = themeToApply === 'dark' ? '#374151' : '#EDEDEC';
       ctx.lineWidth = 8;
       ctx.stroke();
 
-      // Progress arc
+      // Arc de progression
       const progress = isCountingComplete ? 1 : current / target;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, -Math.PI / 2, (2 * Math.PI * progress) - Math.PI / 2);
@@ -3488,7 +3662,7 @@ function initAbout() {
       ctx.lineWidth = 8;
       ctx.stroke();
 
-      // Pulse effect
+      // Effet de pulse
       const pulseScale = 1 + 0.05 * Math.sin(pulsePhase);
       ctx.save();
       ctx.translate(centerX, centerY);
@@ -3503,6 +3677,7 @@ function initAbout() {
 
       pulsePhase += 0.05;
 
+      // Incrémentation de la valeur
       if (!isCountingComplete && current < target) {
         current += increment;
         if (current >= target) {
@@ -3515,43 +3690,31 @@ function initAbout() {
     }
 
     draw();
+  }
 
-    // Cleanup
-    const statItem = statsContainer.children[index];
-    const observerCleanup = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          cancelAnimationFrame(animationFrameId);
+
+    function animateStatValue(index, target, unit) {
+        const valueElement = document.getElementById(`stat-value-${index}`);
+        if (!valueElement) return;
+
+        let current = 0;
+        const increment = target / 100;
+        let animationFrameId;
+
+        function updateValue() {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                valueElement.textContent = Math.floor(current) + (unit || '');
+                cancelAnimationFrame(animationFrameId);
+                return;
+            }
+            valueElement.textContent = Math.floor(current) + (unit || '');
+            animationFrameId = requestAnimationFrame(updateValue);
         }
-      });
-    }, { threshold: 0 });
-    observerCleanup.observe(statItem);
-  }
 
-  function animateStatValue(index, target, unit) {
-    const valueElement = document.getElementById(`stat-value-${index}`);
-    if (!valueElement) return;
-
-    let current = 0;
-    const increment = target / 100;
-    let animationFrameId;
-
-    function updateValue() {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        valueElement.textContent = Math.floor(current) + (unit || '');
-        cancelAnimationFrame(animationFrameId);
-        return;
-      }
-      valueElement.textContent = Math.floor(current) + (unit || '');
-      animationFrameId = requestAnimationFrame(updateValue);
+        updateValue();
     }
-
-    updateValue();
-  }
-
- 
 }
 
 /**
@@ -3576,7 +3739,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initContactsSection();
   initCategoryModal();
   initNumberPicker();
-  initBeforeAfterSliders();
+ // initBeforeAfterSliders();
   initServiceFilters();
   initParticles();
   initContactForm();
@@ -3584,17 +3747,43 @@ document.addEventListener('DOMContentLoaded', async () => {
   initVideoModal();
   initWhyUsSection();
   initEco();
+  renderBeforeAfter();
 
   window.openLightbox = openLightbox;
 
   loadServices().then(services => {
     renderServices(services);
-    renderBeforeAfter(services);
     AOS.refresh();
   });
 
 
+  const heroSection = document.getElementById("hero");
+  const header = document.getElementById("blurred-header");
 
+  if (heroSection && header) {
+    const onScroll = () => {
+      const isDarkMode = document.documentElement.classList.contains("dark");
+      if (isDarkMode) return; 
+
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      const headerHeight = header.offsetHeight;
+
+      if (heroBottom <= headerHeight) {
+        // On est passé sous le hero → applique le style clair
+        header.classList.add("header-light-style");
+      } else {
+        // On est encore sur le hero → style transparent
+        header.classList.remove("header-light-style");
+      }
+    };
+
+    // Vérifie immédiatement au chargement
+    onScroll();
+
+    // Vérifie à chaque scroll
+    window.addEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+  }
 
 
     // Animation de chargement initial
