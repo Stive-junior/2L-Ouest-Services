@@ -1242,11 +1242,15 @@
         font-style: normal;
         }
 
+       #hero-slides a, a{
+        border-color: var(--ll-white) !important;
+        color: var(--ll-white) !important;
+       } 
 
         section:not(#faq) button,.content-main a.inline-flex , #hero-slides a {
        
         font-weight: 600;
-        border: 0.5px solid #e2e8f0;
+        border: 0.5px solid var(--ll-blue);
         cursor: pointer;
         overflow: hidden;
         transition: all 0.3s ease;
@@ -1368,7 +1372,7 @@ html:not(.dark) #blurred-header.header-light-style button {
         </div>
 
         <!-- Particles Background -->
-        <div id="particles-js" class="fixed inset-0 z-0"></div>
+        <div id="particles-js" class="fixed inset-0 z-0 hidden"></div>
 
         <!-- Overlays -->
         <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden lg:hidden"></div>
@@ -2477,6 +2481,7 @@ html:not(.dark) #blurred-header.header-light-style button {
             </div>
 
             
+            
 
          
             
@@ -2868,7 +2873,7 @@ html:not(.dark) #blurred-header.header-light-style button {
 
                 <!-- Before/After Showcase -->
                 <section id="before-after" class="py-20 inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 dark:from-blue-900/10 dark:to-indigo-900/10">
-                    <div class="container mx-auto px-4 max-w-7xl">
+                    <div class="container mx-auto px-4">
                         <div class="text-center mb-16" data-aos="fade-up">
                             <h2 class="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-ll-black dark:text-ll-white">Avant / Après</h2>
                             <p class="text-lg md:text-xl text-ll-text-gray dark:text-ll-medium-gray max-w-3xl mx-auto">
@@ -2878,7 +2883,7 @@ html:not(.dark) #blurred-header.header-light-style button {
                         <div id="before-after-loading" class="flex justify-center items-center py-12">
                             <lottie-player src="/assets/json/animation.json" background="transparent" speed="1" style="width: 150px; height: 150px;" loop autoplay></lottie-player>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 hidden" id="before-after-list"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 hidden" id="before-after-list"></div>
                     </div>
                 </section>
 
@@ -2915,9 +2920,7 @@ html:not(.dark) #blurred-header.header-light-style button {
                     </div>
                     </section>
 
-
-                <div class="section-divider container mx-auto px-6"></div>
-
+<!--
                 <section id="services" class="py-20 bg-ll-white dark:bg-ll-black transition-colors duration-300">
                     <div class="container mx-auto px-6 lg:px-20">
                         <h2 class="text-4xl lg:text-5xl font-bold font-cinzel mb-4 text-center " data-aos="fade-up"><span class="gradient-text">Nos Services phares</span> ✨</h2>
@@ -3012,26 +3015,11 @@ html:not(.dark) #blurred-header.header-light-style button {
                         </div>
                     </div>
                 </section>
-
+            -->
                 <div class="section-divider container mx-auto px-6"></div>
 
-                <section id="before-after" class="py-20 bg-ll-light-bg dark:bg-ll-black transition-colors duration-300">
-                        <div class="container mx-auto px-6 lg:px-20">
-                            <div class="text-center mb-12">
-                                <h2 class="text-4xl lg:text-5xl font-bold font-cinzel mb-4 " data-aos="fade-up"><span class="gradient-text">La Magie du "Avant-Après"</span> ✨</h2>
-                                <p class="text-ll-text-gray dark:text-ll-medium-gray text-lg max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                                    Voyez par vous-même la transformation qu'une intervention professionnelle peut apporter.
-                                </p>
-                            </div>
-                            <div class="before-after-container relative mx-auto max-w-4xl rounded-2xl shadow-xl" id="before-after-slider" data-aos="zoom-in" data-aos-delay="200">
-                                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Image avant nettoyage" class="before rounded-2xl">
-                                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Image après nettoyage" class="after rounded-2xl">
-                                <div class="comparison-slider"></div>
-                            </div>
-                        </div>
-                    </section>
+               
 
-                    <div class="section-divider container mx-auto px-6"></div>
 
                       <section id="stats" class="py-24 bg-gradient-to-br from-ll-light-bg to-ll-white dark:from-sidebar-dark dark:to-ll-black transition-colors duration-300">
                         <div class="container mx-auto px-4 max-w-7xl relative z-10">
