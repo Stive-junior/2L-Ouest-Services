@@ -34,13 +34,6 @@ const equipmentIcons = {
 
 let MOCK_SERVICES = [];
 
-// Toggle global loading overlay
-function toggleLoadingOverlay(show) {
-    const loadingOverlay = document.getElementById('loading-overlay');
-    if (loadingOverlay) {
-        loadingOverlay.classList.toggle('hidden', !show);
-    }
-}
 
 // Toggle loading state for services
 function toggleServicesLoading(show) {
@@ -129,7 +122,7 @@ loadMockServices();
  */
 export async function loadServices(filters = {}) {
     
-    toggleLoadingOverlay(true);
+    toggleServicesLoading(true);
     try {
         const token = getStoredToken();
         if (!token) {
@@ -163,7 +156,7 @@ export async function loadServices(filters = {}) {
         showNotification('Erreur lors du chargement des services.', 'error');
         return applyFilters(MOCK_SERVICES, filters);
     } finally {
-        toggleLoadingOverlay(false);
+        toggleServicesLoading(false);
     }
 }
 

@@ -120,7 +120,7 @@ class UserController {
   }
 
   /**
-   * Met à jour un utilisateur par un admin.
+   * Met à jour un utilisateur (admin uniquement).
    * @param {Object} req - Requête HTTP.
    * @param {Object} res - Réponse HTTP.
    * @param {Function} next - Fonction pour passer au middleware suivant.
@@ -265,6 +265,27 @@ class UserController {
       next(error);
     }
   }
+
+  /**
+   * Vérifie si un email est disponible (non utilisé par un utilisateur existant).
+   * @param {Object} req - Requête HTTP.
+   * @param {Object} res - Réponse HTTP.
+   * @param {Function} next - Fonction pour passer au middleware suivant.
+   * @returns {Promise<void>} - Réponse JSON indiquant si l'email est disponible.
+   */
+  async checkEmailAvailability(req, res, next) {
+    try {
+      const { email } = req.validatedData;
+      const available = await userService.checkEmailAvailability(email);
+      res.status(200).json({
+        status: 'success',
+        data: { available },
+      });
+    } catch (error) {
+      logError('Erreur lors de la vérification de disponibilité de l\'email', { error: error.message, email: req.validatedData.email });
+      next(error);
+    }
+  }
 }
 
 const controller = new UserController();
@@ -281,4 +302,5 @@ module.exports = {
   updatePreferences: controller.updatePreferences.bind(controller),
   addInvoice: controller.addInvoice.bind(controller),
   removeInvoice: controller.removeInvoice.bind(controller),
+  checkEmailAvailability: controller.checkEmailAvailability.bind(controller),
 };

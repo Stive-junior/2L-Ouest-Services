@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // DOM elements
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementById('sidebar-toggle');
+    const Name = document.getElementById('entreprise');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
     const sidebarCollapseToggle = document.getElementById('sidebar-collapse-toggle');
     const mainSidebarClose = document.getElementById('main-sidebar-close');
@@ -16,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarContainer = document.getElementById('sidebar-container');
     const themeButton = document.getElementById('theme-toggle-header');
     const authButton = document.getElementById('auth');
+
+   
     
     /**
      * Sauvegarde l'état actuel des sidebars dans le localStorage.
@@ -110,13 +113,20 @@ function openSidebar(sidebarElement, overlayElement, isChat = false) {
         }
     } else {
         document.body.classList.add('sidebar-open');
-        if (sidebarToggle) {
+        if (sidebarToggle && Name) {
             sidebarToggle.classList.add('transition-all', 'duration-300', 'ease-in-out');
             sidebarToggle.classList.add('chat-closed');
             sidebarToggle.classList.remove('chat-open');
+            
+
+            Name.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            Name.classList.add('chat-closed');
+            Name.classList.remove('chat-open');
 
             if (isMobile) {
                 sidebarToggle.classList.add('hidden');
+                Name.classList.add('hidden');
+
             }
         }
     }
@@ -182,12 +192,17 @@ function closeSidebar(sidebarElement, overlayElement, isChat = false) {
         }
     } else {
         document.body.classList.remove('sidebar-open');
-        if (sidebarToggle) {
+        if (sidebarToggle && Name) {
             sidebarToggle.classList.add('transition-all', 'duration-300', 'ease-in-out');
             sidebarToggle.classList.remove('chat-closed');
             sidebarToggle.classList.add('chat-open');
 
+            Name.classList.add('transition-all', 'duration-300', 'ease-in-out');
+            Name.classList.remove('chat-closed');
+            Name.classList.add('chat-open');
+
             sidebarToggle.classList.remove('hidden');
+            Name.classList.remove('hidden');
         }
     }
 
@@ -338,7 +353,9 @@ window.addEventListener('resize', updateContentLayout);
     function updateAppButtonsVisibility() {
         const isMobile = window.innerWidth < 1024;
         if (isMobile) {
-            if (sidebarToggle) sidebarToggle.classList.toggle('hidden', isSidebarOpen(sidebar));
+            if (sidebarToggle) {sidebarToggle.classList.toggle('hidden', isSidebarOpen(sidebar)) };
+            if(Name) { Name.classList.toggle('hidden' , isSidebarOpen(sidebar)) };
+            
             if (chatSidebarToggle) {
                 chatSidebarToggle.classList.toggle('chat-closed', isSidebarOpen(chatSidebar));
                 chatSidebarToggle.classList.toggle('chat-open', !isSidebarOpen(chatSidebar));

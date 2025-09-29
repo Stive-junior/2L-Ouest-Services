@@ -18,10 +18,15 @@ const { validateEnv } = require('./env');
  * @property {object} firebase - Configuration Firebase.
  * @property {string} [firebase.serviceAccountPath] - Chemin du fichier de clé de service.
  * @property {string} firebase.projectId - ID du projet Firebase.
+ * @property {string} firebase.appId - ID de l'application Firebase.
+ * @property {string} firebase.apiKey - Clé API Firebase.
+ * @property {string} firebase.measurementId - ID de mesure Firebase.
  * @property {string} firebase.clientEmail - Email du client Firebase.
  * @property {string} firebase.privateKey - Clé privée Firebase.
  * @property {string} [firebase.databaseURL] - URL de la base de données Firebase.
  * @property {string} firebase.storageBucket - Bucket de stockage Firebase.
+ * @property {string} firebase.vapidKey - Clé publique VAPID pour FCM.
+ * @property {string} firebase.senderId - Sender ID pour FCM.
  * @property {object} rateLimit - Configuration du rate-limiting.
  * @property {number} rateLimit.windowMs - Fenêtre de temps en ms.
  * @property {number} rateLimit.max - Nombre maximum de requêtes.

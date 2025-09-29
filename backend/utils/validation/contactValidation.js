@@ -15,8 +15,9 @@ const contactSchema = Joi.object({
   userId: Joi.string().optional().allow(null).description('ID de l\'utilisateur (optionnel)'),
   name: Joi.string().min(2).max(100).required().description('Nom de la personne'),
   email: Joi.string().email().required().max(255).description('Email de contact'),
+  phone: Joi.string().pattern(/^\+33[\s\-]?[1-9](?:[\s\-]?\d{2}){4}$/).allow(null, '').optional().description('Numéro de téléphone international'),
   message: Joi.string().min(10).max(1000).required().description('Message envoyé'),
-  subject: Joi.string().min(3).max(100).optional().description('Objet du message'),
+  subjects: Joi.string().min(3).max(100).optional().description('Objet du message'),
   createdAt: Joi.string().isoDate().default(() => new Date().toISOString()).description('Date de création'),
 }).label('ContactSchema');
 

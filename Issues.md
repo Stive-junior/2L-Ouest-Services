@@ -206,7 +206,7 @@ Attends validation pour passer à l'étape 3 (Implémentation du Code).
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{userId} {
+    match /user/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
     match /services/{serviceId} {

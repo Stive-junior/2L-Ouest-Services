@@ -3,7 +3,6 @@
  * @description Script de vérification d'authentification chargé en premier pour rediriger avant le chargement complet de la page.
  * Vérifie si l'utilisateur est connecté via un jeton stocké et si un code de vérification est requis pour certaines pages.
  */
-
 (function () {
   const token = localStorage.getItem('jwt');
   const role = localStorage.getItem('userRole');
@@ -11,7 +10,6 @@
   const codeCheckEmail = localStorage.getItem('codeCheckEmail');
   const page = window.location.pathname.split('/').pop().replace('.html', '');
 
-  //alert(localStorage.getItem('jwt'));
   const publicPages = [
     'signin',
     'signup',
@@ -34,6 +32,16 @@
 
   const isAuthenticated = !!token && !!role;
 
+  // Restreindre l'accès à code-check.html si aucune vérification n'est en cours
+  if (page === 'code-check' && (!codeCheckType || !codeCheckEmail)) {
+    if (isAuthenticated) {
+      window.location.replace('/dashboard.html');
+    } else {
+      window.location.replace('/index.html');
+    }
+    return;
+  }
+
   // Redirection pour les pages protégées si non authentifié
   if (protectedPages.includes(page) && !isAuthenticated) {
     window.location.replace('/pages/auth/signin.html');
@@ -48,5 +56,4 @@
     window.location.replace('/dashboard.html');
     return;
   }
-  
 })();

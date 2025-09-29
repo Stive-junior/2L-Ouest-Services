@@ -11,6 +11,7 @@ const { userRepo, serviceRepo, reviewRepo, chatRepo, contactRepo } = require('..
 const { logger, logInfo, logError, logWarn, logAudit } = require('./loggerService');
 const { AppError, UnauthorizedError } = require('../utils/errorUtils');
 const config = require('../config/config');
+const emailService = require('./emailService');
 
 /**
  * @class SocketService
@@ -444,7 +445,7 @@ class SocketService {
 
     socket.on('createContact', async ({ subject, message }, callback) => {
       try {
-        const { emailService } = require('./emailService');
+        
         const contact = await emailService.createContact({ userId, subject, message });
         const admins = await userRepo.getByRole('admin', 1, 100);
         for (const admin of admins.users) {

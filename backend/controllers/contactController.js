@@ -4,8 +4,7 @@
  * Fournit des endpoints pour créer, récupérer, mettre à jour, supprimer et lister les messages de contact, ainsi que pour envoyer des emails de confirmation.
  * @module controllers/contactController
  */
-
-const emailService  = require('../services/emailService');
+const emailService = require('../services/emailService');
 const { logger, logError } = require('../services/loggerService');
 const { AppError } = require('../utils/errorUtils');
 
@@ -15,7 +14,7 @@ const { AppError } = require('../utils/errorUtils');
  */
 class ContactController {
   /**
-   * Crée un nouveau message de contact et envoie un email de confirmation.
+   * Crée un nouveau message de contact et envoie des emails de confirmation.
    * @param {Object} req - Requête HTTP.
    * @param {Object} res - Réponse HTTP.
    * @param {Function} next - Fonction pour passer au middleware suivant.
@@ -24,8 +23,8 @@ class ContactController {
   async createContact(req, res, next) {
     try {
       const contactData = { ...req.validatedData, userId: req.user?.id || null };
-      const contact = await emailService.createContact(contactData);
-      await emailService.sendContactEmail(contact.id, req.body.htmlTemplate);
+      const { clientHtmlTemplate, adminHtmlTemplate } = req.body;
+      const contact = await emailService.createContact(contactData, clientHtmlTemplate, adminHtmlTemplate);
       res.status(201).json({
         status: 'success',
         data: { contact },
@@ -74,7 +73,7 @@ class ContactController {
       if (contact.userId && contact.userId !== req.user.id && req.user.role !== 'admin') {
         throw new AppError(403, 'Seul l\'auteur ou un admin peut modifier le message de contact');
       }
-      const updatedContact = await emailService.updateContact(id, contactData);
+      const updatedContact = await emailService.updateContact(id, { ...contactData, updatedBy: req.user.id });
       res.status(200).json({
         status: 'success',
         data: { contact: updatedContact },
@@ -99,10 +98,10 @@ class ContactController {
       if (contact.userId && contact.userId !== req.user.id && req.user.role !== 'admin') {
         throw new AppError(403, 'Seul l\'auteur ou un admin peut supprimer le message de contact');
       }
-      await emailService.deleteContact(id);
+      const result = await emailService.deleteContact(id, req.user.id);
       res.status(200).json({
         status: 'success',
-        message: 'Message de contact supprimé avec succès',
+        data: result,
       });
     } catch (error) {
       logError('Erreur lors de la suppression du message de contact', { error: error.message, contactId: req.validatedData.id });
@@ -119,14 +118,38 @@ class ContactController {
    */
   async getAllContacts(req, res, next) {
     try {
-      const { page, limit } = req.validatedData;
-      const { contacts, total, page: currentPage, limit: currentLimit } = await emailService.getAllContacts(page, limit);
+      const { page, limit, ...filters } = req.validatedData;
+      const result = await emailService.getAllContacts(page, limit, filters);
       res.status(200).json({
         status: 'success',
-        data: { contacts, total, page: currentPage, limit: currentLimit },
+        data: result,
       });
     } catch (error) {
       logError('Erreur lors de la récupération des messages de contact', { error: error.message });
+      next(error);
+    }
+  }
+
+  /**
+   * Envoie une réponse à un message de contact.
+   * @param {Object} req - Requête HTTP.
+   * @param {Object} res - Réponse HTTP.
+   * @param {Function} next - Fonction pour passer au middleware suivant.
+   * @returns {Promise<void>} - Réponse JSON avec le résultat de l'envoi.
+   */
+  async replyToContact(req, res, next) {
+    try {
+      const { id, replyMessage, htmlTemplate, replySubject } = req.validatedData;
+      const result = await emailService.sendReplyEmail(id, replyMessage, htmlTemplate, replySubject, {
+        repliedBy: req.user.id,
+        repliedByName: req.user.name,
+      });
+      res.status(200).json({
+        status: 'success',
+        data: result,
+      });
+    } catch (error) {
+      logError('Erreur lors de l\'envoi de la réponse au message de contact', { error: error.message, contactId: req.validatedData.id });
       next(error);
     }
   }
@@ -139,4 +162,5 @@ module.exports = {
   updateContact: controller.updateContact.bind(controller),
   deleteContact: controller.deleteContact.bind(controller),
   getAllContacts: controller.getAllContacts.bind(controller),
+  replyToContact: controller.replyToContact.bind(controller),
 };

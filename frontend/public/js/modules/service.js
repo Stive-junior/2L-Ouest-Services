@@ -154,7 +154,9 @@ const service = {
       api.service.getAllServices().then((data) => {
         this.renderServices(listContainer, data.services);
       }).catch((error) => {
-        showNotification(error.message, 'error');
+       const errorMessage = error && error.message ? error.message : 'Erreur inconnue lors du chargement des services';
+    console.error('❌ Échec bindServicesList:', errorMessage);
+    showNotification(errorMessage, 'error');
       });
     }
   },

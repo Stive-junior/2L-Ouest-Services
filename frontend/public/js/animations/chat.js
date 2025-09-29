@@ -187,11 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Scroll auto sur nouveaux messages
+    // Scroll auto sur nouveaux messages avec MutationObserver
     if (messagesContainer) {
-        messagesContainer.addEventListener('DOMNodeInserted', () => {
+        const observer = new MutationObserver(() => {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         });
+        observer.observe(messagesContainer, { childList: true, subtree: false });
     }
 
     // Initialisation des panneaux

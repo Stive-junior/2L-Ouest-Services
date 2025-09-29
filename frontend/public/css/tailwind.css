@@ -1,6 +1,7 @@
 :root {
   --ll-blue: #2563EB;
   --ll-dark-blue: #1E40AF;
+  --ll-dark-green: #10b981;
   --ll-light-gray: #EDEDEC;
   --ll-medium-gray: #A1A09A;
   --ll-text-gray: #706F6C;
@@ -37,6 +38,74 @@ input:focus {
   border: none;    /* enlève la bordure */
   box-shadow: none; /* enlève aussi l'effet de halo sur certains navigateurs */
 }
+
+input, textarea {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+}
+
+input:disabled, textarea:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Variante avec focus personnalisé */
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+  outline: none;
+  border: 1px solid var(--ll-blue);
+  box-shadow: 0 0 4px rgba(0, 122, 255, 0.4); 
+}
+
+
+
+
+         .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+         .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+         .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+
+
+
+
+.animate-gradient-scroll {
+  animation: gradientScroll 5s linear infinite;
+}
+
+@keyframes gradientScroll {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.dropdown-content a{
+  color: var(--ll-text-gray) !important;
+}
+
 
 .content-main {
   transition: margin-left 0.5s ease-in-out, margin-right 0.5s ease-in-out, width 0.5s ease-in-out;
@@ -206,31 +275,24 @@ input:focus {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgb(255, 255, 255);
-  padding: 0.6rem 1rem;
-  border-radius: 9999px;
+  padding: 0.3rem ;
+  border-radius: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
-  color: var(--ll-black);
+  color: var(--ll-white);
 }
 
 .auth-combined-button:hover {
   background-color: rgba(37, 99, 235, 0.1);
   color: var(--ll-blue);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .dark .auth-combined-button {
-  background-color: rgba(42, 42, 42, 0.8);
   color: var(--ll-light-gray);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.dark .auth-combined-button:hover {
-  background-color: rgba(37, 99, 235, 0.2);
-  color: #3B82F6;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
+
 
 .auth-menu-backdrop {
   backdrop-filter: blur(16px) saturate(180%);

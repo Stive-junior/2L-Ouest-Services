@@ -6,49 +6,14 @@
     "auditLog": "logs/.e56d5e8427dfc7813482a788ac05872423a5d8b0-audit.json",
     "files": [
         {
-            "date": 1756469491119,
-            "name": "logs/app-dev.log-error-2025-08-29.log",
-            "hash": "8444c0ef3c05d513458eecc4b92af2f84dd0e5762365f63393c3a385d7a9ddb2"
+            "date": 1759090756347,
+            "name": "logs/app-dev.log-error-2025-09-28.log",
+            "hash": "6bf0684b069cbb2308c8d154876854dec7b052323f1ea262acd0bdb0b31adff5"
         },
         {
-            "date": 1756541662610,
-            "name": "logs/app-dev.log-error-2025-08-30.log",
-            "hash": "5b5b3e83eb8d9db310edce132e3fa7e3b5275b36fa41fec6d00602582c55f421"
-        },
-        {
-            "date": 1756662546224,
-            "name": "logs/app-dev.log-error-2025-08-31.log",
-            "hash": "56b699ff0efffb4d99a339dc17bce39ea8b436ea01625b6ea1975bae7ed78cf2"
-        },
-        {
-            "date": 1756748851014,
-            "name": "logs/app-dev.log-error-2025-09-01.log",
-            "hash": "1d9be77d77d082810c74b9f8bb1d73494e5460830a5c5f14f690d57d318a6917"
-        },
-        {
-            "date": 1756787127033,
-            "name": "logs/app-dev.log-error-2025-09-02.log",
-            "hash": "1837f79c875fdd10d864debe30d96fbcd4cdef732c44528602decb8fe6d10617"
-        },
-        {
-            "date": 1756882955168,
-            "name": "logs/app-dev.log-error-2025-09-03.log",
-            "hash": "27a0041d6d505b4491b10849561476c39e637bbb9bb69cf840656d622e410b6b"
-        },
-        {
-            "date": 1756990133420,
-            "name": "logs/app-dev.log-error-2025-09-04.log",
-            "hash": "d0cc4145ec081c2381bcf889d649d0690bcc09388cc95120ae6ad55accf880d4"
-        },
-        {
-            "date": 1757083272347,
-            "name": "logs/app-dev.log-error-2025-09-05.log",
-            "hash": "3604c41c955b8558810436c28ca08079d9838b6fd79e99f52442677c41e99893"
-        },
-        {
-            "date": 1757213670720,
-            "name": "logs/app-dev.log-error-2025-09-07.log",
-            "hash": "793e68f6152a6b273a1a3641973a7c94319824772e11a01a6cc515840c4d38ea"
+            "date": 1759100402237,
+            "name": "logs/app-dev.log-error-2025-09-29.log",
+            "hash": "dd7330a6575855b5a12bdd1a08c1cabb58b41d2f57d94b31230092d3b2e7eb06"
         }
     ],
     "hashType": "sha256"

@@ -20,42 +20,54 @@ const { admin } = require('firebase-admin');
  * @description Gère les notifications push et en temps réel pour L&L Ouest Services.
  */
 class NotificationService {
+ 
   /**
-   * Envoie une notification push à un utilisateur via FCM.
+   * Envoie une notification push à un utilisateur via FCM, seulement si token valide.
+   * @async
    * @param {string} userId - ID de l'utilisateur.
-   * @param {admin.messaging.Notification} notification - Contenu de la notification.
+   * @param {admin.messaging.Notification & { data?: Object }} notification - Contenu de la notification avec data optionnel.
    * @returns {Promise<void>}
-   * @throws {AppError} Si l'envoi de la notification échoue.
+   * @throws {AppError} Seulement si erreur critique ; sinon log et continue (graceful).
+   * @description 
+   *   - Vérifie existence user, préférences notifications, et validité token (présent, string, longueur plausible >100 chars).
+   *   - Si invalide, skip avec log warn – évite "The registration token is not a valid FCM registration token".
+   *   - Opération nécessaire seulement si tout valide.
    */
   async sendPushNotification(userId, notification) {
     try {
       const user = await userRepo.getById(userId);
-      if (!user.preferences?.notifications || !user.preferences.fcmToken) {
-        logInfo('Notifications désactivées ou FCM token manquant', { userId });
+      if (!user) {
+        logWarn('Utilisateur non trouvé pour notification push - Skip', { userId });
         return;
       }
 
-      /**@type {admin.messaging.Message} */
+      if (!user.preferences?.notifications) {
+        logInfo('Notifications désactivées pour utilisateur - Skip', { userId });
+        return;
+      }
+
+      const fcmToken = user.preferences.fcmToken;
+      if (!fcmToken || typeof fcmToken !== 'string' || fcmToken.length < 100) {
+        logWarn('FCM token absent ou invalide - Skip notification', { userId, fcmTokenLength: fcmToken?.length });
+        return;
+      }
+
+      /** @type {admin.messaging.Message} */
       const message = {
-        
         notification: {
           title: notification.title,
           body: notification.body,
         },
-        token: user.preferences.fcmToken,
-        data: {
-          userId: user.id,
-          timestamp: new Date().toISOString(),
-        },
-
+        data: notification.data || {},
+        token: fcmToken,
       };
 
       await messaging.send(message);
       socketService.emitToUser(userId, 'pushNotification', notification);
-      logInfo('Notification push envoyée', { userId, title: notification.title });
+      logInfo('Notification push envoyée avec succès', { userId, title: notification.title });
     } catch (error) {
-      logError('Erreur lors de l\'envoi de la notification push', { error: error.message, userId });
-      throw new AppError(500, 'Erreur serveur lors de l\'envoi de la notification push', error.message);
+      logError('Erreur lors de l\'envoi de la notification push (graceful)', { error: error.message, userId });
+      // Ne throw pas : Graceful degradation
     }
   }
 

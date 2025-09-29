@@ -1,29 +1,311 @@
 [
-    {
-        "id": "t1",
-        "text": "Service exceptionnel ! L'équipe est professionnelle et à l'écoute de nos besoins spécifiques. Nos bureaux n'ont jamais été aussi propres !",
-        "author": "Jean Dupont",
-        "title": "Client Satisfait",
-        "rating": 5,
-        "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-        "details": "Détails étendus sur le service, avec mention des aspects écologiques et la rapidité."
-    },
-    {
-        "id": "t2",
-        "text": "Rapide, efficace et respectueux de l'environnement. Nous faisons appel à L&L Ouest Services pour nos vitrines commerciales, et le résultat est toujours impeccable.",
-        "author": "Entreprise XYZ",
-        "title": "Client Professionnel",
-        "rating": 4,
-        "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-        "details": "Détails étendus sur le service, avec mention des aspects écologiques et la rapidité."
-    },
-    {
-        "id": "t3",
-        "text": "Un service de qualité qui dépasse nos attentes. Le nettoyage ponctuel pour notre événement a été réalisé avec soin et dans les délais.",
-        "author": "Marie L.",
-        "title": "Particulier",
-        "rating": 5,
-        "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-        "details": "Détails étendus sur le service, avec mention des aspects écologiques et la rapidité."
-    }
+  {
+    "id": "t1",
+    "text": "Service exceptionnel ! L'équipe est professionnelle et à l'écoute de nos besoins spécifiques. Nos bureaux n'ont jamais été aussi propres !",
+    "author": "Jean Dupont",
+    "title": "Client Satisfait",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "L'équipe a nettoyé tous les bureaux, salles de réunion et couloirs en 3 heures. Les produits utilisés étaient écologiques et ont laissé un parfum léger agréable. La poubelle du recyclage a été triée correctement, et toutes les surfaces brillent sans traces. Le responsable est resté sur place pour vérifier que tout était conforme aux demandes.",
+    "location": "Lyon, France",
+    "submitted_at": "2025-09-15T10:32:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1600566758878-3df6813a0526?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa499a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t2",
+    "text": "Rapide, efficace et respectueux de l'environnement. Nous faisons appel à L&L Ouest Services pour nos vitrines commerciales, et le résultat est toujours impeccable.",
+    "author": "Entreprise XYZ",
+    "title": "Client Professionnel",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Les vitrines ont été nettoyées avec des lingettes sans alcool, aucune trace n’est visible. Les horaires ont été respectés et le nettoyage s’est effectué avant l’ouverture des magasins. L'équipe a également vérifié les portes vitrées et les poignées, les rendant impeccables.",
+    "location": "Bruxelles, Belgique",
+    "submitted_at": "2025-08-22T14:18:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1587563871167-1ee9c73185a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1587560699334-cc4de25aadc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t3",
+    "text": "Un service de qualité qui dépasse nos attentes. Le nettoyage ponctuel pour notre événement a été réalisé avec soin et dans les délais.",
+    "author": "Marie L.",
+    "title": "Particulier",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Pour notre réception, le salon et la cuisine ont été préparés en 2 heures. Les sols ont été aspirés et lavés, les tables et comptoirs désinfectés, et les décorations intactes. L'équipe a également disposé les chaises et tables selon nos instructions.",
+    "location": "Yaoundé, Cameroun",
+    "submitted_at": "2025-09-05T19:45:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469474968028-566cefaaf938?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t4",
+    "text": "Excellente équipe, résultats impeccables.",
+    "author": "Paul Martin",
+    "title": "Directeur",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage complet des bureaux et salle de direction, y compris les ordinateurs et écrans avec des chiffons anti-statiques. Toutes les surfaces sont brillantes, et les déchets ont été correctement triés. Le travail a été effectué en moins de 4 heures avec un suivi précis du planning.",
+    "location": "Paris, France",
+    "submitted_at": "2025-07-30T08:12:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t5",
+    "text": "Service rapide et efficace pour notre bureau.",
+    "author": "Sophie Laurent",
+    "title": "Manager",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Les bureaux ont été nettoyés, les sols aspirés, et les sanitaires désinfectés. Le processus a pris 1h45 au lieu de 2h prévues. Quelques petites traces de poussière sont restées sur les étagères hautes mais l'ensemble est très satisfaisant.",
+    "location": "Toulouse, France",
+    "submitted_at": "2025-09-12T16:27:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t6",
+    "text": "Parfait pour nos besoins industriels.",
+    "author": "Luc Dubois",
+    "title": "Ingénieur",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage des machines et équipements industriels, en insistant sur les zones difficiles d'accès. Les produits utilisés sont adaptés aux surfaces métalliques, et le respect des normes de sécurité a été scrupuleux. Quelques petites marques subsistent sur les sols mais c’est acceptable.",
+    "location": "Liège, Belgique",
+    "submitted_at": "2025-08-10T11:03:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1600566758878-3df6813a0526?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600566758878-3df6813a0526?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t7",
+    "text": "Un service client exceptionnel et des résultats au-delà des attentes.",
+    "author": "Clara Moreau",
+    "title": "Responsable RH",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Le personnel a nettoyé tous les bureaux du département RH, y compris les classeurs et étagères. Les objets de bureau ont été repositionnés correctement. L'équipe a suivi les instructions exactes et a proposé des solutions pour améliorer l’organisation des locaux.",
+    "location": "Dakar, Sénégal",
+    "submitted_at": "2025-09-20T13:50:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t8",
+    "text": "Nettoyage impeccable pour notre restaurant.",
+    "author": "Antoine Lefèvre",
+    "title": "Chef Restaurateur",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Les sols de cuisine et salle de restaurant ont été lavés et désinfectés. Les tables et chaises sont brillantes. L’équipe a respecté les normes HACCP et a vérifié que les ustensiles et surfaces étaient propres et secs avant le service du soir.",
+    "location": "Nice, France",
+    "submitted_at": "2025-09-18T21:05:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t9",
+    "text": "Ils ont transformé notre espace commercial.",
+    "author": "Émilie Bernard",
+    "title": "Directrice Commerciale",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage complet du showroom avec rangement des étagères et vitrines. Le personnel a éliminé la poussière des produits exposés et s’est assuré que l’éclairage valorisait l’espace. Travail efficace et rapide.",
+    "location": "Abidjan, Côte d’Ivoire",
+    "submitted_at": "2025-09-25T09:40:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t10",
+    "text": "Service fiable pour notre école.",
+    "author": "Marc Dubois",
+    "title": "Directeur d’École",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage des salles de classe et du réfectoire avec produits hypoallergéniques. Les tableaux ont été essuyés, et les sols lavés. Les horaires ont été strictement respectés pour ne pas perturber les cours.",
+    "location": "Douala, Cameroun",
+    "submitted_at": "2025-09-26T17:15:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t11",
+    "text": "Parfait pour nos événements spéciaux.",
+    "author": "Julie Renaud",
+    "title": "Organisatrice d’Événements",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "L’équipe a préparé les salles pour un mariage, nettoyé la salle de réception et les espaces extérieurs. Les tables, chaises et décorations ont été arrangées selon le plan fourni, tout était prêt avant l’arrivée des invités.",
+    "location": "Montréal, Canada",
+    "submitted_at": "2025-09-24T20:22:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1519167758481-83f1abff6d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519167758481-83f1abff6d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519167758481-83f1abff6d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t12",
+    "text": "Nettoyage écologique de haute qualité.",
+    "author": "Thomas Leroy",
+    "title": "Particulier",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Utilisation de produits biodégradables pour la maison entière. Le salon, la cuisine et la salle de bain ont été nettoyés en profondeur. Tous les déchets ont été triés, et aucun produit chimique agressif n’a été utilisé, ce qui est parfait pour les enfants et animaux.",
+    "location": "Strasbourg, France",
+    "submitted_at": "2025-09-23T12:00:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t13",
+    "text": "Service rapide pour notre hôtel.",
+    "author": "Laura Petit",
+    "title": "Directrice d’Hôtel",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage complet des chambres, halls et couloirs de l’hôtel. Les draps et serviettes ont été changés, sols lavés et salles de bain désinfectées. Le personnel a suivi le planning strict pour ne pas gêner les clients et a laissé un rapport de contrôle après intervention.",
+    "location": "Paris, France",
+    "submitted_at": "2025-09-21T09:30:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1519085360753-afc7396f004a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1519085360753-afc7396f004a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1519085360753-afc7396f004a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+    ]
+  },
+  {
+    "id": "t14",
+    "text": "Très satisfaits du nettoyage de notre clinique.",
+    "author": "Dr. Sophie Martin",
+    "title": "Médecin Généraliste",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1519085360753-afc7396f004a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage complet de la clinique, y compris les salles d'attente, cabinets médicaux et zones de stérilisation. Les produits désinfectants étaient adaptés aux normes médicales. L'équipe a respecté les horaires pour ne pas perturber les consultations.",
+    "location": "Marseille, France",
+    "submitted_at": "2025-09-27T08:45:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1585435557343-7b3f27a38bec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1585435557343-7b3f27a38bec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t15",
+    "text": "Efficace pour notre entrepôt logistique.",
+    "author": "Pierre Lambert",
+    "title": "Responsable Logistique",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1519085360753-afc7396f004a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage des étagères, sols et zones de stockage. Les allées ont été dégagées et les déchets industriels triés. Le service a été rapide et n'a pas interrompu les opérations logistiques.",
+    "location": "Bruxelles, Belgique",
+    "submitted_at": "2025-09-26T15:20:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t16",
+    "text": "Nettoyage parfait pour notre salle de sport.",
+    "author": "Anna Gonzalez",
+    "title": "Gérante de Salle de Sport",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Désinfection des équipements, tapis et vestiaires. Les miroirs et sols sont impeccables. L'équipe a utilisé des produits sans odeur pour ne pas gêner les membres.",
+    "location": "Douala, Cameroun",
+    "submitted_at": "2025-09-25T11:55:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t17",
+    "text": "Service professionnel pour notre bureau open-space.",
+    "author": "David Kim",
+    "title": "PDG Startup",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1519085360753-afc7396f004a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage des postes de travail, écrans et espaces communs. L'équipe a été discrète et efficace pendant les heures de bureau. Tout est propre et organisé.",
+    "location": "Yaoundé, Cameroun",
+    "submitted_at": "2025-09-24T14:30:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1497366811351-1151cc948a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1497366811351-1151cc948a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1497366811351-1151cc948a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t18",
+    "text": "Très recommandé pour le nettoyage résidentiel.",
+    "author": "Fatima Diallo",
+    "title": "Particulier",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Nettoyage complet de la maison, y compris les chambres, salon et cuisine. Les produits étaient naturels et l'équipe a respecté notre espace personnel.",
+    "location": "Abidjan, Côte d’Ivoire",
+    "submitted_at": "2025-09-23T10:10:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t19",
+    "text": "Efficace pour le nettoyage post-construction.",
+    "author": "Olivier Nguema",
+    "title": "Entrepreneur en Construction",
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Élimination des débris, poussières et résidus de chantier. Les sols, murs et fenêtres sont comme neufs. Travail rapide et minutieux.",
+    "location": "Libreville, Gabon",
+    "submitted_at": "2025-09-22T18:00:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": "t20",
+    "text": "Service impeccable pour notre centre médical.",
+    "author": "Dr. Amina Traoré",
+    "title": "Médecin",
+    "rating": 5,
+    "image": "https://images.unsplash.com/photo-1519085360753-afc7396f004a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "details": "Désinfection des salles d'examen, laboratoires et zones d'attente. Conformité aux normes sanitaires strictes. L'équipe a été professionnelle et discrète.",
+    "location": "Bamako, Mali",
+    "submitted_at": "2025-09-21T07:25:00",
+    "workImages": [
+      "https://images.unsplash.com/photo-1585435557343-7b3f27a38bec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1585435557343-7b3f27a38bec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ]
+  }
 ]

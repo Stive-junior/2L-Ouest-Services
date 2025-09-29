@@ -21,10 +21,15 @@ dotenv.config({ path: path.resolve(__dirname, `../env/${envFile}`) });
  * @property {string} JWT_EXPIRES_IN - Durée de validité des tokens JWT.
  * @property {string} [FIREBASE_SERVICE_ACCOUNT_PATH] - Chemin vers le fichier de clé de service Firebase.
  * @property {string} FIREBASE_PROJECT_ID - ID du projet Firebase.
+ * @property {string} FIREBASE_APP_ID - ID de l'application Firebase.
+ * @property {string} FIREBASE_API_KEY - Clé API Firebase.
+ * @property {string} FIREBASE_MEASUREMENT_ID - ID de mesure Firebase.
  * @property {string} FIREBASE_CLIENT_EMAIL - Email du client Firebase.
  * @property {string} FIREBASE_PRIVATE_KEY - Clé privée Firebase (échappée).
  * @property {string} [FIREBASE_DATABASE_URL] - URL de la base de données Firebase.
  * @property {string} FIREBASE_STORAGE_BUCKET - Bucket de stockage Firebase.
+ * @property {string} FCM_VAPID_KEY - Clé publique VAPID pour FCM (notifications push).
+ * @property {string} FCM_SENDER_ID - Sender ID pour FCM (messagingSenderId).
  * @property {number} RATE_LIMIT_WINDOW_MS - Fenêtre de temps pour le rate-limiting (ms).
  * @property {number} RATE_LIMIT_MAX - Nombre maximum de requêtes par fenêtre.
  * @property {string} LOG_LEVEL - Niveau de journalisation ('error', 'warn', 'info', 'debug').
@@ -79,6 +84,15 @@ const envVarsSchema = Joi.object({
   FIREBASE_PROJECT_ID: Joi.string()
     .required()
     .description('ID du projet Firebase'),
+  FIREBASE_APP_ID: Joi.string()
+    .required()
+    .description('ID de l\'application Firebase'),
+  FIREBASE_API_KEY: Joi.string()
+    .required()
+    .description('Clé API Firebase'),
+  FIREBASE_MEASUREMENT_ID: Joi.string()
+    .required()
+    .description('ID de mesure Firebase'),
   FIREBASE_CLIENT_EMAIL: Joi.string()
     .email()
     .required()
@@ -93,6 +107,13 @@ const envVarsSchema = Joi.object({
   FIREBASE_STORAGE_BUCKET: Joi.string()
     .required()
     .description('Bucket de stockage Firebase'),
+  FCM_VAPID_KEY: Joi.string()
+    .required()
+    .description('Clé publique VAPID pour FCM (notifications push)'),
+  FCM_SENDER_ID: Joi.string()
+    .required()
+    .description('Sender ID pour FCM (messagingSenderId)'),
+  
   RATE_LIMIT_WINDOW_MS: Joi.number()
     .integer()
     .min(1000)
@@ -151,7 +172,7 @@ const envVarsSchema = Joi.object({
     .description('Durée maximale de déconnexion pour la récupération d\'état (ms)'),
   SOCKET_CLEANUP_EMPTY_NAMESPACES: Joi.boolean()
     .default(true)
-    .description('Si true, supprime les namespaces WebSocket vides'),
+    .description('Si true, supprime les namespaces vides'),
   SOCKET_COMPRESSION: Joi.boolean()
     .default(true)
     .description('Si true, active la compression des données WebSocket'),
@@ -200,10 +221,16 @@ const validateEnv = () => {
     firebase: {
       serviceAccountPath: envVars.FIREBASE_SERVICE_ACCOUNT_PATH,
       projectId: envVars.FIREBASE_PROJECT_ID,
+      appId: envVars.FIREBASE_APP_ID,
+      apiKey: envVars.FIREBASE_API_KEY,
+      authDomain: envVars.FIREBASE_AUTH_DOMAIN,
+      measurementId: envVars.FIREBASE_MEASUREMENT_ID,
       clientEmail: envVars.FIREBASE_CLIENT_EMAIL,
       privateKey: envVars.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
       databaseURL: envVars.FIREBASE_DATABASE_URL,
       storageBucket: envVars.FIREBASE_STORAGE_BUCKET,
+      vapidKey: envVars.FCM_VAPID_KEY,
+      senderId: envVars.FCM_SENDER_ID,
     },
     rateLimit: {
       windowMs: envVars.RATE_LIMIT_WINDOW_MS,
@@ -238,3 +265,5 @@ const validateEnv = () => {
 };
 
 module.exports = { validateEnv };
+
+

@@ -8,11 +8,12 @@
 const express = require('express');
 const router = express.Router();
 const { authenticate, restrictTo, validationMiddleware, rateLimitMiddleware } = require('../middleware');
-const { createUser, getProfile, getUserById, getUserByEmail, updateProfile, updateUser, deleteUser, getAllUsers, getUsersByRole, updatePreferences, addInvoice, removeInvoice } = require('../controllers/userController');
+const { createUser, getProfile, getUserById, getUserByEmail, updateProfile, updateUser, deleteUser, getAllUsers, getUsersByRole, updatePreferences, addInvoice, removeInvoice, checkEmailAvailability } = require('../controllers/userController');
 const { createUserSchema, updateUserSchema, idSchema, emailSchema, paginationSchema, roleSchema, preferencesSchema, invoiceSchema } = require('../utils/validation/userValidation');
 
 // Routes publiques
 router.post('/', [rateLimitMiddleware, validationMiddleware(createUserSchema)], createUser);
+router.get('/check-email/:email', [rateLimitMiddleware, validationMiddleware(emailSchema)], checkEmailAvailability);
 
 // Routes protégées par authentification
 router.use(authenticate);

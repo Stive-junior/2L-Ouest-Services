@@ -6,44 +6,14 @@
     "auditLog": "logs/.40952e883f936019c61a6aededd82201cb74d835-audit.json",
     "files": [
         {
-            "date": 1756469491123,
-            "name": "logs/app-dev.log-exceptions-2025-08-29.log",
-            "hash": "0072b2b7314cd653092edc4828d6203a9b1490be2f8cec859c3474fc4cb420d2"
+            "date": 1759090756350,
+            "name": "logs/app-dev.log-exceptions-2025-09-28.log",
+            "hash": "4208380fe3182954d0f44d9882e807f5ac46cf7751ccbccbdc29508318950e6d"
         },
         {
-            "date": 1756541662616,
-            "name": "logs/app-dev.log-exceptions-2025-08-30.log",
-            "hash": "a413b52129a863af8ab4a2e4090daf041d2c97b891d97fec9e44361e9db083f0"
-        },
-        {
-            "date": 1756662546340,
-            "name": "logs/app-dev.log-exceptions-2025-08-31.log",
-            "hash": "264d452b3960b3cf704dfa41f6c7650d0e5c696ddd6c6b587137cf0d4599ff4c"
-        },
-        {
-            "date": 1756753529376,
-            "name": "logs/app-dev.log-exceptions-2025-09-01.log",
-            "hash": "87c06d02fd9200da63e394d4dee1df68f9601368b8769af49f717e43e252c930"
-        },
-        {
-            "date": 1756813276361,
-            "name": "logs/app-dev.log-exceptions-2025-09-02.log",
-            "hash": "72362c0c138a9bdb68f8e1aa8c40f6156073bb69100f291fbb612b8c169ff35e"
-        },
-        {
-            "date": 1757022493592,
-            "name": "logs/app-dev.log-exceptions-2025-09-04.log",
-            "hash": "8bbc563ef3191836eeca48a01f93a6da5f99f33de91c5476a0f71846d14ebda2"
-        },
-        {
-            "date": 1757083272371,
-            "name": "logs/app-dev.log-exceptions-2025-09-05.log",
-            "hash": "4e2da17d5fc79b3f043c4f2e3ffa879272b811cb5e5c49b1e68468eaf1342494"
-        },
-        {
-            "date": 1757213671041,
-            "name": "logs/app-dev.log-exceptions-2025-09-07.log",
-            "hash": "9454107e476ae45382ffd9fc3793939e20601c9aa8abb3c33815014e155cf62e"
+            "date": 1759123852260,
+            "name": "logs/app-dev.log-exceptions-2025-09-29.log",
+            "hash": "bb2836cfee8c5960b230eb0deb3686c394158db53f41c8875b79f8357a9d6f98"
         }
     ],
     "hashType": "sha256"

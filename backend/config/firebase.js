@@ -49,6 +49,19 @@ class Firebase {
         );
       }
 
+      // Log des configurations FCM pour vérification
+      if (!config.firebase.vapidKey || !config.firebase.senderId) {
+        logWarn('Configurations FCM manquantes - Notifications push désactivées', {
+          vapidKeyPresent: !!config.firebase.vapidKey,
+          senderIdPresent: !!config.firebase.senderId,
+        });
+      } else {
+        logInfo('Configurations FCM disponibles', {
+          senderId: config.firebase.senderId,
+          vapidKeyLength: config.firebase.vapidKey.length,
+        });
+      }
+
       const serviceAccount = {
         project_id: config.firebase.projectId,
         client_email: config.firebase.clientEmail,
@@ -179,7 +192,6 @@ class Firebase {
 
 const firebase = new Firebase();
 
-// Exportation des méthodes et services avec bind
 module.exports = {
   initializeFirebase: firebase.initializeFirebase.bind(firebase),
   db: firebase.db,

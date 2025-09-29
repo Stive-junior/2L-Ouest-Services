@@ -1,67 +1,78 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="csrf-token-placeholder">
-    <title>Connexion - L&L Ouest Services</title>
+    <meta name="description" content="L&L Ouest Services - Solutions de nettoyage professionnelles et éco-responsables dans l'Ouest de la France. Services de qualité pour bureaux, vitrines, et plus.">
+    <meta name="keywords" content="nettoyage professionnel, éco-responsable, nettoyage bureaux, nettoyage vitrines, services ménage, Ouest France, nettoyage industriel">
+    <meta name="author" content="L&L Ouest Services">
+    <title>Connexion - L&L Ouest Services | Nettoyage Professionnel</title>
 
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="../../css/tailwind.css" as="style" onload="this.rel='stylesheet'">
+    <!-- SEO Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "L&L Ouest Services",
+        "url": "https://www.llouestservice.fr",
+        "logo": "https://www.llouestservice.fr/assets/logo.png",
+        "description": "Services de nettoyage professionnels et éco-responsables dans l'Ouest de la France.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+33-01-23-45-67-89",
+            "contactType": "Customer Service",
+            "email": "contact@llouestservice.fr"
+        }
+    }
+    </script>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+
+    <!-- CSS Resources -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.18/vue.global.prod.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../../css/tailwind.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+   
+    <!-- JavaScript Resources -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js" defer></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script type="module" src="https://unpkg.com/emoji-picker-element@^1.0.0/index.js"></script>
+    
 
-    <!-- Script de vérification auth chargé en premier (async pour rapidité) -->
+    <script src="https://cdn.jsdelivr.net/npm/joi-browser@13.4.0/dist/joi-browser.min.js"></script>
+
+
+
+
+
     <script async src="/js/auth-check.js"></script>
-    <script type="module" src="/js/loadData.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const themeToApply = savedTheme !== null ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
-            if (themeToApply === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-            window.__initialTheme = themeToApply;
 
-            const sidebarState = localStorage.getItem('sidebarState');
-            if (sidebarState === 'open') {
-                document.body.classList.add('sidebar-open');
-            } else {
-                document.body.classList.remove('sidebar-open');
-            }
+    
 
-            const chatSidebarState = localStorage.getItem('chatSidebarState');
-            if (chatSidebarState === 'open') {
-                document.body.classList.add('chat-sidebar-open');
-            } else {
-                document.body.classList.remove('chat-sidebar-open');
-            }
 
-            AOS.init();
-        });
-    </script>
-
-    <script type="module" src="/js/main.js"></script>
-    <script type="module">
-        import auth from '/js/modules/auth.js';
-        auth.init();
-    </script>
-
-    <!-- Configuration Tailwind inline pour optimisation -->
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -69,6 +80,8 @@
                 extend: {
                     colors: {
                         'll-blue': '#2563EB',
+                        'll-green' : '#90EE90',
+                        'll-dark-green': '#10b981',
                         'll-dark-blue': '#1E40AF',
                         'll-light-gray': '#EDEDEC',
                         'll-medium-gray': '#A1A09A',
@@ -85,38 +98,171 @@
                     scale: {
                         '102': '1.02',
                     },
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'roboto': ['Roboto', 'sans-serif'],
+                    },
                 },
             },
-            plugins: [],
         };
     </script>
+
 
 </head>
 
 
-<body class="bg-ll-white dark:bg-ll-black text-ll-black dark:text-ll-light-gray flex flex-col min-h-screen transition-colors duration-300">
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
-    <div id="chat-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-20 hidden lg:hidden"></div>
 
-    <!-- Sidebar -->
-<!-- Sidebar -->
-<aside id="sidebar" class="fixed top-0 left-0 h-full w-80 bg-sidebar-light dark:bg-sidebar-dark backdrop-blur-xl shadow-2xl z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-500 ease-in-out rounded-r-2xl overflow-hidden border-r border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0;">
+<body class="bg-ll-white dark:bg-ll-black text-ll-black dark:text-ll-light-gray font-Cinzel min-h-screen transition-colors duration-300">
+    <div id="app">
+        <!-- Loading Overlay -->
+       <div id="loading-overlay" class="loading-overlay fixed inset-0 flex flex-col items-center justify-center z-[9999] transition-opacity duration-500 ease-in-out" style="background: rgba(15, 23, 42, 0.95);">
+    <lottie-player 
+        src="/assets/json/icons/team.json" 
+        background="transparent" 
+        speed="1" 
+        style="width: 250px; height: 250px; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));" 
+        loop 
+        autoplay
+        class="scale-100 animate-pulse-slow">
+    </lottie-player>
+    <div class="relative mt-6 flex items-center space-x-3">
+        <p class="text-xl font-semibold text-white tracking-wide animate-pulse">
+            Chargement de L&L Ouest Services
+        </p>
+        <div class="flex space-x-1">
+            <span class="w-2 h-2 bg-blue-400 rounded-full animate-dot1"></span>
+            <span class="w-2 h-2 bg-blue-400 rounded-full animate-dot2"></span>
+            <span class="w-2 h-2 bg-blue-400 rounded-full animate-dot3"></span>
+        </div>
+    </div>
+    <p class="mt-2 text-sm text-slate-400 font-medium">Veuillez patienter...</p>
+</div>
+
+<style>
+/* Empêcher le défilement lorsque l'overlay est visible */
+body.loading {
+    overflow: hidden;
+}
+
+/* Animation pour pulsation lente de l'icône */
+@keyframes pulse-slow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* Animations pour les points de chargement */
+@keyframes dot1 {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.4; transform: translateY(-4px); }
+}
+@keyframes dot2 {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.4; transform: translateY(-4px); }
+}
+@keyframes dot3 {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.4; transform: translateY(-4px); }
+}
+
+/* Appliquer les animations */
+.animate-pulse-slow {
+    animation: pulse-slow 2s ease-in-out infinite;
+}
+.animate-dot1 {
+    animation: dot1 1.5s ease-in-out infinite;
+}
+.animate-dot2 {
+    animation: dot2 1.5s ease-in-out infinite;
+}
+.animate-dot3 {
+    animation: dot3 1.5s ease-in-out infinite;
+}
+
+/* Style responsive */
+@media (max-width: 640px) {
+    #loading-overlay lottie-player {
+        width: 180px;
+        height: 180px;
+    }
+    #loading-overlay p.text-xl {
+        font-size: 1rem;
+    }
+    #loading-overlay p.text-sm {
+        font-size: 0.875rem;
+    }
+}
+
+/* Support mode sombre/clair */
+@media (prefers-color-scheme: light) {
+    #loading-overlay {
+        background: rgba(241, 245, 249, 0.95); /* Fond slate clair */
+    }
+    #loading-overlay p.text-xl {
+        color: #1e293b; /* Texte sombre pour mode clair */
+    }
+    #loading-overlay p.text-sm {
+        color: #64748b; /* Texte secondaire pour mode clair */
+    }
+}
+</style>
+
+<script>
+// Gestion de l'affichage et masquage de l'overlay
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('loading-overlay');
+    const body = document.body;
+
+    // Afficher l'overlay au chargement et bloquer le défilement
+    body.classList.add('loading');
+    overlay.style.opacity = '0';
+    overlay.style.display = 'flex';
+    setTimeout(() => {
+        overlay.style.transition = 'opacity 0.5s ease-in-out';
+        overlay.style.opacity = '1';
+    }, 50);
+
+    // Masquer l'overlay lorsque la page est complètement chargée
+    window.addEventListener('load', () => {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            body.classList.remove('loading');
+        }, 500);
+    });
+});
+</script>
+
+        <!-- Particles Background -->
+        <div id="particles-js" class="fixed inset-0 z-0 hidden"></div>
+
+        <!-- Overlays -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden lg:hidden"></div>
+        <div id="chat-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden lg:hidden"></div>
+
+        <!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 left-0 h-full w-80 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-500 ease-in-out rounded-none overflow-hidden border-r border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0;">
     <div class="relative w-full h-full">
         <!-- Sidebar Header -->
         <div class="absolute top-0 w-full p-4 z-40 bg-gradient-to-b from-sidebar-light/90 to-transparent dark:from-sidebar-dark/90 dark:to-transparent shadow-md">
             <div class="flex items-center justify-between">
-                <a href="/" class="flex items-center text-2xl font-extrabold text-ll-blue dark:text-ll-blue hover:text-ll-dark-blue dark:hover:text-ll-dark-blue transition-all duration-300">
-                    <img src="../../assets/images/logo.png" alt="L&L Ouest Services Logo" class="h-12 w-12 mr-3 transform transition-transform duration-300 hover:scale-110  rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
-                    <span class="text-xl tracking-tight">L&L Ouest Services</span>
+                <a href="/" class="flex items-center text-xl font-extrabold text-ll-dark-green dark:text-ll-blue hover:text-ll-dark-blue dark:hover:text-ll-dark-blue transition-all duration-300">
+                    <img src="../../assets/images/logo.png" alt="L&L Ouest Services Logo" class="h-12 w-12 mr-3 transform transition-transform duration-300 hover:scale-110 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
+                    <span class="text-[1rem] gradiant ">L&L Ouest Services</span>
                 </a>
                 <div class="flex items-center gap-2">
-                    <button id="sidebar-collapse-toggle" class="p-2 rounded-lg hover:bg-white/20 dark:hover:bg-[#2A2A2A] transition-colors focus:outline-none focus:ring-2 focus:ring-ll-blue/30 hidden lg:block" title="Réduire/Étendre le sidebar">
-                        <svg viewBox="0 0 24 24" class="w-7 h-7 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
+                    <button id="sidebar-collapse-toggle" class="p-1 header-btn rounded-lg hover:bg-white/20 dark:hover:bg-[#2A2A2A] transition-colors focus:outline-none focus:ring-2 focus:ring-ll-blue/30 hidden lg:block" title="Réduire/Étendre le sidebar">
+                        <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
                             <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
                         </svg>
                     </button>
-                    <button id="main-sidebar-close" class="lg:hidden p-2 rounded-lg hover:bg-[#f53003]/10 dark:hover:bg-afrixBrown transition focus:outline-none focus:ring-2 focus:ring-ll-blue/30" title="Fermer le sidebar">
-                        <svg viewBox="0 0 24 24" class="w-7 h-7 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
+                    <button id="main-sidebar-close" class="lg:hidden p-1 rounded-lg hover:bg-white/20 dark:hover:bg-[#2A2A2A] transition focus:outline-none focus:ring-2 focus:ring-ll-blue/30" title="Fermer le sidebar">
+                        <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
                             <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
                         </svg>
                     </button>
@@ -150,32 +296,74 @@
                 <div data-level="main" class="w-full float-left">
                     <div class="flex min-h-full w-full flex-col px-3 space-y-2">
                         <!-- User Profile -->
-                        <div class="mb-6 p-4 bg-gradient-to-r from-ll-blue/90 to-ll-dark-blue/90 backdrop-blur-md rounded-xl text-white shadow-lg transform transition-all duration-300 hover:scale-102">
-                            <div class="flex items-center gap-4">
-                                <div class="w-14 h-14 rounded-full bg-black/50 dark:bg-black/50 flex items-center justify-center text-xl font-bold shadow-inner">
-                                    LL
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-white/95 text-lg">Bienvenue</h3>
-                                    <p class="text-sm text-white/90">Utilisateur</p>
-                                </div>
+                        <div id="user-profile-container" class="mb-6 p-4 back-text backdrop-blur-md rounded-xl text-white shadow-lg transform transition-all duration-300 hover:scale-102 relative">
+                                                    <!-- Loading Spinner -->
+                        <div id="profile-loading" class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl hidden">
+                        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold shadow-inner overflow-hidden">
+                            <span id="user-initial" class="user-initial">U</span>
+                            <img id="user-photo" src="" alt="Photo de profil" class="hidden w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 id="user-name" class="font-bold text-white/95 text-lg truncate">Utilisateur</h3>
+                            <p id="user-email" class="text-sm text-white/90 truncate"></p>
+                            <div class="flex items-center gap-2 mt-1">
+                            <span id="user-country" class="text-sm text-white/80"></span>
+                            <span id="user-role" class="text-xs bg-white/20 px-2 py-1 rounded-full">Invité</span>
                             </div>
+                        </div>
+                        <button data-level-id="profile" class="level-dropdown-toggle p-2 rounded-xl hover:bg-ll-blue/20 dark:hover:bg-ll-blue/20 transition-colors duration-300" title="Options du profil" aria-expanded="false" aria-controls="profile" tabindex="0">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        </div>
+
+                        <!-- Dropdown Menu -->
+                        <div id="level-dropdown-profile" class="hidden mt-2 bg-radial-gradient dark:bg-radial-gradient-dark rounded-xl shadow-md overflow-hidden transition-all duration-300 max-h-0" data-os="fade-up">
+                        <div class="pl-8 pr-4 py-2 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-xl shadow-md">
+                            <!-- Menu Items -->
+                            <a href="javascript:void(0)" data-navigate="profile-details" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            Mon profil
+                            </a>
+                            <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Paramètres
+                            </a>
+                            <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-white-700 dark:text-gray-200 hover:bg-ll-blue/10 dark:hover:bg-ll-blue/20 transition-colors duration-300 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Factures
+                            </a>
+                        </div>
+                        </div>
+
                         </div>
 
                         <!-- General Menu -->
-                        <a href="javascript:void(0)" data-navigate="dashboard" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
+                        <a  href="/" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
                             <span class="inline-flex items-center justify-center w-6">
-                                <i class="fas fa-tachometer-alt sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110"></i>
+                                <i class="fas fa-home sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110"></i>
                             </span>
-                            <span class="text-black dark:text-white font-semibold tracking-wide flex-1 truncate">Tableau de bord</span>
+                            <span class="text-black dark:text-white font-semibold tracking-wide flex-1 truncate">Accueil</span>
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
                             <span class="tooltip absolute left-1/2 transform -translate-x-1/2 bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                                Tableau de bord
+                                Accueil
                             </span>
                         </a>
-                        <a href="javascript:void(0)" data-navigate="profile" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
+                        <a href="./pages/user/profile.html" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
                             <span class="inline-flex items-center justify-center w-6">
                                 <i class="fas fa-user sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110"></i>
                             </span>
@@ -334,8 +522,8 @@
 
                             <!-- Level 1-3 -->
                             <div class="relative">
-                                <div class="flex items-center  px-2 py-1 rounded-xl" style="justify-content: right;">
-                                    <a href="javascript:void(0)" data-navigate="level1-3" class="flex items-center gap-3 w-full pr-4 pl-0 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
+                                <div class="flex items-center px-2 py-1 rounded-xl" style="justify-content: right;">
+                                    <a href="javascript:void(0)" data-navigate="level1-3" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 group sidebar-item shadow-xs hover:bg-white/20 dark:hover:bg-[#2A2A2A]/70">
                                         <span class="inline-flex items-center justify-center w-6">
                                             <i class="fas fa-industry sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110"></i>
                                         </span>
@@ -397,13 +585,170 @@
                         </div>
 
                         <div class="pt-4 border-t border-white/20 dark:border-[#3E3E3A]/50">
-                            <button type="submit" class="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-300 group sidebar-item shadow-md focus:outline-none focus:ring-2 focus:ring-red-500/50" title="Se déconnecter de votre compte">
+                            <button type="submit" class="signout-button flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-xl hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-300 group sidebar-item shadow-md focus:outline-none focus:ring-2 focus:ring-red-500/50" title="Se déconnecter de votre compte">
                                 <svg class="w-6 h-6 sidebar-icon text-red-600 dark:text-red-400 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                                 </svg>
                                 <span class="text-red-600 dark:text-red-400 font-semibold tracking-wide">Se déconnecter</span>
                                 <span class="tooltip absolute left-1/2 transform -translate-x-1/2 bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">Se déconnecter</span>
                             </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Details Level -->
+                <div data-level="profile-details" class="w-full hidden" data-parent-name="Profil">
+                    <!-- Header with Quick Actions -->
+                    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-ll-blue to-ll-dark-blue rounded-t-xl">
+                        <h4 class="text-sm font-bold text-white/90">Profil </h4>
+                        <div class="flex items-center gap-2">
+                            <!-- Quick Action: Theme Toggle -->
+                            <button id="toggle-theme" class="p-2 rounded-full hover:bg-white/20 transition-colors duration-300" title="Changer le thème">
+                               <svg class="w-6 h-6 sidebar-icon text-gray-500 dark:text-gray-400 group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                                </svg>
+                                <span class="tooltip absolute left-1/2 transform -translate-x-1/2 bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">Thème</span>
+                            </button>
+                            
+                            <!-- Quick Action: Settings -->
+                            <button data-action="settings" class="p-2 rounded-full hover:bg-white/20 transition-colors duration-300" title="Paramètres">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </button>
+                            <!-- Quick Action: Logout -->
+                            <button type="submit" class="signout-button p-2 rounded-full hover:bg-white/20 bg-red-700/50 transition-colors duration-300" title="Déconnexion">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                            </button>
+                            <!-- Navigation Buttons -->
+                            <div class="flex items-center gap-0 overflow-hidden rounded-xl bg-gray-200/30 dark:bg-gray-700/30 shadow-md">
+                                <button data-back class="p-2 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition-colors duration-300 border-r border-white/10 dark:border-black" title="Retour au niveau précédent">
+                                    <svg class="w-6 h-6 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                    </svg>
+                                </button>
+                                <button data-back-to-main class="p-2 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition-colors duration-300" title="Retour au menu principal">
+                                    <svg class="w-6 h-6 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Profile Content -->
+                    <div class="p-4 bg-white/10 dark:bg-[#1A1A1A]/80 rounded-b-xl shadow-md">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center text-3xl font-bold shadow-inner overflow-hidden">
+                                <span class="user-initial">U</span>
+                                <img id="user-photo-detailed" src="" alt="Photo de profil" class="hidden w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white/95 text-xl truncate">Utilisateur</h3>
+                                <p class="text-sm text-white/90 truncate"></p>
+                                <p class="text-sm text-white/80"></p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <!-- Name Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Nom</h5>
+                                    <p class="text-sm text-white/90">Utilisateur</p>
+                                </div>
+                                <button data-edit="name" class="absolute right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/20 rounded-full" title="Modifier le nom">
+                                    <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Email Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Email</h5>
+                                    <p class="text-sm text-white/90"></p>
+                                </div>
+                                <button data-edit="email" class="absolute right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/20 rounded-full" title="Modifier l'email">
+                                    <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Address Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Adresse</h5>
+                                    <p class="text-sm text-white/90"></p>
+                                </div>
+                                <button data-edit="address" class="absolute right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/20 rounded-full" title="Modifier l'adresse">
+                                    <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Role Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A7 7 0 0112 14a7 7 0 016.879 3.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Rôle</h5>
+                                    <p class="text-sm text-white/90">Invité</p>
+                                </div>
+                            </div>
+                            <!-- Preferences Field -->
+                            <div class="group relative flex items-center gap-2">
+                                <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase">Préférences</h5>
+                                    <div class="text-sm text-white/90">
+                                        <p>Notifications: <span id="notifications-status">Désactivées</span></p>
+                                        <p>Langue: Français</p>
+                                    </div>
+                                </div>
+                                <button data-edit="preferences" class="absolute right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/20 rounded-full" title="Modifier les préférences">
+                                    <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            
+                        </div>
+                        <!-- Edit Profile Button -->
+                        <div class="mt-4">
+                            <button class="w-full px-4 py-2 bg-ll-blue text-white rounded-lg hover:bg-ll-dark-blue transition-colors duration-300">Modifier le profil</button>
+                        </div>
+                    </div>
+                    <!-- Modal for Editing Fields -->
+                    <div id="edit-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50">
+                        <div class="bg-white dark:bg-[#1A1A1A] p-6 rounded-xl shadow-lg w-full max-w-md transform transition-all duration-300 scale-95">
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Modifier</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label id="modal-label" class="block text-sm font-medium text-gray-700 dark:text-gray-300"></label>
+                                    <input id="modal-input" type="text" class="mt-1 w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-ll-blue transition-colors duration-300" />
+                                </div>
+                                <div class="flex justify-end gap-2">
+                                    <button id="modal-cancel" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">Annuler</button>
+                                    <button id="modal-save" class="px-4 py-2 bg-ll-blue text-white rounded-lg hover:bg-ll-dark-blue transition-colors duration-300">Enregistrer</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -622,7 +967,7 @@
                                     <path d="M279.368,24.726H102.992c-9.722,0-17.632,7.91-17.632,17.632V67.92c0,9.722,7.91,17.632,17.632,17.632h176.376 c9.722,0,17.632-7.91,17.632-17.632V42.358C297,32.636,289.09,24.726,279.368,24.726z"/>
                                     <path d="M279.368,118.087H102.992c-9.722,0-17.632,7.91-17.632,17.632v25.562c0,9.722,7.91,17.632,17.632,17.632h176.376 c9.722,0,17.632-7.91,17.632-17.632v-25.562C297,125.997,289.09,118.087,279.368,118.087z"/>
                                     <path d="M279.368,211.448H102.992c-9.722,0-17.632,7.91-17.632,17.633v25.561c0,9.722,7.91,17.632,17.632,17.632h176.376 c9.722,0,17.632-7.91,17.632-17.632v-25.561C297,219.358,289.09,211.448,279.368,211.448z"/>
-                                    <path d="M45.965,24.726H17.632C7.91,24.726,0,32.636,0,42.358V67.92c0,9.722,7.91,17.632,17.632,17.632h28.333 c9.722,0,17.632-7.91,17.632-17.632V42.358C63.597,32.636,55.687,24.726,45.965,24.726z"/>
+                                   <path d="M45.965,24.726H17.632C7.91,24.726,0,32.636,0,42.358V67.92c0,9.722,7.91,17.632,17.632,17.632h28.333 c9.722,0,17.632-7.91,17.632-17.632V42.358C63.597,32.636,55.687,24.726,45.965,24.726z"/>
                                     <path d="M45.965,118.087H17.632C7.91,118.087,0,125.997,0,135.719v25.562c0,9.722,7.91,17.632,17.632,17.632h28.333 c9.722,0,17.632-7.91,17.632-17.632v-25.562C63.597,125.997,55.687,118.087,45.965,118.087z"/>
                                     <path d="M45.965,211.448H17.632C7.91,211.448,0,219.358,0,229.081v25.561c0,9.722,7.91,17.632,17.632,17.632h28.333 c9.722,0,17.632-7.91,17.632-17.632v-25.561C63.597,219.358,55.687,211.448,45.965,211.448z"/>
                                 </svg>
@@ -834,20 +1179,21 @@
     </div>
 </aside>
 
-<aside id="chat-sidebar" class="fixed top-0 right-0 h-full w-80 bg-sidebar-light dark:bg-sidebar-dark backdrop-blur-xl shadow-2xl transform translate-x-full z-50 lg:translate-x-0 transition-all duration-500 ease-in-out rounded-l-2xl overflow-hidden border-l border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0; pointer-events: none;">
-    <div class="relative w-full h-full flex flex-col">
+
+<aside id="chat-sidebar" class="fixed top-0 right-0 h-full w-80 bg-sidebar-light dark:bg-sidebar-dark backdrop-blur-xl shadow-2xl transform translate-x-full z-50 lg:translate-x-0 transition-all duration-500 ease-in-out rounded-none overflow-hidden border-l border-white/20 dark:border-[#3E3E3A]/50 flex flex-col closed" style="width: 0px; min-width: 0px; opacity: 0; pointer-events: none;">
+<div class="relative w-full h-full flex flex-col">
         <!-- Chat Header -->
         <div class="absolute top-0 w-full p-4 z-40 bg-gradient-to-b from-sidebar-light/95 to-transparent dark:from-sidebar-dark/95 dark:to-transparent shadow-md">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-ll-blue/10 dark:bg-ll-blue/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-comments text-ll-blue dark:text-ll-blue text-xl"></i>
+                    <div class="w-10 h-10 bg-ll-blue/10 dark:bg-ll-blue/10 rounded-full back-text flex items-center justify-center">
+                            <svg version="1.1" id="Layer_1" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#62a0ea;" d="M242.2,191.432H47.776C21.424,191.512,0.08,212.848,0,239.2v140.72 c0.08,26.352,21.424,47.696,47.776,47.776H89.48v62.784l77.104-62.76h75.608c26.352-0.08,47.696-21.424,47.776-47.776V239.2 C289.888,212.856,268.544,191.512,242.2,191.432z"></path> <g style="opacity:0.25;"> <polygon points="289.984,311.504 289.984,341.936 191.84,311.504 "></polygon> </g> <path d="M471.688,21.52H178.504c-22.24,0.064-40.248,18.072-40.312,40.312V271.2c0.064,22.24,18.072,40.248,40.312,40.312H312.64 L435.104,411.2v-99.696h36.584c22.232-0.064,40.24-18.072,40.312-40.304V61.832C511.936,39.592,493.928,21.584,471.688,21.52z"></path> <g> <rect x="196.752" y="103.44" style="fill:#999999;" width="256.72" height="8"></rect> <rect x="196.752" y="166.384" style="fill:#999999;" width="256.72" height="8"></rect> <rect x="196.752" y="229.32" style="fill:#999999;" width="256.72" height="8"></rect> </g> </g></svg>
                     </div>
-                    <h2 class="text-xl font-bold text-ll-blue dark:text-ll-blue tracking-tight">LL-Ouest-Services</h2>
+                    <h2 class="text-xl font-bold gradiant">LL-Ouest-Services</h2>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button id="chat-collapse-toggle" class="p-2 rounded-lg hover:bg-white/20 dark:hover:bg-[#2A2A2A] transition-colors focus:outline-none focus:ring-2 focus:ring-ll-blue/30 hidden lg:block" title="Réduire/Étendre le chat" aria-label="Réduire ou étendre le chat">
-                        <svg viewBox="0 0 24 24" class="w-6 h-6 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
+                    <button id="chat-collapse-toggle" class="p-1 header-btn rounded-lg hover:bg-white/20 dark:hover:bg-[#2A2A2A] transition-colors focus:outline-none focus:ring-2 focus:ring-ll-blue/30 hidden lg:block" title="Réduire/Étendre le chat" aria-label="Réduire ou étendre le chat">
+                        <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-ll-blue dark:hover:text-ll-blue transition-colors duration-300">
                             <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
                         </svg>
                     </button>
@@ -871,7 +1217,7 @@
                         <h4 class="px-4 text-xs font-extrabold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Conversations Récentes</h4>
                         <button class="group w-full flex items-center gap-4 px-4 py-3 rounded-xl bg-white/80 dark:bg-[#1A1A1A]/80 shadow-md hover:shadow-lg hover:bg-white dark:hover:bg-[#2A2A2A] transition-all duration-300 transform hover:scale-102" data-conversation-id="1" aria-label="Conversation avec Marie D.">
                             <div class="relative">
-                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-ll-blue to-ll-dark-blue text-white flex items-center justify-center font-bold text-base shadow-lg">MD</div>
+                                <div class="w-12 h-12 rounded-full back-text text-white flex items-center justify-center font-bold text-base shadow-lg">MD</div>
                                 <div class="absolute -top-1 -right-1 w-6 h-6 bg-ll-blue text-white text-xs rounded-full flex items-center justify-center ring-2 ring-white dark:ring-[#1A1A1A] shadow-md animate-pulse">2</div>
                             </div>
                             <div class="flex-1 text-left overflow-hidden collapsed-hidden">
@@ -882,7 +1228,7 @@
                         </button>
                         <button class="group w-full flex items-center gap-4 px-4 py-3 rounded-xl bg-white/80 dark:bg-[#1A1A1A]/80 shadow-md hover:shadow-lg hover:bg-white dark:hover:bg-[#2A2A2A] transition-all duration-300 transform hover:scale-102" data-conversation-id="2" aria-label="Conversation avec Jean M.">
                             <div class="relative">
-                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-ll-blue to-ll-dark-blue text-white flex items-center justify-center font-bold text-base shadow-lg">JM</div>
+                                <div class="w-12 h-12 rounded-full back-text text-white flex items-center justify-center font-bold text-base shadow-lg">JM</div>
                             </div>
                             <div class="flex-1 text-left overflow-hidden collapsed-hidden">
                                 <h5 class="text-sm font-bold text-text-light dark:text-text-dark truncate">Jean M.</h5>
@@ -892,7 +1238,7 @@
                         </button>
                         <button class="group w-full flex items-center gap-4 px-4 py-3 rounded-xl bg-white/80 dark:bg-[#1A1A1A]/80 shadow-md hover:shadow-lg hover:bg-white dark:hover:bg-[#2A2A2A] transition-all duration-300 transform hover:scale-102" data-conversation-id="3" aria-label="Conversation avec Sophie L.">
                             <div class="relative">
-                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-ll-blue to-ll-dark-blue text-white flex items-center justify-center font-bold text-base shadow-lg">SL</div>
+                                <div class="w-12 h-12 rounded-full back-text text-white flex items-center justify-center font-bold text-base shadow-lg">SL</div>
                                 <div class="absolute -top-1 -right-1 w-6 h-6 bg-ll-blue text-white text-xs rounded-full flex items-center justify-center ring-2 ring-white dark:ring-[#1A1A1A] shadow-md animate-pulse">1</div>
                             </div>
                             <div class="flex-1 text-left overflow-hidden collapsed-hidden">
@@ -903,7 +1249,7 @@
                         </button>
                         <button class="group w-full flex items-center gap-4 px-4 py-3 rounded-xl bg-white/80 dark:bg-[#1A1A1A]/80 shadow-md hover:shadow-lg hover:bg-white dark:hover:bg-[#2A2A2A] transition-all duration-300 transform hover:scale-102" data-conversation-id="4" aria-label="Conversation avec Pierre R.">
                             <div class="relative">
-                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-ll-blue to-ll-dark-blue text-white flex items-center justify-center font-bold text-base shadow-lg">PR</div>
+                                <div class="w-12 h-12 rounded-full back-text text-white flex items-center justify-center font-bold text-base shadow-lg">PR</div>
                             </div>
                             <div class="flex-1 text-left overflow-hidden collapsed-hidden">
                                 <h5 class="text-sm font-bold text-text-light dark:text-text-dark truncate">Pierre R.</h5>
@@ -913,7 +1259,7 @@
                         </button>
                         <button class="group w-full flex items-center gap-4 px-4 py-3 rounded-xl bg-white/80 dark:bg-[#1A1A1A]/80 shadow-md hover:shadow-lg hover:bg-white dark:hover:bg-[#2A2A2A] transition-all duration-300 transform hover:scale-102" data-conversation-id="ai" aria-label="Conversation avec LL-Ouest Assistant">
                             <div class="relative">
-                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center font-bold text-base shadow-lg">AI</div>
+                                <div class="w-12 h-12 rounded-full back-text text-white flex items-center justify-center font-bold text-base shadow-lg">AI</div>
                             </div>
                             <div class="flex-1 text-left overflow-hidden collapsed-hidden">
                                 <h5 class="text-sm font-bold text-text-light dark:text-text-dark truncate">LL-Ouest Assistant</h5>
@@ -978,51 +1324,37 @@
     </div>
 </aside>
 
-    <!-- Main Content -->
-    <div class="content-main flex-grow w-full p-6 lg:p-8 transition-all duration-500 overflow-hidden">
-        <div id="blurred-header" class="fixed top-0 left-0 right-0 z-30 bg-ll-white dark:bg-ll-black lg:bg-transparent lg:dark:bg-transparent py-3 px-6 flex justify-between items-center shadow-md lg:shadow-none transition-all duration-300 mb-4 lg:mb-0 blurred-header">
-            <button id="sidebar-toggle" class="p-2 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
-                <svg viewBox="0 0 24 24" class="w-6 h-6">
-                    <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
-                </svg>
-            </button>
-            <div class="flex items-center space-x-1">
-                <button id="chat-sidebar-toggle" class="lg:block hidden p-3 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
-                    <i class="fas fa-comments w-6 h-6"></i>
-                </button>
-                
-                <button id="theme-toggle-header" class="p-3 rounded-md  hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-text-gray dark:text-ll-medium-gray hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+
+        <div class="content-main flex-grow w-full transition-all duration-500 overflow-hidden relative z-10">
+            <!-- Header -->
+            <div id="blurred-header" class="header-light-style fixed top-0 left-0 right-0 z-30 backrop-blur-2xl backdrop-blur lg:backdrop-blur-none  lg:bg-transparent lg:dark:bg-transparent py-3 px-6 flex justify-between items-center shadow-md lg:shadow-none transition-all duration-300 mb-4 lg:mb-0">
+                <div class="flex items-center space-x-1">
+                <button id="sidebar-toggle" class="p-1 header-btn rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30  text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 ">
+                        <path d="M3.75 8.5C3.75 8.08579 4.08579 7.75 4.5 7.75H5.75C6.16421 7.75 6.5 8.08579 6.5 8.5C6.5 8.91421 6.16421 9.25 5.75 9.25H4.5C4.08579 9.25 3.75 8.91421 3.75 8.5ZM3.75 12C3.75 11.5858 4.08579 11.25 4.5 11.25H5.75C6.16421 11.25 6.5 11.5858 6.5 12C6.5 12.4142 6.16421 12.75 5.75 12.75H4.5C4.08579 12.75 3.75 12.4142 3.75 12ZM3.75 15.5C3.75 15.0858 4.08579 14.75 4.5 14.75H5.75C6.16421 14.75 6.5 15.0858 6.5 15.5C6.5 15.9142 6.16421 16.25 5.75 16.25H4.5C4.08579 16.25 3.75 15.9142 3.75 15.5ZM4.25 3C2.45507 3 1 4.45507 1 6.25V17.75C1 19.5449 2.45508 21 4.25 21H19.75C21.5449 21 23 19.5449 23 17.75V6.25C23 4.45507 21.5449 3 19.75 3H4.25ZM19.75 19.5H9V4.5H19.75C20.7165 4.5 21.5 5.2835 21.5 6.25V17.75C21.5 18.7165 20.7165 19.5 19.75 19.5ZM4.25 4.5H7.5V19.5H4.25C3.2835 19.5 2.5 18.7165 2.5 17.75V6.25C2.5 5.2835 3.2835 4.5 4.25 4.5Z" fill="currentColor"></path>
                     </svg>
                 </button>
+                <a href="/" class="text-xl transition-all header-btn duration-200 chat-toggle-button semi-bold bold" id="entreprise">
+                    <div class="back-text" id="name-entreprise">L&L Ouest Services</div>
+                </a>
+                </div>
 
-                <div id="auth" class="chat-toggle-button">
-                <div  x-data="{ open: false }" @click.away="open = false" class="relative z-40">
-                    <button type="button" id="auth" class="auth-combined-button focus:outline-none focus:ring-2 focus:ring-ll-blue/50 auth-dropdown-toggle" title="Authentification" @click="open = !open" :aria-expanded="open.toString()" aria-haspopup="true">
-                        <i class="fas fa-user text-lg"></i>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                <div class="flex items-center space-x-1">
+                    <button id="chat-sidebar-toggle" class="header-btn lg:block hidden p-2 rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30 text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                        <svg version="1.1" id="Layer_1" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#62a0ea;" d="M242.2,191.432H47.776C21.424,191.512,0.08,212.848,0,239.2v140.72 c0.08,26.352,21.424,47.696,47.776,47.776H89.48v62.784l77.104-62.76h75.608c26.352-0.08,47.696-21.424,47.776-47.776V239.2 C289.888,212.856,268.544,191.512,242.2,191.432z"></path> <g style="opacity:0.25;"> <polygon points="289.984,311.504 289.984,341.936 191.84,311.504 "></polygon> </g> <path d="M471.688,21.52H178.504c-22.24,0.064-40.248,18.072-40.312,40.312V271.2c0.064,22.24,18.072,40.248,40.312,40.312H312.64 L435.104,411.2v-99.696h36.584c22.232-0.064,40.24-18.072,40.312-40.304V61.832C511.936,39.592,493.928,21.584,471.688,21.52z"></path> <g> <rect x="196.752" y="103.44" style="fill:#999999;" width="256.72" height="8"></rect> <rect x="196.752" y="166.384" style="fill:#999999;" width="256.72" height="8"></rect> <rect x="196.752" y="229.32" style="fill:#999999;" width="256.72" height="8"></rect> </g> </g></svg>
+                    </button>
+                    <button id="theme-toggle-header" class="header-btn p-2 rounded-md hover:bg-ll-blue/20 dark:hover:bg-ll-blue/30  text-ll-white hover:text-ll-blue dark:hover:text-ll-blue transition-all duration-200 shadow-md chat-toggle-button">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                         </svg>
                     </button>
-                    <div x-show="open" x-transition:enter="auth-dropdown-menu transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="auth-dropdown-menu transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute right-0 mt-2 w-[11rem] rounded-lg shadow-xl p-1.5 auth-menu-backdrop" style="display: none;">
-                        <div class="flex flex-col gap-1">
-                            <a href="/pages/auth/signin.html" class="auth-menu-item">
-                                <i class="fas fa-sign-in-alt w-5 h-5"></i>
-                                <span>Se connecter</span>
-                            </a>
-                            <a href="/pages/auth/signup.html" class="auth-menu-item">
-                                <i class="fas fa-user-plus w-5 h-5"></i>
-                                <span>S'inscrire</span>
-                            </a>
-                        </div>
+                    <div id="auth" class="chat-toggle-button header-btn">
                     </div>
                 </div>
-                </div>
-
-
             </div>
-        </div>
+
+            
+            
         
         <main class="relative z-10 max-w-7xl mx-auto w-full min-h-[calc(100vh-14rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
             <div class="w-full max-w-md bg-ll-white dark:bg-ll-black p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
@@ -1058,6 +1390,8 @@
                     
                     <button type="submit" class="w-full bg-ll-blue text-white py-3 rounded-lg hover:bg-ll-dark-blue focus:outline-none focus:ring-2 focus:ring-ll-blue/50 font-semibold tracking-wide transition-all duration-300 shadow-md hover:shadow-lg"><span>Se connecter</span><i class="fas fa-sign-in-alt ml-2"></i></button>
                 </form>
+
+                
                 <div class="mt-6 text-center space-y-3">
                     <p class="text-sm text-ll-black dark:text-ll-light-gray">
                         Pas de compte ? <a href="/pages/auth/signup.html" class="text-ll-blue dark:text-ll-blue hover:underline font-medium transition-colors duration-200">S'inscrire</a>
@@ -1070,29 +1404,7 @@
         </main>
 
         <!-- JavaScript for Password Toggle -->
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                      
-            document.querySelectorAll('.toggle-password').forEach(button => {
-
-            button.addEventListener('click', function() {
-                const input = this.parentElement.querySelector('input');
-                const icon = this.querySelector('i');
-                
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    input.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            });
-        });
-               
-            });
-        </script>
+       
 
         <section class="bg-ll-light-bg dark:bg-ll-medium-gray/10 py-12 px-6 lg:px-8 rounded-2xl mt-16">
             <div class="max-w-7xl mx-auto">
@@ -1187,6 +1499,19 @@
 
 
     </div>
+    </div>
+    
+
+    <script type="module" src="/js/main.js"></script>
+    <script  type="module" src="/js/form.js"></script>
+
+    <script type="module">
+        import auth from '/js/modules/auth.js';
+        auth.init();
+    </script>
+
+    <script type="module" src="/js/animations/animation.js"></script>
+    <script type="module" src="/js/loadData.js"></script>
 
    
 </body>

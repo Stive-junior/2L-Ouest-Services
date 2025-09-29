@@ -13,6 +13,7 @@ const notificationRoutes = require('./notificationRoutes');
 const reviewRoutes = require('./reviewRoutes');
 const serviceRoutes = require('./serviceRoutes');
 const userRoutes = require('./userRoutes');
+const configRoutes = require('./config');
 
 module.exports = {
   authRoutes,
@@ -24,4 +25,5 @@ module.exports = {
   reviewRoutes,
   serviceRoutes,
   userRoutes,
+  configRoutes,
 };

@@ -108,98 +108,7 @@ async function loadMockData() {
     const testimonialsResponse = await fetch('/assets/json/mock/mock-testimonials.json');
     if (testimonialsResponse.ok) {
       MOCK_TESTIMONIALS = await testimonialsResponse.json();
-      MOCK_TESTIMONIALS.push(
-        {
-          id: 't4',
-          text: 'Excellente équipe, résultats impeccables.',
-          author: 'Paul Martin',
-          title: 'Directeur',
-          rating: 5,
-          image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Service rapide avec une attention particulière aux détails, utilisant des produits écologiques.',
-        },
-        {
-          id: 't5',
-          text: 'Service rapide et efficace pour notre bureau.',
-          author: 'Sophie Laurent',
-          title: 'Manager',
-          rating: 4,
-          image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Le nettoyage a été effectué en moins de 2 heures, avec une grande précision.',
-        },
-        {
-          id: 't6',
-          text: 'Parfait pour nos besoins industriels.',
-          author: 'Luc Dubois',
-          title: 'Ingénieur',
-          rating: 4,
-          image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Utilisation de technologies avancées pour un nettoyage en profondeur.',
-        },
-        {
-          id: 't7',
-          text: 'Un service client exceptionnel et des résultats au-delà des attentes.',
-          author: 'Clara Moreau',
-          title: 'Responsable RH',
-          rating: 5,
-          image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Le personnel était courtois et très professionnel.',
-        },
-        {
-          id: 't8',
-          text: 'Nettoyage impeccable pour notre restaurant.',
-          author: 'Antoine Lefèvre',
-          title: 'Chef Restaurateur',
-          rating: 4,
-          image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Service adapté aux normes d’hygiène strictes de la restauration.',
-        },
-        {
-          id: 't9',
-          text: 'Ils ont transformé notre espace commercial.',
-          author: 'Émilie Bernard',
-          title: 'Directrice Commerciale',
-          rating: 4,
-          image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Travail rapide et soigné, avec des produits respectueux de l’environnement.',
-        },
-        {
-          id: 't10',
-          text: 'Service fiable pour notre école.',
-          author: 'Marc Dubois',
-          title: 'Directeur d’École',
-          rating: 4,
-          image: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Nettoyage complet des salles de classe avec des produits sans allergènes.',
-        },
-        {
-          id: 't11',
-          text: 'Parfait pour nos événements spéciaux.',
-          author: 'Julie Renaud',
-          title: 'Organisatrice d’Événements',
-          rating: 5,
-          image: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Service ponctuel et flexible, adapté à nos besoins.',
-        },
-        {
-          id: 't12',
-          text: 'Nettoyage écologique de haute qualité.',
-          author: 'Thomas Leroy',
-          title: 'Particulier',
-          rating: 4,
-          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Utilisation de produits biodégradables, très appréciée.',
-        },
-        {
-          id: 't13',
-          text: 'Service rapide pour notre hôtel.',
-          author: 'Laura Petit',
-          title: 'Directrice d’Hôtel',
-          rating: 4,
-          image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-          details: 'Nettoyage complet des chambres en un temps record.',
-        }
-      );
+     
     } else {
       throw new Error('Échec du chargement des témoignages');
     }
@@ -268,388 +177,10 @@ async function loadMockData() {
     const teamResponse = await fetch('/assets/json/mock/mock-team.json');
     if (teamResponse.ok) {
       MOCK_TEAM = await teamResponse.json();
-    } else {
-
-    MOCK_TEAM = [
-    {
-        name: "John Doe",
-        role: "Directeur Général",
-        roleCategory: "management",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        bio: "Fondateur de L&L Ouest Services, John dirige l’entreprise avec une vision axée sur l’écologie et l’excellence. Avec plus de 15 ans d’expérience, il a transformé le secteur du nettoyage en intégrant des pratiques durables.",
-        skills: [
-            { name: "Leadership", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 7h-10'></path><path d='M14 17H4'></path><circle cx='17' cy='17' r='3'></circle><circle cx='7' cy='7' r='3'></circle></svg>", level: 95 },
-            { name: "Stratégie", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 8V4'></path><path d='M10 12h4'></path></svg>", level: 90 },
-            { name: "Écologie", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", level: 92 }
-        ],
-        certifications: ["MBA en Gestion d’Entreprise", "Certification Éco-Entrepreneur", "Leadership Durable"],
-        performance: {
-            Leadership: 95,
-            "Satisfaction Client": 90,
-            Innovation: 85,
-            "Gestion Budgétaire": 88
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/johndoe",
-            email: "john.doe@llouestservices.fr",
-            phone: "+33 6 12 34 56 78"
-        },
-        yearsExperience: 15,
-        availability: "Sur rendez-vous",
-        education: ["Master en Administration des Affaires, HEC Paris"],
-        languages: ["Français", "Anglais", "Espagnol"],
-        projectsCompleted: 120
-    },
-    {
-        name: "Jane Smith",
-        role: "Directrice des Opérations",
-        roleCategory: "management",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        bio: "Jane excelle dans la coordination des équipes pour garantir des opérations fluides et efficaces. Diplômée en management opérationnel, elle optimise nos processus pour une qualité de service exceptionnelle.",
-        skills: [
-            { name: "Gestion de Projet", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line><line x1='3' y1='10' x2='21' y2='10'></line></svg>", level: 92 },
-            { name: "Planification", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'></path><polyline points='14 2 14 8 20 8'></polyline></svg>", level: 94 },
-            { name: "Communication", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>", level: 90 }
-        ],
-        certifications: ["PMP Certification", "Lean Six Sigma Green Belt", "Management Agile"],
-        performance: {
-            "Efficacité Opérationnelle": 92,
-            "Satisfaction Équipe": 88,
-            "Respect des Délais": 90,
-            "Optimisation Processus": 91
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/janesmith",
-            email: "jane.smith@llouestservices.fr",
-            phone: "+33 6 23 45 67 89"
-        },
-        yearsExperience: 12,
-        availability: "Disponible en semaine",
-        education: ["Licence en Management Opérationnel, ESSEC"],
-        languages: ["Français", "Anglais"],
-        projectsCompleted: 85
-    },
-    {
-        name: "Luc Martin",
-        role: "Responsable Technique",
-        roleCategory: "technical",
-        image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-        bio: "Luc est un expert des équipements de nettoyage de pointe, garantissant des résultats impeccables. Ingénieur de formation, il supervise l’ensemble de nos équipements et processus techniques.",
-        skills: [
-            { name: "Maintenance Équipements", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'></path></svg>", level: 96 },
-            { name: "Technologie Verte", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", level: 93 },
-            { name: "Formation Technique", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20h9'></path><path d='M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z'></path></svg>", level: 89 }
-        ],
-        certifications: ["Ingénieur en Génie Chimique", "Certification Hygiène et Sécurité", "Expert en Nettoyage Industriel"],
-        performance: {
-            Maintenance: 90,
-            "Innovation Technique": 85,
-            Fiabilité: 88,
-            "Sécurité Équipements": 92
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/lucmartin",
-            email: "luc.martin@llouestservices.fr",
-            phone: "+33 6 34 56 78 90"
-        },
-        yearsExperience: 10,
-        availability: "Disponible sur site",
-        education: ["Diplôme d’Ingénieur, École Centrale Paris"],
-        languages: ["Français", "Anglais", "Allemand"],
-        projectsCompleted: 65
-    },
-    {
-        name: "Clara Dubois",
-        role: "Responsable Marketing",
-        roleCategory: "management",
-        image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-        bio: "Clara conçoit des campagnes innovantes pour promouvoir nos services écologiques, renforçant la visibilité de L&L Ouest Services auprès des clients.",
-        skills: [
-            { name: "Marketing Digital", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='4' width='20' height='16' rx='2'></rect><path d='M10 10h4'></path><path d='M12 12v6'></path><path d='M10 18h4'></path></svg>", level: 88 },
-            { name: "Communication", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>", level: 90 },
-            { name: "Stratégie de Marque", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 8V4'></path><path d='M10 12h4'></path></svg>", level: 87 }
-        ],
-        certifications: ["Google Ads Certification", "Marketing Stratégique", "SEO Avancé"],
-        performance: {
-            "Engagement Client": 88,
-            "Campagnes Réussies": 90,
-            Créativité: 85,
-            "Visibilité Marque": 89
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/claradubois",
-            email: "clara.dubois@llouestservices.fr",
-            phone: "+33 6 45 67 89 01"
-        },
-        yearsExperience: 8,
-        availability: "Disponible en semaine",
-        education: ["Master en Marketing, Sorbonne Université"],
-        languages: ["Français", "Anglais", "Italien"],
-        projectsCompleted: 50
-    },
-    {
-        name: "Antoine Lefèvre",
-        role: "Agent de Nettoyage",
-        roleCategory: "cleaning",
-        image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-        bio: "Antoine excelle dans le nettoyage des espaces professionnels avec une attention méticuleuse aux détails, garantissant des environnements impeccables.",
-        skills: [
-            { name: "Nettoyage Général", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 5v3'></path><path d='M14 5v3'></path><path d='M10 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4'></path><path d='M8 17l2-2 2 2'></path></svg>", level: 85 },
-            { name: "Dépoussiérage", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6H4'></path><path d='M14 12H4'></path><path d='M16 18H4'></path></svg>", level: 88 },
-            { name: "Produits Écologiques", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", level: 90 }
-        ],
-        certifications: ["Formation Nettoyage Professionnel", "Certificat Produits Écologiques", "Hygiène et Sécurité"],
-        performance: {
-            Efficacité: 85,
-            "Satisfaction Client": 90,
-            Précision: 88,
-            Ponctualité: 87
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/antoinelefevre",
-            email: "antoine.lefevre@llouestservices.fr",
-            phone: "+33 6 56 78 90 12"
-        },
-        yearsExperience: 5,
-        availability: "Disponible tous les jours",
-        education: ["CAP Propreté"],
-        languages: ["Français"],
-        projectsCompleted: 200
-    },
-    {
-        name: "Émilie Bernard",
-        role: "Spécialiste Nettoyage de Vitres",
-        roleCategory: "cleaning",
-        image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-        bio: "Émilie est experte dans le nettoyage des vitres, assurant une clarté impeccable, même en hauteur, avec un focus sur la sécurité.",
-        skills: [
-            { name: "Nettoyage de Vitres", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='2' ry='2'></rect><line x1='3' y1='9' x2='21' y2='9'></line><line x1='3' y1='15' x2='21' y2='15'></line></svg>", level: 92 },
-            { name: "Travail en Hauteur", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8 3L12 7L16 3'></path><path d='M12 22V7'></path></svg>", level: 90 },
-            { name: "Sécurité", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'></path></svg>", level: 95 }
-        ],
-        certifications: ["CACES Nacelle", "Formation Sécurité Vitres", "Certificat Travail en Hauteur"],
-        performance: {
-            Précision: 92,
-            Rapidité: 85,
-            "Satisfaction Client": 90,
-            Sécurité: 95
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/emiliebernard",
-            email: "emilie.bernard@llouestservices.fr",
-            phone: "+33 6 67 89 01 23"
-        },
-        yearsExperience: 7,
-        availability: "Disponible sur rendez-vous",
-        education: ["BEP Métiers de l’Hygiène"],
-        languages: ["Français", "Anglais"],
-        projectsCompleted: 150
-    },
-    {
-        name: "Marc Dubois",
-        role: "Spécialiste Dépoussiérage",
-        roleCategory: "cleaning",
-        image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        bio: "Marc maîtrise l’art du dépoussiérage pour des environnements sains et propres, utilisant des techniques écologiques avancées.",
-        skills: [
-            { name: "Dépoussiérage", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6H4'></path><path d='M14 12H4'></path><path d='M16 18H4'></path></svg>", level: 90 },
-            { name: "Produits Écologiques", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", level: 88 },
-            { name: "Précision", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'></circle><polyline points='12 6 12 12 16.5 12'></polyline></svg>", level: 85 }
-        ],
-        certifications: ["Formation Nettoyage Écologique", "Certificat Hygiène", "Techniques de Dépoussiérage Avancées"],
-        performance: {
-            Efficacité: 88,
-            "Satisfaction Client": 85,
-            Précision: 90,
-            "Utilisation Éco-Produits": 87
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/marcDubois",
-            email: "marc.dubois@llouestservices.fr",
-            phone: "+33 6 78 90 12 34"
-        },
-        yearsExperience: 6,
-        availability: "Disponible tous les jours",
-        education: ["CAP Propreté"],
-        languages: ["Français"],
-        projectsCompleted: 180
-    },
-    {
-        name: "Julie Renaud",
-        role: "Coordinatrice Événements",
-        roleCategory: "management",
-        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        bio: "Julie organise des services de nettoyage pour des événements avec une précision remarquable, assurant des espaces parfaits pour chaque occasion.",
-        skills: [
-            { name: "Organisation d’Événements", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line><line x1='3' y1='10' x2='21' y2='10'></line></svg>", level: 90 },
-            { name: "Coordination", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'></path><circle cx='8.5' cy='7' r='4'></circle><polyline points='17 11 19 13 23 9'></polyline></svg>", level: 88 },
-            { name: "Logistique", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'></path><circle cx='12' cy='10' r='3'></circle></svg>", level: 85 }
-        ],
-        certifications: ["Événementiel Professionnel", "Gestion de Projet Événementiel", "Logistique Avancée"],
-        performance: {
-            Organisation: 90,
-            "Satisfaction Client": 85,
-            Flexibilité: 88,
-            "Coordination Équipe": 87
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/julierenaud",
-            email: "julie.renaud@llouestservices.fr",
-            phone: "+33 6 89 01 23 45"
-        },
-        yearsExperience: 9,
-        availability: "Disponible sur rendez-vous",
-        education: ["Licence en Gestion Événementielle, IUT Paris"],
-        languages: ["Français", "Anglais"],
-        projectsCompleted: 70
-    },
-    {
-        name: "Thomas Leroy",
-        role: "Formateur Nettoyage",
-        roleCategory: "technical",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        bio: "Thomas forme les équipes aux techniques de nettoyage modernes et écologiques, renforçant leurs compétences pour des résultats optimaux.",
-        skills: [
-            { name: "Formation", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20h9'></path><path d='M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z'></path></svg>", level: 90 },
-            { name: "Techniques de Nettoyage", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 5v3'></path><path d='M14 5v3'></path><path d='M10 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4'></path><path d='M8 17l2-2 2 2'></path></svg>", level: 88 },
-            { name: "Écologie", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", level: 85 }
-        ],
-        certifications: ["Formateur Agréé", "Certificat Nettoyage Écologique", "Pédagogie Active"],
-        performance: {
-            Formation: 90,
-            "Engagement Équipe": 88,
-            Innovation: 85,
-            Pédagogie: 87
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/thomasleroy",
-            email: "thomas.leroy@llouestservices.fr",
-            phone: "+33 6 90 12 34 56"
-        },
-        yearsExperience: 8,
-        availability: "Disponible en semaine",
-        education: ["Licence en Formation Professionnelle, CNAM"],
-        languages: ["Français", "Anglais"],
-        projectsCompleted: 60
-    },
-    {
-        name: "Laura Petit",
-        role: "Assistante Administrative",
-        roleCategory: "management",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        bio: "Laura gère les plannings et réservations avec une organisation irréprochable, assurant une coordination fluide pour nos clients.",
-        skills: [
-            { name: "Organisation", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line><line x1='3' y1='10' x2='21' y2='10'></line></svg>", level: 90 },
-            { name: "Gestion Administrative", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'></path><polyline points='14 2 14 8 20 8'></polyline></svg>", level: 88 },
-            { name: "Service Client", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>", level: 92 }
-        ],
-        certifications: ["Formation Gestion Administrative", "Certificat Service Client", "Bureautique Avancée"],
-        performance: {
-            Organisation: 90,
-            "Satisfaction Client": 92,
-            Efficacité: 88,
-            "Gestion des Plannings": 89
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/laurapetit",
-            email: "laura.petit@llouestservices.fr",
-            phone: "+33 6 01 23 45 67"
-        },
-        yearsExperience: 6,
-        availability: "Disponible en semaine",
-        education: ["BTS Assistant de Gestion, Lycée Saint-Louis"],
-        languages: ["Français", "Anglais"],
-        projectsCompleted: 100
-    },
-    {
-        name: "Sophie Lambert",
-        role: "Superviseuse Nettoyage Écologique",
-        roleCategory: "cleaning",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        bio: "Sophie supervise les équipes de nettoyage écologique, assurant l’utilisation de produits respectueux de l’environnement pour des résultats durables.",
-        skills: [
-            { name: "Nettoyage Écologique", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z'></path><path d='m12 12 3.5 3.5L19 12l-3.5-3.5L12 12Z'></path></svg>", level: 90 },
-            { name: "Supervision", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'></path><circle cx='8.5' cy='7' r='4'></circle><polyline points='17 11 19 13 23 9'></polyline></svg>", level: 88 },
-            { name: "Contrôle Qualité", icon: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'></polyline></svg>", level: 85 }
-        ],
-        certifications: ["Certificat Nettoyage Écologique", "Formation Supervision", "Contrôle Qualité ISO"],
-        performance: {
-            "Qualité du Travail": 90,
-            "Satisfaction Client": 88,
-            Leadership: 85,
-            "Utilisation Éco-Produits": 87
-        },
-        actionImages: [
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-        ],
-        socialLinks: {
-            linkedin: "https://www.linkedin.com/in/sophielambert",
-            email: "sophie.lambert@llouestservices.fr",
-            phone: "+33 6 12 34 56 78"
-        },
-        yearsExperience: 7,
-        availability: "Disponible tous les jours",
-        education: ["BEP Métiers de l’Hygiène"],
-        languages: ["Français"],
-        projectsCompleted: 140
-    }
-];
+    } 
 
 
-
-    }
+    
 
     const partnersResponse = await fetch('/assets/json/mock/mock-partners.json');
     if (partnersResponse.ok) {
@@ -882,121 +413,91 @@ async function loadMockData() {
 
 // Données pour hero slides avec plus de slides
  
-    const HERO_SLIDES = [
-      {
-        type: 'video',
-        src: '/assets/videos/hamburgeur.mp4',
-        poster: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'L&L Ouest Services',
-        subtitle: 'Excellence et écologie pour un environnement impeccable et sain à Angers',
-        buttons: [
-          { text: 'Demander un devis', href: '/pages/auth/signup.html', class: 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg', ariaLabel: 'Demander un devis gratuit', icon: '📝' },
-          { text: 'Nos services', href: '#services', class: 'border-2 border-gray-200 dark:border-gray-400 text-gray-200 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-400 dark:hover:text-gray-900 shadow-lg', ariaLabel: 'Voir tous les services', icon: '🛠️' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Nettoyage professionnel à Angers pour un espace éclatant.'
-      },
-      {
-        type: 'image',
-        src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'Professionnels du Nettoyage',
-        subtitle: 'Solutions sur mesure pour entreprises et particuliers dans l’Ouest de la France',
-        buttons: [
-          { text: 'En savoir plus', href: '#about', class: 'bg-gray-200 dark:bg-gray-400 text-gray-900 dark:text-gray-900 hover:bg-blue-600 hover:text-white shadow-lg', ariaLabel: 'En savoir plus sur nous', icon: 'ℹ️' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Découvrez nos services personnalisés pour tous vos besoins.'
-      },
-      {
-        type: 'image',
-        src: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'Nettoyage Écologique',
-        subtitle: 'Produits biodégradables pour un avenir durable à Angers',
-        buttons: [
-          { text: 'Engagement vert', href: '#eco-commitments', class: 'bg-green-600 hover:bg-green-700 text-white shadow-lg', ariaLabel: 'Découvrir notre engagement écologique', icon: '🌿' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Un nettoyage respectueux de l’environnement.'
-      },
-      {
-        type: 'image',
-        src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'Avant & Après',
-        subtitle: 'Transformez vos espaces avec nos services professionnels',
-        buttons: [
-          { text: 'Voir les résultats', href: '#before-after', class: 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg', ariaLabel: 'Voir les transformations avant/après', icon: '📸' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Voyez la différence avec nos nettoyages.'
-      },
-      {
-        type: 'image',
-        src: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'Outils Modernes',
-        subtitle: 'Technologie de pointe pour des résultats impeccables',
-        buttons: [
-          { text: 'Nos méthodes', href: '#services', class: 'bg-gray-200 dark:bg-gray-400 text-gray-900 dark:text-gray-900 hover:bg-blue-600 hover:text-white shadow-lg', ariaLabel: 'Découvrir nos méthodes de nettoyage', icon: '⚙️' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Des outils innovants pour un nettoyage optimal.'
-      },
-      {
-        type: 'video',
-        src: '/assets/videos/hamburgeur.mp4',
-        poster: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        title: 'Technologie de Nettoyage',
-        subtitle: 'Découvrez nos outils modernes pour un nettoyage optimal',
-        buttons: [
-          { text: 'Nos équipements', href: '#equipment', class: 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg', ariaLabel: 'Voir nos équipements de nettoyage', icon: '🔧' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Technologie avancée pour des résultats éclatants.'
-      },
-      {
-        type: 'image',
-        src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'Service Personnalisé',
-        subtitle: 'Des solutions adaptées à vos besoins spécifiques à Angers',
-        buttons: [
-          { text: 'Personnaliser', href: '#customize', class: 'bg-purple-600 hover:bg-purple-700 text-white shadow-lg', ariaLabel: 'Personnaliser votre service de nettoyage', icon: '🎨' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Des services sur mesure pour vous.'
-      },
-      {
-        type: 'image',
-        src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'Engagement Communautaire',
-        subtitle: 'Nous soutenons les initiatives locales à Angers',
-        buttons: [
-          { text: 'Nos actions', href: '#community', class: 'bg-orange-600 hover:bg-orange-700 text-white shadow-lg', ariaLabel: 'Découvrir nos actions communautaires', icon: '🤝' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Soutien aux projets locaux pour un avenir meilleur.'
-      },
-      {
-        type: 'image',
-        src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'Équipe Professionnelle',
-        subtitle: 'Rencontrez nos experts dédiés à votre satisfaction',
-        buttons: [
-          { text: 'Notre équipe', href: '#team', class: 'bg-teal-600 hover:bg-teal-700 text-white shadow-lg', ariaLabel: 'Rencontrer notre équipe', icon: '👥' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Une équipe dévouée pour des résultats parfaits.'
-      },
-      {
-        type: 'image',
-        src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        title: 'Partenariats de Qualité',
-        subtitle: 'Collaborez avec nos partenaires pour des résultats optimaux',
-        buttons: [
-          { text: 'Nos partenaires', href: '#partners', class: 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg', ariaLabel: 'Découvrir nos partenaires', icon: '🤝' },
-        ],
-        thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-        sidebarMessage: 'Des partenariats pour un service exceptionnel.'
-      }
-    ];
+  const HERO_SLIDES = [
+  {
+    type: 'video',
+    src: '/assets/videos/hamburgeur.mp4',
+    poster: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'L&L Ouest Services',
+    subtitle: 'Excellence et écologie pour un environnement impeccable et sain à Angers',
+    thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Nettoyage professionnel à Angers pour un espace éclatant.'
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Professionnels du Nettoyage',
+    subtitle: 'Solutions sur mesure pour entreprises et particuliers dans l’Ouest de la France',
+    thumbnail: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Découvrez nos services personnalisés pour tous vos besoins.'
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Nettoyage Écologique',
+    subtitle: 'Produits biodégradables pour un avenir durable à Angers',
+    thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Un nettoyage respectueux de l’environnement.'
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Avant & Après',
+    subtitle: 'Transformez vos espaces avec nos services professionnels',
+    thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Voyez la différence avec nos nettoyages.'
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Outils Modernes',
+    subtitle: 'Technologie de pointe pour des résultats impeccables',
+    thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Des outils innovants pour un nettoyage optimal.'
+  },
+  {
+    type: 'video',
+    src: '/assets/videos/hamburgeur.mp4',
+    poster: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    title: 'Technologie de Nettoyage',
+    subtitle: 'Découvrez nos outils modernes pour un nettoyage optimal',
+    thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Technologie avancée pour des résultats éclatants.'
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Service Personnalisé',
+    subtitle: 'Des solutions adaptées à vos besoins spécifiques à Angers',
+    thumbnail: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Des services sur mesure pour vous.'
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Engagement Communautaire',
+    subtitle: 'Nous soutenons les initiatives locales à Angers',
+    thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Soutien aux projets locaux pour un avenir meilleur.'
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Équipe Professionnelle',
+    subtitle: 'Rencontrez nos experts dédiés à votre satisfaction',
+    thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Une équipe dévouée pour des résultats parfaits.'
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Partenariats de Qualité',
+    subtitle: 'Collaborez avec nos partenaires pour des résultats optimaux',
+    thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Des partenariats pour un service exceptionnel.'
+  }
+];
+
 
 
 
@@ -1049,220 +550,199 @@ let swiperInstance = null;
  * pause au survol, animations AOS, et bulles flottantes pour une entreprise de nettoyage à Angers.
  */
 
-    /**
-     * Initialize hero carousel
-     */
+/**
+ * Initialize hero carousel
+ */
+/**
+ * @file heroCarousel.js
+ * @description Module de gestion du carrousel hero pour L&L Ouest Services.
+ * Gère les slides, les miniatures, et le redimensionnement fluide.
+ * @module heroCarousel
+ */
+
 async function initHeroCarousel() {
-    const slidesContainer = document.getElementById('hero-slides');
-    const thumbnailList = document.getElementById('thumbnail-list');
-    if (!slidesContainer || !thumbnailList) return;
+  const slidesContainer = document.getElementById('hero-slides');
+  const thumbnailList = document.getElementById('thumbnail-list');
+  if (!slidesContainer || !thumbnailList) return;
 
-    // Génération des Slides
-    slidesContainer.innerHTML = HERO_SLIDES.map((slide, index) => `
-        <div class="swiper-slide relative w-full h-full" role="group" aria-label="Slide ${index + 1}">
-            ${slide.type === 'video' ? `
-                <div class="absolute inset-0 z-0">
-                    <video class="w-full h-full object-cover" poster="${slide.poster}" muted loop playsinline preload="none" src="${slide.src}">
-                        <source src="${slide.src}" type="video/mp4">
-                    </video>
-                </div>
-                <div class="video-overlay z-5"></div>
-            ` : `
-                <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('${slide.src}');"></div>
-                <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
-            `}
-            <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-6 carousel-caption">
-           <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight text-fade-in">${slide.title}</h1>
-                <p class="text-lg md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light text-fade-in">${slide.subtitle}</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center text-fade-in">
-                    ${slide.buttons.map(btn => `
-                        <a href="${btn.href}" class="${btn.class} action py-3 px-8 rounded-full font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500 flex items-center gap-2" aria-label="${btn.ariaLabel}">
-                            <span>${btn.icon}</span> ${btn.text}
-                        </a>
-                    `).join('')}
-                </div>
-            </div>
+  // Generate Slides
+  slidesContainer.innerHTML = HERO_SLIDES.map((slide, index) => `
+    <div class="swiper-slide relative w-full h-full flex items-center justify-center" role="group" aria-label="Slide ${index + 1}">
+      ${slide.type === 'video' ? `
+        <div class="absolute inset-0 z-0">
+          <video class="w-full h-full object-cover" poster="${slide.poster}" muted loop playsinline preload="auto" src="${slide.src}">
+            <source src="${slide.src}" type="video/mp4">
+          </video>
         </div>
-    `).join('');
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-[5]"></div>
+      ` : `
+        <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('${slide.src}');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
+      `}
+      <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-6">
+        <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight gradiant">${slide.title}</h1>
+        <p class="text-lg md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light">${slide.subtitle}</p>
+      </div>
+    </div>
+  `).join('');
 
-    // Génération des Thumbnails
-    thumbnailList.innerHTML = HERO_SLIDES.map((slide, index) => `
-        <div class="thumbnail-item relative w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden cursor-pointer border-2 border-transparent" 
-             data-slide-index="${index}"
-             data-sidebar-message="${slide.sidebarMessage}"
-             data-buttons='${JSON.stringify(slide.buttons)}'>
-            <img src="${slide.thumbnail}" alt="Aperçu ${index + 1}" class="w-full h-full object-cover">
-        </div>
-    `).join('');
-    
-    // Variables DOM
-    const thumbnails = document.querySelectorAll('.thumbnail-item');
-    const thumbContainer = document.getElementById('thumbnail-container');
-    const parchmentInfo = document.getElementById('parchment-info');
-    const navUp = document.getElementById('thumb-nav-up');
-    const navDown = document.getElementById('thumb-nav-down');
-    const viewport = document.getElementById('thumbnail-viewport');
-    const scrollAmount = 80;
-    
-    // Timer pour le parchemin
-    let parchmentTimer;
-    const parchmentDelay = 300; // Délai avant affichage du parchemin
+  // Generate Thumbnails
+  thumbnailList.innerHTML = HERO_SLIDES.map((slide, index) => `
+    <div class="thumbnail-item relative w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden cursor-pointer border-2 border-transparent transition-border duration-300 snap-center shadow-lg" 
+         data-slide-index="${index}"
+         data-sidebar-message="${slide.sidebarMessage}">
+      <img src="${slide.thumbnail}" alt="Aperçu ${index + 1}" class="w-full h-full object-cover transition-transform duration-300 transform hover:scale-105">
+    </div>
+  `).join('');
 
-    // Fonctions
-    
-      function updateThumbnails(activeIndex) {
-        thumbnails.forEach((thumb, idx) => {
-          thumb.classList.toggle('active', idx === activeIndex);
-        });
-      
-        // Update parchment info for active slide
-        showParchmentInfo(thumbnails[activeIndex]);
+  // DOM Variables
+  const thumbnails = document.querySelectorAll('.thumbnail-item');
+  const thumbContainer = document.getElementById('thumbnail-container');
+  const parchmentInfo = document.getElementById('parchment-info');
+  const navUp = document.getElementById('thumb-nav-up');
+  const navDown = document.getElementById('thumb-nav-down');
+  const viewport = document.getElementById('thumbnail-viewport');
+  const scrollAmount = 80;
+
+  // Parchment Timer
+  let parchmentTimer;
+  const parchmentDelay = 300;
+
+  // Functions
+  function updateThumbnails(activeIndex) {
+    thumbnails.forEach((thumb, idx) => {
+      thumb.classList.toggle('border-white', idx === activeIndex);
+      thumb.classList.toggle('border-transparent', idx !== activeIndex);
+    });
+    showParchmentInfo(thumbnails[activeIndex]);
+  }
+
+  function handleSlideMedia(swiper) {
+    swiper.slides.forEach((slide, idx) => {
+      const video = slide.querySelector('video');
+      if (video) {
+        if (idx === swiper.activeIndex) {
+          video.play().catch(() => console.log("Video autoplay blocked."));
+        } else {
+          video.pause();
+          video.currentTime = 0;
+        }
       }
-
-
-    function handleSlideMedia(swiper) {
-        swiper.slides.forEach((slide, idx) => {
-            const video = slide.querySelector('video');
-            if (video) {
-                if (idx === swiper.activeIndex) {
-                    video.play().catch(e => console.log("L'autoplay de la vidéo a été bloqué."));
-                } else {
-                    video.pause();
-                    video.currentTime = 0;
-                }
-            }
-        });
-    }
-    
-    function checkScrollButtons() {
-        // Masquer/afficher les boutons de navigation selon la position du scroll
-        if (viewport.scrollTop <= 10) {
-            navUp.classList.add('hidden');
-        } else {
-            navUp.classList.remove('hidden');
-        }
-        
-        if (viewport.scrollTop + viewport.clientHeight >= viewport.scrollHeight - 10) {
-            navDown.classList.add('hidden');
-        } else {
-            navDown.classList.remove('hidden');
-        }
-    }
-    
-    function showParchmentInfo(thumb) {
-        clearTimeout(parchmentTimer);
-        parchmentTimer = setTimeout(() => {
-            const message = thumb.dataset.sidebarMessage;
-            const buttons = JSON.parse(thumb.dataset.buttons);
-
-            parchmentInfo.innerHTML = `
-                <div class="flex items-start mb-2">
-                    <div class="text-xl mr-2">📜</div>
-                    <p class="text-sm md:text-base font-semibold">${message}</p>
-                </div>
-                <div class="flex flex-col gap-2 items-start mt-3">
-                    ${buttons.map(btn => `
-                        <a href="${btn.href}" class="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:underline transition-colors" aria-label="${btn.ariaLabel}">
-                            <span class="text-base">${btn.icon}</span>
-                            <span>${btn.text}</span>
-                        </a>
-                    `).join('')}
-                </div>
-            `;
-            parchmentInfo.classList.add('visible');
-        }, parchmentDelay);
-    }
-    
-    function hideParchmentInfo() {
-        clearTimeout(parchmentTimer);
-        parchmentInfo.classList.remove('visible');
-    }
-
-    // Initialisation de Swiper
-    const swiper = new Swiper('[data-carousel]', {
-        effect: 'fade',
-        fadeEffect: { crossFade: true },
-        loop: true,
-        autoplay: { delay: 7000, disableOnInteraction: false },
-        resizeObserver: true,
-        on: {
-            slideChange: (swiper) => {
-                const activeIndex = swiper.realIndex;
-                updateThumbnails(activeIndex);
-                handleSlideMedia(swiper);
-            },
-            init: (swiper) => {
-                updateThumbnails(swiper.realIndex);
-                handleSlideMedia(swiper);
-              
-                checkScrollButtons();
-            }
-        },
-        a11y: { enabled: true, prevSlideMessage: 'Précédent', nextSlideMessage: 'Suivant' },
     });
+  }
 
-    // Écouteurs d'événements pour la navigation des thumbnails
-    thumbnails.forEach((thumb) => {
-        thumb.addEventListener('click', () => {
-            swiper.slideToLoop(parseInt(thumb.dataset.slideIndex));
-        });
-        
-        thumb.addEventListener('mouseenter', (e) => {
-            showParchmentInfo(thumb);
-        });
-        
-        thumb.addEventListener('mouseleave', () => {
-            hideParchmentInfo();
-        });
-    });
-    
-    // Navigation par boutons
-    navUp.addEventListener('click', () => {
-        viewport.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
-    });
+  function checkScrollButtons() {
+    navUp.classList.toggle('hidden', viewport.scrollTop <= 10);
+    navDown.classList.toggle('hidden', viewport.scrollTop + viewport.clientHeight >= viewport.scrollHeight - 10);
+  }
 
-    navDown.addEventListener('click', () => {
-        viewport.scrollBy({ top: scrollAmount, behavior: 'smooth' });
-    });
-    
-    // Vérification de la position du scroll
-    viewport.addEventListener('scroll', checkScrollButtons);
-    
-    // Détection de la direction de la souris pour le défilement automatique
-    let lastMouseY = 0;
-    thumbContainer.addEventListener('mousemove', (e) => {
-        const currentMouseY = e.clientY;
-        const deltaY = currentMouseY - lastMouseY;
-        
-        if (Math.abs(deltaY) > 5) { // Seuil pour éviter les micro-mouvements
-            if (deltaY < 0 && currentMouseY < 100) {
-                // Souris se déplace vers le haut dans la partie supérieure
-                viewport.scrollBy({ top: -scrollAmount/2, behavior: 'smooth' });
-            } else if (deltaY > 0 && currentMouseY > (viewport.clientHeight - 100)) {
-                // Souris se déplace vers le bas dans la partie inférieure
-                viewport.scrollBy({ top: scrollAmount/2, behavior: 'smooth' });
-            }
-        }
-        
-        lastMouseY = currentMouseY;
-    });
-    
-    // Arrêt/reprise de l'autoplay
-    thumbContainer.addEventListener('mouseenter', () => {
-        swiper.autoplay.stop();
-    });
+  function showParchmentInfo(thumb) {
+    clearTimeout(parchmentTimer);
+    parchmentTimer = setTimeout(() => {
+      const message = thumb.dataset.sidebarMessage;
+      parchmentInfo.innerHTML = `
+        <div class="flex items-start mb-2">
+          <div class="text-xl mr-2">📜</div>
+          <p class="text-sm md:text-base font-semibold text-gray-800 dark:text-gray-200">${message}</p>
+        </div>
+      `;
+      parchmentInfo.classList.remove('hidden');
+      parchmentInfo.classList.add('block', 'glass-effect', 'border', 'border-gray-400', 'dark:border-gray-600');
+    }, parchmentDelay);
+  }
 
-    thumbContainer.addEventListener('mouseleave', () => {
+  function hideParchmentInfo() {
+    clearTimeout(parchmentTimer);
+    parchmentInfo.classList.add('hidden');
+    parchmentInfo.classList.remove('block', 'glass-effect', 'border', 'border-gray-400', 'dark:border-gray-600');
+  }
+
+  // Initialize Swiper
+  const swiper = new Swiper('[data-carousel]', {
+    effect: 'fade',
+    fadeEffect: { crossFade: true },
+    loop: true,
+    autoplay: { delay: 7000, disableOnInteraction: false },
+    resizeObserver: true,
+    on: {
+      slideChange: (swiper) => {
+        updateThumbnails(swiper.realIndex);
+        handleSlideMedia(swiper);
+      },
+      init: (swiper) => {
+        updateThumbnails(swiper.realIndex);
+        handleSlideMedia(swiper);
+        checkScrollButtons();
+      },
+      resize: (swiper) => {
+        swiper.update(); // Mettre à jour Swiper pour recalculer les dimensions
+        checkScrollButtons();
         hideParchmentInfo();
-        swiper.autoplay.start();
+      },
+    },
+    a11y: { enabled: true, prevSlideMessage: 'Précédent', nextSlideMessage: 'Suivant' },
+  });
+
+  // Débogage du redimensionnement
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      swiper.update(); // Recalculer les dimensions de Swiper
+      slidesContainer.style.height = `${window.innerHeight}px`; // Ajuster la hauteur du conteneur
+      checkScrollButtons();
+    }, 100); // Débouncer pour éviter les recalculs excessifs
+  });
+
+  // Thumbnail Event Listeners
+  thumbnails.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      swiper.slideToLoop(parseInt(thumb.dataset.slideIndex));
     });
-    
-    // Initialisation des boutons de navigation
-    checkScrollButtons();
+    thumb.addEventListener('mouseenter', () => {
+      showParchmentInfo(thumb);
+    });
+    thumb.addEventListener('mouseleave', () => {
+      if (parseInt(thumb.dataset.slideIndex) !== swiper.realIndex) {
+        hideParchmentInfo();
+      }
+    });
+  });
+
+  // Navigation Buttons
+  navUp.addEventListener('click', () => {
+    viewport.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
+  });
+
+  navDown.addEventListener('click', () => {
+    viewport.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+  });
+
+  // Scroll Detection
+  viewport.addEventListener('scroll', checkScrollButtons);
+
+  // Autoplay Control
+  thumbContainer.addEventListener('mouseenter', () => {
+    swiper.autoplay.stop();
+    if (parchmentInfo.classList.contains('block')) {
+      const activeIndex = swiper.realIndex;
+      const hoveredThumbnail = Array.from(thumbnails).find(t => parseInt(t.dataset.slideIndex) === activeIndex);
+      if (!hoveredThumbnail) {
+        hideParchmentInfo();
+      }
+    }
+  });
+
+  thumbContainer.addEventListener('mouseleave', () => {
+    swiper.autoplay.start();
+    hideParchmentInfo();
+  });
+
+  // Hide parchment on hero section mouseleave
+  document.getElementById('hero').addEventListener('mouseleave', () => {
+    hideParchmentInfo();
+  });
 }
-
-
-   
 
 
 /**
@@ -1272,48 +752,43 @@ function initTestimonialsCarousel() {
   const testimonialsContainer = document.getElementById('testimonials-list');
   const loadingIndicator = document.getElementById('testimonials-loading');
   if (!testimonialsContainer) {
-    console.log('Conteneur des témoignages non trouvé');
+    //console.log('Conteneur des témoignages non trouvé');
     return;
   }
 
-  
-
-  // Fetch testimonials data (replace with your actual data source)
-  const testimonials = MOCK_TESTIMONIALS;
-
-  if (testimonials.length === 0) {
+  if (MOCK_TESTIMONIALS.length === 0) {
     loadingIndicator?.classList.add('hidden');
     document.getElementById('no-testimonials')?.classList.remove('hidden');
     return;
   }
 
-  testimonialsContainer.innerHTML = testimonials.map((testimonial, index) => {
+  testimonialsContainer.innerHTML = MOCK_TESTIMONIALS.map((testimonial, index) => {
     const rating = Math.min(Math.max(Number(testimonial.rating), 0), 5);
     const expandIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
     const collapseIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
-    const fullTextIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"></path><path d="M14 2v6h6M10 13h4M10 17h4M10 9h4"></path></svg>`;
 
     return `
       <div class="swiper-slide">
-        <div class="testimonial-card-futuristic relative p-6 bg-gray-800 dark:bg-gray-950 rounded-3xl border border-blue-600/20 shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out h-full flex flex-col justify-between transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="${index * 100}">
+        <div class="testimonial-card-futuristic relative p-6 bg-ll-white-800 dark:bg-ll-black-950 rounded-3xl border border-blue-600/20 dark:border-white/50 shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out h-full flex flex-col justify-between transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="${index * 100}">
           <div class="flex items-center mb-4">
             <img src="${testimonial.image}" data-src="${testimonial.image}" class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-blue-500 lazy" alt="Photo de ${testimonial.author}">
             <div>
-              <p class="font-bold text-lg text-blue-400">${testimonial.author}</p>
+              <p class="font-bold text-lg text-white-400">${testimonial.author}</p>
               <p class="text-sm text-gray-400">${testimonial.title}</p>
+              <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">${testimonial.location} - ${new Date(testimonial.submitted_at).toLocaleDateString('fr-FR')}</p>
             </div>
           </div>
           <div class="flex items-center mb-4">
             ${Array(rating).fill('<i class="fas fa-star text-yellow-400" aria-hidden="true"></i>').join('')}
             ${Array(5 - rating).fill('<i class="fas fa-star text-gray-600" aria-hidden="true"></i>').join('')}
           </div>
-          <p class="text-base italic text-gray-300 flex-grow transition-all duration-300 testimonial-text line-clamp-3">${testimonial.text}</p>
-          <div class="testimonial-details hidden mt-4 text-gray-300">${testimonial.details}</div>
+          <p class="text-base italic text-ll-black-300 dark:text-ll-white flex-grow transition-all duration-300 testimonial-text line-clamp-3">${testimonial.text}</p>
+          
           <div class="text-center mt-6 flex justify-between items-center">
-            
-            <button class="view-full-testimonial text-blue-400 hover:text-blue-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md py-2 px-3 transition-colors flex items-center gap-2" data-testimonial-id="${testimonial.id}" aria-label="Voir le témoignage complet de ${testimonial.author}">
-              ${fullTextIcon}
-              <span>Voir le complet</span>
+            <button class="view-full-testimonial flex items-center back-text bg-ll-blue text-ll-white py-2 px-4 rounded-full font-semibold hover:bg-ll-dark-blue transition-colors"
+                    data-testimonial-id="${testimonial.id}" aria-label="Voir le témoignage complet de ${testimonial.author}">
+                    ${expandIcon}
+             <span class="ml-2"> Voir le complet </span>
             </button>
           </div>
         </div>
@@ -1360,8 +835,6 @@ function initTestimonialsCarousel() {
   loadingIndicator?.classList.add('hidden');
   document.querySelector('.testimonials-swiper')?.classList.remove('hidden');
 
-  
-
   // Event listeners for opening the full testimonial modal
   document.querySelectorAll('.view-full-testimonial').forEach(button => {
     button.addEventListener('click', () => {
@@ -1384,44 +857,49 @@ function openTestimonialModal(testimonial) {
   modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 md:p-6 transition-opacity duration-500 opacity-0';
 
   modal.innerHTML = `
-    <div class="modal-content bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-500">
-      <button class="modal-close absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-full p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale">
+<div class="modal-content bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-3xl w-full mx-auto overflow-hidden max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-500">
+      <button class="modal-close absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-xl p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 md:p-8">
-        <!-- Left Column: Image, Rating, Details -->
-        <div class="space-y-6">
-          <div class="text-center">
-            <img src="${testimonial.image || 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80'}" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-blue-200 dark:border-gray-600 shadow-md" alt="Photo de ${testimonial.author}">
-            <h3 class="text-2xl font-sans font-bold text-gray-900 dark:text-white">${testimonial.author}</h3>
-            <p class="text-blue-600 dark:text-blue-400 font-medium">${testimonial.title}</p>
-            <div class="mt-2 flex justify-center">
-              ${Array(testimonial.rating || 5).fill('<svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.97a1 1 0 00-.364-1.118L2.098 9.397c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.97z"/></svg>').join('')}
-              ${Array(5 - (testimonial.rating || 5)).fill('<svg class="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.97a1 1 0 00-.364-1.118L2.098 9.397c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.97z"/></svg>').join('')}
-            </div>
+    
+      <div class="grid grid-cols-1 gap-6 p-6 md:p-8">
+      <div class="flex flex-row items-center text-center space-y-2">
+          <img src="${testimonial.image}" class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-blue-200 dark:border-gray-600 shadow-md" alt="Photo de ${testimonial.author}">
+          <div>
+          <h3 class="text-2xl font-sans font-bold text-gray-900 dark:text-white">${testimonial.author}</h3>
+          <p class="text-blue-600 dark:text-blue-400 font-medium">${testimonial.title}</p>
+          <div class="mt-2 flex justify-center">
+            ${Array(testimonial.rating).fill('<svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.97a1 1 0 00-.364-1.118L2.098 9.397c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.97z"/></svg>').join('')}
+            ${Array(5 - testimonial.rating).fill('<svg class="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.97a1 1 0 00-.364-1.118L2.098 9.397c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.97z"/></svg>').join('')}
           </div>
-          <div class="bg-blue-50 dark:bg-gray-700 p-4 rounded-xl shadow-sm">
-            <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-              </svg>
-              Détails du Témoignage
-            </h4>
-            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">${testimonial.details || 'Aucun détail supplémentaire fourni.'}</p>
-          </div>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">${testimonial.location} - ${new Date(testimonial.submitted_at).toLocaleDateString('fr-FR')}</p>
         </div>
-        <!-- Right Column: Testimonial Text -->
-        <div class="space-y-6">
-          <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
-            <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
-              Témoignage
-            </h4>
-            <p class="text-gray-700 dark:text-gray-300 italic leading-relaxed">${testimonial.text}</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            Témoignage Complet
+          </h4>
+          <p class="text-gray-700 dark:text-gray-300 italic leading-relaxed mb-4">${testimonial.text}</p>
+          <p class="text-gray-700 dark:text-gray-300 leading-relaxed">${testimonial.details}</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Images du Travail Réalisé
+          </h4>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            ${testimonial.workImages.map(img => `
+              <a href="${img}" target="_blank" rel="noopener noreferrer">
+                <img src="${img}" class="w-full h-32 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300" alt="Image du travail réalisé pour ${testimonial.author}" loading="lazy">
+              </a>
+            `).join('')}
           </div>
         </div>
       </div>
@@ -1459,7 +937,6 @@ function openTestimonialModal(testimonial) {
   modal.querySelector('.modal-close').focus();
   document.body.style.overflow = 'hidden';
 }
-
 
 
 
@@ -1502,7 +979,7 @@ let typingInterval = null;
       const faqContainer = document.getElementById('faq-list');
       const paginationContainer = document.querySelector('.faq-pagination');
       if (!faqContainer || !paginationContainer) {
-        console.warn('Conteneur FAQ ou pagination non trouvé');
+       // console.warn('Conteneur FAQ ou pagination non trouvé');
         return;
       }
 
@@ -1661,11 +1138,11 @@ let typingInterval = null;
 
   
 
-        /**
-         * Initializes the team section with a carousel, filters, and modal functionality.
-         * Ensures accessibility, lazy loading, and smooth animations for a professional experience.
-         */
-        function initTeamSection() {
+/**
+* Initializes the team section with a carousel, filters, and modal functionality.
+* Ensures accessibility, lazy loading, and smooth animations for a professional experience.
+*/
+function initTeamSection() {
             const teamContainer = document.getElementById('team-list');
             const modal = document.getElementById('team-modal');
             const header = document.getElementById('blurred-header');
@@ -1673,12 +1150,52 @@ let typingInterval = null;
             const modalClose = document.getElementById('modal-close');
 
             if (!teamContainer || !modal || !modalContent || !modalClose) {
-                console.warn('Team container or modal elements not found');
+               // console.warn('Team container or modal elements not found');
                 return;
             }
 
             let currentFilter = 'all';
             let swiperInstance = null;
+
+            /**
+             * Anime le cercle de progression.
+             * @param {HTMLElement} circleElement - L'élément <circle> à animer.
+             * @param {number} value - La valeur cible (0-100).
+             */
+            function animateCircularProgress(circleElement, value) {
+                const radius = circleElement.r.baseVal.value;
+                const circumference = 2 * Math.PI * radius;
+                const offset = circumference - (value / 100) * circumference;
+
+                circleElement.style.strokeDasharray = `${circumference} ${circumference}`;
+                // Initialise l'offset pour l'animation
+                circleElement.style.strokeDashoffset = circumference; 
+
+                // Démarre l'animation CSS
+                setTimeout(() => {
+                    circleElement.style.transition = 'stroke-dashoffset 1.5s ease-out';
+                    circleElement.style.strokeDashoffset = offset;
+                }, 50); // Petit délai pour garantir l'application du style initial
+
+                // Animation du compteur de valeur
+                const valueDisplay = circleElement.closest('.circular-progress').querySelector('.progress-value');
+                if (valueDisplay) {
+                    let start = 0;
+                    const end = value;
+                    const duration = 1500;
+                    const increment = end / (duration / 20);
+
+                    const timer = setInterval(() => {
+                        start += increment;
+                        if (start >= end) {
+                            start = end;
+                            clearInterval(timer);
+                        }
+                        valueDisplay.textContent = `${Math.round(start)}%`;
+                    }, 20);
+                }
+            }
+
 
             /**
              * Renders team cards based on the selected filter and reinitializes the Swiper carousel.
@@ -1692,9 +1209,9 @@ let typingInterval = null;
 
                 teamContainer.innerHTML = filteredTeam.map((member, index) => `
                     <div class="swiper-slide">
-                        <div class="team-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="${index * 100}">
+                        <div class="team-card bg-white dark:bg-gray-800 rounded-2xl border border-ll-black/20 dark:border-white/50 shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="${index * 100}">
                             <div class="flex items-center space-x-4 mb-4">
-                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="${member.image}" class="w-20 h-20 rounded-full object-cover border-2 border-blue-400  lazy" alt="Photo de ${member.name}" loading="lazy">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="${member.image}" class="w-20 h-20 rounded-full object-cover border-2 border-blue-400 lazy" alt="Photo de ${member.name}" loading="lazy">
                                 <div>
                                     <h4 class="text-lg font-cinzel font-semibold text-gray-900 dark:text-white">${member.name}</h4>
                                     <p class="text-sm text-blue-600 dark:text-blue-400">${member.role}</p>
@@ -1787,9 +1304,16 @@ let typingInterval = null;
                         const member = MOCK_TEAM.find(m => m.name.replace(/\s+/g, '-').toLowerCase() === memberId);
 
                         if (member) {
+                            // Génération des classes de couleur dynamiques pour la performance
+                            const getPerformanceColorClass = (value) => {
+                                if (value >= 90) return 'text-green-500';
+                                if (value >= 80) return 'text-blue-600 dark:text-blue-400';
+                                if (value >= 70) return 'text-yellow-500';
+                                return 'text-red-500';
+                            };
+
                             modalContent.innerHTML = `
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
-                                    <!-- Colonne de gauche: Photo, images d'action, compétences, certifications -->
                                     <div class="space-y-6">
                                         <div class="text-center">
                                             <img src="${member.image}" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-blue-200 dark:border-gray-600 shadow-md" alt="Photo de ${member.name}">
@@ -1828,15 +1352,16 @@ let typingInterval = null;
                                                 </svg>
                                                 Compétences
                                             </h4>
-                                            <div class="grid grid-cols-2 gap-4">
+                                            <div id="skills-progress" class="grid grid-cols-2 gap-4">
                                                 ${member.skills.map(skill => `
-                                                    <div class="flex flex-col items-center">
-                                                        <div class="circular-progress">
+                                                    <div class="flex flex-col items-center" data-skill-level="${skill.level}">
+                                                        <div class="circular-progress w-20 h-20">
                                                             <svg class="w-full h-full" viewBox="0 0 100 100">
                                                                 <circle class="text-gray-200 dark:text-gray-600 stroke-current" stroke-width="8" cx="50" cy="50" r="40" fill="transparent" />
-                                                                <circle class="circular-progress-circle text-blue-600 dark:text-blue-400 stroke-current" stroke-width="8" stroke-linecap="round" cx="50" cy="50" r="40" fill="transparent" stroke-dashoffset="251" />
+                                                                <circle class="circular-progress-circle skill-progress-circle text-blue-600 dark:text-blue-400 stroke-current" stroke-width="8" stroke-linecap="round" cx="50" cy="50" r="40" fill="transparent" style="transition: stroke-dashoffset 1.5s ease-out;" />
                                                             </svg>
                                                             <div class="progress-value text-base font-cinzel font-bold text-gray-900 dark:text-white">0%</div>
+
                                                         </div>
                                                         <p class="mt-2 text-sm text-center text-gray-700 dark:text-gray-300 flex items-center justify-center">
                                                             ${skill.icon}
@@ -1844,6 +1369,9 @@ let typingInterval = null;
                                                         </p>
                                                     </div>
                                                 `).join('')}
+
+
+
                                             </div>
                                         </div>
                                         <div class="bg-blue-50 dark:bg-gray-700 p-4 rounded-xl shadow-sm">
@@ -1865,7 +1393,6 @@ let typingInterval = null;
                                             </ul>
                                         </div>
                                     </div>
-                                    <!-- Colonne de droite: Présentation, performance, et contact -->
                                     <div class="space-y-6">
                                         <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
                                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
@@ -1894,13 +1421,13 @@ let typingInterval = null;
                                                 </svg>
                                                 Indicateurs de Performance
                                             </h4>
-                                            <div class="grid grid-cols-2 gap-4">
+                                            <div id="performance-progress" class="grid grid-cols-2 gap-4">
                                                 ${Object.entries(member.performance).map(([key, value]) => `
-                                                    <div class="flex flex-col items-center">
-                                                        <div class="circular-progress">
+                                                    <div class="flex flex-col items-center" data-performance-value="${value}">
+                                                        <div class="circular-progress w-20 h-20">
                                                             <svg class="w-full h-full" viewBox="0 0 100 100">
                                                                 <circle class="text-gray-200 dark:text-gray-600 stroke-current" stroke-width="8" cx="50" cy="50" r="40" fill="transparent" />
-                                                                <circle class="circular-progress-circle ${value >= 90 ? 'text-green-500' : value >= 80 ? 'text-blue-600 dark:text-blue-400' : value >= 70 ? 'text-yellow-500' : 'text-red-500'} stroke-current" stroke-width="8" stroke-linecap="round" cx="50" cy="50" r="40" fill="transparent" stroke-dashoffset="251" />
+                                                                <circle class="circular-progress-circle performance-progress-circle ${getPerformanceColorClass(value)} stroke-current" stroke-width="8" stroke-linecap="round" cx="50" cy="50" r="40" fill="transparent" style="transition: stroke-dashoffset 1.5s ease-out;" />
                                                             </svg>
                                                             <div class="progress-value text-base font-cinzel font-bold text-gray-900 dark:text-white">0%</div>
                                                         </div>
@@ -1942,43 +1469,30 @@ let typingInterval = null;
                             `;
 
                             modal.classList.add('active');
-                            header.classList.toggle('z-30','');
-
+                            header.classList.remove('z-30'); // Supprimer la classe 'z-30' pour éviter un conflit de z-index avec la modale
                             document.body.style.overflow = 'hidden';
 
                             if (swiperInstance.autoplay.running) {
                                 swiperInstance.autoplay.stop();
                             }
 
-                            // Animation des cercles de progression
+                            // **CORRECTION DES ANIMATIONS DES CERLCE DE PROGRESSION**
+
                             setTimeout(() => {
-                                document.querySelectorAll('.circular-progress-circle').forEach((circle, index) => {
-                                    const value = Object.values(member.performance)[index] || member.skills[index].level;
-                                    const radius = circle.r.baseVal.value;
-                                    const circumference = 2 * Math.PI * radius;
-                                    const offset = circumference - (value / 100) * circumference;
+                                // 1. Animation des Compétences
+                                const skillContainers = modalContent.querySelectorAll('#skills-progress > div');
+                                skillContainers.forEach(container => {
+                                    const circle = container.querySelector('.skill-progress-circle');
+                                    const value = parseInt(container.dataset.skillLevel);
+                                    if (circle) animateCircularProgress(circle, value);
+                                });
 
-                                    circle.style.strokeDasharray = `${circumference} ${circumference}`;
-                                    circle.style.strokeDashoffset = circumference;
-
-                                    setTimeout(() => {
-                                        circle.style.strokeDashoffset = offset;
-                                    }, 100);
-
-                                    const valueDisplay = circle.parentElement.nextElementSibling;
-                                    let start = 0;
-                                    const end = value;
-                                    const duration = 1500;
-                                    const increment = end / (duration / 20);
-
-                                    const timer = setInterval(() => {
-                                        start += increment;
-                                        if (start >= end) {
-                                            start = end;
-                                            clearInterval(timer);
-                                        }
-                                        valueDisplay.textContent = `${Math.round(start)}%`;
-                                    }, 20);
+                                // 2. Animation des Indicateurs de Performance
+                                const performanceContainers = modalContent.querySelectorAll('#performance-progress > div');
+                                performanceContainers.forEach(container => {
+                                    const circle = container.querySelector('.performance-progress-circle');
+                                    const value = parseInt(container.dataset.performanceValue);
+                                    if (circle) animateCircularProgress(circle, value);
                                 });
                             }, 100);
                         }
@@ -2009,8 +1523,16 @@ let typingInterval = null;
             // Gestion de la fermeture de la modale
             function closeModal() {
                 modal.classList.remove('active');
-                header.classList.add('z-30');
+                header.classList.remove('z-30'); // Retirer la classe 'z-30' si la modale est inactive
                 document.body.style.overflow = 'auto';
+
+                // Nettoyer les styles d'animation pour les prochaines ouvertures
+                modalContent.querySelectorAll('.circular-progress-circle').forEach(circle => {
+                    circle.style.transition = 'none';
+                    circle.style.strokeDashoffset = circle.r.baseVal.value * 2 * Math.PI; // Réinitialiser
+                });
+                modalContent.querySelectorAll('.progress-value').forEach(el => el.textContent = '0%');
+
 
                 setTimeout(() => {
                     if (swiperInstance && MOCK_TEAM.length >= 4) {
@@ -2039,141 +1561,173 @@ let typingInterval = null;
 }
 
 
-
 /**
-         * Initialise la section Partenaires avec carrousel et tooltips
-         */
-          function initPartnersSection() {
-            const partnersContainer = document.getElementById('partners-list');
-            const tooltip = document.getElementById('partner-tooltip');
-            const tooltipLogo = document.getElementById('tooltip-logo');
-            const tooltipName = document.getElementById('tooltip-name');
-            const tooltipDetails = document.getElementById('tooltip-details');
-            const tooltipWebsite = document.getElementById('tooltip-website');
-            let swiperInstance = null;
+ * Initialise la section Partenaires avec deux lignes de défilement infini et modal au clic
+ */
+function initPartnersSection() {
+  const partnersSection = document.getElementById('partners');
+  if (!partnersSection) return;
 
-            if (!partnersContainer || !tooltip || !tooltipLogo || !tooltipName || !tooltipDetails || !tooltipWebsite) {
-                console.warn('Conteneur partenaires ou éléments de tooltip non trouvés');
-                return;
-            }
+  // Create modal element if not exists
+  let modal = document.getElementById('partner-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'partner-modal';
+    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden';
+    modal.innerHTML = `
+      <div class="modal-content bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 overflow-hidden max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-500">
+    
+      <button id="close-modal" class="modal-close absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-xl p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+        <div class="text-center mb-6">
+          <img id="modal-logo" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-ll-blue shadow-md" alt="Logo Partenaire">
+          <h3 id="modal-name" class="text-2xl font-cinzel font-bold text-ll-black dark:text-ll-white mt-4"></h3>
+        </div>
+        <div class="space-y-4">
+          <h4 class="text-lg font-semibold text-ll-blue dark:text-ll-blue flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Notre Partenariat
+          </h4>
+          <p id="modal-description" class="text-ll-text-gray dark:text-ll-medium-gray leading-relaxed"></p>
+          <a id="modal-website" href="#" target="_blank" rel="noopener noreferrer" class="block bg-ll-blue text-white py-3 rounded-lg hover:bg-ll-dark-blue transition-colors duration-300 shadow-md flex items-center justify-center gap-2 font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-18 0m18 0a9 9 0 00-18 0m18 0v.01M3 12a9 9 0 0118 0m-18 0v-.01" />
+            </svg>
+            Visiter le site
+          </a>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
 
-            function showTooltip(event, partner) {
-                tooltipLogo.src = partner.logo;
-                tooltipLogo.alt = `Logo de ${partner.name}`;
-                tooltipName.textContent = partner.name;
-                tooltipDetails.textContent = partner.description;
-                tooltipWebsite.href = partner.website;
-                tooltipWebsite.textContent = `Visiter ${partner.name}`;
-                tooltip.classList.remove('opacity-0', 'invisible', '-translate-y-2', 'translate-y-2' , 'hidden');
-                tooltip.classList.add('opacity-100', 'visible', 'translate-y-0');
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
 
-                const rect = event.target.getBoundingClientRect();
-                let leftPos = rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2;
-                let topPos = rect.top + window.scrollY - tooltip.offsetHeight - 15;
+    document.getElementById('close-modal').addEventListener('click', closeModal);
+  }
 
-                const padding = 10;
-                leftPos = Math.max(padding, Math.min(leftPos, window.innerWidth - tooltip.offsetWidth - padding));
-                if (topPos < padding) {
-                    topPos = rect.bottom + window.scrollY + 15;
-                    tooltip.classList.remove('-translate-y-2');
-                    tooltip.classList.add('translate-y-2');
-                } else {
-                    tooltip.classList.remove('translate-y-2');
-                    tooltip.classList.add('-translate-y-2');
-                }
+  function closeModal() {
+    const modalContent = modal.querySelector('div');
+    modalContent.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modalContent.classList.remove('scale-95', 'opacity-0');
+    }, 300);
+  }
 
-                tooltip.style.left = `${leftPos}px`;
-                tooltip.style.top = `${topPos}px`;
+  function openModal(partner) {
+    document.getElementById('modal-logo').src = partner.logo;
+    document.getElementById('modal-name').textContent = partner.name;
+    document.getElementById('modal-description').textContent = partner.description;
+    document.getElementById('modal-website').href = partner.website;
+    modal.classList.remove('hidden');
+    const modalContent = modal.querySelector('div');
+    setTimeout(() => {
+      modalContent.classList.remove('scale-95', 'opacity-0');
+    }, 10);
+  }
 
-                if (swiperInstance && swiperInstance.autoplay.running) {
-                    swiperInstance.autoplay.stop();
-                }
-            }
+  // Create two marquee lines
+  const marqueeContainer = document.createElement('div');
+  marqueeContainer.className = 'space-y-8 marquee-container';
+  marqueeContainer.innerHTML = `
+    <div class="marquee-wrapper relative flex overflow-hidden">
+      <ul class="marquee flex animate-marquee-left"></ul>
+    </div>
+    <div class="marquee-wrapper relative flex overflow-hidden">
+      <ul class="marquee flex animate-marquee-right"></ul>
+    </div>
+  `;
 
-            function hideTooltip() {
-                tooltip.classList.remove('opacity-100', 'visible', 'translate-y-0', 'translate-y-2');
-                tooltip.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                if (swiperInstance && MOCK_PARTNERS.length >= 3) {
-                    swiperInstance.autoplay.start();
-                }
-            }
+  document.getElementById('partners-list').replaceWith(marqueeContainer);
 
-            function renderPartnerCards() {
-                partnersContainer.innerHTML = MOCK_PARTNERS.map((partner) => `
-                    <div class="swiper-slide flex items-center justify-center h-48 sm:h-56">
-                        <a href="${partner.website}" target="_blank" rel="noopener noreferrer" class="group relative block w-full h-full">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" 
-                                 data-src="${partner.logo}" 
-                                 class="partner-logo max-h-[8rem] w-auto object-contain mx-auto filter grayscale opacity-70 
-                                        transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 
-                                        bg-ll-white dark:bg-sidebar-dark rounded-lg p-3 shadow-lg-dark-custom lazy" 
-                                 alt="Logo de ${partner.name}" 
-                                 loading="lazy">
-                            <p class="mt-3 text-center text-sm sm:text-base font-cinzel font-semibold text-ll-black dark:text-ll-white group-hover:text-ll-blue dark:group-hover:text-ll-blue transition-colors duration-300">
-                                ${partner.name}
-                            </p>
-                        </a>
-                    </div>
-                `).join('');
+  const marqueeLeft = marqueeContainer.querySelector('.animate-marquee-left');
+  const marqueeRight = marqueeContainer.querySelector('.animate-marquee-right');
 
-                // Lazy load images
-                const lazyImages = document.querySelectorAll('.partner-logo.lazy');
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.classList.add('loaded');
-                            observer.unobserve(img);
-                        }
-                    });
-                }, { rootMargin: '100px' });
-                lazyImages.forEach(img => observer.observe(img));
+  function renderPartners(marquee, partners) {
+    const items = partners.map(partner => `
+      <li class="flex-shrink-0 mx-8 partner-item" role="button" tabindex="0" aria-label="${partner.name}">
+        <img src="${partner.logo}" alt="${partner.name}" class="w-32 h-auto object-contain cursor-pointer filter grayscale rounded rounded-xl hover:grayscale-0 transition-filter duration-300">
+        <p class="text-sm text-ll-black dark:text-ll-white mt-2 text-center font-semibold">${partner.name}</p>
+      </li>
+    `).join('');
+    marquee.innerHTML = items + items;
+  }
 
-                if (swiperInstance) swiperInstance.destroy(true, true);
+  renderPartners(marqueeLeft, MOCK_PARTNERS);
+  renderPartners(marqueeRight, MOCK_PARTNERS.slice().reverse()); // Reverse for opposite direction
 
-                swiperInstance = new Swiper('.partners-swiper', {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    loop: MOCK_PARTNERS.length >= 3,
-                    centeredSlides: true,
-                    autoplay: MOCK_PARTNERS.length >= 3 ? {
-                        delay: 3000,
-                        disableOnInteraction: false,
-                        pauseOnMouseEnter: true
-                    } : false,
-                    pagination: {
-                        el: '.partners-swiper-pagination',
-                        clickable: true,
-                        bulletClass: 'swiper-pagination-bullet',
-                        bulletActiveClass: 'swiper-pagination-bullet-active',
-                        renderBullet: (index, className) => `<span class="${className} w-3 h-3 bg-ll-medium-gray/70 dark:bg-ll-medium-gray/50 opacity-70 rounded-full transition-all duration-300 hover:bg-ll-blue" aria-label="Aller au partenaire ${index + 1}"></span>`,
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                    a11y: {
-                        enabled: true,
-                        prevSlideMessage: 'Partenaire précédent',
-                        nextSlideMessage: 'Partenaire suivant',
-                        paginationBulletMessage: 'Aller au partenaire {{index}}'
-                    }
-                });
+  // Tooltip (simple)
+  const tooltipEl = document.createElement('div');
+  tooltipEl.id = 'partner-tooltip';
+  tooltipEl.className = 'fixed hidden bg-ll-white dark:bg-sidebar-dark p-4 rounded-lg shadow-lg z-50 transition-opacity duration-300 max-w-xs w-fit text-sm';
+  document.body.appendChild(tooltipEl);
 
-                document.querySelectorAll('.partner-logo').forEach((img, index) => {
-                    const partner = MOCK_PARTNERS[index % MOCK_PARTNERS.length];
-                    const parent = img.parentElement;
-                    parent.addEventListener('mouseenter', (e) => showTooltip(e, partner));
-                    parent.addEventListener('mouseleave', hideTooltip);
-                    parent.addEventListener('focus', (e) => showTooltip(e, partner));
-                    parent.addEventListener('blur', hideTooltip);
-                });
-            }
+  let tooltipTimeout;
 
-            renderPartnerCards();
-        }
+// Affiche le tooltip
+function showTooltip(e, partner) {
+  clearTimeout(tooltipTimeout);
 
+  const rect = e.currentTarget.getBoundingClientRect();
+
+  tooltipEl.innerHTML = `
+    <h4 class="font-bold text-base">${partner.name}</h4>
+    <p class="text-sm mt-1">${partner.description.slice(0, 100)}...</p>
+  `;
+
+  tooltipEl.classList.remove('hidden');
+  tooltipEl.style.opacity = '0';
+
+  const offset = 12;
+  tooltipEl.style.left = `${rect.left + rect.width / 2}px`;
+  tooltipEl.style.top = `${rect.top - offset}px`;
+  tooltipEl.style.transform = 'translate(-50%, -100%)';
+
+  setTimeout(() => {
+    tooltipEl.style.opacity = '1';
+  }, 10);
+}
+
+// Cache le tooltip avec délai
+function hideTooltip() {
+  tooltipEl.style.opacity = '0';
+  tooltipTimeout = setTimeout(() => {
+    tooltipEl.classList.add('hidden');
+  }, 200);
+}
+
+// Event listeners
+marqueeContainer.querySelectorAll('.partner-item').forEach(li => {
+  const index = Array.from(li.parentElement.children).indexOf(li) % MOCK_PARTNERS.length;
+  const partner = MOCK_PARTNERS[index];
+
+  li.addEventListener('mouseenter', (e) => {
+    li.parentElement.style.animationPlayState = 'paused';
+    showTooltip(e, partner);
+  });
+
+  li.addEventListener('mouseleave', () => {
+    li.parentElement.style.animationPlayState = 'running'; // reprend immédiatement
+    hideTooltip();
+  });
+
+  li.addEventListener('click', () => openModal(partner));
+
+  li.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') openModal(partner);
+  });
+});
+
+
+}
 
 
 
@@ -2186,7 +1740,7 @@ let typingInterval = null;
 function initBlogSection() {
   const blogContainer = document.getElementById('blog-list');
   if (!blogContainer) {
-    console.warn('Conteneur blog non trouvé');
+   // console.warn('Conteneur blog non trouvé');
     return;
   }
 
@@ -2315,7 +1869,7 @@ function openBlogModal(post) {
 function initEventsSection() {
   const eventsContainer = document.getElementById('events-list');
   if (!eventsContainer) {
-    console.warn('Conteneur événements non trouvé');
+   // console.warn('Conteneur événements non trouvé');
     return;
   }
 
@@ -2363,7 +1917,7 @@ function initEventsSection() {
 function initGallerySection() {
   const galleryContainer = document.getElementById('gallery-list');
   if (!galleryContainer) {
-    console.warn('Conteneur galerie non trouvé');
+    //console.warn('Conteneur galerie non trouvé');
     return;
   }
 
@@ -2394,19 +1948,19 @@ function initGallerySection() {
  */
 function initStatsSection() {
   const statsContainer = document.getElementById('stats-list');
+  const loadingIndicator = document.getElementById('stats-loading');
   if (!statsContainer) {
-    console.warn('Conteneur statistiques non trouvé');
+    // console.warn('Conteneur statistiques non trouvé');
     return;
   }
 
   // Génère les cartes à partir des données
   statsContainer.innerHTML = MOCK_STATS.map((stat, index) => `
-    <div class="stat-card bg-white gap-4 dark:bg-ll-black rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/20" data-aos="fade-up" data-aos-delay="${index * 100}">
+    <div class="stat-card bg-white gap-4 dark:bg-ll-black rounded-2xl border border-ll-black/20 dark:border-white/50 shadow-lg p-6 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/20" data-aos="fade-up" data-aos-delay="${index * 100}">
       
-
-      <div class="relative w-[140px] h-[140px] md:w-[120px] md:h-[120px] mb-2">
-                <canvas id="stats-canvas-${index}" width="140" height="140" class="absolute inset-0"></canvas>
-                <div class="absolute inset-[-3px] flex items-center justify-center z-10">
+      <div class="relative w-[140px] h-[140px] mb-2">
+                <canvas id="stats-canvas-${index}" class="w-full h-full absolute inset-0"></canvas>
+                <div class="absolute inset-0 flex items-center justify-center z-10">
                     <div class="rounded-full p-4 ">
                       ${stat.svg}
                     </div>
@@ -2422,6 +1976,8 @@ function initStatsSection() {
       </div>
     </div>
   `).join('');
+
+  loadingIndicator?.classList.add('hidden');
 
   const alreadyAnimated = new Set(); // Pour ne pas relancer l'animation plusieurs fois
 
@@ -2440,6 +1996,22 @@ function initStatsSection() {
 
     observer.observe(statCard);
 
+    // Réagir aux changements de thème
+    const handleThemeChange = () => {
+      const canvas = document.getElementById(`stats-canvas-${index}`);
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Réinitialiser et relancer l'animation si déjà animé
+        if (alreadyAnimated.has(index)) {
+          animateCanvasCounter(index, stat.value, stat.unit);
+        }
+      }
+    };
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
+    window.addEventListener('storage', handleThemeChange);
+
     // Efface le canvas si hors champ
     const fadeOutObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -2456,6 +2028,7 @@ function initStatsSection() {
     fadeOutObserver.observe(statCard);
   });
 
+                        
   /**
    * Animation du canvas (cercle animé avec effet de pulse)
    */
@@ -2589,14 +2162,13 @@ function initStatsSection() {
 
 
 
-
 /**
  * Initialise la section Tarification avec grille
  */
 function initPricingSection() {
   const pricingContainer = document.getElementById('pricing-list');
   if (!pricingContainer) {
-    console.warn('Conteneur tarification non trouvé');
+  //  console.warn('Conteneur tarification non trouvé');
     return;
   }
 
@@ -2622,7 +2194,7 @@ function initPricingSection() {
 function initContactsSection() {
   const contactsContainer = document.getElementById('contacts-list');
   if (!contactsContainer) {
-    console.warn('Conteneur contacts non trouvé');
+   // console.warn('Conteneur contacts non trouvé');
     return;
   }
 
@@ -2640,12 +2212,10 @@ function initContactsSection() {
 
 
 
-
-
 function initWhyUsSection() {
   const whyUsContainer = document.getElementById('why-us-list');
   if (!whyUsContainer) {
-    console.warn('Conteneur "Pourquoi Nous Choisir" non trouvé');
+   // console.warn('Conteneur "Pourquoi Nous Choisir" non trouvé');
     return;
   }
 
@@ -2705,8 +2275,180 @@ function initWhyUsSection() {
   });
 }
 
-// N'oubliez pas d'appeler la fonction
-// document.addEventListener('DOMContentLoaded', initWhyUsSection);
+
+
+
+
+// Toggle loading state for before/after showcase
+function toggleBeforeAfterLoading(show) {
+  const loadingEl = document.getElementById('before-after-loading');
+  const beforeAfterList = document.getElementById('before-after-list');
+  if (loadingEl && beforeAfterList) {
+    loadingEl.classList.toggle('hidden', !show);
+    beforeAfterList.classList.toggle('hidden', show);
+  }
+}
+
+/**
+ * Renders before/after showcase from JSON data.
+ */
+async function renderBeforeAfter() {
+  const beforeAfterList = document.getElementById('before-after-list');
+  const loadingEl = document.getElementById('before-after-loading');
+  if (!beforeAfterList || !loadingEl) return;
+
+  toggleBeforeAfterLoading(true);
+
+  try {
+    // Fetch JSON data securely
+    const response = await fetch('/assets/json/mock/before-after.json', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const showcases = data.showcases || [];
+
+    if (showcases.length === 0) {
+      beforeAfterList.innerHTML = '<p class="text-center text-gray-500">Aucune transformation disponible pour le moment.</p>';
+      toggleBeforeAfterLoading(false);
+      return;
+    }
+
+    const beforeAfterItems = showcases.map((showcase, index) => {
+      const before = showcase.before || { url: '', description: '' };
+      const after = showcase.after || { url: '', description: '' };
+      const title = showcase.title || 'Transformation';
+
+      return `
+        <div class="before-after-container relative overflow-hidden rounded-xl shadow-lg border border-ll-black/20 dark:border-white/50" data-aos="fade-up" data-aos-delay="100">
+                    <img src="${before.url}" alt="${before.description}" class="before w-full h-64 object-cover">
+                    <img src="${after.url}" alt="${after.description}" class="after w-full h-64 object-cover absolute top-0 left-0">
+                    <div class="comparaison-slider absolute top-0 h-full w-1 bg-blue-600 cursor-ew-resize"></div>
+                </div>  
+      `;
+    });
+
+    beforeAfterList.innerHTML = beforeAfterItems.join('');
+    initBeforeAfterSliders();
+  } catch (error) {
+    console.error('Erreur lors du chargement des données before/after:', error);
+    beforeAfterList.innerHTML = '<p class="text-center text-red-500">Erreur lors du chargement des transformations. Veuillez réessayer plus tard.</p>';
+  } finally {
+    toggleBeforeAfterLoading(false);
+  }
+}
+
+/**
+ * Initialise les sliders avant/après avec accessibilité et sécurité améliorées
+ */
+function initBeforeAfterSliders() {
+  document.querySelectorAll('.before-after-container').forEach(container => {
+    const beforeImg = container.querySelector('.before');
+    const afterImg = container.querySelector('.after');
+    const slider = container.querySelector('.comparaison-slider');
+
+    if (!beforeImg || !afterImg || !slider) {
+      console.warn('Éléments du slider avant/après non trouvés');
+      return;
+    }
+
+    let isDragging = false;
+    let startX = 0;
+
+    const updateSlider = x => {
+      const rect = container.getBoundingClientRect();
+      const percentage = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+      afterImg.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+      slider.style.left = `${percentage}%`;
+      slider.setAttribute('aria-valuenow', percentage.toFixed(0));
+    };
+
+    const startDragging = e => {
+      e.preventDefault();
+      isDragging = true;
+      startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      document.body.style.touchAction = 'none'; // Prevent page scroll while dragging
+    };
+
+    const dragging = e => {
+      if (!isDragging) return;
+      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      const deltaX = clientX - startX;
+      const deltaY = e.type.includes('touch') ? e.touches[0].clientY - startY : 0;
+
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        stopDragging();
+        return;
+      }
+
+      e.preventDefault();
+      updateSlider(clientX);
+      startX = clientX; // Update start for smoother drag
+    };
+
+    const stopDragging = () => {
+      isDragging = false;
+      document.body.style.touchAction = 'auto'; // Restore page scroll
+    };
+
+    // Attach events only to slider handle
+    slider.addEventListener('mousedown', startDragging);
+    slider.addEventListener('touchstart', startDragging, { passive: false });
+
+    document.addEventListener('mousemove', dragging);
+    document.addEventListener('touchmove', dragging, { passive: false });
+
+    document.addEventListener('mouseup', stopDragging);
+    document.addEventListener('touchend', stopDragging);
+    document.addEventListener('touchcancel', stopDragging);
+
+    // Keyboard accessibility
+    slider.setAttribute('tabindex', '0');
+    slider.setAttribute('role', 'slider');
+    slider.setAttribute('aria-valuemin', '0');
+    slider.setAttribute('aria-valuemax', '100');
+    slider.setAttribute('aria-valuenow', '50');
+    slider.setAttribute('aria-label', 'Contrôle du slider avant/après');
+
+    slider.addEventListener('keydown', e => {
+      const rect = container.getBoundingClientRect();
+      let percentage = parseFloat(slider.style.left || '50');
+      if (e.key === 'ArrowLeft') {
+        percentage = Math.max(0, percentage - 5);
+      } else if (e.key === 'ArrowRight') {
+        percentage = Math.min(100, percentage + 5);
+      } else {
+        return;
+      }
+      updateSlider(rect.left + (rect.width * percentage) / 100);
+    });
+
+    // Initialize slider position
+    updateSlider(container.getBoundingClientRect().left + container.getBoundingClientRect().width / 2);
+
+    // Error handling for images
+    beforeImg.addEventListener('error', () => {
+      beforeImg.src = '/assets/images/image.png';
+      beforeImg.alt = 'Image avant indisponible';
+    });
+
+    afterImg.addEventListener('error', () => {
+      afterImg.src = '/assets/images/logo.png';
+      afterImg.alt = 'Image après indisponible';
+    });
+  });
+}
+
+
+
 
 /**
  * Initialise les modales vidéo avec gestion plein écran
@@ -2798,7 +2540,7 @@ function initCategoryModal() {
   const categoryList = document.getElementById('category-list');
 
   if (!categoryButton || !categoryModal || !closeCategoryModal || !categorySearch || !categoryList) {
-    console.warn('Éléments de la modale de catégorie non trouvés');
+    //console.warn('Éléments de la modale de catégorie non trouvés');
     return;
   }
 
@@ -2920,176 +2662,6 @@ function initNumberPicker() {
   });
 }
 
-// Toggle loading state for before/after showcase
-function toggleBeforeAfterLoading(show) {
-  const loadingEl = document.getElementById('before-after-loading');
-  const beforeAfterList = document.getElementById('before-after-list');
-  if (loadingEl && beforeAfterList) {
-    loadingEl.classList.toggle('hidden', !show);
-    beforeAfterList.classList.toggle('hidden', show);
-  }
-}
-
-/**
- * Renders before/after showcase from JSON data.
- */
-async function renderBeforeAfter() {
-  const beforeAfterList = document.getElementById('before-after-list');
-  const loadingEl = document.getElementById('before-after-loading');
-  if (!beforeAfterList || !loadingEl) return;
-
-  toggleBeforeAfterLoading(true);
-
-  try {
-    // Fetch JSON data securely
-    const response = await fetch('/assets/json/mock/before-after.json', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'same-origin'
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const showcases = data.showcases || [];
-
-    if (showcases.length === 0) {
-      beforeAfterList.innerHTML = '<p class="text-center text-gray-500">Aucune transformation disponible pour le moment.</p>';
-      toggleBeforeAfterLoading(false);
-      return;
-    }
-
-    const beforeAfterItems = showcases.map((showcase, index) => {
-      const before = showcase.before || { url: '', description: '' };
-      const after = showcase.after || { url: '', description: '' };
-      const title = showcase.title || 'Transformation';
-
-      return `
-        <div class="before-after-container relative overflow-hidden rounded-xl shadow-lg border border-black-500" data-aos="fade-up" data-aos-delay="100">
-                    <img src="${before.url}" alt="${before.description}" class="before w-full h-64 object-cover">
-                    <img src="${after.url}" alt="${after.description}" class="after w-full h-64 object-cover absolute top-0 left-0">
-                    <div class="comparison-slider absolute top-0 h-full w-1 bg-blue-600 cursor-ew-resize"></div>
-                </div>  
-      `;
-    });
-
-    beforeAfterList.innerHTML = beforeAfterItems.join('');
-    initBeforeAfterSliders();
-  } catch (error) {
-    console.error('Erreur lors du chargement des données before/after:', error);
-    beforeAfterList.innerHTML = '<p class="text-center text-red-500">Erreur lors du chargement des transformations. Veuillez réessayer plus tard.</p>';
-  } finally {
-    toggleBeforeAfterLoading(false);
-  }
-}
-
-/**
- * Initialise les sliders avant/après avec accessibilité et sécurité améliorées
- */
-function initBeforeAfterSliders() {
-  document.querySelectorAll('.before-after-container').forEach(container => {
-    const beforeImg = container.querySelector('.before');
-    const afterImg = container.querySelector('.after');
-    const slider = container.querySelector('.comparison-slider');
-
-    if (!beforeImg || !afterImg || !slider) {
-      console.warn('Éléments du slider avant/après non trouvés');
-      return;
-    }
-
-    let isDragging = false;
-
-    const updateSlider = x => {
-      const rect = container.getBoundingClientRect();
-      const percentage = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
-      afterImg.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
-      slider.style.left = `${percentage}%`;
-      slider.setAttribute('aria-valuenow', percentage.toFixed(0));
-    };
-
-    const startDragging = x => {
-      isDragging = true;
-      updateSlider(x);
-    };
-
-    const stopDragging = () => {
-      isDragging = false;
-    };
-
-    // Mouse events
-    slider.addEventListener('mousedown', e => {
-      e.preventDefault(); // Prevent text selection
-      startDragging(e.clientX);
-    });
-
-    container.addEventListener('mousemove', e => {
-      if (isDragging) {
-        updateSlider(e.clientX);
-      }
-    });
-
-    document.addEventListener('mouseup', stopDragging);
-
-    // Touch events
-    container.addEventListener('touchstart', e => {
-      e.preventDefault(); // Prevent scrolling
-      startDragging(e.touches[0].clientX);
-    }, { passive: false });
-
-    container.addEventListener('touchmove', e => {
-      if (isDragging) {
-        e.preventDefault(); // Prevent scrolling
-        updateSlider(e.touches[0].clientX);
-      }
-    }, { passive: false });
-
-    document.addEventListener('touchend', stopDragging);
-
-    // Keyboard accessibility
-    slider.setAttribute('tabindex', '0');
-    slider.setAttribute('role', 'slider');
-    slider.setAttribute('aria-valuemin', '0');
-    slider.setAttribute('aria-valuemax', '100');
-    slider.setAttribute('aria-valuenow', '50');
-    slider.setAttribute('aria-label', 'Contrôle du slider avant/après');
-
-    slider.addEventListener('keydown', e => {
-      const rect = container.getBoundingClientRect();
-      let percentage = parseFloat(slider.style.left || '50');
-      if (e.key === 'ArrowLeft') {
-        percentage = Math.max(0, percentage - 5);
-      } else if (e.key === 'ArrowRight') {
-        percentage = Math.min(100, percentage + 5);
-      } else {
-        return;
-      }
-      updateSlider(rect.left + (rect.width * percentage) / 100);
-    });
-
-    // Initialize slider position
-    updateSlider(container.getBoundingClientRect().left + container.getBoundingClientRect().width / 2);
-
-    // Error handling for images
-    beforeImg.addEventListener('error', () => {
-      beforeImg.src = '/assets/images/image.png';
-      beforeImg.alt = 'Image avant indisponible';
-    });
-
-    afterImg.addEventListener('error', () => {
-      afterImg.src = '/assets/images/logo.png';
-      afterImg.alt = 'Image après indisponible';
-    });
-  });
-}
-
-
-
-
-
 
 /**
  * Affiche l'animation de chargement
@@ -3203,7 +2775,7 @@ function initServiceFilters() {
   const filterToggle = document.querySelector('.filter-toggle');
   const filterContent = document.querySelector('.filter-content');
   if (!form || !filterToggle || !filterContent) {
-    console.warn('Éléments des filtres de services non trouvés');
+    //console.warn('Éléments des filtres de services non trouvés');
     return;
   }
 
@@ -3236,7 +2808,7 @@ function initServiceFilters() {
  */
 function initParticles() {
   if (typeof particlesJS === 'undefined' || !document.getElementById('particles-js')) {
-    console.warn('particlesJS non chargé');
+    //console.warn('particlesJS non chargé');
     return;
   }
 
@@ -3260,60 +2832,7 @@ function initParticles() {
   });
 }
 
-/**
- * Initialise le formulaire de contact
- */
-function initContactForm() {
-  const contactForm = document.getElementById('contact-form');
-  if (!contactForm) return;
 
-  const inputs = contactForm.querySelectorAll('input, textarea');
-  inputs.forEach(input => {
-    if (input.value) {
-      input.parentElement.classList.add('focused');
-    }
-
-    input.addEventListener('focus', () => {
-      input.parentElement.classList.add('focused');
-    });
-
-    input.addEventListener('blur', () => {
-      if (!input.value) {
-        input.parentElement.classList.remove('focused');
-      }
-    });
-  });
-
-  contactForm.addEventListener('submit', async event => {
-    event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
-
-    if (!name || !email || !message) {
-      showNotification('Veuillez remplir tous les champs obligatoires.', 'error');
-      return;
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showNotification('Veuillez entrer une adresse email valide.', 'error');
-      return;
-    }
-
-    try {
-      await api.contact.submit({ name, email, message });
-      showNotification('Message envoyé avec succès !', 'success');
-      form.reset();
-      inputs.forEach(input => input.parentElement.classList.remove('focused'));
-    } catch (error) {
-      console.error('Échec de l’envoi du formulaire de contact:', error);
-      showNotification('Erreur lors de l’envoi du message.', 'error');
-    }
-  });
-}
 
 /**
  * Initialise les animations de défilement
@@ -3344,7 +2863,7 @@ function initEco(){
 
   const ecoContainer = document.getElementById('eco-list');
   if (!ecoContainer) {
-    console.warn('Conteneur "Engagement Écologique" non trouvé');
+    //console.warn('Conteneur "Engagement Écologique" non trouvé');
     return;
   }
 
@@ -3353,7 +2872,7 @@ function initEco(){
 
   // Populate the eco section
   ecoContainer.innerHTML = commitments.map((commitment, index) => `
-    <div class="eco-card relative group p-6 rounded-2xl border-2 border-green-500/20 bg-white dark:bg-ll-black shadow-lg hover:shadow-green-500/30 transform hover:scale-[1.03] transition-all duration-500 cursor-pointer overflow-hidden" data-aos="fade-up" data-aos-delay="${index * 100}" data-lottie-url="${commitment.lottieUrl}">
+    <div class="eco-card relative group p-6 rounded-2xl border border-ll-black/20 dark:border-white/50 bg-white dark:bg-ll-black shadow-lg hover:shadow-green-500/30 transform hover:scale-[1.03] transition-all duration-500 cursor-pointer overflow-hidden" data-aos="fade-up" data-aos-delay="${index * 100}" data-lottie-url="${commitment.lottieUrl}">
       <div class="relative w-40 h-20 mx-auto mb-4 flex items-center justify-center">
         <div class="icon-container absolute transition-opacity duration-500 group-hover:opacity-0">${commitment.icon}</div>
         <div class="lottie-container w-[100px] absolute opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
@@ -3483,7 +3002,7 @@ function initAbout() {
     // Initialisation du DOM
     const statsContainer = document.getElementById('company-stats');
     if (!statsContainer) {
-        console.warn('Conteneur des statistiques non trouvé');
+       // console.warn('Conteneur des statistiques non trouvé');
         return;
     }
 
@@ -3498,9 +3017,9 @@ function initAbout() {
 
     statsContainer.innerHTML = uniqueStats.map((stat, index) => `
         <div class="stat-item flex flex-col items-center" data-aos="fade-up" data-aos-delay="${500 + index * 100}">
-            <div class="relative w-[140px] h-[140px] md:w-[120px] md:h-[120px] mb-2">
-                <canvas id="stat-canvas-${index}" width="140" height="140" class="absolute inset-0"></canvas>
-                <div class="absolute inset-[-3px] flex items-center justify-center z-10">
+            <div class="relative w-[140px] h-[140px] aspect-square  mb-2">
+                <canvas id="stat-canvas-${index}"  class="w-full h-full absolute "></canvas>
+                <div class="absolute inset-0 flex items-center justify-center z-10">
                     <div class="rounded-full p-4 shadow-md">
                       ${stat.svg}
                     </div>
@@ -3591,29 +3110,32 @@ function initAbout() {
 
 
 
-    function animateCanvasCounter(index, target, unit) {
+  function animateCanvasCounter(index, target, unit) {
     const canvas = document.getElementById(`stat-canvas-${index}`);
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
-    // The sizes here must match the CSS classes w-[140px] h-[140px]
-    const canvasSize = 140; 
-    canvas.width = canvasSize * dpr;
-    canvas.height = canvasSize * dpr;
-    ctx.scale(dpr, dpr);
 
-    const radius = 50;
-    const centerX = canvas.width / (2 * dpr);
-    const centerY = canvas.height / (2 * dpr);
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        const size = rect.width; // largeur réelle du parent
+        canvas.width = size * dpr;
+        canvas.height = size * dpr;
+        ctx.scale(dpr, dpr);
+        return size;
+    }
+
+    let size = resizeCanvas();
+    const radius = size / 2.8; // rayon ajusté dynamiquement
+    const centerX = size / 2;
+    const centerY = size / 2;
 
     let current = 0;
     const increment = target / 100;
-    let animationFrameId;
     let pulsePhase = 0;
     let isCountingComplete = false;
 
-    // Détection et suivi du thème
     let themeToApply = detectTheme();
     let fontColor = getFontColor(themeToApply);
     let glowColor = themeToApply === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(37, 99, 235, 0.3)';
@@ -3622,76 +3144,73 @@ function initAbout() {
     gradient.addColorStop(0, '#2563EB');
     gradient.addColorStop(1, '#90EE90');
 
-    function detectTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      return savedTheme !== null ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
-    }
-
-    function getFontColor(theme) {
-      return theme === 'dark' ? '#FDFDFC' : '#1B1B18';
-    }
-
     function handleThemeChange() {
-      const newTheme = detectTheme();
-      if (newTheme !== themeToApply) {
-        themeToApply = newTheme;
-        fontColor = getFontColor(themeToApply);
-        glowColor = themeToApply === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(37, 99, 235, 0.3)';
-      }
+        const newTheme = detectTheme();
+        if (newTheme !== themeToApply) {
+            themeToApply = newTheme;
+            fontColor = getFontColor(themeToApply);
+            glowColor = themeToApply === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(37, 99, 235, 0.3)';
+        }
     }
 
-    // Réagir aux changements de thème
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
     window.addEventListener('storage', handleThemeChange);
 
     function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Cercle de fond
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-      ctx.strokeStyle = themeToApply === 'dark' ? '#374151' : '#EDEDEC';
-      ctx.lineWidth = 8;
-      ctx.stroke();
+        // Cercle de fond
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.strokeStyle = themeToApply === 'dark' ? '#374151' : '#EDEDEC';
+        ctx.lineWidth = 8;
+        ctx.stroke();
 
-      // Arc de progression
-      const progress = isCountingComplete ? 1 : current / target;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, -Math.PI / 2, (2 * Math.PI * progress) - Math.PI / 2);
-      ctx.strokeStyle = gradient;
-      ctx.lineWidth = 8;
-      ctx.stroke();
+        // Arc progression
+        const progress = isCountingComplete ? 1 : current / target;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, -Math.PI / 2, (2 * Math.PI * progress) - Math.PI / 2);
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 8;
+        ctx.stroke();
 
-      // Effet de pulse
-      const pulseScale = 1 + 0.05 * Math.sin(pulsePhase);
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.scale(pulseScale, pulseScale);
-      ctx.translate(-centerX, -centerY);
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius - 4, 0, 2 * Math.PI);
-      ctx.strokeStyle = glowColor;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      ctx.restore();
+        // Effet pulse
+        const pulseScale = 1 + 0.05 * Math.sin(pulsePhase);
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.scale(pulseScale, pulseScale);
+        ctx.translate(-centerX, -centerY);
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius - 4, 0, 2 * Math.PI);
+        ctx.strokeStyle = glowColor;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
 
-      pulsePhase += 0.05;
+        pulsePhase += 0.05;
 
-      // Incrémentation de la valeur
-      if (!isCountingComplete && current < target) {
-        current += increment;
-        if (current >= target) {
-          current = target;
-          isCountingComplete = true;
+        // Incrément valeur
+        if (!isCountingComplete && current < target) {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                isCountingComplete = true;
+            }
         }
-      }
 
-      animationFrameId = requestAnimationFrame(draw);
+        requestAnimationFrame(draw);
     }
 
     draw();
-  }
+
+    // Gérer redimensionnement (responsivité)
+    const resizeObserver = new ResizeObserver(() => {
+        ctx.setTransform(1, 0, 0, 1, 0, 0); // reset transform
+        size = resizeCanvas();
+    });
+    resizeObserver.observe(canvas);
+}
+
 
 
     function animateStatValue(index, target, unit) {
@@ -3743,7 +3262,6 @@ document.addEventListener('DOMContentLoaded', async () => {
  // initBeforeAfterSliders();
   initServiceFilters();
   initParticles();
-  initContactForm();
   initScrollAnimations();
   initVideoModal();
   initWhyUsSection();
@@ -3760,21 +3278,50 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const heroSection = document.getElementById("hero");
   const header = document.getElementById("blurred-header");
+  const name = document.getElementById("name-entreprise");
+  const entreprise = document.getElementById("entreprise");
+
 
   if (heroSection && header) {
     const onScroll = () => {
       const isDarkMode = document.documentElement.classList.contains("dark");
-      if (isDarkMode) return; 
+      
 
       const heroBottom = heroSection.getBoundingClientRect().bottom;
       const headerHeight = header.offsetHeight;
 
+
+      if (heroBottom <= headerHeight) {
+        entreprise.classList.add("gradiant");
+        entreprise.classList.remove("header-btn");
+        name.classList.remove("back-text")
+        
+      } else {
+        name.classList.add("back-text");
+        entreprise.classList.add("header-btn");
+        entreprise.classList.remove("gradiant");
+
+      }
+      
+      if (isDarkMode) return; 
+
+      
+
       if (heroBottom <= headerHeight) {
         // On est passé sous le hero → applique le style clair
         header.classList.add("header-light-style");
+        entreprise.classList.add("gradiant");
+        entreprise.classList.remove("header-btn");
+        name.classList.remove("back-text")
+        
       } else {
-        // On est encore sur le hero → style transparent
+        
         header.classList.remove("header-light-style");
+
+        name.classList.add("back-text");
+        entreprise.classList.add("header-btn");
+        entreprise.classList.remove("gradiant");
+
       }
     };
 
@@ -3786,7 +3333,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.addEventListener("resize", onScroll);
   }
 
-
+  
     // Animation de chargement initial
     const loadingOverlay = document.getElementById('loading-overlay');
     if (loadingOverlay) {
@@ -3800,6 +3347,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }, 1000);
     }
 
+    
     // Optimisation des performances : nettoyer les écouteurs d'événements lors du déchargement
     window.addEventListener('unload', () => {
         swiperInstance?.destroy();

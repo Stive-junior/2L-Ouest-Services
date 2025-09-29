@@ -14,18 +14,17 @@ const {
   updateContact,
   deleteContact,
   getAllContacts,
+  replyToContact,
 } = require('../controllers/contactController');
-const { contactSchema, idSchema, paginationSchema } = require('../utils/validation/contactValidation');
+const { contactSchema, idSchema, paginationSchema, replySchema } = require('../utils/validation/contactValidation');
 
-// Routes publiques
 router.post('/', [rateLimitMiddleware, validationMiddleware(contactSchema)], createContact);
 
-// Routes protégées par authentification
 router.use(authenticate);
-
 router.get('/:id', [validationMiddleware(idSchema)], getContact);
 router.put('/:id', [restrictTo(['client', 'admin']), validationMiddleware(contactSchema)], updateContact);
 router.delete('/:id', [restrictTo(['client', 'admin']), validationMiddleware(idSchema)], deleteContact);
 router.get('/', [restrictTo(['admin']), validationMiddleware(paginationSchema)], getAllContacts);
+router.post('/:id/reply', [restrictTo(['admin']), validationMiddleware(replySchema)], replyToContact);
 
 module.exports = router;

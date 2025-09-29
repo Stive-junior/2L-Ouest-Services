@@ -5,10 +5,7 @@
  * @module api/documentApi
  */
 
-import { getAuth } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
 import { showNotification, validateInput, getStoredToken,apiFetch, authGuard, roleGuard, handleApiError } from '../modules/utils.js';
-
-const auth = getAuth();
 
 
 /**

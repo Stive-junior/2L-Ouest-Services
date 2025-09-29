@@ -1,34 +1,71 @@
-/**
- * @file main.js
- * @description Initialisation globale de l'application L&L Ouest Services.
- * Configure Firebase, les APIs, les animations, et les gestionnaires d'événements pour les pages.
- * Optimisé pour un chargement rapide : imports dynamiques, cache des requêtes, exécution asynchrone.
- * @module main
- */
-
-
-import { auth, showNotification, setStoredToken, clearStoredToken, getStoredToken, getCachedUserData } from './modules/utils.js';
-
-import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
-
+import {
+  initializeFirebase,
+  showNotification,
+  setStoredToken,
+  clearStoredToken,
+  getStoredToken,
+  getCachedUserData,
+  checkNetwork,
+  isDarkMode,
+  handleApiError,
+  monitorBackend,
+  stopMonitoring,
+  waitForAuthState
+} from './modules/utils.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js';
 import Api from './api.js';
-
 import './animations/animation.js';
-
 import './animations/theme.js';
-
 import './animations/sidebar.js';
-
 import './animations/chat.js';
+import { loadUserData, updateUIWithUserData } from './loadData.js';
 
-
-// Cache des requêtes API (objet global avec TTL de 5 minutes)
+// Cache des requêtes API (TTL réduit à 2 minutes pour fraîcheur en production)
 const apiCache = {};
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const CACHE_TTL = 2 * 60 * 1000; // 2 minutes
 
+// État global
+let appInitialized = false;
+let firebaseInitialized = false;
+let auth = null;
+let currentPage = null;
+let networkMonitoringInterval = null;
+const NETWORK_CHECK_INTERVAL = 30000; // 30 secondes
 
 /**
- * Cache une réponse API.
+ * Écoute constante de l'état backend, toutes les 30 secondes.
+ * Utilise des notifications polies pour informer sans bloquer.
+ * **Vérifie UNIQUEMENT la disponibilité du backend.**
+ */
+function startNetworkMonitoring() {
+  if (networkMonitoringInterval) return;
+  
+  networkMonitoringInterval = setInterval(async () => {
+    const networkStatus = await checkNetwork({ context: 'Network Monitoring' }); 
+    if (!networkStatus.backendConnected) {
+      await showNotification(
+        'Serveur temporairement indisponible. Nous réessayons automatiquement.',
+        'warning'
+      );
+      await monitorBackend({ context: 'Network Monitoring' });
+    } else {
+      stopMonitoring();
+    }
+  }, NETWORK_CHECK_INTERVAL);
+}
+
+/**
+ * Arrête l'écoute backend constante.
+ */
+function stopNetworkMonitoring() {
+  if (networkMonitoringInterval) {
+    clearInterval(networkMonitoringInterval);
+    networkMonitoringInterval = null;
+  }
+}
+
+/**
+ * Met en cache une réponse API.
  * @param {string} key - Clé du cache.
  * @param {*} data - Données à cacher.
  */
@@ -51,165 +88,365 @@ function getCachedResponse(key) {
 }
 
 /**
- * Détermine la page actuelle à partir de l'URL.
- * @returns {string} - Nom de la page ou du module principal.
+ * Wrapper pour appels asynchrones avec retries (backoff exponentiel, plus patient).
+ * @param {Function} fn - Fonction async à appeler.
+ * @param {number} maxRetries - Max tentatives.
+ * @param {number} baseDelay - Délai base en ms.
+ * @returns {Promise<*>} Résultat de fn.
  */
-function getCurrentPage() {
-  const path = window.location.pathname;
-  const parts = path.split('/').filter(Boolean); // enlève les vides
-
-  if (parts.length === 0) {
-    return 'index'; // cas de "/"
+async function withRetries(fn, maxRetries = 5, baseDelay = 3000) {
+  let lastError;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastError = err;
+      if (attempt < maxRetries) {
+        await new Promise(resolve => setTimeout(resolve, baseDelay * Math.pow(2, attempt - 1)));
+      }
+    }
   }
-
-  const lastPart = parts[parts.length - 1];
-
-  if (lastPart.endsWith('.html')) {
-    const pageName = lastPart.replace('.html', '');
-    return pageName === 'index' ? 'index' : pageName;
-  }
-
-  // Si l'URL se termine par un dossier (ex: /dossier/)
-  return lastPart;
+  throw lastError || new Error('Échec après retries');
 }
 
 /**
- * Charge dynamiquement un module si nécessaire.
+ * Détermine la page actuelle à partir de l'URL.
+ * @returns {string} - Nom de la page.
+ */
+function getCurrentPage() {
+  const path = window.location.pathname;
+  const parts = path.split('/').filter(Boolean);
+  if (parts.length === 0 || parts[0] === 'index.html' || path === '/') {
+    return 'index';
+  }
+  const lastPart = parts[parts.length - 1];
+  return lastPart.endsWith('.html') ? lastPart.replace('.html', '') : lastPart;
+}
+
+/**
+ * Charge dynamiquement un module avec gestion d'erreurs.
  * @param {string} modulePath - Chemin du module.
- * @returns {Promise<Object>} - Le module chargé.
+ * @returns {Promise<Object|null>} - Module chargé ou null.
  */
 async function loadModule(modulePath) {
+  const cacheKey = `module_${modulePath.replace(/\//g, '_')}`;
+  const cachedModule = getCachedResponse(cacheKey);
+  if (cachedModule) {
+    return cachedModule;
+  }
   try {
     const module = await import(modulePath);
-    return module.default;
+    const moduleObj = module.default || module;
+    cacheResponse(cacheKey, moduleObj);
+    return moduleObj;
   } catch (error) {
-    console.error(`Erreur lors du chargement du module ${modulePath}:`, error);
-    showNotification('Erreur lors du chargement d\'un module.', 'error');
+    await showNotification(`Erreur chargement module: ${modulePath}`, 'error');
     return null;
   }
 }
 
 /**
- * Initialise les gestionnaires d'événements pour la page actuelle de manière asynchrone.
+ * Initialise la page actuelle.
  * @param {string} page - Nom de la page.
- * @param {boolean} isAuthenticated - Indique si l'utilisateur est authentifié.
+ * @param {boolean} isAuthenticated - État d'authentification.
+ * @param {Object} [userData] - Données utilisateur.
+ * @returns {Promise<boolean>} Succès de l'initialisation.
  */
-async function initializePage(page, isAuthenticated) {
-  console.log(`Initialisation de la page : ${page}, Auth : ${isAuthenticated}`);
-  
+async function initializePage(page, isAuthenticated, userData = null) {
   const moduleMap = {
-    auth: { path: './modules/auth.js', pages: ['signin', 'signup', 'verify-email', 'password-reset', 'change-email'], authRequired: false },
-    user: { path: './modules/user.js', pages: ['dashboard', 'user', 'admin'], authRequired: true },
-    chat: { path: './modules/chat.js', pages: ['chat'], authRequired: true },
-    contact: { path: './modules/contact.js', pages: ['contact'], authRequired: false },
-    doc: { path: './modules/document.js', pages: ['doc'], authRequired: true },
-    map: { path: './modules/map.js', pages: ['map'], authRequired: false },
-    notifications: { path: './modules/notifications.js', pages: ['notifications'], authRequired: true },
-    review: { path: './modules/review.js', pages: ['reviews', 'reviews-create', 'reviews-manage', 'reviews-user'], authRequired: false },
-    service: { path: './modules/service.js', pages: ['services', 'admin'], authRequired: false },
+    index: { path: null, pages: ['index'], modules: ['contact', 'service', 'review', 'about'], authRequired: false, title: 'Accueil' },
+    auth: { path: './modules/auth.js', pages: ['signin', 'signup', 'verify-email', 'password-reset', 'reset-password', 'change-email', 'code-check'], modules: [], authRequired: false, title: 'Authentification' },
+    user: { path: './modules/user.js', pages: ['dashboard', 'profile', 'admin'], modules: ['notifications'], authRequired: true, title: 'Espace utilisateur' },
+    chat: { path: './modules/chat.js', pages: ['chat'], modules: [], authRequired: true, title: 'Chat' },
+    contact: { path: './modules/contact.js', pages: ['contact', 'messages'], modules: [], authRequired: false, title: 'Contact' },
+    doc: { path: './modules/document.js', pages: ['doc'], modules: [], authRequired: true, title: 'Documents' },
+    map: { path: './modules/map.js', pages: ['map'], modules: [], authRequired: false, title: 'Localisation' },
+    notifications: { path: './modules/notifications.js', pages: ['notifications'], modules: [], authRequired: true, title: 'Notifications' },
+    review: { path: './modules/review.js', pages: ['reviews', 'create', 'manage', 'user'], modules: [], authRequired: false, title: 'Avis' },
+    service: { path: './modules/service.js', pages: ['services', 'admin'], modules: [], authRequired: false, title: 'Services' },
+    mentions: { path: './modules/mentions.js', pages: ['mentions'], modules: [], authRequired: false, title: 'Mentions légales' },
+    realizations: { path: './modules/realizations.js', pages: ['realizations'], modules: [], authRequired: false, title: 'Réalisations' }
   };
 
-  const initPromises = [];
-  
-  Object.values(moduleMap).forEach((mod) => {
-    if (mod.pages.includes(page) && (!mod.authRequired || isAuthenticated)) {
-      initPromises.push(loadModule(mod.path).then((module) => {
-        if (module && typeof module.init === 'function') {
-          module.init();
-        } else {
-          console.warn(`Module ou méthode d'initialisation non trouvé pour la page : ${page}`);
-        }
-      }));
-    }
-  });
+  const authRequiredPages = Object.values(moduleMap)
+    .filter(mod => mod.authRequired)
+    .flatMap(mod => mod.pages);
 
-  await Promise.all(initPromises);
+  if (authRequiredPages.includes(page) && !isAuthenticated) {
+    await showNotification('Veuillez vous connecter.', 'warning');
+    setTimeout(() => window.location.href = '/pages/auth/signin.html', 1500);
+    return false;
+  }
+
+  const pageConfig = Object.values(moduleMap).find(config => config.pages.includes(page));
+  if (pageConfig?.title) {
+    document.title = `${pageConfig.title} - L&L Ouest Services`;
+  }
+
+  const initPromises = [];
+  const mainModule = Object.entries(moduleMap).find(([_, mod]) => mod.pages.includes(page));
+
+  if (mainModule) {
+    const [moduleName, mod] = mainModule;
+    if (mod.path && (!mod.authRequired || isAuthenticated)) {
+      initPromises.push(
+        loadModule(mod.path).then(async module => {
+          if (module?.init) {
+            await module.init({ isAuthenticated, userData, pageContext: page });
+          }
+        })
+      );
+    }
+    if (mod.modules?.length) {
+      for (const additionalModuleName of mod.modules) {
+        const additionalMod = moduleMap[additionalModuleName];
+        if (additionalMod?.path && (!additionalMod.authRequired || isAuthenticated)) {
+          initPromises.push(
+            loadModule(additionalMod.path).then(async module => {
+              if (module?.init) {
+                await module.init({ isAuthenticated, userData, pageContext: page });
+              }
+            })
+          );
+        }
+      }
+    }
+  }
+
+  try {
+    await Promise.all(initPromises);
+    if (typeof AOS !== 'undefined') AOS.refresh();
+    return true;
+  } catch (error) {
+    await showNotification(`Erreur chargement page: ${error.message}`, 'error');
+    return false;
+  }
 }
 
-// Exécution principale asynchrone
-(async () => {
-  AOS.init();
-  console.log('Script principal chargé');
-  const page = getCurrentPage();
+/**
+ * Vérifie l'état d'authentification.
+ * @param {Object|null} user - Utilisateur Firebase.
+ * @returns {Promise<{isAuthenticated: boolean, userData: Object|null}>}
+ */
+async function verifyAuthState(user) {
+  let isAuthenticated = !!user;
+  let userData = null;
 
-  onAuthStateChanged(auth, async (user) => {
-    let isAuthenticated = !!user;
-    let tokenRefreshed = false;
-
-    if (user) {
-      try {
-        const cachedToken = getCachedResponse('jwt');
-        
-        if (cachedToken) {
-          setStoredToken(cachedToken.token, cachedToken.role);
-          isAuthenticated = true;
-        } else {
-          let storedToken = getStoredToken();
-          let newToken = storedToken;
-
-          if (storedToken) {
-            try {
-              const decodedToken = JSON.parse(atob(storedToken.split('.')[1]));
-              const exp = decodedToken.exp * 1000;
-              const now = Date.now();
-              if (exp <= now) {
-                throw new Error('Token expired');
-              }
-              if (exp - now < 5 * 60 * 1000) { // Moins de 5 minutes avant expiration
-                const refreshData = await Api.auth.refreshToken();
-                newToken = refreshData.token;
-                cacheResponse('jwt', { token: newToken, role: refreshData.role || 'client' });
-                setStoredToken(newToken, refreshData.role || 'client');
-                tokenRefreshed = true;
-              } else {
-                const verifyData = await Api.auth.verifyToken();
-                cacheResponse('jwt', { token: storedToken, role: verifyData.role || 'client' });
-                setStoredToken(storedToken, verifyData.role || 'client');
-              }
-            } catch (decodeError) {
-              console.error('Erreur lors du décodage du token:', decodeError);
-              newToken = await Api.auth.refreshToken(); // Attempt refresh
-              const verifyData = await Api.auth.verifyToken();
-              cacheResponse('jwt', { token: newToken.token, role: verifyData.role || 'client' });
-              setStoredToken(newToken.token, verifyData.role || 'client');
-              tokenRefreshed = true;
-            }
-          } else {
-            newToken = await user.getIdToken(true);
-            const verifyData = await Api.auth.verifyToken();
-            cacheResponse('jwt', { token: newToken, role: verifyData.role || 'client' });
-            setStoredToken(newToken, verifyData.role || 'client');
-          }
-          isAuthenticated = true;
+  if (user) {
+    try {
+      const firebaseToken = await user.getIdToken(true);
+      const cachedAuth = getCachedResponse('auth_state');
+      if (cachedAuth && Date.now() - cachedAuth.timestamp < 2 * 60 * 1000) {
+        if (getStoredToken() === cachedAuth.token) {
+          return { isAuthenticated: true, userData: cachedAuth.userInfo };
         }
-      } catch (error) {
-        console.error('Erreur de vérification du token:', error);
-        if (error.message.includes('invalid algorithm') || error.message.includes('Token invalide') || error.message.includes('expiré')) {
-          clearStoredToken();
-          await Api.auth.signOut();
-          showNotification('Session expirée ou token invalide. Veuillez vous reconnecter.', 'error');
-          window.location.href = '/pages/auth/signin.html';
-        } else if (error.message.includes('network')) {
-          showNotification('Erreur réseau lors de la vérification de la session. Utilisation du mode hors ligne.', 'warning');
-          // Fall back to cached data if available
-          const cachedUser = getCachedUserData();
-          if (cachedUser) {
-            isAuthenticated = true;
-          }
-        } else {
-          showNotification('Erreur inattendue lors de la vérification de la session. Veuillez réessayer.', 'error');
-        }
-        isAuthenticated = false;
       }
-    } else {
-      clearStoredToken();
-      isAuthenticated = false;
+
+      let storedToken = getStoredToken();
+      let newToken = storedToken;
+
+      if (storedToken) {
+        try {
+          const payload = JSON.parse(atob(storedToken.split('.')[1]));
+          if (payload.exp * 1000 <= Date.now()) {
+            throw new Error('Token expired');
+          }
+          if (payload.exp * 1000 - Date.now() < 5 * 60 * 1000) {
+            const refreshData = await withRetries(() => Api.auth.refreshToken());
+            newToken = refreshData.token;
+            userData = refreshData.user;
+          } else {
+            const verifyData = await withRetries(() => Api.auth.verifyToken());
+            newToken = verifyData.token;
+            userData = verifyData.user;
+          }
+        } catch (error) {
+          try {
+            const refreshData = await withRetries(() => Api.auth.refreshToken());
+            newToken = refreshData.token;
+            userData = refreshData.user;
+          } catch (refreshError) {
+            throw refreshError;
+          }
+        }
+      } else {
+        const verifyData = await withRetries(() => Api.auth.verifyToken());
+        newToken = verifyData.token;
+        userData = verifyData.user;
+      }
+
+      // S'assurer que le rôle est défini
+      if (!userData?.role) {
+        userData = { ...userData, role: 'client' };
+      }
+
+      setStoredToken(newToken, userData.role);
+      cacheResponse('auth_state', { token: newToken, userInfo: userData, timestamp: Date.now() });
+    } catch (error) {
+      const networkStatus = await checkNetwork();
+      if (!networkStatus.backendConnected) {
+        const cachedUser = getCachedUserData();
+        if (cachedUser) {
+          isAuthenticated = true;
+          userData = cachedUser;
+          await showNotification('Mode dégradé activé (Backend indisponible).', 'warning');
+        } else {
+          isAuthenticated = false;
+          userData = null;
+          await showNotification('Backend indisponible. Aucune donnée en cache. Veuillez réessayer.', 'error');
+        }
+      } else if (error.message?.includes('invalid algorithm') || error.message?.includes('Token invalide') || error.message?.includes('expiré') || error.message?.includes('401')) {
+        clearStoredToken();
+        await Api.auth.signOut();
+        await showNotification('Session expirée. Veuillez vous reconnecter.', 'error');
+      } else {
+        await handleApiError(error, 'Erreur inattendue d\'authentification.', {
+          context: 'Authentification',
+          sourceContext: 'authentification',
+          isCritical: false,
+          iconSvg: `<svg class="w-10 h-10 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+          actions: [
+            { text: 'Réessayer', href: window.location.href, class: 'bg-ll-blue hover:bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm font-medium', svg: `<svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>` },
+            { text: 'Contacter le support', href: 'mailto:contact@llouestservices.fr', class: 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-3 py-1.5 rounded-md text-sm font-medium', svg: `<svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" /></svg>` },
+          ],
+          errorId: generateString(8),
+        });
+        isAuthenticated = false;
+        userData = null;
+      }
+    }
+  } else {
+    clearStoredToken();
+    await Api.auth.signOut();
+  }
+
+  return { isAuthenticated, userData };
+}
+
+/**
+ * Masque l'overlay de chargement.
+ */
+function hideLoadingOverlay() {
+  const loadingOverlay = document.getElementById('loading-overlay');
+  if (loadingOverlay) {
+    loadingOverlay.style.opacity = '0';
+    setTimeout(() => {
+      loadingOverlay.style.display = 'none';
+      document.body.classList.remove('loading');
+    }, 500);
+  }
+}
+
+/**
+ * Initialise l'application.
+ * @returns {Promise<boolean>} Succès de l'initialisation.
+ */
+async function initializeApp() {
+  if (appInitialized) return true;
+
+  try {
+    window.__APP_START_TIME__ = Date.now();
+
+    const networkStatus = await checkNetwork();
+    
+    if (!networkStatus.backendConnected) {
+      await monitorBackend({ context: 'App Initialization' });
     }
 
-    if (tokenRefreshed) {
-      showNotification('Session rafraîchie avec succès.', 'info');
+    try {
+      const app = await initializeFirebase();
+      firebaseInitialized = true;
+      auth = getAuth(app);
+    } catch (error) {
+      firebaseInitialized = false;
+      await handleApiError(error, 'Échec de l\'initialisation de l\'application', {
+        context: 'App Initialization',
+        isCritical: true,
+        sourceContext: 'initialization'
+      });
+      return false;
     }
 
-    await initializePage(page, isAuthenticated);
+    if (typeof AOS !== 'undefined') {
+      AOS.init({ duration: 800, once: true });
+    }
+
+    for (const module of Object.values(Api).filter(m => m.init)) {
+      await module.init();
+    }
+
+    appInitialized = true;
+    currentPage = getCurrentPage();
+
+    startNetworkMonitoring();
+
+    return true;
+  } catch (error) {
+    await showNotification(`Erreur démarrage: ${error.message}`, 'error');
+    return false;
+  }
+}
+
+// Initialisation principale
+(async () => {
+  if (!await initializeApp()) return;
+
+  if (firebaseInitialized && auth) {
+    try {
+      const user = await waitForAuthState(auth); 
+      const { isAuthenticated, userData } = await verifyAuthState(user);
+      
+      updateUIWithUserData(userData);
+      const pageInitSuccess = await initializePage(currentPage || getCurrentPage(), isAuthenticated, userData);
+      
+      if (pageInitSuccess) {
+        hideLoadingOverlay();
+        document.dispatchEvent(new CustomEvent('app:pageReady', {
+          detail: { page: currentPage, isAuthenticated, userData, timestamp: Date.now() }
+        }));
+      }
+    } catch (error) {
+      const pageInitSuccess = await initializePage(currentPage || getCurrentPage(), false, null);
+      if (pageInitSuccess) {
+        hideLoadingOverlay();
+        document.dispatchEvent(new CustomEvent('app:pageReady', {
+          detail: { page: currentPage, isAuthenticated: false, userData: null, timestamp: Date.now(), mode: 'degraded' }
+        }));
+      }
+    }
+    
+    document.addEventListener('auth:updated', async () => {
+      const userData = await loadUserData();
+      updateUIWithUserData(userData);
+    });
+
+  } else {
+    const pageInitSuccess = await initializePage(currentPage || getCurrentPage(), false, null);
+    if (pageInitSuccess) {
+      hideLoadingOverlay();
+      document.dispatchEvent(new CustomEvent('app:pageReady', {
+        detail: { page: currentPage, isAuthenticated: false, userData: null, timestamp: Date.now(), mode: 'degraded' }
+      }));
+    }
+  }
+
+  document.dispatchEvent(new CustomEvent('app:initialized', {
+    detail: { timestamp: Date.now(), firebaseReady: firebaseInitialized, page: currentPage }
+  }));
+
+  window.addEventListener('beforeunload', () => {
+    stopNetworkMonitoring();
+  });
+
+  window.addEventListener('popstate', async event => {
+    if (event.state?.page) {
+      currentPage = event.state.page;
+      const isAuthenticated = !!getStoredToken();
+      const userData = getCachedUserData();
+      const pageInitSuccess = await initializePage(currentPage, isAuthenticated, userData);
+      if (pageInitSuccess) {
+        hideLoadingOverlay();
+      }
+    }
   });
 })();

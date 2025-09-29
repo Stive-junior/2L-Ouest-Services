@@ -196,7 +196,7 @@ class UserService {
   async getAllUsers(page = 1, limit = 10) {
     try {
       const result = await userRepo.getAll(page, limit);
-      logInfo('Tous les utilisateurs récupérés', { page, limit });
+      logInfo('Tous les utilisateurs récupérés', { page, limit, total: result.total });
       return result;
     } catch (error) {
       logError('Erreur lors de la récupération de tous les utilisateurs', { error: error.message });
@@ -215,7 +215,7 @@ class UserService {
   async getUsersByRole(role, page = 1, limit = 10) {
     try {
       const result = await userRepo.getByRole(role, page, limit);
-      logInfo('Utilisateurs récupérés par rôle', { role, page, limit });
+      logInfo('Utilisateurs récupérés par rôle', { role, page, limit, total: result.total });
       return result;
     } catch (error) {
       logError('Erreur lors de la récupération des utilisateurs par rôle', { error: error.message, role });
@@ -294,6 +294,22 @@ class UserService {
     } catch (error) {
       logError('Erreur lors de la suppression de la facture', { error: error.message, userId, invoiceId });
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la suppression de la facture', error.message);
+    }
+  }
+
+  /**
+   * Vérifie si un email est disponible (non utilisé par un utilisateur existant).
+   * @async
+   * @param {string} email - Email à vérifier.
+   * @returns {Promise<boolean>} True si disponible, false sinon.
+   */
+  async checkEmailAvailability(email) {
+    try {
+      const user = await userRepo.getByEmail(email);
+      return !user;
+    } catch (error) {
+      logError('Erreur lors de la vérification de disponibilité de l\'email', { error: error.message, email });
+      throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la vérification de l\'email', error.message);
     }
   }
 }

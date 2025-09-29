@@ -3,6 +3,7 @@
  * @description Fichier principal de l'application backend pour L&L Ouest Services.
  * Configure et initialise l'application Express, les middlewares, les routes, Firebase, et WebSocket.
  * Inclut des vérifications de santé, une journalisation avancée, une gestion des erreurs robuste, et un arrêt gracieux.
+ * Optimisé pour déploiement en ligne gratuit (ex. Render, Railway) sans dépendance à Redis.
  * @module app
  */
 
@@ -12,7 +13,6 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
 const os = require('os');
-const ngrok = require('ngrok');
 const dns = require('dns').promises;
 const fileUpload = require('express-fileupload');
 const path = require('path');
@@ -35,12 +35,59 @@ const {
   reviewRoutes,
   serviceRoutes,
   userRoutes,
+  configRoutes,
 } = require('./routes');
 
 const app = express();
-let ngrokUrl = null;
 let localUrl = null;
 let isShuttingDown = false;
+
+global.networkStatus = true;
+let offlineStartTime = null;
+const MAX_OFFLINE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+// --- Middleware de Contrôle Réseau (avant chaque route) ---
+async function networkCheckMiddleware(req, res, next) {
+  try {
+    await dns.resolve('firestore.googleapis.com');
+    global.networkStatus = true;
+    offlineStartTime = null;
+    next(); // Réseau OK, continuer
+  } catch (err) {
+    global.networkStatus = false;
+    if (!offlineStartTime) offlineStartTime = Date.now();
+    logError('Middleware : Réseau instable détecté', { error: err.message, path: req.path });
+    res.status(503).json({
+      status: 'unavailable',
+      message: 'Réseau instable. Veuillez réessayer plus tard.',
+      retryAfter: 30, // En secondes
+    });
+  }
+}
+
+// --- Écoute Constante de l'État Réseau ---
+function monitorNetwork(intervalMs = 30000) { // Toutes les 30s
+  setInterval(async () => {
+    try {
+      await dns.resolve('firestore.googleapis.com');
+      if (!global.networkStatus) {
+        global.networkStatus = true;
+        offlineStartTime = null;
+        logInfo('Réseau restauré');
+      }
+    } catch (err) {
+      if (global.networkStatus) {
+        global.networkStatus = false;
+        offlineStartTime = Date.now();
+        logWarn('Réseau perdu');
+      } else if (Date.now() - offlineStartTime > MAX_OFFLINE_DURATION) {
+        logError('Offline prolongé : Shutdown initié');
+        process.emit('SIGTERM'); // Déclencher shutdown gracieux
+      }
+    }
+  }, intervalMs);
+  logInfo('Écoute réseau constante démarrée');
+}
 
 // --- Vérification de la connectivité réseau avec retries ---
 async function checkNetworkConnectivity(maxRetries = 3, delayMs = 5000) {
@@ -80,9 +127,15 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
         'JWT_SECRET',
         'JWT_EXPIRES_IN',
         'FIREBASE_PROJECT_ID',
+        'FIREBASE_APP_ID',
+        'FIREBASE_API_KEY',
+        'FIREBASE_MEASUREMENT_ID',
         'FIREBASE_CLIENT_EMAIL',
         'FIREBASE_PRIVATE_KEY',
         'FIREBASE_DATABASE_URL',
+        'FIREBASE_STORAGE_BUCKET',
+        'FCM_VAPID_KEY',
+        'FCM_SENDER_ID',
         'RATE_LIMIT_WINDOW_MS',
         'RATE_LIMIT_MAX',
         'LOG_LEVEL',
@@ -98,7 +151,6 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
         'SOCKET_PING_TIMEOUT',
         'SOCKET_PING_INTERVAL',
         'SOCKET_MAX_HTTP_BUFFER_SIZE',
-        'FCM_VAPID_KEY',
       ];
       const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
       if (missingVars.length > 0) {
@@ -122,7 +174,7 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
       if (!config.googleMaps.apiKey) {
         throw new AppError(500, 'Clé API Google Maps non définie', 'Missing Google Maps API key');
       }
-      logInfo('Clé API Google Maps : OK');
+      logInfo('Configuration Google Maps : OK');
 
       // Vérification de la configuration SMTP
       if (!config.smtp.host || !config.smtp.user || !config.smtp.pass) {
@@ -135,6 +187,12 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
         throw new AppError(500, 'Chemin Socket.IO non défini', 'Missing Socket.IO path');
       }
       logInfo('Configuration Socket.IO : OK');
+
+      // Vérification de la configuration Firebase client-side
+      if (!config.firebase.appId || !config.firebase.apiKey || !config.firebase.measurementId) {
+        throw new AppError(500, 'Configuration Firebase client-side incomplète', 'Incomplete Firebase client configuration');
+      }
+      logInfo('Configuration Firebase client-side : OK');
 
       return true;
     } catch (err) {
@@ -197,12 +255,12 @@ app.use(helmet({
   hsts: {
     maxAge: 31536000,
     includeSubDomains: true,
-    preload: true
+    preload: true,
   },
   ieNoOpen: true,
   noSniff: true,
   referrerPolicy: { policy: "strict-origin-when-cross-origin" },
-  xssFilter: true
+  xssFilter: true,
 }));
 app.use(compression());
 app.use(corsMiddleware);
@@ -212,6 +270,9 @@ app.use(morgan('combined', { stream: { write: message => logger.info(message.tri
 app.use(rateLimitMiddleware);
 app.use('/storage', authenticate, express.static(path.join(__dirname, 'storage')));
 app.use(fileUpload());
+
+// Middleware réseau avant les routes API
+app.use('/api', networkCheckMiddleware);
 
 // --- Route d'accueil ---
 app.get('/', (req, res) => {
@@ -267,16 +328,17 @@ app.get('/', (req, res) => {
       `${apiPrefix}/notification/review`,
       `${apiPrefix}/notification/user`,
       `${apiPrefix}/notification/contact`,
+      `${apiPrefix}/config/firebase`,
     ],
   });
 });
 
-// --- Route pour récupérer l'URL ngrok ---
-app.get('/api/ngrok-url', (req, res) => {
+// --- Route pour récupérer l'URL du serveur ---
+app.get('/api/server-url', (req, res) => {
   res.status(200).json({
-    ngrokUrl: ngrokUrl || localUrl || `http://localhost:${config.port}`,
-    status: ngrokUrl ? 'active' : 'local',
-    message: ngrokUrl ? 'ngrok connecté' : 'ngrok non connecté, utilisant l\'URL locale',
+    serverUrl: localUrl || `http://localhost:${config.port}`,
+    status: 'active',
+    message: 'URL du serveur',
     timestamp: new Date().toISOString(),
   });
 });
@@ -285,6 +347,7 @@ app.get('/api/ngrok-url', (req, res) => {
 const apiPrefix = '/api';
 app.use(`${apiPrefix}/auth`, authRoutes);
 app.use(`${apiPrefix}/user`, userRoutes);
+app.use(`${apiPrefix}/config`, configRoutes);
 app.use(`${apiPrefix}/services`, serviceRoutes);
 app.use(`${apiPrefix}/review`, reviewRoutes);
 app.use(`${apiPrefix}/chat`, chatRoutes);
@@ -294,6 +357,7 @@ app.use(`${apiPrefix}/map`, mapRoutes);
 app.use(`${apiPrefix}/notification`, notificationRoutes);
 
 app.use(loggingMiddleware);
+
 // --- Route de santé ---
 app.get('/api/health', async (req, res) => {
   try {
@@ -307,6 +371,7 @@ app.get('/api/health', async (req, res) => {
       firebaseStatus: 'connected',
       collections,
       socketStatus: socketService.io ? 'connected' : 'disconnected',
+      networkStatus: global.networkStatus ? 'online' : 'offline',
     });
   } catch (err) {
     logError('Échec de la vérification de santé', { error: err.message });
@@ -317,6 +382,16 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
+app.get('/api/check', async (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    message: 'Server is running',
+    timestamp: new Date().toISOString(),
+    environment: config.nodeEnv
+  });
+});
+
+
 // --- Route de base API ---
 app.get('/api', (req, res) => {
   res.status(200).json({
@@ -326,6 +401,7 @@ app.get('/api', (req, res) => {
     endpoints: [
       `${apiPrefix}/auth`,
       `${apiPrefix}/user`,
+      `${apiPrefix}/config`,
       `${apiPrefix}/service`,
       `${apiPrefix}/review`,
       `${apiPrefix}/chat`,
@@ -340,7 +416,6 @@ app.get('/api', (req, res) => {
 // --- Middleware de gestion des erreurs (doit être en dernier) ---
 app.use(errorMiddleware);
 
-
 // --- Gestion des arrêts gracieux ---
 process.on('SIGTERM', async () => {
   if (isShuttingDown) return;
@@ -350,10 +425,6 @@ process.on('SIGTERM', async () => {
     await socketService.close();
     await shutdown();
     await updateApiUrlInFirestore(localUrl || `http://localhost:${config.port}`, 'stopped');
-    if (ngrokUrl) {
-      await ngrok.disconnect();
-      logInfo('ngrok déconnecté');
-    }
     logInfo('Arrêt gracieux terminé');
   } catch (err) {
     logError('Erreur lors de l\'arrêt du serveur', { error: err.message });
@@ -369,10 +440,6 @@ process.on('SIGINT', async () => {
     await socketService.close();
     await shutdown();
     await updateApiUrlInFirestore(localUrl || `http://localhost:${config.port}`, 'stopped');
-    if (ngrokUrl) {
-      await ngrok.disconnect();
-      logInfo('ngrok déconnecté');
-    }
     logInfo('Arrêt gracieux terminé');
   } catch (err) {
     logError('Erreur lors de l\'arrêt du serveur', { error: err.message });
@@ -412,10 +479,11 @@ async function startServer() {
     const ip = Object.values(interfaces)
       .flat()
       .find(i => i.family === 'IPv4' && !i.internal)?.address || '0.0.0.0';
-    localUrl = `http://${ip}:${config.port}`;
+    const port = process.env.PORT || config.port; // Utiliser le port d'environnement si disponible
+    localUrl = `http://${ip}:${port}`;
 
-    const server = app.listen(config.port, '0.0.0.0', async () => {
-      logInfo(`Serveur démarré sur le port ${config.port}`, {
+    const server = app.listen(port, '0.0.0.0', async () => {
+      logInfo(`Serveur démarré sur le port ${port}`, {
         localUrl: `${localUrl}${apiPrefix}`,
         environment: config.nodeEnv,
       });
@@ -428,33 +496,17 @@ async function startServer() {
       await db.collection('status').doc('api_status').set({
         last_started: admin.firestore.FieldValue.serverTimestamp(),
         message: 'API démarrée',
-        port: config.port,
+        port,
         environment: config.nodeEnv,
         ip,
         localUrl,
       });
 
-      // Connexion ngrok (en dernier recours)
-      if (process.env.NGROK_AUTH_TOKEN) {
-        try {
-          ngrokUrl = await ngrok.connect({
-            addr: config.port,
-            authtoken: process.env.NGROK_AUTH_TOKEN,
-          });
-          logInfo(`ngrok connecté avec succès`, { ngrokUrl });
-          await updateApiUrlInFirestore(ngrokUrl, 'active');
-        } catch (ngrokError) {
-          logWarn(`Impossible de connecter ngrok, utilisant l'URL locale`, {
-            error: ngrokError.message,
-            stack: ngrokError.stack,
-          });
-          ngrokUrl = null;
-          await updateApiUrlInFirestore(localUrl, 'local');
-        }
-      } else {
-        logWarn('NGROK_AUTH_TOKEN non défini, utilisant l\'URL locale');
-        await updateApiUrlInFirestore(localUrl, 'local');
-      }
+      // Pas de ngrok pour déploiement en ligne (utiliser l'URL publique fournie par la plateforme)
+      await updateApiUrlInFirestore(localUrl, 'active');
+
+      // Démarrer l'écoute réseau constante
+      monitorNetwork();
     });
 
     // Gestion des signaux pour arrêt du serveur
