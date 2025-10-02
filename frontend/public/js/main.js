@@ -368,7 +368,7 @@ async function initializeApp() {
     }
 
     if (typeof AOS !== 'undefined') {
-      AOS.init({ duration: 800, once: true });
+      AOS.init();
     }
 
     for (const module of Object.values(Api).filter(m => m.init)) {

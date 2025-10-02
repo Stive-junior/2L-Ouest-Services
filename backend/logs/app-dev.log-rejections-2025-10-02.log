@@ -1,0 +1,174 @@
+[1;31m🚨 [2L-Ouest-Services] 02/10/2025 07:10:49 🚨| ⠹ ERROR    | unhandledRejection: Configuration SMTP invalide
+Error: Configuration SMTP invalide
+    at EmailService.verifyTransporter (/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js:56:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)[0m
+[3m╭────────────────── Métadonnées ──────────────────╮[0m
+[3m│ {[0m
+[3m│ [1;34m  "error": [0m[3m{[0m
+[3m│ [1;34m    "statusCode": [0m[3m500,[0m
+[3m│ [1;34m    "details": [0m[3m"Client network socket disconnected before secure TLS connection was established",[0m
+[3m│ [1;34m    "isOperational": [0m[3mtrue[0m
+[3m│   },[0m
+[3m│ [1;34m  "stack": [0m[3m"Error: Configuration SMTP invalide\n    at EmailService.verifyTransporter (/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js:56:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",[0m
+[3m│ [1;34m  "rejection": [0m[3mtrue,[0m
+[3m│ [1;34m  "date": [0m[3m"Thu Oct 02 2025 07:10:49 GMT+0100 (heure normale d’Afrique de l’Ouest)",[0m
+[3m│ [1;34m  "process": [0m[3m{[0m
+[3m│ [1;34m    "pid": [0m[3m11049,[0m
+[3m│ [1;34m    "uid": [0m[3m1000,[0m
+[3m│ [1;34m    "gid": [0m[3m1000,[0m
+[3m│ [1;34m    "cwd": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend",[0m
+[3m│ [1;34m    "execPath": [0m[3m"/home/stive-junior/.nvm/versions/node/v24.5.0/bin/node",[0m
+[3m│ [1;34m    "version": [0m[3m"v24.5.0",[0m
+[3m│ [1;34m    "argv": [0m[3m[[0m
+[3m│       "/home/stive-junior/.nvm/versions/node/v24.5.0/bin/node",[0m
+[3m│       "/home/stive-junior/2L-Ouest-Services/backend/app.js"[0m
+[3m│     ],[0m
+[3m│ [1;34m    "memoryUsage": [0m[3m{[0m
+[3m│ [1;34m      "rss": [0m[3m157327360,[0m
+[3m│ [1;34m      "heapTotal": [0m[3m118259712,[0m
+[3m│ [1;34m      "heapUsed": [0m[3m54403520,[0m
+[3m│ [1;34m      "external": [0m[3m3687517,[0m
+[3m│ [1;34m      "arrayBuffers": [0m[3m119659[0m
+[3m│     }[0m
+[3m│   },[0m
+[3m│ [1;34m  "os": [0m[3m{[0m
+[3m│ [1;34m    "loadavg": [0m[3m[[0m
+[3m│       1.35,[0m
+[3m│       2.18,[0m
+[3m│       2.59[0m
+[3m│     ],[0m
+[3m│ [1;34m    "uptime": [0m[3m1807.21[0m
+[3m│   },[0m
+[3m│ [1;34m  "trace": [0m[3m[[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m13,[0m
+[3m│ [1;34m      "file": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js",[0m
+[3m│ [1;34m      "function": [0m[3m"EmailService.verifyTransporter",[0m
+[3m│ [1;34m      "line": [0m[3m56,[0m
+[3m│ [1;34m      "method": [0m[3m"verifyTransporter",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m5,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/process/task_queues",[0m
+[3m│ [1;34m      "function": [0m[3m"process.processTicksAndRejections",[0m
+[3m│ [1;34m      "line": [0m[3m105,[0m
+[3m│ [1;34m      "method": [0m[3m"processTicksAndRejections",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     }[0m
+[3m│   ][0m
+[3m│ }[0m
+[3m╰─────────────────────────────────────────────────╯[0m
+[1;31m🚨 [2L-Ouest-Services] 02/10/2025 07:11:27 🚨| ⠹ ERROR    | unhandledRejection: Configuration SMTP invalide
+Error: Configuration SMTP invalide
+    at EmailService.verifyTransporter (/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js:56:13)[0m
+[3m╭────────────────── Métadonnées ──────────────────╮[0m
+[3m│ {[0m
+[3m│ [1;34m  "error": [0m[3m{[0m
+[3m│ [1;34m    "statusCode": [0m[3m500,[0m
+[3m│ [1;34m    "details": [0m[3m"Greeting never received",[0m
+[3m│ [1;34m    "isOperational": [0m[3mtrue[0m
+[3m│   },[0m
+[3m│ [1;34m  "stack": [0m[3m"Error: Configuration SMTP invalide\n    at EmailService.verifyTransporter (/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js:56:13)",[0m
+[3m│ [1;34m  "rejection": [0m[3mtrue,[0m
+[3m│ [1;34m  "date": [0m[3m"Thu Oct 02 2025 07:11:27 GMT+0100 (heure normale d’Afrique de l’Ouest)",[0m
+[3m│ [1;34m  "process": [0m[3m{[0m
+[3m│ [1;34m    "pid": [0m[3m11381,[0m
+[3m│ [1;34m    "uid": [0m[3m1000,[0m
+[3m│ [1;34m    "gid": [0m[3m1000,[0m
+[3m│ [1;34m    "cwd": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend",[0m
+[3m│ [1;34m    "execPath": [0m[3m"/home/stive-junior/.nvm/versions/node/v24.5.0/bin/node",[0m
+[3m│ [1;34m    "version": [0m[3m"v24.5.0",[0m
+[3m│ [1;34m    "argv": [0m[3m[[0m
+[3m│       "/home/stive-junior/.nvm/versions/node/v24.5.0/bin/node",[0m
+[3m│       "/home/stive-junior/2L-Ouest-Services/backend/app.js"[0m
+[3m│     ],[0m
+[3m│ [1;34m    "memoryUsage": [0m[3m{[0m
+[3m│ [1;34m      "rss": [0m[3m163307520,[0m
+[3m│ [1;34m      "heapTotal": [0m[3m112230400,[0m
+[3m│ [1;34m      "heapUsed": [0m[3m68300432,[0m
+[3m│ [1;34m      "external": [0m[3m3695435,[0m
+[3m│ [1;34m      "arrayBuffers": [0m[3m127577[0m
+[3m│     }[0m
+[3m│   },[0m
+[3m│ [1;34m  "os": [0m[3m{[0m
+[3m│ [1;34m    "loadavg": [0m[3m[[0m
+[3m│       0.89,[0m
+[3m│       1.95,[0m
+[3m│       2.5[0m
+[3m│     ],[0m
+[3m│ [1;34m    "uptime": [0m[3m1845.7[0m
+[3m│   },[0m
+[3m│ [1;34m  "trace": [0m[3m[[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m13,[0m
+[3m│ [1;34m      "file": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js",[0m
+[3m│ [1;34m      "function": [0m[3m"EmailService.verifyTransporter",[0m
+[3m│ [1;34m      "line": [0m[3m56,[0m
+[3m│ [1;34m      "method": [0m[3m"verifyTransporter",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     }[0m
+[3m│   ][0m
+[3m│ }[0m
+[3m╰─────────────────────────────────────────────────╯[0m
+[1;31m🚨 [2L-Ouest-Services] 02/10/2025 07:21:27 🚨| ⠹ ERROR    | unhandledRejection: Configuration SMTP invalide
+Error: Configuration SMTP invalide
+    at EmailService.verifyTransporter (/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js:56:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)[0m
+[3m╭────────────────── Métadonnées ──────────────────╮[0m
+[3m│ {[0m
+[3m│ [1;34m  "error": [0m[3m{[0m
+[3m│ [1;34m    "statusCode": [0m[3m500,[0m
+[3m│ [1;34m    "details": [0m[3m"Connection timeout",[0m
+[3m│ [1;34m    "isOperational": [0m[3mtrue[0m
+[3m│   },[0m
+[3m│ [1;34m  "stack": [0m[3m"Error: Configuration SMTP invalide\n    at EmailService.verifyTransporter (/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js:56:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",[0m
+[3m│ [1;34m  "rejection": [0m[3mtrue,[0m
+[3m│ [1;34m  "date": [0m[3m"Thu Oct 02 2025 07:21:27 GMT+0100 (heure normale d’Afrique de l’Ouest)",[0m
+[3m│ [1;34m  "process": [0m[3m{[0m
+[3m│ [1;34m    "pid": [0m[3m13527,[0m
+[3m│ [1;34m    "uid": [0m[3m1000,[0m
+[3m│ [1;34m    "gid": [0m[3m1000,[0m
+[3m│ [1;34m    "cwd": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend",[0m
+[3m│ [1;34m    "execPath": [0m[3m"/home/stive-junior/.nvm/versions/node/v24.5.0/bin/node",[0m
+[3m│ [1;34m    "version": [0m[3m"v24.5.0",[0m
+[3m│ [1;34m    "argv": [0m[3m[[0m
+[3m│       "/home/stive-junior/.nvm/versions/node/v24.5.0/bin/node",[0m
+[3m│       "/home/stive-junior/2L-Ouest-Services/backend/app.js"[0m
+[3m│     ],[0m
+[3m│ [1;34m    "memoryUsage": [0m[3m{[0m
+[3m│ [1;34m      "rss": [0m[3m127647744,[0m
+[3m│ [1;34m      "heapTotal": [0m[3m50626560,[0m
+[3m│ [1;34m      "heapUsed": [0m[3m47370616,[0m
+[3m│ [1;34m      "external": [0m[3m3665555,[0m
+[3m│ [1;34m      "arrayBuffers": [0m[3m97697[0m
+[3m│     }[0m
+[3m│   },[0m
+[3m│ [1;34m  "os": [0m[3m{[0m
+[3m│ [1;34m    "loadavg": [0m[3m[[0m
+[3m│       1.21,[0m
+[3m│       3.36,[0m
+[3m│       3.2[0m
+[3m│     ],[0m
+[3m│ [1;34m    "uptime": [0m[3m2446.03[0m
+[3m│   },[0m
+[3m│ [1;34m  "trace": [0m[3m[[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m13,[0m
+[3m│ [1;34m      "file": [0m[3m"/home/stive-junior/2L-Ouest-Services/backend/services/emailService.js",[0m
+[3m│ [1;34m      "function": [0m[3m"EmailService.verifyTransporter",[0m
+[3m│ [1;34m      "line": [0m[3m56,[0m
+[3m│ [1;34m      "method": [0m[3m"verifyTransporter",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     },[0m
+[3m│     {[0m
+[3m│ [1;34m      "column": [0m[3m5,[0m
+[3m│ [1;34m      "file": [0m[3m"node:internal/process/task_queues",[0m
+[3m│ [1;34m      "function": [0m[3m"process.processTicksAndRejections",[0m
+[3m│ [1;34m      "line": [0m[3m105,[0m
+[3m│ [1;34m      "method": [0m[3m"processTicksAndRejections",[0m
+[3m│ [1;34m      "native": [0m[3mfalse[0m
+[3m│     }[0m
+[3m│   ][0m
+[3m│ }[0m
+[3m╰─────────────────────────────────────────────────╯[0m

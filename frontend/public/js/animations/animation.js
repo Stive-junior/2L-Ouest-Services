@@ -19,7 +19,9 @@
 // Imports essentiels
 import { showNotification, openLightbox } from '../modules/utils.js';
 import api from '../api.js';
-import { renderServices, loadServices } from '../injection/loadService.js';
+import loadServicesModule, { getServiceIndex, setServiceIndex } from '../injection/loadService.js';
+const { loadServices, renderServicesSidebar, renderServiceDetail, navigateService, toggleServicesLoading } = loadServicesModule;
+
 
 // Icônes SVG pour catégories avec effets néon
 const categoryIcons = {
@@ -74,7 +76,7 @@ let MOCK_PRICING = [];
 let MOCK_CONTACTS = [];
 let WHY_US_DATA = [];
 let ECO_DATA = [];
-
+let currentServiceIndex = getServiceIndex();
 /**
  * Charge les données mock depuis JSON avec fallback détaillé et logs.
  * @async
@@ -2450,355 +2452,740 @@ function initBeforeAfterSliders() {
 
 
 
-/**
- * Initialise les modales vidéo avec gestion plein écran
- */
-function initVideoModal() {
-  const videoModal = document.createElement('div');
-  videoModal.id = 'video-modal';
-  videoModal.className = 'fixed inset-0 bg-black/75 flex items-center justify-center z-50 p-4 hidden transition-opacity duration-300 backdrop-blur-sm';
-  videoModal.innerHTML = `
-    <div class="bg-black rounded-2xl shadow-2xl max-w-4xl w-full transform scale-95 transition-transform duration-500 relative border border-blue-500/30 shadow-neon-blue">
-      <button class="absolute -top-12 right-0 text-white text-2xl z-10 close-video-modal focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Fermer la modale vidéo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
-        </svg>
-      </button>
-      <div class="aspect-video bg-black rounded-lg overflow-hidden">
-        <video id="modal-video" class="w-full h-full" controls preload="metadata">
-          <source src="" type="video/mp4">
-          Votre navigateur ne supporte pas la balise vidéo.
-        </video>
-      </div>
-      <button class="absolute bottom-4 right-4 bg-black/50 text-white p-2 rounded-full z-10 fullscreen-video focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Passer en plein écran">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
-        </svg>
-      </button>
-    </div>
-  `;
-  document.body.appendChild(videoModal);
 
-  const modalVideo = document.getElementById('modal-video');
-  const closeButton = videoModal.querySelector('.close-video-modal');
-  const fullscreenButton = videoModal.querySelector('.fullscreen-video');
 
-  document.querySelectorAll('.carousel-slide video').forEach(video => {
-    const playButton = document.createElement('button');
-    playButton.className =
-      'absolute bottom-4 right-4 bg-black/50 text-white p-2 rounded-full z-20 video-play-button hover:bg-blue-600 transition-colors shadow-neon-blue focus:outline-none focus:ring-2 focus:ring-blue-500';
-    playButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>';
-    playButton.setAttribute('aria-label', 'Ouvrir la vidéo en plein écran');
-    playButton.addEventListener('click', () => {
-      videoModal.classList.remove('hidden');
-      modalVideo.src = video.querySelector('source').src;
-      modalVideo.play().catch(error => console.error('Erreur de lecture vidéo:', error));
-      document.body.style.overflow = 'hidden';
-    });
-    video.parentElement.appendChild(playButton);
-  });
 
-  const closeModal = () => {
-    videoModal.classList.add('hidden');
-    modalVideo.pause();
-    document.body.style.overflow = 'auto';
-  };
-
-  closeButton.addEventListener('click', closeModal);
-
-  videoModal.addEventListener('click', e => {
-    if (e.target === videoModal) {
-      closeModal();
-    }
-  });
-
-  fullscreenButton.addEventListener('click', () => {
-    if (modalVideo.requestFullscreen) {
-      modalVideo.requestFullscreen();
-    } else if (modalVideo.webkitRequestFullscreen) {
-      modalVideo.webkitRequestFullscreen();
-    } else if (modalVideo.msRequestFullscreen) {
-      modalVideo.msRequestFullscreen();
-    }
-  });
-
-  videoModal.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
-      closeModal();
-    }
-  });
-}
+let reviewsModal = null;
+let categoryModal = null;
+let filterInactivityTimer = null;
+const INACTIVITY_CLOSE_DELAY = 5000; 
 
 /**
- * Initialise la modale de sélection de catégorie
+ * Initialise les modales vidéo avec gestion plein écran et effets futuristes
  */
-function initCategoryModal() {
-  const categoryButton = document.getElementById('category-button');
-  const categoryModal = document.getElementById('category-modal');
-  const closeCategoryModal = document.getElementById('close-category-modal');
-  const categorySearch = document.getElementById('category-search');
-  const categoryList = document.getElementById('category-list');
+export function initVideoModal() {
+    const videoModal = document.createElement('div');
+    videoModal.id = 'video-modal';
+    videoModal.className = 'fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4 transition-all duration-500 backdrop-blur-xl hidden modal-overlay';
+    videoModal.innerHTML = `
+        <div class="modal-content bg-gradient-to-b from-black/80 to-black/100 text-white max-w-6xl w-full relative overflow-hidden neon-glow">
+            <button class="absolute -top-4 right-0 text-white text-2xl z-10 close-video-modal hover:text-blue-400 transition-all p-3 rounded-full hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Fermer la modale vidéo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="aspect-video bg-black rounded-xl overflow-hidden relative">
+                <video id="modal-video" class="w-full h-full" controls preload="metadata" poster="/assets/images/video-poster.jpg">
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne supporte pas la balise vidéo.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
+            </div>
+            <div class="absolute bottom-6 right-6 flex gap-3">
+                <button class="fullscreen-video bg-black/60 text-white p-3 rounded-xl hover:bg-black/80 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Passer en plein écran">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(videoModal);
 
-  if (!categoryButton || !categoryModal || !closeCategoryModal || !categorySearch || !categoryList) {
-    //console.warn('Éléments de la modale de catégorie non trouvés');
-    return;
-  }
+    const modalVideo = document.getElementById('modal-video');
+    const closeButton = videoModal.querySelector('.close-video-modal');
+    const fullscreenButton = videoModal.querySelector('.fullscreen-video');
 
-  function updateCategoryList(searchQuery = '') {
-    const filteredCategories = MOCK_CATEGORIES.filter(category =>
-      category.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    categoryList.innerHTML = filteredCategories.map(
-      category => `
-        <button class="category-item flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-neon-blue" data-category="${category.id}" tabindex="0" data-aos="fade-up" data-aos-delay="${Math.random() * 100}">
-          ${category.icon}
-          <span class="text-sm font-medium text-gray-900 dark:text-white">${category.name}</span>
-        </button>
-      `
-    ).join('');
-    AOS.refresh();
-  }
-
-  updateCategoryList();
-
-  categoryButton.addEventListener('click', () => {
-    categoryModal.classList.remove('hidden');
-    categorySearch.focus();
-    AOS.refresh();
-  });
-
-  closeCategoryModal.addEventListener('click', () => {
-    categoryModal.classList.add('hidden');
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !categoryModal.classList.contains('hidden')) {
-      categoryModal.classList.add('hidden');
-    }
-  });
-
-  categorySearch.addEventListener('input', debounce(e => {
-    updateCategoryList(e.target.value);
-  }, 300));
-
-  categoryList.addEventListener('click', e => {
-    const button = e.target.closest('.category-item');
-    if (button) {
-      const categoryId = button.dataset.category;
-      const category = MOCK_CATEGORIES.find(c => c.id === categoryId);
-      if (category) {
-        document.getElementById('selected-category').textContent = category.name;
-        document.getElementById('category-input').value = category.id;
-        categoryModal.classList.add('hidden');
-        updateFilters();
-      }
-    }
-  });
-
-  categoryList.addEventListener('keydown', e => {
-    const items = categoryList.querySelectorAll('.category-item');
-    const currentItem = document.activeElement;
-    const index = Array.from(items).indexOf(currentItem);
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      const nextIndex = (index + 1) % items.length;
-      items[nextIndex].focus();
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      const prevIndex = (index - 1 + items.length) % items.length;
-      items[prevIndex].focus();
-    } else if (e.key === 'Enter' && currentItem.classList.contains('category-item')) {
-      currentItem.click();
-    }
-  });
-}
-
-/**
- * Initialise les sélecteurs de nombres
- */
-function initNumberPicker() {
-  document.querySelectorAll('.number-picker').forEach(picker => {
-    const input = picker.querySelector('input[type="number"]');
-    const upButton = picker.querySelector('.increase');
-    const downButton = picker.querySelector('.decrease');
-
-    if (!input || !upButton || !downButton) {
-      console.warn('Éléments du sélecteur de nombres non trouvés');
-      return;
-    }
-
-    const min = parseInt(input.min) || 0;
-    const max = parseInt(input.max) || 1000;
-    const step = parseInt(input.step) || 1;
-
-    const updateValue = value => {
-      const newValue = Math.max(min, Math.min(max, value));
-      input.value = newValue;
-      updateFilters();
+    const closeModal = () => {
+        videoModal.classList.remove('open');
+        setTimeout(() => {
+            videoModal.classList.add('hidden');
+            modalVideo.pause();
+            modalVideo.currentTime = 0;
+            document.body.style.overflow = 'auto';
+        }, 300);
     };
 
-    upButton.addEventListener('click', () => {
-      updateValue(parseInt(input.value || min) + step);
+    closeButton.addEventListener('click', closeModal);
+
+    videoModal.addEventListener('click', e => {
+        if (e.target === videoModal) {
+            closeModal();
+        }
     });
 
-    downButton.addEventListener('click', () => {
-      updateValue(parseInt(input.value || min) - step);
+    fullscreenButton.addEventListener('click', () => {
+        if (modalVideo.requestFullscreen) {
+            modalVideo.requestFullscreen();
+        } else if (modalVideo.webkitRequestFullscreen) {
+            modalVideo.webkitRequestFullscreen();
+        } else if (modalVideo.msRequestFullscreen) {
+            modalVideo.msRequestFullscreen();
+        }
     });
 
-    input.addEventListener('input', () => {
-      updateValue(parseInt(input.value) || min);
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+            closeModal();
+        }
     });
 
-    input.addEventListener('keydown', e => {
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        updateValue(parseInt(input.value || min) + step);
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        updateValue(parseInt(input.value || min) - step);
-      }
+    // Video ended event
+    modalVideo.addEventListener('ended', () => {
+        setTimeout(closeModal, 2000);
     });
-  });
+
+    // Exposer la fonction pour ouvrir la modale vidéo
+    window.openVideoModal = (videoSrc) => {
+        videoModal.classList.remove('hidden');
+        setTimeout(() => videoModal.classList.add('open'), 10);
+        modalVideo.src = videoSrc;
+        modalVideo.play().catch(error => console.error('Erreur de lecture vidéo:', error));
+        document.body.style.overflow = 'hidden';
+    };
 }
 
-
 /**
- * Affiche l'animation de chargement
+ * Crée et initialise la modale pour la sélection des avis par étoiles
  */
-function showLoadingAnimation() {
-  const servicesContainer = document.getElementById('services-list');
-  if (!servicesContainer) return;
-
-  servicesContainer.innerHTML = `
-    <div class="flex justify-center items-center h-64" id="loading-animation" data-aos="zoom-in">
-      <lottie-player src="/assets/json/animation.json" background="transparent" speed="1" style="width: 150px; height: 150px;" loop autoplay></lottie-player>
-    </div>
-  `;
-}
-
-/**
- * Affiche un message pour résultats vides
- */
-function showNoResultsMessage(suggestedServices) {
-  const servicesContainer = document.getElementById('services-list');
-  if (!servicesContainer) return;
-
-  servicesContainer.innerHTML = `
-    <div class="text-center py-12" data-aos="fade-up">
-      <h3 class="text-xl font-cinzel font-bold text-gray-900 dark:text-white mb-4 shadow-neon-blue">Aucun résultat trouvé</h3>
-      <p class="text-gray-600 dark:text-gray-300 mb-8">Veuillez modifier vos filtres pour voir plus de services.</p>
-      <button id="reset-filters" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-neon-blue focus:outline-none focus:ring-2 focus:ring-blue-500">Réinitialiser les filtres</button>
-    </div>
-    ${
-      suggestedServices.length > 0
-        ? `
-      <div class="mt-12">
-        <h3 class="text-xl font-cinzel font-bold text-gray-900 dark:text-white mb-6 shadow-neon-blue">Ces services pourraient vous intéresser</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          ${suggestedServices
-            .map(
-              service => `
-            <div class="service-card-enhanced bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-transform duration-300 hover:scale-105 hover:shadow-neon-blue" data-aos="flip-up" data-aos-delay="${Math.random() * 100}">
-              <h4 class="text-lg font-semibold text-gray-900 dark:text-white">${service.title}</h4>
-              <p class="text-gray-600 dark:text-gray-300 mt-2">${service.description}</p>
-              <button class="mt-4 text-blue-600 hover:text-blue-700 font-semibold expand-service" data-service-id="${service.id}" aria-label="En savoir plus sur ${service.title}">
-                En savoir plus
-              </button>
+function initReviewsModal() {
+    reviewsModal = document.createElement('div');
+    reviewsModal.className = 'modal-overlay hidden';
+    reviewsModal.innerHTML = `
+        <div class="modal-content">
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Sélectionner le minimum d'avis</h3>
+            <div class="star-selection-container">
+                <div class="star-row" id="star-row">
+                    ${[...Array(5)].map((_, i) => `
+                        <svg class="star-svg ${i === 0 ? 'selected' : ''}" data-level="${i + 1}" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    `).join('')}
+                </div>
+                <div class="selection-label text-center mt-4 text-gray-600 dark:text-gray-300" id="selection-label">
+                    Cliquez sur une étoile pour sélectionner
+                </div>
+                <div class="tooltip text-center mt-2 text-sm text-gray-500 dark:text-gray-400 hidden" id="tooltip">
+                    <!-- Tooltip will be updated here -->
+                </div>
             </div>
-          `
-            )
-            .join('')}
+            <div class="flex justify-center mt-8 gap-4">
+                <button id="reviews-modal-cancel" class="px-6 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-xl hover:bg-gray-400 dark:hover:bg-gray-500 transition-all duration-300">Annuler</button>
+                <button id="reviews-modal-confirm" class="px-6 py-2 bg-ll-blue text-white rounded-xl hover:bg-blue-700 transition-all duration-300">Confirmer</button>
+            </div>
         </div>
-      </div>
-    `
-        : ''
+    `;
+    document.body.appendChild(reviewsModal);
+
+    const starRow = document.getElementById('star-row');
+    const selectionLabel = document.getElementById('selection-label');
+    const tooltip = document.getElementById('tooltip');
+
+    // Niveaux d'avis par étoile
+    const reviewLevels = {
+        1: { min: 10, label: '≥ 10 avis' },
+        2: { min: 25, label: '≥ 25 avis' },
+        3: { min: 50, label: '≥ 50 avis' },
+        4: { min: 75, label: '≥ 75 avis' },
+        5: { min: 100, label: '≥ 100 avis' }
+    };
+
+    // Fonction pour mettre à jour l'affichage des étoiles (remplissage)
+    function updateStarDisplay(hoveredLevel = null) {
+        // Trouver le niveau sélectionné
+        let selectedLevel = null;
+        starRow.querySelectorAll('.star-svg').forEach(star => {
+            if (star.classList.contains('selected')) {
+                selectedLevel = parseInt(star.dataset.level);
+            }
+        });
+
+        const fillLevel = hoveredLevel || selectedLevel || 0;
+
+        // Mettre à jour chaque étoile
+        starRow.querySelectorAll('.star-svg').forEach(star => {
+            const level = parseInt(star.dataset.level);
+            if (level <= fillLevel) {
+                star.setAttribute('fill', '#fbbf24');
+                star.setAttribute('stroke', '#fbbf24');
+            } else {
+                star.setAttribute('fill', 'none');
+                star.setAttribute('stroke', '#d1d5db');
+            }
+        });
+
+        // Mettre à jour le label et tooltip
+        if (hoveredLevel) {
+            selectionLabel.textContent = reviewLevels[hoveredLevel].label;
+            tooltip.textContent = `Sélectionnez pour filtrer les services avec au moins ${reviewLevels[hoveredLevel].min} avis et commentaires.`;
+            tooltip.classList.remove('hidden');
+        } else if (selectedLevel) {
+            selectionLabel.textContent = reviewLevels[selectedLevel].label;
+            tooltip.textContent = `Filtre actif : au moins ${reviewLevels[selectedLevel].min} avis et commentaires.`;
+            tooltip.classList.remove('hidden');
+        } else {
+            selectionLabel.textContent = 'Aucun filtre (Tous les services)';
+            tooltip.classList.add('hidden');
+        }
     }
-  `;
 
-  document.getElementById('reset-filters')?.addEventListener('click', () => {
-    const form = document.getElementById('service-filters-form');
-    form.reset();
-    document.getElementById('selected-category').textContent = 'Tout';
-    document.getElementById('category-input').value = 'all';
-    updateFilters();
-  });
-}
+    // Hover effects
+    starRow.addEventListener('mouseenter', (e) => {
+        const hoveredStar = e.target.closest('.star-svg');
+        if (hoveredStar) {
+            const level = parseInt(hoveredStar.dataset.level);
+            updateStarDisplay(level);
+        }
+    }, true);
 
-/**
- * Met à jour les filtres
- */
-const updateFilters = debounce(async () => {
-  const servicesContainer = document.getElementById('services-list');
-  if (!servicesContainer) return;
-
-  showLoadingAnimation();
-
-  const filters = {
-    category: document.getElementById('category-input')?.value || 'all',
-    areaMin: parseInt(document.getElementById('areaMin-input')?.value) || 0,
-    areaMax: parseInt(document.getElementById('areaMax-input')?.value) || 1000,
-    durationMin: parseInt(document.getElementById('durationMin-input')?.value) || 0,
-    durationMax: parseInt(document.getElementById('durationMax-input')?.value) || 24,
-    priceMin: parseInt(document.getElementById('priceMin-input')?.value) || 0,
-    priceMax: parseInt(document.getElementById('priceMax-input')?.value) || 10000,
-    ecoFriendly: document.getElementById('ecoFriendly-input')?.checked || false,
-  };
-
-  try {
-    const services = await loadServices(filters);
-    servicesContainer.classList.add('opacity-0');
-    if (services.length === 0) {
-      const suggestedServices = await loadServices({ limit: 3 });
-      showNoResultsMessage(suggestedServices);
-    } else {
-      setTimeout(() => {
-        renderServices(services);
-        servicesContainer.classList.remove('opacity-0');
-        servicesContainer.classList.add('opacity-100');
-        AOS.refresh();
-        
-      }, 300);
-    }
-  } catch (error) {
-    console.error('Erreur lors du chargement des services:', error);
-    showNotification('Erreur lors du chargement des services.', 'error');
-    showNoResultsMessage([]);
-  }
-}, 500);
-
-/**
- * Initialise les filtres de services
- */
-function initServiceFilters() {
-  const form = document.getElementById('service-filters-form');
-  const filterToggle = document.querySelector('.filter-toggle');
-  const filterContent = document.querySelector('.filter-content');
-  if (!form || !filterToggle || !filterContent) {
-    //console.warn('Éléments des filtres de services non trouvés');
-    return;
-  }
-
-  filterToggle.addEventListener('click', () => {
-    const isOpen = filterContent.classList.contains('open');
-    filterContent.classList.toggle('open', !isOpen);
-  });
-
-  form.querySelectorAll('input, select').forEach(input => {
-    input.addEventListener('change', updateFilters);
-    input.addEventListener('input', updateFilters);
-  });
-
-  const resetButton = document.getElementById('reset-filters');
-  if (resetButton) {
-    resetButton.addEventListener('click', () => {
-      form.reset();
-      document.getElementById('selected-category').textContent = 'Tout';
-      document.getElementById('category-input').value = 'all';
-      updateFilters();
+    starRow.addEventListener('mouseleave', () => {
+        updateStarDisplay(); // Remettre à l'état sélectionné seulement
     });
-  }
+
+    // Sélection par clic
+    starRow.addEventListener('click', (e) => {
+        const clickedStar = e.target.closest('.star-svg');
+        if (clickedStar) {
+            // Désélectionner tous
+            starRow.querySelectorAll('.star-svg').forEach(star => star.classList.remove('selected'));
+            // Sélectionner la cliquée
+            clickedStar.classList.add('selected');
+            const level = parseInt(clickedStar.dataset.level);
+            updateStarDisplay(); // Met à jour avec le nouveau selectedLevel
+            // Mettre à jour l'input caché si nécessaire
+            const input = document.getElementById('reviewsMin-input');
+            if (input) {
+                input.value = reviewLevels[level].min;
+            } else {
+                // Créer si n'existe pas
+                const newInput = document.createElement('input');
+                newInput.type = 'hidden';
+                newInput.id = 'reviewsMin-input';
+                newInput.value = reviewLevels[level].min;
+                document.querySelector('.filter-group')?.appendChild(newInput);
+            }
+        }
+    });
+
+    // Boutons
+    reviewsModal.querySelector('#reviews-modal-cancel').addEventListener('click', closeReviewsModal);
+    reviewsModal.querySelector('#reviews-modal-confirm').addEventListener('click', confirmReviewsSelection);
+
+    function closeReviewsModal() {
+        reviewsModal.classList.remove('open');
+        setTimeout(() => {
+            reviewsModal.classList.add('hidden');
+            updateStarDisplay(); // Reset display
+        }, 300);
+    }
+
+    function confirmReviewsSelection() {
+        const selectedStar = starRow.querySelector('.star-svg.selected');
+        if (selectedStar) {
+            const level = parseInt(selectedStar.dataset.level);
+            const minReviews = reviewLevels[level].min;
+            // Mettre à jour le filtre
+            const input = document.getElementById('reviewsMin-input');
+            if (input) {
+                input.value = minReviews;
+            } else {
+                // Créer si n'existe pas
+                const newInput = document.createElement('input');
+                newInput.type = 'hidden';
+                newInput.id = 'reviewsMin-input';
+                newInput.value = minReviews;
+                document.querySelector('.filter-group')?.appendChild(newInput);
+            }
+            updateActiveFilters();
+            updateServices();
+        }
+        closeReviewsModal();
+    }
+
+    // Ouvrir depuis le picker
+    document.querySelector('.star-picker').addEventListener('click', () => {
+        reviewsModal.classList.remove('hidden');
+        setTimeout(() => {
+            reviewsModal.classList.add('open');
+            updateStarDisplay(); // Initial display
+        }, 10);
+    });
+
+    // Initial display
+    updateStarDisplay();
 }
+
+/**
+ * Crée et initialise la modale pour les catégories (6x sur desktop, 4x sur mobile)
+ */
+function initCategoryModal() {
+    categoryModal = document.createElement('div');
+    categoryModal.className = 'modal-overlay';
+    categoryModal.innerHTML = `
+        <div class="modal-content">
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Sélectionner une catégorie</h3>
+            <input type="text" id="modal-category-search" class="w-full p-3 mb-4 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-ll-blue text-gray-900 dark:text-gray-100" placeholder="Rechercher une catégorie...">
+            <div id="modal-category-grid" class="category-grid"></div>
+            <div class="flex justify-center mt-6 gap-4">
+                <button id="category-modal-cancel" class="px-6 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-xl hover:bg-gray-400 dark:hover:bg-gray-500 transition-all">Annuler</button>
+                <button id="category-modal-confirm" class="px-6 py-2 bg-ll-blue text-white rounded-xl hover:shadow-lg neon-glow transition-all">Confirmer</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(categoryModal);
+
+    // Remplir la grille
+    const categories = [
+        { id: 'bureaux', name: 'Bureaux', icon: '🏢' },
+        { id: 'residentiel', name: 'Résidentiel', icon: '🏠' },
+        { id: 'commercial', name: 'Commercial', icon: '🛍️' },
+        { id: 'industriel', name: 'Industriel', icon: '🏭' },
+        { id: 'medical', name: 'Médical', icon: '🏥' },
+        { id: 'hotelier', name: 'Hôtelier', icon: '🏨' },
+        { id: 'education', name: 'Éducation', icon: '🎓' },
+        { id: 'restaurant', name: 'Restaurant', icon: '🍽️' },
+        { id: 'sport', name: 'Sport & Fitness', icon: '💪' },
+        { id: 'evenementiel', name: 'Événementiel', icon: '🎪' }
+    ];
+
+    const grid = categoryModal.querySelector('#modal-category-grid');
+    grid.innerHTML = categories.map(category => `
+        <button class="category-option flex items-center gap-3 p-4 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-all duration-300 w-full text-left focus:outline-none focus:ring-2 focus:ring-blue-500 group glass-effect ${category.id === getCurrentFilters().category ? 'selected bg-ll-blue text-white' : ''}" data-category="${category.id}">
+            <span class="text-2xl transform group-hover:scale-110 transition-transform">${category.icon}</span>
+            <span class="text-sm font-medium text-gray-900 dark:text-white flex-1">${category.name}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                <path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    `).join('');
+
+    // Recherche dans modale
+    const searchInput = categoryModal.querySelector('#modal-category-search');
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        grid.querySelectorAll('.category-option').forEach(option => {
+            const name = option.querySelector('span:nth-child(2)').textContent.toLowerCase();
+            option.style.display = name.includes(term) ? 'flex' : 'none';
+        });
+    });
+
+    // Sélection
+    grid.addEventListener('click', (e) => {
+        const option = e.target.closest('.category-option');
+        if (option) {
+            grid.querySelectorAll('.category-option').forEach(s => s.classList.remove('selected', 'bg-ll-blue', 'text-white'));
+            option.classList.add('selected', 'bg-ll-blue', 'text-white');
+        }
+    });
+
+    // Boutons
+    categoryModal.querySelector('#category-modal-cancel').addEventListener('click', closeCategoryModal);
+    categoryModal.querySelector('#category-modal-confirm').addEventListener('click', confirmCategorySelection);
+
+    function closeCategoryModal() {
+        categoryModal.classList.remove('open');
+        setTimeout(() => categoryModal.classList.add('hidden'), 300);
+    }
+
+    function confirmCategorySelection() {
+        const selected = grid.querySelector('.category-option.selected');
+        if (selected) {
+            const categoryId = selected.dataset.category;
+            const categoryName = selected.querySelector('span:nth-child(2)').textContent;
+            document.getElementById('selected-category').textContent = categoryName;
+            // Update hidden input
+            let input = document.querySelector('input[name="category"]');
+            if (!input) {
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'category';
+                document.getElementById('category-dropdown').appendChild(input);
+            }
+            input.value = categoryId;
+            updateActiveFilters();
+            updateServices();
+        }
+        closeCategoryModal();
+    }
+
+    // Ouvrir depuis dropdown
+    document.getElementById('category-dropdown').addEventListener('click', (e) => {
+        e.stopPropagation();
+        categoryModal.classList.remove('hidden');
+        setTimeout(() => categoryModal.classList.add('open'), 10);
+    });
+}
+
+/**
+ * Initialise les dropdowns de filtres avec animations (fréquence et difficulté restent dropdowns)
+ */
+function initFilterDropdowns() {
+    const dropdowns = [
+        { trigger: 'frequency-dropdown', menu: 'frequency-options' },
+        { trigger: 'difficulty-dropdown', menu: 'difficulty-options' }
+    ];
+
+    dropdowns.forEach(({ trigger, menu }) => {
+        const triggerEl = document.getElementById(trigger);
+        const menuEl = document.getElementById(menu);
+
+        if (triggerEl && menuEl) {
+            triggerEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = !menuEl.classList.contains('hidden');
+                
+                // Close all other dropdowns
+                document.querySelectorAll('[id$="-options"]').forEach(otherMenu => {
+                    if (otherMenu !== menuEl) {
+                        otherMenu.classList.add('hidden', 'scale-95', 'opacity-0');
+                    }
+                });
+
+                if (isOpen) {
+                    menuEl.classList.add('hidden', 'scale-95', 'opacity-0');
+                } else {
+                    menuEl.classList.remove('hidden');
+                    setTimeout(() => {
+                        menuEl.classList.remove('scale-95', 'opacity-0');
+                    }, 10);
+                }
+            });
+        }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+        document.querySelectorAll('[id$="-options"]').forEach(menu => {
+            menu.classList.add('hidden', 'scale-95', 'opacity-0');
+        });
+    });
+
+    // Événements pour les radios (fréquence et difficulté) - mise à jour immédiate
+    document.querySelectorAll('input[name="frequency"], input[name="difficulty"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.checked && radio.value !== 'all') {
+                const dropdownId = radio.name === 'frequency' ? 'selected-frequency' : 'selected-difficulty';
+                const selectedEl = document.getElementById(dropdownId);
+                if (selectedEl) {
+                    selectedEl.textContent = radio.nextElementSibling.textContent;
+                }
+            } else if (radio.checked && radio.value === 'all') {
+                const dropdownId = radio.name === 'frequency' ? 'selected-frequency' : 'selected-difficulty';
+                const selectedEl = document.getElementById(dropdownId);
+                if (selectedEl) {
+                    selectedEl.textContent = radio.name === 'frequency' ? 'Toutes les fréquences' : 'Tous les niveaux';
+                }
+            }
+            updateActiveFilters();
+            updateServices();
+        });
+    });
+}
+
+
+/**
+ * Initialise le timer d'inactivité - ROBUSTE
+ */
+function initFilterInactivityTimer() {
+    const filterPanel = document.getElementById('filter-panel');
+    if (!filterPanel) return;
+
+    const resetTimer = () => {
+        clearTimeout(filterInactivityTimer);
+        filterInactivityTimer = setTimeout(() => {
+            filterPanel.classList.add('hidden');
+        }, INACTIVITY_CLOSE_DELAY);
+    };
+
+    filterPanel.addEventListener('mousemove', resetTimer);
+    filterPanel.addEventListener('click', resetTimer);
+    filterPanel.addEventListener('scroll', resetTimer);
+
+    const openBtn = document.getElementById('open-filter-panel');
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            if (filterPanel.classList.contains('hidden')) {
+                filterPanel.classList.remove('hidden');
+                resetTimer();
+            } else {
+                filterPanel.classList.add('hidden');
+                clearTimeout(filterInactivityTimer);
+            }
+        });
+    }
+}
+
+/**
+ * Initialise la recherche - DEBOUNCE ET AUTO-UPDATE
+ */
+function initSearch() {
+    const searchInput = document.getElementById('service-search');
+    const clearButton = document.getElementById('clear-search');
+    if (!searchInput || !clearButton) return;
+
+    let searchTimeout;
+    
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(async () => {
+            await updateServices(); // AUTO UPDATE ON SEARCH
+        }, 300);
+        
+        if (e.target.value) {
+            searchInput.parentElement?.classList.add('ring-2', 'ring-ll-blue', 'neon-glow');
+            clearButton.classList.remove('hidden');
+        } else {
+            searchInput.parentElement?.classList.remove('ring-2', 'ring-ll-blue', 'neon-glow');
+            clearButton.classList.add('hidden');
+        }
+    });
+
+    clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.focus();
+        clearButton.classList.add('hidden');
+        updateServices(); // AUTO UPDATE
+    });
+}
+
+
+
+/**
+ * Initialise interactions - AVEC AUTO-UPDATE SUR FILTRES
+ */
+export function initServiceInteractions() {
+    initFilterInactivityTimer();
+    const resetBtn = document.getElementById('reset-filters');
+    if (resetBtn) resetBtn.addEventListener('click', resetAllFilters);
+    
+    initCategoryModal(); 
+    initReviewsModal();  
+    initFilterDropdowns(); 
+    initSearch(); 
+    
+    document.querySelectorAll('input[name="frequency"], input[name="difficulty"]').forEach(radio => {
+        radio.addEventListener('change', updateServices);
+    });
+}
+
+/**
+ * Met à jour l'affichage des filtres actifs - AVEC AUTO-UPDATE
+ */
+function updateActiveFilters() {
+    const activeFiltersContainer = document.getElementById('active-filters');
+    if (!activeFiltersContainer) return;
+
+    const filters = getCurrentFilters();
+    const activeFilters = [];
+
+    if (filters.category && filters.category !== 'all') {
+        const categoryName = document.getElementById('selected-category')?.textContent || 'Catégorie';
+        activeFilters.push({ type: 'category', value: filters.category, label: categoryName, color: 'blue' });
+    }
+
+    if (filters.frequency && filters.frequency !== 'all') {
+        const frequencyName = document.getElementById('selected-frequency')?.textContent || 'Fréquence';
+        activeFilters.push({ type: 'frequency', value: filters.frequency, label: frequencyName, color: 'green' });
+    }
+
+    if (filters.difficulty && filters.difficulty !== 'all') {
+        const difficultyName = document.getElementById('selected-difficulty')?.textContent || 'Difficulté';
+        activeFilters.push({ type: 'difficulty', value: filters.difficulty, label: difficultyName, color: 'purple' });
+    }
+
+    if (filters.reviewsMin > 0) {
+        activeFilters.push({ type: 'reviews', value: filters.reviewsMin, label: `Min. ${filters.reviewsMin} avis`, color: 'yellow' });
+    }
+
+    if (activeFilters.length > 0) {
+        activeFiltersContainer.innerHTML = activeFilters.map(filter => `
+            <span class="inline-flex items-center gap-2 bg-${filter.color}-100/50 dark:bg-${filter.color}-900/50 text-${filter.color}-800 dark:text-${filter.color}-200 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105 cursor-pointer remove-filter glass-effect neon-glow" data-type="${filter.type}">
+                ${filter.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hover:scale-110 transition-transform">
+                    <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
+                </svg>
+            </span>
+        `).join('');
+        activeFiltersContainer.classList.remove('hidden');
+        
+        // Remove listeners et add new
+        document.querySelectorAll('.remove-filter').forEach(button => {
+            button.addEventListener('click', function() {
+                const filterType = this.dataset.type;
+                removeFilter(filterType);
+            });
+        });
+    } else {
+        activeFiltersContainer.classList.add('hidden');
+    }
+}
+
+/**
+ * Supprime un filtre et AUTO-UPDATE
+ */
+function removeFilter(filterType) {
+    switch (filterType) {
+        case 'category':
+            if (document.getElementById('selected-category')) document.getElementById('selected-category').textContent = 'Toutes les catégories';
+            document.querySelector('input[name="category"]')?.remove();
+            break;
+        case 'frequency':
+            if (document.getElementById('selected-frequency')) document.getElementById('selected-frequency').textContent = 'Toutes les fréquences';
+            const freqAll = document.querySelector('input[name="frequency"][value="all"]');
+            if (freqAll) freqAll.checked = true;
+            break;
+        case 'difficulty':
+            if (document.getElementById('selected-difficulty')) document.getElementById('selected-difficulty').textContent = 'Tous les niveaux';
+            const diffAll = document.querySelector('input[name="difficulty"][value="all"]');
+            if (diffAll) diffAll.checked = true;
+            break;
+        case 'reviews':
+            const reviewsInput = document.getElementById('reviewsMin-input');
+            if (reviewsInput) reviewsInput.value = 0;
+            const display = document.getElementById('reviews-star-display');
+            if (display) display.innerHTML = renderStarRatingForReviews(0);
+            break;
+    }
+    updateActiveFilters();
+    updateServices();
+}
+
+
+/**
+ * Récupère les filtres actuels - ROBUSTE
+ */
+function getCurrentFilters() {
+    return {
+        category: document.querySelector('input[name="category"]')?.value || 'all',
+        frequency: document.querySelector('input[name="frequency"]:checked')?.value || 'all',
+        difficulty: document.querySelector('input[name="difficulty"]:checked')?.value || 'all',
+        reviewsMin: parseInt(document.getElementById('reviewsMin-input')?.value || 0) || 0,
+        search: document.getElementById('service-search')?.value || ''
+    };
+}
+
+
+/**
+ * Rend les étoiles pour l'affichage des avis min (similaire à renderStarRating)
+ */
+function renderStarRatingForReviews(rating) {
+    return Array.from({ length: 5 }, (_, i) => `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="${i < rating / 20 ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" class="text-yellow-400">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+    `).join('');
+}
+
+/**
+ * Initialise l'affichage des étoiles pour reviews
+ */
+function initReviewsDisplay() {
+    const display = document.getElementById('reviews-star-display');
+    if (display) {
+        display.innerHTML = renderStarRatingForReviews(0);
+    }
+}
+
+/**
+ * Réinitialise tous les filtres et AUTO-UPDATE
+ */
+function resetAllFilters() {
+    // Reset category
+    if (document.getElementById('selected-category')) document.getElementById('selected-category').textContent = 'Toutes les catégories';
+    document.querySelector('input[name="category"]')?.remove();
+    
+    // Reset frequency
+    if (document.getElementById('selected-frequency')) document.getElementById('selected-frequency').textContent = 'Toutes les fréquences';
+    const freqAll = document.querySelector('input[name="frequency"][value="all"]');
+    if (freqAll) freqAll.checked = true;
+    
+    // Reset difficulty
+    if (document.getElementById('selected-difficulty')) document.getElementById('selected-difficulty').textContent = 'Tous les niveaux';
+    const diffAll = document.querySelector('input[name="difficulty"][value="all"]');
+    if (diffAll) diffAll.checked = true;
+    
+    // Reset reviews
+    const reviewsInput = document.getElementById('reviewsMin-input');
+    if (reviewsInput) reviewsInput.value = 0;
+    const display = document.getElementById('reviews-star-display');
+    if (display) display.innerHTML = renderStarRatingForReviews(0);
+    
+    // Reset search
+    const searchInput = document.getElementById('service-search');
+    const clearBtn = document.getElementById('clear-search');
+    if (searchInput) searchInput.value = '';
+    if (clearBtn) clearBtn.classList.add('hidden');
+    
+    updateActiveFilters();
+    updateServices();
+}
+
+
+/**
+ * Met à jour l'affichage des services - ULTRA SYNCHRO: Sidebar + Details + Pagination + Index Reset
+ */
+async function updateServices() {
+    toggleServicesLoading(true);
+    
+    try {
+        const filters = getCurrentFilters();
+        const services = await loadServices(filters); 
+        
+        renderServicesSidebar(services);
+        
+        if (services.length > 0) {
+            // Sync index
+            setServiceIndex(currentServiceIndex); // Via export
+            renderServiceDetail(services[currentServiceIndex], currentServiceIndex, services.length);
+        } else {
+            showNoServicesMessage();
+        }
+
+        const servicesCount = document.getElementById('services-count');
+        if (servicesCount) servicesCount.textContent = services.length;
+        
+    } catch (error) {
+        console.error('Erreur lors du chargement des services:', error);
+        showNotification('Erreur lors du chargement des services.', 'error');
+       
+        renderServicesSidebar([]);
+        showNoServicesMessage();
+    } finally {
+        toggleServicesLoading(false);
+    }
+}
+
+
+/**
+ * Affiche message no services - ROBUSTE
+ */
+export function showNoServicesMessage() {
+    const container = document.getElementById('service-detail-container');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="text-center py-20 glass-effect neon-glow" data-aos="zoom-in">
+            <div class="max-w-md mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 mx-auto mb-6 animate-pulse">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Aucun service trouvé</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-8">Aucun service ne correspond à vos critères de recherche. Essayez de modifier vos filtres.</p>
+                <button id="reset-search-filters" class="bg-gradient-to-r from-ll-blue to-blue-600 text-white py-3 px-6 rounded-xl hover:from-blue-600 hover:to-ll-dark-blue transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 neon-glow">
+                    Réinitialiser les filtres
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('reset-search-filters')?.addEventListener('click', resetAllFilters);
+}
+
+
 
 
 
@@ -3257,10 +3644,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initStatsSection();
   initPricingSection();
   initContactsSection();
-  initCategoryModal();
-  initNumberPicker();
  // initBeforeAfterSliders();
-  initServiceFilters();
   initParticles();
   initScrollAnimations();
   initVideoModal();
@@ -3268,12 +3652,71 @@ document.addEventListener('DOMContentLoaded', async () => {
   initEco();
   renderBeforeAfter();
 
-  window.openLightbox = openLightbox;
+  
 
-  loadServices().then(services => {
-    renderServices(services);
-    AOS.refresh();
+
+
+    initReviewsDisplay();
+    initServiceInteractions();
+    await updateServices();
+   
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in-up', 'neon-glow');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observer les éléments de services
+    document.querySelectorAll('.service-card, .glass-effect').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Animation pour étoiles sur hover
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.classList.contains('star-filled') || e.target.classList.contains('star-empty')) {
+            e.target.style.transform = 'scale(1.2) rotate(5deg)';
+            e.target.style.filter = 'drop-shadow(0 0 10px #fbbf24)';
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.classList.contains('star-filled') || e.target.classList.contains('star-empty')) {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.filter = 'none';
+        }
+    });
+
+    // Refresh AOS after dynamic content
+    window.addEventListener('load', () => {
+        AOS.refresh();
+    });
+
+
+
+const images = Array.from(document.querySelectorAll('img.lightbox-img, #services img, .gallery img ,img'));
+
+if (images.length === 0) return;
+
+const srcList = images.map(el => el.getAttribute('data-src') || el.src);
+const altList = images.map(el => el.getAttribute('alt') || '');
+
+if (srcList.length === 0) return;
+
+images.forEach((img, index) => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', () => {
+    openLightbox(srcList, index, altList);
   });
+});
+
 
 
   const heroSection = document.getElementById("hero");

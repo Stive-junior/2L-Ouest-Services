@@ -343,6 +343,10 @@ app.get('/api/server-url', (req, res) => {
   });
 });
 
+
+app.use(express.json());
+app.use(authenticate);
+
 // --- Montage des routes avec préfixes API ---
 const apiPrefix = '/api';
 app.use(`${apiPrefix}/auth`, authRoutes);
@@ -356,7 +360,6 @@ app.use(`${apiPrefix}/document`, documentRoutes);
 app.use(`${apiPrefix}/map`, mapRoutes);
 app.use(`${apiPrefix}/notification`, notificationRoutes);
 
-app.use(loggingMiddleware);
 
 // --- Route de santé ---
 app.get('/api/health', async (req, res) => {
@@ -414,6 +417,8 @@ app.get('/api', (req, res) => {
 });
 
 // --- Middleware de gestion des erreurs (doit être en dernier) ---
+
+app.use(loggingMiddleware);
 app.use(errorMiddleware);
 
 // --- Gestion des arrêts gracieux ---

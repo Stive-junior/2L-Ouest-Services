@@ -173,7 +173,7 @@ const contactApi = {
 
       const response = await apiFetch('/contact', 'POST', {
         ...normalizedContactData,
-        clientHtmlTemplate: emailTemplates.contactClientConfirmation(templateData),
+        clientHtmlTemplate: emailTemplates.apologyTemplate(templateData),
         adminHtmlTemplate: emailTemplates.contactAdminNotification(templateData),
       }, false, { context: 'Création Message Contact' });
 

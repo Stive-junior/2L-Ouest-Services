@@ -1,0 +1,990 @@
+📋 [2L-Ouest-Services] 30/09/2025 00:03:37 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "2b3cb8a2-86a2-45c3-80e5-269552bb6cf3",
+  "name": "Nana",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<cfcb1ecd-73d9-1b0b-75b6-ddf325255a55@gmail.com>",
+  "adminMessageId": "<d1c4c9ec-38da-666c-fa0d-4795a2e90ccf@gmail.com>"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:09:48 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:10:04 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:10:19 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:10:34 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:10:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:11:04 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:11:19 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:11:34 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:11:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 00:12:04 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+📋 [2L-Ouest-Services] 30/09/2025 00:24:07 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "0251ccfc-cbc7-402e-a81d-104315d87f07",
+  "name": "Jean Dupont",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<3ae19730-f3bf-ec0a-a671-390e155328c0@gmail.com>",
+  "adminMessageId": "<6b431606-b302-44ca-d05a-6b74ac3bc409@gmail.com>"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 01:50:39 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:00:47 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:02:10 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:34:15 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:34:31 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:39:17 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:43:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:43:28 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:43:41 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:43:58 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:44:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:44:28 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:44:42 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:44:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:45:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:45:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:45:42 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:45:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:46:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:46:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:46:42 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:46:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:47:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:47:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:47:42 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:48:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 02:48:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:48:37 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:49:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:49:37 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:50:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:50:37 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:51:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:51:37 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:52:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:52:37 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:53:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:53:37 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:54:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:54:37 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:55:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:55:37 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:56:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:56:38 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:57:07 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:57:38 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:58:08 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 02:58:34 | ERROR    | Échec de la mise à jour de l'URL dans Firestore
+{
+  "error": "Total timeout of API google.firestore.v1.Firestore exceeded 600000 milliseconds retrying error Error: 14 UNAVAILABLE: Name resolution failed for target dns:firestore.googleapis.com:443  before any response was received.",
+  "stack": "Error: Total timeout of API google.firestore.v1.Firestore exceeded 600000 milliseconds retrying error Error: 14 UNAVAILABLE: Name resolution failed for target dns:firestore.googleapis.com:443  before any response was received.\n    at repeat (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:66:31)\n    at Timeout._onTimeout (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:108:25)\n    at listOnTimeout (node:internal/timers:608:17)\n    at process.processTimers (node:internal/timers:543:7)\nCaused by: Error\n    at _firestore._traceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:438:27)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30\n    at NoopContextManager.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/context/NoopContextManager.js:25:19)\n    at ContextAPI.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/api/context.js:60:46)\n    at NoopTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/NoopTracer.js:65:31)\n    at ProxyTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/ProxyTracer.js:36:24)\n    at EnabledTraceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:102:28)\n    at WriteBatch.commit (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:436:43)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/reference/document-reference.js:350:31\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30"
+}
+📋 [2L-Ouest-Services] 30/09/2025 16:12:21 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "08a1b7fa-27f6-459e-a54d-28a2a0ce7de9",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<77a7aa48-5b48-f8a4-db9e-6577ded14bf3@gmail.com>",
+  "adminMessageId": "<d18b6196-3e6b-e747-d3b8-a67493b19d71@gmail.com>"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 16:31:31 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 16:31:48 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 16:32:02 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 16:32:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 16:32:32 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 16:32:48 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+📋 [2L-Ouest-Services] 30/09/2025 17:01:27 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "b5c38da9-3cf6-4eb5-8dd6-a53237593a53",
+  "name": "yo",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<6685d6a2-54fd-c546-11ed-74e9e92d082e@gmail.com>",
+  "adminMessageId": "<2560a962-f280-9bc5-e586-ad6a8e5a5321@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 17:13:39 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "2fa86dcf-2ef5-4c89-9604-d91af73ff6f4",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<cba8cddd-12fb-0386-2bfd-0799609ef713@gmail.com>",
+  "adminMessageId": "<1cf38355-de0a-b004-669b-8a2665f87a5b@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 17:23:59 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "1fd5243f-407c-4ef8-b7b7-a12a1b8f469b",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<d4cfab81-f90e-7c3c-056a-98022fe946ba@gmail.com>",
+  "adminMessageId": "<6a9769b7-b77a-632a-6cba-e13207d9ce46@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 17:26:47 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "dc3a7bb0-d5f4-4301-abef-5cbaebca4eb8",
+  "name": "sss",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<c77a8a1a-6230-a967-5d6f-4b709df67510@gmail.com>",
+  "adminMessageId": "<8ed7b836-0602-2a17-4611-9c0fdfeb4698@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 17:46:19 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "6c2e553d-eb6c-4178-909e-2a801c279c48",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<1c0cdf60-58b4-1950-5300-886dcc5e28d2@gmail.com>",
+  "adminMessageId": "<7f64b78f-f948-ca92-2ef8-401200d713c5@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 18:07:50 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "a2545fc6-8bf4-407f-8d10-cb3141a793d9",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<1e089579-cc2c-ed09-8de2-5b8a3a1964b0@gmail.com>",
+  "adminMessageId": "<ca01b8d3-27e7-f2ce-73af-01932ff934df@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 18:14:47 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "71ec9f21-f33c-4290-8b3e-6232b32fc433",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<2a88b456-ed7f-4af7-e51c-13e623f84100@gmail.com>",
+  "adminMessageId": "<1bed1a3e-30fe-8ffc-64e4-9d6bf3511a2e@gmail.com>"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 18:19:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 18:24:47 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 18:28:47 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:19:35 | ERROR    | Offline prolongé : Shutdown initié
+📋 [2L-Ouest-Services] 30/09/2025 19:30:31 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "06c6d193-acec-456c-abaf-a29ac0e17c88",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<84e3f653-003f-6805-1007-78f19e178164@gmail.com>",
+  "adminMessageId": "<53182b25-920c-2c34-2936-1b3d5b50ec16@gmail.com>"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:39:43 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:40:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:40:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:40:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:40:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:40:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:40:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:40:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:40:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:41:01 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:41:15 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:41:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:41:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:41:31 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:41:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:41:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:41:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:42:01 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:42:15 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:42:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:42:26 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:42:32 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:42:46 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:42:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:42:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:43:02 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:43:16 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:43:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:43:27 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:43:32 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:43:46 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:43:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:43:58 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 19:44:02 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+📋 [2L-Ouest-Services] 30/09/2025 19:51:44 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "0ff10c03-191f-4888-9a9c-2fda8578049a",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<142cfe5e-4d25-de0a-a9ac-720be5d43918@gmail.com>",
+  "adminMessageId": "<d199ecf0-a890-a5ee-e45e-a4a08abcea7d@gmail.com>"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:40:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:40:16 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:40:22 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:40:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:40:37 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:40:46 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:40:52 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:41:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:41:07 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:41:16 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:41:22 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:41:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:41:39 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:41:47 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:41:53 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:42:01 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:42:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:42:17 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:42:23 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:42:31 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:42:39 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:42:47 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:42:54 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:43:02 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:43:10 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:43:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:43:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:43:32 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 20:43:40 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+📋 [2L-Ouest-Services] 30/09/2025 20:45:52 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "99495325-0234-4993-9389-a6a869b2dbdf",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<10f23e02-3aed-54cb-967e-ac4ac6f72082@gmail.com>",
+  "adminMessageId": "<a75cf9f8-81b0-8eb4-ac9e-5acf3943c1b4@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 21:08:05 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "7673c8a5-5239-4520-b8bc-c8c4b914b173",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<589468b8-c3e1-977b-3d44-a3a756d360e8@gmail.com>",
+  "adminMessageId": "<01c37482-5a70-d44e-5352-d7bc15c87dff@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 21:25:54 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "1a91b456-9bf2-4c4d-a11d-31077a8f733f",
+  "name": "Mategne Chendjou Stakyra",
+  "email": "stakyramategnechendjou@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<04593ae5-3080-a12d-5b7f-5c42afa34111@gmail.com>",
+  "adminMessageId": "<8226e428-bc55-9c49-27be-11a71ba27fdb@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 21:27:45 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "e34dbf25-f269-4bfc-a972-91dc3df8ec05",
+  "name": "Mategne Chendjou Stakyra",
+  "email": "stakyramategnechendjou@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<b257a1cb-ba37-6356-1f24-39583b2b7bf2@gmail.com>",
+  "adminMessageId": "<b8137120-eb59-73c4-2f05-15bb640bf40b@gmail.com>"
+}
+📋 [2L-Ouest-Services] 30/09/2025 21:31:23 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "bf79cb2e-775a-4896-a6cc-7c82ef3e8f04",
+  "name": "Mategne Chendjou Stakyra",
+  "email": "stakyramategnechendjou@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<333916eb-669a-327c-9db5-5f096ed1f2c0@gmail.com>",
+  "adminMessageId": "<07218e26-e4b1-e85d-6394-2e22d18f5d12@gmail.com>"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 21:49:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:30:15 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:30:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:30:32 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:30:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:30:48 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:31:01 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:31:03 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:31:16 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:31:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:31:31 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:31:33 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:31:46 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:31:48 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:32:01 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:32:03 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:32:16 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:32:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:32:31 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:32:33 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:32:46 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:32:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:33:01 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:33:04 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:33:17 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:33:19 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:33:32 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:33:34 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:33:47 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:33:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:34:02 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:34:04 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:34:17 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:34:19 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:34:32 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:34:34 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:34:47 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:34:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:35:02 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:35:04 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:35:17 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:35:20 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 30/09/2025 22:35:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:35:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:36:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:36:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:37:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:37:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:38:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:38:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:39:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:39:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:40:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:40:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:41:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:41:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:42:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:42:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:43:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:43:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:44:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:44:52 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:45:22 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 30/09/2025 22:45:36 | ERROR    | Échec de la mise à jour de l'URL dans Firestore
+{
+  "error": "Total timeout of API google.firestore.v1.Firestore exceeded 600000 milliseconds retrying error Error: 14 UNAVAILABLE: Name resolution failed for target dns:firestore.googleapis.com:443  before any response was received.",
+  "stack": "Error: Total timeout of API google.firestore.v1.Firestore exceeded 600000 milliseconds retrying error Error: 14 UNAVAILABLE: Name resolution failed for target dns:firestore.googleapis.com:443  before any response was received.\n    at repeat (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:66:31)\n    at Timeout._onTimeout (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:108:25)\n    at listOnTimeout (node:internal/timers:608:17)\n    at process.processTimers (node:internal/timers:543:7)\nCaused by: Error\n    at _firestore._traceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:438:27)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30\n    at NoopContextManager.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/context/NoopContextManager.js:25:19)\n    at ContextAPI.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/api/context.js:60:46)\n    at NoopTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/NoopTracer.js:65:31)\n    at ProxyTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/ProxyTracer.js:36:24)\n    at EnabledTraceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:102:28)\n    at WriteBatch.commit (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:436:43)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/reference/document-reference.js:350:31\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30"
+}

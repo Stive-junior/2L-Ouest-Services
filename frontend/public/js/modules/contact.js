@@ -12,18 +12,30 @@ import { showNotification, validateField, showLoadingDialog, formatDate, handleA
 let isSubmitting = false;
 
 const contact = {
+
   subjectsList: [
-    { name: 'Demande de devis', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5h6m-6 4h6m-6 4h3m-6 4h6m2-12h4a2 2 0 012 2v8a2 2 0 01-2 2h-4" />', type: 'quote' },
-    { name: 'Service client', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />', type: 'support' },
-    { name: 'Partenariat', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />', type: 'partner' },
-    { name: 'Nettoyage résidentiel', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />' },
-    { name: 'Nettoyage commercial', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7a3 3 0 11-6 0 3 3 0 016 0z" />' },
-    { name: 'Nettoyage en profondeur', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />' },
-    { name: 'Nettoyage de vitres', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />' },
-    { name: 'Nettoyage après travaux', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 0115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />' },
-    { name: 'Désinfection', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z m-1 15v-2h2v2h-2z m0-4v-6h2v6h-2z" />' },
-    { name: 'Autre', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />', type: 'other' },
-  ],
+  { name: 'Demande de devis', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5h6m-6 4h6m-6 4h3m-6 4h6m2-12h4a2 2 0 012 2v8a2 2 0 01-2 2h-4" />', description: 'Obtenez un devis personnalisé pour vos besoins en nettoyage.', type: 'quote' },
+  { name: 'Service client', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />', description: 'Contactez notre équipe pour toute question ou assistance.', type: 'support' },
+  { name: 'Partenariat', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />', description: 'Proposez un partenariat ou une collaboration avec notre entreprise.', type: 'partner' },
+  { name: 'Nettoyage résidentiel', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />', description: 'Services de nettoyage pour maisons et appartements.' },
+  { name: 'Nettoyage commercial', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7a3 3 0 11-6 0 3 3 0 016 0z" />', description: 'Nettoyage pour bureaux, magasins et espaces commerciaux.' },
+  { name: 'Nettoyage en profondeur', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />', description: 'Nettoyage détaillé et approfondi de toutes les surfaces.' },
+  { name: 'Nettoyage de vitres', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />', description: 'Nettoyage professionnel des vitres et fenêtres.' },
+  { name: 'Nettoyage après travaux', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 0115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />', description: 'Élimination des débris et poussières après rénovation.' },
+  { name: 'Désinfection', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z m-1 15v-2h2v2h-2z m0-4v-6h2v6h-2z" />', description: 'Désinfection complète pour éliminer bactéries et virus.' },
+  { name: 'Nettoyage de bureaux', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />', description: 'Entretien quotidien ou hebdomadaire des espaces de bureau.' },
+  { name: 'Nettoyage industriel', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />', description: 'Nettoyage pour usines et sites industriels.' },
+  { name: 'Nettoyage de tapis et moquettes', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />', description: 'Nettoyage spécialisé des tapis, moquettes et tissus d\'ameublement.' },
+  { name: 'Nettoyage de sols', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />', description: 'Nettoyage et polissage de tous types de sols.' },
+  { name: 'Nettoyage écologique', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 002-2 2 2 0 100-4H3v1.935a2 2 0 011.055 1.765l.055 8.5A2 2 0 005.055 21H6.5a2.5 2.5 0 002.5-2.5V18a2 2 0 012-2 2 2 0 014 0v.5A2.5 2.5 0 0017 19h1.445a2 2 0 001.945-1.5l.055-8.5A2 2 0 0121 8.935V7h-2a2 2 0 100 4h-1.945" />', description: 'Utilisation de produits éco-responsables pour un nettoyage vert.' },
+  { name: 'Nettoyage de fin de bail', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />', description: 'Nettoyage complet pour état des lieux de sortie.' },
+  { name: 'Nettoyage après événement', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.438l1-1.68a2 2 0 012.124 0L13 3h6a2 2 0 012 2v12m-2 4v4m-4 0v-4m4 0H5m4 0H5" />', description: 'Remise en état après fêtes, mariages ou événements.' },
+  { name: 'Maintenance régulière', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />', description: 'Contrats d\'entretien périodique pour propreté continue.' },
+  { name: 'Nettoyage de véhicules', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />', description: 'Nettoyage intérieur et extérieur de voitures et flottes.' },
+  { name: 'Autre', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />', description: 'Tout autre sujet ou demande personnalisée.', type: 'other' },
+],
+
+
 
   /**
    * Initialise le module de contact.
@@ -192,17 +204,19 @@ showFieldError(field, message) {
       errorElement.classList.add('text-green-500', 'block');
       input.classList.add('border-green-500', 'focus:border-green-500', 'focus:ring-green-500/50');
     } else if (message.includes('fa-spinner') || message.toLowerCase().includes('vérification')) {
-      // Vérification en cours ou message contenant "vérification" (bleu)
+
       errorElement.innerHTML = `<span class="text-blue-500"><i class="fas ${message.includes('fa-spinner') ? 'fa-spinner fa-spin' : 'fa-info-circle'} mr-1"></i>${message}</span>`;
       errorElement.classList.remove('text-red-500', 'text-green-500', 'text-yellow-500', 'hidden');
       errorElement.classList.add('text-blue-500', 'block');
       input.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50');
+
     } else if (message.includes('fa-exclamation')) {
-      // Avertissement (bleu au lieu de jaune)
-      errorElement.innerHTML = `<span class="text-blue-500"><i class="fas fa-exclamation-circle mr-1"></i>${message}</span>`;
+
+      errorElement.innerHTML = `<span class="dark:text-white text-blue-500"><i class="fas fa-exclamation-circle mr-1"></i>${message}</span>`;
       errorElement.classList.remove('text-red-500', 'text-green-500', 'text-yellow-500', 'hidden');
       errorElement.classList.add('text-blue-500', 'block');
       input.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50');
+
     } else {
       // Erreur (rouge)
       errorElement.innerHTML = `<span class="text-red-500"><i class="fas fa-times-circle mr-1"></i>${message}</span>`;
@@ -219,39 +233,54 @@ showFieldError(field, message) {
   }
 },
 
+/**
+ * Met à jour l'état du bouton de soumission basé sur la validité du formulaire.
+ * @function updateSubmitButtonState
+ * @param {HTMLElement} form - Le formulaire.
+ * @param {HTMLElement} submitButton - Le bouton de soumission.
+ */
+updateSubmitButtonState(form, submitButton) {
+  const formData = new FormData(form);
+  const contactData = {
+    name: formData.get('name')?.trim() || '',
+    email: formData.get('email')?.trim() || '',
+    phone: formData.get('phone')?.trim() ? `+33 ${formData.get('phone').trim().replace(/\s+/g, ' ')}` : '',
+    subjects: formData.get('subjects')?.trim().split(',').filter(s => s) || [],
+    message: formData.get('message')?.trim() || '',
+  };
 
-  /**
-   * Met à jour l'état du bouton de soumission basé sur la validité du formulaire.
-   * @function updateSubmitButtonState
-   * @param {HTMLElement} form - Le formulaire.
-   * @param {HTMLElement} submitButton - Le bouton de soumission.
-   */
-  updateSubmitButtonState(form, submitButton) {
-    const formData = new FormData(form);
-    const contactData = {
-      name: formData.get('name')?.trim() || '',
-      email: formData.get('email')?.trim() || '',
-      phone: formData.get('phone')?.trim() ? `+33 ${formData.get('phone').trim()}` : '',
-      subjects: formData.get('subjects')?.trim().split(',').filter(s => s) || [],
-      message: formData.get('message')?.trim() || '',
-    };
+  // Validation des champs
+  const errors = this.validateForm(contactData);
+  const isEmailValid = !validateField('email', contactData.email, false, true);
+  const isNameValid = !validateField('name', contactData.name, false, true);
+  const isPhoneValid = !validateField('phone', contactData.phone, false, true);
+  const isSubjectsValid = !errors.subjects;
+  const isMessageValid = !errors.message;
 
-    const errors = this.validateForm(contactData);
-    const isEmailValid = !validateField('email', contactData.email, false, true);
-    const isNameValid = !validateField('name', contactData.name, false, true);
-    const isPhoneValid = !validateField('phone', contactData.phone, false, true);
-    const isSubjectsValid = !errors.subjects;
-    const isMessageValid = !errors.message;
+  // Vérification des erreurs API pour l'email
+  const emailErrorElement = document.getElementById('error-email');
+  const hasApiError = emailErrorElement && 
+    !emailErrorElement.innerHTML.includes('fa-check-circle') && 
+    emailErrorElement.innerHTML.trim() !== '';
 
-    const emailErrorElement = document.getElementById('error-email');
-    const hasApiError = emailErrorElement && !emailErrorElement.innerHTML.includes('fa-check-circle') && emailErrorElement.innerHTML.trim() !== '';
+  // Déterminer si le formulaire est valide
+  const isValid = isEmailValid && isNameValid && isPhoneValid && isSubjectsValid && isMessageValid && !hasApiError;
 
-    const isValid = isEmailValid && isNameValid && isPhoneValid && isSubjectsValid && isMessageValid && !hasApiError;
+  // Mise à jour de l'état du bouton
+  submitButton.disabled = !isValid;
+  submitButton.classList.toggle('opacity-50', !isValid);
+  submitButton.classList.toggle('cursor-not-allowed', !isValid);
 
-    submitButton.disabled = !isValid;
-    submitButton.classList.toggle('opacity-50', !isValid);
-    submitButton.classList.toggle('cursor-not-allowed', !isValid);
-  },
+  // Restaurer le contenu par défaut du bouton si valide ou après annulation
+  if (!submitButton.innerHTML.includes('Envoi...') && !submitButton.innerHTML.includes('Vérification...')) {
+    submitButton.innerHTML = `
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+      </svg>
+      <span>Envoyer le message</span>
+    `;
+  }
+},
 
   /**
    * Vérifie la disponibilité de l'email et met à jour l'UI.
@@ -300,11 +329,9 @@ showFieldError(field, message) {
         submitButton.disabled = true;
         submitButton.classList.add('opacity-50', 'cursor-not-allowed');
       } else if (!available) {
-        this.showFieldError('email', 'Cet email est déjà utilisé. <i class="fas fa-exclamation ml-1 text-blue-500"></i> <a href="/pages/auth/signin.html" class="!text-black dark:!text-white hover:underline">Se connecter</a>');
+        this.showFieldError('email', 'Vous êtes déjà membre. <i class="fas fa-exclamation ml-1 text--500"></i> <a href="/pages/auth/signin.html" class="!text-black dark:!text-white underline hover:underline-none">Connectez-vous ici</a>');
         emailInput.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50', 'border-green-500');
         emailInput.classList.remove('border-yellow-500', 'focus:border-yellow-500', 'focus:ring-yellow-500/50');
-        submitButton.disabled = true;
-        submitButton.classList.add('opacity-50', 'cursor-not-allowed');
       } else {
         this.showFieldError('email', 'Email valide <i class="fas fa-check-circle ml-1 text-green-500"></i>');
         emailInput.classList.remove('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50', 'border-yellow-500', 'border-red-500');
@@ -346,12 +373,9 @@ showFieldError(field, message) {
       if (field === 'subjects') value = value ? value.split(',').filter(s => s) : [];
 
       let error = null;
-      if (field === 'subjects') {
-        const validSubjects = this.subjectsList.map(subject => subject.name);
-        if (value.some(s => !validSubjects.includes(s))) error = `Les sujets suivants sont invalides : ${value.filter(s => !validSubjects.includes(s)).join(', ')}.`;
-      } else {
+
         error = validateFieldInitial(field, value, false, true);
-      }
+  
 
       this.showFieldError(field, error || (value && field !== 'subjects' ? `${this.getFieldName(field)} valide <i class="fas fa-check-circle ml-1 text-green-500"></i>` : field === 'subjects' && value.length > 0 ? `Sujet(s) valide(s) <i class="fas fa-check-circle ml-1 text-green-500"></i>` : ''));
     });
@@ -385,206 +409,230 @@ showFieldError(field, message) {
     return fieldNames[field.toLowerCase()] || field;
   },
 
-  /**
-   * Lie le formulaire de contact pour gérer la soumission et la validation en temps réel.
-   * @function bindContactForm
-   */
-  bindContactForm() {
-    const form = document.getElementById('contact-form');
-    if (!form) return;
 
-    const submitButton = form.querySelector('#contact-submit');
-    const emailInput = form.querySelector('[name="email"]');
-    if (!submitButton || !emailInput) {
-      console.warn('Bouton de soumission ou champ email introuvable');
-      return;
+  /**
+ * Lie le formulaire de contact pour gérer la soumission et la validation en temps réel.
+ * @function bindContactForm
+ */
+bindContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) {
+    console.warn('Formulaire de contact introuvable');
+    return;
+  }
+
+  const submitButton = form.querySelector('#contact-submit');
+  const emailInput = form.querySelector('[name="email"]');
+  if (!submitButton || !emailInput) {
+    console.warn('Bouton de soumission ou champ email introuvable');
+    return;
+  }
+
+  let isSubmitting = false;
+
+  // Initialisation de l'état du bouton
+  submitButton.disabled = true;
+  submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+  this.initialValidation(form, submitButton, emailInput);
+
+  // Validation en temps réel pour tous les champs
+  form.querySelectorAll('input:not([type="hidden"]), textarea, #subject-display').forEach(input => {
+    input.addEventListener('input', async () => {
+      const field = input.name || (input.id === 'subject-display' ? 'subjects' : input.name);
+      let value = input.value.trim();
+      if (field === 'phone' && value) value = `+33 ${value.replace(/\s+/g, ' ').trim()}`;
+      if (field === 'subjects') value = value ? value.split(',').filter(s => s) : [];
+
+      let error = null;
+      if (field === 'email') {
+        const syntaxError = validateField('email', value, false, true);
+        if (syntaxError) {
+          this.showFieldError('email', syntaxError);
+          submitButton.disabled = true;
+          submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+          return;
+        }
+
+        this.showFieldError('email', 'Vérification de l\'email en cours... <i class="fas fa-spinner fa-spin ml-1 text-blue-500"></i>');
+        emailInput.classList.remove('border-green-500', 'border-yellow-500', 'border-red-500');
+        emailInput.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50');
+        submitButton.disabled = true;
+        submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+        submitButton.innerHTML = `
+          <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Vérification...
+        `;
+
+        await this.checkEmailAndUpdateButton(value, false, form, submitButton, emailInput);
+      } else if (field === 'message') {
+        if (!value) error = 'Le message est requis.';
+        else if (value.length < 10) error = 'Le message doit contenir au moins 10 caractères.';
+        else if (value.length > 1000) error = 'Le message ne peut pas dépasser 1000 caractères.';
+      } else if (field === 'subjects') {
+        if (!value || value.length === 0) error = 'Veuillez sélectionner au moins un sujet.';
+      } else {
+        error = validateField(field, value, false, true);
+      }
+
+      this.showFieldError(
+        field,
+        error || (value && field !== 'subjects' ? `${this.getFieldName(field)} valide <i class="fas fa-check-circle ml-1 text-green-500"></i>` : field === 'subjects' && value.length > 0 ? `Sujet(s) valide(s) <i class="fas fa-check-circle ml-1 text-green-500"></i>` : '')
+      );
+
+      this.updateSubmitButtonState(form, submitButton);
+      this.saveFormData();
+    });
+
+    // Gestion spécifique pour l'email sur événement blur
+    if (input.id === 'email') {
+      input.addEventListener('blur', async () => {
+        const value = decodeURIComponent(input.value.trim());
+        const syntaxError = validateField('email', value, false, true);
+        if (syntaxError) {
+          this.showFieldError('email', syntaxError);
+          submitButton.disabled = true;
+          submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+          return;
+        }
+
+        this.showFieldError('email', 'Vérification de l\'email en cours... <i class="fas fa-spinner fa-spin ml-1 text-blue-500"></i>');
+        emailInput.classList.remove('border-green-500', 'border-yellow-500', 'border-red-500');
+        emailInput.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50');
+        submitButton.disabled = true;
+        submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+        submitButton.innerHTML = `
+          <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Vérification...
+        `;
+
+        await this.checkEmailAndUpdateButton(value, false, form, submitButton, emailInput);
+      });
     }
 
-    submitButton.disabled = true;
-    submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-
-    this.initialValidation(form, submitButton, emailInput);
-
-    form.querySelectorAll('input:not([type="hidden"]), textarea, #subject-display').forEach(input => {
-      input.addEventListener('input', async () => {
-        const field = input.name || (input.id === 'subject-display' ? 'subjects' : input.name);
+    // Gestion spécifique pour le téléphone
+    if (input.id === 'phone') {
+      input.addEventListener('input', () => {
         let value = input.value.trim();
-        if (field === 'phone' && value) value = `+33 ${value.replace(/\s+/g, ' ').trim()}`;
-        if (field === 'subjects') value = value ? value.split(',').filter(s => s) : [];
-
-        let error = null;
-        if (field === 'message') {
-          if (!value) error = 'Le message est requis.';
-          else if (value.length < 10) error = 'Le message doit contenir au moins 10 caractères.';
-          else if (value.length > 1000) error = 'Le message ne peut pas dépasser 1000 caractères.';
-        } else if (field === 'subjects') {
-          const validSubjects = this.subjectsList.map(subject => subject.name);
-          if (!value || value.length === 0) error = 'Veuillez sélectionner au moins un sujet.';
-          else if (value.some(s => !validSubjects.includes(s))) error = `Les sujets suivants sont invalides : ${value.filter(s => !validSubjects.includes(s)).join(', ')}.`;
-        } else {
-          error = validateField(field, value, false, true);
-        }
-
-        this.showFieldError(
-          field,
-          error || (value && field !== 'subjects' ? `${this.getFieldName(field)} valide <i class="fas fa-check-circle ml-1 text-green-500"></i>` : field === 'subjects' && value.length > 0 ? `Sujet(s) valide(s) <i class="fas fa-check-circle ml-1 text-green-500"></i>` : '')
-        );
-
-        if (field === 'email' && !error) {
-          this.showFieldError('email', `${this.getFieldName('email')} format valide <i class="fas fa-check-circle ml-1 text-blue-500"></i>`);
-        }
-
+        value = value.replace(/[^0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+        input.value = value;
+        const fullPhone = value ? `+33 ${value}` : '';
+        const error = validateField('phone', fullPhone, false, true);
+        this.showFieldError('phone', error || (value ? `Téléphone valide <i class="fas fa-check-circle ml-1 text-green-500"></i>` : ''));
         this.updateSubmitButtonState(form, submitButton);
         this.saveFormData();
       });
+    }
+  });
 
-      if (input.id === 'email') {
-        input.addEventListener('blur', async () => {
-          const value = decodeURIComponent(input.value.trim());
-          const syntaxError = validateField('email', value, false, true);
+  // Gestion de la soumission du formulaire
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (submitButton.disabled || isSubmitting) {
+      console.log('Soumission bloquée : bouton désactivé ou soumission en cours');
+      return;
+    }
 
-          if (syntaxError) {
-            this.showFieldError('email', syntaxError);
-            await this.checkEmailAndUpdateButton(value, false, form, submitButton, emailInput);
-            return;
-          }
+    isSubmitting = true;
+    submitButton.disabled = true;
+    submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+    submitButton.innerHTML = `
+      <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Envoi...
+    `;
 
-          this.showFieldError('email', 'Vérification de l\'email en cours... <i class="fas fa-spinner fa-spin ml-1 text-blue-500"></i>');
-          emailInput.classList.remove('border-green-500', 'border-yellow-500', 'border-red-500');
-          emailInput.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50');
-          submitButton.disabled = true;
-          submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-          submitButton.innerHTML = `
-            <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Vérification...
-          `;
+    try {
+      const formData = new FormData(form);
+      let phoneValue = formData.get('phone')?.trim() || '';
+      if (phoneValue) phoneValue = `+33 ${phoneValue.replace(/\s+/g, ' ').trim()}`;
+      const subjectsArray = formData.get('subjects')?.trim().split(',').filter(s => s) || [];
 
-          await this.checkEmailAndUpdateButton(value, false, form, submitButton, emailInput);
-        });
-      }
+      const contactData = {
+        id: crypto.randomUUID(),
+        name: formData.get('name')?.trim() || '',
+        email: formData.get('email')?.trim() || '',
+        phone: phoneValue,
+        subjects: subjectsArray.join('-'),
+        message: formData.get('message')?.trim() || '',
+        createdAt: new Date().toISOString(),
+      };
 
-      if (input.id === 'phone') {
-        input.addEventListener('input', () => {
-          let value = input.value.trim();
-          value = value.replace(/[^0-9\s]/g, '').replace(/\s+/g, ' ').trim();
-          input.value = value;
-          const fullPhone = value ? `+33 ${value}` : '';
-          const error = validateField('phone', fullPhone, false, true);
-          this.showFieldError('phone', error || (value ? `Téléphone valide <i class="fas fa-check-circle ml-1 text-green-500"></i>` : ''));
-          this.updateSubmitButtonState(form, submitButton);
-          this.saveFormData();
-        });
-      }
-    });
-
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-      if (submitButton.disabled || isSubmitting) {
-        console.log('Soumission bloquée : bouton désactivé ou soumission en cours');
+      const errors = this.validateForm(contactData);
+      if (Object.keys(errors).length > 0) {
+        Object.entries(errors).forEach(([field, message]) => this.showFieldError(field, message));
+        showNotification('Veuillez corriger les erreurs dans le formulaire.', 'error');
+        Swal.close();
+        isSubmitting = false;
+        this.updateSubmitButtonState(form, submitButton);
         return;
       }
 
-      isSubmitting = true;
-      await showLoadingDialog('Envoi de votre message...', 'Cleaning');
-      submitButton.disabled = true;
-      submitButton.innerHTML = `
-        <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-        Envoi...
-      `;
+      
 
-      try {
-        const formData = new FormData(form);
-        let phoneValue = formData.get('phone')?.trim() || '';
-        if (phoneValue) phoneValue = `+33 ${phoneValue.replace(/\s+/g, ' ').trim()}`;
-        const subjectsArray = formData.get('subjects')?.trim().split(',').filter(s => s) || [];
-
-        const contactData = {
-          id: crypto.randomUUID(),
-          name: formData.get('name')?.trim() || '',
-          email: formData.get('email')?.trim() || '',
-          phone: phoneValue,
-          subjects: subjectsArray.join('-'),
-          message: formData.get('message')?.trim() || '',
-          createdAt: new Date().toISOString(),
-        };
-
-        const errors = this.validateForm(contactData);
-        if (Object.keys(errors).length > 0) {
-          Object.entries(errors).forEach(([field, message]) => this.showFieldError(field, message));
-          showNotification('Veuillez corriger les erreurs dans le formulaire.', 'error');
-          Swal.close();
-          return;
-        }
-
-        const emailError = validateField('email', contactData.email, false, true);
-        if (emailError) {
-          this.showFieldError('email', emailError);
-          showNotification('Veuillez corriger l\'email.', 'error');
-          Swal.close();
-          return;
-        }
-
-        const available = await this.checkEmailAvailabilityCached(contactData.email, true);
-        if (available === undefined) {
-          this.showFieldError('email', 'Vérification en attente (serveur indisponible) <i class="fas fa-exclamation ml-1 text-yellow-500"></i>');
-          showNotification('Serveur temporairement indisponible.', 'error');
-          Swal.close();
-          return;
-        }
-        if (!available) {
-          this.showFieldError('email', 'Cet email est déjà utilisé. <i class="fas fa-exclamation ml-1 text-yellow-500"></i> <a href="/pages/auth/signin.html" class="text-blue-500 hover:underline">Se connecter</a>');
-          showNotification('Cet email est déjà utilisé.', 'error');
-          Swal.close();
-          return;
-        }
-
-        const confirmed = await this.showPreConfirmationModal(contactData);
+      const confirmed = await this.showPreConfirmationModal(contactData);
         if (!confirmed) {
-          Swal.close();
-          return;
-        }
-
-        const response = await api.contact.createContact(contactData);
-        await this.showConfirmationModal(contactData);
-
-        form.reset();
-        document.getElementById('selected-subjects').innerHTML = '';
-        document.querySelector('[name="subjects"]').value = '';
-        document.getElementById('subject-display').value = '';
-        this.clearFieldErrors();
-        this.clearSelectedSubjectsStorage();
-        this.invalidateEmailCache();
-        localStorage.removeItem('contactFormData');
-        this.updateSubmitButtonState(form, submitButton);
-      } catch (error) {
         Swal.close();
-        let errorMessage = error.message || 'Erreur technique lors de l\'envoi du message.';
-        if (error.status === 429) {
-          errorMessage = 'Trop de tentatives. Veuillez réessayer plus tard.';
-        } else if (error.reason === 'email-already-in-use') {
-          errorMessage = 'Cet email est déjà utilisé. <a href="/pages/auth/signin.html" class="text-blue-500 hover:underline">Se connecter</a>';
-        }
-        showNotification(errorMessage, 'error');
-      } finally {
         isSubmitting = false;
-        submitButton.disabled = true;
-        submitButton.classList.add('opacity-50', 'cursor-not-allowed');
         submitButton.innerHTML = `
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
           <span>Envoyer le message</span>
         `;
-        this.initialValidation(form, submitButton, emailInput);
+        this.updateSubmitButtonState(form, submitButton); 
+        return;
       }
-    });
-  },
+
+      await showLoadingDialog('Envoi de votre message...', 'Cleaning');
+      const response = await api.contact.createContact(contactData);
+
+      // Réinitialisation du formulaire
+      form.reset();
+      document.getElementById('selected-subjects').innerHTML = '';
+      document.querySelector('[name="subjects"]').value = '';
+      document.getElementById('subject-display').value = '';
+      this.clearFieldErrors();
+      this.clearSelectedSubjectsStorage();
+      this.invalidateEmailCache();
+      localStorage.removeItem('contactFormData');
+
+      // Réinitialisation du bouton
+      submitButton.innerHTML = `
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        <span>Envoyer le message</span>
+      `;
+
+      await this.showConfirmationModal(contactData);
+
+      
+
+      
+      this.initialValidation(form, submitButton, emailInput);
+    } catch (error) {
+      Swal.close();
+      let errorMessage = error.message || 'Erreur technique lors de l\'envoi du message.';
+      if (error.status === 429) {
+        errorMessage = 'Trop de tentatives. Veuillez réessayer plus tard.';
+      } else if (error.reason === 'email-already-in-use') {
+        errorMessage = 'Vous êtes déjà membre. <a href="/pages/auth/signin.html" class="text-blue-500 underline hover:underline-">Connectez-vous ici</a>';
+      }
+      showNotification(errorMessage, 'error');
+    } finally {
+      isSubmitting = false;
+      this.updateSubmitButtonState(form, submitButton);
+    }
+  });
+},
 
   /**
    * Lie les utilitaires du textarea (emoji picker).
@@ -636,137 +684,139 @@ showFieldError(field, message) {
   },
 
   /**
-   * Ouvre la modale de sélection des sujets.
-   * @function openSubjectsModal
-   */
-  openSubjectsModal() {
-    const modal = document.createElement('div');
-    modal.id = 'subjects-modal';
-    modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 md:p-6 transition-opacity duration-500 opacity-0';
+ * Ouvre la modale de sélection des sujets.
+ * @function openSubjectsModal
+ */
+openSubjectsModal() {
+  const modal = document.createElement('div');
+  modal.id = 'subjects-modal';
+  modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 md:p-6 transition-opacity duration-500 opacity-0';
 
-    const isDark = document.documentElement.classList.contains('dark');
-    const bgClass = isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900';
-    const borderClass = isDark ? 'border-gray-600' : 'border-gray-200';
+  const isDark = document.documentElement.classList.contains('dark');
+  const bgClass = isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900';
+  const borderClass = isDark ? 'border-gray-600' : 'border-gray-200';
 
-    modal.innerHTML = `
-      <div class="modal-content ${bgClass} rounded-2xl shadow-2xl max-w-4xl w-full mx-auto overflow-hidden transform scale-95 transition-transform duration-500">
-        <button class="modal-close absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-full p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-        <div class="p-6 md:p-8">
-          <h3 class="text-2xl font-sans font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-ll-dark-green to-ll-dark-blue bg-[length:200%_100%] animate-gradient-scroll">Sélectionnez les sujets</h3>
-          <div class="relative mb-4">
-            <input type="text" id="subject-search" class="w-full pl-4 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-ll-blue focus:border-ll-blue text-gray-900 dark:text-gray-100 transition-all duration-300" placeholder="Rechercher un sujet..." />
-          </div>
-          <div id="subjects-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-60 overflow-y-auto"></div>
-          <div class="mt-6 flex justify-end space-x-4">
-            <button class="modal-cancel px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">Annuler</button>
-            <button class="modal-confirm px-4 py-2 bg-ll-blue text-white rounded-lg hover:bg-ll-dark-blue focus:ring-2 focus:ring-ll-blue/50 transition-all">Confirmer</button>
-          </div>
+  modal.innerHTML = `
+    <div class="modal-content ${bgClass} rounded-2xl shadow-2xl max-w-4xl w-full mx-auto overflow-hidden transform scale-95 transition-transform duration-500">
+      <button class="modal-close absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-xl p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="p-6 md:p-8">
+        <h3 class="text-2xl font-sans font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-ll-dark-green to-ll-dark-blue bg-[length:200%_100%] animate-gradient-scroll">Sélectionnez les sujets</h3>
+        <div class="relative mb-4">
+          <input type="text" id="subject-search" class="w-full pl-4 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-ll-blue focus:border-ll-blue text-gray-900 dark:text-gray-100 transition-all duration-300" placeholder="Rechercher un sujet..." />
+        </div>
+        <div id="subjects-list" class="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-4 max-h-[30rem] overflow-y-auto"></div>
+        <div class="mt-6 flex justify-end space-x-4">
+          <button class="modal-cancel px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">Annuler</button>
+          <button class="modal-confirm px-4 py-2 bg-ll-blue text-white rounded-lg hover:bg-ll-dark-blue focus:ring-2 focus:ring-ll-blue/50 transition-all">Confirmer</button>
         </div>
       </div>
-    `;
+    </div>
+  `;
 
-    document.body.appendChild(modal);
+  document.body.appendChild(modal);
 
-    setTimeout(() => {
-      modal.classList.remove('opacity-0');
-      modal.classList.add('opacity-100');
-      modal.querySelector('.modal-content').classList.remove('scale-95');
-      modal.querySelector('.modal-content').classList.add('scale-100');
-    }, 10);
+  setTimeout(() => {
+    modal.classList.remove('opacity-0');
+    modal.classList.add('opacity-100');
+    modal.querySelector('.modal-content').classList.remove('scale-95');
+    modal.querySelector('.modal-content').classList.add('scale-100');
+  }, 10);
 
-    const subjectsListEl = modal.querySelector('#subjects-list');
-    const searchInput = modal.querySelector('#subject-search');
-    const subjectsInput = document.getElementById('subjects');
-    const selectedSubjects = new Set(subjectsInput.value ? subjectsInput.value.split(',').filter(s => s) : []);
+  const subjectsListEl = modal.querySelector('#subjects-list');
+  const searchInput = modal.querySelector('#subject-search');
+  const subjectsInput = document.getElementById('subjects');
+  const selectedSubjects = new Set(subjectsInput.value ? subjectsInput.value.split(',').filter(s => s) : []);
 
-    const renderSubjects = (filter = '') => {
-      subjectsListEl.innerHTML = this.subjectsList
-        .filter(subject => subject.name.toLowerCase().includes(filter.toLowerCase()))
-        .map(subject => `
-          <div class="subject-card p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer transition-all duration-300 hover:shadow-md ${selectedSubjects.has(subject.name) ? 'bg-ll-blue/20 border-ll-blue border-2' : ''}" data-name="${subject.name}">
-            <div class="flex items-center space-x-3">
-              <input type="checkbox" value="${subject.name}" class="sr-only">
-              <svg class="w-6 h-6 text-ll-text-gray dark:text-ll-medium-gray flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">${subject.icon}</svg>
-              <span class="text-base font-medium">${subject.name}</span>
-            </div>
+  const renderSubjects = (filter = '') => {
+    subjectsListEl.innerHTML = this.subjectsList
+      .filter(subject => subject.name.toLowerCase().includes(filter.toLowerCase()))
+      .map(subject => `
+        <div class="subject-card aspect-square p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer transition-all duration-300 hover:shadow-lg ${selectedSubjects.has(subject.name) ? 'bg-ll-blue/30 border-ll-blue border-2' : ''}" data-name="${subject.name}" title="${subject.description}">
+          <div class="flex flex-col items-center justify-center h-full space-y-2">
+            <input type="checkbox" value="${subject.name}" class="sr-only" aria-label="${subject.name}">
+            <svg class="w-8 h-8 text-ll-text-gray dark:text-ll-medium-gray flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">${subject.icon}</svg>
+            <span class="text-base font-medium text-center">${subject.name}</span>
+            <p class="text-sm text-gray-600 dark:text-gray-400 text-center mt-1">${subject.description}</p>
           </div>
-        `).join('');
-
-      subjectsListEl.querySelectorAll('.subject-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const name = card.dataset.name;
-          if (selectedSubjects.has(name)) {
-            selectedSubjects.delete(name);
-            card.classList.remove('bg-ll-blue/20', 'border-ll-blue', 'border-2');
-          } else {
-            selectedSubjects.add(name);
-            card.classList.add('bg-ll-blue/20', 'border-ll-blue', 'border-2');
-          }
-        });
-      });
-    };
-
-    renderSubjects();
-
-    searchInput.addEventListener('input', () => renderSubjects(searchInput.value));
-
-    const closeModal = () => {
-      modal.classList.remove('opacity-100');
-      modal.classList.add('opacity-0');
-      modal.querySelector('.modal-content').classList.remove('scale-100');
-      modal.querySelector('.modal-content').classList.add('scale-95');
-      setTimeout(() => modal.remove(), 500);
-      document.body.style.overflow = 'auto';
-    };
-
-    modal.querySelector('.modal-close').addEventListener('click', closeModal);
-    modal.querySelector('.modal-cancel').addEventListener('click', closeModal);
-    modal.querySelector('.modal-confirm').addEventListener('click', () => {
-      const selected = Array.from(selectedSubjects);
-      const selectedSubjectsEl = document.getElementById('selected-subjects');
-      selectedSubjectsEl.innerHTML = selected.map(sub => `
-        <span class="service-feature inline-flex items-center bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-md text-sm text-gray-900 dark:text-gray-100">
-          ${sub}
-          <button type="button" class="ml-2 text-red-500 hover:text-red-700" data-remove="${sub}">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
-        </span>
+        </div>
       `).join('');
 
-      subjectsInput.value = selected.join(',');
-      document.getElementById('subject-display').value = selected.length > 0 ? `${selected.length} sujet(s) sélectionné(s)` : '';
-      document.getElementById('subject-display').dispatchEvent(new Event('input'));
-
-      selectedSubjectsEl.querySelectorAll('[data-remove]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const toRemove = btn.dataset.remove;
-          selectedSubjects.delete(toRemove);
-          subjectsInput.value = Array.from(selectedSubjects).join(',');
-          btn.parentElement.remove();
-          document.getElementById('subject-display').value = selectedSubjects.size > 0 ? `${selectedSubjects.size} sujet(s) sélectionné(s)` : '';
-          document.getElementById('subject-display').dispatchEvent(new Event('input'));
-          this.saveSelectedSubjects();
-        });
+    subjectsListEl.querySelectorAll('.subject-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const name = card.dataset.name;
+        if (selectedSubjects.has(name)) {
+          selectedSubjects.delete(name);
+          card.classList.remove('bg-ll-blue/30', 'border-ll-blue', 'border-2');
+        } else {
+          selectedSubjects.add(name);
+          card.classList.add('bg-ll-blue/30', 'border-ll-blue', 'border-2');
+        }
       });
+    });
+  };
 
-      this.saveSelectedSubjects();
-      this.saveFormData();
-      closeModal();
+  renderSubjects();
+
+  searchInput.addEventListener('input', () => renderSubjects(searchInput.value));
+
+  const closeModal = () => {
+    modal.classList.remove('opacity-100');
+    modal.classList.add('opacity-0');
+    modal.querySelector('.modal-content').classList.remove('scale-100');
+    modal.querySelector('.modal-content').classList.add('scale-95');
+    setTimeout(() => modal.remove(), 500);
+    document.body.style.overflow = 'auto';
+  };
+
+  modal.querySelector('.modal-close').addEventListener('click', closeModal);
+  modal.querySelector('.modal-cancel').addEventListener('click', closeModal);
+  modal.querySelector('.modal-confirm').addEventListener('click', () => {
+    const selected = Array.from(selectedSubjects);
+    const selectedSubjectsEl = document.getElementById('selected-subjects');
+    selectedSubjectsEl.innerHTML = selected.map(sub => `
+      <span class="service-feature inline-flex items-center bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-md text-sm text-gray-900 dark:text-gray-100">
+        ${sub}
+        <button type="button" class="ml-2 text-red-500 hover:text-red-700" data-remove="${sub}">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </span>
+    `).join('');
+
+    subjectsInput.value = selected.join(',');
+    document.getElementById('subject-display').value = selected.length > 0 ? `${selected.length} sujet(s) sélectionné(s)` : '';
+    document.getElementById('subject-display').dispatchEvent(new Event('input'));
+
+    selectedSubjectsEl.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const toRemove = btn.dataset.remove;
+        selectedSubjects.delete(toRemove);
+        subjectsInput.value = Array.from(selectedSubjects).join(',');
+        btn.parentElement.remove();
+        document.getElementById('subject-display').value = selectedSubjects.size > 0 ? `${selectedSubjects.size} sujet(s) sélectionné(s)` : '';
+        document.getElementById('subject-display').dispatchEvent(new Event('input'));
+        this.saveSelectedSubjects();
+      });
     });
 
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
+    this.saveSelectedSubjects();
+    this.saveFormData();
+    closeModal();
+  });
 
-    searchInput.focus();
-    document.body.style.overflow = 'hidden';
-  },
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  searchInput.focus();
+  document.body.style.overflow = 'hidden';
+},
+
 
   /**
    * Efface les sujets sélectionnés dans localStorage.
@@ -1186,7 +1236,7 @@ showFieldError(field, message) {
           try {
             const available = await this.checkEmailAvailabilityCached(updatedData.email, true);
             if (!available) {
-              Swal.showValidationMessage('Cet email est déjà utilisé.');
+              Swal.showValidationMessage('Vous êtes déjà membre.');
               return false;
             }
           } catch (e) {
@@ -1377,16 +1427,23 @@ showFieldError(field, message) {
   },
 
   /**
- * Affiche la modale de pré-confirmation avant envoi avec un design amélioré.
+ * Affiche la modale de pré-confirmation avant envoi avec un design ultra-arrondi et épuré.
  * @function showPreConfirmationModal
  * @param {Object} contactData - Données du contact.
  * @returns {Promise<boolean>} Confirmation de l'utilisateur.
  */
 async showPreConfirmationModal(contactData) {
+  // Assurez-vous que swalLoaded est une promesse résolue
+  // await swalLoaded; 
   const isDark = document.documentElement.classList.contains('dark');
-  const modalBgClass = isDark ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900';
-  const contentBgClass = isDark ? 'bg-gray-800' : 'bg-white';
-  const borderClass = isDark ? 'border-gray-700' : 'border-gray-200';
+  
+  // Couleurs principales
+  const bgMain = isDark ? '#1F2937' : '#FFFFFF'; // Un gris plus doux pour le fond
+  const bgContent = isDark ? 'bg-gray-800' : 'bg-gray-50'; // Arrière-plan des cartes internes
+  const textTitle = isDark ? 'text-blue-300' : 'text-ll-blue';
+  const textLabel = isDark ? 'text-gray-400' : 'text-gray-600';
+  const borderSubtle = isDark ? 'border-gray-700/50' : 'border-gray-300/50';
+
   const formattedDate = formatDate(new Date().toISOString());
 
   // Handle subjects, ensuring a clean comma-separated list
@@ -1397,140 +1454,231 @@ async showPreConfirmationModal(contactData) {
     subjectsDisplay = contactData.subjects.replace(/-/g, ' - ');
   }
 
+  // SVG stylisé pour l'icône de question/vérification
+  const confirmationSvg = `
+    <svg class="w-10 h-10 text-ll-blue dark:text-ll-light-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+    </svg>
+  `;
+
   const { isConfirmed } = await Swal.fire({
-    title: 'Confirmation de votre demande',
+    title: `<span class="text-xl sm:text-2xl font-extrabold ${textTitle}">Confirmation de votre demande</span>`,
     html: `
-      <div class="${modalBgClass} p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl w-full max-w-[95vw] sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto font-sans text-left overflow-y-auto max-h-[90vh]">
-        <div class="flex items-center justify-between mb-8 pb-4 border-b ${borderClass}">
-          <div class="flex items-center">
-            <img src="/assets/images/logo.png" alt="L&L Ouest Services Logo" class="h-14 mr-4 rounded-xl p-1">
-            <div>
-              <h2 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-ll-dark-green to-ll-dark-blue">Récapitulatif de la demande</h2>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Envoyé le: ${formattedDate}</p>
-            </div>
+      <div class="${bgContent} p-4 sm:p-8 rounded-3xl shadow-2xl w-full max-w-full mx-auto font-sans text-left overflow-y-auto max-h-[75vh]">
+        
+        <div class="flex items-start mb-6 pb-4 border-b ${borderSubtle}">
+          <div class="p-2 ${bgMain} rounded-xl shadow-inner mr-4">
+              <img src="/assets/images/logo.png" alt="L&L Ouest Services Logo" class="h-10 w-10 object-contain rounded-lg">
+          </div>
+          <div>
+            <h2 class="text-xl font-bold ${textTitle}">Récapitulatif de la demande</h2>
+            <p class="text-sm ${textLabel} mt-1">Envoyé le: ${formattedDate}</p>
           </div>
         </div>
+        
+        <div class="flex justify-center mb-6">
+            ${confirmationSvg}
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
-          <div class="${contentBgClass} p-6 rounded-lg shadow-inner ${borderClass} border">
-            <h3 class="text-lg font-semibold mb-4 text-ll-blue dark:text-ll-light-blue">Vos Coordonnées</h3>
-            <div class="grid grid-cols-1 gap-4">
-              <div>
-                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Nom</label>
-                <p class="mt-1 text-base font-medium">${contactData.name}</p>
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Email</label>
-                <p class="mt-1 text-base font-medium">${contactData.email}</p>
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Téléphone</label>
-                <p class="mt-1 text-base font-medium">${contactData.phone || 'Non renseigné'}</p>
-              </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          
+          <div class="${bgMain} p-5 rounded-2xl shadow-lg border ${borderSubtle} transition-all duration-300 hover:shadow-xl">
+            <h3 class="text-lg font-semibold mb-4 ${textTitle} flex items-center">
+                <i class="fas fa-user-circle mr-2"></i> Vos Coordonnées
+            </h3>
+            <div class="grid grid-cols-1 gap-3">
+              ${['name', 'email', 'phone'].map(key => `
+                <div>
+                  <label class="block text-xs font-bold ${textLabel} uppercase">${key === 'name' ? 'Nom' : key === 'email' ? 'Email' : 'Téléphone'}</label>
+                  <p class="mt-0.5 text-base font-medium text-gray-800 dark:text-gray-200 break-words">${contactData[key] || 'Non renseigné'}</p>
+                </div>
+              `).join('')}
             </div>
           </div>
 
-          <div class="${contentBgClass} p-6 rounded-lg shadow-inner ${borderClass} border">
-            <h3 class="text-lg font-semibold mb-4 text-ll-blue dark:text-ll-light-blue">Détails de la demande</h3>
-            <div class="grid grid-cols-1 gap-4">
+          <div class="${bgMain} p-5 rounded-2xl shadow-lg border ${borderSubtle} transition-all duration-300 hover:shadow-xl">
+            <h3 class="text-lg font-semibold mb-4 ${textTitle} flex items-center">
+                <i class="fas fa-file-alt mr-2"></i> Détails de la demande
+            </h3>
+            <div class="grid grid-cols-1 gap-3">
               <div>
-                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Sujet(s)</label>
-                <p class="mt-1 text-base font-medium">${subjectsDisplay}</p>
+                <label class="block text-xs font-bold ${textLabel} uppercase">Sujet(s)</label>
+                <p class="mt-0.5 text-base font-medium text-gray-800 dark:text-gray-200">${subjectsDisplay}</p>
               </div>
-              <div class="col-span-1">
-                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Message</label>
-                <div class="mt-1 p-3 rounded-md border ${borderClass} ${contentBgClass} max-h-48 overflow-y-auto">
-                  <p class="text-base whitespace-pre-wrap">${contactData.message}</p>
+              <div>
+                <label class="block text-xs font-bold ${textLabel} uppercase">Message</label>
+                <div class="mt-0.5 p-3 rounded-xl ${bgContent} border ${borderSubtle} max-h-32 overflow-y-auto shadow-inner">
+                  <p class="text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-200">${contactData.message}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="text-center mb-6">
-          <p class="text-sm italic text-gray-600 dark:text-gray-300">
-            Veuillez vérifier l'exactitude des informations ci-dessus avant de confirmer.
+        <div class="text-center mt-4">
+          <p class="text-sm italic ${textLabel}">
+            Veuillez vérifier l'exactitude de ces informations. Vous recevrez une copie par email.
           </p>
         </div>
       </div>
     `,
-    icon: 'question',
+    icon: undefined,
     showCancelButton: true,
-
-    confirmButtonText: 'Confirmer et envoyer',
-    cancelButtonText: 'Modifier ma demande',
-
+    focusConfirm: false, 
+    
+    confirmButtonText: '<i class="fas fa-paper-plane mr-2"></i> Confirmer et envoyer',
+    cancelButtonText: '<i class="fas fa-edit mr-2"></i> Modifier ma demande',
 
     confirmButtonColor: '#1e90ff',
     cancelButtonColor: '#6b7280',
     width: '100%',
 
     customClass: {
-      popup: 'swal-wide w-full max-w-[95vw] sm:max-w-xl md:max-w-2xl lg:max-w-4xl',
-      confirmButton: 'px-6 py-3 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500/50',
-      cancelButton: 'px-6 py-3 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500/50',
+      // BORDURE PRINCIPALE TRÈS ARRONDIE
+      popup: 'swal-wide rounded-3xl shadow-xl w-full max-w-lg md:max-w-3xl', 
+      
+      confirmButton: 'px-8 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-[1.02] shadow-lg',
+      cancelButton: 'px-8 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-[1.02] shadow-lg',
+      title: 'pt-4',
     },
-    background: isDark ? '#121212' : '#FDFDFC',
+    background: bgMain, 
     color: isDark ? '#FDFDFC' : '#1B1B18',
-    didOpen: () => {
-      const swalPopup = Swal.getPopup();
-      swalPopup.classList.add('animate__animated', 'animate__fadeInDown');
+    
+    showClass: {
+      popup: 'animate__animated animate__zoomIn'
     },
+    hideClass: {
+      popup: 'animate__animated animate__zoomOut'
+    }
   });
 
   return isConfirmed;
 },
 
 /**
- * Affiche la modale de confirmation après envoi.
+ * Affiche la modale de confirmation après envoi avec un design ultra-arrondi et épuré.
  * @function showConfirmationModal
  * @param {Object} contactData - Données du contact.
+ * @returns {Promise<void>}
  */
 async showConfirmationModal(contactData) {
   const isDark = document.documentElement.classList.contains('dark');
-  const bgClass = isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900';
-  const borderClass = isDark ? 'border-gray-600' : 'border-gray-200';
+  
+  // Couleurs principales alignées avec showPreConfirmationModal
+  const bgMain = isDark ? '#1F2937' : '#FFFFFF';
+  const bgContent = isDark ? 'bg-gray-800' : 'bg-gray-50';
+  const textTitle = isDark ? 'text-blue-300' : 'text-ll-blue';
+  const textLabel = isDark ? 'text-gray-400' : 'text-gray-600';
+  const borderSubtle = isDark ? 'border-gray-700/50' : 'border-gray-300/50';
+
   const formattedDate = formatDate(new Date().toISOString());
-  const subjectsDisplay = contactData.subjects ? contactData.subjects.replace(/-/g, ' - ') : 'N/A';
+
+  // Gestion des sujets pour un affichage propre
+  let subjectsDisplay = 'N/A';
+  if (Array.isArray(contactData.subjects)) {
+    subjectsDisplay = contactData.subjects.length > 0 ? contactData.subjects.join(', ') : 'N/A';
+  } else if (typeof contactData.subjects === 'string') {
+    subjectsDisplay = contactData.subjects.replace(/-/g, ' - ');
+  }
+
+  // SVG stylisé pour l'icône de succès
+  const successSvg = `
+    <svg class="w-10 h-10 text-ll-dark-green dark:text-ll-light-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    </svg>
+  `;
 
   await Swal.fire({
-    title: 'Message envoyé avec succès !',
+    title: `<span class="text-xl sm:text-2xl font-extrabold ${textTitle}">Message envoyé avec succès !</span>`,
     html: `
-      <div class="${bgClass} p-6 rounded-xl ${borderClass} shadow-lg max-w-lg mx-auto">
-        <div class="flex justify-between items-center mb-6 border-b pb-4 ${borderClass}">
-          <img src="/assets/images/logo.png" alt="L&L Ouest Services Logo" class="h-12 border ${borderClass} rounded rounded-xl p-1">
-          <span class="text-sm font-medium">${formattedDate}</span>
+      <div class="${bgContent} p-4 sm:p-8 rounded-3xl shadow-2xl w-full max-w-full mx-auto font-sans text-left overflow-y-auto max-h-[75vh]">
+        
+        <div class="flex items-start mb-6 pb-4 border-b ${borderSubtle}">
+          <div class="p-2 ${bgMain} rounded-xl shadow-inner mr-4">
+            <img src="/assets/images/logo.png" alt="L&L Ouest Services Logo" class="h-10 w-10 object-contain rounded-lg">
+          </div>
+          <div>
+            <h2 class="text-xl font-bold ${textTitle}">Confirmation d'envoi</h2>
+            <p class="text-sm ${textLabel} mt-1">Envoyé le: ${formattedDate}</p>
+          </div>
         </div>
-        <section class="mb-6 border-b ${borderClass} pb-4">
-          <h3 class="text-lg font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ll-dark-green to-ll-dark-blue">Vos coordonnées :</h3>
-          <div class="grid grid-cols-1 gap-2 text-base text-start">
-            <p><strong>Nom :</strong> ${contactData.name}</p>
-            <p><strong>Email :</strong> ${contactData.email}</p>
-            <p><strong>Téléphone :</strong> ${contactData.phone || 'N/A'}</p>
+        
+        <div class="flex justify-center mb-6">
+          ${successSvg}
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          
+          <div class="${bgMain} p-5 rounded-2xl shadow-lg border ${borderSubtle} transition-all duration-300 hover:shadow-xl">
+            <h3 class="text-lg font-semibold mb-4 ${textTitle} flex items-center">
+              <i class="fas fa-user-circle mr-2"></i> Vos Coordonnées
+            </h3>
+            <div class="grid grid-cols-1 gap-3">
+              ${['name', 'email', 'phone'].map(key => `
+                <div>
+                  <label class="block text-xs font-bold ${textLabel} uppercase">${key === 'name' ? 'Nom' : key === 'email' ? 'Email' : 'Téléphone'}</label>
+                  <p class="mt-0.5 text-base font-medium text-gray-800 dark:text-gray-200 break-words">${contactData[key] || 'Non renseigné'}</p>
+                </div>
+              `).join('')}
+            </div>
           </div>
-        </section>
-        <section class="mb-6 border-b ${borderClass} pb-4">
-          <h3 class="text-lg font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ll-dark-green to-ll-dark-blue">Votre demande :</h3>
-          <div class="grid grid-cols-1 gap-2 text-base text-start">
-            <p><strong>Sujets :</strong> ${subjectsDisplay}</p>
-            <p><strong>Message :</strong> ${contactData.message}</p>
+
+          <div class="${bgMain} p-5 rounded-2xl shadow-lg border ${borderSubtle} transition-all duration-300 hover:shadow-xl">
+            <h3 class="text-lg font-semibold mb-4 ${textTitle} flex items-center">
+              <i class="fas fa-file-alt mr-2"></i> Détails de la demande
+            </h3>
+            <div class="grid grid-cols-1 gap-3">
+              <div>
+                <label class="block text-xs font-bold ${textLabel} uppercase">Sujet(s)</label>
+                <p class="mt-0.5 text-base font-medium text-gray-800 dark:text-gray-200">${subjectsDisplay}</p>
+              </div>
+              <div>
+                <label class="block text-xs font-bold ${textLabel} uppercase">Message</label>
+                <div class="mt-0.5 p-3 rounded-xl ${bgContent} border ${borderSubtle} max-h-32 overflow-y-auto shadow-inner">
+                  <p class="text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-200">${contactData.message}</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </section>
-        <p class="text-sm italic text-center">Merci pour votre message. Nous vous répondrons sous 48h.</p>
+        </div>
+
+        <div class="text-center mt-4">
+          <div class="flex justify-center items-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-dark-blue dark:text-ll-light-blue">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <p class="text-sm font-medium text-gray-800 dark:text-gray-200">
+              Votre message a été envoyé. Veuillez vérifier votre boîte mail (<strong>${contactData.email}</strong>) pour la confirmation.
+            </p>
+          </div>
+          <p class="text-sm italic ${textLabel}">
+            Merci pour votre message. Nous vous répondrons sous 48h.
+          </p>
+        </div>
       </div>
     `,
-    icon: 'success',
+    icon: undefined,
     showConfirmButton: true,
-    confirmButtonText: 'Fermer',
+    confirmButtonText: '<i class="fas fa-times mr-2"></i> Fermer',
     confirmButtonColor: '#1e90ff',
-    background: isDark ? '#1B1B18' : '#FDFDFC',
-    color: isDark ? '#FDFDFC' : '#1B1B18',
-    customClass: { popup: 'swal-wide max-w-2xl' },
-    didOpen: () => {
-      Swal.getPopup().classList.add('animate__animated', 'animate__fadeInDown');
+    width: '100%',
+    customClass: {
+      popup: 'swal-wide rounded-3xl shadow-xl w-full max-w-lg md:max-w-3xl',
+      confirmButton: 'px-8 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-[1.02] shadow-lg',
+      title: 'pt-4',
     },
+    background: bgMain,
+    color: isDark ? '#FDFDFC' : '#1B1B18',
+    showClass: {
+      popup: 'animate__animated animate__zoomIn'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__zoomOut'
+    }
   });
-},
+}
 };
+
 
 export default contact;

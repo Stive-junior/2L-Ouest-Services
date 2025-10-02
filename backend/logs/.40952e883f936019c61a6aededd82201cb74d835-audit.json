@@ -14,6 +14,21 @@
             "date": 1759123852260,
             "name": "logs/app-dev.log-exceptions-2025-09-29.log",
             "hash": "bb2836cfee8c5960b230eb0deb3686c394158db53f41c8875b79f8357a9d6f98"
+        },
+        {
+            "date": 1759245000253,
+            "name": "logs/app-dev.log-exceptions-2025-09-30.log",
+            "hash": "3764b062d7b898e0da104680a8c75e1191c04ae493b70d8c343eb598d20224b1"
+        },
+        {
+            "date": 1759302770084,
+            "name": "logs/app-dev.log-exceptions-2025-10-01.log",
+            "hash": "bfbb1d14983044fbd86f1711f836eb7cb7521c8cc65a2888b686b2f10fe2e246"
+        },
+        {
+            "date": 1759385417495,
+            "name": "logs/app-dev.log-exceptions-2025-10-02.log",
+            "hash": "921155fea6baadd05b745affaa39d33acd0c2e3a520bfa3858a95c066efc07f4"
         }
     ],
     "hashType": "sha256"

@@ -1,382 +1,801 @@
 /**
- * @file loadService.js
- * @description Loads service data from Firebase with localStorage caching and mock data fallback.
- * Integrates Swiper carousel for service images, equipment icons, and Lottie animations for loading states.
+ * @file loadServices.js
+ * @description Charge et gère les données des services avec mise en cache et fallback sur données mock
+ * @version Ultra Mega Puissante: Fixed null DOM errors, synced sidebar/details, auto-reset index on filters, robust error handling, enhanced navigation
  */
 
 import { getStoredToken, showNotification } from '../modules/utils.js';
 import api from '../api.js';
+import { showNoServicesMessage } from '../animations/animation.js';
 
-// Cache configuration
+// Configuration du cache ultra-robuste
 const SERVICES_CACHE_KEY = 'servicesDataCache';
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
-// SVG Icons for Services
+// Icônes des services (étendu et optimisé)
 const serviceIcons = {
-    bureaux: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><path d="M6 8h12"></path><path d="M6 12h12"></path><path d="M6 16h12"></path></svg>`,
-    vitrines: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 10h20"></path></svg>`,
-    régulier: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`,
-    ponctuel: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`,
-    salles_de_réunion: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 3v18"></path><path d="M9 9h12"></path></svg>`,
-    sas_dentrée: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M12 7v10"></path></svg>`,
-    réfectoire: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"></path><path d="M4 6h16"></path><path d="M4 18h16"></path></svg>`,
-    sanitaires: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"></path><path d="M6 12h12"></path></svg>`,
-    escaliers: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4z"></path><path d="M14 4h6v6h-6z"></path><path d="M4 14h6v6H4z"></path><path d="M14 14h6v6h-6z"></path></svg>`,
-    piscine: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14h2l2-2 2 4 2-2 2 4 2-2 2 4h2"></path><path d="M2 18h2l2-2 2 4 2-2 2 4 2-2 2 4h2"></path></svg>`,
+    bureaux: '🏢',
+    residentiel: '🏠',
+    commercial: '🛍️',
+    industriel: '🏭',
+    medical: '🏥',
+    hotelier: '🏨',
+    education: '🎓',
+    restaurant: '🍽️',
+    sport: '💪',
+    evenementiel: '🎪',
+    piscine: '🏊',
+    vitres: '🔍',
+    facade: '🏛️',
+    parking: '🅿️',
+    jardin: '🌿'
 };
 
-// Equipment Icons
+// Icônes d'équipement (étendu et optimisé)
 const equipmentIcons = {
-    vacuum: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2H2v6h2l2 2 2-2h8l2 2 2-2h2V2z"></path><path d="M12 10v12"></path><path d="M8 14h8"></path></svg>`,
-    mop: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v12"></path><rect x="8" y="14" width="8" height="6" rx="2"></rect></svg>`,
-    spray: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h8v4H8z"></path><path d="M12 10v8"></path><path d="M10 18h4"></path></svg>`,
+    vacuum: '🧹',
+    mop: '🪣',
+    spray: '🧴',
+    broom: '🧹',
+    bucket: '🪣',
+    cloth: '🧽',
+    polisher: '✨',
+    brush: '🖌️',
+    duster: '🪶',
+    scraper: '🔪',
+    extractor: '💧',
+    pressure_washer: '💦',
+    steam_cleaner: '♨️',
+    floor_machine: '⚙️'
 };
 
 let MOCK_SERVICES = [];
+let allFilteredServices = [];
+let currentServiceIndex = 0;
+let paginationVisiblePages = 5;
+let currentPageOffset = 0;
+let lastFiltersHash = '';
 
-
-// Toggle loading state for services
+/**
+ * Affiche/masque l'animation de chargement avec fallback
+ */
 function toggleServicesLoading(show) {
     const loadingEl = document.getElementById('services-loading');
-    const servicesList = document.getElementById('services-list');
-    if (loadingEl && servicesList) {
+    if (loadingEl) {
         loadingEl.classList.toggle('hidden', !show);
-        servicesList.classList.toggle('hidden', show);
     }
 }
 
-
-// Load mock services from JSON
-async function loadMockServices() {
-    try {
-        const response = await fetch('/assets/json/mock/mock-services.json');
-        if (response.ok) {
-            MOCK_SERVICES = await response.json();
-            MOCK_SERVICES = MOCK_SERVICES.map(service => ({
-                ...service,
-                icon: serviceIcons[service.category] || serviceIcons.bureaux,
-                equipment: ['vacuum', 'mop', 'spray'],
-            }));
-        } else {
-            throw new Error('Failed to load mock services');
+/**
+ * Charge les services mock depuis JSON avec retry et fallback
+ */
+async function loadMockServices(retries = 3) {
+    for (let i = 0; i < retries; i++) {
+        try {
+            const response = await fetch('/assets/json/mock/mock-services.json');
+            if (response.ok) {
+                const data = await response.json();
+                MOCK_SERVICES = data.services.map(service => ({
+                    ...service,
+                    icon: serviceIcons[service.category] || serviceIcons.bureaux,
+                    equipment: (service.equipment || ['vacuum', 'mop', 'spray']).map(eq => ({
+                        icon: equipmentIcons[eq] || equipmentIcons.vacuum,
+                        name: eq
+                    })),
+                    certification: service.certification || getRandomCertification(),
+                    garantie: service.garantie || '30 jours',
+                    delai_intervention: service.delai_intervention || getRandomInterventionTime(),
+                    zone_intervention: service.zone_intervention || 'Île-de-France',
+                    // Defaults pour robustesse
+                    images: service.images || [{ url: '/assets/images/placeholder.jpg', type: 'after' }],
+                    features: service.features || ['Service professionnel', 'Équipé moderne'],
+                    members: service.members || [{ name: 'Équipe Pro', role: 'Nettoyeurs', photo: '/assets/images/placeholder-avatar.jpg' }],
+                    availability: service.availability || { isAvailable: true, schedule: [{ day: 'Lun-Ven', hours: ['9h-18h'] }] },
+                    rating: service.rating || 4.5,
+                    reviews: service.reviews || 100,
+                    difficulty: service.difficulty || 'medium',
+                    frequency: service.frequency || 'hebdomadaire'
+                }));
+                return; // Succès
+            }
+        } catch (error) {
+            console.warn(`Mock load attempt ${i + 1} failed:`, error);
+            if (i === retries - 1) {
+                console.error('All mock load attempts failed');
+                showNotification('Erreur lors du chargement des données mock.', 'error');
+                MOCK_SERVICES = []; // Fallback vide mais géré
+            }
+            await new Promise(resolve => setTimeout(resolve, 500)); // Delay retry
         }
-    } catch (error) {
-        console.error('Error loading mock services:', error);
-        showNotification('Erreur lors du chargement des données mock.', 'error');
-        MOCK_SERVICES = [
-            {
-                id: 'mock-uuid-1',
-                name: 'Nettoyage de Bureaux',
-                description: 'Nettoyage professionnel pour bureaux et espaces de travail.',
-                price: 150,
-                area: 100,
-                duration: 2,
-                category: 'bureaux',
-                ecoFriendly: true,
-                icon: serviceIcons.bureaux,
-                equipment: ['vacuum', 'mop', 'spray'],
-                images: [
-                    { url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', type: 'before', description: 'Bureau avant nettoyage' },
-                    { url: 'https://images.unsplash.com/photo-1600585152915-d208bec867a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', type: 'after', description: 'Bureau après nettoyage' },
-                ],
-                availability: { isAvailable: true, schedule: [{ day: 'lundi', hours: ['09:00', '17:00'] }] },
-                location: { address: '123 Rue Exemple, Nantes', coordinates: { lat: 47.2184, lng: -1.5536 } },
-                createdAt: new Date().toISOString(),
-                features: ['Produits écologiques', 'Nettoyage en profondeur', 'Service personnalisé'],
-                rating: 4,
-                reviews: 120,
-            },
-            {
-                id: 'mock-uuid-2',
-                name: 'Nettoyage de Vitrines',
-                description: 'Nettoyage des vitrines commerciales pour une présentation impeccable.',
-                price: 80,
-                area: 50,
-                duration: 1,
-                category: 'vitrines',
-                ecoFriendly: true,
-                icon: serviceIcons.vitrines,
-                equipment: ['mop', 'spray'],
-                images: [
-                    { url: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', type: 'before', description: 'Vitrine avant nettoyage' },
-                    { url: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', type: 'after', description: 'Vitrine après nettoyage' },
-                ],
-                availability: { isAvailable: true, schedule: [{ day: 'mardi', hours: ['10:00', '16:00'] }] },
-                location: { address: '456 Avenue Test, Rennes', coordinates: { lat: 48.1147, lng: -1.6794 } },
-                createdAt: new Date().toISOString(),
-                features: ['Produits sans traces', 'Service rapide', 'Horaires flexibles'],
-                rating: 4.5,
-                reviews: 85,
-            },
-        ];
     }
 }
 
-// Load mock services at startup
+// Charger mock au démarrage avec async
 loadMockServices();
 
 /**
- * Loads service data with optional filters.
- * @param {Object} [filters] - Filters (e.g., { area, duration, category }).
- * @returns {Promise<Array<Object>|null>} List of services or null on error.
+ * Retourne une certification aléatoire (stable)
+ */
+function getRandomCertification() {
+    const certifications = ['NF X50-900', 'ISO 9001', 'Qualibat', 'Ecocert', 'Label Origine France Garantie'];
+    return certifications[Math.floor(Math.random() * certifications.length)];
+}
+
+/**
+ * Retourne un délai d'intervention aléatoire (stable)
+ */
+function getRandomInterventionTime() {
+    const delais = ['24h', '48h', '72h', '1 semaine'];
+    return delais[Math.floor(Math.random() * delais.length)];
+}
+
+/**
+ * Charge tous les services avec filtres, cache, et auto-reset index si filtres changent
  */
 export async function loadServices(filters = {}) {
-    
     toggleServicesLoading(true);
+    
+    // Hash des filtres pour détecter changements
+    const filtersHash = JSON.stringify(filters);
+    const filtersChanged = filtersHash !== lastFiltersHash;
+    lastFiltersHash = filtersHash;
+    
     try {
         const token = getStoredToken();
+        let services;
+
         if (!token) {
-            console.log('No token found, returning mock data.');
-            return applyFilters(MOCK_SERVICES, filters);
-        }
-
-        const cachedData = getCachedServices();
-        if (cachedData) {
-            console.log('Returning cached service data.');
-            return applyFilters(cachedData, filters);
-        }
-
-        console.log('Fetching service data from Firebase API...');
-        const servicesData = await api.service.getAllServices(1, 50, filters);
-
-        if (servicesData?.services) {
-            const servicesWithIcons = servicesData.services.map(service => ({
-                ...service,
-                icon: serviceIcons[service.category] || serviceIcons.bureaux,
-                equipment: service.equipment || ['vacuum', 'mop', 'spray'],
-            }));
-            cacheServices(servicesWithIcons);
-            return applyFilters(servicesWithIcons, filters);
+            console.log('No token, using mock data.');
+            services = [...MOCK_SERVICES]; // Copy pour éviter mutations
         } else {
-            console.log('No services data from API, using mock data.');
-            return applyFilters(MOCK_SERVICES, filters);
+            let cachedData = getCachedServices();
+            if (cachedData && !filtersChanged) { // Seulement si pas de changement de filtres
+                console.log('Using cached data.');
+                services = [...cachedData];
+            } else {
+                console.log('Fetching from API...');
+                const apiData = await api.service.getAllServices(1, 100, filters).catch(err => {
+                    console.warn('API fetch failed, fallback to mock:', err);
+                    return null;
+                });
+                
+                if (apiData?.services && apiData.services.length > 0) {
+                    services = apiData.services.map(service => ({
+                        ...service,
+                        icon: serviceIcons[service.category] || serviceIcons.bureaux,
+                        equipment: (service.equipment || ['vacuum', 'mop', 'spray']).map(eq => ({
+                            icon: equipmentIcons[eq] || equipmentIcons.vacuum,
+                            name: eq
+                        })),
+                        // Defaults pour API data
+                        images: service.images || [{ url: '/assets/images/placeholder.jpg', type: 'after' }],
+                        features: service.features || ['Service professionnel', 'Équipé moderne'],
+                        members: service.members || [{ name: 'Équipe Pro', role: 'Nettoyeurs', photo: '/assets/images/placeholder-avatar.jpg' }],
+                        availability: service.availability || { isAvailable: true, schedule: [{ day: 'Lun-Ven', hours: ['9h-18h'] }] },
+                        rating: service.rating || 4.5,
+                        reviews: service.reviews || 100,
+                        difficulty: service.difficulty || 'medium',
+                        frequency: service.frequency || 'hebdomadaire'
+                    }));
+                    cacheServices(services);
+                } else {
+                    console.log('API empty, using mock.');
+                    services = [...MOCK_SERVICES];
+                }
+            }
         }
+
+        // Appliquer les filtres (toujours, même sur cache)
+        allFilteredServices = applyFilters(services, filters);
+        
+        // Auto-reset index si filtres changent et résultats différents
+        if (filtersChanged && allFilteredServices.length > 0) {
+            currentServiceIndex = 0;
+        } else if (allFilteredServices.length === 0) {
+            currentServiceIndex = 0;
+        } else if (currentServiceIndex >= allFilteredServices.length) {
+            currentServiceIndex = allFilteredServices.length - 1;
+        }
+        
+        return allFilteredServices;
+        
     } catch (error) {
         console.error('Error loading services:', error);
         showNotification('Erreur lors du chargement des services.', 'error');
-        return applyFilters(MOCK_SERVICES, filters);
+        allFilteredServices = applyFilters(MOCK_SERVICES, filters);
+        currentServiceIndex = 0; // Reset sur erreur
+        return allFilteredServices;
     } finally {
         toggleServicesLoading(false);
     }
 }
 
 /**
- * Applies filters to service data.
- * @param {Array<Object>} services - List of services.
- * @param {Object} filters - Filters to apply.
- * @returns {Array<Object>} Filtered services.
+ * Applique les filtres avancés avec optimisation (early return)
  */
 function applyFilters(services, filters) {
+    const { category, frequency, difficulty, reviewsMin, search } = filters;
+    
     return services.filter(service => {
-        const { category, areaMin, areaMax, durationMin, durationMax, priceMin, priceMax, ecoFriendly } = filters;
-        return (
-            (!category || category === 'all' || service.category === category) &&
-            (!areaMin || service.area >= areaMin) &&
-            (!areaMax || service.area <= areaMax) &&
-            (!durationMin || service.duration >= durationMin) &&
-            (!durationMax || service.duration <= durationMax) &&
-            (!priceMin || service.price >= priceMin) &&
-            (!priceMax || service.price <= priceMax) &&
-            (!ecoFriendly || service.ecoFriendly)
-        );
+        if (category && category !== 'all' && service.category !== category) return false;
+        if (frequency && frequency !== 'all' && service.frequency !== frequency) return false;
+        if (difficulty && difficulty !== 'all' && service.difficulty !== difficulty) return false;
+        if (reviewsMin && service.reviews < reviewsMin) return false;
+        
+        // Recherche textuelle optimisée
+        if (search) {
+            const lowerSearch = search.toLowerCase();
+            if (!service.name.toLowerCase().includes(lowerSearch) &&
+                !service.description.toLowerCase().includes(lowerSearch) &&
+                !service.features.some(feature => feature.toLowerCase().includes(lowerSearch))) {
+                return false;
+            }
+        }
+        
+        return true;
     });
 }
 
 /**
- * Caches services data in localStorage with TTL.
- * @param {Array<Object>} services - Services to cache.
+ * Met en cache les services avec TTL et validation
  */
 function cacheServices(services) {
     try {
-        const cacheData = {
-            data: services,
-            timestamp: Date.now(),
-        };
+        if (!services || !Array.isArray(services)) return;
+        const cacheData = { data: services, timestamp: Date.now() };
         localStorage.setItem(SERVICES_CACHE_KEY, JSON.stringify(cacheData));
     } catch (error) {
-        console.error('Error caching services:', error);
+        console.error('Cache error:', error);
     }
 }
 
 /**
- * Retrieves cached services if not expired.
- * @returns {Array<Object>|null} Cached services or null.
+ * Récupère les services en cache s'ils sont valides
  */
 function getCachedServices() {
     try {
         const cached = localStorage.getItem(SERVICES_CACHE_KEY);
         if (!cached) return null;
+        
         const { data, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < CACHE_TTL) {
-            return data;
+        if (!Array.isArray(data) || Date.now() - timestamp > CACHE_TTL) {
+            localStorage.removeItem(SERVICES_CACHE_KEY);
+            return null;
         }
+        return data;
+    } catch (error) {
+        console.error('Retrieve cache error:', error);
         localStorage.removeItem(SERVICES_CACHE_KEY);
         return null;
-    } catch (error) {
-        console.error('Error retrieving cached services:', error);
-        return null;
     }
 }
 
 /**
- * Renders services in the Swiper carousel.
- * @param {Array<Object>} services - Services to render.
+ * Rend la barre latérale des services et gère la visibilité (caché sur mobile) - SYNCHRO AVEC DETAILS
+ * Met à jour le détail du service pour l'index actuel si valide
  */
-export function renderServices(services) {
-    const servicesList = document.getElementById('services-list');
-    if (!servicesList) return;
-
-    servicesList.innerHTML = services.map(service => `
-        <div class="swiper-slide service-card-enhanced relative bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl group" data-service-id="${service.id}">
-            <div class="service-badge absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-sm font-semibold ${service.ecoFriendly ? 'bg-green-100 text-green-800' : service.rating >= 4.5 ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'}">
-                ${service.ecoFriendly ? 'Éco-responsable' : service.rating >= 4.5 ? 'Populaire' : 'Nouveau'}
-            </div>
-            <div class="service-image relative overflow-hidden">
-                <img src="${service.images[0]?.url || 'https://via.placeholder.com/400'}" alt="${service.name}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy">
-            </div>
-            <div class="service-content p-6 transition-transform duration-300 group-hover:translate-y-2">
-                <div class="flex items-center gap-3 mb-3">
-                    <span class="text-blue-600 dark:text-blue-400">${service.icon}</span>
-                    <h3 class="service-title text-lg font-bold text-gray-900 dark:text-white">${service.name}</h3>
-                </div>
-                <p class="service-description text-gray-600 dark:text-gray-300 text-sm mb-4">${service.description}</p>
-                <div class="service-features flex flex-wrap gap-2 mb-4">
-                    ${service.features.map(feature => `<span class="service-feature text-xs bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded">${feature}</span>`).join('')}
-                </div>
-                <div class="service-equipment flex gap-2 mb-4">
-                    ${service.equipment.map(eq => `<span class="text-blue-600 dark:text-blue-400">${equipmentIcons[eq]}</span>`).join('')}
-                </div>
-                <div class="service-price text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">${service.price} €</div>
-                <div class="service-actions flex gap-3">
-                    <button class="book-service bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-all duration-300" data-service-id="${service.id}">
-                        Réserver
-                    </button>
-                    <button class="details-service bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300" data-service-id="${service.id}">
-                        Détails
-                    </button>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
-    // Initialize Swiper with conditional loop
-    const swiperOptions = {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        breakpoints: {
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-        },
-    };
-    if (services.length >= 3) {
-        swiperOptions.loop = true;
+export function renderServicesSidebar(services) {
+    const sidebarContainer = document.getElementById('services-sidebar-container');
+    const sidebar = document.getElementById('services-sidebar');
+    if (!sidebar || !sidebarContainer) {
+        console.warn('Sidebar elements not found, skipping render.');
+        return;
     }
-    new Swiper('.services-swiper', swiperOptions);
 
-    // Add event listeners for buttons
-    document.querySelectorAll('.book-service').forEach(button => {
-        button.addEventListener('click', () => {
-            const serviceId = button.dataset.serviceId;
-            showNotification(`Service ${serviceId} réservé avec succès !`, 'success');
-        });
-    });
+    // Caché sur mobile par défaut (xl:block dans CSS) - basé sur nombre de services
+    if (services.length < 2) {
+        sidebarContainer.classList.add('hidden');
+    } else {
+        sidebarContainer.classList.remove('hidden');
+    }
 
-    document.querySelectorAll('.details-service').forEach(button => {
-        button.addEventListener('click', () => {
-            const serviceId = button.dataset.serviceId;
-            const service = services.find(s => s.id === serviceId);
-            if (service) {
-                showServiceDetails(service);
-            }
-        });
-    });
-}
+    // Clear et render sidebar
+    sidebar.innerHTML = services.map((service, index) => {
+        const afterImage = service.images?.find(img => img.type === 'after') || { url: '/assets/images/placeholder.jpg' };
+        const categoryLabel = service.category ? `<span class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full">${service.category}</span>` : '';
 
-
-/**
- * Displays service details in a modal.
- * @param {Object} service - Service data.
- */
-function showServiceDetails(service) {
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
-    modal.innerHTML = `
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="sticky top-0 bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center rounded-t-xl">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white">${service.name}</h3>
-                <button class="close-modal text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="p-6">
-                <div class="swiper service-detail-swiper">
-                    <div class="swiper-wrapper">
-                        ${service.images.map(img => `
-                            <div class="swiper-slide">
-                                <img src="${img.url}" alt="${img.description}" class="w-full h-64 object-cover rounded-lg">
+        return `
+            <button class="service-sidebar-item w-full text-left p-6 rounded-2xl border border-white/20 dark:border-gray-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-gray-700/70 transition-all duration-300 group service-card ${
+                index === currentServiceIndex ? 'border-white/50 bg-white/90 dark:bg-gray-700/90 shadow-xl ring-1 ring-white/30' : 'bg-white/50 dark:bg-gray-800/50'
+            }" data-service-index="${index}">
+                <div class="flex flex-col gap-4 h-full">
+                    <img src="${afterImage.url}" alt="${service.name}" class="w-full h-32 object-cover rounded-xl group-hover:scale-105 transition-transform duration-300">
+                    <div class="flex-1 min-h-0">
+                        <h4 class="font-semibold text-gray-900 dark:text-white text-lg truncate group-hover:text-ll-blue transition-colors">${service.name}</h4>
+                        <div class="flex items-center gap-2 mt-2">
+                            <div class="flex text-yellow-400 text-sm">
+                                ${renderStarRating(service.rating)}
                             </div>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">(${service.reviews})</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-gray-200/50 dark:border-gray-600/50">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl transform group-hover:scale-110 transition-transform">${service.icon}</span>
+                            ${categoryLabel}
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1">
+                            <path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </button>
+        `;
+    }).join('');
+
+    // Gestion des clics: SYNCHRO AVEC INDEX ET DETAILS
+    sidebar.querySelectorAll('.service-sidebar-item').forEach((item, index) => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Mettre à jour index et naviguer (utilise navigateService pour cohérence)
+            const direction = index > currentServiceIndex ? 'next' : index < currentServiceIndex ? 'prev' : null;
+            const delta = Math.abs(index - currentServiceIndex);
+            if (direction) {
+                navigateService(direction, delta);
+            } else {
+                // Même index: refresh
+                renderServiceDetail(services[index], index, services.length);
+            }
+            
+            // Update classes actives
+            sidebar.querySelectorAll('.service-sidebar-item').forEach((el, i) => {
+                if (i === currentServiceIndex) {
+                    el.classList.add('border-white/50', 'bg-white/90', 'dark:bg-gray-700/90', 'shadow-xl', 'ring-1', 'ring-white/30');
+                    el.classList.remove('bg-white/50', 'dark:bg-gray-800/50', 'border-white/20', 'dark:border-gray-700/50');
+                } else {
+                    el.classList.remove('border-white/50', 'bg-white/90', 'dark:bg-gray-700/90', 'shadow-xl', 'ring-1', 'ring-white/30');
+                    el.classList.add('bg-white/50', 'dark:bg-gray-800/50', 'border-white/20', 'dark:border-gray-700/50');
+                }
+            });
+        });
+    });
+
+    // Mettre à jour le sélecteur mobile
+    updateMobileServiceSelector(services);
+
+    // Mettre à jour la pagination (avec check null)
+    renderServicePagination(services.length);
+
+    // SYNCHRO: Si services > 0 et index valide, update detail IMMEDIATEMENT
+    if (services.length > 0 && currentServiceIndex < services.length) {
+        renderServiceDetail(services[currentServiceIndex], currentServiceIndex, services.length);
+    } else if (services.length === 0) {
+        showNoServicesMessage(); // Appel à animation.js pour cohérence, mais défini ici si besoin
+    }
+}
+
+/**
+ * Rend la pagination des services avec ellipsis et bouton "more" - FIXED NULL CHECK
+ */
+function renderServicePagination(totalServices) {
+    const paginationContainer = document.getElementById('service-pagination');
+    const pagesContainer = document.getElementById('service-pages');
+    
+    // FIXED: Si pas d'éléments, skip sans erreur
+    if (!paginationContainer || !pagesContainer || totalServices < 2) {
+        if (paginationContainer) paginationContainer.classList.add('hidden');
+        return;
+    }
+
+    const totalPages = totalServices;
+    const currentPage = currentServiceIndex + 1;
+    const maxVisible = paginationVisiblePages;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+    if (endPage - startPage + 1 < maxVisible) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+
+    let pagesHTML = '';
+
+    // First page
+    if (startPage > 1) {
+        pagesHTML += `<button class="service-page-btn px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-medium hover:bg-ll-blue hover:text-white transition-all duration-300 transform hover:scale-105" data-page="1">1</button>`;
+        if (startPage > 2) {
+            pagesHTML += `<span class="pagination-ellipsis mx-1 text-sm">...</span>`;
+        }
+    }
+
+    // Visible pages
+    for (let i = startPage; i <= endPage; i++) {
+        pagesHTML += `
+            <button class="service-page-btn px-4 py-2 rounded-full ${i === currentPage ? 'bg-ll-blue text-white shadow-lg neon-glow' : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'} font-medium hover:bg-ll-blue hover:text-white transition-all duration-300 transform hover:scale-105" data-page="${i}">
+                ${i}
+            </button>
+        `;
+    }
+
+    // Ellipsis and more button
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            pagesHTML += `<span class="pagination-ellipsis mx-1 text-sm">...</span>`;
+        }
+        pagesHTML += `<button class="service-page-btn px-4 py-2 rounded-full bg-ll-blue text-white font-medium hover:shadow-lg neon-glow transition-all duration-300 transform hover:scale-105 pagination-more" data-page="${totalPages}">→</button>`;
+    }
+
+    pagesContainer.innerHTML = pagesHTML;
+    paginationContainer.classList.remove('hidden');
+
+    // Événements: Utilise navigateService
+    const prevBtn = document.getElementById('service-prev');
+    const nextBtn = document.getElementById('service-next');
+    if (prevBtn) prevBtn.onclick = () => navigateService('prev');
+    if (nextBtn) nextBtn.onclick = () => navigateService('next');
+
+    pagesContainer.querySelectorAll('.service-page-btn').forEach(btn => {
+        btn.onclick = (e) => {
+            e.stopPropagation();
+            const page = parseInt(btn.dataset.page);
+            if (page !== currentPage && !isNaN(page)) {
+                const delta = page - currentPage;
+                navigateService(delta > 0 ? 'next' : 'prev', Math.abs(delta));
+            }
+        };
+    });
+
+    // États boutons
+    if (prevBtn) prevBtn.disabled = currentPage === 1;
+    if (nextBtn) nextBtn.disabled = currentPage === totalPages;
+}
+
+/**
+ * Met à jour le sélecteur de services mobile - SYNCHRO AVEC NAVIGATION
+ */
+function updateMobileServiceSelector(services) {
+    const mobileSelector = document.getElementById('mobile-service-selector');
+    if (!mobileSelector) return;
+
+    const currentValue = mobileSelector.value;
+
+    mobileSelector.innerHTML = '<option value="">Sélectionnez un service</option>' + 
+        services.map((service, index) => `
+            <option value="${index}" ${index === currentServiceIndex ? 'selected' : ''}>
+                ${service.name} (${service.rating} ⭐)
+            </option>
+        `).join('');
+
+    if (currentValue && services[currentValue]) {
+        mobileSelector.value = currentValue;
+    }
+
+    // Change: Utilise navigateService
+    const handler = mobileSelector._changeHandler;
+    if (handler) mobileSelector.removeEventListener('change', handler);
+    mobileSelector._changeHandler = (e) => {
+        const selectedIndex = parseInt(e.target.value);
+        if (!isNaN(selectedIndex) && services[selectedIndex]) {
+            const delta = selectedIndex - currentServiceIndex;
+            navigateService(delta > 0 ? 'next' : 'prev', Math.abs(delta));
+        }
+    };
+    mobileSelector.addEventListener('change', mobileSelector._changeHandler);
+}
+
+/**
+ * Rend le détail d'un service - ROBUSTE AVEC DEFAULTS ET SYNCHRO
+ */
+export function renderServiceDetail(service, index = 0, total = 1) {
+    const container = document.getElementById('service-detail-container');
+    if (!container) {
+        console.warn('Detail container not found, skipping render.');
+        return;
+    }
+
+    // Defaults si service invalide
+    if (!service || typeof service !== 'object') {
+        service = {
+            name: 'Service par défaut',
+            description: 'Description par défaut.',
+            images: [{ url: '/assets/images/placeholder.jpg', type: 'after' }],
+            features: ['Feature 1'],
+            equipment: [{ icon: '🧹', name: 'Default' }],
+            members: [{ name: 'Équipe', role: 'Pro', photo: '/assets/images/placeholder-avatar.jpg' }],
+            availability: { isAvailable: true, schedule: [{ day: 'Lun-Ven', hours: ['9h-18h'] }] },
+            rating: 4.5,
+            reviews: 100,
+            difficulty: 'medium',
+            certification: 'Non spécifié',
+            garantie: 'Non spécifié',
+            delai_intervention: 'Non spécifié'
+        };
+    }
+
+    currentServiceIndex = index; // Sync global index
+
+    // Carousel d'images - robuste avec check
+    const imagesWrapper = document.getElementById('service-images');
+    if (imagesWrapper) {
+        imagesWrapper.innerHTML = service.images.map((img, imgIndex) => `
+            <div class="swiper-slide relative">
+                <img src="${img.url}" alt="${img.description || service.name}" class="w-full h-64 md:h-80 lg:h-96 object-cover rounded-xl" loading="lazy" onerror="this.src='/assets/images/placeholder.jpg'">
+                ${img.type === 'before' ? `
+                    <span class="absolute top-4 left-4 bg-red-500/90 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Avant</span>
+                ` : img.type === 'after' ? `
+                    <span class="absolute top-4 left-4 bg-green-500/90 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Après</span>
+                ` : ''}
+            </div>
+        `).join('');
+
+        // Swiper init robuste
+        if (window.Swiper) {
+            const swiperEl = document.querySelector('.service-image-swiper');
+            if (swiperEl && swiperEl.swiper) {
+                swiperEl.swiper.destroy(true, true);
+            }
+            
+            setTimeout(() => {
+                if (swiperEl) {
+                    const newSwiper = new window.Swiper('.service-image-swiper', {
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                        pagination: { 
+                            el: '.swiper-pagination',
+                            clickable: true,
+                            renderBullet: function (index, className) {
+                                return `<span class="${className} !w-3 !h-3 !bg-white/50 !opacity-50 hover:!opacity-100 !transition-all"></span>`;
+                            }
+                        },
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        loop: service.images.length > 1,
+                        lazy: true,
+                        autoplay: service.images.length > 1 ? {
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        } : false,
+                        effect: 'fade',
+                        fadeEffect: { crossFade: true }
+                    });
+                    swiperEl.swiper = newSwiper;
+                }
+            }, 150);
+        }
+    }
+
+    // Détails basiques
+    const nameEl = document.getElementById('service-name');
+    const descEl = document.getElementById('service-description');
+    if (nameEl) nameEl.textContent = service.name;
+    if (descEl) descEl.textContent = service.description;
+
+    // Rating
+    const ratingEl = document.getElementById('service-rating');
+    const ratingValueEl = document.getElementById('service-rating-value');
+    const reviewsEl = document.getElementById('service-reviews');
+    if (ratingEl) ratingEl.innerHTML = renderStarRating(service.rating);
+    if (ratingValueEl) ratingValueEl.textContent = service.rating.toFixed(1);
+    if (reviewsEl) reviewsEl.textContent = `${service.reviews} avis`;
+
+    // Difficulté
+    const difficultyEl = document.getElementById('service-difficulty');
+    if (difficultyEl) {
+        const difficultyColors = { easy: 'difficulty-easy', medium: 'difficulty-medium', hard: 'difficulty-hard' };
+        const difficultyText = { easy: 'Facile', medium: 'Moyen', hard: 'Difficile' };
+        difficultyEl.textContent = difficultyText[service.difficulty] || 'Moyen';
+        difficultyEl.className = `difficulty-badge ${difficultyColors[service.difficulty] || 'difficulty-medium'}`;
+    }
+
+    // Features
+    const featuresList = document.getElementById('service-features');
+    if (featuresList) {
+        featuresList.innerHTML = service.features.map(feature => `
+            <li class="flex items-center gap-3 p-3 bg-white/50 dark:bg-gray-600/30 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 flex-shrink-0">
+                    <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+                <span class="text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">${feature}</span>
+            </li>
+        `).join('');
+    }
+
+    // Equipment
+    const equipmentEl = document.getElementById('service-equipment');
+    if (equipmentEl) {
+        equipmentEl.innerHTML = service.equipment.map(eq => `
+            <div class="text-center group cursor-pointer transform hover:scale-110 transition-all duration-300">
+                <div class="bg-white dark:bg-gray-700 rounded-xl p-4 shadow-lg hover:shadow-xl border-2 border-transparent hover:border-ll-blue">
+                    <span class="text-3xl block mb-2">${eq.icon}</span>
+                    <span class="text-xs text-gray-600 dark:text-gray-400 font-medium capitalize">${eq.name}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Members
+    const membersEl = document.getElementById('service-members');
+    if (membersEl) {
+        membersEl.innerHTML = service.members.map(member => `
+            <div class="flex items-center gap-4 p-4 bg-white/50 dark:bg-gray-600/30 rounded-xl hover:bg-white dark:hover:bg-gray-600 transition-all duration-300 group">
+                <img src="${member.photo}" alt="${member.name}" class="w-12 h-12 md:w-16 md:h-16 rounded-xl object-cover border-2 border-transparent group-hover:border-ll-blue transition-colors" onerror="this.src='/assets/images/placeholder-avatar.jpg'">
+                <div class="flex-1">
+                    <p class="font-semibold text-gray-900 dark:text-white group-hover:text-ll-blue transition-colors">${member.name}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">${member.role}</p>
+                    <div class="flex gap-1 mt-2">
+                        ${Array.from({ length: 5 }, (_, i) => `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="${i < 4 ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-400">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
                         `).join('')}
                     </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-                <p class="mt-4 text-gray-600 dark:text-gray-300">${service.description}</p>
-                <div class="mt-4">
-                    <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">${service.price} €</span>
-                    <span class="text-gray-500 dark:text-gray-400 ml-2">/ prestation</span>
-                </div>
-                <div class="mt-4">
-                    <h4 class="font-semibold text-gray-900 dark:text-white">Caractéristiques :</h4>
-                    <ul class="list-disc pl-5 mt-2 text-gray-600 dark:text-gray-300">
-                        ${service.features.map(feature => `<li>${feature}</li>`).join('')}
-                    </ul>
-                </div>
-                <div class="mt-4">
-                    <h4 class="font-semibold text-gray-900 dark:text-white">Équipement utilisé :</h4>
-                    <div class="flex gap-2 mt-2">
-                        ${service.equipment.map(eq => `<span class="text-blue-600 dark:text-blue-400">${equipmentIcons[eq]}</span>`).join('')}
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <h4 class="font-semibold text-gray-900 dark:text-white">Disponibilité :</h4>
-                    <p class="text-gray-600 dark:text-gray-300">${service.availability.isAvailable ? 'Disponible' : 'Non disponible'}</p>
-                    ${service.availability.schedule.map(sch => `
-                        <p class="text-gray-600 dark:text-gray-300">${sch.day}: ${sch.hours.join(' - ')}</p>
-                    `).join('')}
-                </div>
-                <div class="mt-4">
-                    <h4 class="font-semibold text-gray-900 dark:text-white">Évaluation :</h4>
-                    <p class="text-gray-600 dark:text-gray-300">${service.rating} / 5 (${service.reviews} avis)</p>
                 </div>
             </div>
-            <div class="p-6 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-3">
-                <button class="book-service bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-all duration-300" data-service-id="${service.id}">
-                    Réserver maintenant
-                </button>
-                <button class="close-modal bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300">
-                    Fermer
-                </button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
+        `).join('');
+    }
 
-    // Initialize Swiper for modal images
-    new Swiper('.service-detail-swiper', {
-        slidesPerView: 1,
-        spaceBetween: 10,
-        pagination: { el: '.swiper-pagination', clickable: true },
-    });
+    // Availability
+    const availabilityEl = document.getElementById('service-availability');
+    const scheduleEl = document.getElementById('service-schedule');
+    if (availabilityEl) {
+        availabilityEl.textContent = service.availability.isAvailable ? 
+            '✅ Service disponible immédiatement' : '❌ Service temporairement indisponible';
+    }
+    if (scheduleEl) {
+        scheduleEl.innerHTML = service.availability.schedule.map(sch => `
+            <li class="flex items-center justify-between p-3 bg-white/50 dark:bg-gray-600/30 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors">
+                <span class="font-medium text-gray-700 dark:text-gray-300 capitalize">${sch.day}</span>
+                <span class="dark:text-ll-white text-ll-black font-semibold">${sch.hours.join(' - ')}</span>
+            </li>
+        `).join('');
+    }
 
-    // Close modal
-    modal.querySelectorAll('.close-modal').forEach(btn => {
-        btn.addEventListener('click', () => modal.remove());
-    });
+    // Infos comp
+    const certEl = document.getElementById('service-certification');
+    const guarEl = document.getElementById('service-garantie');
+    const delaiEl = document.getElementById('service-delai');
+    if (certEl) certEl.textContent = service.certification || 'Non spécifié';
+    if (guarEl) guarEl.textContent = service.garantie || 'Non spécifié';
+    if (delaiEl) delaiEl.textContent = service.delai_intervention || 'Non spécifié';
 
-    // Book service
-    modal.querySelector('.book-service').addEventListener('click', () => {
-        showNotification(`Service ${service.name} réservé avec succès !`, 'success');
-        modal.remove();
+    // Boutons d'action
+    const bookButton = document.getElementById('book-service');
+    const demoButton = document.getElementById('demo-service');
+    const moreInfoButton = document.getElementById('more-info-service');
+
+    if (bookButton) {
+        bookButton.onclick = () => {
+            showNotification(`Service "${service.name}" réservé avec succès !`, 'success');
+            window.location.href = `/reservation?service=${service.id || index}`;
+        };
+    }
+
+    if (demoButton) {
+        demoButton.onclick = () => {
+            if (window.openVideoModal && service.videoDemo) {
+                window.openVideoModal(service.videoDemo);
+            } else {
+                showNotification('Démonstration vidéo non disponible pour ce service.', 'info');
+            }
+        };
+    }
+
+    if (moreInfoButton) {
+        moreInfoButton.href = `/services/${service.id || index}`;
+    }
+
+    highlightSearchTerms(service);
+
+    // Update mobile selector
+    updateMobileServiceSelector(allFilteredServices);
+
+    if (typeof AOS !== 'undefined') AOS.refresh();
+}
+
+/**
+ * Met en surbrillance les termes de recherche
+ */
+function highlightSearchTerms(service) {
+    const searchTerm = document.getElementById('service-search')?.value;
+    if (!searchTerm) return;
+
+    const elements = [document.getElementById('service-name'), document.getElementById('service-description')];
+
+    elements.forEach(element => {
+        if (element) {
+            const text = element.textContent;
+            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const highlighted = text.replace(regex, '<mark class="bg-gradient-to-r from-yellow-200 to-yellow-400 dark:from-yellow-600 dark:to-yellow-800 px-1 rounded neon-glow">$1</mark>');
+            element.innerHTML = highlighted;
+        }
     });
 }
+
+
+
+
+/**
+ * Rend la notation par étoiles avec animation futuriste
+ */
+function renderStarRating(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    let stars = '';
+    
+    // Étoiles pleines
+    for (let i = 0; i < fullStars; i++) {
+        stars += `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="url(#gold-gradient)" stroke="currentColor" stroke-width="1" class="star-filled transform hover:scale-110 transition-all neon-glow" data-rating="${i + 1}">
+                <defs>
+                    <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fbbf24"/>
+                        <stop offset="100%" stop-color="#f59e0b"/>
+                    </linearGradient>
+                </defs>
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+        `;
+    }
+    
+    if (hasHalfStar) {
+        stars += `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="url(#half-gold)" stroke="currentColor" stroke-width="1" class="star-filled transform hover:scale-110 transition-all neon-glow">
+                <defs>
+                    <linearGradient id="half-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="50%" stop-color="#fbbf24"/>
+                        <stop offset="50%" stop-color="transparent"/>
+                    </linearGradient>
+                </defs>
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+        `;
+    }
+    
+    // Étoiles vides
+    for (let i = 0; i < emptyStars; i++) {
+        stars += `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="star-empty transform hover:scale-110 transition-all neon-glow" data-rating="${fullStars + (hasHalfStar ? 1 : 0) + i + 1}">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+        `;
+    }
+
+    return stars;
+}
+
+
+
+/**
+ * Navigue vers le service précédent/suivant - UTILISE TOUJOURS POUR SYNCHRO
+ */
+export function navigateService(direction, delta = 1) {
+    const total = allFilteredServices.length;
+    if (total === 0) return;
+
+    let newIndex = currentServiceIndex;
+    if (direction === 'prev') {
+        newIndex = Math.max(0, currentServiceIndex - delta);
+    } else if (direction === 'next') {
+        newIndex = Math.min(total - 1, currentServiceIndex + delta);
+    }
+
+    if (newIndex !== currentServiceIndex) {
+        currentServiceIndex = newIndex;
+        renderServiceDetail(allFilteredServices[currentServiceIndex], currentServiceIndex, total);
+        renderServicesSidebar(allFilteredServices);
+        if (typeof AOS !== 'undefined') AOS.refresh();
+    }
+}
+
+export function getServiceIndex() {
+    return currentServiceIndex;
+}
+
+export function setServiceIndex(index) {
+    currentServiceIndex = Math.max(0, Math.min(index, allFilteredServices.length - 1));
+}
+
+export default {
+    loadServices,
+    renderServicesSidebar,
+    renderServiceDetail,
+    navigateService,
+    toggleServicesLoading,
+    getServiceIndex,
+    setServiceIndex
+};

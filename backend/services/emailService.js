@@ -152,7 +152,6 @@ class EmailService {
       currentYear: new Date().getFullYear(),
       supportPhone: '+33 1 23 45 67 89',
       website: 'https://www.llouestservices.com',
-      logoBase64: logoBase64,
       ...templateData,
     });
 
@@ -358,20 +357,9 @@ try {
 } catch (socketError) {
   logWarn('Erreur notification socket admins', { error: socketError.message });
 }
-      for (const admin of admins.users) {
-          
-          socketService.emitToUser(admin.id, 'newContact', {
-        contactId: contact.id,
-        senderName: contact.name,
-        senderEmail: contact.email,
-        subjects: contact.subjects,
-        messagePreview: contact.message.substring(0, 100) + (contact.message.length > 100 ? '...' : ''),
-        adminSent: !!adminSendResult,
-      });
+ 
 
-        }
-
-     
+    
 
       logAudit('Message de contact créé et emails envoyés avec succès', {
         contactId: contact.id,
@@ -563,7 +551,7 @@ try {
       }
 
       if (contactData.status && contactData.status !== 'pending') {
-        socketService.emitToAdmins('contactStatusChanged', {
+        socketService.emitToUser('contactStatusChanged', {
           contactId,
           newStatus: enrichedContact.statusLabel,
           updatedBy: contactData.updatedBy || 'system',

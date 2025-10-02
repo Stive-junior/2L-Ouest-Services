@@ -1,102 +1,2313 @@
-[
+{
+  "services": [
     {
-        "id": "service-1",
-        "name": "Nettoyage de Bureaux",
-        "description": "Nettoyage complet des bureaux, incluant les surfaces, sols, et mobiliers pour un environnement de travail sain.",
-        "price": 150,
-        "area": 100,
-        "duration": 2,
-        "category": "bureaux",
-        "ecoFriendly": true,
-        "images": [
-            { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "before", "description": "Bureau avant nettoyage" },
-            { "url": "https://images.unsplash.com/photo-1600585152915-d208bec867a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "after", "description": "Bureau après nettoyage" }
-        ],
-        "availability": { "isAvailable": true, "schedule": [{ "day": "lundi", "hours": ["09:00", "17:00"] }, { "day": "mercredi", "hours": ["09:00", "17:00"] }] },
-        "location": { "address": "123 Rue Exemple, Nantes", "coordinates": { "lat": 47.2184, "lng": -1.5536 } },
-        "createdAt": "2025-08-29T17:10:00Z",
-        "features": ["Produits écologiques", "Nettoyage en profondeur", "Service personnalisé"],
-        "rating": 4,
-        "reviews": 120
+      "id": "service-001",
+      "name": "Nettoyage de Bureaux Complet",
+      "description": "Nettoyage professionnel complet des espaces de bureaux incluant désinfection des surfaces, nettoyage des sols et vitres. Service adapté aux entreprises de toutes tailles.",
+      "category": "bureaux",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Bureau avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Bureau après nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "additional",
+          "description": "Détail des surfaces nettoyées"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["18:00", "22:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["18:00", "22:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["18:00", "22:00"]
+          }
+        ]
+      },
+      "features": [
+        "Désinfection complète des surfaces",
+        "Nettoyage des sols et moquettes",
+        "Vitres et baies vitrées",
+        "Sanitaires professionnels",
+        "Espace détente et cuisine"
+      ],
+      "rating": 4.8,
+      "reviews": 156,
+      "equipment": ["vacuum", "mop", "spray", "polisher", "duster", "extractor"],
+      "members": [
+        {
+          "name": "Sophie Martin",
+          "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Chef d'équipe Bureaux"
+        },
+        {
+          "name": "Thomas Dubois",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Technicien Surface"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-bureaux.mp4",
+      "difficulty": "medium",
+      "certification": "NF X50-900",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-01-15T08:00:00Z"
     },
     {
-        "id": "service-2",
-        "name": "Nettoyage de Vitrines",
-        "description": "Nettoyage des vitrines commerciales pour une présentation impeccable et attrayante.",
-        "price": 80,
-        "area": 50,
-        "duration": 1,
-        "category": "vitrines",
-        "ecoFriendly": true,
-        "images": [
-            { "url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "before", "description": "Vitrine avant nettoyage" },
-            { "url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "after", "description": "Vitrine après nettoyage" }
-        ],
-        "availability": { "isAvailable": true, "schedule": [{ "day": "mardi", "hours": ["10:00", "16:00"] }, { "day": "jeudi", "hours": ["10:00", "16:00"] }] },
-        "location": { "address": "456 Avenue Test, Rennes", "coordinates": { "lat": 48.1147, "lng": -1.6794 } },
-        "createdAt": "2025-08-29T17:10:00Z",
-        "features": ["Produits sans traces", "Service rapide", "Horaires flexibles"],
-        "rating": 4.5,
-        "reviews": 85
+      "id": "service-002",
+      "name": "Nettoyage Résidentiel Premium",
+      "description": "Service de nettoyage résidentiel haut de gamme pour maisons et appartements. Utilisation de produits écologiques et techniques professionnelles.",
+      "category": "residentiel",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Salon avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Salon après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "mardi",
+            "hours": ["09:00", "18:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["09:00", "18:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["09:00", "13:00"]
+          }
+        ]
+      },
+      "features": [
+        "Produits écologiques certifiés",
+        "Nettoyage en profondeur",
+        "Désinfection sanitaire",
+        "Traitement des sols",
+        "Aération des pièces"
+      ],
+      "rating": 4.9,
+      "reviews": 10,
+      "equipment": ["vacuum", "mop", "spray", "cloth", "duster", "steam_cleaner"],
+      "members": [
+        {
+          "name": "Marie Lambert",
+          "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Résidentiel"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-residentiel.mp4",
+      "difficulty": "easy",
+      "certification": "Ecocert",
+      "garantie": "15 jours",
+      "delai_intervention": "48h",
+      "zone_intervention": "Grand Paris",
+      "createdAt": "2024-01-20T10:30:00Z"
     },
     {
-        "id": "service-3",
-        "name": "Nettoyage de Piscine",
-        "description": "Entretien complet des piscines, incluant le nettoyage des parois, du fond et le traitement de l'eau.",
-        "price": 200,
-        "area": 150,
-        "duration": 3,
-        "category": "piscine",
-        "ecoFriendly": true,
-        "images": [
-            { "url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", "type": "before", "description": "Piscine avant nettoyage" },
-            { "url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80", "type": "after", "description": "Piscine après nettoyage" }
-        ],
-        "availability": { "isAvailable": true, "schedule": [{ "day": "vendredi", "hours": ["08:00", "14:00"] }] },
-        "location": { "address": "789 Boulevard Plage, La Baule", "coordinates": { "lat": 47.2805, "lng": -2.3938 } },
-        "createdAt": "2025-08-29T17:10:00Z",
-        "features": ["Traitement écologique", "Nettoyage complet", "Maintenance régulière"],
-        "rating": 4.7,
-        "reviews": 95
+      "id": "service-003",
+      "name": "Nettoyage Industriel Lourd",
+      "description": "Nettoyage spécialisé pour environnements industriels, usines et entrepôts. Équipements lourds et protocoles sécurité renforcés.",
+      "category": "industriel",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1581093458791-8a6b22b5d6e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Atelier industriel avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1581093458791-8a6b22b5d6e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Atelier industriel après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["06:00", "14:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["06:00", "14:00"]
+          }
+        ]
+      },
+      "features": [
+        "Nettoyage haute pression",
+        "Dégraissage mécanique",
+        "Traitement des sols industriels",
+        "Équipements sécurité",
+        "Conformité normes"
+      ],
+      "rating": 4.7,
+      "reviews": 89,
+      "equipment": ["pressure_washer", "extractor", "floor_machine", "spray", "brush"],
+      "members": [
+        {
+          "name": "Pierre Moreau",
+          "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Technicien Industriel"
+        },
+        {
+          "name": "Karim Benali",
+          "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Spécialiste Sécurité"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-industriel.mp4",
+      "difficulty": "hard",
+      "certification": "Qualibat",
+      "garantie": "60 jours",
+      "delai_intervention": "72h",
+      "zone_intervention": "France entière",
+      "createdAt": "2024-02-05T07:15:00Z"
     },
     {
-        "id": "service-4",
-        "name": "Nettoyage Régulier",
-        "description": "Service de nettoyage régulier pour maintenir vos espaces propres en continu.",
-        "price": 120,
-        "area": 80,
-        "duration": 1.5,
-        "category": "régulier",
-        "ecoFriendly": false,
-        "images": [
-            { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "before", "description": "Espace avant nettoyage régulier" },
-            { "url": "https://images.unsplash.com/photo-1600585152915-d208bec867a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "after", "description": "Espace après nettoyage régulier" }
-        ],
-        "availability": { "isAvailable": true, "schedule": [{ "day": "lundi", "hours": ["08:00", "16:00"] }, { "day": "jeudi", "hours": ["08:00", "16:00"] }] },
-        "location": { "address": "101 Rue Centrale, Angers", "coordinates": { "lat": 47.4738, "lng": -0.5516 } },
-        "createdAt": "2025-08-29T17:10:00Z",
-        "features": ["Service hebdomadaire", "Flexibilité horaire", "Personnel qualifié"],
-        "rating": 4.6,
-        "reviews": 110
+      "id": "service-004",
+      "name": "Nettoyage Médical et Cliniques",
+      "description": "Service de nettoyage et désinfection pour établissements de santé, cabinets médicaux et laboratoires. Protocoles stricts d'hygiène.",
+      "category": "medical",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Cabinet médical avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Cabinet médical après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["19:00", "23:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["19:00", "23:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["19:00", "23:00"]
+          }
+        ]
+      },
+      "features": [
+        "Désinfection bactéricide",
+        "Protocole HACCP",
+        "Zonage spécifique",
+        "Produits médicaux",
+        "Traçabilité complète"
+      ],
+      "rating": 4.9,
+      "reviews": 134,
+      "equipment": ["steam_cleaner", "spray", "mop", "vacuum", "cloth"],
+      "members": [
+        {
+          "name": "Dr. Claire Fontaine",
+          "photo": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Hygiéniste Médical"
+        },
+        {
+          "name": "Jean Petit",
+          "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Technicien Sterilisation"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-medical.mp4",
+      "difficulty": "hard",
+      "certification": "ISO 13485",
+      "garantie": "90 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-02-10T09:00:00Z"
     },
     {
-        "id": "service-5",
-        "name": "Nettoyage Ponctuel",
-        "description": "Nettoyage ponctuel pour des besoins spécifiques ou des événements spéciaux.",
-        "price": 100,
-        "area": 60,
-        "duration": 1,
-        "category": "ponctuel",
-        "ecoFriendly": true,
-        "images": [
-            { "url": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "before", "description": "Espace avant nettoyage ponctuel" },
-            { "url": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", "type": "after", "description": "Espace après nettoyage ponctuel" }
-        ],
-        "availability": { "isAvailable": true, "schedule": [{ "day": "samedi", "hours": ["09:00", "15:00"] }] },
-        "location": { "address": "202 Avenue Événement, Nantes", "coordinates": { "lat": 47.2184, "lng": -1.5536 } },
-        "createdAt": "2025-08-29T17:10:00Z",
-        "features": ["Intervention rapide", "Service sur mesure", "Produits écologiques"],
-        "rating": 4.4,
-        "reviews": 70
+      "id": "service-005",
+      "name": "Nettoyage Hôtelier Luxe",
+      "description": "Service premium pour hôtels 4-5 étoiles, incluant chambres, espaces communs et standards de luxe internationaux.",
+      "category": "hotelier",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Chambre hôtel avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Chambre hôtel après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["08:00", "16:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["08:00", "16:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["08:00", "16:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["08:00", "16:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["08:00", "16:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["09:00", "13:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["09:00", "13:00"]
+          }
+        ]
+      },
+      "features": [
+        "Standards 5 étoiles",
+        "Linge premium inclus",
+        "Produits luxe",
+        "Service discret",
+        "Contrôle qualité"
+      ],
+      "rating": 4.8,
+      "reviews": 278,
+      "equipment": ["vacuum", "mop", "spray", "polisher", "cloth", "duster"],
+      "members": [
+        {
+          "name": "Élodie Rousseau",
+          "photo": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Manager Hôtelier"
+        },
+        {
+          "name": "Marc Lefebvre",
+          "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Superviseur Chambres"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-hotelier.mp4",
+      "difficulty": "medium",
+      "certification": "ISO 9001",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Paris Centre",
+      "createdAt": "2024-02-15T11:20:00Z"
+    },
+    {
+      "id": "service-006",
+      "name": "Nettoyage de Vitres Hauteur",
+      "description": "Nettoyage professionnel des vitres, baies vitrées et façades en hauteur. Équipes certifiées pour travaux en hauteur.",
+      "category": "vitres",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Vitres avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1495433324511-bf8e92934d90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Vitres après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "mardi",
+            "hours": ["08:00", "17:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["08:00", "17:00"]
+          }
+        ]
+      },
+      "features": [
+        "Travaux en hauteur certifiés",
+        "Nettoyage sans traces",
+        "Équipements sécurité",
+        "Protection environnement",
+        "Rapidité d'intervention"
+      ],
+      "rating": 4.6,
+      "reviews": 167,
+      "equipment": ["spray", "cloth", "scraper", "brush"],
+      "members": [
+        {
+          "name": "Antoine Mercier",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Cordiste Hauteur"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-vitres.mp4",
+      "difficulty": "hard",
+      "certification": "CACES Hauteur",
+      "garantie": "15 jours",
+      "delai_intervention": "48h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-02-20T08:45:00Z"
+    },
+    {
+      "id": "service-007",
+      "name": "Nettoyage Restaurants et Cuisines",
+      "description": "Nettoyage professionnel des restaurants, cuisines professionnelles et zones de préparation alimentaire. Normes HACCP strictes.",
+      "category": "restaurant",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Cuisine professionnelle avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Cuisine professionnelle après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["23:00", "04:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["23:00", "04:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["23:00", "04:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["23:00", "04:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["23:00", "04:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["23:00", "04:00"]
+          }
+        ]
+      },
+      "features": [
+        "Dégraissage professionnel",
+        "Normes HACCP",
+        "Nettoyage hottes",
+        "Désinfection complète",
+        "Produits alimentaires"
+      ],
+      "rating": 4.7,
+      "reviews": 189,
+      "equipment": ["pressure_washer", "steam_cleaner", "spray", "brush", "scraper"],
+      "members": [
+        {
+          "name": "Chef Michel Durand",
+          "photo": "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert HACCP"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-restaurant.mp4",
+      "difficulty": "hard",
+      "certification": "HACCP",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Paris et Banlieue",
+      "createdAt": "2024-03-01T14:00:00Z"
+    },
+    {
+      "id": "service-008",
+      "name": "Nettoyage Établissements Scolaires",
+      "description": "Service spécialisé pour écoles, collèges et lycées. Protocoles adaptés aux environnements éducatifs et produits non-toxiques.",
+      "category": "education",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Salle de classe avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Salle de classe après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["16:00", "20:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["16:00", "20:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["16:00", "20:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["16:00", "20:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["16:00", "20:00"]
+          }
+        ]
+      },
+      "features": [
+        "Produits non-toxiques enfants",
+        "Désinfection renforcée",
+        "Salles spécialisées",
+        "Espaces communs",
+        "Horaires adaptés"
+      ],
+      "rating": 4.5,
+      "reviews": 145,
+      "equipment": ["vacuum", "mop", "spray", "cloth", "duster"],
+      "members": [
+        {
+          "name": "Nathalie Simon",
+          "photo": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Coordinatrice Scolaire"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-education.mp4",
+      "difficulty": "medium",
+      "certification": "NF Environnement",
+      "garantie": "30 jours",
+      "delai_intervention": "48h",
+      "zone_intervention": "Académie de Paris",
+      "createdAt": "2024-03-05T10:00:00Z"
+    },
+    {
+      "id": "service-009",
+      "name": "Nettoyage Salles de Sport",
+      "description": "Nettoyage et désinfection des salles de sport, équipements fitness et vestiaires. Protocoles hygiène renforcés.",
+      "category": "sport",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Salle de sport avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Salle de sport après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["21:00", "01:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["21:00", "01:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["21:00", "01:00"]
+          }
+        ]
+      },
+      "features": [
+        "Désinfection équipements",
+        "Nettoyage tapis sport",
+        "Vestiaires et douches",
+        "Neutralisation odeurs",
+        "Protocole sanitaire"
+      ],
+      "rating": 4.6,
+      "reviews": 178,
+      "equipment": ["steam_cleaner", "spray", "vacuum", "cloth", "extractor"],
+      "members": [
+        {
+          "name": "Kevin Sport",
+          "photo": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Technicien Sport"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-sport.mp4",
+      "difficulty": "medium",
+      "certification": "ISO 9001",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Paris intramuros",
+      "createdAt": "2024-03-10T13:30:00Z"
+    },
+    {
+      "id": "service-010",
+      "name": "Nettoyage après Chantier",
+      "description": "Nettoyage complet après travaux de construction ou rénovation. Élimination des poussières et résidus de chantier.",
+      "category": "residentiel",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1503387769-00ec6e0d46f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Appartement après chantier"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Appartement nettoyé"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["08:00", "18:00"]
+          }
+        ]
+      },
+      "features": [
+        "Élimination poussières",
+        "Nettoyage finition",
+        "Vitres et surfaces",
+        "Sol et revêtements",
+        "Prêt à habiter"
+      ],
+      "rating": 4.8,
+      "reviews": 234,
+      "equipment": ["vacuum", "pressure_washer", "spray", "cloth", "duster"],
+      "members": [
+        {
+          "name": "Paul BTP",
+          "photo": "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Post-Chantier"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-chantier.mp4",
+      "difficulty": "hard",
+      "certification": "Qualibat",
+      "garantie": "15 jours",
+      "delai_intervention": "72h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-03-15T09:15:00Z"
+    },
+    {
+      "id": "service-011",
+      "name": "Nettoyage Façades Bâtiments",
+      "description": "Nettoyage et ravalement des façades de bâtiments. Techniques adaptées à tous types de matériaux.",
+      "category": "facade",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Façade avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Façade après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "mardi",
+            "hours": ["08:00", "17:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["08:00", "17:00"]
+          }
+        ]
+      },
+      "features": [
+        "Haute pression adaptée",
+        "Traitement anti-mousse",
+        "Protection environnement",
+        "Matériaux spécifiques",
+        "Échafaudages inclus"
+      ],
+      "rating": 4.7,
+      "reviews": 112,
+      "equipment": ["pressure_washer", "spray", "brush", "scraper"],
+      "members": [
+        {
+          "name": "Robert Façade",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Façades"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-facades.mp4",
+      "difficulty": "hard",
+      "certification": "Qualibat",
+      "garantie": "12 mois",
+      "delai_intervention": "1 semaine",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-03-20T08:00:00Z"
+    },
+    {
+      "id": "service-012",
+      "name": "Nettoyage Parkings et Garages",
+      "description": "Nettoyage professionnel des parkings souterrains, garages et aires de stationnement. Balayage mécanique et haute pression.",
+      "category": "parking",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Parking avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Parking après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["22:00", "06:00"]
+          }
+        ]
+      },
+      "features": [
+        "Balayage mécanique",
+        "Haute pression",
+        "Dégraissage sols",
+        "Signalisation préservée",
+        "Évacuation eaux"
+      ],
+      "rating": 4.5,
+      "reviews": 98,
+      "equipment": ["pressure_washer", "floor_machine", "vacuum", "brush"],
+      "members": [
+        {
+          "name": "Marc Parking",
+          "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Technicien Espaces"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-parking.mp4",
+      "difficulty": "medium",
+      "certification": "CACES",
+      "garantie": "30 jours",
+      "delai_intervention": "48h",
+      "zone_intervention": "Paris et Banlieue",
+      "createdAt": "2024-03-25T10:30:00Z"
+    },
+    {
+      "id": "service-013",
+      "name": "Nettoyage Événementiel Post-Événement",
+      "description": "Nettoyage rapide et efficace après événements, séminaires, congrès et salons professionnels.",
+      "category": "evenementiel",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Salle événement avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Salle événement après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["06:00", "23:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["06:00", "23:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["06:00", "23:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["06:00", "23:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["06:00", "23:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["06:00", "23:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["06:00", "23:00"]
+          }
+        ]
+      },
+      "features": [
+        "Intervention rapide",
+        "Équipes renforcées",
+        "Gestion déchets",
+        "Remise en état",
+        "Flexibilité horaire"
+      ],
+      "rating": 4.6,
+      "reviews": 167,
+      "equipment": ["vacuum", "mop", "spray", "cloth", "duster"],
+      "members": [
+        {
+          "name": "Sarah Événement",
+          "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Manager Événementiel"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-evenementiel.mp4",
+      "difficulty": "medium",
+      "certification": "ISO 9001",
+      "garantie": "15 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-04-01T12:00:00Z"
+    },
+    {
+      "id": "service-014",
+      "name": "Nettoyage Commerce et Boutiques",
+      "description": "Service de nettoyage pour commerces, boutiques et espaces de vente. Mise en valeur des produits et espaces clients.",
+      "category": "commercial",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Boutique avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Boutique après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["20:00", "24:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["20:00", "24:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["20:00", "24:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["20:00", "24:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["20:00", "24:00"]
+          }
+        ]
+      },
+      "features": [
+        "Vitrines éclatantes",
+        "Sol et surfaces",
+        "Espaces clients",
+        "Caisse et comptoir",
+        "Horaires étendus"
+      ],
+      "rating": 4.7,
+      "reviews": 189,
+      "equipment": ["vacuum", "mop", "spray", "polisher", "cloth"],
+      "members": [
+        {
+          "name": "Julie Commerce",
+          "photo": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Retail"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-commerce.mp4",
+      "difficulty": "easy",
+      "certification": "NF X50-900",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Paris Centre",
+      "createdAt": "2024-04-05T14:20:00Z"
+    },
+    {
+      "id": "service-015",
+      "name": "Nettoyage Piscines Privées",
+      "description": "Entretien et nettoyage complet des piscines privées. Traitement de l'eau et maintenance des équipements.",
+      "category": "piscine",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Piscine avant entretien"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1536746803623-cef87080bfc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Piscine après entretien"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["09:00", "17:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["09:00", "17:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["09:00", "17:00"]
+          }
+        ]
+      },
+      "features": [
+        "Analyse qualité eau",
+        "Nettoyage ligne d'eau",
+        "Filtration et traitement",
+        "Équipements techniques",
+        "Conseils entretien"
+      ],
+      "rating": 4.8,
+      "reviews": 145,
+      "equipment": ["vacuum", "brush", "spray", "cloth"],
+      "members": [
+        {
+          "name": "Luc Piscine",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Technicien Piscines"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-piscine.mp4",
+      "difficulty": "medium",
+      "certification": "Qualipropre",
+      "garantie": "60 jours",
+      "delai_intervention": "48h",
+      "zone_intervention": "Yvelines, Hauts-de-Seine",
+      "createdAt": "2024-04-10T11:00:00Z"
+    },
+    {
+      "id": "service-016",
+      "name": "Nettoyage Moyens de Transport",
+      "description": "Nettoyage intérieur et extérieur des véhicules de société, utilitaires et flottes automobiles.",
+      "category": "transport",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Véhicule avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Véhicule après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["07:00", "19:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["07:00", "19:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["07:00", "19:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["07:00", "19:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["07:00", "19:00"]
+          }
+        ]
+      },
+      "features": [
+        "Lavage extérieur",
+        "Nettoyage intérieur",
+        "Désinfection habitacle",
+        "Aspiration complète",
+        "Produits adaptés"
+      ],
+      "rating": 4.6,
+      "reviews": 134,
+      "equipment": ["vacuum", "spray", "cloth", "pressure_washer"],
+      "members": [
+        {
+          "name": "Auto Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Automobile"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-vehicules.mp4",
+      "difficulty": "easy",
+      "certification": "NF X50-900",
+      "garantie": "15 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-04-15T08:45:00Z"
+    },
+    {
+      "id": "service-017",
+      "name": "Nettoyage Toitures et Gouttières",
+      "description": "Nettoyage et entretien des toitures, gouttières et systèmes d'évacuation des eaux pluviales.",
+      "category": "toiture",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1566908829818-b5e5642c53b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Toiture avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1566908829818-b5e5642c53b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Toiture après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "mardi",
+            "hours": ["08:00", "17:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["08:00", "17:00"]
+          }
+        ]
+      },
+      "features": [
+        "Démoussage toiture",
+        "Nettoyage gouttières",
+        "Vérification étanchéité",
+        "Traitement préventif",
+        "Sécurité travaux hauteur"
+      ],
+      "rating": 4.7,
+      "reviews": 98,
+      "equipment": ["pressure_washer", "brush", "scraper"],
+      "members": [
+        {
+          "name": "Toit Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Toiture"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-toiture.mp4",
+      "difficulty": "hard",
+      "certification": "Qualibat",
+      "garantie": "12 mois",
+      "delai_intervention": "1 semaine",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-04-20T09:30:00Z"
+    },
+    {
+      "id": "service-018",
+      "name": "Nettoyage Espaces Verts et Terrasses",
+      "description": "Nettoyage et entretien des espaces verts, terrasses et mobilier extérieur. Préparation des espaces de détente.",
+      "category": "jardin",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Terrasse avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Terrasse après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["08:00", "18:00"]
+          }
+        ]
+      },
+      "features": [
+        "Nettoyage terrasses",
+        "Mobilier extérieur",
+        "Espaces verts",
+        "Préparation saisonnière",
+        "Produits écologiques"
+      ],
+      "rating": 4.5,
+      "reviews": 112,
+      "equipment": ["pressure_washer", "brush", "spray", "cloth"],
+      "members": [
+        {
+          "name": "Jardin Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Espaces Verts"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-espaces-verts.mp4",
+      "difficulty": "easy",
+      "certification": "Ecocert",
+      "garantie": "30 jours",
+      "delai_intervention": "48h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-04-25T10:15:00Z"
+    },
+    {
+      "id": "service-019",
+      "name": "Nettoyage Data Centers et Salles Serveurs",
+      "description": "Nettoyage technique des data centers et salles serveurs. Protocoles anti-statique et contrôle particulaire.",
+      "category": "technique",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1590650516494-0c8e4a4dd61b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Data center avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1590650516494-0c8e4a4dd61b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Data center après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "samedi",
+            "hours": ["00:00", "06:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["00:00", "06:00"]
+          }
+        ]
+      },
+      "features": [
+        "Protocole anti-statique",
+        "Contrôle particulaire",
+        "Équipements spécifiques",
+        "Intervention hors production",
+        "Traçabilité complète"
+      ],
+      "rating": 4.9,
+      "reviews": 67,
+      "equipment": ["vacuum", "cloth", "duster", "spray"],
+      "members": [
+        {
+          "name": "Tech Data",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Data Center"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-datacenter.mp4",
+      "difficulty": "hard",
+      "certification": "ISO 14644",
+      "garantie": "90 jours",
+      "delai_intervention": "1 semaine",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-05-01T14:00:00Z"
+    },
+    {
+      "id": "service-020",
+      "name": "Nettoyage Laboratoires et Salles Blanches",
+      "description": "Nettoyage stérile des laboratoires de recherche et salles blanches. Normes ISO 14644 et contrôles microbiologiques.",
+      "category": "technique",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1581093458791-8a6b22b5d6e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Laboratoire avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1581093458791-8a6b22b5d6e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Laboratoire après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["18:00", "22:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["18:00", "22:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["18:00", "22:00"]
+          }
+        ]
+      },
+      "features": [
+        "Normes ISO 14644",
+        "Contrôles microbiologiques",
+        "Équipements stériles",
+        "Personnel formé",
+        "Documentation complète"
+      ],
+      "rating": 4.8,
+      "reviews": 89,
+      "equipment": ["steam_cleaner", "spray", "cloth", "vacuum"],
+      "members": [
+        {
+          "name": "Lab Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Laboratoire"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-laboratoire.mp4",
+      "difficulty": "hard",
+      "certification": "ISO 14644",
+      "garantie": "90 jours",
+      "delai_intervention": "72h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-05-05T11:30:00Z"
+    },
+    {
+      "id": "service-021",
+      "name": "Nettoyage Établissements Recevant du Public (ERP)",
+      "description": "Service spécialisé pour les ERP de catégorie 1 à 5. Conformité réglementaire et protocoles sécurité.",
+      "category": "commercial",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "ERP avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "ERP après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["20:00", "24:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["20:00", "24:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["20:00", "24:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["20:00", "24:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["20:00", "24:00"]
+          }
+        ]
+      },
+      "features": [
+        "Conformité ERP",
+        "Sécurité incendie",
+        "Accessibilité PMR",
+        "Désinfection renforcée",
+        "Rapports réglementaires"
+      ],
+      "rating": 4.7,
+      "reviews": 156,
+      "equipment": ["vacuum", "mop", "spray", "cloth", "duster"],
+      "members": [
+        {
+          "name": "ERP Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert ERP"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-erp.mp4",
+      "difficulty": "medium",
+      "certification": "ISO 9001",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-05-10T09:00:00Z"
+    },
+    {
+      "id": "service-022",
+      "name": "Nettoyage Cuisines Collectives",
+      "description": "Nettoyage professionnel des cuisines collectives, cantines et restaurants d'entreprise. Normes HACCP strictes.",
+      "category": "restaurant",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Cuisine collective avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Cuisine collective après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["14:00", "18:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["14:00", "18:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["14:00", "18:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["14:00", "18:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["14:00", "18:00"]
+          }
+        ]
+      },
+      "features": [
+        "Normes HACCP",
+        "Dégraissage professionnel",
+        "Matériel cuisine",
+        "Sécurité alimentaire",
+        "Contrôles réguliers"
+      ],
+      "rating": 4.8,
+      "reviews": 134,
+      "equipment": ["steam_cleaner", "pressure_washer", "spray", "brush"],
+      "members": [
+        {
+          "name": "Collectif Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Cuisines"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-cuisines-collectives.mp4",
+      "difficulty": "hard",
+      "certification": "HACCP",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-05-15T13:45:00Z"
+    },
+    {
+      "id": "service-023",
+      "name": "Nettoyage Ascenseurs et Cabines",
+      "description": "Nettoyage et désinfection des ascenseurs, cabines et machineries. Produits adaptés et techniques spécifiques.",
+      "category": "technique",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1541746972996-4e0b0f43e9a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Ascenseur avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1541746972996-4e0b0f43e9a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Ascenseur après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["22:00", "06:00"]
+          }
+        ]
+      },
+      "features": [
+        "Cabines et commandes",
+        "Miroirs et parois",
+        "Sol et plafond",
+        "Désinfection complète",
+        "Maintenance préventive"
+      ],
+      "rating": 4.6,
+      "reviews": 112,
+      "equipment": ["vacuum", "spray", "cloth", "polisher"],
+      "members": [
+        {
+          "name": "Ascenseur Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Ascenseurs"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-ascenseurs.mp4",
+      "difficulty": "medium",
+      "certification": "NF X50-900",
+      "garantie": "30 jours",
+      "delai_intervention": "48h",
+      "zone_intervention": "Paris et Banlieue",
+      "createdAt": "2024-05-20T10:20:00Z"
+    },
+    {
+      "id": "service-024",
+      "name": "Nettoyage Bibliothèques et Archives",
+      "description": "Nettoyage délicat des bibliothèques, archives et documents précieux. Techniques adaptées aux matériaux fragiles.",
+      "category": "education",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Bibliothèque avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Bibliothèque après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "mardi",
+            "hours": ["09:00", "17:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["09:00", "17:00"]
+          }
+        ]
+      },
+      "features": [
+        "Documents précieux",
+        "Rayonnages et étagères",
+        "Dépoussiérage délicat",
+        "Protection collections",
+        "Expertise patrimoniale"
+      ],
+      "rating": 4.7,
+      "reviews": 89,
+      "equipment": ["vacuum", "duster", "cloth", "spray"],
+      "members": [
+        {
+          "name": "Biblio Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Patrimoine"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-bibliotheques.mp4",
+      "difficulty": "medium",
+      "certification": "ISO 9001",
+      "garantie": "30 jours",
+      "delai_intervention": "1 semaine",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-05-25T11:10:00Z"
+    },
+    {
+      "id": "service-025",
+      "name": "Nettoyage Églises et Lieux de Culte",
+      "description": "Nettoyage respectueux des églises, temples et lieux de culte. Préservation du patrimoine architectural et artistique.",
+      "category": "patrimoine",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Église avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Église après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["08:00", "16:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["08:00", "16:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["08:00", "16:00"]
+          }
+        ]
+      },
+      "features": [
+        "Patrimoine architectural",
+        "Vitraux et sculptures",
+        "Bancs et mobilier",
+        "Sol et dallage",
+        "Respect des lieux"
+      ],
+      "rating": 4.8,
+      "reviews": 78,
+      "equipment": ["vacuum", "cloth", "duster", "spray"],
+      "members": [
+        {
+          "name": "Culte Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Patrimoine"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-eglises.mp4",
+      "difficulty": "medium",
+      "certification": "Monuments Historiques",
+      "garantie": "60 jours",
+      "delai_intervention": "1 semaine",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-06-01T09:30:00Z"
+    },
+    {
+      "id": "service-026",
+      "name": "Nettoyage Studios et Plateaux de Tournage",
+      "description": "Nettoyage professionnel des studios, plateaux de tournage et espaces techniques audiovisuels.",
+      "category": "technique",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Plateau avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Plateau après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["06:00", "22:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["06:00", "22:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["06:00", "22:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["06:00", "22:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["06:00", "22:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["06:00", "22:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["06:00", "22:00"]
+          }
+        ]
+      },
+      "features": [
+        "Plateaux et studios",
+        "Équipements techniques",
+        "Loges et espaces",
+        "Décor et accessoires",
+        "Flexibilité horaire"
+      ],
+      "rating": 4.7,
+      "reviews": 67,
+      "equipment": ["vacuum", "mop", "spray", "cloth"],
+      "members": [
+        {
+          "name": "Studio Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Audiovisuel"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-studios.mp4",
+      "difficulty": "medium",
+      "certification": "ISO 9001",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-06-05T14:15:00Z"
+    },
+    {
+      "id": "service-027",
+      "name": "Nettoyage Navires et Bateaux",
+      "description": "Nettoyage spécialisé des navires, bateaux de plaisance et embarcations. Techniques maritimes adaptées.",
+      "category": "transport",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Bateau avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Bateau après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["08:00", "18:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["08:00", "18:00"]
+          }
+        ]
+      },
+      "features": [
+        "Coque et carène",
+        "Pont et cockpit",
+        "Aménagements intérieurs",
+        "Moteurs et techniques",
+        "Produits marins"
+      ],
+      "rating": 4.6,
+      "reviews": 89,
+      "equipment": ["pressure_washer", "spray", "cloth", "brush"],
+      "members": [
+        {
+          "name": "Marine Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Maritime"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-bateaux.mp4",
+      "difficulty": "hard",
+      "certification": "Qualibat",
+      "garantie": "30 jours",
+      "delai_intervention": "48h",
+      "zone_intervention": "Côte d'Azur, Bretagne",
+      "createdAt": "2024-06-10T10:45:00Z"
+    },
+    {
+      "id": "service-028",
+      "name": "Nettoyage Avions et Aéronefs",
+      "description": "Nettoyage technique des avions, cabines et postes de pilotage. Normes aéronautiques strictes.",
+      "category": "transport",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Avion avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Avion après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["00:00", "24:00"]
+          }
+        ]
+      },
+      "features": [
+        "Normes aéronautiques",
+        "Cabines passagers",
+        "Postes de pilotage",
+        "Soutes et techniques",
+        "Désinfection renforcée"
+      ],
+      "rating": 4.8,
+      "reviews": 112,
+      "equipment": ["vacuum", "spray", "cloth", "duster"],
+      "members": [
+        {
+          "name": "Aero Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Aéronautique"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-avions.mp4",
+      "difficulty": "hard",
+      "certification": "EASA Part 145",
+      "garantie": "60 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Aéroports France",
+      "createdAt": "2024-06-15T08:30:00Z"
+    },
+    {
+      "id": "service-029",
+      "name": "Nettoyage Métro et Transports en Commun",
+      "description": "Nettoyage professionnel des rames de métro, bus et transports en commun. Protocoles spécifiques RATP/SNCF.",
+      "category": "transport",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Métro avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Métro après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["22:00", "06:00"]
+          }
+        ]
+      },
+      "features": [
+        "Rames et wagons",
+        "Stations et quais",
+        "Sièges et poignées",
+        "Sol et parois",
+        "Désinfection complète"
+      ],
+      "rating": 4.5,
+      "reviews": 178,
+      "equipment": ["vacuum", "pressure_washer", "spray", "cloth"],
+      "members": [
+        {
+          "name": "Transport Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Transports"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-metro.mp4",
+      "difficulty": "medium",
+      "certification": "RATP/SNCF",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-06-20T12:00:00Z"
+    },
+    {
+      "id": "service-030",
+      "name": "Nettoyage Centres Commerciaux",
+      "description": "Service complet pour centres commerciaux et galeries marchandes. Gestion des flux et espaces publics.",
+      "category": "commercial",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Centre commercial avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Centre commercial après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["22:00", "06:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["22:00", "06:00"]
+          }
+        ]
+      },
+      "features": [
+        "Allées et espaces communs",
+        "Sanitaires publics",
+        "Aires de repos",
+        "Parkings couverts",
+        "Gestion déchets"
+      ],
+      "rating": 4.6,
+      "reviews": 223,
+      "equipment": ["floor_machine", "vacuum", "pressure_washer", "spray"],
+      "members": [
+        {
+          "name": "Shopping Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Manager Centres Commerciaux"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-centres-commerciaux.mp4",
+      "difficulty": "medium",
+      "certification": "ISO 9001",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-06-25T15:20:00Z"
+    },
+    {
+      "id": "service-031",
+      "name": "Nettoyage Gares et Aérogares",
+      "description": "Nettoyage professionnel des gares, aérogares et halls de transit. Gestion des flux de voyageurs.",
+      "category": "transport",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Gare avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Gare après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["00:00", "24:00"]
+          }
+        ]
+      },
+      "features": [
+        "Halls et salles d'attente",
+        "Guichets et comptoirs",
+        "Sanitaires publics",
+        "Quais et voies",
+        "Désinfection permanente"
+      ],
+      "rating": 4.7,
+      "reviews": 189,
+      "equipment": ["floor_machine", "vacuum", "pressure_washer", "spray"],
+      "members": [
+        {
+          "name": "Gare Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Infrastructures"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-gares.mp4",
+      "difficulty": "medium",
+      "certification": "SNCF/RATP",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-07-01T11:45:00Z"
+    },
+    {
+      "id": "service-032",
+      "name": "Nettoyage Musées et Galeries d'Art",
+      "description": "Nettoyage délicat des musées, galeries d'art et espaces d'exposition. Préservation des œuvres et collections.",
+      "category": "patrimoine",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Musée avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Musée après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["09:00", "17:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["09:00", "17:00"]
+          }
+        ]
+      },
+      "features": [
+        "Œuvres et collections",
+        "Salles d'exposition",
+        "Vitrines et présentoirs",
+        "Sol et éclairage",
+        "Protection patrimoine"
+      ],
+      "rating": 4.8,
+      "reviews": 78,
+      "equipment": ["vacuum", "duster", "cloth", "spray"],
+      "members": [
+        {
+          "name": "Musée Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Muséographie"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-musees.mp4",
+      "difficulty": "medium",
+      "certification": "Monuments Historiques",
+      "garantie": "60 jours",
+      "delai_intervention": "1 semaine",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-07-05T10:00:00Z"
+    },
+    {
+      "id": "service-033",
+      "name": "Nettoyage Théâtres et Salles de Spectacle",
+      "description": "Nettoyage complet des théâtres, opéras et salles de spectacle. Espaces scéniques et publics.",
+      "category": "evenementiel",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1514306191717-452ec28c7814?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Théâtre avant nettoyage"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1514306191717-452ec28c7814?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Théâtre après nettoyage"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["08:00", "12:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["08:00", "12:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["08:00", "12:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["08:00", "12:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["08:00", "12:00"]
+          }
+        ]
+      },
+      "features": [
+        "Scène et coulisses",
+        "Fauteuils et gradins",
+        "Foyers et halls",
+        "Loges artistes",
+        "Espaces techniques"
+      ],
+      "rating": 4.7,
+      "reviews": 134,
+      "equipment": ["vacuum", "mop", "spray", "cloth"],
+      "members": [
+        {
+          "name": "Spectacle Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Spectacle"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-theatres.mp4",
+      "difficulty": "medium",
+      "certification": "ISO 9001",
+      "garantie": "30 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Paris Centre",
+      "createdAt": "2024-07-10T13:20:00Z"
+    },
+    {
+      "id": "service-034",
+      "name": "Nettoyage Piscines Municipales",
+      "description": "Entretien et nettoyage des piscines municipales, bassins et espaces aquatiques. Normes sanitaires strictes.",
+      "category": "piscine",
+      "frequency": "régulier",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Piscine municipale avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1536746803623-cef87080bfc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Piscine municipale après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["06:00", "10:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["06:00", "10:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["06:00", "10:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["06:00", "10:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["06:00", "10:00"]
+          }
+        ]
+      },
+      "features": [
+        "Bassins et lignes d'eau",
+        "Vestiaires et douches",
+        "Solides anti-dérapants",
+        "Traitement eau",
+        "Normes ARS"
+      ],
+      "rating": 4.6,
+      "reviews": 156,
+      "equipment": ["vacuum", "pressure_washer", "brush", "spray"],
+      "members": [
+        {
+          "name": "Municipal Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Expert Piscines Publiques"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-piscines-municipales.mp4",
+      "difficulty": "hard",
+      "certification": "ARS",
+      "garantie": "60 jours",
+      "delai_intervention": "24h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-07-15T09:45:00Z"
+    },
+    {
+      "id": "service-035",
+      "name": "Nettoyage Urgence et Dégâts des Eaux",
+      "description": "Service d'urgence pour dégâts des eaux, incendies et situations critiques. Intervention rapide 24h/24.",
+      "category": "urgence",
+      "frequency": "ponctuel",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "before",
+          "description": "Dégât des eaux avant"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          "type": "after",
+          "description": "Dégât des eaux après"
+        }
+      ],
+      "availability": {
+        "isAvailable": true,
+        "schedule": [
+          {
+            "day": "lundi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "mardi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "mercredi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "jeudi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "vendredi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "samedi",
+            "hours": ["00:00", "24:00"]
+          },
+          {
+            "day": "dimanche",
+            "hours": ["00:00", "24:00"]
+          }
+        ]
+      },
+      "features": [
+        "Intervention 24h/24",
+        "Pompage et séchage",
+        "Désinfection complète",
+        "Restoration des lieux",
+        "Expertise assurance"
+      ],
+      "rating": 4.9,
+      "reviews": 245,
+      "equipment": ["extractor", "pressure_washer", "spray", "vacuum"],
+      "members": [
+        {
+          "name": "Urgence Propre",
+          "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+          "role": "Manager Urgences"
+        }
+      ],
+      "videoDemo": "https://example.com/demo-urgences.mp4",
+      "difficulty": "hard",
+      "certification": "ISO 9001",
+      "garantie": "90 jours",
+      "delai_intervention": "2h",
+      "zone_intervention": "Île-de-France",
+      "createdAt": "2024-07-20T16:30:00Z"
     }
-]
+  ]
+}

@@ -1347,7 +1347,8 @@ export function validateFieldInitial(field, value, signIn = false, contact = fal
     // ===== SUJETS =====
     case 'subjects':
     case 'sujet':
-      if (!cleanedValue || (Array.isArray(cleanedValue) && cleanedValue.length === 0) ||
+      if(!cleanedValue) return '';
+      if ((Array.isArray(cleanedValue) && cleanedValue.length === 0) ||
           (typeof cleanedValue === 'string' && cleanedValue.trim() === '')) {
         return '';
       }
@@ -1820,11 +1821,21 @@ export async function apiFetch(endpoint, method = 'GET', body = null, requireAut
   } catch (error) {
     clearTimeout(timeoutId);
     if (error.name === 'AbortError') {
-      const error = new Error('Timeout lors de la requête API');
-      error.reason = 'timeout';
+      const timeoutError = new Error('Le serveur est injoignable. Vérifiez votre connexion internet ou réessayez plus tard.');
+      timeoutError.reason = 'timeout';
+      timeoutError.isCritical = true;
+      timeoutError.context = context;
+      throw timeoutError;
+    }
+
+    if (
+      error.message?.includes('NetworkError') ||
+      error.message?.includes('Failed to fetch')
+    ) {
+      error.message = 'Le serveur est indisponible ou en maintenance pour le moment. Veuillez réessayer plus tard.';
+      error.reason = 'network';
       error.isCritical = true;
       error.context = context;
-      throw error;
     }
 
     error.context = context;
@@ -2377,167 +2388,157 @@ export async function checkAndRedirect(shouldBeAuthenticated, redirectAuthentica
 }
 
 /**
- * Lightbox pour images.
+ * Lightbox pour images - VERSION FIXEE: Évite les erreurs Alpine en parsant data attr au lieu d'injecter JSON direct dans x-data
  * @param {string[]} images - Images.
  * @param {number} [initialIndex=0] - Index initial.
- * @param {string} [caption=''] - Légende.
+ * @param {string|string[]} [captions=''] - Légende(s) (chaîne ou tableau pour dynamique).
  */
-export function openLightbox(images, initialIndex = 0, caption = '') {
+export function openLightbox(images, initialIndex = 0, captions = '') {
   if (!Array.isArray(images) || images.length === 0) {
     console.warn('⚠️ openLightbox: images doit être un tableau non vide');
     return;
   }
 
-  let lightbox = document.querySelector('.lightbox');
-  if (!lightbox) {
-    lightbox = document.createElement('div');
-    lightbox.className = 'lightbox fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[9999] p-4 transition-opacity duration-300';
-    lightbox.setAttribute('aria-modal', 'true');
-    lightbox.setAttribute('role', 'dialog');
-    lightbox.setAttribute('tabindex', '-1');
-    document.body.appendChild(lightbox);
+  // Compatibilité : si captions est une chaîne, la convertir en tableau singleton
+  if (!Array.isArray(captions)) {
+    captions = [captions];
   }
 
-  // Échapper les caractères spéciaux pour Alpine.js
-  const safeImages = images.map(img => img.replace(/'/g, "\\'"));
-  const safeCaption = caption.replace(/'/g, "\\'");
+  let lightbox = document.querySelector('.lightbox');
+  if (lightbox) {
+    lightbox.remove(); // Nettoyage si existant
+  }
 
-  lightbox.innerHTML = `
-    <div class="lightbox-content relative max-w-[95vw] max-h-[95vh]" 
-         x-data="{ 
-           currentIndex: ${initialIndex}, 
-           images: ${JSON.stringify(safeImages)}, 
-           caption: '${safeCaption}',
-           init() {
-             this.$watch('currentIndex', () => this.loadImage());
-             this.loadImage();
-           },
-           nextImage() { 
-             this.currentIndex = (this.currentIndex + 1) % this.images.length; 
-           },
-           prevImage() { 
-             this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length; 
-           },
-           closeLightbox() { 
-             this.$el.parentElement.classList.add('opacity-0'); 
-             setTimeout(() => { 
-               this.$el.parentElement.remove(); 
-               document.body.style.overflow = 'auto';
-             }, 300); 
-           },
-           loadImage() {
-             const img = this.$el.querySelector('img');
-             if (img) {
-               img.src = '';
-               img.src = this.images[this.currentIndex];
-             }
-           }
-         }" 
-         x-on:keydown.escape.window="closeLightbox"
-         x-on:keydown.arrow-right.window="nextImage"
-         x-on:keydown.arrow-left.window="prevImage"
-         x-init="$el.focus()">
-      
-      <!-- Bouton fermer -->
-      <button class="lightbox-close absolute -top-12 right-0 text-white text-2xl cursor-pointer hover:text-ll-blue transition-all duration-200 z-10" 
-              aria-label="Fermer la lightbox" 
-              x-on:click="closeLightbox">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-          <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+  lightbox = document.createElement('div');
+  lightbox.className = 'lightbox fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[9999] p-4 transition-opacity duration-300 opacity-0';
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('tabindex', '-1');
+
+  const dataObj = {
+    currentIndex: initialIndex,
+    images: images,
+    captions: captions
+  };
+
+  const lightboxContent = document.createElement('div');
+  lightboxContent.className = 'lightbox-content relative max-w-[95vw] max-h-[95vh]';
+  lightboxContent.dataset.lightboxData = JSON.stringify(dataObj); // Safe pour dataset
+
+  // x-data simple: parse dataset en init
+  lightboxContent.setAttribute('x-data', '{ currentIndex: 0, images: [], captions: [], init() { const data = JSON.parse(this.$el.dataset.lightboxData || "{}"); Object.assign(this, data); this.$watch("currentIndex", () => this.loadImage()); this.loadImage(); }, nextImage() { this.currentIndex = (this.currentIndex + 1) % this.images.length; }, prevImage() { this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length; }, closeLightbox() { const lightbox = this.$el.closest(".lightbox"); if (lightbox) { document.body.style.overflow = "auto"; lightbox.classList.remove("opacity-100"); lightbox.classList.add("opacity-0"); setTimeout(() => { lightbox.remove(); }, 300); } } , loadImage() { const img = this.$el.querySelector("img"); if (img) { img.src = ""; img.src = this.images[this.currentIndex]; img.alt = this.captions[this.currentIndex] || ""; } } }');
+  lightboxContent.setAttribute('x-on:keydown.escape.window', 'closeLightbox');
+  lightboxContent.setAttribute('x-on:keydown.arrow-right.window', 'nextImage');
+  lightboxContent.setAttribute('x-on:keydown.arrow-left.window', 'prevImage');
+  lightboxContent.setAttribute('x-init', '$el.focus()');
+
+  // Contenu HTML (sans ${} dynamiques)
+  lightboxContent.innerHTML = `
+    <!-- Bouton fermer -->
+    <button class="lightbox-close !absolute -top-12 right-0 text-white text-2xl cursor-pointer hover:text-ll-blue transition-all duration-200 z-10" 
+            aria-label="Fermer la lightbox" 
+            x-on:click="closeLightbox">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
+        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+      </svg>
+    </button>
+    
+    <!-- Contenu principal -->
+    <div class="relative w-full h-full flex items-center justify-center">
+      <!-- Précédent -->
+      <button class="absolute left-4 z-10 text-white text-3xl cursor-pointer hover:text-ll-blue transition-all duration-200 opacity-75 hover:opacity-100" 
+              aria-label="Image précédente" 
+              x-on:click="prevImage" 
+              x-show="images.length > 1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+          <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12"/>
         </svg>
       </button>
       
-      <!-- Contenu principal -->
-      <div class="relative w-full h-full flex items-center justify-center">
-        <!-- Précédent -->
-        <button class="absolute left-4 z-10 text-white text-3xl cursor-pointer hover:text-ll-blue transition-all duration-200 opacity-75 hover:opacity-100" 
-                aria-label="Image précédente" 
-                x-on:click="prevImage" 
-                x-show="images.length > 1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
-            <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12"/>
-          </svg>
-        </button>
+      <!-- Image principale -->
+      <div class="relative flex items-center justify-center w-full h-full">
+        <img x-ref="mainImage"
+             src="" 
+             alt=""
+             class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transition-all duration-300 cursor-zoom-in hover:cursor-zoom-out"
+             loading="lazy"
+             onerror="this.src='/assets/images/logo.jpg'; this.alt='Image indisponible';">
         
-        <!-- Image principale -->
-        <div class="relative flex items-center justify-center w-full h-full">
-          <img x-ref="mainImage"
-               :src="images[currentIndex]" 
-               :alt="caption || 'Image ' + (currentIndex + 1)"
-               class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transition-all duration-300 cursor-zoom-in hover:cursor-zoom-out"
-               loading="lazy"
-               onerror="this.src='/assets/images/fallback-image.jpg'; this.alt='Image indisponible';">
-          
-          <!-- Overlay de chargement -->
-          <div x-show="false" 
-               x-transition:enter="transition ease-out duration-300"
-               x-transition:enter-start="opacity-0"
-               x-transition:leave="transition ease-in duration-200"
-               class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-            <lottie-player src="/assets/json/icons/animation.json" 
-                          background="transparent" 
-                          speed="1" 
-                          style="width: 60px; height: 60px;" 
-                          loop autoplay>
-            </lottie-player>
-          </div>
+        <!-- Overlay de chargement (caché par défaut) -->
+        <div x-show="false" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:leave="transition ease-in duration-200"
+             class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
+          <lottie-player src="/assets/json/animation.json" 
+                        background="transparent" 
+                        speed="1" 
+                        style="width: 60px; height: 60px;" 
+                        loop autoplay>
+          </lottie-player>
         </div>
-        
-        <!-- Suivant -->
-        <button class="absolute right-4 z-10 text-white text-3xl cursor-pointer hover:text-ll-blue transition-all duration-200 opacity-75 hover:opacity-100" 
-                aria-label="Image suivante" 
-                x-on:click="nextImage" 
-                x-show="images.length > 1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
-            <path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12"/>
-          </svg>
-        </button>
       </div>
       
-      <!-- Légende -->
-      <div class="lightbox-caption absolute -bottom-12 left-0 right-0 text-center text-white text-sm font-medium leading-tight px-4 z-10"
-           x-text="caption || 'Image ' + (currentIndex + 1) + ' sur ' + images.length"
-           x-show="caption || images.length > 1">
-      </div>
-      
-      <!-- Compteur -->
-      <div class="absolute -top-12 left-0 text-white text-sm font-medium z-10" 
-           x-show="images.length > 1">
-        <span x-text="currentIndex + 1"></span> / <span x-text="images.length"></span>
-      </div>
+      <!-- Suivant -->
+      <button class="absolute right-4 z-10 text-white text-3xl cursor-pointer hover:text-ll-blue transition-all duration-200 opacity-75 hover:opacity-100" 
+              aria-label="Image suivante" 
+              x-on:click="nextImage" 
+              x-show="images.length > 1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8">
+          <path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Légende -->
+    <div class="lightbox-caption absolute -bottom-12 left-0 right-0 text-center text-white text-sm font-medium leading-tight px-4 z-10"
+         x-text="captions[currentIndex] || 'Image ' + (currentIndex + 1) + ' sur ' + images.length"
+         x-show="captions[currentIndex] || images.length > 1">
+    </div>
+    
+    <!-- Compteur -->
+    <div class="absolute -top-12 left-0 text-white text-sm font-medium z-10" 
+         x-show="images.length > 1">
+      <span x-text="currentIndex + 1"></span> / <span x-text="images.length"></span>
     </div>
   `;
 
+  lightbox.appendChild(lightboxContent);
+  document.body.appendChild(lightbox);
+
   // Animation d'apparition
   document.body.style.overflow = 'hidden';
-  lightbox.classList.remove('opacity-0');
-  lightbox.classList.add('opacity-100');
+  requestAnimationFrame(() => {
+    lightbox.classList.remove('opacity-0');
+    lightbox.classList.add('opacity-100');
+  });
 
   // Gestion clic extérieur
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) {
-      lightbox.querySelector('[x-on\\:click="closeLightbox"]').click();
+      const closeBtn = lightboxContent.querySelector('.lightbox-close');
+      if (closeBtn) closeBtn.click();
     }
-  });
+  }, { once: false }); // Re-attach if needed
 
   // Focus management pour accessibilité
-  const focusableElements = lightbox.querySelectorAll(
+  const focusableElements = lightboxContent.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
   );
   const firstFocusable = focusableElements[0];
   const lastFocusable = focusableElements[focusableElements.length - 1];
 
-  lightbox.addEventListener('keydown', (e) => {
+  lightboxContent.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
       if (e.shiftKey) {
         if (document.activeElement === firstFocusable) {
           e.preventDefault();
-          lastFocusable.focus();
+          lastFocusable?.focus();
         }
       } else {
         if (document.activeElement === lastFocusable) {
           e.preventDefault();
-          firstFocusable.focus();
+          firstFocusable?.focus();
         }
       }
     }
@@ -2549,7 +2550,18 @@ export function openLightbox(images, initialIndex = 0, caption = '') {
   if (typeof AOS !== 'undefined') {
     setTimeout(() => AOS.refresh(), 100);
   }
+
+  // Cleanup on remove
+  const observer = new MutationObserver(() => {
+    if (!document.body.contains(lightbox)) {
+      document.body.style.overflow = 'auto';
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true });
 }
+
+
 
 /**
  * Validation d'étape de formulaire.

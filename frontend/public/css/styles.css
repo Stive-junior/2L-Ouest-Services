@@ -180,10 +180,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-
-        /* ✅ S'applique uniquement aux .header-btn et aux boutons qui NE sont pas .faq-toggle */
+/* ✅ S'applique uniquement aux .header-btn et aux boutons qui NE sont pas .faq-toggle, .modal-close, .toggle-password ou dans .services */
 .header-btn,
-button:not(.faq-toggle):not(.modal-close):not(.toggle-password),
+button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button),
 section a.cta {
   position: relative;
   border: none;
@@ -192,10 +191,10 @@ section a.cta {
   z-index: 1;
 }
 
-
-
-/* ✅ Bordure animée uniquement sur .header-btn et les boutons sauf .faq-toggle */
-.header-btn::before,button:not(.faq-toggle):not(.toggle-password)::before , section a.cta::before {
+/* ✅ Bordure animée uniquement sur .header-btn et les boutons sauf ceux exclus */
+.header-btn::before,
+button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button)::before,
+section a.cta::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -221,6 +220,7 @@ section a.cta {
           mask-composite: exclude;
   z-index: -1;
 }
+
 
 
 @keyframes borderFlow {
@@ -1501,7 +1501,7 @@ section a.cta {
         color: var(--ll-white) !important;
        } 
 
-        section:not(#faq) button,.content-main a.inline-flex , #hero-slides a {
+        section:not(#faq):not(#services) button,.content-main a.inline-flex , #hero-slides a {
        
         font-weight: 600;
         border: 0.5px solid var(--ll-blue);

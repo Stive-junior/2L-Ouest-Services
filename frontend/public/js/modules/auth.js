@@ -178,8 +178,8 @@ bindSignUpForm() {
   if (!submitButton) return;
 
   let currentStep = 1;
-  let isSubmitting = false; // Flag pour éviter les soumissions multiples
-  let isProcessingStep = false; // Flag pour éviter les transitions multiples
+  let isSubmitting = false;
+  let isProcessingStep = false;
 
   this.showStep(steps, currentStep);
   this.updateStepButtonState(steps, currentStep);
