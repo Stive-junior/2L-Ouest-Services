@@ -9,6 +9,7 @@ const Joi = require('joi');
 const path = require('path');
 const dotenv = require('dotenv');
 
+dotenv.config({ path: path.resolve(__dirname, `../env/.env`) });
 const envFile = process.env.NODE_ENV === 'production' ? '.env.pro' : '.env.dev';
 dotenv.config({ path: path.resolve(__dirname, `../env/${envFile}`) });
 

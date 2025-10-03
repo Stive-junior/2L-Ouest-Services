@@ -515,3 +515,37 @@ Error: Échec de connexion à Firestore après retries
   "error": "queryA EREFUSED firestore.googleapis.com",
   "path": "/check"
 }
+🚨 [2L-Ouest-Services] 03/10/2025 19:42:03 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 19:42:20 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 20:20:31 | ERROR    | Erreur lors de la fermeture du serveur WebSocket
+{
+  "error": "Cannot read properties of null (reading 'close')"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 20:20:55 | ERROR    | Erreur lors de la fermeture du serveur WebSocket
+{
+  "error": "Cannot read properties of null (reading 'close')"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 20:22:36 | ERROR    | Erreur lors de la fermeture du serveur WebSocket
+{
+  "error": "Cannot read properties of null (reading 'close')"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 20:25:58 | ERROR    | Erreur lors de la fermeture du serveur WebSocket
+{
+  "error": "Cannot read properties of null (reading 'close')"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 20:26:26 | ERROR    | Erreur lors de la fermeture du serveur WebSocket
+{
+  "error": "Cannot read properties of null (reading 'close')"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 20:30:27 | ERROR    | Erreur lors de la fermeture du serveur WebSocket
+{
+  "error": "Cannot read properties of null (reading 'close')"
+}

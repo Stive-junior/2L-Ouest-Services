@@ -7457,3 +7457,423 @@ Error: Échec de connexion à Firestore après retries
 }
 ✅ [2L-Ouest-Services] 03/10/2025 19:41:33 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:41:33 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
 ⚠️ [2L-Ouest-Services] 03/10/2025 19:41:39 | WARN     | Réseau perdu
+✅ [2L-Ouest-Services] 03/10/2025 19:42:03 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 19:42:03 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:42:03 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:42:03 +0000] "GET /api/check HTTP/1.1" 503 101 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:42:20 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 19:42:20 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:42:20 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:42:20 +0000] "GET /api/check HTTP/1.1" 503 101 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:42:33 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:42:33 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:42:33 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:43:03 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:43:03 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:43:03 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:43:33 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:43:34 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:43:34 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:44:03 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:44:03 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:44:03 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:44:34 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:44:34 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:44:34 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:45:04 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:45:04 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:45:04 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:45:34 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:45:34 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:45:34 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:46:04 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:46:04 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:46:04 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:46:34 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:46:34 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:46:34 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:47:04 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:47:04 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:47:04 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:47:34 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:47:34 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:47:34 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:48:04 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:48:04 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:48:04 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:48:35 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:48:35 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:48:35 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:49:05 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:49:05 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:49:05 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:49:35 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:49:35 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:49:35 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:50:05 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:50:05 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:50:05 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:50:35 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:50:35 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:50:35 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:51:05 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:51:05 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:51:05 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:51:35 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:51:35 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:51:35 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:52:06 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:52:06 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:52:06 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:52:36 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:52:36 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:52:36 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:53:06 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 19:53:06 | INFO     | 127.0.0.1 - - [03/Oct/2025:18:53:06 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 19:53:29 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 19:53:29 | INFO     | Serveur WebSocket fermé
+✅ [2L-Ouest-Services] 03/10/2025 19:53:29 | INFO     | Application Firebase arrêtée proprement
+✅ [2L-Ouest-Services] 03/10/2025 19:53:31 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "stopped"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:29 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 20:14:29 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:29 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:29 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 20:14:30 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:30 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:14:30 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:30 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 03/10/2025 20:14:30 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:30 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:14:31 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 03/10/2025 20:14:31 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 03/10/2025 20:14:31 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Configuration Google Maps : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Configuration Firebase client-side : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Serveur démarré sur le port 8000
+{
+  "localUrl": "http://192.168.43.17:8000/api",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | SocketService initialisé
+✅ [2L-Ouest-Services] 03/10/2025 20:14:32 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 03/10/2025 20:14:33 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "active"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:33 | INFO     | Écoute réseau constante démarrée
+✅ [2L-Ouest-Services] 03/10/2025 20:14:36 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:14:36 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:14:36 +0000] "GET /api/check HTTP/1.1" 200 112 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 20:14:38 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:14:38 | INFO     | Serveur WebSocket fermé
+✅ [2L-Ouest-Services] 03/10/2025 20:14:38 | INFO     | Application Firebase arrêtée proprement
+✅ [2L-Ouest-Services] 03/10/2025 20:14:38 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "stopped"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "production"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:30 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:20:31 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:20:53 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 20:20:53 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:54 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "production"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:54 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 20:20:54 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:54 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:20:54 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:54 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 03/10/2025 20:20:54 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:20:54 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:20:55 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:22:35 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 20:22:35 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:22:35 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:22:35 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 20:22:35 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:22:36 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:25:56 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 20:25:56 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:25:56 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:25:57 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 20:25:57 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:25:57 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:25:57 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:25:57 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 03/10/2025 20:25:57 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:25:57 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:25:58 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:26:25 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 20:26:25 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:26:25 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:26:25 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 20:26:26 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:26:26 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:26:26 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:26:26 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 03/10/2025 20:26:26 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:26:26 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 03/10/2025 20:26:26 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 20:30:26 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 20:30:26 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:30:26 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "development"
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:30:26 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 20:30:27 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 20:30:27 | INFO     | Démarrage du serveur...

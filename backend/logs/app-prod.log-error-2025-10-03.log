@@ -1,0 +1,8 @@
+🚨 [2L-Ouest-Services] 03/10/2025 20:29:22 | ERROR    | Erreur lors de la fermeture du serveur WebSocket
+{
+  "error": "Cannot read properties of null (reading 'close')"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 20:29:47 | ERROR    | Erreur lors de la fermeture du serveur WebSocket
+{
+  "error": "Cannot read properties of null (reading 'close')"
+}

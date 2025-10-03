@@ -24,7 +24,6 @@ const config = require('./config/config');
 const { corsMiddleware, errorMiddleware, rateLimitMiddleware, loggingMiddleware, authenticate } = require('./middleware');
 const socketService = require('./services/socketService');
 
-// Importation des routes depuis index.js
 const {
   authRoutes,
   chatRoutes,
@@ -119,81 +118,59 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
     try {
       logInfo('Début de la vérification de santé', { attempt });
 
-      // Vérification des variables d'environnement requises
+      // Vérification des variables d'environnement requises (gardé)
       const requiredEnvVars = [
-        'NODE_ENV',
-        'PORT',
-        'FRONTEND_URL',
-        'JWT_SECRET',
-        'JWT_EXPIRES_IN',
-        'FIREBASE_PROJECT_ID',
-        'FIREBASE_APP_ID',
-        'FIREBASE_API_KEY',
-        'FIREBASE_MEASUREMENT_ID',
-        'FIREBASE_CLIENT_EMAIL',
-        'FIREBASE_PRIVATE_KEY',
-        'FIREBASE_DATABASE_URL',
-        'FIREBASE_STORAGE_BUCKET',
-        'FCM_VAPID_KEY',
-        'FCM_SENDER_ID',
-        'RATE_LIMIT_WINDOW_MS',
-        'RATE_LIMIT_MAX',
-        'LOG_LEVEL',
-        'LOG_FILE_PATH',
-        'SMTP_HOST',
-        'SMTP_PORT',
-        'SMTP_USER',
-        'SMTP_PASS',
-        'GOOGLE_MAPS_API_KEY',
-        'SOCKET_PATH',
-        'SOCKET_CONNECT_TIMEOUT',
-        'SOCKET_MAX_DISCONNECTION_DURATION',
-        'SOCKET_PING_TIMEOUT',
-        'SOCKET_PING_INTERVAL',
-        'SOCKET_MAX_HTTP_BUFFER_SIZE',
+        'NODE_ENV', 'PORT', 'FRONTEND_URL', 'JWT_SECRET', 'JWT_EXPIRES_IN',
+        'FIREBASE_PROJECT_ID', 'FIREBASE_APP_ID', 'FIREBASE_API_KEY', 'FIREBASE_MEASUREMENT_ID',
+        'FIREBASE_CLIENT_EMAIL', 'FIREBASE_PRIVATE_KEY', 'FIREBASE_DATABASE_URL', 'FIREBASE_STORAGE_BUCKET',
+        'FCM_VAPID_KEY', 'FCM_SENDER_ID', 'RATE_LIMIT_WINDOW_MS', 'RATE_LIMIT_MAX',
+        'LOG_LEVEL', 'LOG_FILE_PATH', 'SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS',
+        'GOOGLE_MAPS_API_KEY', 'SOCKET_PATH', 'SOCKET_CONNECT_TIMEOUT', 'SOCKET_MAX_DISCONNECTION_DURATION',
+        'SOCKET_PING_TIMEOUT', 'SOCKET_PING_INTERVAL', 'SOCKET_MAX_HTTP_BUFFER_SIZE',
       ];
       const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
       if (missingVars.length > 0) {
         throw new AppError(500, `Variables d'environnement manquantes : ${missingVars.join(', ')}`, 'Missing environment variables');
       }
-      logInfo('Vérification des variables d\'environnement : OK');
+      logInfo('Vérification des variables d\'environnement : OK');  // ← Log ajouté
 
-      // Test d'écriture dans Firestore
+      // Test d'écriture dans Firestore (gardé, mais avec log)
+      logInfo('Tentative d\'écriture Firestore...');  // ← Log ajouté
       await db.collection('status').doc('health_check').set({
         lastChecked: admin.firestore.FieldValue.serverTimestamp(),
         status: 'healthy',
         environment: config.nodeEnv,
       });
-      logInfo('Écriture de test Firestore réussie');
+      logInfo('Écriture de test Firestore réussie');  // ← Log ajouté
 
-      // Liste des collections Firestore
-      const collections = await listCollections();
+       const collections = await listCollections();
       logInfo('Connexion Firestore : OK', { collections });
 
-      // Vérification de la configuration Google Maps
+      // Vérification de la configuration Google Maps (gardé)
       if (!config.googleMaps.apiKey) {
         throw new AppError(500, 'Clé API Google Maps non définie', 'Missing Google Maps API key');
       }
       logInfo('Configuration Google Maps : OK');
 
-      // Vérification de la configuration SMTP
+      // Vérification de la configuration SMTP (gardé)
       if (!config.smtp.host || !config.smtp.user || !config.smtp.pass) {
         throw new AppError(500, 'Configuration SMTP incomplète', 'Incomplete SMTP configuration');
       }
       logInfo('Configuration SMTP : OK');
 
-      // Vérification de la configuration Socket.IO
+      // Vérification de la configuration Socket.IO (gardé)
       if (!config.socket.path) {
         throw new AppError(500, 'Chemin Socket.IO non défini', 'Missing Socket.IO path');
       }
       logInfo('Configuration Socket.IO : OK');
 
-      // Vérification de la configuration Firebase client-side
+      // Vérification de la configuration Firebase client-side (gardé)
       if (!config.firebase.appId || !config.firebase.apiKey || !config.firebase.measurementId) {
         throw new AppError(500, 'Configuration Firebase client-side incomplète', 'Incomplete Firebase client configuration');
       }
       logInfo('Configuration Firebase client-side : OK');
 
+      logInfo('healthCheck completé avec succès');  // ← Log final ajouté
       return true;
     } catch (err) {
       lastError = err;
@@ -212,6 +189,7 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
   });
   throw new AppError(500, 'Échec définitif de la vérification de santé', lastError?.message || 'Unknown error');
 }
+
 
 // --- Mise à jour de l'URL dans Firestore ---
 async function updateApiUrlInFirestore(url, status) {
@@ -477,41 +455,55 @@ async function startServer() {
     logInfo('Démarrage du serveur...');
     await checkNetworkConnectivity();
     logInfo('Firebase initialisé');
-    await healthCheck();
 
-    // Détermination de l'adresse IP locale
-    const interfaces = os.networkInterfaces();
-    const ip = Object.values(interfaces)
-      .flat()
-      .find(i => i.family === 'IPv4' && !i.internal)?.address || '0.0.0.0';
-    const port = process.env.PORT || config.port; // Utiliser le port d'environnement si disponible
-    localUrl = `http://${ip}:${port}`;
-
+    // Écoute d'abord (priorité Render : listen ASAP)
+    const port = process.env.PORT || config.port;
     const server = app.listen(port, '0.0.0.0', async () => {
-      logInfo(`Serveur démarré sur le port ${port}`, {
-        localUrl: `${localUrl}${apiPrefix}`,
-        environment: config.nodeEnv,
+      logInfo(`Serveur démarré sur le port ${port}`);  // ← Log pour confirmer listen
+
+      // HealthCheck EN BACKGROUND (non-bloquant)
+      healthCheck().then(() => {
+        logInfo('HealthCheck background OK');
+      }).catch(err => {
+        logError('HealthCheck background failed', { error: err.message });
+        // Ne crash pas le serveur !
       });
+
+      // Détermination de l'adresse IP locale
+      const interfaces = os.networkInterfaces();
+      const ip = Object.values(interfaces)
+        .flat()
+        .find(i => i.family === 'IPv4' && !i.internal)?.address || '0.0.0.0';
+      localUrl = `http://${ip}:${port}`;
 
       // Initialisation du SocketService
       socketService.initialize(server);
       logInfo('SocketService initialisé');
 
-      // Mise à jour du statut Firestore
-      await db.collection('status').doc('api_status').set({
-        last_started: admin.firestore.FieldValue.serverTimestamp(),
-        message: 'API démarrée',
-        port,
-        environment: config.nodeEnv,
-        ip,
-        localUrl,
-      });
+      // Mise à jour du statut Firestore (avec try-catch)
+      try {
+        await db.collection('status').doc('api_status').set({
+          last_started: admin.firestore.FieldValue.serverTimestamp(),
+          message: 'API démarrée',
+          port,
+          environment: config.nodeEnv,
+          ip,
+          localUrl,
+        });
+      } catch (err) {
+        logError('Erreur mise à jour statut Firestore', { error: err.message });
+      }
 
-      // Pas de ngrok pour déploiement en ligne (utiliser l'URL publique fournie par la plateforme)
-      await updateApiUrlInFirestore(localUrl, 'active');
+      // Mise à jour URL (avec try-catch)
+      try {
+        await updateApiUrlInFirestore(localUrl, 'active');
+      } catch (err) {
+        logError('Erreur update URL Firestore', { error: err.message });
+      }
 
       // Démarrer l'écoute réseau constante
       monitorNetwork();
+      logInfo('Startup complet !');  // ← Log final
     });
 
     // Gestion des signaux pour arrêt du serveur
