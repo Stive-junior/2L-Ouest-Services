@@ -1,0 +1,298 @@
+🚨 [2L-Ouest-Services] 03/10/2025 21:40:36 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+📋 [2L-Ouest-Services] 03/10/2025 21:51:26 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "3ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+📋 [2L-Ouest-Services] 03/10/2025 21:54:53 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "4ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+📋 [2L-Ouest-Services] 03/10/2025 21:55:07 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "5ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:47 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:47 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:49 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:51 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:51 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:51 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:52 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:55 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:31:23 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:31:54 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:32:26 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:32:58 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:42 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:42 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:44 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:46 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:46 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:46 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:47 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:50 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:07 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:07 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:08 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:10 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:10 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:10 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:12 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:14 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:25 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:25 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:27 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:30 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:34 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:59 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}

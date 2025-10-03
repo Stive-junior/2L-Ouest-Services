@@ -22,7 +22,7 @@ let firebaseConfigCache = null; // Note : Initialisé à null, mais pourrait êt
 const CONFIG_CACHE_KEY = 'firebaseConfigCache';
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 heures
 
-export const API_BASE_URL = 'http://localhost:8000/api';
+export const API_BASE_URL = 'https://twol-ouest-services.onrender.com/api';
 export const USER_CACHE_KEY = 'userDataCache';
 
 let isShowingErrorModal = false;
@@ -1785,6 +1785,10 @@ export async function apiFetch(endpoint, method = 'GET', body = null, requireAut
 
   if (body && ['POST', 'PUT', 'PATCH'].includes(method)) {
     requestConfig.body = body instanceof FormData ? body : JSON.stringify(body);
+    // Si FormData, supprime Content-Type pour laisser le browser le set
+    if (body instanceof FormData) {
+      headers.delete('Content-Type');
+    }
   }
 
   console.log(`🚀 API ${method} ${endpoint}`);
@@ -1794,9 +1798,10 @@ export async function apiFetch(endpoint, method = 'GET', body = null, requireAut
     clearTimeout(timeoutId);
 
     let data;
-    try {
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
       data = await response.json();
-    } catch {
+    } else {
       data = await response.text();
     }
 
@@ -1830,7 +1835,8 @@ export async function apiFetch(endpoint, method = 'GET', body = null, requireAut
 
     if (
       error.message?.includes('NetworkError') ||
-      error.message?.includes('Failed to fetch')
+      error.message?.includes('Failed to fetch') ||
+      error.name === 'TypeError'  // Souvent pour fetch fails
     ) {
       error.message = 'Le serveur est indisponible ou en maintenance pour le moment. Veuillez réessayer plus tard.';
       error.reason = 'network';
@@ -1843,7 +1849,6 @@ export async function apiFetch(endpoint, method = 'GET', body = null, requireAut
     throw error;
   }
 }
-
 
 
 /**

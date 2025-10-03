@@ -27,6 +27,11 @@ const originValidator = (origin, callback) => {
     return callback(null, true);
   }
 
+  // Pour /api/check (public/monitoring), autoriser tout (wildcard pour debug)
+  if (origin === '*' || allowedOrigins.includes(origin)) {
+    return callback(null, true);  // Retourne true pour wildcard sur check
+  }
+
   // Vérifier si l'origine est dans la liste blanche
   if (allowedOrigins.includes(origin)) {
     return callback(null, origin);
@@ -48,6 +53,7 @@ const corsOptions = {
   exposedHeaders: ['X-Total-Count', 'Content-Range'], // En-têtes exposés au client
   credentials: true, // Autoriser les cookies et en-têtes d'authentification
   maxAge: 86400, // Cache des pré-vérifications CORS pendant 24h
+  preflightContinue: false,  // Gérer OPTIONS explicitement
 };
 
 /**
@@ -65,12 +71,14 @@ const corsMiddleware = cors(corsOptions);
 const logCors = (req, res, next) => {
   const origin = req.headers.origin;
 
-  // Journaliser les requêtes CORS
-  logInfo('Requête CORS traitée', {
-    origin: origin || 'aucune origine',
-    method: req.method,
-    path: req.path,
-  });
+  // Log détaillé pour OPTIONS preflight et /api/check
+  if (req.method === 'OPTIONS' || req.path === '/api/check') {
+    logInfo('CORS Preflight ou Check traitée', {
+      origin: origin || 'aucune origine',
+      method: req.method,
+      path: req.path,
+    });
+  }
 
   // Appliquer le middleware CORS
   corsMiddleware(req, res, (err) => {
@@ -81,6 +89,10 @@ const logCors = (req, res, next) => {
         method: req.method,
         path: req.path,
       });
+      // Pour 502-like, renvoie headers CORS même sur error
+      res.set('Access-Control-Allow-Origin', origin || '*');
+      res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
       return res.status(403).json({ error: 'Requête CORS non autorisée' });
     }
     next();

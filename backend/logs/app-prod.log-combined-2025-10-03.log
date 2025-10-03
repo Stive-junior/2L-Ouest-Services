@@ -665,3 +665,855 @@
   "path": "/api/check"
 }
 ✅ [2L-Ouest-Services] 03/10/2025 21:39:30 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:39:30 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:40:01 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:40:01 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:40:01 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:40:31 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 21:40:36 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:40:36 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:40:36 +0000] "GET /api/check HTTP/1.1" 503 101 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:40:36 | INFO     | Réseau restauré
+✅ [2L-Ouest-Services] 03/10/2025 21:40:53 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:40:53 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:40:53 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:41:00 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:41:00 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:41:00 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:41:32 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:41:32 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:41:32 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:42:04 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:42:04 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:42:04 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:42:35 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:42:35 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:42:35 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:43:07 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:43:07 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:43:07 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:43:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:43:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:43:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:44:11 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:44:11 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:44:11 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:44:42 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:44:42 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:44:42 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:45:14 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:45:14 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:45:14 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:45:46 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:45:46 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:45:46 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:46:18 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:46:18 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:46:18 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:46:50 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:46:50 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:46:50 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:47:22 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:47:22 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:47:22 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:47:54 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:47:54 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:47:54 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:48:25 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:48:25 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:48:25 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:48:57 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:48:57 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:48:57 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:49:29 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:49:29 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:49:29 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:50:00 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:50:00 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:50:00 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:50:30 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:50:31 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:50:31 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:51:00 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:51:00 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:51:00 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:51:26 | INFO     | Requête CORS traitée
+{
+  "origin": "aucune origine",
+  "method": "GET",
+  "path": "/"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:51:26 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:51:26 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:51:26 | INFO     | Requête CORS traitée
+{
+  "origin": "aucune origine",
+  "method": "GET",
+  "path": "/favicon.ico"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:51:26 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:51:26 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+📋 [2L-Ouest-Services] 03/10/2025 21:51:26 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "3ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:51:31 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:51:31 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:51:31 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:52:01 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:52:01 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:52:01 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:52:31 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:52:31 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:52:31 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:53:01 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:53:01 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:53:01 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:53:31 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:53:31 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:53:31 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:54:01 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:54:01 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:54:01 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:54:31 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:54:31 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:54:31 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:54:53 | INFO     | Requête CORS traitée
+{
+  "origin": "aucune origine",
+  "method": "GET",
+  "path": "/api"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:54:53 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:54:53 +0000] "GET /api HTTP/1.1" 200 254 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:54:53 | INFO     | Requête CORS traitée
+{
+  "origin": "aucune origine",
+  "method": "GET",
+  "path": "/favicon.ico"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:54:53 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:54:53 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/api" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+📋 [2L-Ouest-Services] 03/10/2025 21:54:53 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "4ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:55:02 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:55:02 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:55:02 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:55:07 | INFO     | Requête CORS traitée
+{
+  "origin": "aucune origine",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:55:07 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:55:07 +0000] "GET /api/check HTTP/1.1" 200 111 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:55:07 | INFO     | Requête CORS traitée
+{
+  "origin": "aucune origine",
+  "method": "GET",
+  "path": "/favicon.ico"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:55:07 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:55:07 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/api/check" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+📋 [2L-Ouest-Services] 03/10/2025 21:55:07 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "5ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:55:32 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:55:32 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:55:32 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:56:02 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:56:02 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:56:02 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:56:32 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:56:32 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:56:32 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:57:02 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:57:02 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:57:02 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:30:47 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:30:47 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:47 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:30:47 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:30:47 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:47 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:30:49 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:30:49 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:49 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:30:51 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:30:51 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:51 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:30:51 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:30:51 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:51 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:30:51 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:30:51 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:51 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:30:52 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:30:52 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:52 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:30:55 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:30:55 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:30:55 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:31:23 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:31:23 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:31:23 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:31:54 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:31:54 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:31:54 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:32:26 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:32:26 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:32:26 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:32:58 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:32:58 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:32:58 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:29 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:29 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:42 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:42 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:42 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:42 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:42 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:42 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:44 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:44 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:44 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:46 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:46 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:46 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:46 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:46 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:46 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:46 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:46 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:46 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:47 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:47 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:47 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:33:50 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:33:50 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:33:50 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:07 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:07 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:07 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:07 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:07 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:07 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:08 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:08 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:08 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:10 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:10 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:10 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:10 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:10 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:10 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:10 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:10 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:10 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:12 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:12 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:12 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:14 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:14 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:14 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:25 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:25 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:25 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:25 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:25 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:25 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:27 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:27 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:27 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:29 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:29 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:29 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:29 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:29 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:29 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:30 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:30 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:30 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:34 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:34 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:34 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:34:59 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:34:59 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:34:59 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
