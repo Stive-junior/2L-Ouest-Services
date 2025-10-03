@@ -56,15 +56,38 @@ let paginationVisiblePages = 5;
 let currentPageOffset = 0;
 let lastFiltersHash = '';
 
+
 /**
- * Affiche/masque l'animation de chargement avec fallback
+ * Toggle le loading overlay - ROBUSTE: Cache complètement les détails derrière et réapparaît si services disponibles
  */
 function toggleServicesLoading(show) {
-    const loadingEl = document.getElementById('services-loading');
-    if (loadingEl) {
-        loadingEl.classList.toggle('hidden', !show);
+    const container = document.getElementById('service-detail-container');
+    const loading = document.getElementById('services-loading');
+    if (!container || !loading) return;
+
+    // Assurer que le container est relative pour positioning
+    if (!container.classList.contains('relative')) {
+        container.classList.add('relative');
+    }
+
+    // Toggle hidden class pour show/hide
+    if (show) {
+        loading.classList.remove('hidden');
+    } else {
+        loading.classList.add('hidden');
+    }
+
+    // Si on cache le loading et qu'il y a des services, s'assurer que le contenu est visible (z-0 ou similaire)
+    if (!show) {
+        const existingContent = container.querySelector('.service-detail-content');
+        if (existingContent) {
+            existingContent.classList.remove('hidden');
+            existingContent.style.zIndex = '0';
+        }
     }
 }
+
+
 
 /**
  * Charge les services mock depuis JSON avec retry et fallback
@@ -149,7 +172,7 @@ export async function loadServices(filters = {}) {
             services = [...MOCK_SERVICES]; // Copy pour éviter mutations
         } else {
             let cachedData = getCachedServices();
-            if (cachedData && !filtersChanged) { // Seulement si pas de changement de filtres
+            if (cachedData && !filtersChanged) {
                 console.log('Using cached data.');
                 services = [...cachedData];
             } else {
@@ -282,16 +305,11 @@ export function renderServicesSidebar(services) {
         return;
     }
 
-    // Caché sur mobile par défaut (xl:block dans CSS) - basé sur nombre de services
-    if (services.length < 2) {
-        sidebarContainer.classList.add('hidden');
-    } else {
-        sidebarContainer.classList.remove('hidden');
-    }
+    
 
     // Clear et render sidebar
     sidebar.innerHTML = services.map((service, index) => {
-        const afterImage = service.images?.find(img => img.type === 'after') || { url: '/assets/images/placeholder.jpg' };
+        const afterImage = service.images?.find(img => img.type === 'after') || { url: '/assets/images/logo.png' };
         const categoryLabel = service.category ? `<span class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full">${service.category}</span>` : '';
 
         return `
@@ -360,9 +378,10 @@ export function renderServicesSidebar(services) {
 
     // SYNCHRO: Si services > 0 et index valide, update detail IMMEDIATEMENT
     if (services.length > 0 && currentServiceIndex < services.length) {
+        AOS.refreshHard(); // Refresh AOS pour animations
         renderServiceDetail(services[currentServiceIndex], currentServiceIndex, services.length);
     } else if (services.length === 0) {
-        showNoServicesMessage(); // Appel à animation.js pour cohérence, mais défini ici si besoin
+        showNoServicesMessage();
     }
 }
 
@@ -411,10 +430,9 @@ function renderServicePagination(totalServices) {
     // Ellipsis and more button
     if (endPage < totalPages) {
         if (endPage < totalPages - 1) {
-            pagesHTML += `<span class="pagination-ellipsis mx-1 text-sm">...</span>`;
+            pagesHTML += `<span class="pagination-ellipsis mx-0 text-sm">...</span>`;
         }
-        pagesHTML += `<button class="service-page-btn px-4 py-2 rounded-full bg-ll-blue text-white font-medium hover:shadow-lg neon-glow transition-all duration-300 transform hover:scale-105 pagination-more" data-page="${totalPages}">→</button>`;
-    }
+       }
 
     pagesContainer.innerHTML = pagesHTML;
     paginationContainer.classList.remove('hidden');
@@ -489,7 +507,7 @@ export function renderServiceDetail(service, index = 0, total = 1) {
         service = {
             name: 'Service par défaut',
             description: 'Description par défaut.',
-            images: [{ url: '/assets/images/placeholder.jpg', type: 'after' }],
+            images: [{ url: '/assets/images/placeholder.jpg', type: 'after', description: 'Description par défaut' }],
             features: ['Feature 1'],
             equipment: [{ icon: '🧹', name: 'Default' }],
             members: [{ name: 'Équipe', role: 'Pro', photo: '/assets/images/placeholder-avatar.jpg' }],
@@ -499,7 +517,8 @@ export function renderServiceDetail(service, index = 0, total = 1) {
             difficulty: 'medium',
             certification: 'Non spécifié',
             garantie: 'Non spécifié',
-            delai_intervention: 'Non spécifié'
+            delai_intervention: 'Non spécifié',
+            zone_intervention: 'Non spécifié'
         };
     }
 
@@ -510,11 +529,14 @@ export function renderServiceDetail(service, index = 0, total = 1) {
     if (imagesWrapper) {
         imagesWrapper.innerHTML = service.images.map((img, imgIndex) => `
             <div class="swiper-slide relative">
-                <img src="${img.url}" alt="${img.description || service.name}" class="w-full h-64 md:h-80 lg:h-96 object-cover rounded-xl" loading="lazy" onerror="this.src='/assets/images/placeholder.jpg'">
+                <img src="${img.url}" alt="${img.description || service.name}" class="w-full h-64 md:h-80 lg:h-96 object-cover rounded-xl" loading="lazy" onerror="this.src='/assets/images/logo.png'">
                 ${img.type === 'before' ? `
                     <span class="absolute top-4 left-4 bg-red-500/90 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Avant</span>
                 ` : img.type === 'after' ? `
                     <span class="absolute top-4 left-4 bg-green-500/90 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Après</span>
+                ` : ''}
+                ${img.description ? `
+                    <p class="absolute bottom-4 left-4 right-4 text-white text-sm bg-black/50 rounded p-2 text-center backdrop-blur-sm">${img.description}</p>
                 ` : ''}
             </div>
         `).join('');
@@ -522,36 +544,44 @@ export function renderServiceDetail(service, index = 0, total = 1) {
         // Swiper init robuste
         if (window.Swiper) {
             const swiperEl = document.querySelector('.service-image-swiper');
-            if (swiperEl && swiperEl.swiper) {
-                swiperEl.swiper.destroy(true, true);
+            if (swiperEl && swiperEl.swiper && typeof swiperEl.swiper.destroy === 'function') {
+                try {
+                    swiperEl.swiper.destroy(true, true);
+                } catch (err) {
+                    console.warn('Error destroying previous Swiper instance:', err);
+                }
             }
             
             setTimeout(() => {
                 if (swiperEl) {
-                    const newSwiper = new window.Swiper('.service-image-swiper', {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                        pagination: { 
-                            el: '.swiper-pagination',
-                            clickable: true,
-                            renderBullet: function (index, className) {
-                                return `<span class="${className} !w-3 !h-3 !bg-white/50 !opacity-50 hover:!opacity-100 !transition-all"></span>`;
-                            }
-                        },
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        loop: service.images.length > 1,
-                        lazy: true,
-                        autoplay: service.images.length > 1 ? {
-                            delay: 5000,
-                            disableOnInteraction: false,
-                        } : false,
-                        effect: 'fade',
-                        fadeEffect: { crossFade: true }
-                    });
-                    swiperEl.swiper = newSwiper;
+                    try {
+                        const newSwiper = new window.Swiper('.service-image-swiper', {
+                            slidesPerView: 1,
+                            spaceBetween: 0,
+                            pagination: { 
+                                el: '.swiper-pagination',
+                                clickable: true,
+                                renderBullet: function (index, className) {
+                                    return `<span class="${className} !w-3 !h-3 !bg-white/50 !opacity-50 hover:!opacity-100 !transition-all"></span>`;
+                                }
+                            },
+                            navigation: {
+                                nextEl: '.swiper-button-next',
+                                prevEl: '.swiper-button-prev',
+                            },
+                            loop: service.images.length > 1,
+                            lazy: true,
+                            autoplay: service.images.length > 1 ? {
+                                delay: 5000,
+                                disableOnInteraction: false,
+                            } : false,
+                            effect: 'fade',
+                            fadeEffect: { crossFade: true }
+                        });
+                        swiperEl.swiper = newSwiper;
+                    } catch (swiperErr) {
+                        console.error('Error initializing Swiper:', swiperErr);
+                    }
                 }
             }, 150);
         }
@@ -647,9 +677,11 @@ export function renderServiceDetail(service, index = 0, total = 1) {
     const certEl = document.getElementById('service-certification');
     const guarEl = document.getElementById('service-garantie');
     const delaiEl = document.getElementById('service-delai');
+    const zoneEl = document.getElementById('service-zone');
     if (certEl) certEl.textContent = service.certification || 'Non spécifié';
     if (guarEl) guarEl.textContent = service.garantie || 'Non spécifié';
     if (delaiEl) delaiEl.textContent = service.delai_intervention || 'Non spécifié';
+    if (zoneEl) zoneEl.textContent = service.zone_intervention || 'Non spécifié';
 
     // Boutons d'action
     const bookButton = document.getElementById('book-service');
@@ -666,7 +698,7 @@ export function renderServiceDetail(service, index = 0, total = 1) {
     if (demoButton) {
         demoButton.onclick = () => {
             if (window.openVideoModal && service.videoDemo) {
-                window.openVideoModal(service.videoDemo);
+                window.openVideoModal(service.videoDemo , service.name);
             } else {
                 showNotification('Démonstration vidéo non disponible pour ce service.', 'info');
             }
@@ -685,8 +717,9 @@ export function renderServiceDetail(service, index = 0, total = 1) {
     if (typeof AOS !== 'undefined') AOS.refresh();
 }
 
+
 /**
- * Met en surbrillance les termes de recherche
+ * Met en surbrillance les termes de recherche - SANS FOND, JUSTE COULEUR + GLOW LÉGER
  */
 function highlightSearchTerms(service) {
     const searchTerm = document.getElementById('service-search')?.value;
@@ -698,12 +731,11 @@ function highlightSearchTerms(service) {
         if (element) {
             const text = element.textContent;
             const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-            const highlighted = text.replace(regex, '<mark class="bg-gradient-to-r from-yellow-200 to-yellow-400 dark:from-yellow-600 dark:to-yellow-800 px-1 rounded neon-glow">$1</mark>');
+            const highlighted = text.replace(regex, '<span class="text-yellow-500 font-bold" style="text-shadow: 0 0 8px rgba(255, 193, 7, 0.6);">$1</span>');
             element.innerHTML = highlighted;
         }
     });
 }
-
 
 
 

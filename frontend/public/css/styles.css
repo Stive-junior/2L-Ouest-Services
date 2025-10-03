@@ -1583,7 +1583,7 @@ html:not(.dark) #blurred-header.header-light-style button:hover {
 }
 
 
-
+.slider-neon::-moz-range-thumb { background: #3b82f6; border-radius: 50%; width: 12px; height: 12px; }
 
 .modal-content {
   transition: transform 0.5s ease, opacity 0.5s ease;

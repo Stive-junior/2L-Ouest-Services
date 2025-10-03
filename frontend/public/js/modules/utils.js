@@ -2462,7 +2462,7 @@ export function openLightbox(images, initialIndex = 0, captions = '') {
              alt=""
              class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transition-all duration-300 cursor-zoom-in hover:cursor-zoom-out"
              loading="lazy"
-             onerror="this.src='/assets/images/logo.jpg'; this.alt='Image indisponible';">
+             onerror="this.src='/assets/images/logo.png'; this.alt='Image indisponible';">
         
         <!-- Overlay de chargement (caché par défaut) -->
         <div x-show="false" 

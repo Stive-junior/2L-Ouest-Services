@@ -2462,58 +2462,180 @@ const INACTIVITY_CLOSE_DELAY = 5000;
 
 /**
  * Initialise les modales vidéo avec gestion plein écran et effets futuristes
+ * Mise à jour complète : Positionnement optimisé du bouton de fermeture (top-right fixe et responsive)
+ * Contrôles vidéo personnalisés : Barre de progression interactive, play/pause, volume slider, fullscreen
  */
 export function initVideoModal() {
     const videoModal = document.createElement('div');
     videoModal.id = 'video-modal';
     videoModal.className = 'fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4 transition-all duration-500 backdrop-blur-xl hidden modal-overlay';
+    
     videoModal.innerHTML = `
-        <div class="modal-content bg-gradient-to-b from-black/80 to-black/100 text-white max-w-6xl w-full relative overflow-hidden neon-glow">
-            <button class="absolute -top-4 right-0 text-white text-2xl z-10 close-video-modal hover:text-blue-400 transition-all p-3 rounded-full hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Fermer la modale vidéo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="modal-content bg-gradient-to-b from-black/80 to-black/100 text-white max-w-6xl w-full max-h-[95vh] relative overflow-hidden neon-glow rounded-2xl">
+            <!-- Titre de la vidéo : Positionnement top-left optimisé, responsive et accessible -->
+            <h2 id="video-title" class="absolute top-4 left-4 z-10 text-xl md:text-2xl font-bold text-white truncate max-w-[70%] sm:max-w-[60%] lg:max-w-[50%] bg-black/30 px-3 py-1 rounded-lg backdrop-blur-sm" aria-label="Titre de la vidéo"></h2>
+            
+            <!-- Bouton de fermeture : Positionnement top-right optimisé, responsive et accessible -->
+            <button class="close-video-modal !absolute top-4 right-4 z-10 text-white text-2xl p-3 rounded-full hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow transition-all duration-300 hover:scale-110 sm:top-6 sm:right-6" aria-label="Fermer la modale vidéo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
                 </svg>
             </button>
-            <div class="aspect-video bg-black rounded-xl overflow-hidden relative">
-                <video id="modal-video" class="w-full h-full" controls preload="metadata" poster="/assets/images/video-poster.jpg">
+            
+            <!-- Conteneur vidéo avec overlay gradient -->
+            <div class="relative w-full h-full flex items-center justify-center">
+                <video id="modal-video" class="w-full h-full max-h-[80vh] object-contain rounded-xl shadow-2xl" preload="metadata" poster="/assets/images/video-poster.jpg" muted>
                     <source src="" type="video/mp4">
                     Votre navigateur ne supporte pas la balise vidéo.
                 </video>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none rounded-xl"></div>
             </div>
-            <div class="absolute bottom-6 right-6 flex gap-3">
-                <button class="fullscreen-video bg-black/60 text-white p-3 rounded-xl hover:bg-black/80 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Passer en plein écran">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
-                    </svg>
-                </button>
+            
+            <!-- Contrôles vidéo personnalisés : Barre en bas, semi-transparente avec hover reveal -->
+            <div class="video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:opacity-100 pointer-events-none group-hover/parent:pointer-events-auto neon-glow">
+                <div class="flex items-center justify-between w-full">
+                    <!-- Play/Pause -->
+                    <button id="play-pause-btn" class="play-pause-btn text-white p-3 rounded-full hover:bg-white/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Lecture/Pause">
+                        <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+                            <circle cx="12" cy="12" r="10"></circle><polygon points="10,8 16,12 10,16"></polygon>
+                        </svg>
+                        <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>
+                        </svg>
+                    </button>
+                    
+                    <!-- Barre de progression -->
+                    <div class="progress-container flex-1 mx-4 relative">
+                        <div class="progress-bar bg-white/20 rounded-full h-2 cursor-pointer relative overflow-hidden" id="progress-bar">
+                            <div class="progress-fill bg-blue-500 h-full rounded-full transition-all duration-200" id="progress-fill" style="width: 0%"></div>
+                            <div class="progress-thumb absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full transform -translate-y-1/2 opacity-0 transition-opacity duration-200" id="progress-thumb"></div>
+                        </div>
+                        <div class="time-display text-xs text-white/70 mt-1 flex justify-between">
+                            <span id="current-time">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Volume -->
+                    <div class="volume-container flex items-center gap-2">
+                        <button id="volume-btn" class="volume-btn text-white p-2 rounded-full hover:bg-white/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Volume">
+                            <svg id="volume-high-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19"></polygon><polygon points="22 9 17 4 17 20 22 15"></polygon>
+                            </svg>
+                            <svg id="volume-low-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19"></polygon>
+                            </svg>
+                            <svg id="volume-mute-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>
+                            </svg>
+                        </button>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1" class="w-20 h-1 bg-white/30 rounded-lg appearance-none cursor-pointer slider-neon [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:appearance-none" />
+                    </div>
+                    
+                    <!-- Fullscreen -->
+                    <button class="fullscreen-video bg-black/60 text-white p-3 rounded-xl hover:bg-black/80 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Passer en plein écran">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     `;
     document.body.appendChild(videoModal);
 
+    // Éléments DOM
     const modalVideo = document.getElementById('modal-video');
+    const videoTitle = document.getElementById('video-title');
     const closeButton = videoModal.querySelector('.close-video-modal');
     const fullscreenButton = videoModal.querySelector('.fullscreen-video');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const progressBar = document.getElementById('progress-bar');
+    const progressFill = document.getElementById('progress-fill');
+    const progressThumb = document.getElementById('progress-thumb');
+    const currentTimeEl = document.getElementById('current-time');
+    const durationEl = document.getElementById('duration');
+    const volumeBtn = document.getElementById('volume-btn');
+    const volumeHighIcon = document.getElementById('volume-high-icon');
+    const volumeLowIcon = document.getElementById('volume-low-icon');
+    const volumeMuteIcon = document.getElementById('volume-mute-icon');
+    const volumeSlider = document.getElementById('volume-slider');
 
-    const closeModal = () => {
-        videoModal.classList.remove('open');
-        setTimeout(() => {
-            videoModal.classList.add('hidden');
-            modalVideo.pause();
-            modalVideo.currentTime = 0;
-            document.body.style.overflow = 'auto';
-        }, 300);
+    // Fonction pour formater le temps
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
     };
 
-    closeButton.addEventListener('click', closeModal);
-
-    videoModal.addEventListener('click', e => {
-        if (e.target === videoModal) {
-            closeModal();
+    // Gestion play/pause
+    const togglePlayPause = () => {
+        if (modalVideo.paused) {
+            modalVideo.play().catch(error => console.error('Erreur de lecture vidéo:', error));
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        } else {
+            modalVideo.pause();
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
         }
+    };
+    playPauseBtn.addEventListener('click', togglePlayPause);
+
+    // Gestion barre de progression
+    const updateProgress = () => {
+        if (modalVideo.duration) {
+            const progress = (modalVideo.currentTime / modalVideo.duration) * 100;
+            progressFill.style.width = `${progress}%`;
+            currentTimeEl.textContent = formatTime(modalVideo.currentTime);
+            durationEl.textContent = formatTime(modalVideo.duration);
+            progressThumb.style.left = `${progress}%`;
+            progressThumb.classList.toggle('opacity-100', modalVideo.paused || progress >= 100);
+        }
+    };
+    modalVideo.addEventListener('timeupdate', updateProgress);
+    modalVideo.addEventListener('loadedmetadata', updateProgress);
+
+    // Seek sur clic/drag
+    const handleProgressClick = (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        modalVideo.currentTime = pos * modalVideo.duration;
+    };
+    progressBar.addEventListener('click', handleProgressClick);
+    let isDragging = false;
+    progressBar.addEventListener('mousedown', () => isDragging = true);
+    document.addEventListener('mouseup', () => isDragging = false);
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) handleProgressClick(e);
     });
 
+    // Gestion volume
+    const updateVolumeIcon = () => {
+        const vol = modalVideo.volume;
+        volumeHighIcon.classList.toggle('hidden', vol < 0.5);
+        volumeLowIcon.classList.toggle('hidden', vol === 0 || vol >= 0.5);
+        volumeMuteIcon.classList.toggle('hidden', vol > 0);
+    };
+    volumeSlider.addEventListener('input', (e) => {
+        modalVideo.volume = e.target.value;
+        updateVolumeIcon();
+    });
+    volumeBtn.addEventListener('click', () => {
+        modalVideo.muted = !modalVideo.muted;
+        volumeSlider.value = modalVideo.muted ? 0 : 1;
+        updateVolumeIcon();
+    });
+    updateVolumeIcon(); // Init
+
+    // Hover pour révéler contrôles
+    const modalContent = videoModal.querySelector('.modal-content');
+    modalContent.addEventListener('mouseenter', () => modalContent.classList.add('group'));
+    modalContent.addEventListener('mouseleave', () => modalContent.classList.remove('group'));
+
+    // Fullscreen
     fullscreenButton.addEventListener('click', () => {
         if (modalVideo.requestFullscreen) {
             modalVideo.requestFullscreen();
@@ -2524,86 +2646,148 @@ export function initVideoModal() {
         }
     });
 
+    // Fermeture de la modale
+    const closeModal = () => {
+        videoModal.classList.remove('open');
+        setTimeout(() => {
+            videoModal.classList.add('hidden');
+            modalVideo.pause();
+            modalVideo.currentTime = 0;
+            modalVideo.muted = false;
+            document.body.style.overflow = 'auto';
+            modalContent.classList.remove('group');
+        }, 500); // Durée ajustée pour transition-all
+    };
+
+    closeButton.addEventListener('click', closeModal);
+
+    videoModal.addEventListener('click', e => {
+        if (e.target === videoModal) {
+            closeModal();
+        }
+    });
+
     // Keyboard navigation
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
             closeModal();
+        } else if (e.key === ' ') {
+            e.preventDefault();
+            togglePlayPause();
+        } else if (e.key === 'ArrowRight') {
+            modalVideo.currentTime += 5;
+        } else if (e.key === 'ArrowLeft') {
+            modalVideo.currentTime -= 5;
+        } else if (e.key === 'ArrowUp') {
+            modalVideo.volume = Math.min(1, modalVideo.volume + 0.1);
+            volumeSlider.value = modalVideo.volume;
+            updateVolumeIcon();
+        } else if (e.key === 'ArrowDown') {
+            modalVideo.volume = Math.max(0, modalVideo.volume - 0.1);
+            volumeSlider.value = modalVideo.volume;
+            updateVolumeIcon();
         }
     });
 
     // Video ended event
     modalVideo.addEventListener('ended', () => {
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
         setTimeout(closeModal, 2000);
     });
 
     // Exposer la fonction pour ouvrir la modale vidéo
-    window.openVideoModal = (videoSrc) => {
+    window.openVideoModal = (videoSrc , title) => {
         videoModal.classList.remove('hidden');
         setTimeout(() => videoModal.classList.add('open'), 10);
         modalVideo.src = videoSrc;
+        videoTitle.textContent = title || '';
+        modalVideo.load();
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        progressFill.style.width = '0%';
+        currentTimeEl.textContent = '0:00';
+        durationEl.textContent = '0:00';
         modalVideo.play().catch(error => console.error('Erreur de lecture vidéo:', error));
         document.body.style.overflow = 'hidden';
     };
 }
 
 /**
- * Crée et initialise la modale pour la sélection des avis par étoiles
+ * Crée et initialise la modale pour les avis minimum (étoiles) - Combinaison des deux approches
+ * Logique du deuxième pour survol/clic sur étoiles SVG avec seuils de mise à jour, intégrant le tableau stars du premier (0-5 niveaux)
  */
 function initReviewsModal() {
-    reviewsModal = document.createElement('div');
-    reviewsModal.className = 'modal-overlay hidden';
+    let reviewsModal = document.createElement('div');
+    reviewsModal.className = 'fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4';
     reviewsModal.innerHTML = `
-        <div class="modal-content">
-            <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Sélectionner le minimum d'avis</h3>
-            <div class="star-selection-container">
-                <div class="star-row" id="star-row">
+        <div class="modal-content absolute  bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-md w-full mx-auto overflow-hidden neon-glow max-h-[90vh] overflow-y-auto transform transition-transform duration-500 scale-95 opacity-0">
+         
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Sélectionner le nombre minimum d'avis</h3>
+            <div id="modal-reviews-grid" class="space-y-6">
+                <!-- Option pour 0 étoiles (Aucun filtre) -->
+                <button id="zero-reviews-option" class="reviews-option flex items-center justify-center p-4 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-all duration-300 w-full text-left focus:outline-none focus:ring-2 focus:ring-blue-500 group glass-effect" data-reviews="0">
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg">☆☆☆☆☆</span> <!-- Icône vide pour 0 -->
+                        <span id="zero-reviews-name" class="text-sm font-medium text-gray-900 dark:text-white">0 étoiles (Tous les services)</span>
+                    </div>
+                </button>
+                <!-- Rangée d'étoiles SVG pour niveaux 1-5 -->
+                <div class="star-row flex justify-center gap-2" id="star-row">
                     ${[...Array(5)].map((_, i) => `
-                        <svg class="star-svg ${i === 0 ? 'selected' : ''}" data-level="${i + 1}" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="star-svg cursor-pointer transition-all duration-300" data-level="${i + 1}" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                         </svg>
                     `).join('')}
                 </div>
-                <div class="selection-label text-center mt-4 text-gray-600 dark:text-gray-300" id="selection-label">
-                    Cliquez sur une étoile pour sélectionner
-                </div>
-                <div class="tooltip text-center mt-2 text-sm text-gray-500 dark:text-gray-400 hidden" id="tooltip">
-                    <!-- Tooltip will be updated here -->
-                </div>
             </div>
-            <div class="flex justify-center mt-8 gap-4">
-                <button id="reviews-modal-cancel" class="px-6 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-xl hover:bg-gray-400 dark:hover:bg-gray-500 transition-all duration-300">Annuler</button>
-                <button id="reviews-modal-confirm" class="px-6 py-2 bg-ll-blue text-white rounded-xl hover:bg-blue-700 transition-all duration-300">Confirmer</button>
+            <div class="selection-label text-center mt-4 text-gray-600 dark:text-gray-300" id="selection-label">
+                Cliquez sur une étoile pour sélectionner
+            </div>
+            <div class="tooltip text-center mt-2 text-sm text-gray-500 dark:text-gray-400 hidden" id="tooltip">
+                <!-- Tooltip will be updated here -->
+            </div>
+            <div class="flex justify-center mt-6 gap-4">
+                <button id="reviews-modal-cancel" class="px-6 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-xl hover:bg-gray-400 dark:hover:bg-gray-500 transition-all">Annuler</button>
+                <button id="reviews-modal-confirm" class="px-6 py-2 bg-ll-blue text-white rounded-xl hover:shadow-lg neon-glow transition-all">Confirmer</button>
             </div>
         </div>
     `;
     document.body.appendChild(reviewsModal);
 
-    const starRow = document.getElementById('star-row');
-    const selectionLabel = document.getElementById('selection-label');
-    const tooltip = document.getElementById('tooltip');
+    // Intégration du tableau stars du premier pour les noms et icônes (adapté pour seuils)
+    const stars = [
+        { id: 0, name: '0 étoiles (Tous les services)', icon: '☆☆☆☆☆', minReviews: 0, filled: false }, // Adapté pour 0
+        { id: 1, name: '1 étoile', icon: '⭐☆☆☆☆', minReviews: 10, filled: true },
+        { id: 2, name: '2 étoiles', icon: '⭐⭐☆☆☆', minReviews: 25, filled: true },
+        { id: 3, name: '3 étoiles', icon: '⭐⭐⭐☆☆', minReviews: 50, filled: true },
+        { id: 4, name: '4 étoiles', icon: '⭐⭐⭐⭐☆', minReviews: 75, filled: true },
+        { id: 5, name: '5 étoiles', icon: '⭐⭐⭐⭐⭐', minReviews: 100, filled: true }
+    ];
 
-    // Niveaux d'avis par étoile
+    const starRow = reviewsModal.querySelector('#star-row');
+    const selectionLabel = reviewsModal.querySelector('#selection-label');
+    const tooltip = reviewsModal.querySelector('#tooltip');
+    const zeroOption = reviewsModal.querySelector('#zero-reviews-option');
+    const content = reviewsModal.querySelector('.modal-content');
+
+    // Seuils par niveau (basé sur le deuxième, adapté pour 0)
     const reviewLevels = {
-        1: { min: 10, label: '≥ 10 avis' },
-        2: { min: 25, label: '≥ 25 avis' },
-        3: { min: 50, label: '≥ 50 avis' },
-        4: { min: 75, label: '≥ 75 avis' },
-        5: { min: 100, label: '≥ 100 avis' }
+        0: { min: 0, label: stars[0].name },
+        1: { min: 10, label: stars[1].name },
+        2: { min: 25, label: stars[2].name },
+        3: { min: 50, label: stars[3].name },
+        4: { min: 75, label: stars[4].name },
+        5: { min: 100, label: stars[5].name }
     };
 
-    // Fonction pour mettre à jour l'affichage des étoiles (remplissage)
-    function updateStarDisplay(hoveredLevel = null) {
-        // Trouver le niveau sélectionné
-        let selectedLevel = null;
-        starRow.querySelectorAll('.star-svg').forEach(star => {
-            if (star.classList.contains('selected')) {
-                selectedLevel = parseInt(star.dataset.level);
-            }
-        });
+    // Map pour récupérer le niveau depuis minReviews
+    const levelMap = Object.fromEntries(Object.entries(reviewLevels).map(([k, v]) => [v.min, parseInt(k)]));
 
+    // Fonction pour mettre à jour l'affichage des étoiles SVG (remplissage)
+    function updateStarDisplay(hoveredLevel = null, selectedLevel = null) {
         const fillLevel = hoveredLevel || selectedLevel || 0;
 
-        // Mettre à jour chaque étoile
         starRow.querySelectorAll('.star-svg').forEach(star => {
             const level = parseInt(star.dataset.level);
             if (level <= fillLevel) {
@@ -2615,56 +2799,67 @@ function initReviewsModal() {
             }
         });
 
-        // Mettre à jour le label et tooltip
+        // Mettre à jour le label et tooltip basé sur le niveau
+        const currentLevel = hoveredLevel || selectedLevel || 0;
+        selectionLabel.textContent = reviewLevels[currentLevel].label;
         if (hoveredLevel) {
-            selectionLabel.textContent = reviewLevels[hoveredLevel].label;
-            tooltip.textContent = `Sélectionnez pour filtrer les services avec au moins ${reviewLevels[hoveredLevel].min} avis et commentaires.`;
+            tooltip.textContent = `Survolez pour voir : au moins ${reviewLevels[currentLevel].min} avis.`;
             tooltip.classList.remove('hidden');
         } else if (selectedLevel) {
-            selectionLabel.textContent = reviewLevels[selectedLevel].label;
-            tooltip.textContent = `Filtre actif : au moins ${reviewLevels[selectedLevel].min} avis et commentaires.`;
+            tooltip.textContent = `Filtre actif : au moins ${reviewLevels[currentLevel].min} avis.`;
             tooltip.classList.remove('hidden');
         } else {
-            selectionLabel.textContent = 'Aucun filtre (Tous les services)';
             tooltip.classList.add('hidden');
+        }
+
+        // Mettre à jour l'icône et nom pour l'option 0 si sélectionnée
+        const zeroIconSpan = zeroOption.querySelector('span.text-lg');
+        if (currentLevel === 0) {
+            zeroOption.classList.add('selected', 'bg-ll-blue', 'text-white');
+            zeroIconSpan.textContent = stars[0].icon;
+            document.getElementById('zero-reviews-name').textContent = stars[0].name;
+        } else {
+            zeroOption.classList.remove('selected', 'bg-ll-blue', 'text-white');
         }
     }
 
-    // Hover effects
+    // Gestion du clic sur l'option 0
+    zeroOption.addEventListener('click', () => {
+        // Désélectionner les étoiles
+        starRow.querySelectorAll('.star-svg').forEach(star => star.classList.remove('selected'));
+        updateStarDisplay(null, 0); // Sélection 0
+    });
+
+    // Hover effects sur les étoiles (logique du deuxième)
     starRow.addEventListener('mouseenter', (e) => {
         const hoveredStar = e.target.closest('.star-svg');
         if (hoveredStar) {
             const level = parseInt(hoveredStar.dataset.level);
-            updateStarDisplay(level);
+            updateStarDisplay(level); // Survol
         }
     }, true);
 
     starRow.addEventListener('mouseleave', () => {
-        updateStarDisplay(); // Remettre à l'état sélectionné seulement
+        // Remettre à l'état sélectionné seulement
+        let selectedLevel = null;
+        starRow.querySelectorAll('.star-svg').forEach(star => {
+            if (star.classList.contains('selected')) {
+                selectedLevel = parseInt(star.dataset.level);
+            }
+        });
+        updateStarDisplay(null, selectedLevel || 0);
     });
 
-    // Sélection par clic
+    // Sélection par clic sur étoiles (logique du deuxième, adapté pour niveaux 1-5)
     starRow.addEventListener('click', (e) => {
         const clickedStar = e.target.closest('.star-svg');
         if (clickedStar) {
-            // Désélectionner tous
+            // Désélectionner tous les étoiles
             starRow.querySelectorAll('.star-svg').forEach(star => star.classList.remove('selected'));
             // Sélectionner la cliquée
             clickedStar.classList.add('selected');
             const level = parseInt(clickedStar.dataset.level);
-            updateStarDisplay(); // Met à jour avec le nouveau selectedLevel
-            // Mettre à jour l'input caché si nécessaire
-            const input = document.getElementById('reviewsMin-input');
-            if (input) {
-                input.value = reviewLevels[level].min;
-            } else {
-                // Créer si n'existe pas
-                const newInput = document.createElement('input');
-                newInput.type = 'hidden';
-                newInput.id = 'reviewsMin-input';
-                newInput.value = reviewLevels[level].min;
-                document.querySelector('.filter-group')?.appendChild(newInput);
-            }
+            updateStarDisplay(null, level); // Mise à jour avec sélection
         }
     });
 
@@ -2673,57 +2868,74 @@ function initReviewsModal() {
     reviewsModal.querySelector('#reviews-modal-confirm').addEventListener('click', confirmReviewsSelection);
 
     function closeReviewsModal() {
-        reviewsModal.classList.remove('open');
+        content.classList.remove('scale-100', 'opacity-100');
         setTimeout(() => {
             reviewsModal.classList.add('hidden');
-            updateStarDisplay(); // Reset display
+            // Reset display au niveau initial (basé sur filtre courant)
+            let currentMinReviews = getCurrentFilters().reviews || 0;
+            let currentLevel = levelMap[currentMinReviews] || 0;
+            updateStarDisplay(null, currentLevel);
         }, 300);
     }
 
     function confirmReviewsSelection() {
+        let selectedLevel = 0;
         const selectedStar = starRow.querySelector('.star-svg.selected');
         if (selectedStar) {
-            const level = parseInt(selectedStar.dataset.level);
-            const minReviews = reviewLevels[level].min;
-            // Mettre à jour le filtre
-            const input = document.getElementById('reviewsMin-input');
-            if (input) {
-                input.value = minReviews;
-            } else {
-                // Créer si n'existe pas
-                const newInput = document.createElement('input');
-                newInput.type = 'hidden';
-                newInput.id = 'reviewsMin-input';
-                newInput.value = minReviews;
-                document.querySelector('.filter-group')?.appendChild(newInput);
-            }
-            updateActiveFilters();
-            updateServices();
+            selectedLevel = parseInt(selectedStar.dataset.level);
+        } // else if zeroOption selected, level=0 already
+
+        const minReviews = reviewLevels[selectedLevel].min;
+        const reviewsName = reviewLevels[selectedLevel].label;
+
+        // Mettre à jour le span sélectionné
+        document.getElementById('selected-reviews').textContent = reviewsName;
+
+        // Update hidden input (name="reviews" comme dans le premier, value=minReviews)
+        let input = document.querySelector('input[name="reviews"]');
+        if (!input) {
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'reviews';
+            document.getElementById('reviews-trigger').appendChild(input);
         }
+        input.value = minReviews;
+
+        updateActiveFilters();
+        updateServices();
         closeReviewsModal();
     }
 
-    // Ouvrir depuis le picker
-    document.querySelector('.star-picker').addEventListener('click', () => {
+    // Ouvrir depuis trigger (adapté pour le nouveau bouton)
+    document.getElementById('reviews-trigger').addEventListener('click', (e) => {
+        e.stopPropagation();
         reviewsModal.classList.remove('hidden');
         setTimeout(() => {
-            reviewsModal.classList.add('open');
-            updateStarDisplay(); // Initial display
+            content.classList.add('scale-100', 'opacity-100');
+            // Initial display basé sur filtre courant
+            let currentMinReviews = getCurrentFilters().reviews || 0;
+            let currentLevel = levelMap[currentMinReviews] || 0;
+            if (currentLevel > 0) {
+                starRow.querySelector(`[data-level="${currentLevel}"]`).classList.add('selected');
+            }
+            updateStarDisplay(null, currentLevel);
         }, 10);
     });
 
-    // Initial display
-    updateStarDisplay();
+    // Close on overlay click
+    reviewsModal.addEventListener('click', (e) => {
+        if (e.target === reviewsModal) closeReviewsModal();
+    });
 }
 
 /**
  * Crée et initialise la modale pour les catégories (6x sur desktop, 4x sur mobile)
  */
 function initCategoryModal() {
-    categoryModal = document.createElement('div');
-    categoryModal.className = 'modal-overlay';
+    let categoryModal = document.createElement('div');
+    categoryModal.className = 'fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4';
     categoryModal.innerHTML = `
-        <div class="modal-content">
+        <div class="modal-content absolute bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden max-h-[90vh] overflow-y-auto transform transition-transform duration-500 scale-95 opacity-0">
             <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Sélectionner une catégorie</h3>
             <input type="text" id="modal-category-search" class="w-full p-3 mb-4 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-ll-blue text-gray-900 dark:text-gray-100" placeholder="Rechercher une catégorie...">
             <div id="modal-category-grid" class="category-grid"></div>
@@ -2734,6 +2946,8 @@ function initCategoryModal() {
         </div>
     `;
     document.body.appendChild(categoryModal);
+
+    const content = categoryModal.querySelector('.modal-content');
 
     // Remplir la grille
     const categories = [
@@ -2784,7 +2998,7 @@ function initCategoryModal() {
     categoryModal.querySelector('#category-modal-confirm').addEventListener('click', confirmCategorySelection);
 
     function closeCategoryModal() {
-        categoryModal.classList.remove('open');
+        content.classList.remove('scale-100', 'opacity-100');
         setTimeout(() => categoryModal.classList.add('hidden'), 300);
     }
 
@@ -2800,7 +3014,7 @@ function initCategoryModal() {
                 input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'category';
-                document.getElementById('category-dropdown').appendChild(input);
+                document.getElementById('category-trigger').appendChild(input);
             }
             input.value = categoryId;
             updateActiveFilters();
@@ -2809,78 +3023,198 @@ function initCategoryModal() {
         closeCategoryModal();
     }
 
-    // Ouvrir depuis dropdown
-    document.getElementById('category-dropdown').addEventListener('click', (e) => {
+    // Ouvrir depuis trigger
+    document.getElementById('category-trigger').addEventListener('click', (e) => {
         e.stopPropagation();
         categoryModal.classList.remove('hidden');
-        setTimeout(() => categoryModal.classList.add('open'), 10);
+        setTimeout(() => content.classList.add('scale-100', 'opacity-100'), 10);
     });
+
+    // Close on overlay click
+    categoryModal.addEventListener('click', (e) => {
+        if (e.target === categoryModal) closeCategoryModal();
+    });
+}
+/**
+ * Crée et initialise la modale pour la fréquence
+ */
+function initFrequencyModal() {
+  let frequencyModal = document.createElement('div');
+  frequencyModal.className = 'fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4';
+  frequencyModal.innerHTML = `
+    <div class="modal-content absolute  bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-md w-full mx-auto overflow-hidden max-h-[90vh] overflow-y-auto transform transition-transform duration-500 scale-95 opacity-0">
+      <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Sélectionner une fréquence</h3>
+      <div id="modal-frequency-grid" class="space-y-3"></div>
+      <div class="flex justify-center mt-6 gap-4">
+        <button id="frequency-modal-cancel" class="px-6 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-xl hover:bg-gray-400 dark:hover:bg-gray-500 transition-all">Annuler</button>
+        <button id="frequency-modal-confirm" class="px-6 py-2 bg-ll-blue text-white rounded-xl hover:shadow-lg neon-glow transition-all">Confirmer</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(frequencyModal);
+
+  const content = frequencyModal.querySelector('.modal-content');
+
+  // Remplir la grille
+  const frequencies = [
+    { id: 'all', name: 'Toutes', icon: '🌐' },
+    { id: 'régulier', name: 'Régulier', icon: '🔄' },
+    { id: 'ponctuel', name: 'Ponctuel', icon: '📅' }
+  ];
+
+  const grid = frequencyModal.querySelector('#modal-frequency-grid');
+  grid.innerHTML = frequencies.map(freq => `
+    <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-xl transition-all w-full ${freq.id === getCurrentFilters().frequency ? 'bg-ll-blue text-white' : ''}">
+      <input type="radio" name="frequency" value="${freq.id}" class="form-radio text-ll-blue focus:ring-ll-blue sr-only" ${freq.id === getCurrentFilters().frequency ? 'checked' : ''}>
+      <div class="flex items-center gap-3 ml-3 flex-1">
+        <span class="text-2xl">${freq.icon}</span>
+        <span class="text-sm font-medium text-gray-900 dark:text-white">${freq.name}</span>
+      </div>
+    </label>
+  `).join('');
+
+  // Permet la sélection au clic sur toute la ligne
+  grid.querySelectorAll('label').forEach(label => {
+    label.addEventListener('click', function (e) {
+      // Empêche double déclenchement si clic sur input
+      if (e.target.tagName.toLowerCase() === 'input') return;
+      grid.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+      this.querySelector('input[type="radio"]').checked = true;
+      grid.querySelectorAll('label').forEach(l => l.classList.remove('bg-ll-blue', 'text-white'));
+      this.classList.add('bg-ll-blue', 'text-white');
+    });
+  });
+
+  // Boutons
+  frequencyModal.querySelector('#frequency-modal-cancel').addEventListener('click', closeFrequencyModal);
+  frequencyModal.querySelector('#frequency-modal-confirm').addEventListener('click', confirmFrequencySelection);
+
+  function closeFrequencyModal() {
+    content.classList.remove('scale-100', 'opacity-100');
+    setTimeout(() => frequencyModal.classList.add('hidden'), 300);
+  }
+
+  function confirmFrequencySelection() {
+    const selectedRadio = grid.querySelector('input[name="frequency"]:checked');
+    if (selectedRadio) {
+      const freqName = selectedRadio.closest('label').querySelector('span:last-child').textContent;
+      document.getElementById('selected-frequency').textContent = freqName;
+      let input = document.querySelector('input[name="frequency"]');
+      if (!input) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'frequency';
+        document.getElementById('frequency-trigger').appendChild(input);
+      }
+      input.value = selectedRadio.value;
+      updateActiveFilters();
+      updateServices();
+    }
+    closeFrequencyModal();
+  }
+
+  // Ouvrir depuis trigger
+  document.getElementById('frequency-trigger').addEventListener('click', (e) => {
+    e.stopPropagation();
+    frequencyModal.classList.remove('hidden');
+    setTimeout(() => content.classList.add('scale-100', 'opacity-100'), 10);
+  });
+
+  // Close on overlay click
+  frequencyModal.addEventListener('click', (e) => {
+    if (e.target === frequencyModal) closeFrequencyModal();
+  });
 }
 
 /**
- * Initialise les dropdowns de filtres avec animations (fréquence et difficulté restent dropdowns)
+ * Crée et initialise la modale pour la difficulté
  */
-function initFilterDropdowns() {
-    const dropdowns = [
-        { trigger: 'frequency-dropdown', menu: 'frequency-options' },
-        { trigger: 'difficulty-dropdown', menu: 'difficulty-options' }
-    ];
+function initDifficultyModal() {
+  let difficultyModal = document.createElement('div');
+  difficultyModal.className = 'fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4';
+  difficultyModal.innerHTML = `
+    <div class="modal-content absolute  bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-md w-full mx-auto overflow-hidden max-h-[90vh] overflow-y-auto transform transition-transform duration-500 scale-95 opacity-0">
+      <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Sélectionner un niveau de difficulté</h3>
+      <div id="modal-difficulty-grid" class="space-y-3"></div>
+      <div class="flex justify-center mt-6 gap-4">
+        <button id="difficulty-modal-cancel" class="px-6 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-xl hover:bg-gray-400 dark:hover:bg-gray-500 transition-all">Annuler</button>
+        <button id="difficulty-modal-confirm" class="px-6 py-2 bg-ll-blue text-white rounded-xl hover:shadow-lg neon-glow transition-all">Confirmer</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(difficultyModal);
 
-    dropdowns.forEach(({ trigger, menu }) => {
-        const triggerEl = document.getElementById(trigger);
-        const menuEl = document.getElementById(menu);
+  const content = difficultyModal.querySelector('.modal-content');
 
-        if (triggerEl && menuEl) {
-            triggerEl.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const isOpen = !menuEl.classList.contains('hidden');
-                
-                // Close all other dropdowns
-                document.querySelectorAll('[id$="-options"]').forEach(otherMenu => {
-                    if (otherMenu !== menuEl) {
-                        otherMenu.classList.add('hidden', 'scale-95', 'opacity-0');
-                    }
-                });
+  // Remplir la grille
+  const difficulties = [
+    { id: 'all', name: 'Tous', icon: '📊' },
+    { id: 'easy', name: 'Facile', icon: '😊' },
+    { id: 'medium', name: 'Moyen', icon: '😐' },
+    { id: 'hard', name: 'Difficile', icon: '😤' }
+  ];
 
-                if (isOpen) {
-                    menuEl.classList.add('hidden', 'scale-95', 'opacity-0');
-                } else {
-                    menuEl.classList.remove('hidden');
-                    setTimeout(() => {
-                        menuEl.classList.remove('scale-95', 'opacity-0');
-                    }, 10);
-                }
-            });
-        }
+  const grid = difficultyModal.querySelector('#modal-difficulty-grid');
+  grid.innerHTML = difficulties.map(diff => `
+    <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-xl transition-all w-full ${diff.id === getCurrentFilters().difficulty ? 'bg-ll-blue text-white' : ''}">
+      <input type="radio" name="difficulty" value="${diff.id}" class="form-radio text-ll-blue focus:ring-ll-blue sr-only" ${diff.id === getCurrentFilters().difficulty ? 'checked' : ''}>
+      <div class="flex items-center gap-3 ml-3 flex-1">
+        <span class="text-2xl">${diff.icon}</span>
+        <span class="text-sm font-medium text-gray-900 dark:text-white">${diff.name}</span>
+      </div>
+    </label>
+  `).join('');
+
+  // Permet la sélection au clic sur toute la ligne
+  grid.querySelectorAll('label').forEach(label => {
+    label.addEventListener('click', function (e) {
+      if (e.target.tagName.toLowerCase() === 'input') return;
+      grid.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+      this.querySelector('input[type="radio"]').checked = true;
+      grid.querySelectorAll('label').forEach(l => l.classList.remove('bg-ll-blue', 'text-white'));
+      this.classList.add('bg-ll-blue', 'text-white');
     });
+  });
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', () => {
-        document.querySelectorAll('[id$="-options"]').forEach(menu => {
-            menu.classList.add('hidden', 'scale-95', 'opacity-0');
-        });
-    });
+  // Boutons
+  difficultyModal.querySelector('#difficulty-modal-cancel').addEventListener('click', closeDifficultyModal);
+  difficultyModal.querySelector('#difficulty-modal-confirm').addEventListener('click', confirmDifficultySelection);
 
-    // Événements pour les radios (fréquence et difficulté) - mise à jour immédiate
-    document.querySelectorAll('input[name="frequency"], input[name="difficulty"]').forEach(radio => {
-        radio.addEventListener('change', () => {
-            if (radio.checked && radio.value !== 'all') {
-                const dropdownId = radio.name === 'frequency' ? 'selected-frequency' : 'selected-difficulty';
-                const selectedEl = document.getElementById(dropdownId);
-                if (selectedEl) {
-                    selectedEl.textContent = radio.nextElementSibling.textContent;
-                }
-            } else if (radio.checked && radio.value === 'all') {
-                const dropdownId = radio.name === 'frequency' ? 'selected-frequency' : 'selected-difficulty';
-                const selectedEl = document.getElementById(dropdownId);
-                if (selectedEl) {
-                    selectedEl.textContent = radio.name === 'frequency' ? 'Toutes les fréquences' : 'Tous les niveaux';
-                }
-            }
-            updateActiveFilters();
-            updateServices();
-        });
-    });
+  function closeDifficultyModal() {
+    content.classList.remove('scale-100', 'opacity-100');
+    setTimeout(() => difficultyModal.classList.add('hidden'), 300);
+  }
+
+  function confirmDifficultySelection() {
+    const selectedRadio = grid.querySelector('input[name="difficulty"]:checked');
+    if (selectedRadio) {
+      const diffName = selectedRadio.closest('label').querySelector('span:last-child').textContent;
+      document.getElementById('selected-difficulty').textContent = diffName;
+      let input = document.querySelector('input[name="difficulty"]');
+      if (!input) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'difficulty';
+        document.getElementById('difficulty-trigger').appendChild(input);
+      }
+      input.value = selectedRadio.value;
+      updateActiveFilters();
+      updateServices();
+    }
+    closeDifficultyModal();
+  }
+
+  // Ouvrir depuis trigger
+  document.getElementById('difficulty-trigger').addEventListener('click', (e) => {
+    e.stopPropagation();
+    difficultyModal.classList.remove('hidden');
+    setTimeout(() => content.classList.add('scale-100', 'opacity-100'), 10);
+  });
+
+  // Close on overlay click
+  difficultyModal.addEventListener('click', (e) => {
+    if (e.target === difficultyModal) closeDifficultyModal();
+  });
 }
 
 
@@ -2917,7 +3251,7 @@ function initFilterInactivityTimer() {
 }
 
 /**
- * Initialise la recherche - DEBOUNCE ET AUTO-UPDATE
+ * Initialise la recherche - DEBOUNCE ET AUTO-UPDATE (sidebar + detail complet à chaque saisie)
  */
 function initSearch() {
     const searchInput = document.getElementById('service-search');
@@ -2929,14 +3263,14 @@ function initSearch() {
     searchInput.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(async () => {
-            await updateServices(); // AUTO UPDATE ON SEARCH
+            await updateServices(); 
         }, 300);
         
         if (e.target.value) {
-            searchInput.parentElement?.classList.add('ring-2', 'ring-ll-blue', 'neon-glow');
+            searchInput.parentElement?.classList.add('neon-glow');
             clearButton.classList.remove('hidden');
         } else {
-            searchInput.parentElement?.classList.remove('ring-2', 'ring-ll-blue', 'neon-glow');
+            searchInput.parentElement?.classList.remove('neon-glow');
             clearButton.classList.add('hidden');
         }
     });
@@ -2945,11 +3279,9 @@ function initSearch() {
         searchInput.value = '';
         searchInput.focus();
         clearButton.classList.add('hidden');
-        updateServices(); // AUTO UPDATE
+        updateServices();
     });
 }
-
-
 
 /**
  * Initialise interactions - AVEC AUTO-UPDATE SUR FILTRES
@@ -2960,8 +3292,10 @@ export function initServiceInteractions() {
     if (resetBtn) resetBtn.addEventListener('click', resetAllFilters);
     
     initCategoryModal(); 
-    initReviewsModal();  
-    initFilterDropdowns(); 
+    initReviewsModal(); 
+    initFrequencyModal();
+    initDifficultyModal();
+
     initSearch(); 
     
     document.querySelectorAll('input[name="frequency"], input[name="difficulty"]').forEach(radio => {
@@ -3051,7 +3385,6 @@ function removeFilter(filterType) {
     updateServices();
 }
 
-
 /**
  * Récupère les filtres actuels - ROBUSTE
  */
@@ -3064,7 +3397,6 @@ function getCurrentFilters() {
         search: document.getElementById('service-search')?.value || ''
     };
 }
-
 
 /**
  * Rend les étoiles pour l'affichage des avis min (similaire à renderStarRating)
@@ -3123,7 +3455,8 @@ function resetAllFilters() {
 
 
 /**
- * Met à jour l'affichage des services - ULTRA SYNCHRO: Sidebar + Details + Pagination + Index Reset
+ * Met à jour l'affichage des services - ULTRA SYNCHRO: Sidebar + Details + Pagination + Index Reset + Toggle No-Services
+ * Mise à jour: Cache/Supprime message no-services IMMÉDIATEMENT si services trouvés, re-render détails.
  */
 async function updateServices() {
     toggleServicesLoading(true);
@@ -3133,17 +3466,29 @@ async function updateServices() {
         const services = await loadServices(filters); 
         
         renderServicesSidebar(services);
+        updateActiveFilters();
         
         if (services.length > 0) {
-            // Sync index
-            setServiceIndex(currentServiceIndex); // Via export
+          
+            hideNoServicesMessage();
+            setServiceIndex(currentServiceIndex);
             renderServiceDetail(services[currentServiceIndex], currentServiceIndex, services.length);
+            // S'assurer contenu visible après render
+            const existingContent = document.querySelector('#service-detail-container .service-detail-content');
+            if (existingContent) {
+                existingContent.classList.remove('hidden');
+                existingContent.style.zIndex = '0';
+            }
         } else {
+            // Seulement si pas déjà affiché
             showNoServicesMessage();
         }
 
         const servicesCount = document.getElementById('services-count');
         if (servicesCount) servicesCount.textContent = services.length;
+        
+        // Refresh global pour fluidité
+        if (typeof AOS !== 'undefined') AOS.refresh();
         
     } catch (error) {
         console.error('Erreur lors du chargement des services:', error);
@@ -3156,38 +3501,74 @@ async function updateServices() {
     }
 }
 
-
 /**
- * Affiche message no services - ROBUSTE
+ * Affiche message no services - ROBUSTE ET OPAQUE: Remplace le contenu services par le message
+ * Mise à jour: Cache la grille entière des services via nouveau ID, affiche message en bloc simple sans overlay/shadow.
+ * Ajout : Nouveau ID 'services-display-grid' requis sur la div grid des services.
  */
 export function showNoServicesMessage() {
-    const container = document.getElementById('service-detail-container');
-    if (!container) return;
+  const grid = document.getElementById('services-display-grid');
+  if (!grid) return;
 
-    container.innerHTML = `
-        <div class="text-center py-20 glass-effect neon-glow" data-aos="zoom-in">
-            <div class="max-w-md mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 mx-auto mb-6 animate-pulse">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    <line x1="11" y1="8" x2="11" y2="14"></line>
-                    <line x1="8" y1="11" x2="14" y2="11"></line>
-                </svg>
-                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Aucun service trouvé</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-8">Aucun service ne correspond à vos critères de recherche. Essayez de modifier vos filtres.</p>
-                <button id="reset-search-filters" class="bg-gradient-to-r from-ll-blue to-blue-600 text-white py-3 px-6 rounded-xl hover:from-blue-600 hover:to-ll-dark-blue transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 neon-glow">
-                    Réinitialiser les filtres
-                </button>
-            </div>
-        </div>
+  // 1. Masquer la grille entière (sidebar + détails)
+  grid.classList.add('hidden');
+
+  // 2. Créer ou afficher le div message simple (sans shadow, juste padding)
+  let noServicesDiv = document.getElementById('no-services-display');
+  if (!noServicesDiv) {
+    noServicesDiv = document.createElement('div');
+    noServicesDiv.id = 'no-services-display';
+    noServicesDiv.className = 'hidden col-span-full text-center py-20';
+    noServicesDiv.innerHTML = `
+      <div class="max-w-md mx-auto p-8">
+        <svg class="text-gray-400 dark:text-white mx-auto mb-6 animate-pulse" width="80" height="80" viewBox="0 0 74.34 74.34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path fill="currentColor" d="M29.52,53.303h-8.945c-0.552,0-1,0.448-1,1v8.104c0,0.343,0.176,0.662,0.466,0.845l4.473,2.826 c0.163,0.103,0.349,0.155,0.534,0.155s0.371-0.052,0.534-0.155l4.473-2.826c0.29-0.183,0.466-0.502,0.466-0.845v-8.104 C30.52,53.751,30.072,53.303,29.52,53.303z M28.52,61.856l-3.473,2.194l-3.473-2.194v-6.553h6.945V61.856z M22.81,28.413 c0.925,8.32,7.514,12.07,11.993,12.07c4.479,0,11.067-3.75,11.993-12.07c1.333-0.702,3.13-2.447,3.039-5.548 c-0.018-0.599-0.071-2.419-1.406-2.924c-1.313-0.497-2.638,0.819-2.891,1.088c-0.377,0.404-0.356,1.037,0.047,1.414 s1.037,0.357,1.414-0.047c0.175-0.187,0.482-0.424,0.686-0.521c0.056,0.151,0.134,0.462,0.151,1.05 c0.085,2.891-2.028,3.759-2.238,3.838l-3.894,0.853c-4.581-0.493-9.221-0.493-13.801,0l-3.901-0.854 c-0.295-0.116-2.315-1.014-2.232-3.836c0.017-0.588,0.095-0.899,0.151-1.05c0.192,0.092,0.486,0.311,0.686,0.521 c0.377,0.403,1.01,0.423,1.414,0.047c0.403-0.377,0.424-1.01,0.047-1.414c-0.252-0.269-1.572-1.589-2.891-1.088 c-1.335,0.504-1.389,2.325-1.406,2.924C19.679,25.967,21.477,27.712,22.81,28.413z M24.92,29.009l1.998,0.438l0.589,5.339 C26.295,33.365,25.331,31.47,24.92,29.009z M42.097,34.785l0.589-5.339l1.998-0.438C44.273,31.47,43.309,33.365,42.097,34.785z M40.667,29.515l-0.795,7.198c-0.002,0.017,0.005,0.032,0.004,0.048c-1.835,1.225-3.776,1.722-5.074,1.722 c-1.296,0-3.232-0.496-5.064-1.716l-0.8-7.252C32.833,29.149,36.77,29.149,40.667,29.515z M29.438,42.722l-2.902,1.362l-0.255-4.656 c-0.03-0.552-0.509-0.976-1.053-0.944c-0.551,0.03-0.974,0.502-0.944,1.053l0.053,0.972c-3.428,1.238-6.537,3.485-8.878,6.368 c-0.137-0.803-0.428-1.572-1.058-2.206c-0.255-0.257-0.565-0.466-0.905-0.648v-7.55c0.279,0.079,0.586,0.216,0.861,0.458 c0.67,0.587,1.009,1.63,1.009,3.101V43.2c0,0.552,0.448,1,1,1s1-0.448,1-1v-3.167c0-2.072-0.569-3.621-1.691-4.604 c-0.728-0.638-1.544-0.897-2.185-0.996c-0.016-0.538-0.452-0.971-0.994-0.971H1c-0.552,0-1,0.448-1,1V37.5c0,0.552,0.448,1,1,1h3.09 c0.14,1.476,0.632,4.212,2.33,5.737c-0.201,0.135-0.402,0.269-0.568,0.436c-1.194,1.201-1.185,2.886-1.177,4.372l0.001,6.94 c0,1.83,0.909,3.448,2.297,4.437c-0.578,0.87-1.148,1.603-1.145,1.603c-3.024,3.302-2.698,9.679-2.683,9.949 c0.03,0.529,0.468,0.943,0.999,0.943h13.131c0.53,0,0.968-0.414,0.999-0.943c0.015-0.27,0.341-6.648-2.662-9.925 c-0.011-0.013-0.945-1.112-1.641-2.204c0.992-0.987,1.606-2.353,1.606-3.86l0.001-5.84c2.064-3.39,5.257-6.083,8.874-7.535 l0.168,3.065c0.018,0.332,0.2,0.633,0.485,0.804c0.158,0.094,0.335,0.142,0.513,0.142c0.145,0,0.29-0.031,0.425-0.095l4.245-1.992 c0.5-0.235,0.715-0.83,0.48-1.33C30.533,42.702,29.937,42.489,29.438,42.722z M2,35.461h1.13V36.5H2V35.461z M9.391,43.338 c-3.29,0-3.357-5.784-3.357-5.842C6.03,36.98,5.633,36.57,5.13,36.519v-1.059h6.366v7.879l-1.361-0.001c-0.003,0-0.006,0-0.009,0 c-0.003,0-0.005,0-0.008,0L9.391,43.338z M6.675,49.034c-0.006-1.203-0.013-2.34,0.595-2.951c0.49-0.493,1.448-0.743,2.845-0.744 l0.024,0c1.397,0.002,2.355,0.251,2.844,0.744c0.406,0.409,0.536,1.054,0.577,1.795h-2.325c-0.552,0-1,0.448-1,1s0.448,1,1,1h2.343 l0,1.821h-2.343c-0.552,0-1,0.448-1,1s0.448,1,1,1h2.342l0,1.688h-2.342c-0.552,0-1,0.448-1,1s0.448,1,1,1h2.037 c-0.539,1.204-1.743,2.047-3.145,2.047c-1.902,0-3.45-1.548-3.45-3.45L6.675,49.034z M5.133,70.917 c0.007-0.393,0.031-0.897,0.079-1.451h10.995c0.048,0.553,0.071,1.058,0.078,1.451H5.133z M14.115,63.374 c0.974,1.063,1.509,2.608,1.808,4.091H5.501c0.305-1.494,0.853-3.057,1.852-4.149c0.037-0.047,0.767-0.981,1.456-2.049 c0.423,0.105,0.862,0.168,1.317,0.168c0.78,0,1.52-0.167,2.191-0.464C13.089,62.17,14.047,63.296,14.115,63.374z M21.2,16.754v1.046 c0,0.552,0.448,1,1,1s1-0.448,1-1v-1.37c2.995-1.182,7.331-2.308,11.602-2.308c4.271,0,8.607,1.126,11.602,2.308v1.37 c0,0.552,0.448,1,1,1s1-0.448,1-1v-1.046c0.266-0.186,0.428-0.489,0.428-0.815V5.24c0-0.395-0.232-0.753-0.594-0.914 c-3.156-1.404-8.343-2.904-13.436-2.904c-5.094,0-10.281,1.5-13.436,2.904c-0.361,0.161-0.594,0.519-0.594,0.914v10.698 C20.772,16.264,20.935,16.567,21.2,16.754z M22.772,5.9c2.999-1.241,7.556-2.477,12.03-2.477c4.474,0,9.03,1.236,12.03,2.477v8.546 c-3.169-1.208-7.635-2.325-12.03-2.325c-4.396,0-8.86,1.117-12.03,2.325V5.9z M73.34,32.94h-25.23c-0.552,0-1,0.448-1,1v3.523 c0,0.552,0.448,1,1,1h2.335l9.721,6.916v9.426c-1.676,0.08-2.913,0.494-3.715,1.301c-1.194,1.201-1.185,2.886-1.177,4.372 l0.001,6.94c0,3.005,2.445,5.45,5.45,5.45s5.45-2.445,5.45-5.45l0.001-6.94c0.008-1.486,0.017-3.171-1.177-4.372 c-0.658-0.662-1.595-1.068-2.833-1.239v-9.516c4.234-3.308,7.866-6.118,8.861-6.888h2.313c0.552,0,1-0.448,1-1V33.94 C74.34,33.387,73.892,32.94,73.34,32.94z M64.176,60.468l-0.001,6.951c0,1.902-1.548,3.45-3.45,3.45 c-1.402,0-2.606-0.844-3.145-2.047h2.037c0.552,0,1-0.448,1-1s-0.448-1-1-1h-2.342l0-1.688h2.342c0.552,0,1-0.448,1-1s-0.448-1-1-1 h-2.343l0-1.821h2.343c0.552,0,1-0.448,1-1s-0.448-1-1-1h-2.325c0.041-0.741,0.171-1.386,0.577-1.795 c0.491-0.494,1.453-0.745,2.856-0.745s2.365,0.25,2.856,0.745C64.189,58.128,64.183,59.264,64.176,60.468z M72.34,36.463h-1.654 c-0.221,0-0.436,0.073-0.611,0.208c0,0-4.039,3.119-8.937,6.944l-9.794-6.968c-0.169-0.12-0.372-0.185-0.58-0.185h-1.654V34.94 h23.23V36.463z M45.023,42.462l-0.176,3.212c-0.018,0.332-0.2,0.633-0.485,0.804c-0.158,0.094-0.335,0.142-0.513,0.142 c-0.145,0-0.29-0.031-0.425-0.095l-4.245-1.992c-0.5-0.235-0.715-0.83-0.48-1.33c0.234-0.501,0.831-0.715,1.33-0.48l2.902,1.362 l0.255-4.656c0.03-0.552,0.502-0.974,1.053-0.944c0.551,0.03,0.974,0.502,0.944,1.053l-0.046,0.835 c5.806,1.963,10.629,6.745,12.592,12.492c0.179,0.522-0.101,1.091-0.623,1.27c-0.107,0.037-0.216,0.054-0.323,0.054 c-0.416,0-0.804-0.262-0.946-0.677C54.129,48.515,50.015,44.334,45.023,42.462z M35.802,47.247v24.44c0,0.552-0.448,1-1,1 s-1-0.448-1-1v-24.44c0-0.552,0.448-1,1-1S35.802,46.695,35.802,47.247z M48.725,30.049h24c0.552,0,1,0.448,1,1s-0.448,1-1,1h-24 c-0.552,0-1-0.448-1-1S48.172,30.049,48.725,30.049z"/>
+          </g>
+        </svg>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Aucun service trouvé</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-8">Aucun service ne correspond à vos critères de recherche. Essayez de modifier vos filtres.</p>
+        <button id="reset-search-filters" class="bg-gradient-to-r from-ll-blue to-blue-600 text-white py-3 px-6 rounded-xl hover:from-blue-600 hover:to-ll-dark-blue transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 neon-glow">
+          Réinitialiser les filtres
+        </button>
+      </div>
     `;
+    grid.parentNode.insertBefore(noServicesDiv, grid.nextSibling);
+  }
+  noServicesDiv.classList.remove('hidden');
 
-    document.getElementById('reset-search-filters')?.addEventListener('click', resetAllFilters);
+  // 3. Event listener pour bouton (idempotent)
+  const resetBtn = document.getElementById('reset-search-filters');
+  if (resetBtn && !resetBtn._listenerAdded) {
+    if (typeof resetAllFilters === 'function') {
+      resetBtn.addEventListener('click', resetAllFilters);
+    } else {
+      resetBtn.addEventListener('click', () => console.log('Filtres réinitialisés.'));
+    }
+    resetBtn._listenerAdded = true;
+  }
 }
 
+/**
+ * Cache le message "Aucun service trouvé" et réaffiche les détails - IMMÉDIAT
+ * Appelée quand des services sont trouvés pour toggle instantané.
+ */
+export function hideNoServicesMessage() {
+  const grid = document.getElementById('services-display-grid');
+  const noServicesDiv = document.getElementById('no-services-display');
+  if (!grid) return;
 
+  // 1. Réafficher la grille
+  grid.classList.remove('hidden');
 
+  // 2. Masquer le message
+  if (noServicesDiv) {
+    noServicesDiv.classList.add('hidden');
+  }
 
+  // 3. Refresh AOS pour animations fluides
+  if (typeof AOS !== 'undefined') AOS.refresh();
+}
 
 
 /**
@@ -3701,80 +4082,61 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-const images = Array.from(document.querySelectorAll('img.lightbox-img, #services img, .gallery img ,img'));
-
-if (images.length === 0) return;
-
-const srcList = images.map(el => el.getAttribute('data-src') || el.src);
-const altList = images.map(el => el.getAttribute('alt') || '');
-
-if (srcList.length === 0) return;
-
-images.forEach((img, index) => {
-  img.style.cursor = 'zoom-in';
-  img.addEventListener('click', () => {
-    openLightbox(srcList, index, altList);
-  });
-});
+const images = Array.from(document.querySelectorAll('img.lightbox-img, #services img, .gallery img ,img')); if (images.length === 0) return; const srcList = images.map(el => el.getAttribute('data-src') || el.src); const altList = images.map(el => el.getAttribute('alt') || ''); if (srcList.length === 0) return; images.forEach((img, index) => { img.style.cursor = 'zoom-in'; img.addEventListener('click', () => { openLightbox(srcList, index, altList); }); }); 
 
 
 
-  const heroSection = document.getElementById("hero");
-  const header = document.getElementById("blurred-header");
-  const name = document.getElementById("name-entreprise");
-  const entreprise = document.getElementById("entreprise");
+const heroSection = document.getElementById("hero");
+const services = document.getElementById("services");
+const header = document.getElementById("blurred-header");
+const name = document.getElementById("name-entreprise");
+const entreprise = document.getElementById("entreprise");
+
+if (heroSection && header && services) {
+  const onScroll = () => {
+    const isDarkMode = document.documentElement.classList.contains("dark");
+    const heroBottom = heroSection.getBoundingClientRect().bottom;
+    const servicesRect = services.getBoundingClientRect();
+    const headerHeight = header.offsetHeight;
+
+    // ✅ Vérifie si le header est sous le hero
+    const isPastHero = heroBottom <= headerHeight;
+
+    // ✅ Vérifie si on est dans la zone "services"
+    const isOnServices = servicesRect.top <= headerHeight;
+
+    // --- Application des styles ---
+    if (isPastHero || isOnServices) {
+      entreprise.classList.add("gradiant");
+      entreprise.classList.remove("header-btn");
+      name.classList.remove("back-text");
+    } else {
+      name.classList.add("back-text");
+      entreprise.classList.add("header-btn");
+      entreprise.classList.remove("gradiant");
+    }
+
+    if (isDarkMode) return;
+
+    if (isPastHero || isOnServices) {
+      header.classList.add("header-light-style");
+      entreprise.classList.add("gradiant");
+      entreprise.classList.remove("header-btn");
+      name.classList.remove("back-text");
+    } else {
+      header.classList.remove("header-light-style");
+      name.classList.add("back-text");
+      entreprise.classList.add("header-btn");
+      entreprise.classList.remove("gradiant");
+    }
+  };
+
+  onScroll();
+  window.addEventListener("scroll", onScroll);
+  window.addEventListener("resize", onScroll);
+}
 
 
-  if (heroSection && header) {
-    const onScroll = () => {
-      const isDarkMode = document.documentElement.classList.contains("dark");
-      
-
-      const heroBottom = heroSection.getBoundingClientRect().bottom;
-      const headerHeight = header.offsetHeight;
-
-
-      if (heroBottom <= headerHeight) {
-        entreprise.classList.add("gradiant");
-        entreprise.classList.remove("header-btn");
-        name.classList.remove("back-text")
-        
-      } else {
-        name.classList.add("back-text");
-        entreprise.classList.add("header-btn");
-        entreprise.classList.remove("gradiant");
-
-      }
-      
-      if (isDarkMode) return; 
-
-      
-
-      if (heroBottom <= headerHeight) {
-        // On est passé sous le hero → applique le style clair
-        header.classList.add("header-light-style");
-        entreprise.classList.add("gradiant");
-        entreprise.classList.remove("header-btn");
-        name.classList.remove("back-text")
-        
-      } else {
-        
-        header.classList.remove("header-light-style");
-
-        name.classList.add("back-text");
-        entreprise.classList.add("header-btn");
-        entreprise.classList.remove("gradiant");
-
-      }
-    };
-
-    // Vérifie immédiatement au chargement
-    onScroll();
-
-    // Vérifie à chaque scroll
-    window.addEventListener("scroll", onScroll);
-    window.addEventListener("resize", onScroll);
-  }
 
   
     // Animation de chargement initial

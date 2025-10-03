@@ -1435,8 +1435,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="section-divider container mx-auto px-6"></div>
 
-     
-<!-- Services Section -->
+ <!-- Services Section -->
 <section id="services" class="py-20 relative overflow-hidden ">
     <div class="container mx-auto px-4 max-w-[350rem]">
         <!-- Header Section -->
@@ -1448,154 +1447,141 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <!-- Search and Filter Bar -->
-        <div class="flex flex-col md:flex-row gap-4 mb-12 items-center justify-center" data-aos="fade-up" data-aos-delay="200">
-            <!-- Search Input with Filter Button -->
-            <div class="relative w-full md:w-[600px]">
-                <!-- Search Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+<div class="flex flex-col md:flex-row gap-4 mb-12 items-center justify-center" data-aos="fade-up" data-aos-delay="200">
+  <!-- Search Input with Filter Button -->
+  <div class="relative w-full md:w-[600px]">
+    <!-- Search Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+         viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+         class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    
+    <!-- Search Input -->
+    <input 
+      type="text" 
+      id="service-search" 
+      class="w-full pl-12 pr-28 py-4 bg-gradient-to-r from-white to-blue-50 
+             dark:from-gray-800 dark:to-gray-700 border-2 border-gray-200 
+             dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-ll-blue 
+             focus:border-ll-blue text-gray-900 dark:text-gray-100 
+             placeholder-gray-400 dark:placeholder-gray-500 
+             transition-all duration-300 shadow-lg hover:shadow-xl focus:shadow-2xl" 
+      placeholder="Rechercher un service..."
+    >
+    
+    <!-- Clear Search Button -->
+    <button id="clear-search" 
+            class="absolute right-16 top-1/2 -translate-y-1/2 
+                   text-gray-400 hover:text-gray-600 
+                   dark:hover:text-gray-300 transition-colors hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+           viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6L6 18"></path>
+        <path d="M6 6l12 12"></path>
+      </svg>
+    </button>
+    
+    <!-- Filter Button -->
+    <button id="open-filter-panel" 
+            class="absolute right-3 top-1/2 -translate-y-1/2 
+                   bg-gradient-to-r from-ll-blue to-blue-600 
+                   text-white p-2 rounded-xl 
+                   hover:from-blue-600 hover:to-ll-dark-blue 
+                   transition-all duration-300 shadow-lg 
+                   hover:shadow-xl hover:scale-110 
+                   focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor">
+        <path d="M8,6.2V26.3A6.2,6.2,0,0,0,4,32a6,6,0,0,0,4,5.6v4.2A2.1,2.1,0,0,0,10,44a2.1,2.1,0,0,0,2-2.2V37.6A6,6,0,0,0,16,32a6.2,6.2,0,0,0-4-5.7V6.2A2.1,2.1,0,0,0,10,4,2.1,2.1,0,0,0,8,6.2Z"></path>
+        <path d="M22,6.2v4.1A6.2,6.2,0,0,0,18,16a6,6,0,0,0,4,5.6V41.8a2,2,0,1,0,4,0V21.6A6,6,0,0,0,30,16a6.2,6.2,0,0,0-4-5.7V6.2a2,2,0,1,0-4,0Z"></path>
+        <path d="M36,6.2V23.3A6.2,6.2,0,0,0,32,29a6,6,0,0,0,4,5.6v7.2a2,2,0,1,0,4,0V34.6A6,6,0,0,0,44,29a6.2,6.2,0,0,0-4-5.7V6.2a2,2,0,1,0-4,0Z"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+
+       <!-- Advanced Filter Panel -->
+<div id="filter-panel" class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 mb-12 border-2 border-blue-500/30 hidden" data-aos="fade-up" data-aos-delay="300">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Category Filter -->
+        <div class="filter-group">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Catégorie</label>
+            <button id="category-trigger" class="w-full flex items-center justify-between bg-gray-50 dark:bg-gray-700 text-left p-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 shadow-lg border-2 border-transparent hover:border-ll-blue focus:border-ll-blue focus:outline-none">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl">📂</span>
+                    <span id="selected-category" class="text-gray-900 dark:text-white">Toutes les catégories</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                    <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
-                
-                <!-- Search Input -->
-                <input 
-                    type="text" 
-                    id="service-search" 
-                    class="w-full pl-12 pr-16 py-4 bg-gradient-to-r from-white to-blue-50 dark:from-gray-800 dark:to-gray-700 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-ll-blue focus:border-ll-blue text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-300 shadow-lg hover:shadow-xl focus:shadow-2xl" 
-                    placeholder="Rechercher un service..."
-                >
-                
-                <!-- Clear Search Button -->
-                <button id="clear-search" class="absolute right-12 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
-                    </svg>
-                </button>
-                
-                <!-- Filter Button -->
-                <button id="open-filter-panel" 
-                        class="absolute right-3 top-1/2 -translate-y-1/2 bg-gradient-to-r from-ll-blue to-blue-600 text-white p-2 rounded-xl hover:from-blue-600 hover:to-ll-dark-blue transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16v2H4z"></path>
-                        <path d="M8 10h8v2H8z"></path>
-                        <path d="M6 16h12v2H6z"></path>
-                    </svg>
-                </button>
-            </div>
+            </button>
         </div>
 
-        <!-- Advanced Filter Panel -->
-        <div id="filter-panel" class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 mb-12 border-2 border-blue-500/30 hidden" data-aos="fade-up" data-aos-delay="300">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Category Filter -->
-                <div class="filter-group">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Catégorie</label>
-                    <div class="relative">
-                        <button type="button" id="category-dropdown" class="w-full bg-gray-50 dark:bg-gray-700 text-left p-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 shadow-lg border-2 border-transparent hover:border-ll-blue focus:border-ll-blue focus:outline-none group">
-                            <span id="selected-category" class="text-gray-900 dark:text-white">Toutes les catégories</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="float-right transform group-hover:rotate-180 transition-transform duration-300">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <div id="category-options" class="absolute z-10 w-full mt-2 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl max-h-60 overflow-y-auto hidden transform origin-top transition-all duration-300 scale-95 opacity-0">
-                            <div class="p-2">
-                                <input type="text" id="category-search" class="w-full p-3 mb-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-ll-blue text-gray-900 dark:text-gray-100" placeholder="Rechercher...">
-                                <div id="category-list" class="space-y-1"></div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Frequency Filter -->
+        <div class="filter-group">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Fréquence</label>
+            <button id="frequency-trigger" class="w-full flex items-center justify-between bg-gray-50 dark:bg-gray-700 text-left p-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 shadow-lg border-2 border-transparent hover:border-ll-blue focus:border-ll-blue focus:outline-none">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl">🔄</span>
+                    <span id="selected-frequency" class="text-gray-900 dark:text-white">Toutes les fréquences</span>
                 </div>
-
-                <!-- Frequency Filter -->
-                <div class="filter-group">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Fréquence</label>
-                    <div class="relative">
-                        <button type="button" id="frequency-dropdown" class="w-full bg-gray-50 dark:bg-gray-700 text-left p-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 shadow-lg border-2 border-transparent hover:border-ll-blue focus:border-ll-blue focus:outline-none group">
-                            <span id="selected-frequency" class="text-gray-900 dark:text-white">Toutes les fréquences</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="float-right transform group-hover:rotate-180 transition-transform duration-300">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <div id="frequency-options" class="absolute z-10 w-full mt-2 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl hidden transform origin-top transition-all duration-300 scale-95 opacity-0">
-                            <div class="p-4 space-y-3">
-                                <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
-                                    <input type="radio" name="frequency" value="all" class="form-radio text-ll-blue focus:ring-ll-blue"> 
-                                    <span class="ml-3 text-gray-900 dark:text-white">Toutes</span>
-                                </label>
-                                <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
-                                    <input type="radio" name="frequency" value="régulier" class="form-radio text-ll-blue focus:ring-ll-blue"> 
-                                    <span class="ml-3 text-gray-900 dark:text-white">Régulier</span>
-                                </label>
-                                <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
-                                    <input type="radio" name="frequency" value="ponctuel" class="form-radio text-ll-blue focus:ring-ll-blue"> 
-                                    <span class="ml-3 text-gray-900 dark:text-white">Ponctuel</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Difficulty Filter -->
-                <div class="filter-group">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Difficulté</label>
-                    <div class="relative">
-                        <button type="button" id="difficulty-dropdown" class="w-full bg-gray-50 dark:bg-gray-700 text-left p-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 shadow-lg border-2 border-transparent hover:border-ll-blue focus:border-ll-blue focus:outline-none group">
-                            <span id="selected-difficulty" class="text-gray-900 dark:text-white">Tous les niveaux</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="float-right transform group-hover:rotate-180 transition-transform duration-300">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <div id="difficulty-options" class="absolute z-10 w-full mt-2 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl hidden transform origin-top transition-all duration-300 scale-95 opacity-0">
-                            <div class="p-4 space-y-3">
-                                <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
-                                    <input type="radio" name="difficulty" value="all" class="form-radio text-ll-blue focus:ring-ll-blue"> 
-                                    <span class="ml-3 text-gray-900 dark:text-white">Tous</span>
-                                </label>
-                                <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
-                                    <input type="radio" name="difficulty" value="easy" class="form-radio text-ll-blue focus:ring-ll-blue"> 
-                                    <span class="ml-3 text-gray-900 dark:text-white">Facile</span>
-                                </label>
-                                <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
-                                    <input type="radio" name="difficulty" value="medium" class="form-radio text-ll-blue focus:ring-ll-blue"> 
-                                    <span class="ml-3 text-gray-900 dark:text-white">Moyen</span>
-                                </label>
-                                <label class="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
-                                    <input type="radio" name="difficulty" value="hard" class="form-radio text-ll-blue focus:ring-ll-blue"> 
-                                    <span class="ml-3 text-gray-900 dark:text-white">Difficile</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Reviews Filter -->
-                <div class="filter-group">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Avis minimum</label>
-                    <div class="star-picker flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-xl p-3 shadow-lg border-2 border-transparent hover:border-ll-blue transition-all duration-300 cursor-pointer" aria-label="Sélectionner le nombre minimum d'avis">
-                        <div id="reviews-star-display" class="flex gap-1">
-                            <!-- Stars will be rendered here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Selected Filters Display -->
-            <div id="active-filters" class="mt-6 flex flex-wrap gap-3 hidden">
-                <!-- Active filters will be displayed here -->
-            </div>
-
-            <!-- Filter Actions -->
-            <div class="flex justify-end items-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <button id="reset-filters" class="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white py-3 px-6 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500">
-                    Réinitialiser
-                </button>
-            </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
         </div>
+
+        <!-- Difficulty Filter -->
+        <div class="filter-group">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Difficulté</label>
+            <button id="difficulty-trigger" class="w-full flex items-center justify-between bg-gray-50 dark:bg-gray-700 text-left p-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 shadow-lg border-2 border-transparent hover:border-ll-blue focus:border-ll-blue focus:outline-none">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl">📊</span>
+                    <span id="selected-difficulty" class="text-gray-900 dark:text-white">Tous les niveaux</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Reviews Filter -->
+        <div class="filter-group">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Avis minimum</label>
+            <button id="reviews-trigger" class="w-full flex items-center justify-between bg-gray-50 dark:bg-gray-700 text-left p-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 shadow-lg border-2 border-transparent hover:border-ll-blue focus:border-ll-blue focus:outline-none cursor-pointer">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl">⭐</span>
+                    <span id="selected-reviews" class="text-gray-900 dark:text-white">0 étoiles</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Selected Filters Display -->
+    <div id="active-filters" class="mt-6 flex flex-wrap gap-3 hidden">
+        <!-- Active filters will be displayed here -->
+    </div>
+
+    <!-- Filter Actions -->
+    <div class="flex justify-end items-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <button id="reset-filters" class="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white py-3 px-6 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500">
+            Réinitialiser
+        </button>
+    </div>
+</div>
 
         <!-- Services Display - Dual View -->
-        <div class="grid grid-cols-1 xl:grid-cols-4 gap-8" data-aos="fade-up" data-aos-delay="400">
+        <div id="services-display-grid" class="grid grid-cols-1 xl:grid-cols-4 gap-8" data-aos="fade-up" data-aos-delay="400">
         <!-- Service List Sidebar - Hidden on mobile and when < 2 services -->
-        <div id="services-sidebar-container" class="xl:col-span-1 hidden xl:block h-full">
+       <div id="services-sidebar-container" class="hidden lg:block lg:col-span-1 h-full">
+
             <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 sticky top-6 h-full overflow-hidden flex flex-col">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2 sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-lg z-10">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1612,64 +1598,65 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
 
-            <!-- Service Detail View -->
-            <div class="xl:col-span-3">
-                <div id="service-detail-container" class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 md:p-8 min-h-[600px] relative overflow-hidden">
-                    <!-- Loading Animation -->
-                    <div id="services-loading" class="absolute inset-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm flex justify-center items-center z-10 hidden">
-                        <div class="text-center">
-                            <lottie-player src="/assets/json/animation.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
-                            <p class="text-gray-600 dark:text-gray-300 mt-4">Chargement des services...</p>
-                        </div>
+           <!-- Service Detail View -->
+<div id="detail" class="xl:col-span-3">
+    <div id="service-detail-container" class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 md:p-8 min-h-[600px] relative overflow-hidden">
+        <!-- Loading Animation -->
+        <div id="services-loading" class="absolute inset-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md flex justify-center items-center z-20 hidden">
+            <div class="text-center">
+                <lottie-player src="/assets/json/animation.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                <p class="text-gray-600 dark:text-gray-300 mt-4">Chargement des services...</p>
+            </div>
+        </div>
+
+        <div class="service-detail-content">
+
+            <!-- Mobile Service Selector -->
+            <div class="xl:hidden mb-6">
+                <select id="mobile-service-selector" class="w-full p-4 bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-2xl text-gray-900 dark:text-white focus:ring-2 focus:ring-ll-blue focus:border-ll-blue transition-all duration-300">
+                    <option value="">Sélectionnez un service</option>
+                </select>
+            </div>
+
+            <!-- Main Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full mb-4">
+                <!-- Left Side: Image Carousel -->
+                <div class="space-y-6  h-full">
+                <div class="swiper service-image-swiper rounded-2xl overflow-hidden shadow-2xl flex-grow **order-1**">
+                     <div class="swiper-wrapper" id="service-images"></div>
+                        <div class="swiper-pagination !bottom-4"></div>
+                        <div class="swiper-button-next !text-white !bg-black/30 !w-12 !h-12 rounded-full hover:!bg-black/50 transition-colors"></div>
+                        <div class="swiper-button-prev !text-white !bg-black/30 !w-12 !h-12 rounded-full hover:!bg-black/50 transition-colors"></div>
                     </div>
 
-                    <!-- Mobile Service Selector -->
-                    <div class="xl:hidden mb-6">
-                        <select id="mobile-service-selector" class="w-full p-4 bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-2xl text-gray-900 dark:text-white focus:ring-2 focus:ring-ll-blue focus:border-ll-blue transition-all duration-300">
-                            <option value="">Sélectionnez un service</option>
-                        </select>
+                    <!-- Team Members Grid -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-purple-200/50 dark:border-gray-600/50 rounded-2xl p-6 flex-grow-0">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-500">
+                                <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                            Équipe en Charge
+                        </h4>
+                        <div id="service-members" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                     </div>
 
-                    <!-- Main Content -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full mb-4">
-                        <!-- Left Side: Image Carousel -->
-                    <div class="space-y-6  h-full">
-                            <div class="swiper service-image-swiper rounded-2xl overflow-hidden shadow-2xl flex-grow">
-                                <div class="swiper-wrapper" id="service-images"></div>
-                                <div class="swiper-pagination !bottom-4"></div>
-                                <div class="swiper-button-next !text-white !bg-black/30 !w-12 !h-12 rounded-full hover:!bg-black/50 transition-colors"></div>
-                                <div class="swiper-button-prev !text-white !bg-black/30 !w-12 !h-12 rounded-full hover:!bg-black/50 transition-colors"></div>
-                            </div>
+                    <!-- Availability -->
+                    <div class="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-orange-200/50 dark:border-gray-600/50 rounded-2xl p-6 flex-grow-0">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            Disponibilité
+                        </h4>
+                        <p id="service-availability" class="text-gray-600 dark:text-gray-300 mb-3"></p>
+                        <ul id="service-schedule" class="grid grid-cols-1 md:grid-cols-2 gap-2"></ul>
+                    </div>
 
+                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-shrink-0">
 
-                             <!-- Team Members Grid -->
-                            <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-purple-200/50 dark:border-gray-600/50 rounded-2xl p-6 flex-grow-0">
-                                <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-500">
-                                        <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                                    </svg>
-                                    Équipe en Charge
-                                </h4>
-                                <div id="service-members" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-                            </div>
-
-                            <!-- Availability -->
-                            <div class="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-orange-200/50 dark:border-gray-600/50 rounded-2xl p-6 flex-grow-0">
-                                <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <polyline points="12 6 12 12 16 14"></polyline>
-                                    </svg>
-                                    Disponibilité
-                                </h4>
-                                <p id="service-availability" class="text-gray-600 dark:text-gray-300 mb-3"></p>
-                                <ul id="service-schedule" class="grid grid-cols-1 md:grid-cols-2 gap-2"></ul>
-                            </div>
-
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-shrink-0">
     <!-- Bouton Réserver (gauche) -->
-    <button id="book-service" class="btn-container dark:text-ll-white text-ll-black py-4 px-8 rounded-xl font-semibold shadow-lg w-full bg-white dark:bg-ll-black border-2 border-ll-light-gray dark:border-ll-medium-gray text-ll-text-gray dark:text-ll-white py-4 px-6 rounded-xl font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark">
+    <button id="book-service" class="btn-container dark:text-ll-white text-ll-black hover:text-ll-white py-4 px-8 rounded-xl font-semibold shadow-lg w-full bg-white dark:bg-transparent border-2 border-ll-light-gray dark:border-ll-medium-gray text-ll-text-gray dark:text-ll-white py-4 px-6 rounded-xl font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark">
         <div class="progress-fill bg-gradient-to-r from-ll-dark-green to-ll-green rounded-xl"></div>
         <div class="btn-content shine-effect">
             <div class="icon-wrapper mr-4">
@@ -1688,11 +1675,11 @@ document.addEventListener('DOMContentLoaded', () => {
     </button>
     
     <!-- Bouton Démo Vidéo (droite) -->
-    <button id="demo-service" class="btn-container btn-right dark:text-ll-white text-ll-black py-4 px-8 rounded-xl font-semibold shadow-lg w-full bg-white dark:bg-ll-black border-2 border-ll-light-gray dark:border-ll-medium-gray text-ll-text-gray dark:text-ll-white py-4 px-6 rounded-xl font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark">
+    <button id="demo-service" class="btn-container btn-right dark:text-ll-white text-ll-black hover:text-ll-white py-4 px-8 rounded-xl font-semibold shadow-lg w-full bg-white dark:bg-transparent border-2 border-ll-light-gray dark:border-ll-medium-gray text-ll-text-gray dark:text-ll-white py-4 px-6 rounded-xl font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark">
         <div class="progress-fill bg-gradient-to-r from-ll-dark-blue to-ll-blue rounded-xl"></div>
         <div class="btn-content shine-effect">
-            <span class="btn-text">Démo Vidéo</span>
-            <div class="icon-wrapper ml-4">
+          
+            <div class="icon-wrapper mr-4">
                 <svg class="icon-default" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                 </svg>
@@ -1701,6 +1688,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <polygon points="10 8 16 12 10 16 10 8"></polygon>
                 </svg>
             </div>
+              <span class="btn-text">Démo Vidéo</span>
         </div>
     </button>
 </div>
@@ -1748,11 +1736,16 @@ document.addEventListener('DOMContentLoaded', () => {
             transform: translate3d(0,-2px,0);
         }
     }
+
+    @keyframes subtlePulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.05); opacity: 0.8; }
+    }
     
     .btn-container {
         position: relative;
         overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     
     .btn-container:hover {
@@ -1766,7 +1759,7 @@ document.addEventListener('DOMContentLoaded', () => {
         justify-content: center;
         position: relative;
         z-index: 2;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
     }
     
     .icon-wrapper {
@@ -1776,40 +1769,43 @@ document.addEventListener('DOMContentLoaded', () => {
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
+        animation: subtlePulse 1.5s infinite ease-in-out;
     }
     
     .icon-default {
         position: absolute;
-        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: bounceIn 0.6s infinite ease-in-out;
     }
     
     .icon-hover {
         position: absolute;
         opacity: 0;
         transform: scale(0.5);
-        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: bounceIn 0.6s infinite ease-in-out;
     }
     
     .btn-text {
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         position: relative;
         z-index: 2;
     }
     
     /* Animation au survol */
     .btn-container:hover .btn-text {
-        animation: slideTextLeft 0.4s forwards;
+        animation: slideTextLeft 0.2s forwards;
     }
     
     .btn-container:hover .icon-default {
         --direction: 1;
-        animation: iconDisappear 0.6s forwards;
+        animation: iconDisappear 0.3s forwards;
     }
     
     .btn-container:hover .icon-hover {
         --direction: 1;
-        animation: iconReappear 0.6s forwards, bounceIn 0.8s 0.5s;
+        animation: iconReappear 0.3s forwards, bounceIn 0.4s infinite;
         opacity: 1;
         transform: scale(1);
     }
@@ -1822,59 +1818,59 @@ document.addEventListener('DOMContentLoaded', () => {
         height: 100%;
         width: 0%;
         z-index: 1;
-        transition: width 0.6s ease;
+        transition: width 0.3s ease;
     }
     
     .btn-container:hover .progress-fill {
-        animation: fillProgress 0.6s forwards;
+        animation: fillProgress 0.3s forwards;
     }
     
     /* Animation de retour */
     .btn-container:not(:hover) .btn-text {
-        animation: slideTextRight 0.4s forwards;
+        animation: slideTextRight 0.2s forwards;
     }
     
     .btn-container:not(:hover) .icon-default {
         --direction: -1;
-        animation: iconReappear 0.6s forwards;
+        animation: iconReappear 0.3s forwards, bounceIn 0.6s infinite ease-in-out;
     }
     
     .btn-container:not(:hover) .icon-hover {
         --direction: -1;
-        animation: iconDisappear 0.6s forwards;
+        animation: iconDisappear 0.3s forwards;
         opacity: 0;
         transform: scale(0.5);
     }
     
     /* Styles spécifiques pour le bouton de droite */
     .btn-right:hover .btn-text {
-        animation: slideTextRight 0.4s forwards;
+        animation: slideTextRight 0.2s forwards;
     }
     
     .btn-right:hover .icon-default {
         --direction: -1;
-        animation: iconDisappear 0.6s forwards;
+        animation: iconDisappear 0.3s forwards;
     }
     
     .btn-right:hover .icon-hover {
         --direction: -1;
-        animation: iconReappear 0.6s forwards, bounceIn 0.8s 0.5s;
+        animation: iconReappear 0.3s forwards, bounceIn 0.4s infinite;
         opacity: 1;
         transform: scale(1);
     }
     
     .btn-right:not(:hover) .btn-text {
-        animation: slideTextLeft 0.4s forwards;
+        animation: slideTextLeft 0.2s forwards;
     }
     
     .btn-right:not(:hover) .icon-default {
         --direction: 1;
-        animation: iconReappear 0.6s forwards;
+        animation: iconReappear 0.3s forwards, bounceIn 0.6s infinite ease-in-out;
     }
     
     .btn-right:not(:hover) .icon-hover {
         --direction: 1;
-        animation: iconDisappear 0.6s forwards;
+        animation: iconDisappear 0.3s forwards;
         opacity: 0;
         transform: scale(0.5);
     }
@@ -1883,127 +1879,144 @@ document.addEventListener('DOMContentLoaded', () => {
     .shine-effect::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: -100%;
-        width: 50%;
-        height: 100%;
+        top: -10px;
+        left: -90%;
+        width: 20rem;
+        height: 3rem;
+       
+        transform: skewX(-25deg);
+        transition: left 0.5s;
+        z-index: 3;
+    }
+
+    .dark .shine-effect::before {
         background: linear-gradient(
             to right,
             transparent 0%,
-            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.1) 50%,
             transparent 100%
         );
-        transform: skewX(-25deg);
-        transition: left 0.75s;
-        z-index: 3;
+    }
+
+    .shine-effect::before {
+        background: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(77, 77, 77, 0.3) 50%,
+            transparent 100%
+        );
     }
     
     .btn-container:hover .shine-effect::before {
         left: 150%;
     }
 </style>
+                </div>
 
-                                                    </div>
-
-                        <!-- Right Side: Service Details -->
-                        <div class="space-y-6 h-full flex flex-col">
-                            <!-- Service Header -->
-                            <div class="border-b border-gray-200 dark:border-gray-700 pb-6 flex-grow-0">
-                                <h3 id="service-name" class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3"></h3>
-                                <p id="service-description" class="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-relaxed"></p>
-                                
-                                <!-- Rating and Reviews -->
-                                <div class="flex flex-wrap items-center gap-4 mt-4">
-                                    <div class="flex items-center gap-2">
-                                        <div id="service-rating" class="flex gap-1"></div>
-                                        <span id="service-rating-value" class="text-yellow-500 font-bold"></span>
-                                    </div>
-                                    <span class="text-gray-500 dark:text-gray-400" id="service-reviews"></span>
-                                    <span id="service-difficulty" class="px-3 py-1 rounded-full text-xs font-semibold capitalize"></span>
-                                </div>
+                <!-- Right Side: Service Details -->
+                <div class="space-y-6 h-full flex flex-col">
+                    <!-- Service Header -->
+                    <div class="border-b border-gray-200 dark:border-gray-700 pb-6 flex-grow-0">
+                        <h3 id="service-name" class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3"></h3>
+                        <p id="service-description" class="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-relaxed"></p>
+                        
+                        <!-- Rating and Reviews -->
+                        <div class="flex flex-wrap items-center gap-4 mt-4">
+                            <div class="flex items-center gap-2">
+                                <div id="service-rating" class="flex gap-1"></div>
+                                <span id="service-rating-value" class="text-yellow-500 font-bold"></span>
                             </div>
-
-                            <!-- Features Grid -->
-                            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-blue-200/50 dark:border-gray-600/50 rounded-2xl p-6 ">
-                                <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue">
-                                        <path d="M20 6 9 17l-5-5"></path>
-                                    </svg>
-                                    Caractéristiques Principales
-                                </h4>
-                                <ul id="service-features" class="grid grid-cols-1 md:grid-cols-2 gap-3 overflow-y-auto max-h-full"></ul>
-                            </div>
-
-                            <!-- Equipment Grid -->
-                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-green-200/50 dark:border-gray-600/50 rounded-2xl p-6 flex-grow-0">
-                                <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500">
-                                        <path d="M22 2H2v6h2l2 2 2-2h8l2 2 2-2h2V2z"></path>
-                                        <path d="M12 10v12"></path>
-                                        <path d="M8 14h8"></path>
-                                    </svg>
-                                    Équipements Utilisés
-                                </h4>
-                                <div id="service-equipment" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-                            </div>
-
-                           
-                            <!-- Additional Info -->
-                            <div class="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-gray-200/50 dark:border-gray-600/50 rounded-2xl p-6 flex-grow-0">
-                                <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                    </svg>
-                                    Informations Complémentaires
-                                </h4>
-                                <div class="grid grid-cols-3 md:grid-cols-3 gap-4 text-sm">
-                                    <div class="flex flex-col">
-                                        <span class="text-gray-500 dark:text-gray-400">Certification</span>
-                                        <span id="service-certification" class="font-semibold text-gray-900 dark:text-white"></span>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-gray-500 dark:text-gray-400">Garantie</span>
-                                        <span id="service-garantie" class="font-semibold text-gray-900 dark:text-white"></span>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-gray-500 dark:text-gray-400">Délai d'intervention</span>
-                                        <span id="service-delai" class="font-semibold text-gray-900 dark:text-white"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            <span class="text-gray-500 dark:text-gray-400" id="service-reviews"></span>
+                            <span id="service-difficulty" class="px-3 py-1 rounded-full text-xs font-semibold capitalize"></span>
                         </div>
                     </div>
 
-                    <!-- Pagination Navigation & Additional Info Button (inline with space between) -->
-                    <div class="mt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-                        <div id="service-pagination" class="flex justify-center items-center gap-2 hidden">
-                            <button id="service-prev" class="service-prev px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M15 18l-6-6 6-6"></path>
-                                </svg>
-                            </button>
-                            <div id="service-pages" class="flex gap-1"></div>
-                            <button id="service-next" class="service-next px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M9 18l6-6-6-6"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="text-center flex-grow-0">
-                            <a id="more-info-service" href="#" class="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white py-3 px-6 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <line x1="12" y1="16" x2="12" y2="12"></line>
-                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                </svg>
-                                Plus d'informations détaillées
-                            </a>
+                    <!-- Features Grid -->
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-blue-200/50 dark:border-gray-600/50 rounded-2xl p-6 ">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue">
+                                <path d="M20 6 9 17l-5-5"></path>
+                            </svg>
+                            Caractéristiques Principales
+                        </h4>
+                        <ul id="service-features" class="grid grid-cols-1 md:grid-cols-2 gap-3 overflow-y-auto max-h-full"></ul>
+                    </div>
+
+                    <!-- Equipment Grid -->
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-green-200/50 dark:border-gray-600/50 rounded-2xl p-6 flex-grow-0">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500">
+                                <path d="M22 2H2v6h2l2 2 2-2h8l2 2 2-2h2V2z"></path>
+                                <path d="M12 10v12"></path>
+                                <path d="M8 14h8"></path>
+                            </svg>
+                            Équipements Utilisés
+                        </h4>
+                        <div id="service-equipment" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+                    </div>
+
+                   
+                    <!-- Additional Info -->
+                    <div class="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 backdrop-blur-sm border border-gray-200/50 dark:border-gray-600/50 rounded-2xl p-6 flex-grow-0">
+                        <h4 class="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3 text-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            Informations Complémentaires
+                        </h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div class="flex flex-col">
+                                <span class="text-gray-500 dark:text-gray-400">Certification</span>
+                                <span id="service-certification" class="font-semibold text-gray-900 dark:text-white"></span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-gray-500 dark:text-gray-400">Garantie</span>
+                                <span id="service-garantie" class="font-semibold text-gray-900 dark:text-white"></span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-gray-500 dark:text-gray-400">Délai d'intervention</span>
+                                <span id="service-delai" class="font-semibold text-gray-900 dark:text-white"></span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-gray-500 dark:text-gray-400">Zone d'intervention</span>
+                                <span id="service-zone" class="font-semibold text-gray-900 dark:text-white"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Pagination Navigation & Additional Info Button (inline with space between) -->
+            <div class="mt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div id="service-pagination" class="flex justify-center items-center gap-2 hidden">
+                    <button id="service-prev" class="service-prev px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 18l-6-6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div id="service-pages" class="flex gap-1"></div>
+                    <button id="service-next" class="service-next px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="text-center flex-grow-0">
+                    <a id="more-info-service" href="#" class="cta inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white py-3 px-6 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        Plus d'informations détaillées
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
         </div>
 
         <!-- Contact CTA -->
@@ -2050,7 +2063,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     </div>
 </section>
-
 
 <style>
 .custom-scrollbar::-webkit-scrollbar {
@@ -2125,46 +2137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     color: #d1d5db;
 }
 
-/* Modal styles responsive */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    padding: 1rem;
-}
-
-.modal-overlay.open {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background: white;
-    border-radius: 16px;
-    padding: 24px;
-    overflow-y: auto;
-    transform: scale(0.95);
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.modal-overlay.open .modal-content {
-    transform: scale(1);
-}
-
-@media (max-width: 768px) {
-    .modal-content {
-        padding: 16px;
-        max-width: 95vw;
-    }
-}
 
 .category-grid {
     display: grid;
@@ -2211,6 +2183,47 @@ document.addEventListener('DOMContentLoaded', () => {
     transition: all 0.2s ease;
 }
 
+
+/* Modal styles responsive */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 1rem;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    overflow-y: auto;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.modal-overlay.open .modal-content {
+    transform: scale(1);
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 16px;
+        max-width: 95vw;
+    }
+}
 
 
 /* Pagination simple */
