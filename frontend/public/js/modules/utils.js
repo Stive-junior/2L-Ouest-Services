@@ -467,7 +467,7 @@ export async function monitorBackend(options = {}) {
       const networkStatus = await checkNetwork({ context });
       if (networkStatus.backendConnected) {
         console.log('✅ Backend disponible');
-        await showNotification('Connexion au serveur rétablie ! La page va se recharger.', 'success');
+        await showNotification('Connexion au serveur rétablie !', 'success');
         logError({
           context,
           errorId,
@@ -475,7 +475,6 @@ export async function monitorBackend(options = {}) {
           details: { retryCount, duration: Date.now() - pollingStartTime }
         });
         stopMonitoring();
-        window.location.reload();
       } else {
         throw new Error('Serveur inaccessible');
       }
