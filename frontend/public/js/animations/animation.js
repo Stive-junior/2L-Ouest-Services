@@ -3469,7 +3469,7 @@ async function updateServices() {
         updateActiveFilters();
         
         if (services.length > 0) {
-          
+
             hideNoServicesMessage();
             setServiceIndex(currentServiceIndex);
             renderServiceDetail(services[currentServiceIndex], currentServiceIndex, services.length);
@@ -4082,9 +4082,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-const images = Array.from(document.querySelectorAll('img.lightbox-img, #services img, .gallery img ,img')); if (images.length === 0) return; const srcList = images.map(el => el.getAttribute('data-src') || el.src); const altList = images.map(el => el.getAttribute('alt') || ''); if (srcList.length === 0) return; images.forEach((img, index) => { img.style.cursor = 'zoom-in'; img.addEventListener('click', () => { openLightbox(srcList, index, altList); }); }); 
+// Sélectionne les images pour lightbox, en excluant celles de sections spécifiques (ex. : footer, header, ou avec classe .no-lightbox)
+const images = Array.from(
+  document.querySelectorAll(
+    'img.lightbox-img, #services img, .gallery img, img' 
+    + ':not(.no-lightbox):not(#partners img):not(.footer img):not(#footer img)'
+  )
+);
 
+if (images.length === 0) return;
 
+const srcList = images.map(el => el.getAttribute('data-src') || el.src);
+const altList = images.map(el => el.getAttribute('alt') || '');
+
+if (srcList.length === 0) return;
+
+images.forEach((img, index) => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', () => {
+    openLightbox(srcList, index, altList);
+  });
+});
 
 const heroSection = document.getElementById("hero");
 const services = document.getElementById("services");

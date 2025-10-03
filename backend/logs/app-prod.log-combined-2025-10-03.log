@@ -1,182 +1,667 @@
-✅ [2L-Ouest-Services] 03/10/2025 20:29:21 | INFO     | Firebase: Validation des credentials directs...
-✅ [2L-Ouest-Services] 03/10/2025 20:29:21 | INFO     | Configurations FCM disponibles
+✅ [2L-Ouest-Services] 03/10/2025 20:57:05 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 20:57:05 | INFO     | Configurations FCM disponibles
 {
   "senderId": "1075873956073",
   "vapidKeyLength": 87
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:29:21 | INFO     | Firebase Admin SDK initialisé
+✅ [2L-Ouest-Services] 03/10/2025 20:57:05 | INFO     | Firebase Admin SDK initialisé
 {
   "projectId": "ll-ouest-services",
   "environment": "production"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:29:21 | INFO     | Initialisation des repositories
-✅ [2L-Ouest-Services] 03/10/2025 20:29:22 | INFO     | Service Firebase Messaging disponible pour notifications push
+✅ [2L-Ouest-Services] 03/10/2025 20:57:05 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 20:57:05 | INFO     | Service Firebase Messaging disponible pour notifications push
 {
   "senderId": "1075873956073",
   "vapidKeyLength": 87
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:29:22 | INFO     | Démarrage du serveur...
-✅ [2L-Ouest-Services] 03/10/2025 20:29:46 | INFO     | Firebase: Validation des credentials directs...
-✅ [2L-Ouest-Services] 03/10/2025 20:29:46 | INFO     | Configurations FCM disponibles
+✅ [2L-Ouest-Services] 03/10/2025 21:01:31 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 21:01:31 | INFO     | Configurations FCM disponibles
 {
   "senderId": "1075873956073",
   "vapidKeyLength": 87
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:29:46 | INFO     | Firebase Admin SDK initialisé
+✅ [2L-Ouest-Services] 03/10/2025 21:01:31 | INFO     | Firebase Admin SDK initialisé
 {
   "projectId": "ll-ouest-services",
   "environment": "production"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:29:46 | INFO     | Initialisation des repositories
-✅ [2L-Ouest-Services] 03/10/2025 20:29:47 | INFO     | Service Firebase Messaging disponible pour notifications push
+✅ [2L-Ouest-Services] 03/10/2025 21:01:31 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 21:01:32 | INFO     | Service Firebase Messaging disponible pour notifications push
 {
   "senderId": "1075873956073",
   "vapidKeyLength": 87
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:29:47 | INFO     | Démarrage du serveur...
-✅ [2L-Ouest-Services] 03/10/2025 20:29:47 | INFO     | Connexion réseau à Firestore : OK
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | Connexion réseau à Firestore : OK
 {
   "attempt": 1
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:29:47 | INFO     | Firebase initialisé
-✅ [2L-Ouest-Services] 03/10/2025 20:29:47 | INFO     | Début de la vérification de santé
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | Serveur démarré sur le port 8000
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | Début de la vérification de santé
 {
   "attempt": 1
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:29:47 | INFO     | Vérification des variables d'environnement : OK
-✅ [2L-Ouest-Services] 03/10/2025 20:29:47 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
-✅ [2L-Ouest-Services] 03/10/2025 20:35:48 | INFO     | Firebase: Validation des credentials directs...
-✅ [2L-Ouest-Services] 03/10/2025 20:35:48 | INFO     | Configurations FCM disponibles
-{
-  "senderId": "1075873956073",
-  "vapidKeyLength": 87
-}
-✅ [2L-Ouest-Services] 03/10/2025 20:35:48 | INFO     | Firebase Admin SDK initialisé
-{
-  "projectId": "ll-ouest-services",
-  "environment": "production"
-}
-✅ [2L-Ouest-Services] 03/10/2025 20:35:48 | INFO     | Initialisation des repositories
-✅ [2L-Ouest-Services] 03/10/2025 20:35:48 | INFO     | Service Firebase Messaging disponible pour notifications push
-{
-  "senderId": "1075873956073",
-  "vapidKeyLength": 87
-}
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | Démarrage du serveur...
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | Connexion réseau à Firestore : OK
-{
-  "attempt": 1
-}
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | Firebase initialisé
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | Serveur démarré sur le port 8000
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | Début de la vérification de santé
-{
-  "attempt": 1
-}
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | Vérification des variables d'environnement : OK
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | Tentative d'écriture Firestore...
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | Serveur WebSocket initialisé
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | Tentative d'écriture Firestore...
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | Serveur WebSocket initialisé
 {
   "path": "/socket.io"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:35:49 | INFO     | SocketService initialisé
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Connexion Firestore vérifiée
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Connexion Firebase établie à la tentative 1
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Écriture de test Firestore réussie
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Configuration Google Maps : OK
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Configuration SMTP : OK
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Configuration Socket.IO : OK
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Configuration Firebase client-side : OK
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | healthCheck completé avec succès
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | HealthCheck background OK
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+✅ [2L-Ouest-Services] 03/10/2025 21:01:33 | INFO     | SocketService initialisé
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Configuration Google Maps : OK
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Configuration Firebase client-side : OK
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | healthCheck completé avec succès
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | HealthCheck background OK
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
 {
   "status": "active"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Écoute réseau constante démarrée
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Startup complet !
-✅ [2L-Ouest-Services] 03/10/2025 20:35:51 | INFO     | Configuration SMTP vérifiée avec succès
-✅ [2L-Ouest-Services] 03/10/2025 20:35:58 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Écoute réseau constante démarrée
+✅ [2L-Ouest-Services] 03/10/2025 21:01:35 | INFO     | Startup complet !
+✅ [2L-Ouest-Services] 03/10/2025 21:01:36 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 03/10/2025 21:01:44 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:35:58 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:35:58 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:36:06 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:01:44 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:01:44 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:01:51 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:36:06 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:36:06 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:36:38 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:01:51 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:01:51 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:02:22 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:36:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:36:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:37:10 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:02:22 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:02:22 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:02:52 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:37:10 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:37:10 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:37:42 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:02:52 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:02:52 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:03:22 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:37:42 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:37:42 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:38:13 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:03:23 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:03:23 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:03:52 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:38:13 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:38:13 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:38:45 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:03:52 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:03:52 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:04:22 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:38:45 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:38:45 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:39:16 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:04:22 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:04:22 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:04:52 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:39:16 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:39:16 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:39:48 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:04:52 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:04:52 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:05:30 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:39:48 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:39:48 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:40:18 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:05:30 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:05:30 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:06:04 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:40:18 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:40:18 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:40:49 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:06:04 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:06:04 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:06:34 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:40:49 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:40:49 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
-✅ [2L-Ouest-Services] 03/10/2025 20:41:21 | INFO     | Requête CORS traitée
+✅ [2L-Ouest-Services] 03/10/2025 21:06:34 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:06:34 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:06:58 | INFO     | Requête CORS traitée
 {
   "origin": "http://localhost:3000",
   "method": "GET",
   "path": "/api/check"
 }
-✅ [2L-Ouest-Services] 03/10/2025 20:41:21 | INFO     | 127.0.0.1 - - [03/Oct/2025:19:41:21 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:06:58 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:06:58 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:07:31 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:07:31 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:07:31 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:08:01 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:08:01 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:08:01 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:08:05 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:08:05 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:08:05 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:08:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:08:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:08:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:09:09 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:09:09 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:09:09 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:09:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:09:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:09:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:10:09 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:10:09 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:10:09 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:10:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:10:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:10:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:11:09 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:11:09 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:11:09 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:11:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:11:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:11:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:12:09 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:12:09 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:12:09 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:12:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:12:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:12:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:13:09 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:13:09 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:13:09 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:13:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:13:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:13:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:14:09 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:14:09 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:14:09 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:14:40 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:14:40 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:14:40 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:15:10 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:15:10 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:15:10 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:15:40 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:15:40 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:15:40 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:16:11 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:16:11 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:16:11 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:16:41 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:16:41 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:16:41 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:17:04 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:17:04 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:17:04 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:17:36 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:17:36 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:17:36 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:18:07 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:18:07 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:18:07 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:18:37 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:18:37 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:18:37 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:19:08 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:19:08 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:19:08 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:19:38 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:19:38 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:19:38 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:20:08 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:20:08 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:20:08 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:20:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:20:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:20:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:20:47 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:20:47 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:20:47 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:21:17 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:21:17 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:21:17 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:21:47 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:21:47 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:21:47 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:22:17 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:22:17 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:22:17 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:22:47 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:22:47 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:22:47 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:23:17 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:23:17 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:23:17 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:23:47 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:23:47 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:23:47 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:24:17 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:24:17 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:24:17 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:24:47 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:24:47 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:24:47 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:25:17 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:25:17 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:25:17 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:25:48 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:25:48 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:25:48 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:26:19 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:26:19 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:26:19 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:26:23 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:26:23 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:26:23 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:26:55 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:26:55 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:26:55 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:27:26 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:27:26 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:27:26 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:27:58 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:27:58 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:27:58 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:28:29 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:28:29 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:28:29 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:29:01 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:29:01 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:29:01 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:29:11 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:29:11 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:29:11 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:29:44 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:29:44 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:29:44 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:29:52 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:29:52 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:29:52 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:30:23 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:30:23 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:30:23 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:30:53 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:30:53 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:30:53 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:31:23 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:31:23 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:31:23 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:31:40 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:31:40 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:31:40 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:32:12 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:32:12 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:32:12 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:32:43 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:32:43 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:32:43 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:33:15 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:33:15 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:33:15 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:33:47 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:33:47 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:33:47 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:34:12 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:34:12 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:34:12 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:34:37 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:34:37 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:34:37 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:35:00 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:35:00 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:35:00 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:35:31 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:35:31 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:35:31 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:35:56 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:35:56 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:35:56 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:36:21 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:36:21 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:36:21 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:36:39 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:36:39 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:36:39 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:36:53 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:36:53 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:36:53 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:37:25 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:37:25 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:37:25 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:37:30 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:37:30 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:37:30 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:38:00 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:38:00 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:38:00 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:38:30 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:38:30 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:38:30 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:39:00 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:39:00 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:39:00 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 21:39:30 | INFO     | Requête CORS traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 21:39:30 | INFO     | 127.0.0.1 - - [03/Oct/2025:20:39:30 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
