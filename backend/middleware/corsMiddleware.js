@@ -12,6 +12,8 @@ const { logger, logInfo } = require('../services/loggerService');
 // Liste des origines autorisées, incluant les environnements de production et de développement
 const allowedOrigins = [
   config.frontendUrl, // URL du frontend depuis la configuration
+  'https://ll-ouest-services.netlify.app',  // Frontend Netlify (prod)
+  'http://ll-ouest-services.netlify.app',    // Variante sans HTTPS pour tests
   'http://localhost:3000', // Développement local
   'http://localhost:35909', // Port alternatif pour tests
 ].filter(Boolean); // Supprime les valeurs undefined/null
@@ -24,21 +26,27 @@ const allowedOrigins = [
 const originValidator = (origin, callback) => {
   // Autoriser les requêtes sans origine (ex. : requêtes locales non-browser)
   if (!origin) {
+    logInfo('CORS: Pas d\'origine (local/non-browser)', { origin });
     return callback(null, true);
   }
 
-  // Pour /api/check (public/monitoring), autoriser tout (wildcard pour debug)
-  if (origin === '*' || allowedOrigins.includes(origin)) {
-    return callback(null, true);  // Retourne true pour wildcard sur check
+  // Log pour debug
+  logInfo('CORS Validation', { origin, allowed: allowedOrigins });
+
+  // Pour /api/check (public/monitoring), autoriser wildcard si pas de credentials
+  if (origin === '*') {
+    logInfo('CORS: Wildcard autorisé pour *', { origin });
+    return callback(null, true);
   }
 
   // Vérifier si l'origine est dans la liste blanche
   if (allowedOrigins.includes(origin)) {
-    return callback(null, origin);
+    logInfo('CORS: Origine autorisée', { origin });
+    return callback(null, origin);  // Retourne l'origine exacte pour credentials
   }
 
   // Journaliser et rejeter les origines non autorisées
-  logger.warn(`CORS: Origine non autorisée: ${origin}`);
+  logger.warn(`CORS: Origine non autorisée: ${origin}`, { allowedOrigins });
   callback(new Error('Origine non autorisée par la politique CORS'));
 };
 
@@ -54,6 +62,7 @@ const corsOptions = {
   credentials: true, // Autoriser les cookies et en-têtes d'authentification
   maxAge: 86400, // Cache des pré-vérifications CORS pendant 24h
   preflightContinue: false,  // Gérer OPTIONS explicitement
+  optionsSuccessStatus: 204, // Statut pour OPTIONS sans body
 };
 
 /**
@@ -78,6 +87,12 @@ const logCors = (req, res, next) => {
       method: req.method,
       path: req.path,
     });
+  } else {
+    logInfo('CORS Requête standard', {
+      origin: origin || 'aucune origine',
+      method: req.method,
+      path: req.path,
+    });
   }
 
   // Appliquer le middleware CORS
@@ -88,11 +103,14 @@ const logCors = (req, res, next) => {
         error: err.message,
         method: req.method,
         path: req.path,
+        allowedOrigins,
       });
-      // Pour 502-like, renvoie headers CORS même sur error
+      // Toujours renvoyer headers CORS sur error (fix pour 502/missing)
       res.set('Access-Control-Allow-Origin', origin || '*');
-      res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-      res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD');
+      res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+      res.set('Access-Control-Allow-Credentials', 'true');
+      res.set('Access-Control-Max-Age', '86400');
       return res.status(403).json({ error: 'Requête CORS non autorisée' });
     }
     next();

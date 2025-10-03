@@ -1517,3 +1517,257 @@
   "method": "GET",
   "path": "/api/check"
 }
+✅ [2L-Ouest-Services] 03/10/2025 22:35:29 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:35:29 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:35:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:35:54 | INFO     | Requête CORS traitée
+{
+  "origin": "aucune origine",
+  "method": "GET",
+  "path": "/api"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:35:54 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:35:54 +0000] "GET /api HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:35:55 | INFO     | Requête CORS traitée
+{
+  "origin": "aucune origine",
+  "method": "GET",
+  "path": "/favicon.ico"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:35:55 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:35:55 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/api" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+📋 [2L-Ouest-Services] 03/10/2025 22:35:55 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "3ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:36:00 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:36:00 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:36:00 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:36:30 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:36:30 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:36:30 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:37:00 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:37:00 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:37:00 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:37:30 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:37:30 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:37:30 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:00 | INFO     | Requête CORS traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+⚠️ [2L-Ouest-Services] 03/10/2025 22:38:00 | WARN     | CORS: Origine non autorisée: https://ll-ouest-services.netlify.app
+🚨 [2L-Ouest-Services] 03/10/2025 22:38:00 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:25 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 22:38:25 | INFO     | Serveur WebSocket fermé
+✅ [2L-Ouest-Services] 03/10/2025 22:38:25 | INFO     | Application Firebase arrêtée proprement
+✅ [2L-Ouest-Services] 03/10/2025 22:38:31 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "stopped"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:46 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 03/10/2025 22:38:46 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:46 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "production"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:46 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 03/10/2025 22:38:46 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:46 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 03/10/2025 22:38:47 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:47 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 03/10/2025 22:38:47 | INFO     | Serveur démarré sur le port 8000
+✅ [2L-Ouest-Services] 03/10/2025 22:38:47 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:47 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 03/10/2025 22:38:47 | INFO     | Tentative d'écriture Firestore...
+✅ [2L-Ouest-Services] 03/10/2025 22:38:47 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:47 | INFO     | SocketService initialisé
+✅ [2L-Ouest-Services] 03/10/2025 22:38:48 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 03/10/2025 22:38:48 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 03/10/2025 22:38:48 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "active"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | Écoute réseau constante démarrée
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | Startup complet !
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | Configuration Google Maps : OK
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | Configuration SMTP : OK
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | Configuration Firebase client-side : OK
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | healthCheck completé avec succès
+✅ [2L-Ouest-Services] 03/10/2025 22:38:49 | INFO     | HealthCheck background OK
+✅ [2L-Ouest-Services] 03/10/2025 22:38:50 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 03/10/2025 22:39:09 | INFO     | CORS Preflight ou Check traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:39:09 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:39:09 +0000] "GET /api/check HTTP/1.1" 200 111 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:39:19 | INFO     | CORS Preflight ou Check traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:39:19 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:39:19 +0000] "GET /api/check HTTP/1.1" 200 111 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:39:19 | INFO     | CORS Preflight ou Check traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:39:19 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:39:19 +0000] "GET /api/check HTTP/1.1" 200 111 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:39:20 | INFO     | CORS Preflight ou Check traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "OPTIONS",
+  "path": "/api/config/firebase"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:39:20 | INFO     | CORS Preflight ou Check traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:39:20 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:39:20 +0000] "GET /api/check HTTP/1.1" 200 111 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:39:20 | INFO     | Fourniture des configurations publiques au client
+✅ [2L-Ouest-Services] 03/10/2025 22:39:20 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:39:20 +0000] "GET /api/config/firebase HTTP/1.1" 200 501 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:39:20 | INFO     | Fourniture des configurations publiques au client
+✅ [2L-Ouest-Services] 03/10/2025 22:39:20 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:39:20 +0000] "GET /api/config/firebase HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:39:52 | INFO     | CORS Preflight ou Check traitée
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "method": "GET",
+  "path": "/api/check"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:39:52 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:39:52 +0000] "GET /api/check HTTP/1.1" 200 111 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+⚠️ [2L-Ouest-Services] 03/10/2025 22:40:54 | WARN     | Réseau perdu
+✅ [2L-Ouest-Services] 03/10/2025 22:41:19 | INFO     | Réseau restauré
+⚠️ [2L-Ouest-Services] 03/10/2025 22:46:49 | WARN     | Réseau perdu
+✅ [2L-Ouest-Services] 03/10/2025 22:47:49 | INFO     | Réseau restauré
+✅ [2L-Ouest-Services] 03/10/2025 22:49:55 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:49:55 +0000] "GET /api HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:49:55 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:49:55 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/api" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+📋 [2L-Ouest-Services] 03/10/2025 22:49:55 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "9ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+✅ [2L-Ouest-Services] 03/10/2025 22:49:56 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:49:56 +0000] "GET /api HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 03/10/2025 22:49:56 | INFO     | 127.0.0.1 - - [03/Oct/2025:21:49:56 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/api" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+📋 [2L-Ouest-Services] 03/10/2025 22:49:56 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "5ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}

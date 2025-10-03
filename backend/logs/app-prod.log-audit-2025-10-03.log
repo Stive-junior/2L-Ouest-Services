@@ -296,3 +296,72 @@
   "method": "GET",
   "path": "/api/check"
 }
+🚨 [2L-Ouest-Services] 03/10/2025 22:35:29 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+📋 [2L-Ouest-Services] 03/10/2025 22:35:55 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "3ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:36:00 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:36:30 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:37:00 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:37:30 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+🚨 [2L-Ouest-Services] 03/10/2025 22:38:00 | ERROR    | Erreur CORS
+{
+  "origin": "https://ll-ouest-services.netlify.app",
+  "error": "Origine non autorisée par la politique CORS",
+  "method": "GET",
+  "path": "/api/check"
+}
+📋 [2L-Ouest-Services] 03/10/2025 22:49:55 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "9ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+📋 [2L-Ouest-Services] 03/10/2025 22:49:56 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "5ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
