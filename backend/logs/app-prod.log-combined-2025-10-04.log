@@ -3562,3 +3562,86 @@
 {
   "status": "stopped"
 }
+✅ [2L-Ouest-Services] 04/10/2025 02:05:36 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 04/10/2025 02:05:36 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:37 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "production"
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:44 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 04/10/2025 02:05:48 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:48 | INFO     | CORS: Origines autorisées initialisées
+{
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:51 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 04/10/2025 02:05:53 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:53 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 04/10/2025 02:05:53 | INFO     | Serveur démarré sur le port 8000
+✅ [2L-Ouest-Services] 04/10/2025 02:05:53 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:53 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 04/10/2025 02:05:53 | INFO     | Tentative d'écriture Firestore...
+✅ [2L-Ouest-Services] 04/10/2025 02:05:53 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:53 | INFO     | SocketService initialisé
+✅ [2L-Ouest-Services] 04/10/2025 02:05:54 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 04/10/2025 02:05:54 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 04/10/2025 02:05:54 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | Initialisation SMTP réussie
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "active"
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | Écoute réseau constante démarrée
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | Startup complet !
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 02:05:55 | INFO     | Tentative de vérification SMTP...
+✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | Vérification SMTP connexion : OK
+✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | Configuration Google Maps : OK
+✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | Variable Configuration SMTP : OK
+✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | Configuration Firebase client-side : OK
+✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | healthCheck completé avec succès
+✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | HealthCheck background OK

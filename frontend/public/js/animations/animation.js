@@ -2489,7 +2489,8 @@ export function initVideoModal() {
             <h2 id="video-title" class="absolute top-4 left-4 z-10 text-xl md:text-2xl font-bold text-white truncate max-w-[70%] sm:max-w-[60%] lg:max-w-[50%] bg-black/30 px-3 py-1 rounded-lg backdrop-blur-sm" aria-label="Titre de la vidéo"></h2>
             
             <!-- Bouton de fermeture : Positionnement top-right optimisé, responsive et accessible -->
-            <button class="close-video-modal !absolute top-4 right-4 z-10 text-white text-2xl p-3 rounded-full hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow transition-all duration-300 hover:scale-110 sm:top-6 sm:right-6" aria-label="Fermer la modale vidéo">
+            <button class="close-video-modal modal-close absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-xl p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale vidéo">
+            
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
                 </svg>

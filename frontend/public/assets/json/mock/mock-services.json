@@ -62,7 +62,7 @@
           "role": "Technicien Surface"
         }
       ],
-      "videoDemo": "https://example.com/demo-bureaux.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "NF X50-900",
       "garantie": "30 jours",
@@ -122,7 +122,7 @@
           "role": "Expert Résidentiel"
         }
       ],
-      "videoDemo": "https://example.com/demo-residentiel.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "easy",
       "certification": "Ecocert",
       "garantie": "15 jours",
@@ -183,7 +183,7 @@
           "role": "Spécialiste Sécurité"
         }
       ],
-      "videoDemo": "https://example.com/demo-industriel.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "Qualibat",
       "garantie": "60 jours",
@@ -248,7 +248,7 @@
           "role": "Technicien Sterilisation"
         }
       ],
-      "videoDemo": "https://example.com/demo-medical.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "ISO 13485",
       "garantie": "90 jours",
@@ -329,7 +329,7 @@
           "role": "Superviseur Chambres"
         }
       ],
-      "videoDemo": "https://example.com/demo-hotelier.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "ISO 9001",
       "garantie": "30 jours",
@@ -385,7 +385,7 @@
           "role": "Cordiste Hauteur"
         }
       ],
-      "videoDemo": "https://example.com/demo-vitres.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "CACES Hauteur",
       "garantie": "15 jours",
@@ -457,7 +457,7 @@
           "role": "Expert HACCP"
         }
       ],
-      "videoDemo": "https://example.com/demo-restaurant.mp4",
+    "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "HACCP",
       "garantie": "30 jours",
@@ -525,7 +525,7 @@
           "role": "Coordinatrice Scolaire"
         }
       ],
-      "videoDemo": "https://example.com/demo-education.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "NF Environnement",
       "garantie": "30 jours",
@@ -585,7 +585,7 @@
           "role": "Technicien Sport"
         }
       ],
-      "videoDemo": "https://example.com/demo-sport.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "ISO 9001",
       "garantie": "30 jours",
@@ -653,7 +653,7 @@
           "role": "Expert Post-Chantier"
         }
       ],
-      "videoDemo": "https://example.com/demo-chantier.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "Qualibat",
       "garantie": "15 jours",
@@ -709,7 +709,7 @@
           "role": "Expert Façades"
         }
       ],
-      "videoDemo": "https://example.com/demo-facades.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "Qualibat",
       "garantie": "12 mois",
@@ -765,7 +765,7 @@
           "role": "Technicien Espaces"
         }
       ],
-      "videoDemo": "https://example.com/demo-parking.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "CACES",
       "garantie": "30 jours",
@@ -909,7 +909,7 @@
           "role": "Expert Retail"
         }
       ],
-      "videoDemo": "https://example.com/demo-commerce.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "easy",
       "certification": "NF X50-900",
       "garantie": "30 jours",
@@ -969,7 +969,7 @@
           "role": "Technicien Piscines"
         }
       ],
-      "videoDemo": "https://example.com/demo-piscine.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "Qualipropre",
       "garantie": "60 jours",
@@ -1037,7 +1037,7 @@
           "role": "Expert Automobile"
         }
       ],
-      "videoDemo": "https://example.com/demo-vehicules.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "easy",
       "certification": "NF X50-900",
       "garantie": "15 jours",
@@ -1093,7 +1093,7 @@
           "role": "Expert Toiture"
         }
       ],
-      "videoDemo": "https://example.com/demo-toiture.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "Qualibat",
       "garantie": "12 mois",
@@ -1161,7 +1161,7 @@
           "role": "Expert Espaces Verts"
         }
       ],
-      "videoDemo": "https://example.com/demo-espaces-verts.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "easy",
       "certification": "Ecocert",
       "garantie": "30 jours",
@@ -1217,7 +1217,7 @@
           "role": "Expert Data Center"
         }
       ],
-      "videoDemo": "https://example.com/demo-datacenter.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "ISO 14644",
       "garantie": "90 jours",
@@ -1277,7 +1277,7 @@
           "role": "Expert Laboratoire"
         }
       ],
-      "videoDemo": "https://example.com/demo-laboratoire.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "ISO 14644",
       "garantie": "90 jours",
@@ -1345,7 +1345,7 @@
           "role": "Expert ERP"
         }
       ],
-      "videoDemo": "https://example.com/demo-erp.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "ISO 9001",
       "garantie": "30 jours",
@@ -1413,7 +1413,7 @@
           "role": "Expert Cuisines"
         }
       ],
-      "videoDemo": "https://example.com/demo-cuisines-collectives.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "HACCP",
       "garantie": "30 jours",
@@ -1469,7 +1469,7 @@
           "role": "Expert Ascenseurs"
         }
       ],
-      "videoDemo": "https://example.com/demo-ascenseurs.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "NF X50-900",
       "garantie": "30 jours",
@@ -1525,7 +1525,7 @@
           "role": "Expert Patrimoine"
         }
       ],
-      "videoDemo": "https://example.com/demo-bibliotheques.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "ISO 9001",
       "garantie": "30 jours",
@@ -1585,7 +1585,7 @@
           "role": "Expert Patrimoine"
         }
       ],
-      "videoDemo": "https://example.com/demo-eglises.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "Monuments Historiques",
       "garantie": "60 jours",
@@ -1661,7 +1661,7 @@
           "role": "Expert Audiovisuel"
         }
       ],
-      "videoDemo": "https://example.com/demo-studios.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "ISO 9001",
       "garantie": "30 jours",
@@ -1729,7 +1729,7 @@
           "role": "Expert Maritime"
         }
       ],
-      "videoDemo": "https://example.com/demo-bateaux.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "Qualibat",
       "garantie": "30 jours",
@@ -1805,7 +1805,7 @@
           "role": "Expert Aéronautique"
         }
       ],
-      "videoDemo": "https://example.com/demo-avions.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "EASA Part 145",
       "garantie": "60 jours",
@@ -1881,7 +1881,7 @@
           "role": "Expert Transports"
         }
       ],
-      "videoDemo": "https://example.com/demo-metro.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "RATP/SNCF",
       "garantie": "30 jours",
@@ -1957,7 +1957,7 @@
           "role": "Manager Centres Commerciaux"
         }
       ],
-      "videoDemo": "https://example.com/demo-centres-commerciaux.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "ISO 9001",
       "garantie": "30 jours",
@@ -2033,7 +2033,7 @@
           "role": "Expert Infrastructures"
         }
       ],
-      "videoDemo": "https://example.com/demo-gares.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "SNCF/RATP",
       "garantie": "30 jours",
@@ -2089,7 +2089,7 @@
           "role": "Expert Muséographie"
         }
       ],
-      "videoDemo": "https://example.com/demo-musees.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "Monuments Historiques",
       "garantie": "60 jours",
@@ -2157,7 +2157,7 @@
           "role": "Expert Spectacle"
         }
       ],
-      "videoDemo": "https://example.com/demo-theatres.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "medium",
       "certification": "ISO 9001",
       "garantie": "30 jours",
@@ -2225,7 +2225,7 @@
           "role": "Expert Piscines Publiques"
         }
       ],
-      "videoDemo": "https://example.com/demo-piscines-municipales.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "ARS",
       "garantie": "60 jours",
@@ -2301,7 +2301,7 @@
           "role": "Manager Urgences"
         }
       ],
-      "videoDemo": "https://example.com/demo-urgences.mp4",
+      "videoDemo": "/assets/videos/hamburgeur.mp4",
       "difficulty": "hard",
       "certification": "ISO 9001",
       "garantie": "90 jours",
