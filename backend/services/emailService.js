@@ -7,7 +7,7 @@ const path = require('path');
 const config = require('../config/config');
 const { userRepo, contactRepo } = require('../repositories');
 const socketService = require('./socketService');
-const { logger, logInfo, logError, logAudit } = require('./loggerService');
+const { logger, logInfo, logError, logAudit, logWarn } = require('./loggerService');
 const { AppError } = require('../utils/errorUtils');
 
 /**
