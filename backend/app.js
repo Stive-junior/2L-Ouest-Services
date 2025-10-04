@@ -21,7 +21,7 @@ const { logger, logInfo, logError, logWarn } = require('./services/loggerService
 const { AppError } = require('./utils/errorUtils');
 const { db, admin, verifyConnection, listCollections, shutdown } = require('./config/firebase');
 const config = require('./config/config');
-const { corsMiddleware, errorMiddleware, rateLimitMiddleware, loggingMiddleware, authenticate } = require('./middleware');
+const { corsMiddleware, errorMiddleware, loggingMiddleware, authenticate } = require('./middleware');
 const socketService = require('./services/socketService');
 const emailService = require('./services/emailService');
 
@@ -255,7 +255,6 @@ app.use(corsMiddleware);
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(morgan('combined', { stream: { write: message => logInfo(message.trim()) } }));
-app.use(rateLimitMiddleware);
 app.use('/storage', authenticate, express.static(path.join(__dirname, 'storage')));
 app.use(fileUpload());
 

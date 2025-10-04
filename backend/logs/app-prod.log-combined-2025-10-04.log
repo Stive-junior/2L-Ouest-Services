@@ -3555,3 +3555,10 @@
   "origin": "http://localhost:3000"
 }
 ✅ [2L-Ouest-Services] 04/10/2025 01:33:04 | INFO     | 127.0.0.1 - - [04/Oct/2025:00:33:04 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 04/10/2025 02:05:22 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 04/10/2025 02:05:22 | INFO     | Serveur WebSocket fermé
+✅ [2L-Ouest-Services] 04/10/2025 02:05:22 | INFO     | Application Firebase arrêtée proprement
+✅ [2L-Ouest-Services] 04/10/2025 02:05:24 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "stopped"
+}
