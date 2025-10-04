@@ -1,0 +1,164 @@
+🚨 [2L-Ouest-Services] 04/10/2025 00:13:47 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:14:04 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:14:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:14:34 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:14:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:15:05 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:15:19 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:15:35 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:15:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:16:06 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:16:20 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:16:36 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:16:50 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:17:06 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:17:20 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:17:37 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:17:51 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:18:07 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:18:21 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:18:37 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:18:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:19:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:19:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:20:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:20:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:21:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:21:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:22:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:22:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:23:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:23:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:24:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:24:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:25:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:25:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:26:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:26:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:27:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:27:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:28:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:28:49 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:29:19 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 04/10/2025 00:29:27 | ERROR    | Échec de la mise à jour de l'URL dans Firestore
+{
+  "error": "Total timeout of API google.firestore.v1.Firestore exceeded 600000 milliseconds retrying error Error: 14 UNAVAILABLE: Name resolution failed for target dns:firestore.googleapis.com:443  before any response was received.",
+  "stack": "Error: Total timeout of API google.firestore.v1.Firestore exceeded 600000 milliseconds retrying error Error: 14 UNAVAILABLE: Name resolution failed for target dns:firestore.googleapis.com:443  before any response was received.\n    at repeat (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:66:31)\n    at Timeout._onTimeout (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:108:25)\n    at listOnTimeout (node:internal/timers:608:17)\n    at process.processTimers (node:internal/timers:543:7)\nCaused by: Error\n    at _firestore._traceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:438:27)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30\n    at NoopContextManager.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/context/NoopContextManager.js:25:19)\n    at ContextAPI.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/api/context.js:60:46)\n    at NoopTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/NoopTracer.js:65:31)\n    at ProxyTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/ProxyTracer.js:36:24)\n    at EnabledTraceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:102:28)\n    at WriteBatch.commit (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:436:43)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/reference/document-reference.js:350:31\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:29:53 | ERROR    | Impossible de se connecter au réseau pour Firestore
+{
+  "error": "queryA EREFUSED firestore.googleapis.com"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:37:47 | ERROR    | Exception non gérée
+{
+  "error": "callback is not a function",
+  "stack": "TypeError: callback is not a function\n    at finalize (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-pool/index.js:612:24)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-pool/index.js:632:25\n    at SMTPConnection._actionAUTHComplete (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:1602:9)\n    at SMTPConnection.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:556:26)\n    at SMTPConnection._processResponse (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:993:20)\n    at SMTPConnection._onData (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:774:14)\n    at SMTPConnection._onSocketData (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:195:44)\n    at TLSSocket.emit (node:events:507:28)\n    at addChunk (node:internal/streams/readable:559:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:41:14 | ERROR    | Exception non gérée
+{
+  "error": "callback is not a function",
+  "stack": "TypeError: callback is not a function\n    at finalize (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-pool/index.js:612:24)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-pool/index.js:632:25\n    at SMTPConnection._actionAUTHComplete (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:1602:9)\n    at SMTPConnection.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:556:26)\n    at SMTPConnection._processResponse (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:993:20)\n    at SMTPConnection._onData (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:774:14)\n    at SMTPConnection._onSocketData (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:195:44)\n    at TLSSocket.emit (node:events:507:28)\n    at addChunk (node:internal/streams/readable:559:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)"
+}
+🚨 [2L-Ouest-Services] 04/10/2025 00:46:07 | ERROR    | Exception non gérée
+{
+  "error": "callback is not a function",
+  "stack": "TypeError: callback is not a function\n    at finalize (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-pool/index.js:612:24)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-pool/index.js:632:25\n    at SMTPConnection._actionAUTHComplete (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:1602:9)\n    at SMTPConnection.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:556:26)\n    at SMTPConnection._processResponse (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:993:20)\n    at SMTPConnection._onData (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:774:14)\n    at SMTPConnection._onSocketData (/home/stive-junior/2L-Ouest-Services/backend/node_modules/nodemailer/lib/smtp-connection/index.js:195:44)\n    at TLSSocket.emit (node:events:507:28)\n    at addChunk (node:internal/streams/readable:559:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)"
+}
+📋 [2L-Ouest-Services] 04/10/2025 00:50:58 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "3ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+📋 [2L-Ouest-Services] 04/10/2025 00:51:02 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "5ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}

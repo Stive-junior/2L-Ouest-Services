@@ -555,12 +555,6 @@ let swiperInstance = null;
 /**
  * Initialize hero carousel
  */
-/**
- * @file heroCarousel.js
- * @description Module de gestion du carrousel hero pour L&L Ouest Services.
- * Gère les slides, les miniatures, et le redimensionnement fluide.
- * @module heroCarousel
- */
 
 async function initHeroCarousel() {
   const slidesContainer = document.getElementById('hero-slides');
@@ -584,6 +578,25 @@ async function initHeroCarousel() {
       <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-6">
         <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight gradiant">${slide.title}</h1>
         <p class="text-lg md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light">${slide.subtitle}</p>
+
+
+    <a href="#contact" class="btn-container btn-right text-ll-white hover:text-ll-white py-4 px-8 rounded-xl font-semibold shadow-lg !bg-transparent border-1 hover:!border-0 !border-ll-medium-gray py-4 px-6 rounded-xl font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark">
+        <div class="progress-fill bg-gradient-to-r from-ll-dark-blue to-ll-blue rounded-xl"></div>
+        <div class="btn-content shine-effect">
+          
+            <div class="icon-wrapper mr-4">
+                <svg class="icon-default" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <svg class="icon-hover" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                </svg>
+            </div>
+              <span class="btn-text">Contactez nous</span>
+        </div>
+    </a>
+
       </div>
     </div>
   `).join('');
@@ -3024,11 +3037,14 @@ function initCategoryModal() {
     }
 
     // Ouvrir depuis trigger
-    document.getElementById('category-trigger').addEventListener('click', (e) => {
-        e.stopPropagation();
-        categoryModal.classList.remove('hidden');
-        setTimeout(() => content.classList.add('scale-100', 'opacity-100'), 10);
-    });
+    const categoryTrigger = document.getElementById('category-trigger');
+    if (categoryTrigger) {
+        categoryTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            categoryModal.classList.remove('hidden');
+            setTimeout(() => content.classList.add('scale-100', 'opacity-100'), 10);
+        });
+    }
 
     // Close on overlay click
     categoryModal.addEventListener('click', (e) => {

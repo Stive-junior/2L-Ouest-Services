@@ -924,7 +924,8 @@ async signIn(credentials, postOperations = []) {
     } catch (tokenError) {
       console.error('Erreur obtention FCM Token:', tokenError);
     }
-
+  await showLoadingDialog('Connexion en cours...', 'Cleaning'); 
+  
     // 1. TENTATIVE DE CONNEXION FIREBASE
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;

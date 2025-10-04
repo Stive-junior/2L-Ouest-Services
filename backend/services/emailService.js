@@ -34,7 +34,7 @@ class EmailService {
     this.transporter = nodemailer.createTransport({
       host: config.smtp.host,
       port: config.smtp.port,
-      secure: config.smtp.secure,
+      secure: config.smtp.secure, // false pour port 587, true pour 465
       auth: {
         user: config.smtp.user,
         pass: config.smtp.pass,
@@ -42,23 +42,50 @@ class EmailService {
       pool: true,
       maxConnections: 5,
       maxMessages: 100,
+      connectionTimeout: 10000,
+      greetingTimeout: 5000,
+      socketTimeout: 10000,
     });
 
-    this.verifyTransporter();
+   this.smtpReady = false;
+   this.verifyTransporter();
+  }
+
+  async init() {
+    try {
+      await this.verifyTransporter();
+      this.smtpReady = true;
+      logInfo('Initialisation SMTP réussie');
+    } catch (error) {
+      this.smtpReady = false;
+      logError('Échec initialisation SMTP (continu au démarrage)', { error: error.message });
+    }
   }
 
   async verifyTransporter() {
-    try {
-      await this.transporter.verify();
-      logInfo('Configuration SMTP vérifiée avec succès');
-    } catch (error) {
-      logError('Erreur lors de la vérification SMTP', { error: error.message });
-      throw new AppError(500, 'Configuration SMTP invalide', error.message);
-    }
+  try {
+    await this.transporter.verify();
+    logInfo('Configuration SMTP vérifiée avec succès');
+    this.smtpValid = true;
+  } catch (error) {
+    logError('Erreur lors de la vérification SMTP', { 
+      error: error.message, 
+      code: error.code,
+      stack: error.stack?.substring(0, 500)
+    });
+    this.smtpValid = false;
+  }
+
   }
 
   async sendEmail(options) {
     try {
+
+      if (!this.smtpReady) {
+      logWarn('SMTP non prêt, skip envoi email', { to: options.to });
+      throw new AppError(503, 'Service email temporairement indisponible', 'SMTP not ready');
+    }
+
       if (!options.to || typeof options.to !== 'string') {
         throw new AppError(400, 'Destinataire email requis et doit être une chaîne');
       }

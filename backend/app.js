@@ -23,6 +23,7 @@ const { db, admin, verifyConnection, listCollections, shutdown } = require('./co
 const config = require('./config/config');
 const { corsMiddleware, errorMiddleware, rateLimitMiddleware, loggingMiddleware, authenticate } = require('./middleware');
 const socketService = require('./services/socketService');
+const emailService = require('./services/emailService');
 
 const {
   authRoutes,
@@ -141,10 +142,19 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
         status: 'healthy',
         environment: config.nodeEnv,
       });
-      logInfo('Écriture de test Firestore réussie');  // ← Log ajouté
+      logInfo('Écriture de test Firestore réussie');
 
        const collections = await listCollections();
       logInfo('Connexion Firestore : OK', { collections });
+
+
+      logInfo('Tentative de vérification SMTP...');
+      try {
+        await emailService.transporter.verify();
+        logInfo('Vérification SMTP connexion : OK');
+      } catch (smtpErr) {
+        logWarn('Vérification SMTP connexion échouée (mais continu)', { error: smtpErr.message });
+      }
 
       // Vérification de la configuration Google Maps (gardé)
       if (!config.googleMaps.apiKey) {
@@ -156,7 +166,7 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
       if (!config.smtp.host || !config.smtp.user || !config.smtp.pass) {
         throw new AppError(500, 'Configuration SMTP incomplète', 'Incomplete SMTP configuration');
       }
-      logInfo('Configuration SMTP : OK');
+      logInfo('Variable Configuration SMTP : OK');
 
       // Vérification de la configuration Socket.IO (gardé)
       if (!config.socket.path) {
@@ -170,7 +180,7 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
       }
       logInfo('Configuration Firebase client-side : OK');
 
-      logInfo('healthCheck completé avec succès');  // ← Log final ajouté
+      logInfo('healthCheck completé avec succès');  
       return true;
     } catch (err) {
       lastError = err;
@@ -244,12 +254,11 @@ app.use(compression());
 app.use(corsMiddleware);
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
+app.use(morgan('combined', { stream: { write: message => logInfo(message.trim()) } }));
 app.use(rateLimitMiddleware);
 app.use('/storage', authenticate, express.static(path.join(__dirname, 'storage')));
 app.use(fileUpload());
 
-// Middleware réseau avant les routes API
 app.use('/api', networkCheckMiddleware);
 
 // --- Route d'accueil ---
@@ -350,6 +359,7 @@ app.get('/api/health', async (req, res) => {
       timestamp: new Date().toISOString(),
       environment: config.nodeEnv,
       firebaseStatus: 'connected',
+      smtpStatus: emailService.smtpReady ? 'ready' : 'unverified',
       collections,
       socketStatus: socketService.io ? 'connected' : 'disconnected',
       networkStatus: global.networkStatus ? 'online' : 'offline',
@@ -459,14 +469,16 @@ async function startServer() {
     // Écoute d'abord (priorité Render : listen ASAP)
     const port = process.env.PORT || config.port;
     const server = app.listen(port, '0.0.0.0', async () => {
-      logInfo(`Serveur démarré sur le port ${port}`);  // ← Log pour confirmer listen
+      logInfo(`Serveur démarré sur le port ${port}`);  
 
-      // HealthCheck EN BACKGROUND (non-bloquant)
+      emailService.init().catch(err => {
+        logError('Init SMTP échouée au démarrage', { error: err.message });
+      });
+
       healthCheck().then(() => {
         logInfo('HealthCheck background OK');
       }).catch(err => {
         logError('HealthCheck background failed', { error: err.message });
-        // Ne crash pas le serveur !
       });
 
       // Détermination de l'adresse IP locale
@@ -503,7 +515,7 @@ async function startServer() {
 
       // Démarrer l'écoute réseau constante
       monitorNetwork();
-      logInfo('Startup complet !');  // ← Log final
+      logInfo('Startup complet !'); 
     });
 
     // Gestion des signaux pour arrêt du serveur

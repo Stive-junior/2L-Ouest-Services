@@ -10,13 +10,22 @@ const config = require('../config/config');
 const { logger, logInfo } = require('../services/loggerService');
 
 // Liste des origines autorisées, incluant les environnements de production et de développement
-const allowedOrigins = [
-  config.frontendUrl, // URL du frontend depuis la configuration
+let allowedOrigins = [
+  // Gère array ou string pour config.frontendUrl
+  ...(Array.isArray(config.frontendUrl) ? config.frontendUrl : [config.frontendUrl || '']),
   'https://ll-ouest-services.netlify.app',  // Frontend Netlify (prod)
-  'http://ll-ouest-services.netlify.app',    // Variante sans HTTPS pour tests
+  'http://ll-ouest-services.netlify.app',   // Variante sans HTTPS pour tests
+  // Optionnel : Autoriser sous-domaines Netlify (ex. preview.*.netlify.app)
+  'https://*.netlify.app',
   'http://localhost:3000', // Développement local
   'http://localhost:35909', // Port alternatif pour tests
-].filter(Boolean); // Supprime les valeurs undefined/null
+].filter(Boolean); // Supprime les valeurs undefined/null/vides
+
+// Supprime les doublons
+allowedOrigins = [...new Set(allowedOrigins)];
+
+// Pour debug : Log la liste au démarrage
+logInfo('CORS: Origines autorisées initialisées', { allowedOrigins });
 
 /**
  * Valide dynamiquement l'origine de la requête.
@@ -31,16 +40,23 @@ const originValidator = (origin, callback) => {
   }
 
   // Log pour debug
-  logInfo('CORS Validation', { origin, allowed: allowedOrigins });
+  logInfo('CORS Validation', { origin, allowedOrigins });
 
-  // Pour /api/check (public/monitoring), autoriser wildcard si pas de credentials
-  if (origin === '*') {
-    logInfo('CORS: Wildcard autorisé pour *', { origin });
+  // Mode dev : Autoriser wildcard localement (à activer via config si besoin)
+  if (config.nodeEnv === 'development' && origin === '*') {
+    logInfo('CORS: Wildcard autorisé en dev', { origin });
     return callback(null, true);
   }
 
-  // Vérifier si l'origine est dans la liste blanche
-  if (allowedOrigins.includes(origin)) {
+  const isAllowed = allowedOrigins.some(allowed => {
+    if (allowed.includes('*')) {
+      // Matching simple pour wildcard (ex. https://preview--*.netlify.app)
+      return new RegExp(allowed.replace('*', '.*')).test(origin);
+    }
+    return allowed === origin;
+  });
+
+  if (isAllowed) {
     logInfo('CORS: Origine autorisée', { origin });
     return callback(null, origin);  // Retourne l'origine exacte pour credentials
   }
@@ -79,19 +95,25 @@ const corsMiddleware = cors(corsOptions);
  */
 const logCors = (req, res, next) => {
   const origin = req.headers.origin;
+  const clientIp = req.ip || req.connection.remoteAddress || 'unknown';
+  const userAgent = req.headers['user-agent'] || 'unknown';
 
   // Log détaillé pour OPTIONS preflight et /api/check
-  if (req.method === 'OPTIONS' || req.path === '/api/check') {
-    logInfo('CORS Preflight ou Check traitée', {
+  if (req.method === 'OPTIONS' || req.path === '/api/check' || req.path === '/api/health') {
+    logInfo('CORS Preflight ou Health/Check traitée', {
       origin: origin || 'aucune origine',
       method: req.method,
       path: req.path,
+      clientIp,
+      userAgent: userAgent.substring(0, 100), // Limite pour logs
     });
   } else {
     logInfo('CORS Requête standard', {
       origin: origin || 'aucune origine',
       method: req.method,
       path: req.path,
+      clientIp,
+      userAgent: userAgent.substring(0, 100),
     });
   }
 
@@ -103,6 +125,7 @@ const logCors = (req, res, next) => {
         error: err.message,
         method: req.method,
         path: req.path,
+        clientIp,
         allowedOrigins,
       });
       // Toujours renvoyer headers CORS sur error (fix pour 502/missing)
@@ -111,6 +134,11 @@ const logCors = (req, res, next) => {
       res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
       res.set('Access-Control-Allow-Credentials', 'true');
       res.set('Access-Control-Max-Age', '86400');
+
+      // Pour OPTIONS, renvoyer 204 au lieu de 403 (meilleur pour preflights)
+      if (req.method === 'OPTIONS') {
+        return res.status(204).end();
+      }
       return res.status(403).json({ error: 'Requête CORS non autorisée' });
     }
     next();

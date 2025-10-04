@@ -22,7 +22,8 @@ let firebaseConfigCache = null; // Note : Initialisé à null, mais pourrait êt
 const CONFIG_CACHE_KEY = 'firebaseConfigCache';
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 heures
 
-export const API_BASE_URL = 'https://twol-ouest-services.onrender.com/api';
+//export const API_BASE_URL = 'https://twol-ouest-services.onrender.com/api';
+export const  API_BASE_URL = 'http://localhost:8000/api';
 export const USER_CACHE_KEY = 'userDataCache';
 
 let isShowingErrorModal = false;
