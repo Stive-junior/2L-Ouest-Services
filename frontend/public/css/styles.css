@@ -182,7 +182,7 @@
 
 /* ✅ S'applique uniquement aux .header-btn et aux boutons qui NE sont pas .faq-toggle, .modal-close, .toggle-password ou dans .services */
 .header-btn,
-button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button),
+button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button):not([data-conversation-id]):not([data-action]),
 section a.cta {
   position: relative;
   border: none;
@@ -193,7 +193,7 @@ section a.cta {
 
 /* ✅ Bordure animée uniquement sur .header-btn et les boutons sauf ceux exclus */
 .header-btn::before,
-button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button)::before,
+button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button):not([data-conversation-id]):not([data-action])::before,
 section a.cta::before {
   content: "";
   position: absolute;
