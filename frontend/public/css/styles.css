@@ -181,7 +181,7 @@
         }
 
 /* ✅ S'applique uniquement aux .header-btn et aux boutons qui NE sont pas .faq-toggle, .modal-close, .toggle-password ou dans .services */
-.header-btn:not(#sidebar-toggle),
+.header-btn,
 button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button):not([data-conversation-id]):not([data-action]):not(#sidebar button):not(#sidebar-toggle),
 section a.cta {
   position: relative;

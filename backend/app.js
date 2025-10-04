@@ -148,12 +148,15 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
       logInfo('Connexion Firestore : OK', { collections });
 
 
-      logInfo('Tentative de vérification SMTP...');
-      try {
-        await emailService.transporter.verify();
-        logInfo('Vérification SMTP connexion : OK');
-      } catch (smtpErr) {
-        logWarn('Vérification SMTP connexion échouée (mais continu)', { error: smtpErr.message });
+     logInfo('Tentative de vérification SMTP...');
+      const smtpVerified = await emailService.verifyTransporterWithRetry(3, 5000);
+      if (!smtpVerified) {
+        logWarn('SMTP non vérifié (mais service continue)');
+        if (config.nodeEnv === 'production') {
+          throw new AppError(503, 'Configuration SMTP invalide après retries');
+         }
+      } else {
+        logInfo('Vérification SMTP : OK');
       }
 
       // Vérification de la configuration Google Maps (gardé)
@@ -358,7 +361,7 @@ app.get('/api/health', async (req, res) => {
       timestamp: new Date().toISOString(),
       environment: config.nodeEnv,
       firebaseStatus: 'connected',
-      smtpStatus: emailService.smtpReady ? 'ready' : 'unverified',
+      smtpStatus: emailService.isSmtpVerified ? 'verified' : 'unverified',
       collections,
       socketStatus: socketService.io ? 'connected' : 'disconnected',
       networkStatus: global.networkStatus ? 'online' : 'offline',

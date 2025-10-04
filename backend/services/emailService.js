@@ -30,26 +30,72 @@ const { AppError } = require('../utils/errorUtils');
  * @description Gère l'envoi d'emails personnalisés pour L&L Ouest Services.
  */
 class EmailService {
+  
   constructor() {
-    this.transporter = nodemailer.createTransport({
-      host: config.smtp.host,
-      port: config.smtp.port,
-      secure: config.smtp.secure, // false pour port 587, true pour 465
-      auth: {
-        user: config.smtp.user,
-        pass: config.smtp.pass,
-      },
-      pool: true,
-      maxConnections: 5,
-      maxMessages: 100,
-      connectionTimeout: 10000,
-      greetingTimeout: 5000,
-      socketTimeout: 10000,
-    });
 
-   this.smtpReady = false;
-   this.verifyTransporter();
+  this.transporter = nodemailer.createTransport({
+    host: config.smtp.host, 
+    port: config.smtp.port, 
+    secure: config.smtp.secure,  
+    auth: {
+      user: config.smtp.user,
+      pass: config.smtp.pass,
+    },
+
+    pool: false, 
+    connectionTimeout: 120000, 
+    greetingTimeout: 60000,     
+    socketTimeout: 60000,       
+
+    opportunisticTLS: true,     
+    ignoreTLS: false,     
+    logger: true,      
+    debug: true, 
+    tls: {
+      rejectUnauthorized: true  
+    },
+
+    lmtp: false
+  });
+
+  this.isSmtpVerified = false;
+
+}
+
+
+
+  async verifyTransporterWithRetry(maxRetries = 3, delayMs = 5000) {
+    let lastError = null;
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        logInfo(`Vérification SMTP (tentative ${attempt}/${maxRetries})`);
+        await this.transporter.verify();
+        this.isSmtpVerified = true;
+        logInfo('Configuration SMTP vérifiée avec succès');
+        return true;
+      } catch (error) {
+        lastError = error;
+        
+        if (error.code === 'ETIMEDOUT' || error.message.includes('timeout')) {
+          logWarn(`Timeout SMTP détecté : ${error.message}. Vérifiez firewall Render ou port SMTP.`);
+         }
+
+        logWarn(`Échec de la vérification SMTP (tentative ${attempt}/${maxRetries})`, { error: error.message });
+        if (attempt < maxRetries) {
+          await new Promise(resolve => setTimeout(resolve, delayMs));
+        }
+      }
+    }
+
+    this.isSmtpVerified = false;
+    logError('Vérification SMTP échouée après retries', { error: lastError?.message });
+
+    if (config.nodeEnv === 'production') {
+      throw new AppError(500, 'Configuration SMTP invalide après retries', lastError?.message);
+     }
+    return false;
   }
+
 
   async init() {
     try {
@@ -63,28 +109,18 @@ class EmailService {
   }
 
   async verifyTransporter() {
-  try {
-    await this.transporter.verify();
-    logInfo('Configuration SMTP vérifiée avec succès');
-    this.smtpValid = true;
-  } catch (error) {
-    logError('Erreur lors de la vérification SMTP', { 
-      error: error.message, 
-      code: error.code,
-      stack: error.stack?.substring(0, 500)
-    });
-    this.smtpValid = false;
-  }
-
+    return await this.verifyTransporterWithRetry();
   }
 
   async sendEmail(options) {
     try {
 
-      if (!this.smtpReady) {
-      logWarn('SMTP non prêt, skip envoi email', { to: options.to });
-      throw new AppError(503, 'Service email temporairement indisponible', 'SMTP not ready');
-    }
+     if (!this.isSmtpVerified) {
+        const verified = await this.verifyTransporterWithRetry(2, 3000);
+        if (!verified) {
+          throw new AppError(503, 'Service SMTP temporairement indisponible', 'SMTP not ready');
+        }
+      }
 
       if (!options.to || typeof options.to !== 'string') {
         throw new AppError(400, 'Destinataire email requis et doit être une chaîne');
@@ -134,6 +170,9 @@ class EmailService {
         to: options.to,
         subject: options.subject,
       });
+      if (error.code === 'ECONNECTION' || error.message.includes('timeout')) {
+        this.isSmtpVerified = false;
+      }
       throw new AppError(500, 'Erreur serveur lors de l\'envoi de l\'email', error.message);
     }
   }

@@ -3645,3 +3645,317 @@
 ✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | Configuration Firebase client-side : OK
 ✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | healthCheck completé avec succès
 ✅ [2L-Ouest-Services] 04/10/2025 02:05:58 | INFO     | HealthCheck background OK
+✅ [2L-Ouest-Services] 04/10/2025 03:12:11 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 04/10/2025 03:12:11 | INFO     | Serveur WebSocket fermé
+✅ [2L-Ouest-Services] 04/10/2025 03:12:11 | INFO     | Application Firebase arrêtée proprement
+✅ [2L-Ouest-Services] 04/10/2025 03:12:13 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "stopped"
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:14 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 04/10/2025 03:12:14 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:14 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "production"
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:14 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 04/10/2025 03:12:14 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:14 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:14 | INFO     | CORS: Origines autorisées initialisées
+{
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Serveur démarré sur le port 8000
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Vérification SMTP (tentative 1/3)
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Tentative d'écriture Firestore...
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | SocketService initialisé
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:15 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:16 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | Initialisation SMTP réussie
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "active"
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | Écoute réseau constante démarrée
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | Startup complet !
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | Tentative de vérification SMTP...
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | Vérification SMTP (tentative 1/3)
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:17 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:18 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | Vérification SMTP : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | Configuration Google Maps : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | Variable Configuration SMTP : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | Configuration Firebase client-side : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | healthCheck completé avec succès
+✅ [2L-Ouest-Services] 04/10/2025 03:12:19 | INFO     | HealthCheck background OK
+✅ [2L-Ouest-Services] 04/10/2025 03:12:20 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:20 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:12:20 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:08 | INFO     | Signal SIGINT reçu. Arrêt du serveur...
+✅ [2L-Ouest-Services] 04/10/2025 03:18:08 | INFO     | Serveur WebSocket fermé
+✅ [2L-Ouest-Services] 04/10/2025 03:18:08 | INFO     | Application Firebase arrêtée proprement
+✅ [2L-Ouest-Services] 04/10/2025 03:18:10 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "stopped"
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:19 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 04/10/2025 03:18:19 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:19 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "production"
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | CORS: Origines autorisées initialisées
+{
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Démarrage du serveur...
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Connexion réseau à Firestore : OK
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Firebase initialisé
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Serveur démarré sur le port 8000
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Vérification SMTP (tentative 1/3)
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Début de la vérification de santé
+{
+  "attempt": 1
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Vérification des variables d'environnement : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Tentative d'écriture Firestore...
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | Serveur WebSocket initialisé
+{
+  "path": "/socket.io"
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | SocketService initialisé
+✅ [2L-Ouest-Services] 04/10/2025 03:18:20 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:21 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | Connexion Firestore vérifiée
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | Connexion Firebase établie à la tentative 1
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | Écriture de test Firestore réussie
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | URL API mise à jour dans Firestore : http://192.168.43.17:8000
+{
+  "status": "active"
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | Écoute réseau constante démarrée
+✅ [2L-Ouest-Services] 04/10/2025 03:18:22 | INFO     | Startup complet !
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | Initialisation SMTP réussie
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | Collections Firestore récupérées
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | Connexion Firestore : OK
+{
+  "collections": [
+    "config",
+    "contacts",
+    "status",
+    "users"
+  ]
+}
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | Tentative de vérification SMTP...
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | Vérification SMTP (tentative 1/3)
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:23 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:24 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:25 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | Configuration SMTP vérifiée avec succès
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | Vérification SMTP : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | Configuration Google Maps : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | Variable Configuration SMTP : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | Configuration Socket.IO : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | Configuration Firebase client-side : OK
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | healthCheck completé avec succès
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | HealthCheck background OK
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | [%s] %s %s
+✅ [2L-Ouest-Services] 04/10/2025 03:18:26 | INFO     | [%s] %s %s

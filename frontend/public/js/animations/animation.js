@@ -2686,8 +2686,8 @@ export function initVideoModal() {
         if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
             closeModal();
         } else if (e.key === ' ') {
-            e.preventDefault();
-            togglePlayPause();
+            //e.preventDefault();
+          //  togglePlayPause();
         } else if (e.key === 'ArrowRight') {
             modalVideo.currentTime += 5;
         } else if (e.key === 'ArrowLeft') {
