@@ -2971,3 +2971,195 @@
   "origin": "http://localhost:3000"
 }
 ✅ [2L-Ouest-Services] 06/10/2025 00:50:14 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:50:14 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 06/10/2025 00:50:45 | INFO     | CORS Preflight ou Health/Check traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check",
+  "clientIp": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:50:45 | INFO     | CORS Validation
+{
+  "origin": "http://localhost:3000",
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:50:45 | INFO     | CORS: Origine autorisée
+{
+  "origin": "http://localhost:3000"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:50:45 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:50:45 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 06/10/2025 00:51:15 | INFO     | CORS Preflight ou Health/Check traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check",
+  "clientIp": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:51:15 | INFO     | CORS Validation
+{
+  "origin": "http://localhost:3000",
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:51:15 | INFO     | CORS: Origine autorisée
+{
+  "origin": "http://localhost:3000"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:51:15 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:51:15 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 06/10/2025 00:51:45 | INFO     | CORS Preflight ou Health/Check traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check",
+  "clientIp": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:51:45 | INFO     | CORS Validation
+{
+  "origin": "http://localhost:3000",
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:51:45 | INFO     | CORS: Origine autorisée
+{
+  "origin": "http://localhost:3000"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:51:45 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:51:45 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 06/10/2025 00:52:15 | INFO     | CORS Preflight ou Health/Check traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check",
+  "clientIp": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:52:15 | INFO     | CORS Validation
+{
+  "origin": "http://localhost:3000",
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:52:15 | INFO     | CORS: Origine autorisée
+{
+  "origin": "http://localhost:3000"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:52:15 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:52:15 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 06/10/2025 00:52:46 | INFO     | CORS Preflight ou Health/Check traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check",
+  "clientIp": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:52:46 | INFO     | CORS Validation
+{
+  "origin": "http://localhost:3000",
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:52:46 | INFO     | CORS: Origine autorisée
+{
+  "origin": "http://localhost:3000"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:52:46 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:52:46 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 06/10/2025 00:53:16 | INFO     | CORS Preflight ou Health/Check traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check",
+  "clientIp": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:53:16 | INFO     | CORS Validation
+{
+  "origin": "http://localhost:3000",
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:53:16 | INFO     | CORS: Origine autorisée
+{
+  "origin": "http://localhost:3000"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:53:16 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:53:16 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 06/10/2025 00:53:46 | INFO     | CORS Preflight ou Health/Check traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check",
+  "clientIp": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:53:46 | INFO     | CORS Validation
+{
+  "origin": "http://localhost:3000",
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:53:46 | INFO     | CORS: Origine autorisée
+{
+  "origin": "http://localhost:3000"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:53:46 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:53:46 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+✅ [2L-Ouest-Services] 06/10/2025 00:54:16 | INFO     | CORS Preflight ou Health/Check traitée
+{
+  "origin": "http://localhost:3000",
+  "method": "GET",
+  "path": "/api/check",
+  "clientIp": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:54:16 | INFO     | CORS Validation
+{
+  "origin": "http://localhost:3000",
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:54:16 | INFO     | CORS: Origine autorisée
+{
+  "origin": "http://localhost:3000"
+}
+✅ [2L-Ouest-Services] 06/10/2025 00:54:16 | INFO     | 127.0.0.1 - - [05/Oct/2025:23:54:16 +0000] "GET /api/check HTTP/1.1" 200 111 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0"
