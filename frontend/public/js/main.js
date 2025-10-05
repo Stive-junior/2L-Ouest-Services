@@ -20,9 +20,10 @@ import './animations/sidebar.js';
 import './animations/chat.js';
 import { loadUserData, updateUIWithUserData } from './loadData.js';
 
-// Cache des requêtes API (TTL réduit à 2 minutes pour fraîcheur en production)
+
+
 const apiCache = {};
-const CACHE_TTL = 2 * 60 * 1000; // 2 minutes
+const CACHE_TTL = 2 * 60 * 1000;
 
 // État global
 let appInitialized = false;
@@ -30,7 +31,66 @@ let firebaseInitialized = false;
 let auth = null;
 let currentPage = null;
 let networkMonitoringInterval = null;
-const NETWORK_CHECK_INTERVAL = 30000; // 30 secondes
+const NETWORK_CHECK_INTERVAL = 30000; 
+
+// État pour l'overlay de chargement
+let loadingOverlay = null;
+let loadingStatusElement = null;
+let loadingTextElement = null;
+let loadingIconElement = null;
+let loadingSubtextElement = null;
+
+/**
+ * Initialise les éléments de l'overlay de chargement.
+ */
+function initLoadingElements() {
+  loadingOverlay = document.getElementById('loading-overlay');
+  loadingStatusElement = document.getElementById('loading-status');
+  loadingTextElement = document.getElementById('loading-text');
+  loadingIconElement = document.getElementById('loading-icon');
+  loadingSubtextElement = document.getElementById('loading-subtext');
+}
+
+/**
+ * Met à jour le statut de chargement avec icône SVG et message dynamique.
+ * @param {string} text - Texte principal.
+ * @param {string} subtext - Sous-texte optionnel.
+ * @param {string} iconType - Type d'icône : 'network', 'firebase', 'auth', 'backend', 'modules', 'default'.
+ */
+function updateLoadingStatus(text, subtext = '', iconType = 'default') {
+  if (!loadingTextElement) return;
+
+  // Messages par défaut
+  const statusMessages = {
+    network: { text: 'Vérification de votre connexion...', subtext: 'Assurons-nous que tout est connecté.' },
+    firebase: { text: 'Initialisation de Firebase...', subtext: 'Chargement des services sécurisés.' },
+    auth: { text: 'Vérification de votre session...', subtext: 'Récupération de vos informations personnelles.' },
+    backend: { text: 'Connexion au serveur...', subtext: 'Le backend se réveille (cold start Render ?).' },
+    modules: { text: 'Chargement des modules...', subtext: 'Préparation de l\'interface utilisateur.' },
+    default: { text: 'Chargement de L&L Ouest Services', subtext: 'Veuillez patienter...' }
+  };
+
+  const status = statusMessages[iconType] || statusMessages.default;
+  loadingTextElement.textContent = text || status.text;
+  loadingSubtextElement.textContent = subtext || status.subtext;
+
+  const icons = {
+    network: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 text-blue-400 animate-pulse"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 5h.01M19 12h.01M12 19h.01M12 5v14"></path></svg>',
+    firebase: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 text-orange-400 animate-bounce"><path stroke="currentColor" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke="currentColor" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>',
+    auth: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 text-green-400 animate-spin-slow"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M12 4v16m-3-9h6"></path></svg>',
+    backend: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 text-purple-400 animate-pulse"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>',
+    modules: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 text-indigo-400 animate-bounce"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>',
+    default: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 text-blue-400 animate-spin-slow"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>'
+  };
+
+  loadingIconElement.innerHTML = icons[iconType] || icons.default;
+
+  loadingIconElement.classList.add('transition-all', 'duration-300');
+  loadingIconElement.style.transform = 'scale(1.1)';
+  setTimeout(() => {
+    loadingIconElement.style.transform = 'scale(1)';
+  }, 150);
+}
 
 /**
  * Écoute constante de l'état backend, toutes les 30 secondes.
@@ -87,14 +147,15 @@ function getCachedResponse(key) {
   return null;
 }
 
+
 /**
- * Wrapper pour appels asynchrones avec retries (backoff exponentiel, plus patient).
+ * Wrapper pour appels asynchrones avec retries (backoff exponentiel, plus patient pour Render).
  * @param {Function} fn - Fonction async à appeler.
- * @param {number} maxRetries - Max tentatives.
- * @param {number} baseDelay - Délai base en ms.
+ * @param {number} maxRetries - Max tentatives (défaut 8 pour cold starts).
+ * @param {number} baseDelay - Délai base en ms (défaut 5s).
  * @returns {Promise<*>} Résultat de fn.
  */
-async function withRetries(fn, maxRetries = 5, baseDelay = 3000) {
+async function withRetries(fn, maxRetries = 8, baseDelay = 5000) {
   let lastError;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -102,7 +163,9 @@ async function withRetries(fn, maxRetries = 5, baseDelay = 3000) {
     } catch (err) {
       lastError = err;
       if (attempt < maxRetries) {
-        await new Promise(resolve => setTimeout(resolve, baseDelay * Math.pow(2, attempt - 1)));
+        const delay = baseDelay * Math.pow(2, attempt - 1);
+        console.log(`🔄 Retry ${attempt}/${maxRetries} dans ${delay}ms : ${err.message}`);
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
   }
@@ -153,6 +216,8 @@ async function loadModule(modulePath) {
  * @returns {Promise<boolean>} Succès de l'initialisation.
  */
 async function initializePage(page, isAuthenticated, userData = null) {
+  updateLoadingStatus('Chargement des modules...', 'Préparation de l\'interface...', 'modules');
+
   const moduleMap = {
     index: { path: null, pages: ['index'], modules: ['contact', 'service', 'review', 'about'], authRequired: false, title: 'Accueil' },
     auth: { path: './modules/auth.js', pages: ['signin', 'signup', 'verify-email', 'password-reset', 'reset-password', 'change-email', 'code-check'], modules: [], authRequired: false, title: 'Authentification' },
@@ -229,6 +294,8 @@ async function initializePage(page, isAuthenticated, userData = null) {
  * @returns {Promise<{isAuthenticated: boolean, userData: Object|null}>}
  */
 async function verifyAuthState(user) {
+  updateLoadingStatus('Vérification de votre session...', 'Récupération de vos informations personnelles.', 'auth');
+
   let isAuthenticated = !!user;
   let userData = null;
 
@@ -324,15 +391,15 @@ async function verifyAuthState(user) {
 }
 
 /**
- * Masque l'overlay de chargement.
+ * Masque l'overlay de chargement avec animation fluide.
  */
 function hideLoadingOverlay() {
-  const loadingOverlay = document.getElementById('loading-overlay');
   if (loadingOverlay) {
     loadingOverlay.style.opacity = '0';
     setTimeout(() => {
       loadingOverlay.style.display = 'none';
       document.body.classList.remove('loading');
+      loadingOverlay = null;
     }, 500);
   }
 }
@@ -344,15 +411,21 @@ function hideLoadingOverlay() {
 async function initializeApp() {
   if (appInitialized) return true;
 
+  // Init overlay
+  initLoadingElements();
+
   try {
     window.__APP_START_TIME__ = Date.now();
 
+    updateLoadingStatus('Vérification de votre connexion...', 'Assurons-nous que tout est connecté.', 'network');
     const networkStatus = await checkNetwork();
     
     if (!networkStatus.backendConnected) {
+      updateLoadingStatus('Connexion au serveur...', 'Le backend se réveille (cold start Render ?).', 'backend');
       await monitorBackend({ context: 'App Initialization' });
     }
 
+    updateLoadingStatus('Initialisation de Firebase...', 'Chargement des services sécurisés.', 'firebase');
     try {
       const app = await initializeFirebase();
       firebaseInitialized = true;

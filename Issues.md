@@ -102,7 +102,7 @@ Voici un listing complet d'issues pour le projet GitHub, organisé par catégori
     **Milestone** : MVP  
 
 17. **Titre** : Implémenter formulaire de contact  
-    **Description** : Dans contact.js, utiliser fetch pour POST /api/contact. Valider inputs, afficher feedback (success/error). Intégrer RGPD consent (cookies via JS localStorage).  
+    **Description** : Dans contact.js, utiliser fetch pour POST /api/contact. Valider inputs, afficher feedback (success/error). Intégrer RGPD  (cookies via JS localStorage).  
     **Labels** : frontend, form  
     **Assignees** : dev1  
     **Milestone** : MVP  

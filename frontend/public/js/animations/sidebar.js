@@ -219,8 +219,9 @@ function updateContentLayout() {
 
     contentMain.style.transition = 'margin-left 0.5s ease-in-out, margin-right 0.5s ease-in-out, width 0.5s ease-in-out, padding 0.5s ease-in-out, border-radius 0.5s ease-in-out';
     
-    contentMain.classList.remove('rounded-l-2xl', 'rounded-r-2xl', 'rounded-l-[28px]', 'rounded-r-[28px]', 'border-r', 'border-white/20', 'dark:border-[#3E3E3A]/50', 'rounded-[28px]');
+    contentMain.classList.remove('rounded-l-3xl', 'rounded-r-3xl', 'rounded-3xl', 'border-r', 'border-white/20', 'dark:border-[#3E3E3A]/50');
     contentMain.style.padding = '0';
+    contentMain.style.border = 'none';
 
     if (isMobile) {
         contentMain.style.marginLeft = '0';
@@ -250,16 +251,19 @@ function updateContentLayout() {
         let paddingLeft = leftSidebarOpen ? '0px' : '6px';
         let paddingRight = rightSidebarOpen ? '0px' : '6px';
         contentMain.style.padding = `6px ${paddingRight} 6px ${paddingLeft}`;
-        contentMain.classList.add('rounded-[28px]', 'border-r', 'border-white/20', 'dark:border-[#3E3E3A]/50');
+        
+        // Amélioration des bordures : border-2 pour épaisseur, rounded-3xl pour arrondi généreux et cohérent
+        contentMain.style.border = '2px solid';
+        contentMain.classList.add('rounded-3xl');
 
         if (leftSidebarOpen && !rightSidebarOpen) {
-            contentMain.classList.add('rounded-l-[28px]');
-            contentMain.classList.remove('rounded-r-[28px]');
+            contentMain.classList.add('rounded-l-3xl');
+            contentMain.classList.remove('rounded-r-3xl');
         } else if (rightSidebarOpen && !leftSidebarOpen) {
-            contentMain.classList.add('rounded-r-[28px]');
-            contentMain.classList.remove('rounded-l-[28px]');
+            contentMain.classList.add('rounded-r-3xl');
+            contentMain.classList.remove('rounded-l-3xl');
         } else if (leftSidebarOpen && rightSidebarOpen) {
-            contentMain.classList.add('rounded-l-[28px]', 'rounded-r-[28px]');
+            contentMain.classList.add('rounded-l-3xl', 'rounded-r-3xl');
         }
     }
 

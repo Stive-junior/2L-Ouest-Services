@@ -33,7 +33,7 @@ logInfo('CORS: Origines autorisées initialisées', { allowedOrigins });
  * @param {Function} callback - Callback pour accepter ou rejeter l'origine.
  */
 const originValidator = (origin, callback) => {
-  // Autoriser les requêtes sans origine (ex. : requêtes locales non-browser)
+  
   if (!origin) {
     logInfo('CORS: Pas d\'origine (local/non-browser)', { origin });
     return callback(null, true);

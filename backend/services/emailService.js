@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const { EmailParams, Sender, Recipient, Attachment } = require('mailersend');
 const handlebars = require('handlebars');
 const crypto = require('crypto');
 const fs = require('fs');
@@ -9,6 +9,7 @@ const { userRepo, contactRepo } = require('../repositories');
 const socketService = require('./socketService');
 const { logger, logInfo, logError, logAudit, logWarn } = require('./loggerService');
 const { AppError } = require('../utils/errorUtils');
+const { EmailModule } = require('mailersend/lib/modules/Email.module');
 
 /**
  * @typedef {Object} Contact
@@ -32,94 +33,38 @@ const { AppError } = require('../utils/errorUtils');
 class EmailService {
   
   constructor() {
-
-  this.transporter = nodemailer.createTransport({
-    host: config.smtp.host, 
-    port: config.smtp.port, 
-    secure: config.smtp.secure,  
-    auth: {
-      user: config.smtp.user,
-      pass: config.smtp.pass,
-    },
-
-    pool: false, 
-    connectionTimeout: 120000, 
-    greetingTimeout: 60000,     
-    socketTimeout: 60000,       
-
-    opportunisticTLS: true,     
-    ignoreTLS: false,     
-    logger: true,      
-    debug: true, 
-    tls: {
-      rejectUnauthorized: true  
-    },
-
-    lmtp: false
-  });
-
-  this.isSmtpVerified = false;
-
-}
-
-
-
-  async verifyTransporterWithRetry(maxRetries = 3, delayMs = 5000) {
-    let lastError = null;
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-      try {
-        logInfo(`Vérification SMTP (tentative ${attempt}/${maxRetries})`);
-        await this.transporter.verify();
-        this.isSmtpVerified = true;
-        logInfo('Configuration SMTP vérifiée avec succès');
-        return true;
-      } catch (error) {
-        lastError = error;
-        
-        if (error.code === 'ETIMEDOUT' || error.message.includes('timeout')) {
-          logWarn(`Timeout SMTP détecté : ${error.message}. Vérifiez firewall Render ou port SMTP.`);
-         }
-
-        logWarn(`Échec de la vérification SMTP (tentative ${attempt}/${maxRetries})`, { error: error.message });
-        if (attempt < maxRetries) {
-          await new Promise(resolve => setTimeout(resolve, delayMs));
-        }
-      }
-    }
-
-    this.isSmtpVerified = false;
-    logError('Vérification SMTP échouée après retries', { error: lastError?.message });
-
-    if (config.nodeEnv === 'production') {
-      throw new AppError(500, 'Configuration SMTP invalide après retries', lastError?.message);
-     }
-    return false;
+    this.emailModule = new EmailModule(
+      config.mailersend.apiKey,
+      'https://api.mailersend.com/v1'
+    );
+    this.fromEmail = 'noreply@test-86org8e71m1gew13.mlsender.net';
+    this.fromName = 'L&L Ouest Services';
+    this.replyToEmail = 'contact@llouestservices.com';
+    this.replyToName = 'L&L Ouest Services';
+    this.isMailersendReady = true;
   }
-
 
   async init() {
     try {
-      await this.verifyTransporter();
-      this.smtpReady = true;
-      logInfo('Initialisation SMTP réussie');
+      logInfo('Initialisation MailerSend réussie');
+      this.isMailersendReady = true;
     } catch (error) {
-      this.smtpReady = false;
-      logError('Échec initialisation SMTP (continu au démarrage)', { error: error.message });
+      this.isMailersendReady = false;
+      logError('Échec initialisation MailerSend (continu au démarrage)', { 
+        error: {
+          message: error.message,
+          stack: error.stack,
+          code: error.code,
+          name: error.name
+        }
+      });
     }
-  }
-
-  async verifyTransporter() {
-    return await this.verifyTransporterWithRetry();
   }
 
   async sendEmail(options) {
     try {
-
-     if (!this.isSmtpVerified) {
-        const verified = await this.verifyTransporterWithRetry(2, 3000);
-        if (!verified) {
-          throw new AppError(503, 'Service SMTP temporairement indisponible', 'SMTP not ready');
-        }
+      if (!this.isMailersendReady) {
+        throw new AppError(503, 'Service MailerSend temporairement indisponible', 'MailerSend not ready');
       }
 
       if (!options.to || typeof options.to !== 'string') {
@@ -134,224 +79,316 @@ class EmailService {
 
       const cleanTo = options.to.trim().toLowerCase();
 
-      const mailOptions = {
-        from: `"L&L Ouest Services" <${config.smtp.user}>`,
+      // Préparer attachments
+      const attachments = options.attachments ? options.attachments.map(att => {
+        if (typeof att.path === 'string' && fs.existsSync(att.path)) {
+          const buffer = fs.readFileSync(att.path);
+          return new Attachment({
+            filename: att.filename,
+            content: buffer.toString('base64'),
+            contentType: att.contentType || 'application/octet-stream',
+            ...(att.description && { description: att.description })
+          });
+        }
+        return null;
+      }).filter(Boolean) : [];
+
+      const params = new EmailParams();
+      params.setFrom(new Sender(this.fromEmail, this.fromName));
+      params.setReplyTo(new Recipient(this.replyToEmail, this.replyToName));
+      params.setTo([new Recipient(cleanTo)]);
+      if (options.cc) {
+        params.setCc(options.cc.trim().split(',').map(email => new Recipient(email.trim().toLowerCase())));
+      }
+      if (options.bcc) {
+        params.setBcc(options.bcc.trim().split(',').map(email => new Recipient(email.trim().toLowerCase())));
+      }
+      params.setSubject(options.subject);
+      if (options.text) {
+        params.setText(options.text);
+      }
+      params.setHtml(options.html);
+      if (attachments.length > 0) {
+        params.setAttachments(attachments);
+      }
+      // Note: customHeaders not directly supported in EmailParams; omit for now or handle via API if possible
+      // params.setTags(options.tags || []); // if needed
+
+      const result = await this.emailModule.send(params);
+
+      logInfo('Email envoyé avec succès via MailerSend', {
+        messageId: result.body.id,
         to: cleanTo,
-        cc: options.cc ? options.cc.trim().split(',').map(email => email.trim().toLowerCase()) : undefined,
-        bcc: options.bcc ? options.bcc.trim().split(',').map(email => email.trim().toLowerCase()) : undefined,
         subject: options.subject,
-        html: options.html,
-        attachments: options.attachments || [],
-        headers: options.headers || {},
-        tracking: {
-          clickTracking: { enable: true, skipQueryParam: true },
-          openTracking: { enable: true },
+        replyTo: this.replyToEmail,
+        attachmentsCount: attachments.length,
+        response: {
+          id: result.body.id,
+          status: result.status
         },
-      };
-
-      const result = await this.transporter.sendMail(mailOptions);
-
-      logInfo('Email envoyé avec succès', {
-        messageId: result.messageId,
-        to: cleanTo,
-        subject: options.subject,
-        response: result.response,
       });
 
       return {
-        messageId: result.messageId,
-        response: result.response,
-        accepted: result.accepted,
-        rejected: result.rejected,
+        messageId: result.body.id,
+        response: result,
+        accepted: [cleanTo],
+        rejected: [],
       };
     } catch (error) {
-      logError('Erreur lors de l\'envoi de l\'email', {
-        error: error.message,
-        to: options.to,
-        subject: options.subject,
-      });
-      if (error.code === 'ECONNECTION' || error.message.includes('timeout')) {
-        this.isSmtpVerified = false;
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        stack: error.stack,
+        statusCode: error.status || 'unknown',
+        to: options?.to,
+        subject: options?.subject,
+        payloadKeys: Object.keys({ ...options, html: '[truncated]' }),
+        attachmentsCount: options?.attachments?.length || 0,
+      };
+      logError('Erreur lors de l\'envoi de l\'email via MailerSend', errorDetails);
+      
+      if (error.message.includes('timeout') || error.code === 'ETIMEDOUT' || error.status === 408) {
+        this.isMailersendReady = false;
+        logWarn('Service MailerSend marqué comme indisponible suite à timeout', { to: options?.to });
+      }
+      
+      if (error.status >= 400 && error.status < 500) {
+        throw new AppError(error.status || 400, 'Erreur client lors de l\'envoi de l\'email', error.message);
       }
       throw new AppError(500, 'Erreur serveur lors de l\'envoi de l\'email', error.message);
     }
   }
 
   async sendContactEmail(contactId, recipient, htmlTemplate, emailSubject, templateData = {}) {
-  try {
-    if (!contactId || typeof contactId !== 'string') {
-      throw new AppError(400, 'ID de contact requis et doit être une chaîne');
-    }
-    if (!recipient || typeof recipient !== 'string') {
-      throw new AppError(400, 'Destinataire email requis');
-    }
-    if (!htmlTemplate || typeof htmlTemplate !== 'string') {
-      throw new AppError(400, 'Template HTML requis');
-    }
+    try {
+      if (!contactId || typeof contactId !== 'string') {
+        throw new AppError(400, 'ID de contact requis et doit être une chaîne');
+      }
+      if (!recipient || typeof recipient !== 'string') {
+        throw new AppError(400, 'Destinataire email requis');
+      }
+      if (!htmlTemplate || typeof htmlTemplate !== 'string') {
+        throw new AppError(400, 'Template HTML requis');
+      }
 
-    const contact = await contactRepo.getById(contactId);
-    if (!contact) {
-      throw new AppError(404, 'Message de contact non trouvé');
-    }
+      const contact = await contactRepo.getById(contactId);
+      if (!contact) {
+        throw new AppError(404, 'Message de contact non trouvé');
+      }
 
-    if (!contact.email || !contact.name || !contact.message) {
-      throw new AppError(400, 'Données de contact incomplètes');
-    }
+      if (!contact.email || !contact.name || !contact.message) {
+        throw new AppError(400, 'Données de contact incomplètes');
+      }
 
-    // Charger et encoder le logo en base64
-    const logoPath = path.join(__dirname, '../storage/logo.png');
-    const logoBuffer = fs.readFileSync(logoPath);
-    const logoBase64 = logoBuffer.toString('base64');
+      // Charger et encoder le logo en base64
+      const logoPath = path.join(__dirname, '../storage/logo.png');
+      let logoBase64;
+      try {
+        const logoBuffer = fs.readFileSync(logoPath);
+        logoBase64 = logoBuffer.toString('base64');
+      } catch (fsError) {
+        logWarn('Logo non trouvé pour email de contact', { path: logoPath, error: fsError.message });
+        logoBase64 = '';
+      }
 
-    const subject = emailSubject || `Message de contact - ${contact.name} - L&L Ouest Services`;
+      const subject = emailSubject || `Message de contact - ${contact.name} - L&L Ouest Services`;
 
-    const template = handlebars.compile(htmlTemplate);
-    const html = template({
-      id: contact.id,
-      name: contact.name,
-      email: contact.email,
-      phone: contact.phone || 'N/A',
-      subjects: contact.subjects || 'Nouveau message de contact',
-      message: contact.message,
-      createdAt: contact.createdAt ? new Date(contact.createdAt).toLocaleDateString('fr-FR') : new Date().toLocaleDateString('fr-FR'),
-      company: 'L&L Ouest Services',
-      currentYear: new Date().getFullYear(),
-      supportPhone: '+33 1 23 45 67 89',
-      website: 'https://www.llouestservices.com',
-      ...templateData,
-    });
+      const template = handlebars.compile(htmlTemplate);
+      const html = template({
+        id: contact.id,
+        name: contact.name,
+        email: contact.email,
+        phone: contact.phone || 'N/A',
+        subjects: contact.subjects || 'Nouveau message de contact',
+        message: contact.message,
+        createdAt: contact.createdAt ? new Date(contact.createdAt).toLocaleDateString('fr-FR') : new Date().toLocaleDateString('fr-FR'),
+        company: 'L&L Ouest Services',
+        currentYear: new Date().getFullYear(),
+        supportPhone: '+33 1 23 45 67 89',
+        website: 'https://www.llouestservices.com',
+        logoBase64,
+        ...templateData,
+      });
 
-    const result = await this.sendEmail({
-      to: recipient.trim().toLowerCase(),
-      subject,
-      html,
-      headers: {
-        'X-Contact-ID': contact.id,
-        'X-Contact-Name': contact.name,
-        'X-Contact-Subjects': contact.subjects || '',
-      },
-    });
+      // Version text simple pour compatibilité
+      const text = `Bonjour ${contact.name},
 
-    if (contact.userId) {
-      const eventType = templateData.isAdminReply ? 'contactReplied' : 'contactEmailSent';
-      socketService.emitToUser(contact.userId, eventType, {
-        contactId: contact.id,
+Vous avez soumis un message de contact le ${new Date(contact.createdAt).toLocaleDateString('fr-FR')}.
+
+Sujets: ${contact.subjects || 'Nouveau message'}
+Message: ${contact.message}
+
+Cordialement,
+L&L Ouest Services`;
+
+      const result = await this.sendEmail({
+        to: recipient.trim().toLowerCase(),
+        subject,
+        text,
+        html,
+        headers: {
+          'X-Contact-ID': contact.id,
+          'X-Contact-Name': contact.name,
+          'X-Contact-Subjects': contact.subjects || '',
+        },
+      });
+
+      if (contact.userId) {
+        const eventType = templateData.isAdminReply ? 'contactReplied' : 'contactEmailSent';
+        socketService.emitToUser(contact.userId, eventType, {
+          contactId: contact.id,
+          recipient,
+          messageId: result.messageId,
+        });
+      }
+
+      const logType = templateData.isAdminNotification ? 'notification admin' :
+                     templateData.isClientConfirmation ? 'confirmation client' : 'email contact';
+      logInfo(`Email de contact ${logType} envoyé`, {
+        contactId,
         recipient,
         messageId: result.messageId,
+        subjects: contact.subjects,
+        subject: subject.substring(0, 50) + (subject.length > 50 ? '...' : ''),
+        htmlLength: html.length,
+        textLength: text.length,
       });
+
+      return result;
+    } catch (error) {
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        contactId,
+        recipient,
+        hasTemplate: !!htmlTemplate,
+        templateLength: htmlTemplate ? htmlTemplate.length : 0,
+        subject: emailSubject,
+        templateDataKeys: Object.keys(templateData || {}),
+      };
+      logError('Erreur lors de l\'envoi de l\'email de contact', errorDetails);
+      throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de l\'envoi de l\'email de contact', error.message);
     }
-
-    const logType = templateData.isAdminNotification ? 'notification admin' :
-                   templateData.isClientConfirmation ? 'confirmation client' : 'email contact';
-    logInfo(`Email de contact ${logType} envoyé`, {
-      contactId,
-      recipient,
-      messageId: result.messageId,
-      subjects: contact.subjects,
-      subject: subject.substring(0, 50) + (subject.length > 50 ? '...' : ''),
-    });
-
-    return result;
-  } catch (error) {
-    logError('Erreur lors de l\'envoi de l\'email de contact', {
-      error: error.message,
-      contactId,
-      recipient,
-      hasTemplate: !!htmlTemplate,
-      templateLength: htmlTemplate ? htmlTemplate.length : 0,
-    });
-    throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de l\'envoi de l\'email de contact', error.message);
   }
-}
-
-
-
 
   async sendInvoiceEmail(userId, invoicePath, invoice, htmlTemplate, additionalData = {}) {
-  try {
-    if (!userId || typeof userId !== 'string') {
-      throw new AppError(400, 'ID d\'utilisateur requis');
+    try {
+      if (!userId || typeof userId !== 'string') {
+        throw new AppError(400, 'ID d\'utilisateur requis');
+      }
+      if (!invoicePath || typeof invoicePath !== 'string') {
+        throw new AppError(400, 'Chemin de la facture requis');
+      }
+      if (!invoice || typeof invoice !== 'object') {
+        throw new AppError(400, 'Détails de la facture requis');
+      }
+      if (!htmlTemplate || typeof htmlTemplate !== 'string') {
+        throw new AppError(400, 'Template HTML requis');
+      }
+
+      const user = await userRepo.getById(userId);
+      if (!user) {
+        throw new AppError(404, 'Utilisateur non trouvé');
+      }
+
+      const logoPath = path.join(__dirname, '../storage/logo.png'); 
+      let logoBase64;
+      try {
+        const logoBuffer = fs.readFileSync(logoPath);
+        logoBase64 = logoBuffer.toString('base64');
+      } catch (fsError) {
+        logWarn('Logo non trouvé pour email de facture', { path: logoPath, error: fsError.message });
+        logoBase64 = '';
+      }
+
+      const template = handlebars.compile(htmlTemplate);
+      const html = template({
+        name: user.name,
+        email: user.email,
+        invoiceId: invoice.id || invoice.invoiceId,
+        invoiceNumber: invoice.invoiceNumber || invoice.id || `LL${Date.now()}`,
+        amount: invoice.amount || invoice.total || '0.00',
+        date: invoice.date ? new Date(invoice.date).toLocaleDateString('fr-FR') : new Date().toLocaleDateString('fr-FR'),
+        dueDate: invoice.dueDate ? new Date(invoice.dueDate).toLocaleDateString('fr-FR') : 'N/A',
+        company: 'L&L Ouest Services',
+        currency: invoice.currency || '€',
+        currentYear: new Date().getFullYear(),
+        supportPhone: '+33 1 23 45 67 89',
+        website: 'https://www.llouestservices.com',
+        logoBase64,
+        link: invoice.link || '#',
+        ...additionalData,
+      });
+
+      // Version text simple
+      const text = `Bonjour ${user.name},
+
+Veuillez trouver ci-joint votre facture ${invoice.id || invoice.invoiceId} pour un montant de ${invoice.amount || invoice.total || '0.00'} ${invoice.currency || '€'}.
+
+Date: ${invoice.date ? new Date(invoice.date).toLocaleDateString('fr-FR') : new Date().toLocaleDateString('fr-FR')}
+Échéance: ${invoice.dueDate ? new Date(invoice.dueDate).toLocaleDateString('fr-FR') : 'N/A'}
+
+Cordialement,
+L&L Ouest Services`;
+
+      let attachmentBuffer;
+      try {
+        attachmentBuffer = fs.readFileSync(invoicePath);
+      } catch (fsError) {
+        throw new AppError(400, 'Fichier de facture non trouvé ou illisible', fsError.message);
+      }
+
+      const attachments = [new Attachment({
+        filename: `facture-${invoice.id || invoice.invoiceId || 'LL' + Date.now()}.pdf`,
+        content: attachmentBuffer.toString('base64'),
+        contentType: 'application/pdf',
+        ...(invoice.description && { description: invoice.description }),
+      })];
+
+      const result = await this.sendEmail({
+        to: user.email.trim().toLowerCase(),
+        subject: `Votre facture ${invoice.id || invoice.invoiceId} - L&L Ouest Services`,
+        text,
+        html,
+        attachments,
+        headers: {
+          'X-Invoice-ID': invoice.id || invoice.invoiceId,
+          'X-User-ID': userId,
+        },
+      });
+
+      socketService.emitToUser(userId, 'invoiceEmailSent', {
+        invoiceId: invoice.id || invoice.invoiceId,
+        messageId: result.messageId,
+      });
+
+      logAudit('Email de facture envoyé avec succès', {
+        userId,
+        invoiceId: invoice.id || invoice.invoiceId,
+        amount: invoice.amount || invoice.total,
+        messageId: result.messageId,
+        attachmentSize: attachmentBuffer.length,
+      });
+
+      return result;
+    } catch (error) {
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        userId,
+        invoiceId: invoice?.id || invoice?.invoiceId,
+        hasTemplate: !!htmlTemplate,
+        templateLength: htmlTemplate ? htmlTemplate.length : 0,
+        invoicePathExists: fs.existsSync(invoicePath),
+        additionalDataKeys: Object.keys(additionalData || {}),
+      };
+      logError('Erreur lors de l\'envoi de l\'email de facture', errorDetails);
+      throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de l\'envoi de l\'email de facture', error.message);
     }
-    if (!invoicePath || typeof invoicePath !== 'string') {
-      throw new AppError(400, 'Chemin de la facture requis');
-    }
-    if (!invoice || typeof invoice !== 'object') {
-      throw new AppError(400, 'Détails de la facture requis');
-    }
-    if (!htmlTemplate || typeof htmlTemplate !== 'string') {
-      throw new AppError(400, 'Template HTML requis');
-    }
-
-    const user = await userRepo.getById(userId);
-    if (!user) {
-      throw new AppError(404, 'Utilisateur non trouvé');
-    }
-
-    
-    const logoPath = path.join(__dirname, '../storage/logo.png'); 
-    const logoBuffer = fs.readFileSync(logoPath);
-    const logoBase64 = logoBuffer.toString('base64');
-
-    const template = handlebars.compile(htmlTemplate);
-    const html = template({
-      name: user.name,
-      email: user.email,
-      invoiceId: invoice.id || invoice.invoiceId,
-      invoiceNumber: invoice.invoiceNumber || invoice.id || `LL${Date.now()}`,
-      amount: invoice.amount || invoice.total || '0.00',
-      date: invoice.date ? new Date(invoice.date).toLocaleDateString('fr-FR') : new Date().toLocaleDateString('fr-FR'),
-      dueDate: invoice.dueDate ? new Date(invoice.dueDate).toLocaleDateString('fr-FR') : 'N/A',
-      company: 'L&L Ouest Services',
-      currency: invoice.currency || '€',
-      currentYear: new Date().getFullYear(),
-      supportPhone: '+33 1 23 45 67 89',
-      website: 'https://www.llouestservices.com',
-      logoBase64: logoBase64,
-      link: invoice.link || '#',
-      ...additionalData,
-    });
-
-    const attachments = [{
-      filename: `facture-${invoice.id || invoice.invoiceId || 'LL' + Date.now()}.pdf`,
-      path: invoicePath,
-      contentType: 'application/pdf',
-      ...(invoice.description && { description: invoice.description }),
-    }];
-
-    const result = await this.sendEmail({
-      to: user.email.trim().toLowerCase(),
-      subject: `Votre facture ${invoice.id || invoice.invoiceId} - L&L Ouest Services`,
-      html,
-      attachments,
-      headers: {
-        'X-Invoice-ID': invoice.id || invoice.invoiceId,
-        'X-User-ID': userId,
-      },
-    });
-
-    socketService.emitToUser(userId, 'invoiceEmailSent', {
-      invoiceId: invoice.id || invoice.invoiceId,
-      messageId: result.messageId,
-    });
-
-    logAudit('Email de facture envoyé avec succès', {
-      userId,
-      invoiceId: invoice.id || invoice.invoiceId,
-      amount: invoice.amount || invoice.total,
-      messageId: result.messageId,
-    });
-
-    return result;
-  } catch (error) {
-    logError('Erreur lors de l\'envoi de l\'email de facture', {
-      error: error.message,
-      userId,
-      invoiceId: invoice?.id,
-      hasTemplate: !!htmlTemplate,
-    });
-    throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de l\'envoi de l\'email de facture', error.message);
   }
-}
 
   async createContact(contactData, clientHtmlTemplate, adminHtmlTemplate) {
     let clientSendResult = null;
@@ -363,8 +400,6 @@ class EmailService {
         throw new AppError(400, 'Données de contact incomplètes (nom, email et message requis)');
       }
 
-     
-     
       const contact = await contactRepo.create({
         ...contactData,
         id: crypto.randomUUID(),
@@ -386,6 +421,7 @@ class EmailService {
         messageLength: contact.message.length,
       });
 
+      // Envoi de la confirmation au client
       if (clientHtmlTemplate) {
         clientSendResult = await this.sendContactEmail(
           contact.id,
@@ -396,8 +432,9 @@ class EmailService {
         );
       }
 
+      // Envoi de la notification à l'admin (config.smtp.user ou fallback)
       if (adminHtmlTemplate) {
-        const adminEmail = config.smtp.user || 'nanatchoffojunior@gmail.com';
+        const adminEmail = config.smtp?.user || 'nanatchoffojunior@gmail.com';
         adminSendResult = await this.sendContactEmail(
           contact.id,
           adminEmail,
@@ -414,18 +451,6 @@ class EmailService {
           adminSent: !!adminSendResult,
         });
       }
-
-      let admins = [];
-
-try {
-  admins = await userRepo.getByEmail(config.smtp.user);
-
-} catch (socketError) {
-  logWarn('Erreur notification socket admins', { error: socketError.message });
-}
- 
-
-    
 
       logAudit('Message de contact créé et emails envoyés avec succès', {
         contactId: contact.id,
@@ -449,9 +474,10 @@ try {
         },
       };
     } catch (error) {
-      logError('Erreur lors de la création du message de contact', {
-        error: error.message,
-        errorCode: error.code,
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
         contactData: {
           name: contactData.name,
           email: contactData.email,
@@ -464,13 +490,23 @@ try {
         adminTemplateProvided: !!adminHtmlTemplate,
         clientSent: !!clientSendResult,
         adminSent: !!adminSendResult,
-      });
+        contactCacheId: contactCache?.id,
+      };
+      logError('Erreur lors de la création du message de contact', errorDetails);
 
       if (contactCache && contactCache.id) {
-        await contactRepo.update(contactCache.id, {
-          status: 'created_email_failed',
-          errorMessage: error.message.substring(0, 500),
-        });
+        try {
+          await contactRepo.update(contactCache.id, {
+            status: 'created_email_failed',
+            errorMessage: error.message.substring(0, 500),
+          });
+          logWarn('Contact marqué comme échoué après erreur de création', { contactId: contactCache.id });
+        } catch (updateError) {
+          logError('Échec mise à jour statut contact après erreur', { 
+            contactId: contactCache.id, 
+            updateError: updateError.message 
+          });
+        }
       }
 
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la création du message de contact', error.message);
@@ -526,7 +562,13 @@ try {
 
       return enrichedContact;
     } catch (error) {
-      logError('Erreur lors de la récupération du message de contact', { error: error.message, contactId });
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        contactId,
+      };
+      logError('Erreur lors de la récupération du message de contact', errorDetails);
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la récupération du message de contact', error.message);
     }
   }
@@ -635,12 +677,15 @@ try {
 
       return enrichedContact;
     } catch (error) {
-      logError('Erreur lors de la mise à jour du message de contact', {
-        error: error.message,
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
         contactId,
         updatedFields: Object.keys(contactData || {}),
         hasSubjects: !!contactData?.subjects,
-      });
+      };
+      logError('Erreur lors de la mise à jour du message de contact', errorDetails);
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la mise à jour du message de contact', error.message);
     }
   }
@@ -712,11 +757,14 @@ try {
         message: 'Contact archivé avec succès',
       };
     } catch (error) {
-      logError('Erreur lors de la suppression du message de contact', {
-        error: error.message,
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
         contactId,
         deletedBy,
-      });
+      };
+      logError('Erreur lors de la suppression du message de contact', errorDetails);
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la suppression du message de contact', error.message);
     }
   }
@@ -828,199 +876,259 @@ try {
 
       return enrichedResult;
     } catch (error) {
-      logError('Erreur lors de la récupération des messages de contact', {
-        error: error.message,
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
         page,
         limit,
-        filters,
+        filtersKeys: Object.keys(filters),
         sortBy,
         sortOrder,
-      });
+      };
+      logError('Erreur lors de la récupération des messages de contact', errorDetails);
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la récupération des messages de contact', error.message);
     }
   }
 
- async sendReplyEmail(contactId, replyMessage, htmlTemplate, replySubject, additionalData = {}) {
-  try {
-    const contact = await contactRepo.getById(contactId);
-    if (!contact) {
-      throw new AppError(404, 'Message de contact non trouvé');
-    }
+  async sendReplyEmail(contactId, replyMessage, htmlTemplate, replySubject, additionalData = {}) {
+    try {
+      const contact = await contactRepo.getById(contactId);
+      if (!contact) {
+        throw new AppError(404, 'Message de contact non trouvé');
+      }
 
-    if (!replyMessage || typeof replyMessage !== 'string' || replyMessage.trim().length < 10) {
-      throw new AppError(400, 'Message de réponse invalide (minimum 10 caractères)');
-    }
+      if (!replyMessage || typeof replyMessage !== 'string' || replyMessage.trim().length < 10) {
+        throw new AppError(400, 'Message de réponse invalide (minimum 10 caractères)');
+      }
 
-    // Load and encode logo in base64
-    const logoPath = path.join(__dirname, '../storage/logo.png'); 
-    const logoBuffer = fs.readFileSync(logoPath);
-    const logoBase64 = logoBuffer.toString('base64');
+      // Load and encode logo in base64
+      const logoPath = path.join(__dirname, '../storage/logo.png'); 
+      let logoBase64;
+      try {
+        const logoBuffer = fs.readFileSync(logoPath);
+        logoBase64 = logoBuffer.toString('base64');
+      } catch (fsError) {
+        logWarn('Logo non trouvé pour email de réponse', { path: logoPath, error: fsError.message });
+        logoBase64 = '';
+      }
 
-    const cleanReply = replyMessage.trim();
+      const cleanReply = replyMessage.trim();
 
-    const subject = replySubject ||
-      `Re: Votre message du ${new Date(contact.createdAt).toLocaleDateString('fr-FR')} - L&L Ouest Services`;
+      const subject = replySubject ||
+        `Re: Votre message du ${new Date(contact.createdAt).toLocaleDateString('fr-FR')} - L&L Ouest Services`;
 
-    let html;
-    if (htmlTemplate && typeof htmlTemplate === 'string') {
-      const template = handlebars.compile(htmlTemplate);
-      html = template({
-        name: contact.name,
-        email: contact.email,
-        originalMessage: contact.message,
-        originalSubjects: contact.subjects || 'N/A',
+      let html;
+      let text;
+      if (htmlTemplate && typeof htmlTemplate === 'string') {
+        const template = handlebars.compile(htmlTemplate);
+        html = template({
+          name: contact.name,
+          email: contact.email,
+          originalMessage: contact.message,
+          originalSubjects: contact.subjects || 'N/A',
+          reply: cleanReply,
+          createdAt: new Date(contact.createdAt).toLocaleDateString('fr-FR'),
+          company: 'L&L Ouest Services',
+          supportPhone: '+33 1 23 45 67 89',
+          website: 'https://www.llouestservices.com',
+          repliedByName: additionalData.repliedByName || 'L&L Ouest Services',
+          logoBase64,
+          ...additionalData,
+        });
+
+        // Version text simple
+        text = `Bonjour ${contact.name},
+
+Réponse à votre message du ${new Date(contact.createdAt).toLocaleDateString('fr-FR')} concernant "${contact.subjects || 'votre demande'}".
+
+Votre message original:
+${contact.message}
+
+Notre réponse:
+${cleanReply}
+
+${additionalData.repliedByName ? `Répondu par : ${additionalData.repliedByName}` : ''}
+
+Cordialement,
+L&L Ouest Services`;
+      } else {
+        // Fallback template (updated to match the new design)
+        html = `
+          <!DOCTYPE html>
+          <html lang="fr">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+            <style>
+              body { font-family: 'Open Sans', Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; color: #6c757d; font-size: 14px; line-height: 1.6; }
+              .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border: 1px solid #dee2e6; border-radius: 6px; overflow: hidden; }
+              .header { padding: 20px; border-bottom: 2px solid #2563eb; text-align: center; }
+              .header img { width: 60px; height: 60px; margin-bottom: 10px; }
+              .header h1 { font-family: 'Merriweather', serif; font-size: 18px; color: #2563eb; margin: 0; font-weight: 700; }
+              .content { padding: 20px; }
+              .content p { margin: 10px 0; }
+              .original-message { border: 1px solid #dee2e6; border-radius: 4px; padding: 15px; margin-bottom: 15px; background-color: #f8f9fa; }
+              .original-message h3 { font-family: 'Merriweather', serif; font-size: 16px; color: #2563eb; margin: 0 0 10px; }
+              .reply-section { border: 1px solid #dee2e6; border-radius: 4px; padding: 15px; margin-bottom: 15px; }
+              .reply-section h3 { font-family: 'Merriweather', serif; font-size: 16px; color: #2563eb; margin: 0 0 10px; }
+              .button { display: inline-block; background-color: #2563eb; color: #ffffff; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600; margin: 10px 0; transition: background-color 0.3s; }
+              .button:hover { background-color: #1e40af; }
+              .footer { border-top: 1px solid #dee2e6; padding: 15px; text-align: center; font-size: 12px; color: #6c757d; }
+              .footer a { color: #2563eb; text-decoration: none; }
+              .footer a:hover { text-decoration: underline; }
+              @media only screen and (max-width: 600px) {
+                .container { margin: 10px; padding: 10px; }
+                .content { padding: 15px; }
+                .button { display: block; text-align: center; }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <img src="data:image/png;base64,${logoBase64}" alt="L&L Ouest Services Logo">
+                <h1>Réponse à Votre Message</h1>
+              </div>
+              <div class="content">
+                <p>Cher(e) ${contact.name || 'Utilisateur'},</p>
+                <p>Merci pour votre message du ${new Date(contact.createdAt).toLocaleDateString('fr-FR')} concernant "${contact.subjects || 'votre demande'}". Voici notre réponse :</p>
+                <div class="original-message">
+                  <h3>Votre message original :</h3>
+                  <p>${contact.message.replace(/\n/g, '<br>')}</p>
+                  ${contact.phone ? `<p><strong>Téléphone :</strong> ${contact.phone}</p>` : ''}
+                </div>
+                <div class="reply-section">
+                  <h3>Notre réponse :</h3>
+                  <p>${cleanReply.replace(/\n/g, '<br>')}</p>
+                  ${additionalData.repliedByName ? `<p>Répondu par : ${additionalData.repliedByName}</p>` : ''}
+                </div>
+                <p>Pour toute question supplémentaire, contactez-nous au <strong>+33 1 23 45 67 89</strong> ou par email à <a href="mailto:contact@llouestservices.com">contact@llouestservices.com</a>.</p>
+                <p><a href="https://www.llouestservices.com" class="button">Visiter notre site</a></p>
+                <p>Cordialement,<br>L&L Ouest Services</p>
+              </div>
+              <div class="footer">
+                <p>L&L Ouest Services &copy; ${new Date().getFullYear()} | Tous droits réservés<br>
+                   <a href="https://www.llouestservices.com">https://www.llouestservices.com</a> | Support : +33 1 23 45 67 89</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+        text = `Bonjour ${contact.name || 'Utilisateur'},
+
+Merci pour votre message du ${new Date(contact.createdAt).toLocaleDateString('fr-FR')} concernant "${contact.subjects || 'votre demande'}".
+
+Votre message original:
+${contact.message.replace(/\n/g, '\n')}
+
+${contact.phone ? `Téléphone: ${contact.phone}` : ''}
+
+Notre réponse:
+${cleanReply.replace(/\n/g, '\n')}
+
+${additionalData.repliedByName ? `Répondu par : ${additionalData.repliedByName}` : ''}
+
+Pour toute question supplémentaire, contactez-nous au +33 1 23 45 67 89 ou par email à contact@llouestservices.com.
+
+Cordialement,
+L&L Ouest Services`;
+      }
+
+      const sendResult = await this.sendEmail({
+        to: contact.email.trim().toLowerCase(),
+        subject,
+        text,
+        html,
+        headers: {
+          'X-Contact-ID': contact.id,
+          'X-Reply-ID': crypto.randomUUID(),
+          'X-Reply-Type': 'admin_response',
+          'X-Replied-By': additionalData.repliedBy || 'system',
+        },
+      });
+
+      const updatedContact = await contactRepo.update(contactId, {
         reply: cleanReply,
-        createdAt: new Date(contact.createdAt).toLocaleDateString('fr-FR'),
-        company: 'L&L Ouest Services',
-        supportPhone: '+33 1 23 45 67 89',
-        website: 'https://www.llouestservices.com',
-        repliedByName: additionalData.repliedByName || 'L&L Ouest Services',
-        logoBase64: logoBase64,
-        ...additionalData,
+        repliedAt: new Date().toISOString(),
+        status: 'replied',
+        updatedAt: new Date().toISOString(),
+        repliedBy: additionalData.repliedBy || null,
       });
-    } else {
-      // Fallback template (updated to match the new design)
-      html = `
-        <!DOCTYPE html>
-        <html lang="fr">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-          <style>
-            body { font-family: 'Open Sans', Arial, sans-serif; background-color: ${colors.light}; margin: 0; padding: 0; color: ${colors.secondary}; font-size: 14px; line-height: 1.6; }
-            .container { max-width: 600px; margin: 20px auto; background-color: ${colors.white}; border: 1px solid ${colors.border}; border-radius: 6px; overflow: hidden; }
-            .header { padding: 20px; border-bottom: 2px solid ${colors.primary}; text-align: center; }
-            .header img { width: 60px; height: 60px; margin-bottom: 10px; }
-            .header h1 { font-family: 'Merriweather', serif; font-size: 18px; color: ${colors.primary}; margin: 0; font-weight: 700; }
-            .content { padding: 20px; }
-            .content p { margin: 10px 0; }
-            .original-message { border: 1px solid ${colors.border}; border-radius: 4px; padding: 15px; margin-bottom: 15px; background-color: ${colors.light}; }
-            .original-message h3 { font-family: 'Merriweather', serif; font-size: 16px; color: ${colors.primary}; margin: 0 0 10px; }
-            .reply-section { border: 1px solid ${colors.border}; border-radius: 4px; padding: 15px; margin-bottom: 15px; }
-            .reply-section h3 { font-family: 'Merriweather', serif; font-size: 16px; color: ${colors.primary}; margin: 0 0 10px; }
-            .button { display: inline-block; background-color: ${colors.primary}; color: ${colors.white}; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600; margin: 10px 0; transition: background-color 0.3s; }
-            .button:hover { background-color: ${colors.accent}; }
-            .footer { border-top: 1px solid ${colors.border}; padding: 15px; text-align: center; font-size: 12px; color: ${colors.secondary}; }
-            .footer a { color: ${colors.primary}; text-decoration: none; }
-            .footer a:hover { text-decoration: underline; }
-            @media only screen and (max-width: 600px) {
-              .container { margin: 10px; padding: 10px; }
-              .content { padding: 15px; }
-              .button { display: block; text-align: center; }
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <img src="data:image/png;base64,${logoBase64}" alt="L&L Ouest Services Logo">
-              <h1>Réponse à Votre Message</h1>
-            </div>
-            <div class="content">
-              <p>Cher(e) ${contact.name || 'Utilisateur'},</p>
-              <p>Merci pour votre message du ${new Date(contact.createdAt).toLocaleDateString('fr-FR')} concernant "${contact.subjects || 'votre demande'}". Voici notre réponse :</p>
-              <div class="original-message">
-                <h3>Votre message original :</h3>
-                <p>${contact.message.replace(/\n/g, '<br>')}</p>
-                ${contact.phone ? `<p><strong>Téléphone :</strong> ${contact.phone}</p>` : ''}
-              </div>
-              <div class="reply-section">
-                <h3>Notre réponse :</h3>
-                <p>${cleanReply.replace(/\n/g, '<br>')}</p>
-                ${additionalData.repliedByName ? `<p>Répondu par : ${additionalData.repliedByName}</p>` : ''}
-              </div>
-              <p>Pour toute question supplémentaire, contactez-nous au <strong>+33 1 23 45 67 89</strong> ou par email à <a href="mailto:contact@llouestservices.com">contact@llouestservices.com</a>.</p>
-              <p><a href="https://www.llouestservices.com" class="button">Visiter notre site</a></p>
-              <p>Cordialement,<br>L&L Ouest Services</p>
-            </div>
-            <div class="footer">
-              <p>L&L Ouest Services &copy; ${new Date().getFullYear()} | Tous droits réservés<br>
-                 <a href="https://www.llouestservices.com">https://www.llouestservices.com</a> | Support : +33 1 23 45 67 89</p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `;
-    }
 
-    const sendResult = await this.sendEmail({
-      to: contact.email.trim().toLowerCase(),
-      subject,
-      html,
-      headers: {
-        'X-Contact-ID': contact.id,
-        'X-Reply-ID': crypto.randomUUID(),
-        'X-Reply-Type': 'admin_response',
-        'X-Replied-By': additionalData.repliedBy || 'system',
-      },
-    });
+      if (!updatedContact) {
+        throw new AppError(500, 'Échec de la mise à jour du contact après envoi de la réponse');
+      }
 
-    const updatedContact = await contactRepo.update(contactId, {
-      reply: cleanReply,
-      repliedAt: new Date().toISOString(),
-      status: 'replied',
-      updatedAt: new Date().toISOString(),
-      repliedBy: additionalData.repliedBy || null,
-    });
+      const enrichedUpdatedContact = {
+        ...updatedContact,
+        subjectsArray: updatedContact.subjects ? updatedContact.subjects.split('-').map(s => s.trim()).filter(s => s.length > 0) : [],
+        subjectsCount: updatedContact.subjects ? updatedContact.subjects.split('-').filter(s => s.trim().length > 0).length : 0,
+        messagePreview: updatedContact.message ? (updatedContact.message.length > 100 ? updatedContact.message.substring(0, 100) + '...' : updatedContact.message) : '',
+        replyPreview: updatedContact.reply ? (updatedContact.reply.length > 100 ? updatedContact.reply.substring(0, 100) + '...' : updatedContact.reply) : '',
+        statusLabel: this.getStatusLabel(updatedContact.status),
+        phoneValid: updatedContact.phone && updatedContact.phone.startsWith('+33') && updatedContact.phone.length === 12,
+        hasReply: true,
+        replyLength: updatedContact.reply ? updatedContact.reply.length : 0,
+        repliedAtFormatted: updatedContact.repliedAt ? new Date(updatedContact.repliedAt).toLocaleDateString('fr-FR', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        }) : null,
+      };
 
-    if (!updatedContact) {
-      throw new AppError(500, 'Échec de la mise à jour du contact après envoi de la réponse');
-    }
+      if (contact.userId) {
+        socketService.emitToUser(contact.userId, 'contactReplied', {
+          contactId,
+          replyPreview: enrichedUpdatedContact.replyPreview,
+          repliedAt: enrichedUpdatedContact.repliedAtFormatted,
+          messageId: sendResult.messageId,
+          repliedBy: additionalData.repliedByName || 'L&L Ouest Services',
+        });
+      }
 
-    const enrichedUpdatedContact = {
-      ...updatedContact,
-      subjectsArray: updatedContact.subjects ? updatedContact.subjects.split('-').map(s => s.trim()).filter(s => s.length > 0) : [],
-      subjectsCount: updatedContact.subjects ? updatedContact.subjects.split('-').filter(s => s.trim().length > 0).length : 0,
-      messagePreview: updatedContact.message ? (updatedContact.message.length > 100 ? updatedContact.message.substring(0, 100) + '...' : updatedContact.message) : '',
-      replyPreview: updatedContact.reply ? (updatedContact.reply.length > 100 ? updatedContact.reply.substring(0, 100) + '...' : updatedContact.reply) : '',
-      statusLabel: this.getStatusLabel(updatedContact.status),
-      phoneValid: updatedContact.phone && updatedContact.phone.startsWith('+33') && updatedContact.phone.length === 12,
-      hasReply: true,
-      replyLength: updatedContact.reply ? updatedContact.reply.length : 0,
-    };
-
-    if (contact.userId) {
-      socketService.emitToUser(contact.userId, 'contactReplied', {
+      socketService.emitToAdmins('contactReplied', {
         contactId,
-        replyPreview: enrichedUpdatedContact.replyPreview,
-        repliedAt: enrichedUpdatedContact.repliedAtFormatted,
+        repliedTo: contact.email,
+        replyLength: enrichedUpdatedContact.replyLength,
         messageId: sendResult.messageId,
-        repliedBy: additionalData.repliedByName || 'L&L Ouest Services',
+        repliedBy: additionalData.repliedByName || 'system',
       });
+
+      logAudit('Email de réponse envoyé et contact mis à jour', {
+        contactId,
+        email: contact.email,
+        replyLength: cleanReply.length,
+        messageId: sendResult.messageId,
+        status: enrichedUpdatedContact.status,
+        repliedBy: additionalData.repliedBy || 'system',
+        htmlLength: html.length,
+        textLength: text.length,
+      });
+
+      return {
+        messageId: sendResult.messageId,
+        updatedContact: enrichedUpdatedContact,
+      };
+    } catch (error) {
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        contactId,
+        replyLength: replyMessage ? replyMessage.length : 0,
+        hasTemplate: !!htmlTemplate,
+        subject: replySubject,
+        additionalDataKeys: Object.keys(additionalData || {}),
+      };
+      logError('Erreur lors de l\'envoi de l\'email de réponse', errorDetails);
+      throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de l\'envoi de l\'email de réponse', error.message);
     }
-
-    socketService.emitToAdmins('contactReplied', {
-      contactId,
-      repliedTo: contact.email,
-      replyLength: enrichedUpdatedContact.replyLength,
-      messageId: sendResult.messageId,
-      repliedBy: additionalData.repliedByName || 'system',
-    });
-
-    logAudit('Email de réponse envoyé et contact mis à jour', {
-      contactId,
-      email: contact.email,
-      replyLength: cleanReply.length,
-      messageId: sendResult.messageId,
-      status: enrichedUpdatedContact.status,
-      repliedBy: additionalData.repliedBy || 'system',
-    });
-
-    return {
-      messageId: sendResult.messageId,
-      updatedContact: enrichedUpdatedContact,
-    };
-  } catch (error) {
-    logError('Erreur lors de l\'envoi de l\'email de réponse', {
-      error: error.message,
-      contactId,
-      replyLength: replyMessage ? replyMessage.length : 0,
-      hasTemplate: !!htmlTemplate,
-    });
-    throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de l\'envoi de l\'email de réponse', error.message);
   }
-}
 
   async getContactStats(filters = {}) {
     try {
@@ -1045,10 +1153,13 @@ try {
         filtersApplied: Object.keys(filters).filter(key => filters[key]).length,
       };
     } catch (error) {
-      logError('Erreur lors de la récupération des statistiques des contacts', {
-        error: error.message,
-        filters,
-      });
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        filtersKeys: Object.keys(filters),
+      };
+      logError('Erreur lors de la récupération des statistiques des contacts', errorDetails);
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de la récupération des statistiques', error.message);
     }
   }
@@ -1081,16 +1192,20 @@ try {
       logInfo('Export CSV des contacts généré', {
         totalExported: result.contacts.length,
         filtersApplied: Object.keys(filters).filter(key => filters[key]).length,
+        fileSize: Buffer.byteLength(csv, 'utf8'),
       });
 
       return csv;
     } catch (error) {
-      logError('Erreur lors de l\'export CSV des contacts', {
-        error: error.message,
-        filters,
+      const errorDetails = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        filtersKeys: Object.keys(filters),
         sortBy,
         sortOrder,
-      });
+      };
+      logError('Erreur lors de l\'export CSV des contacts', errorDetails);
       throw error instanceof AppError ? error : new AppError(500, 'Erreur serveur lors de l\'export des contacts', error.message);
     }
   }

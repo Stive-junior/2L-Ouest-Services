@@ -757,7 +757,7 @@
       ],
       "rating": 4.5,
       "reviews": 98,
-      "equipment": ["pressure_washer", "floor_machine", "vacuum", "brush"],
+      "equipment": ["pressure_washer", "car_machine","cloth","vacuum", "brush"],
       "members": [
         {
           "name": "Marc Parking",

@@ -39,6 +39,8 @@ const { validateEnv } = require('./env');
  * @property {boolean} smtp.secure - Utilisation de SSL/TLS.
  * @property {string} smtp.user - Utilisateur SMTP.
  * @property {string} smtp.pass - Mot de passe SMTP.
+ * @property {object} mailersend - Configuration MailerSend pour l'envoi d'emails transactionnels.
+ * @property {string} mailersend.apiKey - Clé API MailerSend.
  * @property {object} googleMaps - Configuration Google Maps.
  * @property {string} googleMaps.apiKey - Clé API Google Maps.
  * @property {object} socket - Configuration WebSocket.

@@ -1,0 +1,67 @@
+🚨 [2L-Ouest-Services] 06/10/2025 00:03:05 | ERROR    | Erreur lors de l'envoi de l'email via MailerSend
+{
+  "error": "request to https://api.mailersend.com/v1/email failed, reason: ",
+  "to": "nanatchoffojunior@gmail.com",
+  "subject": "Confirmation de votre message - L&L Ouest Services"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 00:03:05 | ERROR    | Erreur lors de l'envoi de l'email de contact
+{
+  "error": "Erreur serveur lors de l'envoi de l'email",
+  "contactId": "1959062b-e36b-4b4d-bfb0-9c9ee59af63f",
+  "recipient": "nanatchoffojunior@gmail.com",
+  "hasTemplate": true,
+  "templateLength": 11117
+}
+🚨 [2L-Ouest-Services] 06/10/2025 00:03:05 | ERROR    | Erreur lors de la création du message de contact
+{
+  "error": "Erreur serveur lors de l'envoi de l'email",
+  "contactData": {
+    "name": "Nana Junior",
+    "email": "nanatchoffojunior@gmail.com",
+    "hasMessage": true,
+    "hasSubjects": true,
+    "hasPhone": true,
+    "userId": null
+  },
+  "clientTemplateProvided": true,
+  "adminTemplateProvided": true,
+  "clientSent": false,
+  "adminSent": false
+}
+📋 [2L-Ouest-Services] 06/10/2025 00:03:06 | AUDIT    | Message de contact mis à jour
+{
+  "contactId": "1959062b-e36b-4b4d-bfb0-9c9ee59af63f",
+  "updatedFields": [
+    "status",
+    "errorMessage"
+  ]
+}
+🚨 [2L-Ouest-Services] 06/10/2025 00:03:06 | ERROR    | Erreur lors de la création du message de contact
+{
+  "error": "Erreur serveur lors de l'envoi de l'email"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 00:03:06 | ERROR    | Erreur traitée par le middleware Erreur serveur lors de l'envoi de l'email
+{
+  "statusCode": 500,
+  "details": "request to https://api.mailersend.com/v1/email failed, reason: ",
+  "path": "/api/contact",
+  "method": "POST"
+}
+📋 [2L-Ouest-Services] 06/10/2025 00:31:29 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "4779834f-5f94-4bb7-a5f8-5b4010e1570c",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true
+}
+📋 [2L-Ouest-Services] 06/10/2025 00:44:26 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "8964b87a-0144-4926-a7d9-aac6b3946e40",
+  "name": "Nana Junior",
+  "email": "nanatchoffojunior@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true
+}

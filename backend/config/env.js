@@ -31,6 +31,7 @@ dotenv.config({ path: path.resolve(__dirname, `../env/${envFile}`) });
  * @property {string} FIREBASE_STORAGE_BUCKET - Bucket de stockage Firebase.
  * @property {string} FCM_VAPID_KEY - Clé publique VAPID pour FCM (notifications push).
  * @property {string} FCM_SENDER_ID - Sender ID pour FCM (messagingSenderId).
+ * @property {string} MAILERSEND_API_KEY - Clé API MailerSend pour l'envoi d'emails transactionnels.
  * @property {number} RATE_LIMIT_WINDOW_MS - Fenêtre de temps pour le rate-limiting (ms).
  * @property {number} RATE_LIMIT_MAX - Nombre maximum de requêtes par fenêtre.
  * @property {string} LOG_LEVEL - Niveau de journalisation ('error', 'warn', 'info', 'debug').
@@ -114,6 +115,9 @@ const envVarsSchema = Joi.object({
   FCM_SENDER_ID: Joi.string()
     .required()
     .description('Sender ID pour FCM (messagingSenderId)'),
+  MAILERSEND_API_KEY: Joi.string()
+    .required()
+    .description('Clé API MailerSend pour l\'envoi d\'emails transactionnels'),
   
   RATE_LIMIT_WINDOW_MS: Joi.number()
     .integer()
@@ -233,6 +237,9 @@ const validateEnv = () => {
       vapidKey: envVars.FCM_VAPID_KEY,
       senderId: envVars.FCM_SENDER_ID,
     },
+    mailersend: {
+      apiKey: envVars.MAILERSEND_API_KEY,
+    },
     rateLimit: {
       windowMs: envVars.RATE_LIMIT_WINDOW_MS,
       max: envVars.RATE_LIMIT_MAX,
@@ -266,5 +273,3 @@ const validateEnv = () => {
 };
 
 module.exports = { validateEnv };
-
-

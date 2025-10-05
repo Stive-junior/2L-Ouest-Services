@@ -128,6 +128,7 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
         'LOG_LEVEL', 'LOG_FILE_PATH', 'SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS',
         'GOOGLE_MAPS_API_KEY', 'SOCKET_PATH', 'SOCKET_CONNECT_TIMEOUT', 'SOCKET_MAX_DISCONNECTION_DURATION',
         'SOCKET_PING_TIMEOUT', 'SOCKET_PING_INTERVAL', 'SOCKET_MAX_HTTP_BUFFER_SIZE',
+        'MAILERSEND_API_KEY',  // Ajout pour MailerSend
       ];
       const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
       if (missingVars.length > 0) {
@@ -148,15 +149,15 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
       logInfo('Connexion Firestore : OK', { collections });
 
 
-     logInfo('Tentative de vérification SMTP...');
-      const smtpVerified = await emailService.verifyTransporterWithRetry(3, 5000);
-      if (!smtpVerified) {
-        logWarn('SMTP non vérifié (mais service continue)');
+     logInfo('Tentative de vérification MailerSend...');
+      await emailService.init(); 
+      if (!emailService.isMailersendReady) {
+        logWarn('MailerSend non vérifié (mais service continue)');
         if (config.nodeEnv === 'production') {
-          throw new AppError(503, 'Configuration SMTP invalide après retries');
+          throw new AppError(503, 'Configuration MailerSend invalide après init');
          }
       } else {
-        logInfo('Vérification SMTP : OK');
+        logInfo('Vérification MailerSend : OK');
       }
 
       // Vérification de la configuration Google Maps (gardé)
@@ -177,7 +178,6 @@ async function healthCheck(maxRetries = 3, delayMs = 5000) {
       }
       logInfo('Configuration Socket.IO : OK');
 
-      // Vérification de la configuration Firebase client-side (gardé)
       if (!config.firebase.appId || !config.firebase.apiKey || !config.firebase.measurementId) {
         throw new AppError(500, 'Configuration Firebase client-side incomplète', 'Incomplete Firebase client configuration');
       }
@@ -361,7 +361,7 @@ app.get('/api/health', async (req, res) => {
       timestamp: new Date().toISOString(),
       environment: config.nodeEnv,
       firebaseStatus: 'connected',
-      smtpStatus: emailService.isSmtpVerified ? 'verified' : 'unverified',
+      mailersendStatus: emailService.isMailersendReady ? 'ready' : 'unverified',  // Adapté pour MailerSend
       collections,
       socketStatus: socketService.io ? 'connected' : 'disconnected',
       networkStatus: global.networkStatus ? 'online' : 'offline',
@@ -474,7 +474,7 @@ async function startServer() {
       logInfo(`Serveur démarré sur le port ${port}`);  
 
       emailService.init().catch(err => {
-        logError('Init SMTP échouée au démarrage', { error: err.message });
+        logError('Init MailerSend échouée au démarrage', { error: err.message });
       });
 
       healthCheck().then(() => {

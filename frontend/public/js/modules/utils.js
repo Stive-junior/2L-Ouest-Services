@@ -20,18 +20,17 @@ let firebaseConfig = null;
 // Cache pour les configurations Firebase
 let firebaseConfigCache = null; // Note : Initialisé à null, mais pourrait être un objet en cas de besoin
 const CONFIG_CACHE_KEY = 'firebaseConfigCache';
-const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 heures
+const CACHE_TTL = 24 * 60 * 60 * 1000;
 
-export const API_BASE_URL = 'https://twol-ouest-services.onrender.com/api';
-//export const  API_BASE_URL = 'http://localhost:8000/api';
+//export const API_BASE_URL = 'https://twol-ouest-services.onrender.com/api';
+export const  API_BASE_URL = 'http://localhost:8000/api';
 export const USER_CACHE_KEY = 'userDataCache';
 
 let isShowingErrorModal = false;
 let accumulatedErrors = []; 
 
-
 let networkStatusCache = null;
-const NETWORK_CACHE_TTL = 30 * 1000;
+const NETWORK_CACHE_TTL = 5 * 60 * 1000;
 
 // Chargement asynchrone de SweetAlert2
 const swalScript = document.createElement('script');
@@ -148,7 +147,7 @@ export async function initializeFirebase() {
 
 /**
  * Récupère les configurations Firebase via l'API backend avec cache intelligent.
- * Effectue jusqu'à 3 tentatives avec retries, et affiche un modal sur échecs persistants.
+ * Effectue jusqu'à 5 tentatives avec retries, et affiche un modal sur échecs persistants.
  * @returns {Promise<Object>} La configuration Firebase.
  * @throws {Error} Si la récupération échoue après retries.
  */
@@ -159,7 +158,7 @@ export async function getFirebaseConfig() {
     return cachedConfig;
   }
 
-  const retries = 3;
+  const retries = 5; // Augmenté à 5 pour cold starts
   let lastError;
   const errorId = generateString(8);
 
@@ -174,8 +173,9 @@ export async function getFirebaseConfig() {
       
       const response = await apiFetch('/config/firebase', 'GET', null, false, {
         retries: 0,
-        timeout: 10000,
-        retryOnNetworkError: false
+        timeout: 60000,
+        retryOnColdStart: true,
+        context: 'Firebase Config'
       });
 
       if (response.status !== "success" || !response.data) {
@@ -228,7 +228,7 @@ export async function getFirebaseConfig() {
         throw error;
       }
 
-      await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+      await new Promise(resolve => setTimeout(resolve, 2000 * attempt));
     }
   }
 
@@ -239,6 +239,7 @@ export async function getFirebaseConfig() {
   });
   throw lastError;
 }
+
 
 
 /**
@@ -344,6 +345,7 @@ export function cacheUserData(userData) {
   }
 }
 
+
 /**
  * Vérifie la connectivité au backend via la route /check.
  * @param {Object} [options] - Options supplémentaires.
@@ -352,65 +354,98 @@ export function cacheUserData(userData) {
  */
 export async function checkNetwork(options = {}) {
   const { context = 'Network Check' } = options;
-
   const errorId = generateString(8);
 
-  // Vérifier la connectivité au backend avec fetch direct via /check
-  try {
-    const startTime = performance.now();
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
-
-    const response = await fetch(`${API_BASE_URL}/check`, {
-      method: 'GET',
-      signal: controller.signal,
-      cache: 'no-cache'
-    });
-    clearTimeout(timeoutId);
-
-    const responseTime = performance.now() - startTime;
-
-    if (!response.ok) {
-      throw new Error(`Réponse non-OK: ${response.status}`);
-    }
-
-    const data = await response.json(); 
-    if (data.status !== 'ok') {
-      throw new Error('Statut serveur non OK');
-    }
-
-    const result = {
-      backendConnected: true,
-      details: {
-        status: response.status,
-        responseTime,
-        endpoint: '/check',
-        errorId
-      }
-    };
-    console.log(`✅ Serveur disponible pour ${context}`);
-    return result;
-  } catch (error) {
-    console.error(`❌ Erreur vérification réseau pour ${context}:`, error);
-    const result = {
-      backendConnected: false,
-      details: { reason: 'erreur_reseau', message: error.message || 'Serveur inaccessible', errorId }
-    };
-    logError({
-      context,
-      errorId,
-      message: `Échec vérification réseau: ${error.message}`,
-      details: { error }
-    });
-    return result;
+  // Cache : Si backend OK récemment, retourne true sans fetch
+  if (networkStatusCache?.backendConnected && Date.now() - networkStatusCache.timestamp < NETWORK_CACHE_TTL) {
+    console.log(`✅ Cache réseau valide pour ${context} (TTL: ${Math.round((NETWORK_CACHE_TTL - (Date.now() - networkStatusCache.timestamp)) / 1000)}s)`);
+    return networkStatusCache;
   }
+
+  // Retry interne pour cold starts (3 tentatives avec backoff)
+  const maxRetries = 3;
+  let lastError;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const startTime = performance.now();
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 60000);
+
+      const response = await fetch(`${API_BASE_URL}/check`, {
+        method: 'GET',
+        signal: controller.signal,
+        cache: 'no-cache'
+      });
+      clearTimeout(timeoutId);
+
+      const responseTime = performance.now() - startTime;
+
+      if (!response.ok) {
+        throw new Error(`Réponse non-OK: ${response.status}`);
+      }
+
+      const data = await response.json(); 
+      if (data.status !== 'ok') {
+        throw new Error('Statut serveur non OK');
+      }
+
+      const result = {
+        backendConnected: true,
+        details: {
+          status: response.status,
+          responseTime,
+          endpoint: '/check',
+          errorId,
+          coldStartSuspected: false
+        },
+        timestamp: Date.now()
+      };
+
+      // Cache le succès (5min TTL)
+      networkStatusCache = result;
+      console.log(`✅ Serveur disponible pour ${context} (temps: ${Math.round(responseTime)}ms, tentative ${attempt})`);
+      return result;
+    } catch (error) {
+      lastError = error;
+      const coldStartSuspected = error.name === 'AbortError' || (error.message && error.message.includes('null') || error.message.includes('CORS'));
+      console.error(`❌ Erreur vérification réseau pour ${context} (tentative ${attempt}/${maxRetries}):`, error, { coldStartSuspected });
+
+      if (coldStartSuspected) {
+        console.log('🔍 Cold start Render suspecté : retry dans ' + (2 ** (attempt - 1) * 2000) + 'ms');
+      }
+
+      logError({
+        context,
+        errorId,
+        message: `Échec vérification réseau: ${error.message}`,
+        details: { error, attempt, coldStartSuspected }
+      });
+
+      if (attempt < maxRetries && coldStartSuspected) {
+        await new Promise(resolve => setTimeout(resolve, 2 ** (attempt - 1) * 2000));
+      } else if (attempt === maxRetries) {
+        networkStatusCache = {
+          backendConnected: false,
+          details: { reason: 'erreur_reseau', message: lastError.message || 'Serveur inaccessible', errorId, coldStartSuspected },
+          timestamp: Date.now()
+        };
+      }
+    }
+  }
+
+  const result = networkStatusCache || {
+    backendConnected: false,
+    details: { reason: 'erreur_reseau', message: lastError?.message || 'Serveur inaccessible', errorId }
+  };
+  return result;
 }
+
 
   let isMonitoring = false;
   let monitoringInterval = null;
   
 /**
- * Surveille le backend avec un polling discret (30s, limité à 5min).
+ * Surveille le backend avec un polling discret (60s, limité à 10min).
  * Utilise des notifications pour informer l'utilisateur sans bloquer l'écran.
  * @param {Object} [options] - Options supplémentaires.
  * @param {string} [options.context='Serveur Monitoring'] - Contexte de l'appel.
@@ -419,36 +454,43 @@ export async function checkNetwork(options = {}) {
 export async function monitorBackend(options = {}) {
   const { context = 'Serveur Monitoring' } = options;
 
-
-
   if (isMonitoring) {
     console.log(`🚫 Surveillance déjà en cours pour ${context}`);
     return;
   }
   isMonitoring = true;
 
-  const MAX_POLLING_DURATION = 5 * 60 * 1000; // 5 minutes
+  const MAX_POLLING_DURATION = 10 * 60 * 1000;
   const pollingStartTime = Date.now();
   let retryCount = 0;
-  const POLLING_INTERVAL = 30000; // 30 secondes
+  const POLLING_INTERVAL = 60000;
 
   const errorId = generateString(8);
 
-  // Notification initiale polie pour informer du problème
+  // Vérification initiale avec timeout long (60s)
+  console.log(`🔍 Vérification initiale avec timeout 60s pour ${context}...`);
+  let initialCheck = await checkNetwork({ context: `${context} (initial)` });
+  if (initialCheck.backendConnected) {
+    console.log('✅ Backend OK dès le départ');
+    await showNotification('Connexion au serveur rétablie !', 'success');
+    isMonitoring = false;
+    return;
+  }
+
   await showNotification(
-    'Serveur temporairement indisponible. Nous réessayons automatiquement toutes les 30 secondes.',
+    'Serveur temporairement indisponible (cold start Render ?). Nous réessayons toutes les 60s.',
     'warning'
   );
   await showNotification(
-    'Solutions rapides : Vérifiez votre connexion Wi-Fi, rafraîchissez la page (F5), ou contactez-nous au 01 23 45 67 89.',
+    'Solutions : Rafraîchissez (F5), vérifiez Wi-Fi, ou appelez 01 23 45 67 89.',
     'info'
   );
 
   logError({
     context,
     errorId,
-    message: 'Surveillance backend déclenchée',
-    details: { timestamp: new Date().toISOString() }
+    message: 'Surveillance backend déclenchée (cold start suspecté)',
+    details: { timestamp: new Date().toISOString(), initialCheck }
   });
 
   console.log(`🚀 Lancement surveillance serveur pour ${context}...`);
@@ -457,7 +499,7 @@ export async function monitorBackend(options = {}) {
     if (Date.now() - pollingStartTime >= MAX_POLLING_DURATION) {
       console.log('⏱️ Durée maximale atteinte, arrêt du polling.');
       await showNotification(
-        'Surveillance arrêtée. Veuillez réessayer plus tard ou contacter le support à contact@llouestservices.fr.',
+        'Surveillance arrêtée. Réessayez ou contactez support@llouestservices.fr.',
         'error'
       );
       stopMonitoring();
@@ -467,7 +509,7 @@ export async function monitorBackend(options = {}) {
     try {
       const networkStatus = await checkNetwork({ context });
       if (networkStatus.backendConnected) {
-        console.log('✅ Backend disponible');
+        console.log('✅ Backend disponible après cold start');
         await showNotification('Connexion au serveur rétablie !', 'success');
         logError({
           context,
@@ -481,30 +523,30 @@ export async function monitorBackend(options = {}) {
       }
     } catch (error) {
       retryCount++;
-      console.log(`❌ Serveur inaccessible (tentative ${retryCount})...`);
+      const coldStartSuspected = error.message.includes('cold start') || networkStatusCache?.details?.coldStartSuspected;
+      console.log(`❌ Serveur inaccessible (tentative ${retryCount}, cold start ? ${coldStartSuspected})...`);
       logError({
         context,
         errorId,
         message: `Échec tentative ${retryCount}: ${error.message}`,
-        details: { retryCount, pollingStartTime }
+        details: { retryCount, pollingStartTime, coldStartSuspected }
       });
 
-      // Notification périodique (toutes les 2 tentatives pour ne pas spammer)
-      if (retryCount % 2 === 0) {
+      // Notification périodique (toutes les 3 tentatives)
+      if (retryCount % 3 === 0) {
         await showNotification(
-          `Serveur toujours indisponible (tentative ${retryCount}). Nouvelle tentative dans 30 secondes...`,
+          `Serveur toujours indisponible (tentative ${retryCount}). Nouvelle tentative dans 60s...`,
           'warning'
         );
       }
     }
   };
 
-  // Polling toutes les 30 secondes
+  // Polling toutes les 60s
   monitoringInterval = setInterval(async () => {
     await check();
   }, POLLING_INTERVAL);
 
-  // Exécuter immédiatement une première vérification
   await check();
 }
 
@@ -517,6 +559,7 @@ export function stopMonitoring() {
     monitoringInterval = null;
   }
   isMonitoring = false;
+  networkStatusCache = null;
 }
 
 if (!AbortController.timeout) {
@@ -1331,7 +1374,7 @@ export function validateFieldInitial(field, value, signIn = false, contact = fal
     case 'street':
     case 'rue':
     case 'address':
-      if (!cleanedValue) return 'L\'adresse est requise.';
+      if (!cleanedValue) return '';
       if (cleanedValue.length < 5 || cleanedValue.length > 200) {
         return 'L\'adresse doit contenir entre 5 et 200 caractères.';
       }
@@ -1745,19 +1788,24 @@ export async function fetchLogoBase64() {
  * Effectue un fetch unitaire avec gestion basique d'auth, timeout, et erreurs.
  * Utilise les options pour configurer, mais sans relance automatique en cas d'erreur réseau.
  * Ne déclenche pas handleApiError directement pour éviter les doubles notifications.
- * @function apiFetch
+* @function apiFetch
  * @param {string} endpoint - Endpoint API (ex. : '/contact').
  * @param {string} [method='GET'] - Méthode HTTP (GET, POST, PUT, DELETE).
  * @param {Object|null} [body=null] - Corps de la requête (JSON pour POST/PUT/PATCH).
  * @param {boolean} [requireAuth=true] - Si true, ajoute le token Bearer (sinon skip).
  * @param {Object} [options={}] - Options supplémentaires.
- * @param {number} [options.timeout=30000] - Timeout en ms (défaut : 30s).
+ * @param {number} [options.timeout=120000] - Timeout en ms (défaut : 120s pour cold starts).
  * @param {string} [options.context='Général'] - Contexte pour formatErrorMessage.
+ * @param {boolean} [options.retryOnColdStart=false] - Auto-retry 2x sur status null (cold start).
  * @returns {Promise<Object|undefined>} - Réponse JSON/text ou undefined en cas d'erreur non critique.
  * @throws {Error} - En cas d'erreur critique (ex. : missing token, timeout, fetch fail).
  */
 export async function apiFetch(endpoint, method = 'GET', body = null, requireAuth = true, options = {}) {
-  const { timeout = 30000, context = 'Général' } = options;
+  const { 
+    timeout = 120000, // 2 minutes par défaut
+    context = 'Général',
+    retryOnColdStart = false // Nouveau : auto-retry sur cold start
+  } = options;
 
   const headers = new Headers({ 'Content-Type': 'application/json' });
 
@@ -1773,81 +1821,92 @@ export async function apiFetch(endpoint, method = 'GET', body = null, requireAut
     headers.set('Authorization', `Bearer ${token}`);
   }
 
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeout);
+  // Fonction retry pour cold start
+  const performFetch = async (retryCount = 0) => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-  const requestConfig = {
-    method,
-    headers,
-    signal: controller.signal,
-    cache: 'no-cache',
-  };
+    const requestConfig = {
+      method,
+      headers,
+      signal: controller.signal,
+      cache: 'no-cache',
+    };
 
-  if (body && ['POST', 'PUT', 'PATCH'].includes(method)) {
-    requestConfig.body = body instanceof FormData ? body : JSON.stringify(body);
-    // Si FormData, supprime Content-Type pour laisser le browser le set
-    if (body instanceof FormData) {
-      headers.delete('Content-Type');
-    }
-  }
-
-  console.log(`🚀 API ${method} ${endpoint}`);
-
-  try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, requestConfig);
-    clearTimeout(timeoutId);
-
-    let data;
-    const contentType = response.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      data = await response.json();
-    } else {
-      data = await response.text();
+    if (body && ['POST', 'PUT', 'PATCH'].includes(method)) {
+      requestConfig.body = body instanceof FormData ? body : JSON.stringify(body);
+      if (body instanceof FormData) {
+        headers.delete('Content-Type');
+      }
     }
 
-    if (!response.ok) {
-      const { message, reason, suggestion, isCritical } = formatErrorMessage(
-        response.status,
-        data?.message || data || response.statusText,
-        context
-      );
-      const error = new Error(message);
-      error.status = response.status;
-      error.reason = reason;
-      error.suggestion = suggestion;
-      error.isCritical = isCritical;
+    console.log(`🚀 API ${method} ${endpoint} (tentative ${retryCount + 1})`);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, requestConfig);
+      clearTimeout(timeoutId);
+
+      let data;
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
+
+      if (!response.ok) {
+        const { message, reason, suggestion, isCritical } = formatErrorMessage(
+          response.status,
+          data?.message || data || response.statusText,
+          context
+        );
+        const error = new Error(message);
+        error.status = response.status;
+        error.reason = reason;
+        error.suggestion = suggestion;
+        error.isCritical = isCritical;
+        error.context = context;
+        error.backendMessage = data?.message || data || null;
+        throw error;
+      }
+
+      console.log(`✅ API ${method} ${endpoint} OK`);
+      return data;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      if (error.name === 'AbortError') {
+        const timeoutError = new Error('Le serveur est injoignable. Vérifiez votre connexion internet ou réessayez plus tard.');
+        timeoutError.reason = 'timeout';
+        timeoutError.isCritical = true;
+        timeoutError.context = context;
+        throw timeoutError;
+      }
+
+      if (
+        error.message?.includes('NetworkError') ||
+        error.message?.includes('Failed to fetch') ||
+        error.name === 'TypeError'
+      ) {
+        error.message = 'Le serveur est indisponible ou en maintenance pour le moment. Veuillez réessayer plus tard.';
+        error.reason = 'network';
+        error.isCritical = true;
+        error.context = context;
+      }
+
+      const isColdStart = retryOnColdStart && (error.message.includes('null') || error.message.includes('CORS') || retryCount < 2);
+      if (isColdStart && retryCount < 2) {
+        console.log(`🔍 Cold start suspecté pour ${endpoint} : retry dans 5s (tentative ${retryCount + 1}/2)`);
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        return performFetch(retryCount + 1);
+      }
+
       error.context = context;
-      error.backendMessage = data?.message || data || null; // Capture du message brut du backend
+      console.error(`❌ Erreur API ${method} ${endpoint}:`, error);
       throw error;
     }
+  };
 
-    console.log(`✅ API ${method} ${endpoint} OK`);
-    return data;
-  } catch (error) {
-    clearTimeout(timeoutId);
-    if (error.name === 'AbortError') {
-      const timeoutError = new Error('Le serveur est injoignable. Vérifiez votre connexion internet ou réessayez plus tard.');
-      timeoutError.reason = 'timeout';
-      timeoutError.isCritical = true;
-      timeoutError.context = context;
-      throw timeoutError;
-    }
-
-    if (
-      error.message?.includes('NetworkError') ||
-      error.message?.includes('Failed to fetch') ||
-      error.name === 'TypeError'  // Souvent pour fetch fails
-    ) {
-      error.message = 'Le serveur est indisponible ou en maintenance pour le moment. Veuillez réessayer plus tard.';
-      error.reason = 'network';
-      error.isCritical = true;
-      error.context = context;
-    }
-
-    error.context = context;
-    console.error(`❌ Erreur API ${method} ${endpoint}:`, error);
-    throw error;
-  }
+  return await performFetch();
 }
 
 

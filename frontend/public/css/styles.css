@@ -182,7 +182,7 @@
 
 /* ✅ S'applique uniquement aux .header-btn et aux boutons qui NE sont pas .faq-toggle, .modal-close, .toggle-password ou dans .services */
 .header-btn,
-button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button):not([data-conversation-id]):not([data-action]):not(#sidebar button):not(#sidebar-toggle),
+button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button):not([data-conversation-id]):not([data-action]):not(#sidebar button):not(#video-modal button):not(#sidebar-toggle),
 section a.cta {
   position: relative;
   border: none;
@@ -193,7 +193,7 @@ section a.cta {
 
 /* ✅ Bordure animée uniquement sur .header-btn et les boutons sauf ceux exclus */
 .header-btn::before,
-button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button):not([data-conversation-id]):not([data-action]):not(#sidebar button)::before,
+button:not(.faq-toggle):not(.modal-close):not(.toggle-password):not(#services button):not(#hero-slides button):not([data-conversation-id]):not([data-action]):not(#sidebar button):not(.no-border):not(#video-modal button):before,
 section a.cta::before {
   content: "";
   position: absolute;
@@ -1520,7 +1520,7 @@ section a.cta::before {
 
 
 html:not(.dark) #blurred-header.header-light-style button {
-  background: rgba(255, 255, 255, 0.6); /* Blanc translucide */
+  background: rgba(255, 255, 255, 0.6); 
   backdrop-filter: blur(10px) saturate(150%); /* effet verre dépoli */
   -webkit-backdrop-filter: blur(10px) saturate(150%);
   color: #2b2b2b;

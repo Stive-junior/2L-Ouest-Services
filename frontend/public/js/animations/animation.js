@@ -19,7 +19,7 @@
 // Imports essentiels
 import { showNotification, openLightbox } from '../modules/utils.js';
 import api from '../api.js';
-import loadServicesModule, { getServiceIndex, setServiceIndex } from '../injection/loadService.js';
+import loadServicesModule, { getServiceIndex, highlightSearchTerms, resetHighlights, setServiceIndex } from '../injection/loadService.js';
 const { loadServices, renderServicesSidebar, renderServiceDetail, navigateService, toggleServicesLoading } = loadServicesModule;
 
 
@@ -413,109 +413,113 @@ async function loadMockData() {
 
 
 
-// Données pour hero slides avec plus de slides
- 
-  const HERO_SLIDES = [
+
+
+// HERO_SLIDES remains the same as before
+const HERO_SLIDES = [
   {
     type: 'video',
-    src: '/assets/videos/hamburgeur.mp4',
-    poster: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'L&L Ouest Services',
-    subtitle: 'Excellence et écologie pour un environnement impeccable et sain à Angers',
-    thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Nettoyage professionnel à Angers pour un espace éclatant.'
+    src: 'https://assets.mixkit.co/videos/preview/mixkit-woman-cleaning-a-room-39865-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Espaces Impeccables',
+    subtitle: 'Découvrez la magie du nettoyage professionnel qui redonne vie à vos locaux à Angers',
+    thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Nettoyage sur mesure pour un éclat durable.',
+    delay: 12000
   },
   {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Professionnels du Nettoyage',
-    subtitle: 'Solutions sur mesure pour entreprises et particuliers dans l’Ouest de la France',
+    src: 'https://images.unsplash.com/photo-1558618048-6f3546cc0c3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Équipe Dédiée',
+    subtitle: 'Nos experts passionnés transforment la propreté en art pour entreprises et particuliers',
+    thumbnail: 'https://images.unsplash.com/photo-1558618048-6f3546cc0c3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Une équipe fiable pour tous vos besoins en hygiène.',
+    delay: 6000
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Solutions Écologiques',
+    subtitle: 'Nettoyez avec conscience : produits biodégradables pour un avenir plus vert à Angers',
+    thumbnail: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Engagement éco-responsable au cœur de nos services.',
+    delay: 6000
+  },
+  {
+    type: 'video',
+    src: 'https://assets.mixkit.co/videos/preview/mixkit-cleaning-a-window-1255-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Avant & Après',
+    subtitle: 'Témoins de la transformation : de l\'ordre au chaos, nous réinventons vos espaces',
     thumbnail: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Découvrez nos services personnalisés pour tous vos besoins.'
+    sidebarMessage: 'Résultats visibles qui impressionnent à chaque fois.',
+    delay: 10000
   },
   {
     type: 'image',
     src: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Nettoyage Écologique',
-    subtitle: 'Produits biodégradables pour un avenir durable à Angers',
+    title: 'Service Express',
+    subtitle: 'Intervention rapide et discrète pour ne jamais perturber votre quotidien effréné',
     thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Un nettoyage respectueux de l’environnement.'
+    sidebarMessage: 'Efficacité sans compromis sur la qualité.',
+    delay: 6000
   },
   {
     type: 'image',
     src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Avant & Après',
-    subtitle: 'Transformez vos espaces avec nos services professionnels',
+    title: 'Outils Innovants',
+    subtitle: 'Technologie de pointe au service d\'un nettoyage impeccable et durable',
     thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Voyez la différence avec nos nettoyages.'
-  },
-  {
-    type: 'image',
-    src: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Outils Modernes',
-    subtitle: 'Technologie de pointe pour des résultats impeccables',
-    thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Des outils innovants pour un nettoyage optimal.'
+    sidebarMessage: 'Innovation pour des résultats supérieurs.',
+    delay: 6000
   },
   {
     type: 'video',
-    src: '/assets/videos/hamburgeur.mp4',
-    poster: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    title: 'Technologie de Nettoyage',
-    subtitle: 'Découvrez nos outils modernes pour un nettoyage optimal',
-    thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Technologie avancée pour des résultats éclatants.'
+    src: 'https://assets.mixkit.co/videos/preview/mixkit-portrait-of-cleaning-lady-39866-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Engagement Local',
+    subtitle: 'Soutien aux communautés d\'Angers : propreté et solidarité main dans la main',
+    thumbnail: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Partenaire de confiance pour l\'Ouest.',
+    delay: 11000
   },
   {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Service Personnalisé',
-    subtitle: 'Des solutions adaptées à vos besoins spécifiques à Angers',
-    thumbnail: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Des services sur mesure pour vous.'
+    src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Hygiène Premium',
+    subtitle: 'Standards élevés pour une sécurité optimale dans tous vos environnements',
+    thumbnail: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Hygiène au sommet pour votre sérénité.',
+    delay: 6000
   },
   {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Engagement Communautaire',
-    subtitle: 'Nous soutenons les initiatives locales à Angers',
-    thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Soutien aux projets locaux pour un avenir meilleur.'
+    src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Personnalisation Totale',
+    subtitle: 'Solutions taillées sur mesure pour répondre précisément à vos défis uniques',
+    thumbnail: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Adapté à chaque client, chaque espace.',
+    delay: 6000
   },
   {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Équipe Professionnelle',
-    subtitle: 'Rencontrez nos experts dédiés à votre satisfaction',
-    thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Une équipe dévouée pour des résultats parfaits.'
+    src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Confiance Gagnée',
+    subtitle: 'Des années d\'excellence qui font de nous le choix n°1 en services de nettoyage',
+    thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Réputation bâtie sur des résultats exceptionnels.',
+    delay: 6000
   },
   {
     type: 'image',
-    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Partenariats de Qualité',
-    subtitle: 'Collaborez avec nos partenaires pour des résultats optimaux',
-    thumbnail: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Des partenariats pour un service exceptionnel.'
+    src: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    title: 'Futur Propre',
+    subtitle: 'Investissez dans un nettoyage durable pour un demain radieux et serein',
+    thumbnail: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Vers un monde plus propre, ensemble.',
+    delay: 6000
   }
 ];
-
-
-
-
-
-// Fonction de debounce
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
 
 /**
  * Lazy load des images avec IntersectionObserver
@@ -539,105 +543,63 @@ function lazyLoadImages(images) {
   images.forEach(img => observer.observe(img));
 }
 
-
 let activeSlide = 0;
 let swiperInstance = null;
-
-
-
-
+let currentTimer = null;
 
 /**
- * Initialise le carrousel hero avec navigation par thumbnails verticaux, effets de parchemin au survol,
- * pause au survol, animations AOS, et bulles flottantes pour une entreprise de nettoyage à Angers.
+ * Initialize hero carousel with navigation buttons
  */
-
-/**
- * Initialize hero carousel
- */
-
 async function initHeroCarousel() {
   const slidesContainer = document.getElementById('hero-slides');
-  const thumbnailList = document.getElementById('thumbnail-list');
-  if (!slidesContainer || !thumbnailList) return;
+  if (!slidesContainer) return;
 
-  // Generate Slides
+  // Generate Slides with text animation classes
   slidesContainer.innerHTML = HERO_SLIDES.map((slide, index) => `
-    <div class="swiper-slide relative w-full h-full flex items-center justify-center" role="group" aria-label="Slide ${index + 1}">
+    <div class="swiper-slide relative w-full h-full flex items-center justify-center transition-opacity duration-700 ease-in-out" role="group" aria-label="Slide ${index + 1}">
       ${slide.type === 'video' ? `
         <div class="absolute inset-0 z-0">
-          <video class="w-full h-full object-cover" poster="${slide.poster}" muted loop playsinline preload="auto" src="${slide.src}">
+          <video class="w-full h-full object-cover" poster="${slide.poster}" muted loop playsinline preload="metadata" src="${slide.src}">
             <source src="${slide.src}" type="video/mp4">
           </video>
         </div>
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-[5]"></div>
       ` : `
-        <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('${slide.src}');"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-700" style="background-image: url('${slide.src}');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-[5]"></div>
       `}
-      <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-6">
+      <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-6 transform transition-all duration-700 ease-in-out group">
         <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight gradiant">${slide.title}</h1>
-        <p class="text-lg md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light">${slide.subtitle}</p>
-
-
-    <a href="#contact" class="btn-container btn-right text-ll-white hover:text-ll-white py-4 px-8 rounded-xl font-semibold shadow-lg !bg-transparent border-1 hover:!border-0 !border-ll-medium-gray py-4 px-6 rounded-xl font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark">
-        <div class="progress-fill bg-gradient-to-r from-ll-dark-blue to-ll-blue rounded-xl"></div>
-        <div class="btn-content shine-effect">
-          
-            <div class="icon-wrapper mr-4">
-                <svg class="icon-default" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                <svg class="icon-hover" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
-                </svg>
+        <p class="text-lg md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light opacity-100 transform translate-y-0 transition-all duration-700">${slide.subtitle}</p>
+        <a href="#contact" class="btn-container btn-right text-ll-white hover:text-ll-white py-4 px-8 rounded-xl font-semibold shadow-lg !bg-transparent border !border-ll-medium-gray hover:!border-0 py-4 px-6 rounded-xl font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark">
+          <div class="progress-fill bg-gradient-to-r from-ll-dark-blue to-ll-blue rounded-xl"></div>
+          <div class="btn-content shine-effect">
+            <div class="icon-wrapper text-ll-white mr-4">
+              <svg class="icon-default w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <svg class="icon-hover w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
             </div>
-              <span class="btn-text">Contactez nous</span>
-        </div>
-    </a>
-
+            <span class="btn-text">Contactez-nous</span>
+          </div>
+        </a>
       </div>
     </div>
   `).join('');
 
-  // Generate Thumbnails
-  thumbnailList.innerHTML = HERO_SLIDES.map((slide, index) => `
-    <div class="thumbnail-item relative w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden cursor-pointer border-2 border-transparent transition-border duration-300 snap-center shadow-lg" 
-         data-slide-index="${index}"
-         data-sidebar-message="${slide.sidebarMessage}">
-      <img src="${slide.thumbnail}" alt="Aperçu ${index + 1}" class="w-full h-full object-cover transition-transform duration-300 transform hover:scale-105">
-    </div>
-  `).join('');
-
   // DOM Variables
-  const thumbnails = document.querySelectorAll('.thumbnail-item');
-  const thumbContainer = document.getElementById('thumbnail-container');
-  const parchmentInfo = document.getElementById('parchment-info');
-  const navUp = document.getElementById('thumb-nav-up');
-  const navDown = document.getElementById('thumb-nav-down');
-  const viewport = document.getElementById('thumbnail-viewport');
-  const scrollAmount = 80;
+  const swiperSlides = slidesContainer.querySelectorAll('.swiper-slide');
 
-  // Parchment Timer
-  let parchmentTimer;
-  const parchmentDelay = 300;
-
-  // Functions
-  function updateThumbnails(activeIndex) {
-    thumbnails.forEach((thumb, idx) => {
-      thumb.classList.toggle('border-white', idx === activeIndex);
-      thumb.classList.toggle('border-transparent', idx !== activeIndex);
-    });
-    showParchmentInfo(thumbnails[activeIndex]);
-  }
-
+  // Handle slide media (videos) - play current, pause others
   function handleSlideMedia(swiper) {
-    swiper.slides.forEach((slide, idx) => {
+    swiperSlides.forEach((slide, idx) => {
       const video = slide.querySelector('video');
       if (video) {
-        if (idx === swiper.activeIndex) {
-          video.play().catch(() => console.log("Video autoplay blocked."));
+        if (idx === swiper.realIndex) {
+          video.currentTime = 0;
+          video.play().catch(() => console.log('Autoplay blocked'));
         } else {
           video.pause();
           video.currentTime = 0;
@@ -646,117 +608,74 @@ async function initHeroCarousel() {
     });
   }
 
-  function checkScrollButtons() {
-    navUp.classList.toggle('hidden', viewport.scrollTop <= 10);
-    navDown.classList.toggle('hidden', viewport.scrollTop + viewport.clientHeight >= viewport.scrollHeight - 10);
+  // Start timer for next slide based on slide delay
+  function startSlideTimer(swiper) {
+    if (currentTimer) clearTimeout(currentTimer);
+    const currentSlide = HERO_SLIDES[swiper.realIndex % HERO_SLIDES.length]; // Handle loop
+    const delay = currentSlide.delay || 7000;
+    currentTimer = setTimeout(() => {
+      swiper.slideNext();
+    }, delay);
   }
 
-  function showParchmentInfo(thumb) {
-    clearTimeout(parchmentTimer);
-    parchmentTimer = setTimeout(() => {
-      const message = thumb.dataset.sidebarMessage;
-      parchmentInfo.innerHTML = `
-        <div class="flex items-start mb-2">
-          <div class="text-xl mr-2">📜</div>
-          <p class="text-sm md:text-base font-semibold text-gray-800 dark:text-gray-200">${message}</p>
-        </div>
-      `;
-      parchmentInfo.classList.remove('hidden');
-      parchmentInfo.classList.add('block', 'glass-effect', 'border', 'border-gray-400', 'dark:border-gray-600');
-    }, parchmentDelay);
-  }
-
-  function hideParchmentInfo() {
-    clearTimeout(parchmentTimer);
-    parchmentInfo.classList.add('hidden');
-    parchmentInfo.classList.remove('block', 'glass-effect', 'border', 'border-gray-400', 'dark:border-gray-600');
-  }
-
-  // Initialize Swiper
+  // Initialize Swiper with fade effect and navigation
   const swiper = new Swiper('[data-carousel]', {
     effect: 'fade',
     fadeEffect: { crossFade: true },
     loop: true,
-    autoplay: { delay: 7000, disableOnInteraction: false },
+    speed: 800, // Smooth transition speed
     resizeObserver: true,
+    // Custom navigation
+    navigation: {
+      prevEl: '.custom-prev-btn',
+      nextEl: '.custom-next-btn',
+    },
+    a11y: { 
+      enabled: true, 
+      prevSlideMessage: 'Slide précédent', 
+      nextSlideMessage: 'Slide suivant' 
+    },
     on: {
-      slideChange: (swiper) => {
-        updateThumbnails(swiper.realIndex);
-        handleSlideMedia(swiper);
-      },
       init: (swiper) => {
-        updateThumbnails(swiper.realIndex);
         handleSlideMedia(swiper);
-        checkScrollButtons();
+        startSlideTimer(swiper);
+      },
+      slideChange: (swiper) => {
+        // Animate text out (up for previous, down for next? But fade handles, add class for extra)
+        const oldSlide = swiperSlides[(swiper.previousIndex || swiperSlides.length - 1) % swiperSlides.length];
+        const newSlide = swiperSlides[swiper.realIndex];
+        if (oldSlide) {
+          oldSlide.querySelector('.group').classList.add('translate-y-[-20px]', 'opacity-0');
+        }
+        setTimeout(() => {
+          if (newSlide) newSlide.querySelector('.group').classList.remove('translate-y-full', 'opacity-0');
+        }, 100);
+        handleSlideMedia(swiper);
+        startSlideTimer(swiper);
       },
       resize: (swiper) => {
-        swiper.update(); // Mettre à jour Swiper pour recalculer les dimensions
-        checkScrollButtons();
-        hideParchmentInfo();
-      },
-    },
-    a11y: { enabled: true, prevSlideMessage: 'Précédent', nextSlideMessage: 'Suivant' },
-  });
-
-  // Débogage du redimensionnement
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      swiper.update(); // Recalculer les dimensions de Swiper
-      slidesContainer.style.height = `${window.innerHeight}px`; // Ajuster la hauteur du conteneur
-      checkScrollButtons();
-    }, 100); // Débouncer pour éviter les recalculs excessifs
-  });
-
-  // Thumbnail Event Listeners
-  thumbnails.forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      swiper.slideToLoop(parseInt(thumb.dataset.slideIndex));
-    });
-    thumb.addEventListener('mouseenter', () => {
-      showParchmentInfo(thumb);
-    });
-    thumb.addEventListener('mouseleave', () => {
-      if (parseInt(thumb.dataset.slideIndex) !== swiper.realIndex) {
-        hideParchmentInfo();
-      }
-    });
-  });
-
-  // Navigation Buttons
-  navUp.addEventListener('click', () => {
-    viewport.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
-  });
-
-  navDown.addEventListener('click', () => {
-    viewport.scrollBy({ top: scrollAmount, behavior: 'smooth' });
-  });
-
-  // Scroll Detection
-  viewport.addEventListener('scroll', checkScrollButtons);
-
-  // Autoplay Control
-  thumbContainer.addEventListener('mouseenter', () => {
-    swiper.autoplay.stop();
-    if (parchmentInfo.classList.contains('block')) {
-      const activeIndex = swiper.realIndex;
-      const hoveredThumbnail = Array.from(thumbnails).find(t => parseInt(t.dataset.slideIndex) === activeIndex);
-      if (!hoveredThumbnail) {
-        hideParchmentInfo();
+        swiper.update();
       }
     }
   });
 
-  thumbContainer.addEventListener('mouseleave', () => {
-    swiper.autoplay.start();
-    hideParchmentInfo();
+  swiperInstance = swiper;
+
+  // Set initial height
+  slidesContainer.style.height = `${window.innerHeight}px`;
+
+  // Resize handler
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      swiper.update();
+      slidesContainer.style.height = `${window.innerHeight}px`;
+    }, 100);
   });
 
-  // Hide parchment on hero section mouseleave
-  document.getElementById('hero').addEventListener('mouseleave', () => {
-    hideParchmentInfo();
-  });
+  // Lazy load any lazy images if needed (though backgrounds are inline)
+  lazyLoadImages(document.querySelectorAll('img.lazy'));
 }
 
 
@@ -783,7 +702,7 @@ function initTestimonialsCarousel() {
     const collapseIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
 
     return `
-      <div class="swiper-slide">
+      <div class="swiper-slide rounded-3xl">
         <div class="testimonial-card-futuristic relative p-6 bg-ll-white-800 dark:bg-ll-black-950 rounded-3xl border border-blue-600/20 dark:border-white/50 shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out h-full flex flex-col justify-between transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="${index * 100}">
           <div class="flex items-center mb-4">
             <img src="${testimonial.image}" data-src="${testimonial.image}" class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-blue-500 lazy" alt="Photo de ${testimonial.author}">
@@ -1224,7 +1143,7 @@ function initTeamSection() {
 
                 teamContainer.innerHTML = filteredTeam.map((member, index) => `
                     <div class="swiper-slide">
-                        <div class="team-card bg-white dark:bg-gray-800 rounded-2xl border border-ll-black/20 dark:border-white/50 shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="${index * 100}">
+                        <div class="team-card bg-ll-white-800 dark:bg-ll-black-950 rounded-3xl border border-blue-600/20 dark:border-ll-medium-gray shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="${index * 100}  ">
                             <div class="flex items-center space-x-4 mb-4">
                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="${member.image}" class="w-20 h-20 rounded-full object-cover border-2 border-blue-400 lazy" alt="Photo de ${member.name}" loading="lazy">
                                 <div>
@@ -2471,7 +2390,7 @@ function initBeforeAfterSliders() {
 let reviewsModal = null;
 let categoryModal = null;
 let filterInactivityTimer = null;
-const INACTIVITY_CLOSE_DELAY = 5000; 
+const INACTIVITY_CLOSE_DELAY = 10000; 
 
 /**
  * Initialise les modales vidéo avec gestion plein écran et effets futuristes
@@ -2498,7 +2417,7 @@ export function initVideoModal() {
             
             <!-- Conteneur vidéo avec overlay gradient -->
             <div class="relative w-full h-full flex items-center justify-center">
-                <video id="modal-video" class="w-full h-full max-h-[80vh] object-contain rounded-xl shadow-2xl" preload="metadata" poster="/assets/images/video-poster.jpg" muted>
+                <video id="modal-video" class="w-full h-full max-h-[80vh] object-contain rounded-xl shadow-2xl" preload="metadata" poster="/assets/images/logo.png" muted>
                     <source src="" type="video/mp4">
                     Votre navigateur ne supporte pas la balise vidéo.
                 </video>
@@ -2920,14 +2839,15 @@ function initReviewsModal() {
         closeReviewsModal();
     }
 
-    // Ouvrir depuis trigger (adapté pour le nouveau bouton)
-    document.getElementById('reviews-trigger').addEventListener('click', (e) => {
+    const review = document.getElementById('reviews-trigger');
+    
+    if(review){
+    review.addEventListener('click', (e) => {
         e.stopPropagation();
         reviewsModal.classList.remove('hidden');
         setTimeout(() => {
             content.classList.add('scale-100', 'opacity-100');
-            // Initial display basé sur filtre courant
-            let currentMinReviews = getCurrentFilters().reviews || 0;
+            let currentMinReviews = getCurrentFilters().reviewsMin || 0;
             let currentLevel = levelMap[currentMinReviews] || 0;
             if (currentLevel > 0) {
                 starRow.querySelector(`[data-level="${currentLevel}"]`).classList.add('selected');
@@ -2935,6 +2855,7 @@ function initReviewsModal() {
             updateStarDisplay(null, currentLevel);
         }, 10);
     });
+  }
 
     // Close on overlay click
     reviewsModal.addEventListener('click', (e) => {
@@ -2963,7 +2884,6 @@ function initCategoryModal() {
 
     const content = categoryModal.querySelector('.modal-content');
 
-    // Remplir la grille
     const categories = [
         { id: 'bureaux', name: 'Bureaux', icon: '🏢' },
         { id: 'residentiel', name: 'Résidentiel', icon: '🏠' },
@@ -2976,6 +2896,33 @@ function initCategoryModal() {
         { id: 'sport', name: 'Sport & Fitness', icon: '💪' },
         { id: 'evenementiel', name: 'Événementiel', icon: '🎪' }
     ];
+
+    const categoryIcons = {
+  all: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M3 3h18v18H3z"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>`,
+  bureaux: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M6 8h12"></path><path d="M6 12h12"></path><path d="M6 16h12"></path></svg>`,
+  piscine: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M2 14h2l2-2 2 4 2-2 2 4 2-2 2 4h2"></path><path d="M2 18h2l2-2 2 4 2-2 2 4 2-2 2 4h2"></path></svg>`,
+  régulier: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`,
+  ponctuel: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`,
+  salles_de_réunion: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 3v18"></path><path d="M9 9h12"></path></svg>`,
+  sas_dentrée: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M12 7v10"></path></svg>`,
+  réfectoire: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M4 12h16"></path><path d="M4 6h16"></path><path d="M4 18h16"></path></svg>`,
+  sanitaires: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M12 3v18"></path><path d="M6 12h12"></path></svg>`,
+  escaliers: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M4 4h6v6H4z"></path><path d="M14 4h6v6h-6z"></path><path d="M4 14h6v6H4z"></path><path d="M14 14h6v6h-6z"></path></svg>`,
+  vitrines: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 10h20"></path></svg>`,
+  industriel: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M2 20h20V4H2z"></path><path d="M6 4v16"></path><path d="M10 4v16"></path><path d="M14 4v16"></path><path d="M18 4v16"></path></svg>`,
+  commercial: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M9 9h6v6H9z"></path></svg>`,
+  residentiel: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M3 12l9-9 9 9"></path><path d="M5 10v10a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V10"></path></svg>`,
+  medical: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M12 2v20"></path><path d="M4 10h16"></path><path d="M4 14h16"></path></svg>`,
+  education: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M12 3v18"></path><path d="M3 12h18"></path></svg>`,
+  hotelier: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 10h.01"></path><path d="M6 14h.01"></path><path d="M10 10h.01"></path><path d="M10 14h.01"></path><path d="M14 10h.01"></path><path d="M14 14h.01"></path><path d="M18 10h.01"></path><path d="M18 14h.01"></path></svg>`,
+  restaurant: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M4 12h16"></path><path d="M4 6h16"></path><path d="M4 18h16"></path></svg>`,
+  gym: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M4 7h16v10H4z"></path><path d="M8 10v4"></path><path d="M12 10v4"></path><path d="M16 10v4"></path></svg>`,
+  parking: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 8h8v8H8z"></path></svg>`,
+  jardin: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M12 3v18"></path><path d="M6 9h12"></path><path d="M4 15h16"></path></svg>`,
+  facade: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M6 8v8"></path><path d="M10 8v8"></path><path d="M14 8v8"></path><path d="M18 8v8"></path></svg>`,
+  toiture: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M3 12l9-9 9 9"></path><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"></path></svg>`,
+  evenementiel: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ll-blue hover:text-ll-dark-blue"><path d="M12 2v4"></path><path d="M2 12h4"></path><path d="M12 18v4"></path><path d="M18 12h4"></path><path d="M4 4l16 16"></path><path d="M4 20L20 4"></path></svg>`,
+};
 
     const grid = categoryModal.querySelector('#modal-category-grid');
     grid.innerHTML = categories.map(category => `
@@ -3130,12 +3077,16 @@ function initFrequencyModal() {
     closeFrequencyModal();
   }
 
-  // Ouvrir depuis trigger
-  document.getElementById('frequency-trigger').addEventListener('click', (e) => {
+  
+  const frequency = document.getElementById('frequency-trigger');
+  
+  if(frequency){
+  frequency.addEventListener('click', (e) => {
     e.stopPropagation();
     frequencyModal.classList.remove('hidden');
     setTimeout(() => content.classList.add('scale-100', 'opacity-100'), 10);
   });
+}
 
   // Close on overlay click
   frequencyModal.addEventListener('click', (e) => {
@@ -3222,11 +3173,17 @@ function initDifficultyModal() {
   }
 
   // Ouvrir depuis trigger
-  document.getElementById('difficulty-trigger').addEventListener('click', (e) => {
+  const difficulty = document.getElementById('difficulty-trigger');
+  
+  if(difficulty){
+
+  difficulty.addEventListener('click', (e) => {
     e.stopPropagation();
     difficultyModal.classList.remove('hidden');
     setTimeout(() => content.classList.add('scale-100', 'opacity-100'), 10);
   });
+
+}
 
   // Close on overlay click
   difficultyModal.addEventListener('click', (e) => {
@@ -3235,37 +3192,46 @@ function initDifficultyModal() {
 }
 
 
-/**
- * Initialise le timer d'inactivité - ROBUSTE
- */
+
 function initFilterInactivityTimer() {
     const filterPanel = document.getElementById('filter-panel');
     if (!filterPanel) return;
 
-    const resetTimer = () => {
+    const startTimer = () => {
         clearTimeout(filterInactivityTimer);
         filterInactivityTimer = setTimeout(() => {
             filterPanel.classList.add('hidden');
         }, INACTIVITY_CLOSE_DELAY);
     };
 
-    filterPanel.addEventListener('mousemove', resetTimer);
-    filterPanel.addEventListener('click', resetTimer);
-    filterPanel.addEventListener('scroll', resetTimer);
+    const clearTimer = () => {
+        clearTimeout(filterInactivityTimer);
+    };
+
+    // Sur entrée souris: clear le timer (ne ferme pas pendant survol)
+    filterPanel.addEventListener('mouseenter', clearTimer);
+
+    // Sur sortie souris: démarrer le timer (compte l'inactivité après sortie)
+    filterPanel.addEventListener('mouseleave', startTimer);
+
+    // Sur interactions internes (clic, scroll): clear pour éviter fermeture prématurée
+    filterPanel.addEventListener('click', clearTimer);
+    filterPanel.addEventListener('scroll', clearTimer);
 
     const openBtn = document.getElementById('open-filter-panel');
     if (openBtn) {
         openBtn.addEventListener('click', () => {
             if (filterPanel.classList.contains('hidden')) {
                 filterPanel.classList.remove('hidden');
-                resetTimer();
+                clearTimer(); // Clear au démarrage
             } else {
                 filterPanel.classList.add('hidden');
-                clearTimeout(filterInactivityTimer);
+                clearTimer(); // Clear à la fermeture manuelle
             }
         });
     }
 }
+
 
 /**
  * Initialise la recherche - DEBOUNCE ET AUTO-UPDATE (sidebar + detail complet à chaque saisie)
@@ -3281,6 +3247,7 @@ function initSearch() {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(async () => {
             await updateServices(); 
+            highlightSearchTerms({});
         }, 300);
         
         if (e.target.value) {
@@ -3297,6 +3264,8 @@ function initSearch() {
         searchInput.focus();
         clearButton.classList.add('hidden');
         updateServices();
+        // Reset highlights sur clear
+        resetHighlights();
     });
 }
 
@@ -3476,7 +3445,7 @@ function resetAllFilters() {
  * Mise à jour: Cache/Supprime message no-services IMMÉDIATEMENT si services trouvés, re-render détails.
  */
 async function updateServices() {
-    toggleServicesLoading(true);
+    await toggleServicesLoading(true);
     
     try {
         const filters = getCurrentFilters();
@@ -3514,7 +3483,7 @@ async function updateServices() {
         renderServicesSidebar([]);
         showNoServicesMessage();
     } finally {
-        toggleServicesLoading(false);
+      await  toggleServicesLoading(false);
     }
 }
 
@@ -4054,7 +4023,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-    initReviewsDisplay();
     initServiceInteractions();
     await updateServices();
    
@@ -4121,55 +4089,114 @@ images.forEach((img, index) => {
   });
 });
 
+
 const heroSection = document.getElementById("hero");
 const services = document.getElementById("services");
 const header = document.getElementById("blurred-header");
 const name = document.getElementById("name-entreprise");
 const entreprise = document.getElementById("entreprise");
+const main = document.getElementById("top");
+
 
 if (heroSection && header && services) {
+  let lastScrollY = window.scrollY; 
+  let isHeaderHidden = false;
+
+  const applyHeroStyles = () => {
+    entreprise.classList.add("gradiant");
+    entreprise.classList.remove("header-btn");
+    name.classList.remove("back-text");
+    header.classList.add("bg-ll-white/50", "dark:bg-ll-black/50");
+    header.classList.remove("bg-transparent", "dark:bg-transparent");
+ header.classList.add("header-light-style");
+  
+    
+  };
+
+  const resetHeroStyles = () => {
+    entreprise.classList.remove("gradiant");
+    entreprise.classList.add("header-btn");
+    name.classList.add("back-text");
+    header.classList.add("bg-transparent", "dark:bg-transparent");
+    header.classList.remove("bg-ll-white/50", "dark:bg-ll-black/50");
+     header.classList.remove("header-light-style");
+
+    
+  };
+
   const onScroll = () => {
-    const isDarkMode = document.documentElement.classList.contains("dark");
     const heroBottom = heroSection.getBoundingClientRect().bottom;
     const servicesRect = services.getBoundingClientRect();
+    const servicesTop = servicesRect.top;
     const headerHeight = header.offsetHeight;
 
-    // ✅ Vérifie si le header est sous le hero
     const isPastHero = heroBottom <= headerHeight;
+    const isOnServices = servicesTop <= headerHeight && servicesTop >= -services.offsetHeight;
 
-    // ✅ Vérifie si on est dans la zone "services"
-    const isOnServices = servicesRect.top <= headerHeight;
 
-    // --- Application des styles ---
-    if (isPastHero || isOnServices) {
-      entreprise.classList.add("gradiant");
-      entreprise.classList.remove("header-btn");
-      name.classList.remove("back-text");
+    
+    // --- Détection direction du scroll ---
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
+      // scroll vers le bas
+      if (!isHeaderHidden) {
+        header.classList.add("translate-y-[-100%]", "transition-transform", "duration-500");
+        isHeaderHidden = true;
+      }
     } else {
-      name.classList.add("back-text");
-      entreprise.classList.add("header-btn");
-      entreprise.classList.remove("gradiant");
+      // scroll vers le haut
+      if (isHeaderHidden) {
+        header.classList.remove("translate-y-[-100%]");
+        isHeaderHidden = false;
+      }
     }
+    lastScrollY = currentScrollY;
 
-    if (isDarkMode) return;
-
+    // --- Effets Hero & Services ---
     if (isPastHero || isOnServices) {
-      header.classList.add("header-light-style");
-      entreprise.classList.add("gradiant");
-      entreprise.classList.remove("header-btn");
-      name.classList.remove("back-text");
+      applyHeroStyles();
     } else {
-      header.classList.remove("header-light-style");
-      name.classList.add("back-text");
-      entreprise.classList.add("header-btn");
-      entreprise.classList.remove("gradiant");
+      resetHeroStyles();
     }
   };
 
+  // ✅ Survol de la section services
+  services.addEventListener("mouseenter", applyHeroStyles);
+  services.addEventListener("mouseleave", onScroll);
+
+  // ✅ Scroll et resize
   onScroll();
   window.addEventListener("scroll", onScroll);
   window.addEventListener("resize", onScroll);
 }
+
+
+
+const backToTopBtn = document.getElementById('back-to-top');
+
+if (backToTopBtn && main) {
+  // Fonction pour scroller en haut
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  const handleScroll = () => {
+    const heroHeight = main.offsetHeight;
+    if (window.scrollY > heroHeight) {
+      backToTopBtn.classList.remove('hidden');
+    } else {
+      backToTopBtn.classList.add('hidden');
+    }
+  };
+
+  // Événements
+  window.addEventListener('scroll', handleScroll);
+  handleScroll(); // Appel initial
+}
+
 
 
 

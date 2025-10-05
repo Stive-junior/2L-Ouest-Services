@@ -239,7 +239,7 @@ showFieldError(field, message) {
  * @param {HTMLElement} form - Le formulaire.
  * @param {HTMLElement} submitButton - Le bouton de soumission.
  */
-updateSubmitButtonState(form, submitButton) {
+updateSubmitButtonState(form, submitButton , isInitialL = false) {
   const formData = new FormData(form);
   const contactData = {
     name: formData.get('name')?.trim() || '',
@@ -250,7 +250,7 @@ updateSubmitButtonState(form, submitButton) {
   };
 
   // Validation des champs
-  const errors = this.validateForm(contactData);
+  const errors = this.validateForm(contactData , isInitialL);
   const isEmailValid = !validateField('email', contactData.email, false, true);
   const isNameValid = !validateField('name', contactData.name, false, true);
   const isPhoneValid = !validateField('phone', contactData.phone, false, true);
@@ -366,6 +366,8 @@ updateSubmitButtonState(form, submitButton) {
       message: formData.get('message')?.trim() || '',
     };
 
+  
+
     form.querySelectorAll('input:not([type="hidden"]), textarea, #subject-display').forEach(input => {
       const field = input.name || (input.id === 'subject-display' ? 'subjects' : input.name);
       let value = input.value.trim();
@@ -375,9 +377,18 @@ updateSubmitButtonState(form, submitButton) {
       let error = null;
 
         error = validateFieldInitial(field, value, false, true);
+
+ 
   
 
       this.showFieldError(field, error || (value && field !== 'subjects' ? `${this.getFieldName(field)} valide <i class="fas fa-check-circle ml-1 text-green-500"></i>` : field === 'subjects' && value.length > 0 ? `Sujet(s) valide(s) <i class="fas fa-check-circle ml-1 text-green-500"></i>` : ''));
+
+       const subjectsValue = form.querySelector('[name="subjects"]').value.trim() || '';
+  const subjectDisplay = document.getElementById('subject-display');
+  if (!subjectsValue && subjectDisplay) {
+    this.showFieldError('subjects', 'Sélectionnez un sujet'); 
+    subjectDisplay.value = 'Sélectionnez un sujet';
+  }
     });
 
     if (contactData.email) {
@@ -388,7 +399,7 @@ updateSubmitButtonState(form, submitButton) {
     }
 
     if (!contactData.email) {
-      this.updateSubmitButtonState(form, submitButton);
+      this.updateSubmitButtonState(form, submitButton , true);
     }
   },
 
@@ -466,13 +477,12 @@ bindContactForm() {
           Vérification...
         `;
 
+        
         await this.checkEmailAndUpdateButton(value, false, form, submitButton, emailInput);
       } else if (field === 'message') {
         if (!value) error = 'Le message est requis.';
         else if (value.length < 10) error = 'Le message doit contenir au moins 10 caractères.';
         else if (value.length > 1000) error = 'Le message ne peut pas dépasser 1000 caractères.';
-      } else if (field === 'subjects') {
-        if (!value || value.length === 0) error = 'Veuillez sélectionner au moins un sujet.';
       } else {
         error = validateField(field, value, false, true);
       }
@@ -891,12 +901,13 @@ openSubjectsModal() {
         });
       });
 
+      subjectDisplay.value = selected.length > 0 ? `${selected.length} sujet(s) sélectionné(s)` : 'Sélectionnez un sujet';
       subjectDisplay.dispatchEvent(new Event('input'));
     } else {
       subjectsInput.value = '';
-      selectedSubjectsEl.innerHTML = '';
-      subjectDisplay.value = '';
-      subjectDisplay.dispatchEvent(new Event('input'));
+    selectedSubjectsEl.innerHTML = '';
+    subjectDisplay.value = 'Sélectionnez un sujet';
+    subjectDisplay.dispatchEvent(new Event('input'));
     }
   },
 
@@ -1362,7 +1373,7 @@ openSubjectsModal() {
    * @param {Object} data - Données du formulaire.
    * @returns {Object} Erreurs de validation.
    */
-  validateForm(data) {
+  validateForm(data , isInitialL = false) {
     const errors = {};
     const validSubjects = this.subjectsList.map(subject => subject.name);
 
@@ -1379,7 +1390,7 @@ openSubjectsModal() {
     if (phoneError) errors.phone = phoneError;
 
     // Validation des sujets
-    if (!data.subjects || (Array.isArray(data.subjects) && data.subjects.length === 0)) {
+    if (isInitialL && !data.subjects || (Array.isArray(data.subjects) && data.subjects.length === 0)) {
       errors.subjects = 'Veuillez sélectionner au moins un sujet.';
     } else if (Array.isArray(data.subjects)) {
       const invalidSubjects = data.subjects.filter(s => !validSubjects.includes(s));

@@ -1,0 +1,914 @@
+🚨 [2L-Ouest-Services] 05/10/2025 00:29:54 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:29:54 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:29:54 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:29:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:29:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:29:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:54 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:54 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:30:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:31:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:31:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:31:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:31:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:31:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 00:31:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 08:14:24 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 14:24:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 15:34:21 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 15:34:26 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 15:34:31 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 15:50:37 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 15:50:42 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 15:55:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 15:55:19 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 16:29:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 17:24:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:11:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:11:43 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:11:43 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:11:43 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:11:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:11:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:11:49 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:13 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:13 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:13 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:43 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 18:12:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:03:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:03:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:03:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:03:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:03:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:03:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:04:07 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:04:07 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:04:07 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:32:52 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 19:49:06 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA ETIMEOUT firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:28 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:28 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:28 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:33 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:33 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:33 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:43:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:44:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:45:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:45:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:45:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:45:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:45:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 20:45:44 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:43:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:40 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:40 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:40 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:45:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:10 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:10 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:10 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:40 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:40 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:40 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:46:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:41 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:41 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:41 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:47:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:41 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:41 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:41 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:48:56 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:11 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:42 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:42 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:42 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:49:57 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:50:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:50:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:50:12 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 21:50:33 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:51:03 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:51:33 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:52:03 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:52:33 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:53:03 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:53:33 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:54:03 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:54:33 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:55:03 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:55:33 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:56:03 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:56:33 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:57:03 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:57:33 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 21:58:03 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:14 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:39 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:39 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:49:39 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:50:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:50:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:50:09 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:50:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:50:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:50:24 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+📋 [2L-Ouest-Services] 05/10/2025 22:50:57 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "e643645f-b47d-4f75-9628-96b79b167485",
+  "name": "LL Ouest Services",
+  "email": "ll.ouest.services@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<f47c3d5f-2202-aafb-17e9-b592846d6279@gmail.com>",
+  "adminMessageId": "<3c24ccc9-d551-dd82-de28-cb4cc17ca181@gmail.com>"
+}
+📋 [2L-Ouest-Services] 05/10/2025 22:54:28 | AUDIT    | Message de contact créé et emails envoyés avec succès
+{
+  "contactId": "843e402e-ddab-497b-b13b-6ef6fcd10542",
+  "name": "LL Ouest Services",
+  "email": "ll.ouest.services@gmail.com",
+  "hasSubjects": true,
+  "clientEmailSent": true,
+  "adminEmailSent": true,
+  "clientMessageId": "<7231f547-7cb3-17e3-1db8-5befa631b85e@gmail.com>",
+  "adminMessageId": "<e244e2a2-47ab-58b6-f471-969aa7ec4853@gmail.com>"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:56:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:56:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:56:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:35 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:35 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:35 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:57:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:58:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:58:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 05/10/2025 22:58:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
