@@ -1186,7 +1186,217 @@ const emailTemplates = {
       </div>
     </body>
     </html>
-  `
+  `,
+    reservationClientConfirmation: (data) => `
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      ${commonStyles}
+    </head>
+    <body>
+      <div class="email-container">
+        <div class="email-header">
+          <div class="logo-container">
+            <img src="${company.logo}" alt="${company.name}" class="logo">
+          </div>
+          <h1 class="header-title">Confirmation de Réservation</h1>
+          <p class="header-subtitle">Votre demande a bien été enregistrée</p>
+          <div class="email-date">
+            ${getFormattedDate(data.createdAt)}
+          </div>
+        </div>
+        
+        <div class="email-content">
+          <p class="salutation">Cher(e) ${data.name || 'Client'},</p>
+          
+          <div class="message-section">
+            <p>Nous accusons réception de votre réservation pour le service "${data.serviceName}" et vous remercions pour votre confiance. Notre équipe l'examinera et vous contactera sous 24h pour confirmer les détails et planifier l'intervention.</p>
+          </div>
+          
+          <div class="info-section">
+            <div class="info-section-title">
+              <i class="fas fa-user-circle"></i> Vos Coordonnées
+            </div>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-value">${data.name || 'Non spécifié'}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-value">${data.email || 'Non spécifié'}</span>
+              </div>
+              ${data.phone ? `
+              <div class="info-item">
+                <span class="info-value">${data.phone}</span>
+              </div>
+              ` : ''}
+              <div class="info-item">
+                <span class="info-value">${data.address || 'Non spécifié'}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="info-section">
+            <div class="info-section-title">
+              <i class="fas fa-calendar-check"></i> Détails de la Réservation
+            </div>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-value">Service : ${data.serviceName} (${data.serviceCategory})</span>
+              </div>
+              <div class="info-item">
+                <span class="info-value">Date souhaitée : ${data.date || 'Non spécifiée'}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-value">Fréquence : ${data.frequency || 'Non spécifiée'}</span>
+              </div>
+              ${data.options ? `
+              <div class="info-item">
+                <span class="info-value">Options : ${data.options.replace(/-/g, ', ')}</span>
+              </div>
+              ` : ''}
+            </div>
+          </div>
+          
+          ${data.message ? `
+          <div class="message-box">
+            <div class="message-box-title">
+              <i class="fas fa-comment-alt"></i> Vos Instructions
+            </div>
+            <p>${data.message}</p>
+          </div>
+          ` : ''}
+          
+          <div class="divider"></div>
+          
+          <div class="action-buttons">
+            <a href="${company.website}" class="outline-button">
+              <i class="fas fa-globe"></i> Notre site
+            </a>
+            <a href="${company.website}/services" class="outline-button accent">
+              <i class="fas fa-concierge-bell"></i> Nos services
+            </a>
+            <a href="tel:${company.phone}" class="outline-button secondary">
+              <i class="fas fa-phone"></i> Nous appeler
+            </a>
+          </div>
+        </div>
+        
+        ${getEmailFooter()}
+      </div>
+    </body>
+    </html>
+  `,
+
+  reservationAdminNotification: (data) => `
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      ${commonStyles}
+    </head>
+    <body>
+      <div class="email-container">
+        <div class="email-header">
+          <div class="logo-container">
+            <img src="${company.logo}" alt="${company.name}" class="logo">
+          </div>
+          <h1 class="header-title">Nouvelle Réservation</h1>
+          <p class="header-subtitle">Action requise - Planification</p>
+          <div class="email-date">
+            ${getFormattedDate(data.createdAt)}
+          </div>
+        </div>
+        
+        <div class="email-content">
+          <p class="salutation">Cher administrateur,</p>
+          
+          <div class="message-section">
+            <p>Une nouvelle réservation a été reçue et nécessite votre attention pour planification et confirmation.</p>
+          </div>
+          
+          <div class="info-section">
+            <div class="info-section-title">
+              <i class="fas fa-user-tie"></i> Informations Client
+            </div>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-value">${data.name || 'Non spécifié'}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-value">${data.email || 'Non spécifié'}</span>
+              </div>
+              ${data.phone ? `
+              <div class="info-item">
+                <span class="info-value">${data.phone}</span>
+              </div>
+              ` : ''}
+              <div class="info-item">
+                <span class="info-value">${data.address || 'Non spécifié'}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-value">ID Réservation : ${data.id}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="info-section">
+            <div class="info-section-title">
+              <i class="fas fa-calendar-check"></i> Détails Réservation
+            </div>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-value">Service : ${data.serviceName} (${data.serviceCategory})</span>
+              </div>
+              <div class="info-item">
+                <span class="info-value">Date souhaitée : ${data.date || 'Non spécifiée'}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-value">Fréquence : ${data.frequency || 'Non spécifiée'}</span>
+              </div>
+              ${data.options ? `
+              <div class="info-item">
+                <span class="info-value">Options : ${data.options.replace(/-/g, ', ')}</span>
+              </div>
+              ` : ''}
+            </div>
+          </div>
+          
+          ${data.message ? `
+          <div class="message-box">
+            <div class="message-box-title">
+              <i class="fas fa-comment-alt"></i> Instructions Spéciales
+            </div>
+            <p>${data.message}</p>
+          </div>
+          ` : ''}
+          
+          <div class="divider"></div>
+          
+          <div class="action-buttons">
+            <a href="mailto:${data.email}?subject=Re:%20Confirmation%20Réservation%20${data.id}" class="outline-button accent">
+              <i class="fas fa-reply"></i> Confirmer par email
+            </a>
+            <a href="${company.website}/admin/reservations/${data.id}" class="outline-button">
+              <i class="fas fa-eye"></i> Voir dans l'admin
+            </a>
+            <a href="tel:${data.phone || company.phone}" class="outline-button secondary">
+              <i class="fas fa-phone"></i> Appeler le client
+            </a>
+          </div>
+        </div>
+        
+        ${getEmailFooter()}
+      </div>
+    </body>
+    </html>
+  `,
 };
 
 function getEmailFooter() {

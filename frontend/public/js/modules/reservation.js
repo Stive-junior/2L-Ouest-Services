@@ -54,10 +54,10 @@ const reservation = {
       return;
     }
 
-    // Préremplir champs cachés
+    // Préremplir champs cachés pour toutes les données du service
     document.getElementById('reservation-service-id').value = service.id || 'default';
-    document.getElementById('reservation-service-name').value = service.name;
-    document.getElementById('reservation-service-category').value = service.category;
+    document.getElementById('reservation-service-name').value = service.name || '';
+    document.getElementById('reservation-service-category').value = service.category || '';
 
     // Préremplir user si connecté
     if (user) {
@@ -175,6 +175,8 @@ const reservation = {
       message: formData.get('message')?.trim() || '',
       consentement: formData.get('consentement') === 'on',
       serviceId: formData.get('serviceId') || '',
+      serviceName: formData.get('serviceName') || '',
+      serviceCategory: formData.get('serviceCategory') || '',
     };
     localStorage.setItem('reservationFormData', JSON.stringify(reservationData));
   },
@@ -199,6 +201,8 @@ const reservation = {
       form.querySelector('[name="subjects"]').value = reservationData.options || '';
       form.querySelector('[name="message"]').value = reservationData.message || '';
       form.querySelector('[name="serviceId"]').value = reservationData.serviceId || '';
+      form.querySelector('[name="serviceName"]').value = reservationData.serviceName || '';
+      form.querySelector('[name="serviceCategory"]').value = reservationData.serviceCategory || '';
       if (reservationData.consentement) {
         form.querySelector('[name="consentement"]').checked = true;
       }
@@ -286,6 +290,8 @@ const reservation = {
       message: formData.get('message')?.trim() || '',
       consentement: formData.get('consentement') === 'on',
       serviceId: formData.get('serviceId') || '',
+      serviceName: formData.get('serviceName') || '',
+      serviceCategory: formData.get('serviceCategory') || '',
     };
 
     // Validation des champs
@@ -299,10 +305,11 @@ const reservation = {
     const isOptionsValid = !errors.options;
     const isMessageValid = !errors.message;
     const isConsentValid = !errors.consentement;
+    const isServiceValid = !!reservationData.serviceId && !!reservationData.serviceName && !!reservationData.serviceCategory;
 
 
     // Déterminer si le formulaire est valide
-    const isValid = isEmailValid && isNameValid && isPhoneValid && isDateValid && isFrequencyValid && isAddressValid && isOptionsValid && isMessageValid && isConsentValid ;
+    const isValid = isEmailValid && isNameValid && isPhoneValid && isDateValid && isFrequencyValid && isAddressValid && isOptionsValid && isMessageValid && isConsentValid && isServiceValid;
 
     // Mise à jour de l'état du bouton
     submitButton.disabled = !isValid;
@@ -401,6 +408,8 @@ const reservation = {
       message: formData.get('message')?.trim() || '',
       consentement: formData.get('consentement') === 'on',
       serviceId: formData.get('serviceId') || '',
+      serviceName: formData.get('serviceName') || '',
+      serviceCategory: formData.get('serviceCategory') || '',
     };
 
     form.querySelectorAll('input:not([type="hidden"]), textarea, select, #reservation-subjects-display').forEach(input => {
@@ -452,6 +461,9 @@ const reservation = {
       subjects: 'Options',
       message: 'Message',
       consentement: 'Consentement',
+      serviceId: 'Service ID',
+      serviceName: 'Nom du Service',
+      serviceCategory: 'Catégorie du Service',
     };
     return fieldNames[field.toLowerCase()] || field;
   },
@@ -620,6 +632,8 @@ const reservation = {
         const reservationData = {
           id: crypto.randomUUID(),
           serviceId: formData.get('serviceId') || '',
+          serviceName: formData.get('serviceName') || '',
+          serviceCategory: formData.get('serviceCategory') || '',
           name: formData.get('name')?.trim() || '',
           email: formData.get('email')?.trim() || '',
           phone: phoneValue,
@@ -1001,6 +1015,11 @@ openOptionsModal() {
       errors.address = 'L\'adresse doit contenir au moins 5 caractères.';
     }
 
+    // Validation des données du service
+    if (!data.serviceId) errors.serviceId = 'ID du service requis.';
+    if (!data.serviceName || data.serviceName.trim() === '') errors.serviceName = 'Nom du service requis.';
+    if (!data.serviceCategory || data.serviceCategory.trim() === '') errors.serviceCategory = 'Catégorie du service requise.';
+
     // Validation des options
     if (isInitialLoad && !data.options || (Array.isArray(data.options) && data.options.length === 0)) {
       errors.options = 'Veuillez sélectionner au moins une option.';
@@ -1122,6 +1141,10 @@ openOptionsModal() {
                   <i class="fas fa-calendar-check mr-2"></i> Détails de la Réservation
               </h3>
               <div class="grid grid-cols-1 gap-3">
+                <div>
+                  <label class="block text-xs font-bold ${textLabel} uppercase">Service</label>
+                  <p class="mt-0.5 text-base font-medium text-gray-800 dark:text-gray-200">${reservationData.serviceName} (${reservationData.serviceCategory})</p>
+                </div>
                 <div>
                   <label class="block text-xs font-bold ${textLabel} uppercase">Date</label>
                   <p class="mt-0.5 text-base font-medium text-gray-800 dark:text-gray-200">${reservationData.date}</p>
@@ -1249,6 +1272,10 @@ openOptionsModal() {
                 <i class="fas fa-calendar-check mr-2"></i> Détails de la Réservation
               </h3>
               <div class="grid grid-cols-1 gap-3">
+                <div>
+                  <label class="block text-xs font-bold ${textLabel} uppercase">Service</label>
+                  <p class="mt-0.5 text-base font-medium text-gray-800 dark:text-gray-200">${reservationData.serviceName} (${reservationData.serviceCategory})</p>
+                </div>
                 <div>
                   <label class="block text-xs font-bold ${textLabel} uppercase">Date</label>
                   <p class="mt-0.5 text-base font-medium text-gray-800 dark:text-gray-200">${reservationData.date}</p>

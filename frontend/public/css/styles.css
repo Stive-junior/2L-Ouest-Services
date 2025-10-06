@@ -290,6 +290,23 @@ section a.cta::before {
 }
 
 
+[class*="gradient-hero"] {
+  background: linear-gradient(
+    270deg,
+    var(--ll-blue),
+    #f5f5f5,
+    var(--ll-white),
+    var(--ll-white),
+    var(--ll-dark-green)
+  );
+  background-size: 400% 400%; /* plus large pour plus de fluidité */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 8s ease-in-out infinite;
+}
+
+
 .back-text {
   padding: 0.3rem ; 
   border-radius: 0.5rem;

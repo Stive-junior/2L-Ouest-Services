@@ -373,7 +373,7 @@ export function renderServiceDetail(service, index = 0, total = 1) {
     if (scheduleEl) {
         const schedule = service.availability?.schedule || [];
         scheduleEl.innerHTML = schedule.map((sch, idx) => `
-            <li class="schedule-item" data-aos="fade-right" data-aos-delay="${idx * 100}">
+            <li class="schedule-item" data-aos="fade-right" data-aos-delay="${idx * 100 *3}">
                 <div class="flex items-center justify-between p-4 bg-ll-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-3xl border border-gray-200/50 dark:border-gray-700/50 hover:border-ll-blue/30 transition-all duration-300 group">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-ll-blue/10 rounded-xl flex items-center justify-center group-hover:bg-ll-blue/20 transition-colors duration-300">

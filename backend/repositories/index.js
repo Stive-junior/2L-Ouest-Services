@@ -10,6 +10,7 @@ const UserRepository = require('./userRepo');
 const ServiceRepository = require('./serviceRepo');
 const ReviewRepository = require('./reviewRepo');
 const ContactRepository = require('./contactRepo');
+const ReservationRepository = require('./reservationRepo');
 const ChatRepository = require('./chatRepo');
 const { logger, logInfo, logError } = require('../services/loggerService');
 const { AppError } = require('../utils/errorUtils');
@@ -17,20 +18,21 @@ const { AppError } = require('../utils/errorUtils');
 /**
  * @constant {Object} collections
  * @description Références aux collections Firestore utilisées par les repositories.
- * @type {{ users: admin.firestore.CollectionReference, services: admin.firestore.CollectionReference, reviews: admin.firestore.CollectionReference, contacts: admin.firestore.CollectionReference, chatMessages: admin.firestore.CollectionReference }}
+ * @type {{ users: admin.firestore.CollectionReference, services: admin.firestore.CollectionReference, reviews: admin.firestore.CollectionReference, contacts: admin.firestore.CollectionReference, reservations: admin.firestore.CollectionReference, chatMessages: admin.firestore.CollectionReference }}
  */
 const collections = {
   users: db.collection('users'),
   services: db.collection('services'),
   reviews: db.collection('reviews'),
   contacts: db.collection('contacts'),
+  reservations: db.collection('reservations'),
   chatMessages: db.collection('chatMessages'),
 };
 
 /**
  * @function initializeRepositories
  * @description Initialise les instances des repositories avec les références aux collections.
- * @returns {{ userRepo: UserRepository, serviceRepo: ServiceRepository, reviewRepo: ReviewRepository, contactRepo: ContactRepository, chatRepo: ChatRepository }}
+ * @returns {{ userRepo: UserRepository, serviceRepo: ServiceRepository, reviewRepo: ReviewRepository, contactRepo: ContactRepository, reservationRepo: ReservationRepository, chatRepo: ChatRepository }}
  */
 const initializeRepositories = () => {
   try {
@@ -40,6 +42,7 @@ const initializeRepositories = () => {
       serviceRepo: new ServiceRepository(collections.services),
       reviewRepo: new ReviewRepository(collections.reviews),
       contactRepo: new ContactRepository(collections.contacts),
+      reservationRepo: new ReservationRepository(collections.reservations),
       chatRepo: new ChatRepository(collections.chatMessages),
     };
   } catch (error) {

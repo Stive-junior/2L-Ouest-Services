@@ -240,7 +240,8 @@ const contactApi = {
     }
   },
 
-  /**
+
+    /**
    * Crée une nouvelle réservation via l'API et envoie des emails de confirmation (client) et notification (admin).
    * Valide les données avant envoi, génère un ID unique, et utilise les templates emails adaptés aux réservations.
    * Affiche une notification utilisateur en cas de succès ou d'erreur.
@@ -248,6 +249,8 @@ const contactApi = {
    * @function createReservation
    * @param {Object} reservationData - Données de la réservation à envoyer.
    * @param {string} reservationData.serviceId - ID du service réservé.
+   * @param {string} reservationData.serviceName - Nom du service réservé.
+   * @param {string} reservationData.serviceCategory - Catégorie du service réservé.
    * @param {string} reservationData.name - Nom du client (2-100 caractères).
    * @param {string} reservationData.email - Email du client (format valide).
    * @param {string} [reservationData.phone] - Numéro de téléphone (optionnel, format +33 suivi de 9 chiffres).
@@ -267,6 +270,8 @@ const contactApi = {
       const normalizedReservationData = {
         id,
         serviceId: reservationData.serviceId?.trim(),
+        serviceName: reservationData.serviceName?.trim(),
+        serviceCategory: reservationData.serviceCategory?.trim(),
         name: reservationData.name?.trim(),
         email: reservationData.email?.trim().toLowerCase(),
         phone: reservationData.phone?.trim(),
@@ -283,6 +288,8 @@ const contactApi = {
       const templateData = {
         id: normalizedReservationData.id,
         serviceId: normalizedReservationData.serviceId,
+        serviceName: normalizedReservationData.serviceName,
+        serviceCategory: normalizedReservationData.serviceCategory,
         name: normalizedReservationData.name,
         email: normalizedReservationData.email,
         phone: normalizedReservationData.phone || 'N/A',

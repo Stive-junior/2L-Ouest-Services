@@ -415,111 +415,136 @@ async function loadMockData() {
 
 
 
-// HERO_SLIDES remains the same as before
+// HERO_SLIDES updated with pertinent content for L&L Ouest Services
+// Focus: Professional cleaning in Angers, France; small odd jobs (petits boulots), outside services (prestations extérieures),
+// eco-friendly, team, express, local engagement, hygiene, customization, trust, future-oriented.
+// Added 'hybrid' type for slides with both image and video: video blurred in background, symbolic image oblique as preview.
+// Sources: Real Unsplash images and Mixkit videos, curated for relevance (professional cleaning, French context where possible).
+// Variety: Offices, teams, eco products, before/after, tools, local Angers vibes, handyman for small jobs.
 const HERO_SLIDES = [
   {
     type: 'video',
     src: 'https://assets.mixkit.co/videos/preview/mixkit-woman-cleaning-a-room-39865-large.mp4',
     poster: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Espaces Impeccables',
-    subtitle: 'Découvrez la magie du nettoyage professionnel qui redonne vie à vos locaux à Angers',
+    title: 'Espaces Impeccables à Angers',
+    subtitle: 'Nettoyage professionnel L&L Ouest Services : redonnez vie à vos bureaux et locaux avec expertise locale',
     thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Nettoyage sur mesure pour un éclat durable.',
+    sidebarMessage: 'Propreté sur mesure pour entreprises angevines.',
     delay: 12000
   },
   {
     type: 'image',
     src: 'https://images.unsplash.com/photo-1558618048-6f3546cc0c3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Équipe Dédiée',
-    subtitle: 'Nos experts passionnés transforment la propreté en art pour entreprises et particuliers',
+    title: 'Équipe Dédiée et Locale',
+    subtitle: 'Nos professionnels passionnés à Angers transforment la propreté en art pour vos espaces de travail',
     thumbnail: 'https://images.unsplash.com/photo-1558618048-6f3546cc0c3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Une équipe fiable pour tous vos besoins en hygiène.',
+    sidebarMessage: 'Une équipe fiable pour tous vos besoins en hygiène et maintenance.',
     delay: 6000
   },
   {
-    type: 'image',
-    src: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    type: 'hybrid', // New type: blurred video bg + oblique symbolic image overlay
+    src_video: 'https://assets.mixkit.co/videos/preview/mixkit-cleaning-dirty-furniture-with-a-steam-vacuum-cleaner-45041-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    src_image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', // Eco products symbolic
     title: 'Solutions Écologiques',
-    subtitle: 'Nettoyez avec conscience : produits biodégradables pour un avenir plus vert à Angers',
-    thumbnail: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Engagement éco-responsable au cœur de nos services.',
-    delay: 6000
+    subtitle: 'Produits biodégradables et verts pour un nettoyage responsable au cœur de l\'Ouest français',
+    thumbnail: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+    sidebarMessage: 'Engagement éco-responsable pour un Angers plus propre.',
+    delay: 8000
   },
   {
     type: 'video',
     src: 'https://assets.mixkit.co/videos/preview/mixkit-cleaning-a-window-1255-large.mp4',
     poster: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Avant & Après',
-    subtitle: 'Témoins de la transformation : de l\'ordre au chaos, nous réinventons vos espaces',
+    title: 'Avant & Après : Transformation',
+    subtitle: 'De l\'ordre au chaos, nos interventions rapides révèlent l\'éclat de vos espaces professionnels',
     thumbnail: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Résultats visibles qui impressionnent à chaque fois.',
+    sidebarMessage: 'Résultats visibles qui impressionnent vos clients.',
     delay: 10000
   },
   {
     type: 'image',
     src: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Service Express',
-    subtitle: 'Intervention rapide et discrète pour ne jamais perturber votre quotidien effréné',
+    title: 'Service Express 24/7',
+    subtitle: 'Interventions discrètes et rapides pour ne jamais perturber votre activité à Angers',
     thumbnail: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Efficacité sans compromis sur la qualité.',
+    sidebarMessage: 'Efficacité pour vos horaires flexibles.',
     delay: 6000
   },
   {
-    type: 'image',
-    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    type: 'hybrid',
+    src_video: 'https://assets.mixkit.co/videos/preview/vacuum-cleaner-cleaning-a-sofa-45039-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    src_image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', // Tool symbolic
     title: 'Outils Innovants',
-    subtitle: 'Technologie de pointe au service d\'un nettoyage impeccable et durable',
+    subtitle: 'Technologie de pointe pour un nettoyage impeccable et durable dans vos locaux ouest-français',
     thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Innovation pour des résultats supérieurs.',
-    delay: 6000
+    sidebarMessage: 'Innovation au service de la qualité premium.',
+    delay: 7000
   },
   {
     type: 'video',
     src: 'https://assets.mixkit.co/videos/preview/mixkit-portrait-of-cleaning-lady-39866-large.mp4',
     poster: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Engagement Local',
-    subtitle: 'Soutien aux communautés d\'Angers : propreté et solidarité main dans la main',
+    title: 'Engagement Local à Angers',
+    subtitle: 'Soutien aux communautés angevines : propreté, petits boulots et services extérieurs solidaires',
     thumbnail: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Partenaire de confiance pour l\'Ouest.',
+    sidebarMessage: 'Partenaire de confiance pour l\'Ouest de la France.',
     delay: 11000
   },
   {
     type: 'image',
     src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Hygiène Premium',
-    subtitle: 'Standards élevés pour une sécurité optimale dans tous vos environnements',
+    title: 'Hygiène Premium Certifiée',
+    subtitle: 'Standards élevés pour une sécurité optimale dans bureaux, commerces et espaces privés',
     thumbnail: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Hygiène au sommet pour votre sérénité.',
+    sidebarMessage: 'Hygiène au sommet pour votre sérénité quotidienne.',
     delay: 6000
   },
   {
     type: 'image',
     src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
     title: 'Personnalisation Totale',
-    subtitle: 'Solutions taillées sur mesure pour répondre précisément à vos défis uniques',
+    subtitle: 'Solutions sur mesure : nettoyage, petits boulots, messagerie et prestations extérieures adaptées',
     thumbnail: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Adapté à chaque client, chaque espace.',
+    sidebarMessage: 'Adapté à chaque client, chaque défi unique.',
     delay: 6000
   },
   {
-    type: 'image',
-    src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    type: 'hybrid',
+    src_video: 'https://assets.mixkit.co/videos/preview/man-cleaning-and-jamming-at-home-101303-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    src_image: 'https://images.unsplash.com/photo-1558618048-6f3546cc0c3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', // Team symbolic for trust
     title: 'Confiance Gagnée',
-    subtitle: 'Des années d\'excellence qui font de nous le choix n°1 en services de nettoyage',
+    subtitle: 'Années d\'excellence L&L : le choix n°1 pour services polyvalents à Angers et alentours',
     thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Réputation bâtie sur des résultats exceptionnels.',
-    delay: 6000
+    sidebarMessage: 'Réputation bâtie sur des résultats exceptionnels et fiables.',
+    delay: 9000
   },
   {
     type: 'image',
     src: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-    title: 'Futur Propre',
-    subtitle: 'Investissez dans un nettoyage durable pour un demain radieux et serein',
+    title: 'Futur Propre et Durable',
+    subtitle: 'Investissez dans un nettoyage éco-responsable pour un demain radieux en Pays de la Loire',
     thumbnail: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    sidebarMessage: 'Vers un monde plus propre, ensemble.',
+    sidebarMessage: 'Vers un monde plus propre, ensemble avec L&L Ouest Services.',
     delay: 6000
   }
 ];
+
+/**
+ * Fisher-Yates shuffle for random order without repetition in cycle
+ * @param {Array} array - Array to shuffle
+ * @returns {Array} Shuffled copy
+ */
+function shuffleSlides(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 /**
  * Lazy load des images avec IntersectionObserver
@@ -549,45 +574,95 @@ let currentTimer = null;
 
 /**
  * Initialize hero carousel with navigation buttons
+ * Now shuffles slides randomly on init for unexpected order, no repeats in loop.
  */
 async function initHeroCarousel() {
   const slidesContainer = document.getElementById('hero-slides');
   if (!slidesContainer) return;
 
-  // Generate Slides with text animation classes
-  slidesContainer.innerHTML = HERO_SLIDES.map((slide, index) => `
-    <div class="swiper-slide relative w-full h-full flex items-center justify-center transition-opacity duration-700 ease-in-out" role="group" aria-label="Slide ${index + 1}">
-      ${slide.type === 'video' ? `
-        <div class="absolute inset-0 z-0">
-          <video class="w-full h-full object-cover" poster="${slide.poster}" muted loop playsinline preload="metadata" src="${slide.src}">
-            <source src="${slide.src}" type="video/mp4">
+  const shuffledSlides = shuffleSlides(HERO_SLIDES);
+
+  // Generate Slides with text animation classes and hybrid support
+slidesContainer.innerHTML = shuffledSlides.map((slide, index) => `
+  <div class="swiper-slide relative w-full h-full flex items-center justify-center transition-opacity duration-700 ease-in-out overflow-hidden" role="group" aria-label="Slide ${index + 1} de ${shuffledSlides.length}">
+    ${slide.type === 'video' ? `
+      <div class="absolute inset-0 z-0">
+        <video class="w-full h-full object-cover object-center" poster="${slide.poster}" muted loop playsinline preload="metadata" src="${slide.src}" aria-hidden="true">
+          <source src="${slide.src}" type="video/mp4">
+        </video>
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70 z-[5]"></div>
+    ` : slide.type === 'image' ? `
+      <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700" style="background-image: url('${slide.src}');"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70 z-[5]"></div>
+    ` : slide.type === 'hybrid' ? `
+      <div class="absolute inset-0 z-0 flex flex-col lg:flex-row h-full w-full">
+        <!-- Vidéo blurred : Pleine largeur sur mobile (top half), 2/3 sur desktop (left) -->
+        <div class="relative w-full lg:w-2/3 h-1/2 lg:h-full flex-shrink-0">
+          <video class="blurred-video w-full h-full object-cover object-center" poster="${slide.poster}" muted loop playsinline preload="metadata" src="${slide.src_video}" aria-hidden="true">
+            <source src="${slide.src_video}" type="video/mp4">
           </video>
         </div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-[5]"></div>
-      ` : `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-700" style="background-image: url('${slide.src}');"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-[5]"></div>
-      `}
-      <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-6 transform transition-all duration-700 ease-in-out group">
-        <h1 class="text-4xl md:text-6xl font-cinzel font-bold mb-4 tracking-tight gradiant">${slide.title}</h1>
-        <p class="text-lg md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed font-light opacity-100 transform translate-y-0 transition-all duration-700">${slide.subtitle}</p>
-        <a href="#contact" class="btn-container btn-right text-ll-white hover:text-ll-white py-4 px-8 rounded-xl font-semibold shadow-lg !bg-transparent border !border-ll-medium-gray hover:!border-0 py-4 px-6 rounded-xl font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark">
-          <div class="progress-fill bg-gradient-to-r from-ll-dark-blue to-ll-blue rounded-xl"></div>
-          <div class="btn-content shine-effect">
-            <div class="icon-wrapper text-ll-white mr-4">
-              <svg class="icon-default w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-              </svg>
-              <svg class="icon-hover w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-              </svg>
-            </div>
-            <span class="btn-text">Contactez-nous</span>
-          </div>
-        </a>
+        <!-- Séparateur blurry fade : Invisible sur mobile, ligne verticale fade sur desktop -->
+        <div class="hidden lg:block absolute inset-y-0 left-2/3 w-1 bg-gradient-to-b from-transparent via-white/20 to-transparent z-[6] backdrop-blur-xl"></div>
+        <!-- Image symbolique : Pleine largeur sur mobile (bottom half), 1/3 sur desktop (right) -->
+        <div class="relative w-full hidden lg:block lg:w-1/3 h-1/2 lg:h-full flex-shrink-0 overflow-hidden rounded-r-xl lg:rounded-none">
+          <img src="${slide.src_image}" alt="Aperçu symbolique : ${slide.title}" class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105" loading="lazy">
+        </div>
       </div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70 z-[5]"></div>
+    ` : ''}
+    <!-- Contenu textuel : Centré, responsive, overlay sur split pour hybrid -->
+    <div class="relative z-10 flex flex-col justify-center items-center text-center text-white h-full px-2 sm:px-4 lg:px-6 w-full max-w-4xl mx-auto transform transition-all duration-700 ease-in-out group">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-cinzel font-bold mb-2 sm:mb-4 tracking-tight text-shadow-lg gradient-hero">${slide.title}</h1>
+      <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-4 sm:mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed font-light opacity-100 transform translate-y-0 transition-all duration-700 line-clamp-3">${slide.subtitle}</p>
+      <a href="#contact" class="btn-container btn-right text-ll-white hover:text-ll-white py-3 sm:py-4 px-6 sm:px-8 rounded-xl font-semibold shadow-lg !bg-transparent border !border-ll-medium-gray hover:!border-0 font-medium text-sm sm:text-base shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ll-blue/50 transition-all duration-300 transform flex items-center justify-center min-h-[44px] sm:min-h-[56px] hover:bg-ll-light-bg dark:hover:bg-sidebar-dark" aria-label="Contactez L&L Ouest Services pour ${slide.title.toLowerCase()}">
+        <div class="progress-fill bg-gradient-to-r from-ll-dark-blue to-ll-blue rounded-xl absolute inset-0 -z-10"></div>
+        <div class="btn-content shine-effect relative z-10 flex items-center">
+          <div class="icon-wrapper text-ll-white mr-2 sm:mr-4 flex-shrink-0">
+            <svg class="icon-default w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <svg class="icon-hover w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 hidden group-hover:block" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+          </div>
+          <span class="btn-text whitespace-nowrap">Contactez-nous</span>
+        </div>
+      </a>
     </div>
-  `).join('');
+  </div>
+`).join('');
+
+if (!document.querySelector('#hero-hybrid-css')) {
+  const style = document.createElement('style');
+  style.id = 'hero-hybrid-css';
+  style.textContent = `
+    .blurred-video { filter: blur(3px) saturate(0.8); opacity: 0.85; }
+    .text-shadow-lg { text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .touch-manipulation { touch-action: manipulation; }
+    @media (max-width: 1024px) {
+      .oblique-symbol { display: none; } /* Hide if any legacy */
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .transition-all { transition: none !important; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+  // Add CSS for hybrid elements (blurred video and oblique image) - inject if needed
+  if (!document.querySelector('#hero-hybrid-css')) {
+    const style = document.createElement('style');
+    style.id = 'hero-hybrid-css';
+    style.textContent = `
+      .blurred-video { filter: blur(4px); opacity: 0.7; }
+      .oblique-symbol { filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); }
+      @media (max-width: 768px) { .oblique-symbol { transform: rotate(-3deg) scale(0.8); right: 5%; top: 10%; } }
+    `;
+    document.head.appendChild(style);
+  }
 
   // DOM Variables
   const swiperSlides = slidesContainer.querySelectorAll('.swiper-slide');
@@ -611,7 +686,7 @@ async function initHeroCarousel() {
   // Start timer for next slide based on slide delay
   function startSlideTimer(swiper) {
     if (currentTimer) clearTimeout(currentTimer);
-    const currentSlide = HERO_SLIDES[swiper.realIndex % HERO_SLIDES.length]; // Handle loop
+    const currentSlide = shuffledSlides[swiper.realIndex % shuffledSlides.length];
     const delay = currentSlide.delay || 7000;
     currentTimer = setTimeout(() => {
       swiper.slideNext();
@@ -677,7 +752,6 @@ async function initHeroCarousel() {
   // Lazy load any lazy images if needed (though backgrounds are inline)
   lazyLoadImages(document.querySelectorAll('img.lazy'));
 }
-
 
 /**
  * Initialise le carrousel des témoignages avec un design futuriste et une boucle infinie
@@ -2387,97 +2461,92 @@ function initBeforeAfterSliders() {
 
 
 
-let reviewsModal = null;
-let categoryModal = null;
-let filterInactivityTimer = null;
-const INACTIVITY_CLOSE_DELAY = 10000; 
-
 /**
- * Initialise les modales vidéo avec gestion plein écran et effets futuristes
- * Mise à jour complète : Positionnement optimisé du bouton de fermeture (top-right fixe et responsive)
- * Contrôles vidéo personnalisés : Barre de progression interactive, play/pause, volume slider, fullscreen
+ * Initialise les modales vidéo avec gestion plein écran et effets futuristes.
+ * Version Ultra-Performante et Modulaire (Refonte complète).
+ * * - Suppression des listeners redondants (dblclick)
+ * - Gestion unifiée des événements 'click' pour éviter les conflits simple/double clic
+ * - Optimisation de la gestion des gestes tactiles (passifs si possible)
+ * - Amélioration de la gestion de l'inactivité et du plein écran
+ * - Utilisation de l'API Pointer Events pour la barre de progression (plus robuste)
  */
 export function initVideoModal() {
+    // --- 1. INITIALISATION DU DOM (Améliorée pour responsive : vidéo full sur petit écran) ---
     const videoModal = document.createElement('div');
     videoModal.id = 'video-modal';
-    videoModal.className = 'fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4 transition-all duration-500 backdrop-blur-xl hidden modal-overlay';
+    // Utilisation de 'aria-modal' pour l'accessibilité
+    videoModal.className = 'fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-0 sm:p-2 sm:p-4 transition-all duration-500 backdrop-blur-xl hidden modal-overlay overflow-auto';
+    videoModal.setAttribute('role', 'dialog');
+    videoModal.setAttribute('aria-modal', 'true');
+    videoModal.setAttribute('aria-labelledby', 'video-title');
     
     videoModal.innerHTML = `
-        <div class="modal-content bg-gradient-to-b from-black/80 to-black/100 text-white max-w-6xl w-full max-h-[95vh] relative overflow-hidden neon-glow rounded-2xl">
-            <!-- Titre de la vidéo : Positionnement top-left optimisé, responsive et accessible -->
-            <h2 id="video-title" class="absolute top-4 left-4 z-10 text-xl md:text-2xl font-bold text-white truncate max-w-[70%] sm:max-w-[60%] lg:max-w-[50%] bg-black/30 px-3 py-1 rounded-lg backdrop-blur-sm" aria-label="Titre de la vidéo"></h2>
+        <div class="modal-content bg-gradient-to-b from-black/80 to-black/100 text-white w-full h-full sm:max-w-[95vw] sm:max-h-[95vh] relative overflow-hidden neon-glow rounded-2xl shadow-2xl transition-all duration-300 group/parent">
+            <h2 id="video-title" class="absolute top-2 sm:top-4 left-2 sm:left-4 z-10 text-xs sm:text-xl md:text-2xl font-bold text-white truncate max-w-[70%] sm:max-w-[60%] lg:max-w-[50%] bg-black/40 px-2 py-1 sm:px-3 sm:py-1 rounded-lg backdrop-blur-sm shadow-md hidden xs:block" aria-live="polite"></h2>
             
-            <!-- Bouton de fermeture : Positionnement top-right optimisé, responsive et accessible -->
-            <button class="close-video-modal modal-close absolute top-4 right-4 z-10 bg-white dark:bg-gray-700 rounded-xl p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-md" aria-label="Fermer la modale vidéo">
-            
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button class="close-video-modal modal-close absolute top-2 sm:top-4 right-2 sm:right-4 z-10 bg-white/90 dark:bg-gray-700/90 rounded-xl p-1 sm:p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50" aria-label="Fermer la modale vidéo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-6 sm:h-6">
                     <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
                 </svg>
             </button>
             
-            <!-- Conteneur vidéo avec overlay gradient -->
-            <div class="relative w-full h-full flex items-center justify-center">
-                <video id="modal-video" class="w-full h-full max-h-[80vh] object-contain rounded-xl shadow-2xl" preload="metadata" poster="/assets/images/logo.png" muted>
+            <div class="video-player-container relative w-full h-screen sm:h-[60vh] sm:h-[70vh] md:h-[80vh] flex items-center justify-center touch-manipulation">
+                <video id="modal-video" class="w-full h-full max-h-[80vh] object-contain rounded-xl shadow-2xl cursor-pointer transition-filter duration-200" preload="metadata" poster="/assets/images/logo.png" muted tabindex="0" aria-label="Lecteur vidéo principal">
                     <source src="" type="video/mp4">
                     Votre navigateur ne supporte pas la balise vidéo.
                 </video>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none rounded-xl"></div>
+                <div id="gesture-indicator" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/30 backdrop-blur-md text-white px-4 py-2 rounded-full opacity-0 transition-opacity duration-300 pointer-events-none text-lg sm:text-2xl font-semibold"></div>
             </div>
             
-            <!-- Contrôles vidéo personnalisés : Barre en bas, semi-transparente avec hover reveal -->
-            <div class="video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:opacity-100 pointer-events-none group-hover/parent:pointer-events-auto neon-glow">
-                <div class="flex items-center justify-between w-full">
-                    <!-- Play/Pause -->
-                    <button id="play-pause-btn" class="play-pause-btn text-white p-3 rounded-full hover:bg-white/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Lecture/Pause">
-                        <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
-                            <circle cx="12" cy="12" r="10"></circle><polygon points="10,8 16,12 10,16"></polygon>
-                        </svg>
-                        <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>
-                        </svg>
-                    </button>
+            <div class="video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2 sm:p-4 opacity-0 transition-opacity duration-300 group-hover/parent:opacity-100 pointer-events-none group-hover/parent:pointer-events-auto neon-glow">
+                <div class="flex items-center justify-between w-full flex-col sm:flex-row gap-2 sm:gap-0">
+                    <div class="flex justify-center sm:justify-start w-full sm:w-auto">
+                        <button id="play-pause-btn" class="text-white p-2 sm:p-3 rounded-full hover:bg-white/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Lecture/Pause" aria-controls="modal-video">
+                            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-6 sm:h-6"><circle cx="12" cy="12" r="10"></circle><polygon points="10,8 16,12 10,16"></polygon></svg>
+                            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:w-6 sm:h-6"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                        </button>
+                    </div>
                     
-                    <!-- Barre de progression -->
-                    <div class="progress-container flex-1 mx-4 relative">
-                        <div class="progress-bar bg-white/20 rounded-full h-2 cursor-pointer relative overflow-hidden" id="progress-bar">
-                            <div class="progress-fill bg-blue-500 h-full rounded-full transition-all duration-200" id="progress-fill" style="width: 0%"></div>
-                            <div class="progress-thumb absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full transform -translate-y-1/2 opacity-0 transition-opacity duration-200" id="progress-thumb"></div>
+                    <div class="progress-container flex-1 mx-2 sm:mx-4 relative w-full sm:w-auto">
+                        <div class="progress-bar bg-white/20 rounded-full h-1.5 sm:h-2 cursor-pointer relative overflow-visible" id="progress-bar">
+                            <div class="progress-fill bg-gradient-to-r from-blue-400 to-blue-600 h-full rounded-full transition-all duration-200" id="progress-fill" style="width: 0%"></div>
+                            <div class="progress-thumb absolute top-1/2 w-3 h-3 bg-blue-500 rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 shadow-lg neon-glow" id="progress-thumb" style="left: 0%"></div>
                         </div>
                         <div class="time-display text-xs text-white/70 mt-1 flex justify-between">
-                            <span id="current-time">0:00</span>
+                            <span id="current-time" aria-live="off">0:00</span>
                             <span id="duration">0:00</span>
                         </div>
                     </div>
                     
-                    <!-- Volume -->
-                    <div class="volume-container flex items-center gap-2">
-                        <button id="volume-btn" class="volume-btn text-white p-2 rounded-full hover:bg-white/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Volume">
-                            <svg id="volume-high-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
-                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19"></polygon><polygon points="22 9 17 4 17 20 22 15"></polygon>
+                    <div class="flex justify-center sm:justify-end w-full sm:w-auto gap-2 relative">
+                        <div class="volume-control relative group">
+                            <button id="mute-btn" class="text-white p-2 sm:p-3 rounded-full hover:bg-white/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Couper/Rétablir le son" aria-controls="modal-video" aria-expanded="false">
+                                <svg id="volume-up-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-6 sm:h-6"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                                <svg id="volume-mute-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:w-6 sm:h-6"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="22" y1="22" x2="2" y2="2"></line></svg>
+                            </button>
+                            <div class="volume-slider-container absolute bottom-full right-0 mb-2 hidden group-hover:block group-focus-within:block bg-black/90 rounded-lg p-2 shadow-lg z-10 min-w-[100px]">
+                                <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-1.5 rounded-lg appearance-none bg-white/20 cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:shadow-md" aria-label="Contrôle du volume">
+                                <div class="volume-label text-xs text-white/80 text-center mt-1" id="volume-label">100%</div>
+                            </div>
+                        </div>
+                        
+                        <button class="fullscreen-video bg-black/60 text-white p-2 sm:p-3 rounded-xl hover:bg-black/80 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Passer en plein écran">
+                            <svg id="fullscreen-open-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-6 sm:h-6">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
                             </svg>
-                            <svg id="volume-low-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
-                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19"></polygon>
-                            </svg>
-                            <svg id="volume-mute-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>
+                            <svg id="fullscreen-close-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:w-6 sm:h-6">
+                                <path d="M15 3h6v6"></path><path d="M18 6l-6 6"></path><path d="M9 21H3v-6"></path><path d="M6 18l6-6"></path><path d="M3 9V3h6"></path><path d="M6 6l6 6"></path><path d="M21 15v6h-6"></path><path d="M18 18l-6-6"></path>
                             </svg>
                         </button>
-                        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1" class="w-20 h-1 bg-white/30 rounded-lg appearance-none cursor-pointer slider-neon [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:appearance-none" />
                     </div>
-                    
-                    <!-- Fullscreen -->
-                    <button class="fullscreen-video bg-black/60 text-white p-3 rounded-xl hover:bg-black/80 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 neon-glow" aria-label="Passer en plein écran">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
     `;
     document.body.appendChild(videoModal);
 
-    // Éléments DOM
+    // --- 2. RÉFÉRENCES ET VARIABLES D'ÉTAT ---
     const modalVideo = document.getElementById('modal-video');
     const videoTitle = document.getElementById('video-title');
     const closeButton = videoModal.querySelector('.close-video-modal');
@@ -2485,166 +2554,459 @@ export function initVideoModal() {
     const playPauseBtn = document.getElementById('play-pause-btn');
     const playIcon = document.getElementById('play-icon');
     const pauseIcon = document.getElementById('pause-icon');
+    const muteBtn = document.getElementById('mute-btn');
+    const volumeUpIcon = document.getElementById('volume-up-icon');
+    const volumeMuteIcon = document.getElementById('volume-mute-icon');
+    const fullscreenOpenIcon = document.getElementById('fullscreen-open-icon');
+    const fullscreenCloseIcon = document.getElementById('fullscreen-close-icon');
     const progressBar = document.getElementById('progress-bar');
     const progressFill = document.getElementById('progress-fill');
     const progressThumb = document.getElementById('progress-thumb');
     const currentTimeEl = document.getElementById('current-time');
     const durationEl = document.getElementById('duration');
-    const volumeBtn = document.getElementById('volume-btn');
-    const volumeHighIcon = document.getElementById('volume-high-icon');
-    const volumeLowIcon = document.getElementById('volume-low-icon');
-    const volumeMuteIcon = document.getElementById('volume-mute-icon');
+    const modalContent = videoModal.querySelector('.modal-content');
+    const gestureIndicator = document.getElementById('gesture-indicator');
     const volumeSlider = document.getElementById('volume-slider');
+    const volumeLabel = document.getElementById('volume-label');
 
-    // Fonction pour formater le temps
+    let brightnessLevel = 1;
+    let autoPauseTimer = null;
+    let clickTimeout = null;
+    let lastClickTime = 0;
+    const clickDelay = 300; // Délai pour détecter double-clic
+    let touchStartX = 0, touchStartY = 0;
+    let lastTouchX = 0, lastTouchY = 0;
+    let isSwiping = false;
+    let isKeyboardInteraction = false; // Flag pour détecter interaction clavier et éviter conflits bouton
+
+    // --- 3. FONCTIONS UTILITAIRES ---
+
+    /** Formate le temps en minutes:secondes. */
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     };
 
-    // Gestion play/pause
-    const togglePlayPause = () => {
-        if (modalVideo.paused) {
-            modalVideo.play().catch(error => console.error('Erreur de lecture vidéo:', error));
-            playIcon.classList.add('hidden');
-            pauseIcon.classList.remove('hidden');
-        } else {
-            modalVideo.pause();
-            playIcon.classList.remove('hidden');
-            pauseIcon.classList.add('hidden');
+    /** Met à jour la luminosité via filtre CSS. */
+    const updateBrightness = (level) => {
+        brightnessLevel = Math.max(0.1, Math.min(2, level)); // Limites 10% à 200%
+        modalVideo.style.filter = `brightness(${brightnessLevel})`;
+    };
+
+    /** Affiche temporairement un indicateur de geste (volume, luminosité, seek). */
+    const showGestureIndicator = (text) => {
+        gestureIndicator.textContent = text;
+        gestureIndicator.classList.add('opacity-100');
+        clearTimeout(gestureIndicator.timer);
+        gestureIndicator.timer = setTimeout(() => {
+            gestureIndicator.classList.remove('opacity-100');
+        }, 800);
+    };
+
+    /** Met à jour l'affichage du volume. */
+    const updateVolumeDisplay = () => {
+        const volumePercent = Math.round(modalVideo.volume * 100);
+        volumeSlider.value = volumePercent;
+        volumeLabel.textContent = `${volumePercent}%`;
+    };
+
+    // --- 4. GESTION LECTURE/PAUSE/VOLUME (Améliorée pour éviter conflits bouton) ---
+
+    /** Gère l'auto-pause sur inactivité. */
+    const startAutoPauseTimer = () => {
+        clearTimeout(autoPauseTimer);
+        if (!modalVideo.paused) {
+            autoPauseTimer = setTimeout(() => {
+                modalVideo.pause();
+                updatePlayPauseIcon(false);
+            }, 5000);
         }
     };
-    playPauseBtn.addEventListener('click', togglePlayPause);
+    const clearAutoPauseTimer = () => clearTimeout(autoPauseTimer);
 
-    // Gestion barre de progression
+    /** Met à jour les icônes Play/Pause de manière synchrone. */
+    const updatePlayPauseIcon = (isPlaying) => {
+        // Force la mise à jour immédiate pour éviter les lags
+        requestAnimationFrame(() => {
+            playIcon.classList.toggle('hidden', isPlaying);
+            pauseIcon.classList.toggle('hidden', !isPlaying);
+            playPauseBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Lecture');
+        });
+    };
+
+    /** Met à jour les icônes Mute/Unmute. */
+    const updateMuteIcon = (isMuted) => {
+        volumeUpIcon.classList.toggle('hidden', isMuted);
+        volumeMuteIcon.classList.toggle('hidden', !isMuted);
+        muteBtn.setAttribute('aria-label', isMuted ? 'Rétablir le son' : 'Couper le son');
+    };
+
+    /** Toggle Play/Pause (avec flag pour clavier). */
+    const togglePlayPause = () => {
+        // Si interaction clavier, ignorer les conflits potentiels avec le bouton
+        if (isKeyboardInteraction) {
+            isKeyboardInteraction = false;
+        }
+        if (modalVideo.paused) {
+            modalVideo.play().catch(error => console.error('Erreur de lecture vidéo:', error));
+            updatePlayPauseIcon(true);
+            startAutoPauseTimer();
+        } else {
+            modalVideo.pause();
+            updatePlayPauseIcon(false);
+            clearAutoPauseTimer();
+        }
+    };
+
+    // Événement clic sur bouton play/pause (dédié, sans conflit)
+    playPauseBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Empêche la propagation vers la vidéo
+        togglePlayPause();
+    });
+
+    // Unifier les événements de clic sur la vidéo (simple clic pour contrôles, double pour toggle)
+    modalVideo.addEventListener('click', (e) => {
+        const now = Date.now();
+        const delta = now - lastClickTime;
+        lastClickTime = now;
+
+        if (delta < clickDelay) {
+            // Double-clic détecté : Toggle play/pause
+            clearTimeout(clickTimeout);
+            clickTimeout = null;
+            togglePlayPause();
+            e.preventDefault(); // Empêche l'action par défaut du double-clic
+        } else {
+            // Premier clic : Délai pour confirmer simple clic (afficher contrôles)
+            clickTimeout = setTimeout(() => {
+                if (!isSwiping) {
+                    // Simple clic : Afficher contrôles (géré par group-hover)
+                }
+            }, clickDelay);
+        }
+        isSwiping = false; // Reset pour le prochain clic
+        clearAutoPauseTimer(); // Interagit avec le lecteur
+    });
+
+    /** Toggle Mute. */
+    const toggleMute = () => {
+        modalVideo.muted = !modalVideo.muted;
+        updateMuteIcon(modalVideo.muted);
+        updateVolumeDisplay(); // Sync avec slider
+        showGestureIndicator(modalVideo.muted ? '🔇 Muted' : '🔊 Unmuted');
+    };
+    muteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMute();
+    });
+
+    // Gestion du slider volume
+    volumeSlider.addEventListener('input', (e) => {
+        const volume = parseInt(e.target.value) / 100;
+        modalVideo.volume = volume;
+        modalVideo.muted = volume === 0;
+        updateVolumeDisplay();
+        updateMuteIcon(modalVideo.muted);
+        clearAutoPauseTimer();
+    });
+
+    // Écouteurs de la vidéo pour synchronisation
+    modalVideo.addEventListener('play', () => {
+        updatePlayPauseIcon(true);
+        startAutoPauseTimer();
+    });
+    modalVideo.addEventListener('pause', () => {
+        updatePlayPauseIcon(false);
+        clearAutoPauseTimer();
+    });
+    modalVideo.addEventListener('volumechange', () => {
+        // Synchroniser l'icône muet si le volume est à 0 ou muet
+        updateMuteIcon(modalVideo.muted || modalVideo.volume === 0);
+        updateVolumeDisplay();
+    });
+
+    // --- 5. GESTION BARRE DE PROGRESSION (Pointer Events pour robustesse) ---
+
+    let isSeeking = false;
+
+    /** Met à jour la progression et l'affichage du temps. */
     const updateProgress = () => {
         if (modalVideo.duration) {
             const progress = (modalVideo.currentTime / modalVideo.duration) * 100;
             progressFill.style.width = `${progress}%`;
+            progressThumb.style.left = `${progress}%`;
+            
+            // Affichage du temps
             currentTimeEl.textContent = formatTime(modalVideo.currentTime);
             durationEl.textContent = formatTime(modalVideo.duration);
-            progressThumb.style.left = `${progress}%`;
-            progressThumb.classList.toggle('opacity-100', modalVideo.paused || progress >= 100);
+            
+            // Afficher le 'thumb' quand pause ou fin
+            progressThumb.classList.toggle('opacity-100', modalVideo.paused || progress >= 100 || isSeeking);
         }
     };
+
+    /** Calcule et applique le temps de seek. */
+    const seekToPosition = (clientX) => {
+        const rect = progressBar.getBoundingClientRect();
+        let pos = (clientX - rect.left) / rect.width;
+        pos = Math.max(0, Math.min(1, pos)); // Clamp entre 0 et 1
+        modalVideo.currentTime = pos * modalVideo.duration;
+    };
+
+    progressBar.addEventListener('pointerdown', (e) => {
+        isSeeking = true;
+        seekToPosition(e.clientX);
+        modalVideo.pause(); // Pause pendant le seek
+        document.body.style.userSelect = 'none'; // Empêche la sélection de texte pendant le drag
+        progressThumb.classList.add('scale-150'); // Effet visuel
+        clearAutoPauseTimer();
+    });
+
+    document.addEventListener('pointermove', (e) => {
+        if (isSeeking) {
+            seekToPosition(e.clientX);
+        }
+    });
+
+    document.addEventListener('pointerup', () => {
+        if (isSeeking) {
+            isSeeking = false;
+            if (!modalVideo.paused) {
+                modalVideo.play().catch(error => console.error('Erreur de lecture vidéo:', error));
+                startAutoPauseTimer();
+            }
+            document.body.style.userSelect = 'auto';
+            progressThumb.classList.remove('scale-150');
+        }
+    });
+
     modalVideo.addEventListener('timeupdate', updateProgress);
     modalVideo.addEventListener('loadedmetadata', updateProgress);
 
-    // Seek sur clic/drag
-    const handleProgressClick = (e) => {
-        const rect = progressBar.getBoundingClientRect();
-        const pos = (e.clientX - rect.left) / rect.width;
-        modalVideo.currentTime = pos * modalVideo.duration;
-    };
-    progressBar.addEventListener('click', handleProgressClick);
-    let isDragging = false;
-    progressBar.addEventListener('mousedown', () => isDragging = true);
-    document.addEventListener('mouseup', () => isDragging = false);
-    document.addEventListener('mousemove', (e) => {
-        if (isDragging) handleProgressClick(e);
-    });
+    // --- 6. GESTION DES GESTES TACTILES (Swipe - Affinée pour haut/bas) ---
 
-    // Gestion volume
-    const updateVolumeIcon = () => {
-        const vol = modalVideo.volume;
-        volumeHighIcon.classList.toggle('hidden', vol < 0.5);
-        volumeLowIcon.classList.toggle('hidden', vol === 0 || vol >= 0.5);
-        volumeMuteIcon.classList.toggle('hidden', vol > 0);
-    };
-    volumeSlider.addEventListener('input', (e) => {
-        modalVideo.volume = e.target.value;
-        updateVolumeIcon();
-    });
-    volumeBtn.addEventListener('click', () => {
-        modalVideo.muted = !modalVideo.muted;
-        volumeSlider.value = modalVideo.muted ? 0 : 1;
-        updateVolumeIcon();
-    });
-    updateVolumeIcon(); // Init
+    const SWIPE_THRESHOLD_X = 50; // Pixels
+    const SWIPE_THRESHOLD_Y = 30; // Pixels
+    const VOLUME_STEP = 0.05; // Plus fin pour gestes
+    const BRIGHTNESS_STEP = 0.05;
+    const SEEK_STEP = 5; // Secondes plus fin
 
-    // Hover pour révéler contrôles
-    const modalContent = videoModal.querySelector('.modal-content');
-    modalContent.addEventListener('mouseenter', () => modalContent.classList.add('group'));
-    modalContent.addEventListener('mouseleave', () => modalContent.classList.remove('group'));
+    modalVideo.addEventListener('touchstart', (e) => {
+        // On n'agit que si un seul doigt
+        if (e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            lastTouchX = touchStartX;
+            lastTouchY = touchStartY;
+            isSwiping = false; // Réinitialisation de l'état de swipe
+            clearAutoPauseTimer();
+        }
+    }, { passive: true }); // Passive: true pour le 'touchstart' initial (meilleure performance de scroll)
 
-    // Fullscreen
+    modalVideo.addEventListener('touchmove', (e) => {
+        if (e.touches.length !== 1) return;
+
+        const touchEndX = e.touches[0].clientX;
+        const touchEndY = e.touches[0].clientY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        const absDeltaX = Math.abs(deltaX);
+        const absDeltaY = Math.abs(deltaY);
+        
+        const currentDeltaX = touchEndX - lastTouchX;
+        const currentDeltaY = touchEndY - lastTouchY;
+
+        // Si le mouvement est significatif
+        if (absDeltaX > SWIPE_THRESHOLD_X || absDeltaY > SWIPE_THRESHOLD_Y) {
+            e.preventDefault(); // Empêche le défilement (scroll) natif
+            isSwiping = true;
+
+            // Détection du geste principal (on favorise l'axe dominant)
+            if (absDeltaX > absDeltaY) {
+                // Swipe Horizontal (Seek)
+                const seekAmount = (currentDeltaX > 0 ? SEEK_STEP : -SEEK_STEP);
+                modalVideo.currentTime = Math.max(0, Math.min(modalVideo.duration, modalVideo.currentTime + seekAmount));
+                showGestureIndicator(`↔️ Seek ${seekAmount > 0 ? '+' : ''}${seekAmount}s`);
+            } else {
+                // Swipe Vertical (haut pour augmenter, bas pour diminuer)
+                const windowWidth = window.innerWidth;
+                const isUpward = currentDeltaY < 0; // Vers le haut si deltaY négatif
+                if (touchStartX > windowWidth * 0.5) {
+                    // Côté droit: Volume
+                    const volumeDelta = isUpward ? VOLUME_STEP : -VOLUME_STEP;
+                    modalVideo.volume = Math.max(0, Math.min(1, modalVideo.volume + volumeDelta));
+                    const volumePercent = Math.round(modalVideo.volume * 100);
+                    showGestureIndicator(`🔊 Volume: ${volumePercent}% ${isUpward ? '↑' : '↓'}`);
+                } else {
+                    // Côté gauche: Luminosité
+                    const brightnessDelta = isUpward ? BRIGHTNESS_STEP : -BRIGHTNESS_STEP;
+                    updateBrightness(brightnessLevel + brightnessDelta);
+                    const brightnessPercent = Math.round(brightnessLevel * 100);
+                    showGestureIndicator(`💡 Brightness: ${brightnessPercent}% ${isUpward ? '↑' : '↓'}`);
+                }
+            }
+        }
+        
+        lastTouchX = touchEndX;
+        lastTouchY = touchEndY;
+    }, { passive: false }); // Passive: false pour permettre preventDefault
+
+    // --- 7. GESTION PLEIN ÉCRAN ---
+
     fullscreenButton.addEventListener('click', () => {
-        if (modalVideo.requestFullscreen) {
-            modalVideo.requestFullscreen();
-        } else if (modalVideo.webkitRequestFullscreen) {
-            modalVideo.webkitRequestFullscreen();
-        } else if (modalVideo.msRequestFullscreen) {
-            modalVideo.msRequestFullscreen();
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            // Demande le plein écran sur le conteneur pour inclure les contrôles
+            const targetElement = modalContent; 
+            if (targetElement.requestFullscreen) {
+                targetElement.requestFullscreen();
+            } else if (targetElement.webkitRequestFullscreen) { /* Safari */
+                targetElement.webkitRequestFullscreen();
+            } else if (targetElement.msRequestFullscreen) { /* IE11 */
+                targetElement.msRequestFullscreen();
+            }
         }
     });
 
-    // Fermeture de la modale
+    // Écouteur fullscreen change pour ajuster les icônes
+    document.addEventListener('fullscreenchange', () => {
+        const isFullscreen = !!document.fullscreenElement;
+        fullscreenOpenIcon.classList.toggle('hidden', isFullscreen);
+        fullscreenCloseIcon.classList.toggle('hidden', !isFullscreen);
+        // Ajout d'une classe pour les styles spécifiques au plein écran si besoin
+        modalContent.classList.toggle('is-fullscreen', isFullscreen);
+    });
+
+    // --- 8. FERMETURE & INITIALISATION ---
+
+    /** Ferme la modale et réinitialise l'état. */
     const closeModal = () => {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        }
         videoModal.classList.remove('open');
+        clearAutoPauseTimer();
+        
         setTimeout(() => {
             videoModal.classList.add('hidden');
             modalVideo.pause();
             modalVideo.currentTime = 0;
-            modalVideo.muted = false;
+            modalVideo.muted = true; // Rétablir le 'muted' au repos
+            modalVideo.volume = 1; // Rétablir le volume par défaut interne
+            updateBrightness(1); // Reset luminosité
+            updatePlayPauseIcon(false);
+            updateMuteIcon(true);
+            updateVolumeDisplay();
             document.body.style.overflow = 'auto';
-            modalContent.classList.remove('group');
-        }, 500); // Durée ajustée pour transition-all
+            modalContent.classList.remove('group/parent'); // Retire le hover/interaction
+        }, 500); // 500ms pour correspondre à la transition CSS
     };
 
     closeButton.addEventListener('click', closeModal);
 
+    // Fermeture par clic en dehors du contenu
     videoModal.addEventListener('click', e => {
         if (e.target === videoModal) {
             closeModal();
         }
     });
 
-    // Keyboard navigation
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
-            closeModal();
-        } else if (e.key === ' ') {
-            //e.preventDefault();
-          //  togglePlayPause();
-        } else if (e.key === 'ArrowRight') {
-            modalVideo.currentTime += 5;
-        } else if (e.key === 'ArrowLeft') {
-            modalVideo.currentTime -= 5;
-        } else if (e.key === 'ArrowUp') {
-            modalVideo.volume = Math.min(1, modalVideo.volume + 0.1);
-            volumeSlider.value = modalVideo.volume;
-            updateVolumeIcon();
-        } else if (e.key === 'ArrowDown') {
-            modalVideo.volume = Math.max(0, modalVideo.volume - 0.1);
-            volumeSlider.value = modalVideo.volume;
-            updateVolumeIcon();
+    // --- 9. NAVIGATION CLAVIER (Améliorée avec flag pour interactions) ---
+
+    const handleKeydown = (e) => {
+        if (videoModal.classList.contains('hidden')) return; 
+
+        isKeyboardInteraction = true; // Flag pour interactions clavier
+
+        switch (e.key) {
+            case 'Escape':
+                e.preventDefault();
+                closeModal();
+                break;
+            case ' ':
+                e.preventDefault(); // Empêche le défilement de la page
+                togglePlayPause();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                modalVideo.currentTime = Math.min(modalVideo.duration, modalVideo.currentTime + SEEK_STEP);
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                modalVideo.currentTime = Math.max(0, modalVideo.currentTime - SEEK_STEP);
+                break;
+            case 'ArrowUp':
+                e.preventDefault();
+                modalVideo.volume = Math.min(1, modalVideo.volume + VOLUME_STEP);
+                showGestureIndicator(`🔊 Volume: ${Math.round(modalVideo.volume * 100)}% ↑`);
+                break;
+            case 'ArrowDown':
+                e.preventDefault();
+                modalVideo.volume = Math.max(0, modalVideo.volume - VOLUME_STEP);
+                showGestureIndicator(`🔊 Volume: ${Math.round(modalVideo.volume * 100)}% ↓`);
+                break;
+            case 'f':
+            case 'F':
+                e.preventDefault();
+                fullscreenButton.click();
+                break;
+            case 'm':
+            case 'M':
+                e.preventDefault();
+                toggleMute();
+                break;
         }
-    });
+        clearAutoPauseTimer(); // Toute interaction clavier réinitialise le timer
+    };
+    document.addEventListener('keydown', handleKeydown);
 
-    // Video ended event
+    // --- 10. GESTION FIN DE VIDÉO ET OUVERTURE ---
+
     modalVideo.addEventListener('ended', () => {
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-        setTimeout(closeModal, 2000);
+        updatePlayPauseIcon(false);
+        // On ferme 2s après la fin
+        setTimeout(closeModal, 2000); 
     });
 
-    // Exposer la fonction pour ouvrir la modale vidéo
-    window.openVideoModal = (videoSrc , title) => {
+    /**
+     * Expose la fonction pour ouvrir la modale vidéo.
+     * @param {string} videoSrc - URL de la source vidéo.
+     * @param {string} [title=''] - Titre de la vidéo.
+     */
+    window.openVideoModal = (videoSrc, title = '') => {
         videoModal.classList.remove('hidden');
-        setTimeout(() => videoModal.classList.add('open'), 10);
+        // Utilisation de requestAnimationFrame pour forcer le reflow avant l'ajout de la classe 'open'
+        requestAnimationFrame(() => videoModal.classList.add('open'));
+        
         modalVideo.src = videoSrc;
-        videoTitle.textContent = title || '';
+        videoTitle.textContent = title;
         modalVideo.load();
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
+        
+        // Initialisation des états au moment de l'ouverture
+        modalVideo.muted = false; // Rétablit le son à l'ouverture (meilleure UX)
+        updatePlayPauseIcon(true);
+        updateMuteIcon(false);
+        updateBrightness(1); 
+        updateVolumeDisplay();
         progressFill.style.width = '0%';
         currentTimeEl.textContent = '0:00';
         durationEl.textContent = '0:00';
-        modalVideo.play().catch(error => console.error('Erreur de lecture vidéo:', error));
+        
+        // La lecture doit être initiée par l'utilisateur pour l'autoplay
+        modalVideo.play().catch(error => {
+            console.warn('Autoplay bloqué, l\'utilisateur doit cliquer sur Play.');
+            modalVideo.muted = false; // Maintient le mute à 'false' pour un play user-initiated
+            updatePlayPauseIcon(false); // Affiche le bouton Play
+        });
+        
         document.body.style.overflow = 'hidden';
+        modalContent.classList.add('group/parent'); // Active l'état de contrôle visible
+        startAutoPauseTimer();
     };
 }
+
 
 /**
  * Crée et initialise la modale pour les avis minimum (étoiles) - Combinaison des deux approches

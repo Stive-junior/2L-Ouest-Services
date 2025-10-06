@@ -410,6 +410,7 @@ app.get('/api', (req, res) => {
 
 app.use(loggingMiddleware);
 app.use(errorMiddleware);
+app.set('trust proxy', 1);
 
 // --- Gestion des arrêts gracieux ---
 process.on('SIGTERM', async () => {
