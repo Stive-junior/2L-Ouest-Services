@@ -287,7 +287,7 @@ function updateAuthMenu(userData) {
     </div>
   `;
 
-  auth.bindSignOutButton();
+  auth.init();
 
   
 }

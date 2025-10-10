@@ -115,7 +115,7 @@
 <body class="bg-ll-white dark:bg-ll-black text-ll-black dark:text-ll-light-gray font-Cinzel min-h-screen transition-colors duration-300">
     <div id="app">
         <!-- Loading Overlay -->
-       <div id="loading-overlay" class="loading-overlay fixed inset-0 flex flex-col items-center justify-center z-[9999] transition-opacity duration-500 ease-in-out" style="background: rgba(15, 23, 42, 0.95);">
+       <div id="loading-overlay" class="loading-overlay fixed inset-0 flex flex-col items-center justify-center z-[9999] transition-opacity duration-500 ease-in-out" style="background: rgb(59, 75, 114);">
     <lottie-player 
         src="/assets/json/icons/team.json" 
         background="transparent" 
@@ -1356,52 +1356,53 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
         
-        <main class="relative z-10 max-w-7xl mx-auto w-full min-h-[calc(100vh-14rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-            <div class="w-full max-w-md bg-ll-white dark:bg-ll-black p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
-                <!-- Logo and Company Name -->
-                <div class="flex items-end justify-center mb-8 gap-4">
-                    <img src="/assets/images/logo.png" alt="LL-Ouest-Services Logo" class="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
-                    <h1 class="text-xxl font-bold font-extrabold text-ll-black dark:text-ll-light-gray tracking-tight" style="font-family: 'Cinzel', serif;">L&L-Ouest-Services</h1>
+       <main class="relative z-10 max-w-7xl mx-auto w-full min-h-[calc(100vh-14rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md bg-ll-white dark:bg-ll-black p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
+        <!-- Logo and Company Name -->
+        <div class="flex items-end justify-center mb-8 gap-4">
+            <img src="/assets/images/logo.png" alt="LL-Ouest-Services Logo" class="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-blue-500/10">
+            <h1 class="text-xxl font-bold font-extrabold text-ll-black dark:text-ll-light-gray tracking-tight" style="font-family: 'Cinzel', serif;">L&L-Ouest-Services</h1>
+        </div>
+        <h2 class="text-3xl font-extrabold mb-8 mt-4 text-center  text-ll-black dark:text-ll-light-gray">Se connecter</h2>
+        <form id="signin-form" class="space-y-6">
+            <div class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-2">Email <span class="text-red-500">*</span></label>
+                    <div class="relative" style="display: initial;">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-ll-text-gray-500 text-lg"></i>
+                        <input type="email" id="email" name="email" class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200" required placeholder="example@domaine.com" aria-label="Adresse email">
+                        <span id="error-email" class="error-message text-red-500 text-xs mt-2 block"></span>
+                    </div>
                 </div>
-                <h2 class="text-3xl font-extrabold mb-8 mt-4 text-center  text-ll-black dark:text-ll-light-gray">Se connecter</h2>
-                <form id="signin-form" class="space-y-6">
-                    <div class="space-y-6">
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-2">Email <span class="text-red-500">*</span></label>
-                            <div class="relative" style="display: initial;">
-                                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-ll-text-gray-500 text-lg"></i>
-                                <input type="email" id="email" name="email" class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200" required placeholder="example@domaine.com" aria-label="Adresse email">
-                                <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="password" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-2">Mot de passe <span class="text-red-500">*</span></label>
-                            <div class="relative" style="display: initial;">
-                                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-ll-light-gray-500 text-lg"></i>
-                                <input type="password" id="password" name="password" class="w-full pl-12 pr-14 py-3  dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200" required placeholder="Votre mot de passe" aria-label="Mot de passe">
-                                <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <span class="error-message text-red-500 text-xs mt-2 block"></span>
-                            </div>
-
+                <div id="password-container" class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0">
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-ll-black dark:text-ll-light-gray mb-2">Mot de passe <span class="text-red-500">*</span></label>
+                        <div class="relative" style="display: initial;">
+                            <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-ll-light-gray-500 text-lg"></i>
+                            <input type="password" id="password" name="password" class="w-full pl-12 pr-14 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200" required placeholder="Votre mot de passe" aria-label="Mot de passe">
+                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <span id="error-password" class="error-message text-red-500 text-xs mt-2 block"></span>
                         </div>
                     </div>
-                    
-                    <button type="submit" class="w-full bg-ll-blue text-white py-3 rounded-lg hover:bg-ll-dark-blue focus:outline-none focus:ring-2 focus:ring-ll-blue/50 font-semibold tracking-wide transition-all duration-300 shadow-md hover:shadow-lg"><span>Se connecter</span><i class="fas fa-sign-in-alt ml-2"></i></button>
-                </form>
-
-                
-                <div class="mt-6 text-center space-y-3">
-                    <p class="text-sm text-ll-black dark:text-ll-light-gray">
-                        Pas de compte ? <a href="/pages/auth/signup.html" class="text-ll-blue dark:text-ll-blue hover:underline font-medium transition-colors duration-200">S'inscrire</a>
-                    </p>
-                    <p class="text-sm text-ll-black dark:text-ll-light-gray">
-                        <a href="/pages/auth/password-reset.html" class="text-ll-blue dark:text-ll-blue hover:underline font-medium transition-colors duration-200">Mot de passe oublié ?</a>
-                    </p>
                 </div>
             </div>
-        </main>
+            
+            <button type="submit" class="w-full bg-ll-blue text-white py-3 rounded-lg hover:bg-ll-dark-blue focus:outline-none focus:ring-2 focus:ring-ll-blue/50 font-semibold tracking-wide transition-all duration-300 shadow-md hover:shadow-lg"><span>Se connecter</span><i class="fas fa-sign-in-alt ml-2"></i></button>
+        </form>
+
+        
+        <div class="mt-6 text-center space-y-3">
+            <p class="text-sm text-ll-black dark:text-ll-light-gray">
+                Pas de compte ? <a href="/pages/auth/signup.html" class="text-ll-blue dark:text-ll-blue hover:underline font-medium transition-colors duration-200">S'inscrire</a>
+            </p>
+            <p class="text-sm text-ll-black dark:text-ll-light-gray">
+                <a href="/pages/auth/password-reset.html" class="text-ll-blue dark:text-ll-blue hover:underline font-medium transition-colors duration-200">Mot de passe oublié ?</a>
+            </p>
+        </div>
+    </div>
+</main>
 
         <!-- JavaScript for Password Toggle -->
        

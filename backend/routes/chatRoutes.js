@@ -24,4 +24,3 @@ router.get('/', [validationMiddleware(paginationSchema)], getUserMessages);
 router.post('/messages/:id/file', [validationMiddleware(fileSchema)], uploadChatFile);
 router.delete('/messages/:id/file', [validationMiddleware(deleteFileSchema)], deleteChatFile);
 
-module.exports = router;

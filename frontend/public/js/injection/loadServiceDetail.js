@@ -190,7 +190,8 @@ export function renderServiceDetail(service, index = 0, total = 1) {
         rating: `#service-rating-main`,
         reviews: `#service-reviews-main`,
         difficulty: `#service-difficulty-main`,
-        description: `#service-description-main`
+        description: `#service-description-main`,
+        name: `.service-name`,
     };
 
     const iconEl = document.querySelector(selectors.icon);
@@ -200,10 +201,12 @@ export function renderServiceDetail(service, index = 0, total = 1) {
     const reviewsEl = document.querySelector(selectors.reviews);
     const difficultyEl = document.querySelector(selectors.difficulty);
     const descEl = document.querySelector(selectors.description);
+    const name = document.querySelector(selectors.name);
 
     if (iconEl) iconEl.textContent = service.icon || '🏢';
     if (categoryEl) categoryEl.textContent = service.category?.charAt(0).toUpperCase() + service.category?.slice(1) || 'Professionnel';
     if (titleEl) titleEl.textContent = service.name;
+    if(name) name.textContent = service.name;
     if (ratingEl) ratingEl.innerHTML = renderStarRating(service.rating || 4.5);
     if (reviewsEl) reviewsEl.textContent = `(${service.reviews || 0} avis clients)`;
     if (difficultyEl) {

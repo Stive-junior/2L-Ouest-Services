@@ -24,6 +24,11 @@
             "date": 1759705303289,
             "name": "logs/app-prod.log-error-2025-10-06.log",
             "hash": "77b78ece37b00bb6b954de508da7be013f11deccbc9d43d5fe01fd53f343cb6c"
+        },
+        {
+            "date": 1760091022679,
+            "name": "logs/app-prod.log-error-2025-10-10.log",
+            "hash": "88be3e51b0943c163e9002366257c81dc4bffd7c631f92e19a7a1c0de5992948"
         }
     ],
     "hashType": "sha256"

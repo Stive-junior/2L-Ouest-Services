@@ -571,6 +571,7 @@ bindSignUpForm() {
   });
 },
 
+
 /**
  * Lie la soumission et la validation au formulaire de connexion.
  * @function bindSignInForm
@@ -588,14 +589,26 @@ bindSignInForm() {
 
   const submitButton = form.querySelector('button[type="submit"]');
   const emailInput = form.querySelector('[name="email"]');
-  if (!submitButton || !emailInput) {
-    console.warn('Bouton de soumission ou champ email introuvable');
+  const passwordInput = form.querySelector('[name="password"]');
+  const passwordContainer = document.getElementById('password-container');
+  const emailErrorElement = document.getElementById('error-email');
+  if (!submitButton || !emailInput || !passwordInput || !passwordContainer || !emailErrorElement) {
+    console.warn('Éléments requis introuvables');
     return;
   }
 
   // Désactiver le bouton par défaut
   submitButton.disabled = true;
   submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+
+  // Fonction debounce pour les vérifications asynchrones
+  const debounce = (func, delay) => {
+    let timeout;
+    return (value) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(value), delay);
+    };
+  };
 
   /**
    * Met à jour l'état de validation du bouton de soumission.
@@ -617,7 +630,6 @@ bindSignInForm() {
 
       // Le bouton est valide uniquement si tous les champs sont syntaxiquement valides
       // ET qu'aucun message d'erreur d'email (API check) n'est affiché.
-      const emailErrorElement = document.getElementById('error-email');
       const hasApiError = emailErrorElement && !emailErrorElement.innerHTML.includes('fa-check-circle') && emailErrorElement.innerHTML.trim() !== '';
 
       const isValid = Object.keys(errors).length === 0 && !hasApiError && isEmailValid && isPasswordValid;
@@ -626,34 +638,40 @@ bindSignInForm() {
       currentSubmitButton.classList.toggle('opacity-50', !isValid);
       currentSubmitButton.classList.toggle('cursor-not-allowed', !isValid);
   };
-  
+
   /**
-   * Vérifie la disponibilité de l'email via cache/API et met à jour l'UI (champ + bouton).
+   * Vérifie la disponibilité de l'email via cache/API et met à jour l'UI (champ + bouton + visibilité mot de passe).
    * @param {string} value - La valeur de l'email à vérifier.
    * @param {boolean} isInitialLoad - Indique si l'appel vient de l'initialisation.
    */
   const checkEmailAndUpdateButton = async (value, isInitialLoad = false) => {
-    // 1. Validation de la syntaxe
+    let available;
     const syntaxError = validateField('email', value);
     if (syntaxError) {
       this.showFieldError('email', syntaxError);
       emailInput.classList.remove('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50', 'border-green-500', 'border-yellow-500');
       emailInput.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/50');
+      // Masquer le mot de passe en cas d'erreur de syntaxe
+      passwordContainer.classList.remove('max-h-48', 'opacity-100');
+      passwordContainer.classList.add('max-h-0', 'opacity-0');
+      passwordInput.value = '';
+      this.showFieldError('password', '');
       updateSubmitButtonState(form, submitButton); 
       return;
     }
 
-    // 2. Affichage de l'état de vérification
-    if (isInitialLoad && value) {
-      this.showFieldError('email', 'Vérification de l\'email en cours... <i class="fas fa-spinner fa-spin ml-1 text-blue-500"></i>');
-      emailInput.classList.remove('border-green-500', 'border-yellow-500', 'border-red-500');
-      emailInput.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50');
-      submitButton.disabled = true;
-      submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+    // Affichage de l'état de vérification
+    this.showFieldError('email', 'Vérification de l\'email en cours... <i class="fas fa-spinner fa-spin ml-1 text-blue-500"></i>');
+    emailInput.classList.remove('border-green-500', 'border-yellow-500', 'border-red-500');
+    emailInput.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50');
+    submitButton.disabled = true;
+    submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+    if (!isInitialLoad) {
+      submitButton.innerHTML = '<span class="loading-spinner"></span> Vérification...';
     }
 
     try {
-      const available = await this.checkEmailAvailabilityCached(value);
+      available = await this.checkEmailAvailabilityCached(value);
 
       if (!isInitialLoad) {
         submitButton.innerHTML = '<span>Se connecter</span><i class="fas fa-sign-in-alt ml-2"></i>';
@@ -678,7 +696,6 @@ bindSignInForm() {
         this.showFieldError('email', 'Email valide <i class="fas fa-check-circle ml-1 text-green-500"></i>');
         emailInput.classList.remove('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50', 'border-yellow-500', 'border-red-500');
         emailInput.classList.add('border-green-500', 'focus:border-green-500', 'focus:ring-green-500/50');
-        updateSubmitButtonState(form, submitButton); // Met à jour l'état du bouton
       }
     } catch (e) {
       console.error('Erreur vérification email connexion:', e);
@@ -687,9 +704,54 @@ bindSignInForm() {
       emailInput.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/50');
       submitButton.disabled = true;
       submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+      available = undefined; // Pour la logique de visibilité
+    }
+
+    // Gestion de la visibilité et validation du mot de passe
+    const shouldShowPassword = available === false;
+    if (shouldShowPassword) {
+      // Animation de descente : afficher le conteneur
+      passwordContainer.classList.remove('max-h-0', 'opacity-0');
+      passwordContainer.classList.add('max-h-48', 'opacity-100');
+      // Validation du mot de passe si valeur présente
+      const pwValue = passwordInput.value.trim();
+      let pwMessage = '';
+      const colorClasses = ['border-red-500', 'focus:border-red-500', 'focus:ring-red-500/50',
+                            'border-green-500', 'focus:border-green-500', 'focus:ring-green-500/50',
+                            'border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50',
+                            'border-gray-300', 'dark:border-gray-600', 'focus:ring-2', 'focus:ring-blue-500', 'focus:border-blue-500'];
+      passwordInput.classList.remove(...colorClasses);
+      if (pwValue) {
+        const pwError = validateField('password', pwValue, true);
+        pwMessage = pwError || 'Mot de passe valide <i class="fas fa-check-circle ml-1 text-green-500"></i>';
+        if (pwError) {
+          passwordInput.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/50');
+        } else {
+          passwordInput.classList.add('border-green-500', 'focus:border-green-500', 'focus:ring-green-500/50');
+        }
+      } else {
+        pwMessage = '';
+        // Classes par défaut
+        passwordInput.classList.add('border-gray-300', 'dark:border-gray-600', 'focus:ring-2', 'focus:ring-blue-500', 'focus:border-blue-500');
+      }
+      this.showFieldError('password', pwMessage);
+      updateSubmitButtonState(form, submitButton);
+    } else {
+      // Animation de remontée : masquer le conteneur
+      passwordContainer.classList.remove('max-h-48', 'opacity-100');
+      passwordContainer.classList.add('max-h-0', 'opacity-0');
+      passwordInput.value = '';
+      this.showFieldError('password', '');
+      const colorClasses = ['border-red-500', 'focus:border-red-500', 'focus:ring-red-500/50',
+                            'border-green-500', 'focus:border-green-500', 'focus:ring-green-500/50',
+                            'border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50'];
+      passwordInput.classList.remove(...colorClasses);
+      updateSubmitButtonState(form, submitButton);
     }
   };
 
+  // Debounce pour vérification constante de l'email sur input
+  const debouncedCheckEmail = debounce((value) => checkEmailAndUpdateButton(value, false), 800);
 
   /**
    * Effectue la validation initiale au chargement, affiche les messages d'état sur les champs
@@ -702,7 +764,7 @@ bindSignInForm() {
       password: (formData.get('password') || '').trim(),
     };
     
-    // Validation des champs non-email (Password)
+    // Validation des champs (y compris mot de passe si prérempli)
     form.querySelectorAll('input').forEach(input => {
       const field = input.name;
       const value = input.value.trim();
@@ -718,12 +780,11 @@ bindSignInForm() {
     if (credentials.email) {
       const emailSyntaxError = validateField('email', credentials.email);
       if (!emailSyntaxError) {
-        // La fonction checkEmailAndUpdateButton mettra à jour l'état du bouton à la fin.
         await checkEmailAndUpdateButton(credentials.email, true);
       }
     }
     
-    // Si l'email est vide, on s'assure que le bouton reste désactivé après les vérifications de mot de passe.
+    // Si l'email est vide, on s'assure que le bouton reste désactivé
     if (!credentials.email) {
         updateSubmitButtonState(form, submitButton);
     }
@@ -733,8 +794,8 @@ bindSignInForm() {
   initialValidation();
 
   // ------------------------------------------------------------------
-// 2. Événements en temps réel (input)
-// ------------------------------------------------------------------
+  // 2. Événements en temps réel (input)
+  // ------------------------------------------------------------------
   form.querySelectorAll('input').forEach(input => {
     input.addEventListener('input', () => {
       const field = input.name;
@@ -746,8 +807,10 @@ bindSignInForm() {
       if (!error && value) {
         if (field === 'email') {
             // Pour l'email: Si la syntaxe est bonne, on affiche un message neutre/syntaxique
-            // La vérification de disponibilité se fera au 'blur'.
+            // La vérification de disponibilité se fera via debounce.
             message = `${this.getFieldName(field)} format valide <i class="fas fa-check-circle ml-1 text-blue-500"></i>`;
+            // Déclencher la vérification API débouancée
+            debouncedCheckEmail(value);
         } else {
             // Pour les autres champs: validation complète
             message = `${this.getFieldName(field)} valide <i class="fas fa-check-circle ml-1 text-green-500"></i>`;
@@ -758,42 +821,24 @@ bindSignInForm() {
       updateSubmitButtonState(form, submitButton);
     });
 
-// ------------------------------------------------------------------
-// 3. Événement de vérification d'email (blur) - ASYNCHRONE
-// ------------------------------------------------------------------
+    // ------------------------------------------------------------------
+    // 3. Événement de vérification d'email (blur) - ASYNCHRONE
+    // ------------------------------------------------------------------
     if (input.id === 'email') {
       input.addEventListener('blur', async () => {
-        const value = decodeURIComponent(input.value.trim());
-
-        // On vérifie d'abord la syntaxe locale
+        const value = input.value.trim();
         const syntaxError = validateField('email', value);
-
-        if (syntaxError) {
-          // Afficher l'erreur de syntaxe immédiatement
-          this.showFieldError('email', syntaxError);
-          // Le reste des changements de couleur/bouton sera géré par checkEmailAndUpdateButton via updateSubmitButtonState
-          await checkEmailAndUpdateButton(value); 
-          return;
+        if (!syntaxError) {
+          // Vérification immédiate sur blur
+          await checkEmailAndUpdateButton(value, false);
         }
-
-        // 1. Affichage immédiat du message de vérification (sur le champ)
-        this.showFieldError('email', 'Vérification de l\'email en cours... <i class="fas fa-spinner fa-spin ml-1 text-blue-500"></i>');
-        emailInput.classList.remove('border-green-500', 'border-yellow-500', 'border-red-500');
-        emailInput.classList.add('border-blue-500', 'focus:border-blue-500', 'focus:ring-blue-500/50');
-        
-        // 2. Affichage de l'état de vérification sur le bouton
-        submitButton.disabled = true;
-        submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-        submitButton.innerHTML = '<span class="loading-spinner"></span> Vérification...';
-
-        await checkEmailAndUpdateButton(value);
       });
     }
   });
 
-// ------------------------------------------------------------------
-// 4. Événement de soumission (submit)
-// ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // 4. Événement de soumission (submit)
+  // ------------------------------------------------------------------
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (submitButton.disabled) {
@@ -807,7 +852,6 @@ bindSignInForm() {
     const credentials = {
       email: (formData.get('email') || '').trim(),
       password: (formData.get('password') || '').trim(),
-      fcmToken: generateString(32),
     };
 
     // Validation locale avant soumission
@@ -851,23 +895,8 @@ bindSignInForm() {
       submitButton.disabled = true;
       submitButton.innerHTML = '<span class="loading-spinner"></span> Connexion...';
 
-      const postOperations = [
-        async () => {
-          const loadedUserData = await api.auth.getCurrentUser();
-          if (loadedUserData === undefined) throw new Error('Impossible de récupérer les données utilisateur');
-          cacheUserData(loadedUserData);
-        },
-        async () => {
-          const loadedUserData = getCachedUserData();
-          await showSuccessDialog(loadedUserData);
-        },
-        async () => {
-          form.querySelectorAll('input').forEach(input => (input.disabled = true));
-        },
-      ];
+      await api.auth.signIn(credentials);
 
-      await api.auth.signIn(credentials, postOperations);
-      Swal.close();
     } catch (error) {
       Swal.close();
       let errorMessage = error.message || 'Erreur technique lors de la connexion.';
@@ -878,10 +907,21 @@ bindSignInForm() {
         errorMessage = 'Trop de tentatives. Veuillez réessayer plus tard.';
       }
       showNotification(errorMessage, 'error');
+      console.error('❌ Erreur lors de la connexion:', error);
     } finally {
       submitButton.disabled = false;
       submitButton.innerHTML = '<span>Se connecter</span><i class="fas fa-sign-in-alt ml-2"></i>';
-      initialValidation();
+      // Reset des erreurs sans re-vérification API pour éviter tout risque de boucle après échec
+      this.showFieldError('email', '');
+      this.showFieldError('password', '');
+      emailInput.classList.remove('border-red-500', 'border-green-500', 'border-yellow-500', 'border-blue-500');
+      emailInput.classList.add('border-gray-300', 'dark:border-gray-600');
+      passwordInput.classList.remove('border-red-500', 'border-green-500', 'border-yellow-500', 'border-blue-500');
+      passwordInput.classList.add('border-gray-300', 'dark:border-gray-600');
+      // Masquer le mot de passe après échec pour reset propre
+      passwordContainer.classList.remove('max-h-48', 'opacity-100');
+      passwordContainer.classList.add('max-h-0', 'opacity-0');
+      passwordInput.value = '';
     }
   });
 },
@@ -1926,8 +1966,8 @@ bindSignOutButton() {
         text: 'Vous allez être déconnecté de votre compte.',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#30d67bff',
-        cancelButtonColor: 'rgba(221, 51, 51, 1)',
+        confirmButtonColor: '#3f7599ff',
+        cancelButtonColor: 'rgba(139, 87, 87, 1)',
         confirmButtonText: 'Oui, se déconnecter',
         cancelButtonText: 'Annuler',
         background: this.isDarkMode() ? '#1B1B18' : '#FDFDFC',
@@ -1958,7 +1998,6 @@ bindSignOutButton() {
         ];
 
         console.log('🚀 Déconnexion Firebase...');
-        await signOut(auth);
 
         // Appel API de déconnexion avec post-opérations
         console.log('🚀 Lancement de la déconnexion backend...');
@@ -1983,7 +2022,6 @@ bindSignOutButton() {
         Swal.close();
         showNotification(error.message || 'Erreur technique lors de la déconnexion.', 'error');
         try {
-          await signOut(auth);
           clearUserCache();
           clearStoredToken();
           localStorage.clear();

@@ -1,0 +1,27 @@
+✅ [2L-Ouest-Services] 10/10/2025 11:10:31 | INFO     | Firebase: Validation des credentials directs...
+✅ [2L-Ouest-Services] 10/10/2025 11:10:32 | INFO     | Configurations FCM disponibles
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 10/10/2025 11:10:34 | INFO     | Firebase Admin SDK initialisé
+{
+  "projectId": "ll-ouest-services",
+  "environment": "production"
+}
+✅ [2L-Ouest-Services] 10/10/2025 11:10:42 | INFO     | Initialisation des repositories
+✅ [2L-Ouest-Services] 10/10/2025 11:10:45 | INFO     | Service Firebase Messaging disponible pour notifications push
+{
+  "senderId": "1075873956073",
+  "vapidKeyLength": 87
+}
+✅ [2L-Ouest-Services] 10/10/2025 11:10:45 | INFO     | CORS: Origines autorisées initialisées
+{
+  "allowedOrigins": [
+    "https://ll-ouest-services.netlify.app",
+    "http://ll-ouest-services.netlify.app",
+    "https://*.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:35909"
+  ]
+}

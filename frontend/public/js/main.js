@@ -226,7 +226,6 @@ async function initializePage(page, isAuthenticated, userData = null) {
     contact: { path: './modules/contact.js', pages: ['contact', 'messages'], modules: [], authRequired: false, title: 'Contact' },
     doc: { path: './modules/document.js', pages: ['doc'], modules: [], authRequired: true, title: 'Documents' },
     map: { path: './modules/map.js', pages: ['map'], modules: [], authRequired: false, title: 'Localisation' },
-    notifications: { path: './modules/notifications.js', pages: ['notifications'], modules: [], authRequired: true, title: 'Notifications' },
     review: { path: './modules/review.js', pages: ['reviews', 'create', 'manage', 'user'], modules: [], authRequired: false, title: 'Avis' },
     service: { path: './modules/service.js', pages: ['services', 'admin'], modules: [], authRequired: false, title: 'Services' },
     mentions: { path: './modules/mentions.js', pages: ['mentions'], modules: [], authRequired: false, title: 'Mentions légales' },

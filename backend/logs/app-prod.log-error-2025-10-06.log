@@ -1113,3 +1113,696 @@
   "error": "queryA EREFUSED firestore.googleapis.com",
   "path": "/check"
 }
+🚨 [2L-Ouest-Services] 06/10/2025 12:33:58 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 06/10/2025 12:34:28 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 06/10/2025 12:34:58 | ERROR    | Échec de la mise à jour de l'URL dans Firestore
+{
+  "error": "4 DEADLINE_EXCEEDED: Deadline exceeded after 60.000s,name resolution: 0.001s,Waiting for LB pick",
+  "stack": "Error: 4 DEADLINE_EXCEEDED: Deadline exceeded after 60.000s,name resolution: 0.001s,Waiting for LB pick\n    at callErrorFromStatus (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/call.js:32:19)\n    at Object.onReceiveStatus (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:76)\n    at Object.onReceiveStatus (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:361:141)\n    at Object.onReceiveStatus (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:324:181)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/resolving-call.js:135:78\n    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)\nfor call at\n    at ServiceClientImpl.makeUnaryRequest (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/client.js:161:32)\n    at ServiceClientImpl.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/make-client.js:105:19)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/v1/firestore_client.js:242:33\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/timeout.js:44:16\n    at repeat (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:82:25)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:125:13\n    at OngoingCallPromise.call (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/call.js:67:27)\n    at NormalApiCaller.call (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/normalApiCaller.js:34:19)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/createApiCall.js:112:30\nCaused by: Error\n    at _firestore._traceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:438:27)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30\n    at NoopContextManager.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/context/NoopContextManager.js:25:19)\n    at ContextAPI.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/api/context.js:60:46)\n    at NoopTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/NoopTracer.js:65:31)\n    at ProxyTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/ProxyTracer.js:36:24)\n    at EnabledTraceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:102:28)\n    at WriteBatch.commit (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:436:43)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/reference/document-reference.js:350:31\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 12:36:24 | ERROR    | Impossible de se connecter au réseau pour Firestore
+{
+  "error": "queryA EREFUSED firestore.googleapis.com"
+}
+📋 [2L-Ouest-Services] 06/10/2025 14:49:03 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "6ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+📋 [2L-Ouest-Services] 06/10/2025 14:49:05 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "2ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+📋 [2L-Ouest-Services] 06/10/2025 14:49:06 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "7ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+📋 [2L-Ouest-Services] 06/10/2025 14:49:07 | AUDIT    | Requête traitée
+{
+  "method": "GET",
+  "path": "/favicon.ico",
+  "status": 404,
+  "duration": "1ms",
+  "ip": "127.0.0.1",
+  "userId": "non authentifié"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:52:37 | ERROR    | Erreur lors de la récupération de l'utilisateur par email
+{
+  "error": "14 UNAVAILABLE: No connection established. Last error: Error: Client network socket disconnected before secure TLS connection was established",
+  "email": "nanatchoffojunior@gmail.com"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:52:37 | ERROR    | Erreur lors de la vérification de disponibilité de l'email
+{
+  "error": "Erreur serveur lors de la récupération de l'utilisateur par email",
+  "email": "nanatchoffojunior@gmail.com"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:52:37 | ERROR    | Erreur lors de la vérification de disponibilité de l'email
+{
+  "error": "Erreur serveur lors de la récupération de l'utilisateur par email",
+  "email": "nanatchoffojunior@gmail.com"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:52:37 | ERROR    | Erreur traitée par le middleware Erreur serveur lors de la récupération de l'utilisateur par email
+{
+  "statusCode": 500,
+  "details": "14 UNAVAILABLE: No connection established. Last error: Error: Client network socket disconnected before secure TLS connection was established",
+  "path": "/api/user/check-email/nanatchoffojunior%40gmail.com",
+  "method": "GET"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:53:22 | ERROR    | Erreur lors de la récupération de l'utilisateur par email
+{
+  "error": "14 UNAVAILABLE: No connection established. Last error: Error: connect ENETUNREACH 2607:f8b0:4008:815::200a:443 - Local (:::0)",
+  "email": "nanatchoffojunior@gmail.com"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:53:22 | ERROR    | Erreur lors de la vérification de disponibilité de l'email
+{
+  "error": "Erreur serveur lors de la récupération de l'utilisateur par email",
+  "email": "nanatchoffojunior@gmail.com"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:53:22 | ERROR    | Erreur lors de la vérification de disponibilité de l'email
+{
+  "error": "Erreur serveur lors de la récupération de l'utilisateur par email",
+  "email": "nanatchoffojunior@gmail.com"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:53:22 | ERROR    | Erreur traitée par le middleware Erreur serveur lors de la récupération de l'utilisateur par email
+{
+  "statusCode": 500,
+  "details": "14 UNAVAILABLE: No connection established. Last error: Error: connect ENETUNREACH 2607:f8b0:4008:815::200a:443 - Local (:::0)",
+  "path": "/api/user/check-email/nanatchoffojunior%40gmail.com",
+  "method": "GET"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:54:23 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:54:23 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:54:23 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:54:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:54:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 14:54:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:16:17 | AUDIT    | Utilisateur mis à jour
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2",
+  "email": "nanatchoffojunior@gmail.com",
+  "updatedFields": [
+    "id",
+    "email",
+    "name",
+    "role",
+    "phone",
+    "address",
+    "company",
+    "invoices",
+    "preferences",
+    "location",
+    "createdAt",
+    "lastLogin",
+    "emailVerified"
+  ]
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:16:17 | AUDIT    | Utilisateur connecté
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2",
+  "email": "nanatchoffojunior@gmail.com"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:16:17 | AUDIT    | Utilisateur connecté via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2",
+  "email": "nanatchoffojunior@gmail.com"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:17:12 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:11 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:17 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:21 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:26 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:31 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:34 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:40 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:45 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:51 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:21:55 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:00 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:05 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:08 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:13 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:18 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:21 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:25 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:29 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:34 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:39 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:42 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:48 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:52 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:22:58 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:03 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:10 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:15 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:20 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:26 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:33 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:37 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:43 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:48 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:52 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:23:57 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:00 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:06 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:11 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:18 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:23 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:29 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:33 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:39 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:44 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:49 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:53 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:24:56 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:25:02 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:25:12 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:25:18 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:25:24 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:25:30 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:25:36 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:25:50 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:26:36 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:26:59 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:27:31 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:28:52 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:36:59 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:38:23 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:41:04 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:43:05 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:48:45 | AUDIT    | Token Firebase vérifié via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:48:56 | AUDIT    | Utilisateur déconnecté
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+📋 [2L-Ouest-Services] 06/10/2025 15:48:56 | AUDIT    | Utilisateur déconnecté via contrôleur
+{
+  "userId": "cJ1nw4lCAbZueN3YQgQRuB1cjaf2"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:45 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:52:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:25 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:53:55 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:18 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:28 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:28 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:28 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:54:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:55:59 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:56:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:56:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:56:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:56:29 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:56:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:56:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:00 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:30 | ERROR    | Middleware : Réseau instable détecté
+{
+  "error": "queryA EREFUSED firestore.googleapis.com",
+  "path": "/check"
+}
+🚨 [2L-Ouest-Services] 06/10/2025 18:57:42 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 06/10/2025 18:58:12 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 06/10/2025 18:58:42 | ERROR    | Offline prolongé : Shutdown initié
+🚨 [2L-Ouest-Services] 06/10/2025 18:58:42 | ERROR    | Échec de la mise à jour de l'URL dans Firestore
+{
+  "error": "4 DEADLINE_EXCEEDED: Deadline exceeded after 60.001s,metadata filters: 0.001s,LB pick: 0.007s,remote_addr=142.250.151.95:443",
+  "stack": "Error: 4 DEADLINE_EXCEEDED: Deadline exceeded after 60.001s,metadata filters: 0.001s,LB pick: 0.007s,remote_addr=142.250.151.95:443\n    at callErrorFromStatus (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/call.js:32:19)\n    at Object.onReceiveStatus (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:76)\n    at Object.onReceiveStatus (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:361:141)\n    at Object.onReceiveStatus (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:324:181)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/resolving-call.js:135:78\n    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)\nfor call at\n    at ServiceClientImpl.makeUnaryRequest (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/client.js:161:32)\n    at ServiceClientImpl.<anonymous> (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@grpc/grpc-js/build/src/make-client.js:105:19)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/v1/firestore_client.js:242:33\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/timeout.js:44:16\n    at repeat (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:82:25)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/retries.js:125:13\n    at OngoingCallPromise.call (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/call.js:67:27)\n    at NormalApiCaller.call (/home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/normalCalls/normalApiCaller.js:34:19)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/google-gax/build/src/createApiCall.js:112:30\nCaused by: Error\n    at _firestore._traceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:438:27)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30\n    at NoopContextManager.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/context/NoopContextManager.js:25:19)\n    at ContextAPI.with (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/api/context.js:60:46)\n    at NoopTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/NoopTracer.js:65:31)\n    at ProxyTracer.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@opentelemetry/api/build/src/trace/ProxyTracer.js:36:24)\n    at EnabledTraceUtil.startActiveSpan (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:102:28)\n    at WriteBatch.commit (/home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/write-batch.js:436:43)\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/reference/document-reference.js:350:31\n    at /home/stive-junior/2L-Ouest-Services/backend/node_modules/@google-cloud/firestore/build/src/telemetry/enabled-trace-util.js:110:30"
+}

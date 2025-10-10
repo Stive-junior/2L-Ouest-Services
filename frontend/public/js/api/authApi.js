@@ -892,19 +892,63 @@ const authApi = {
     }
   },
 
+
+  /**
+ * Fonction unifiée pour gérer toutes les actions post-connexion de manière sûre et séquentielle.
+ * Exécutée uniquement après succès backend, sans risque de boucle (pas d'appels API récursifs).
+ * @async
+ * @function handlePostSignInSuccess
+ * @param {Object} responseData - Les données de réponse du backend (token, user, redirect).
+ * @description Met en cache les données utilisateur, met à jour l'UI, affiche les notifications et dialogues,
+ * et redirige. Exportée pour réutilisation si nécessaire.
+ * @returns {Promise<void>}
+ * @throws {Error} En cas d'erreur critique (mais gérée silencieusement pour ne pas interrompre la redirection).
+ */
+async handlePostSignInSuccess(responseData) {
+  try {
+    setStoredToken(responseData.token, responseData.user.role || 'client');
+    console.log('✅ Token et rôle stockés avec succès');
+
+   cacheUserData(responseData.user);
+    console.log('✅ Données utilisateur mises en cache');
+
+    Swal.close();
+
+    showNotification('Connexion réussie ! 🎉', 'success');
+
+    updateUIWithUserData(responseData.user);
+    console.log('✅ UI mise à jour avec les données utilisateur');
+
+    await showSuccessDialog(responseData.user);
+    console.log('✅ Dialogue de succès affiché');
+
+    setTimeout(() => {
+      window.location.href = responseData.redirect || '/dashboard.html';
+    }, 2000);
+    console.log('✅ Redirection planifiée');
+
+  } catch (postError) {
+    console.error('❌ Erreur lors des actions post-connexion:', postError);
+    Swal.close();
+    showNotification('Connexion réussie, mais erreur mineure lors de la finalisation.', 'warning');
+    setTimeout(() => {
+      window.location.href = '/dashboard.html';
+    }, 1000);
+  }
+},
+
 /**
  * Connecte un utilisateur avec email et mot de passe.
- * Exécute les opérations post-endpoint après la connexion réussie au backend.
+ * Gère entièrement les opérations post-endpoint en interne via handlePostSignInSuccess.
  * @async
  * @function signIn
  * @param {Object} credentials - Identifiants de connexion.
  * @param {string} credentials.email - Adresse email.
  * @param {string} credentials.password - Mot de passe.
- * @param {Array<Function>} [postOperations=[]] - Liste de fonctions à exécuter après la connexion.
- * @returns {Promise<Object>} Données de l'utilisateur et token JWT.
+ * @returns {Promise<Object>} Données de l'utilisateur et token JWT (en cas de succès, mais redirection immédiate).
  * @throws {Error} En cas d'erreur de connexion (Firebase ou Backend).
  */
-async signIn(credentials, postOperations = []) {
+async signIn(credentials) {
 
   try {
     if (!auth) {
@@ -957,35 +1001,13 @@ async signIn(credentials, postOperations = []) {
         fcmToken,
       }, false, { context: 'Connexion' });
 
-      // Exécution des opérations post-endpoint
-      for (const operation of postOperations) {
-        try {
-          await operation();
-          console.log('✅ Opération post-endpoint exécutée:', operation.name || 'anonyme');
-        } catch (opError) {
-          console.error('❌ Erreur lors de l\'exécution de l\'opération post-endpoint:', opError);
-        }
-      }
-
-      // Finalisation et redirection
-      setStoredToken(response.data.token, response.data.user.role || 'client');
-      Swal.close();
-      showNotification('Connexion réussie ! 🎉', 'success');
-      
-      const loadedUserData = await loadUserData();
-      updateUIWithUserData(loadedUserData);
-
-      await showSuccessDialog(loadedUserData);
-      setTimeout(() => {
-        window.location.href = response.redirect || '/dashboard.html';
-      }, 2000);
+      await this.handlePostSignInSuccess(response.data);
 
       return response.data;
     } catch (backendError) {
       // 2.1. Échec du Backend API - Nettoyage
       await signOut(auth);
       clearStoredToken();
-      // ✅ ACTIONS: Réessayer / Support
       throw await handleApiError(backendError, 'Erreur lors de la connexion au backend', {
         context: 'Connexion',
         sourceContext: 'connexion',
@@ -998,18 +1020,13 @@ async signIn(credentials, postOperations = []) {
       });
     }
   } catch (error) {
-    // 3. GESTION DES ERREURS FIREBASE (Echec de signInWithEmailAndPassword)
     console.error('❌ Erreur connexion:', error);
     clearStoredToken();
     
-    // Assurer la déconnexion
     try { await signOut(auth); } catch(e) { /* ignore */ }
     Swal.close();
     
-    // 🔥 Extraction du message d'erreur utilisateur spécifique
     const userMessage = getAuthErrorMessage(error) || 'Erreur lors de la connexion'; 
-
-    // Définir si l'action de réinitialisation doit être affichée pour les erreurs d'identifiants
     const shouldShowReset = ['auth/invalid-credential', 'auth/wrong-password', 'auth/user-not-found'].includes(error.code);
     
     // ✅ ACTIONS: Réessayer / Réinitialiser (si pertinent) / Support
@@ -1043,7 +1060,6 @@ async signIn(credentials, postOperations = []) {
     });
   }
 },
-
 
   
 
